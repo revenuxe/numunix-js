@@ -601,36 +601,46 @@ function ShowcaseCard({
 function FindBanner() {
   return (
     <section id="book" className="bg-white px-4 pb-16 md:px-8">
-      <div className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl">
+      <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem]">
         <img
           src={findBanner}
           alt="Numunix data center"
           width={1600}
-          height={700}
+          height={900}
           loading="lazy"
-          className="h-72 w-full object-cover md:h-80"
+          className="h-[420px] w-full object-cover sm:h-[460px] md:h-[500px]"
         />
-        <div className="absolute inset-0 bg-ink/50" />
-        <div className="absolute inset-0 flex items-center justify-center px-6">
-          <div className="max-w-md rounded-3xl bg-white/10 p-6 text-center text-white ring-1 ring-white/20 backdrop-blur-md md:p-8">
-            <h3 className="text-2xl font-bold md:text-3xl">
-              Find Numunix Support Near You
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/50 to-ink/30" />
+        <div className="absolute inset-0 flex items-center px-6 md:px-12 lg:px-16">
+          <div className="w-full max-w-lg rounded-3xl bg-white/10 p-7 text-white ring-1 ring-white/25 shadow-card backdrop-blur-xl md:p-10">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium ring-1 ring-white/20">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+              Nearby Support
+            </span>
+            <h3 className="mt-4 text-2xl font-bold leading-tight md:text-3xl lg:text-4xl">
+              Find Numunix Support{" "}
+              <span className="text-brand">Near You</span>
             </h3>
-            <p className="mt-2 text-sm text-white/80">
+            <p className="mt-3 text-sm text-white/80 md:text-base">
               Discover a Numunix engineer today for expert, reliable and
               friendly IT service.
             </p>
             <form
               onSubmit={(e) => e.preventDefault()}
-              className="mt-5 flex items-center gap-2 rounded-full bg-white/10 p-1.5 ring-1 ring-white/25"
+              className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-2 sm:rounded-full sm:bg-white/10 sm:p-1.5 sm:ring-1 sm:ring-white/25"
             >
               <input
                 type="text"
+                maxLength={12}
                 placeholder="Enter your PIN / ZIP"
-                className="w-full bg-transparent px-4 py-2 text-sm text-white placeholder:text-white/60 focus:outline-none"
+                className="w-full rounded-full bg-white/10 px-5 py-3 text-sm text-white ring-1 ring-white/20 placeholder:text-white/60 focus:outline-none focus:ring-brand sm:bg-transparent sm:ring-0 sm:focus:ring-0"
               />
-              <button className="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ink">
+              <button
+                type="submit"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-white/90"
+              >
                 Find Now
+                <ArrowRight className="h-4 w-4" />
               </button>
             </form>
           </div>
@@ -639,6 +649,7 @@ function FindBanner() {
     </section>
   );
 }
+
 
 function WhyUs() {
   const items = [
