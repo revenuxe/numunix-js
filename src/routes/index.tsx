@@ -816,69 +816,6 @@ function FAQ() {
   );
 }
 
-/* ---------- FOOTER ---------- */
-function Footer() {
-  const cols: { title: string; links: string[] }[] = [
-    { title: "Company", links: ["About Us", "Why Us", "Careers", "Contact Us"] },
-    { title: "Services", links: ["Laptop Repair", "Desktop Repair", "CCTV", "Networking"] },
-    { title: "Resources", links: ["Expert Tips", "Guides", "Locations", "Site Map"] },
-  ];
-  return (
-    <footer className="relative overflow-hidden bg-white px-4 pt-20 pb-8 md:px-8">
-      <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr]">
-        <div>
-          <LogoMark className="h-9" />
-          <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-            Reliable nationwide IT support, hardware services and business AMC.
-            We Keep IT Running.
-          </p>
-          <div className="mt-6 flex items-center gap-3">
-            {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                aria-label="social"
-                className="grid h-9 w-9 place-items-center rounded-full bg-secondary text-ink transition hover:bg-brand hover:text-brand-foreground"
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
-          </div>
-        </div>
-        {cols.map((c) => (
-          <div key={c.title}>
-            <h4 className="text-sm font-semibold text-ink">{c.title}</h4>
-            <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              {c.links.map((l) => (
-                <li key={l}>
-                  <a href="#" className="transition hover:text-ink">
-                    {l}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-
-      <div
-        aria-hidden
-        className="pointer-events-none mt-16 select-none text-center text-[18vw] font-extrabold leading-none tracking-tighter text-ink/[0.04] md:text-[14vw]"
-      >
-        Numunix
-      </div>
-
-      <div className="mx-auto mt-8 flex max-w-6xl flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
-        <p>© {new Date().getFullYear()} Numunix. All rights reserved.</p>
-        <div className="flex items-center gap-4">
-          <a href="#" className="hover:text-ink">Privacy Policy</a>
-          <a href="#" className="hover:text-ink">Terms</a>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
 /* ---------- PAGE ---------- */
 function LandingPage() {
   return (
@@ -891,7 +828,8 @@ function LandingPage() {
       <WhyUs />
       <Resources />
       <FAQ />
-      <Footer />
+      <SiteFooter />
     </main>
   );
 }
+
