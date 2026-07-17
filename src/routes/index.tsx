@@ -166,7 +166,7 @@ function Hero() {
     { label: "AMC", Icon: Briefcase },
   ];
   return (
-    <section className="relative overflow-hidden bg-ink text-white">
+    <section className="relative flex min-h-screen flex-col overflow-hidden bg-ink text-white">
       <img
         src={heroImg}
         alt="Numunix engineer repairing a laptop"
@@ -174,62 +174,133 @@ function Hero() {
         height={1200}
         className="absolute inset-0 h-full w-full object-cover object-center opacity-70"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/40 lg:to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
 
       <Nav />
 
-      <div className="relative mx-auto max-w-7xl px-4 pt-24 pb-32 md:px-8 md:pt-40 md:pb-40 lg:pt-52 lg:pb-52">
-        <div className="max-w-2xl">
-          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium ring-1 ring-white/20 backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-brand" />
-            We Keep IT Running
-          </span>
-          <h1 className="mt-5 text-[2.25rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-            Reliable IT Support
-            <br className="hidden sm:block" />{" "}
-            <span className="text-brand">& Hardware</span> Services
-          </h1>
-          <p className="mt-5 max-w-xl text-sm text-white/80 sm:mt-6 sm:text-lg">
-            Numunix provides reliable onsite and business IT support with
-            certified technicians, transparent pricing and fast turnaround —
-            laptop repair, CCTV, networking, AMC and more.
-          </p>
-          <div className="mt-6 flex flex-wrap items-center gap-3 sm:mt-8">
-            <a
-              href="#book"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90"
-            >
-              Book Service
-              <ArrowRight className="h-4 w-4" />
-            </a>
-            <a
-              href="#book"
-              className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10"
-            >
-              Get Free Consultation
-            </a>
+      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pt-28 pb-12 md:px-8 md:pt-32 md:pb-20 lg:pt-36 lg:pb-24">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-12">
+          {/* Left column */}
+          <div className="max-w-2xl">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium ring-1 ring-white/20 backdrop-blur">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+              We Keep IT Running
+            </span>
+            <h1 className="mt-5 text-[2.5rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+              Reliable IT Support
+              <br className="hidden sm:block" />{" "}
+              <span className="text-brand">& Hardware</span> Services
+            </h1>
+            <p className="mt-5 max-w-xl text-sm text-white/80 sm:mt-6 sm:text-lg">
+              Numunix provides reliable onsite and business IT support with
+              certified technicians, transparent pricing and fast turnaround —
+              laptop repair, CCTV, networking, AMC and more.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-3 sm:mt-8">
+              <a
+                href="#book"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90"
+              >
+                Book Service
+                <ArrowRight className="h-4 w-4" />
+              </a>
+              <a
+                href="#book"
+                className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10"
+              >
+                Get Free Consultation
+              </a>
+            </div>
+
+            {/* Service chips */}
+            <div className="mt-8 flex flex-wrap gap-2 sm:mt-10">
+              {floating.map(({ label, Icon }) => (
+                <div
+                  key={label}
+                  className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-medium text-white ring-1 ring-white/20 backdrop-blur-md"
+                >
+                  <span className="grid h-6 w-6 place-items-center rounded-full bg-brand text-brand-foreground">
+                    <Icon className="h-3.5 w-3.5" />
+                  </span>
+                  {label}
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile booking form — appears below chips on mobile only */}
+            <div className="mt-8 lg:hidden">
+              <BookingForm />
+            </div>
           </div>
 
-          {/* Floating service chips — inline on mobile, absolute on desktop */}
-          <div className="mt-8 flex flex-wrap gap-2 sm:mt-10 lg:absolute lg:right-12 lg:bottom-24 lg:mt-0 lg:max-w-md lg:justify-end">
-            {floating.map(({ label, Icon }) => (
-              <div
-                key={label}
-                className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-medium text-white ring-1 ring-white/20 backdrop-blur-md"
-              >
-                <span className="grid h-6 w-6 place-items-center rounded-full bg-brand text-brand-foreground">
-                  <Icon className="h-3.5 w-3.5" />
-                </span>
-                {label}
-              </div>
-            ))}
+          {/* Right column — desktop booking form */}
+          <div className="hidden lg:block lg:w-[380px]">
+            <BookingForm />
           </div>
         </div>
       </div>
     </section>
   );
 }
+
+function BookingForm() {
+  return (
+    <form
+      onSubmit={(e) => e.preventDefault()}
+      className="rounded-3xl bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-6"
+    >
+      <h3 className="text-lg font-bold text-white sm:text-xl">
+        Book a Service
+      </h3>
+      <p className="mt-1 text-xs text-white/70">
+        Get a free callback from a certified Numunix engineer.
+      </p>
+      <div className="mt-4 space-y-3">
+        <label className="block">
+          <span className="text-xs font-semibold text-white/80">Name</span>
+          <input
+            type="text"
+            required
+            maxLength={100}
+            placeholder="Your full name"
+            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
+          />
+        </label>
+        <label className="block">
+          <span className="text-xs font-semibold text-white/80">Email</span>
+          <input
+            type="email"
+            required
+            maxLength={255}
+            placeholder="you@example.com"
+            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
+          />
+        </label>
+        <label className="block">
+          <span className="text-xs font-semibold text-white/80">
+            Postal Code
+          </span>
+          <input
+            type="text"
+            required
+            maxLength={12}
+            placeholder="Enter your PIN / ZIP"
+            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
+          />
+        </label>
+      </div>
+      <button
+        type="submit"
+        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110"
+      >
+        Schedule Service
+        <ArrowRight className="h-4 w-4" />
+      </button>
+    </form>
+  );
+}
+
 
 
 /* ---------- COMMON PROBLEMS (matches reference layout with 3 cards + center) ---------- */
