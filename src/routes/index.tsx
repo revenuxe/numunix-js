@@ -77,15 +77,11 @@ function Hero() {
 
       <SiteNav variant="dark" />
 
-      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pb-8 pt-24 md:px-8 md:pt-28 md:pb-12 lg:pt-32 lg:pb-16">
+      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pb-6 pt-20 md:px-8 md:pt-24 md:pb-8 lg:pt-24 lg:pb-10">
         <div className="grid gap-7 md:grid-cols-[minmax(0,1fr)_minmax(300px,380px)] md:items-center md:gap-8 lg:gap-12">
           {/* Left column */}
           <div className="max-w-2xl">
-            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium ring-1 ring-white/20 backdrop-blur">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand" />
-              We Keep IT Running
-            </span>
-            <h1 className="mt-4 text-[2rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-6xl">
+            <h1 className="text-[2rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-6xl">
               Reliable IT Support{" "}
               <span className="text-brand">&amp; Hardware</span> Services
             </h1>
