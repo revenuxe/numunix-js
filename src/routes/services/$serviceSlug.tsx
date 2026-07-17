@@ -166,9 +166,22 @@ export const Route = createFileRoute("/services/$serviceSlug")({
   },
 });
 
+function ServiceHeroActions() {
+  return (
+    <div className="mb-4 grid gap-3">
+      <button form="service-booking-form" type="submit" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-5 py-4 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110">
+        Schedule Service <ArrowRight className="h-4 w-4" />
+      </button>
+      <a href={CONTACT.whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/30 bg-ink/45 px-5 py-4 text-sm font-semibold text-white backdrop-blur transition hover:bg-white hover:text-ink">
+        <WhatsAppIcon className="h-4 w-4" /> Reach us on WhatsApp
+      </a>
+    </div>
+  );
+}
 function ServiceBookingForm({ serviceName }: { serviceName: string }) {
   return (
     <form
+      id="service-booking-form"
       onSubmit={(event) => event.preventDefault()}
       className="w-full rounded-[2rem] bg-slate-800/85 p-6 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-7"
     >
@@ -179,8 +192,6 @@ function ServiceBookingForm({ serviceName }: { serviceName: string }) {
         <label className="block"><span className="text-xs font-semibold text-white/80">Email</span><input type="email" required maxLength={255} placeholder="you@example.com" className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 focus:outline-none focus:ring-brand" /></label>
         <label className="block"><span className="text-xs font-semibold text-white/80">Postal Code</span><input required maxLength={12} placeholder="Enter your PIN / ZIP" className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 focus:outline-none focus:ring-brand" /></label>
       </div>
-      <button type="submit" className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110">Schedule Service <ArrowRight className="h-4 w-4" /></button>
-      <a href={CONTACT.whatsappUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/25 px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-white hover:text-ink"><WhatsAppIcon className="h-4 w-4" /> Reach us on WhatsApp</a>
     </form>
   );
 }
@@ -199,7 +210,10 @@ function ServicePage() {
             <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">{service.hero}</h1>
             <p className="mt-5 max-w-xl text-base leading-7 text-white/75 md:text-lg">{service.intro}</p>
           </div>
-          <ServiceBookingForm serviceName={service.name} />
+          <div className="w-full">
+            <ServiceHeroActions />
+            <ServiceBookingForm serviceName={service.name} />
+          </div>
         </div>
       </section>
 
