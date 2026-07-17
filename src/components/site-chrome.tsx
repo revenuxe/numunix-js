@@ -70,8 +70,10 @@ export function SiteNav({ variant = "light" }: { variant?: "light" | "dark" }) {
             href={CONTACT.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className={`inline-flex h-14 items-center gap-2 rounded-full px-6 text-sm font-semibold shadow-soft transition ${
-              isDark ? "bg-white text-ink hover:bg-white/90" : "bg-ink text-white hover:opacity-90"
+            className={`inline-flex h-14 items-center gap-2 rounded-full border px-6 text-sm font-semibold shadow-soft transition ${
+              isDark
+                ? "border-white/30 bg-ink/55 text-white backdrop-blur hover:bg-white hover:text-ink"
+                : "border-ink/20 bg-ink text-white hover:bg-brand"
             }`}
           >
             <WhatsAppIcon className="h-4 w-4" />

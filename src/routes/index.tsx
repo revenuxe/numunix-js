@@ -77,8 +77,8 @@ function Hero() {
 
       <SiteNav variant="dark" />
 
-      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pb-8 pt-24 md:px-8 md:pt-32 md:pb-20 lg:pt-36 lg:pb-24">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-12">
+      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pb-8 pt-24 md:px-8 md:pt-28 md:pb-12 lg:pt-32 lg:pb-16">
+        <div className="grid gap-7 md:grid-cols-[minmax(0,1fr)_minmax(300px,380px)] md:items-center md:gap-8 lg:gap-12">
           {/* Left column */}
           <div className="max-w-2xl">
             <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium ring-1 ring-white/20 backdrop-blur">
@@ -94,10 +94,10 @@ function Hero() {
               laptop repair, CCTV, networking, AMC &amp; more.
             </p>
 
-            {/* Mobile CTAs — full width */}
+            {/* Hero CTAs */}
             <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
               <a
-                href="#book"
+                href="#hero-booking-form"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90 sm:w-auto"
               >
                 Book Service
@@ -107,7 +107,7 @@ function Hero() {
                 href={CONTACT.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110 sm:w-auto sm:bg-white/5 sm:text-white sm:ring-1 sm:ring-white/25 sm:backdrop-blur"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-ink/60 px-6 py-3.5 text-sm font-semibold text-white shadow-soft backdrop-blur transition hover:bg-white hover:text-ink sm:w-auto"
               >
                 <WhatsAppIcon className="h-4 w-4" />
                 Reach us on WhatsApp
@@ -115,7 +115,7 @@ function Hero() {
             </div>
 
             {/* Service chips — desktop / tablet only */}
-            <div className="mt-8 hidden flex-wrap gap-2 sm:mt-10 sm:flex">
+            <div className="mt-8 hidden flex-wrap gap-2 lg:mt-10 lg:flex">
               {floating.map(({ label, Icon }) => (
                 <div
                   key={label}
@@ -130,8 +130,8 @@ function Hero() {
             </div>
           </div>
 
-          {/* Right column — desktop booking form only */}
-          <div className="hidden lg:block lg:w-[380px]">
+          {/* Booking form stays inside the hero at every viewport size. */}
+          <div id="hero-booking-form" className="w-full md:max-w-[380px] md:justify-self-end">
             <BookingForm />
           </div>
         </div>
@@ -144,7 +144,7 @@ function BookingForm() {
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
-      className="rounded-3xl bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-6"
+      className="rounded-3xl bg-slate-800/75 p-5 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-6"
     >
       <h3 className="text-lg font-bold text-white sm:text-xl">
         Book a Service
@@ -160,7 +160,7 @@ function BookingForm() {
             required
             maxLength={100}
             placeholder="Your full name"
-            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
+            className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 backdrop-blur focus:outline-none focus:ring-brand"
           />
         </label>
         <label className="block">
@@ -170,7 +170,7 @@ function BookingForm() {
             required
             maxLength={255}
             placeholder="you@example.com"
-            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
+            className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 backdrop-blur focus:outline-none focus:ring-brand"
           />
         </label>
         <label className="block">
@@ -182,13 +182,13 @@ function BookingForm() {
             required
             maxLength={12}
             placeholder="Enter your PIN / ZIP"
-            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
+            className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 backdrop-blur focus:outline-none focus:ring-brand"
           />
         </label>
       </div>
       <button
         type="submit"
-        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110"
+        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110"
       >
         Schedule Service
         <ArrowRight className="h-4 w-4" />
