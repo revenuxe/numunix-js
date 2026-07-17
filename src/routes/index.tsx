@@ -85,7 +85,7 @@ function Hero() {
               <span className="h-1.5 w-1.5 rounded-full bg-brand" />
               We Keep IT Running
             </span>
-            <h1 className="mt-4 text-[2rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+            <h1 className="mt-4 text-[2rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-6xl">
               Reliable IT Support{" "}
               <span className="text-brand">&amp; Hardware</span> Services
             </h1>
@@ -95,10 +95,10 @@ function Hero() {
             </p>
 
             {/* Hero CTAs */}
-            <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
+            <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap lg:mt-8">
               <a
                 href="#hero-booking-form"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90 sm:w-auto"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90 sm:w-auto lg:h-[62px] lg:px-8 lg:text-base"
               >
                 Book Service
                 <ArrowRight className="h-4 w-4" />
@@ -107,7 +107,7 @@ function Hero() {
                 href={CONTACT.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-ink/60 px-6 py-3.5 text-sm font-semibold text-white shadow-soft backdrop-blur transition hover:bg-white hover:text-ink sm:w-auto"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-ink/60 px-6 py-3.5 text-sm font-semibold text-white shadow-soft backdrop-blur transition hover:bg-white hover:text-ink sm:w-auto lg:h-[62px] lg:px-8 lg:text-base"
               >
                 <WhatsAppIcon className="h-4 w-4" />
                 Reach us on WhatsApp
@@ -119,9 +119,9 @@ function Hero() {
               {floating.map(({ label, Icon }) => (
                 <div
                   key={label}
-                  className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-medium text-white ring-1 ring-white/20 backdrop-blur-md"
+                  className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-medium text-white ring-1 ring-white/20 backdrop-blur-md lg:h-[52px] lg:px-4 lg:text-sm"
                 >
-                  <span className="grid h-6 w-6 place-items-center rounded-full bg-brand text-brand-foreground">
+                  <span className="grid h-6 w-6 place-items-center rounded-full bg-brand text-brand-foreground lg:h-7 lg:w-7">
                     <Icon className="h-3.5 w-3.5" />
                   </span>
                   {label}
@@ -202,7 +202,7 @@ function BookingForm() {
 
 
 
-/* ---------- COMMON PROBLEMS (matches reference layout with 3 cards + center) ---------- */
+/* ---------- COMMON PROBLEMS ---------- */
 function CommonProblems() {
   return (
     <section id="services" className="relative bg-white px-4 py-24 md:px-8 md:py-32">
@@ -217,7 +217,7 @@ function CommonProblems() {
       </div>
 
       <div className="relative mx-auto mt-14 max-w-6xl sm:mt-16">
-        {/* Central floating team image — behind cards on desktop */}
+        {/* Center image is deliberately layered behind the networking service. */}
         <div
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-0 hidden -translate-x-1/2 lg:block"
@@ -234,20 +234,9 @@ function CommonProblems() {
           </div>
         </div>
 
-        {/* Mobile team image */}
-        <div className="mb-8 overflow-hidden rounded-3xl shadow-card ring-1 ring-border lg:hidden">
-          <img
-            src={teamImg}
-            alt="Numunix engineering team"
-            width={1200}
-            height={700}
-            loading="lazy"
-            className="h-56 w-full object-cover sm:h-72"
-          />
-        </div>
-
         <div className="relative grid gap-5 md:gap-6 lg:grid-cols-3 lg:gap-8">
           <ProblemCard
+            number="01"
             Icon={Laptop}
             title="Laptop Repair"
             desc="If your laptop keeps freezing or won't power on, our engineers diagnose it fast and get it running."
@@ -259,9 +248,9 @@ function CommonProblems() {
             ]}
             highlighted
           />
-          {/* Spacer on desktop to reveal the central team image */}
           <div className="hidden lg:block" aria-hidden />
           <ProblemCard
+            number="02"
             Icon={Camera}
             title="CCTV & Security"
             desc="We install and service CCTV systems for homes and businesses with clear footage and remote access."
@@ -272,87 +261,100 @@ function CommonProblems() {
               "Remote mobile access",
             ]}
           />
-          {/* Networking card — sits below center image on desktop, overlapping */}
-          <div className="lg:col-span-3 lg:mx-auto lg:-mt-24 lg:w-[380px] lg:rotate-[2deg]">
-            <ProblemCard
-              Icon={Network}
-              title="Networking"
-              desc="We design and troubleshoot business networks — Wi-Fi, LAN, routers and firewalls — for stable, secure connectivity."
-              bullets={[
-                "Slow or dropping Wi-Fi",
-                "Router & firewall setup",
-                "Structured LAN cabling",
-                "VPN & remote access",
-              ]}
-            />
+
+          <div className="relative pt-24 lg:col-span-3 lg:mx-auto lg:-mt-24 lg:w-[380px] lg:rotate-[2deg] lg:pt-0">
+            <div
+              aria-hidden
+              className="absolute inset-x-5 top-0 h-40 overflow-hidden rounded-[1.75rem] shadow-card ring-1 ring-border lg:hidden"
+            >
+              <img
+                src={teamImg}
+                alt=""
+                width={800}
+                height={460}
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
+            </div>
+            <div className="relative z-10">
+              <ProblemCard
+                number="03"
+                Icon={Network}
+                title="Networking"
+                desc="We design and troubleshoot business networks — Wi-Fi, LAN, routers and firewalls — for stable, secure connectivity."
+                bullets={[
+                  "Slow or dropping Wi-Fi",
+                  "Router & firewall setup",
+                  "Structured LAN cabling",
+                  "VPN & remote access",
+                ]}
+                featured
+              />
+            </div>
           </div>
         </div>
       </div>
-
     </section>
   );
 }
 
 function ProblemCard({
+  number,
   Icon,
   title,
   desc,
   bullets,
   highlighted = false,
+  featured = false,
 }: {
+  number: string;
   Icon: typeof Laptop;
   title: string;
   desc: string;
   bullets: string[];
   highlighted?: boolean;
+  featured?: boolean;
 }) {
+  const dark = highlighted || featured;
   return (
     <a
       href="#book"
-      className={`group relative flex h-full flex-col rounded-3xl p-7 md:p-8 transition duration-300 ${
+      className={`group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] p-6 shadow-card transition duration-300 hover:-translate-y-1 md:p-8 ${
         highlighted
-          ? "bg-brand text-brand-foreground ring-1 ring-brand shadow-brand hover:-translate-y-1"
-          : "bg-white text-ink ring-1 ring-border hover:-translate-y-1 hover:border-brand hover:ring-brand/60 hover:shadow-card"
+          ? "bg-brand text-brand-foreground ring-1 ring-brand shadow-brand"
+          : featured
+            ? "bg-ink text-white ring-1 ring-ink"
+            : "bg-white text-ink ring-1 ring-border hover:border-brand hover:ring-brand/60"
       }`}
     >
+      <div className="absolute right-6 top-5 text-xs font-bold tracking-[0.2em] opacity-40 md:right-8 md:top-7">
+        {number}
+      </div>
       <div className="flex items-start justify-between">
         <span
           className={`grid h-12 w-12 place-items-center rounded-2xl ${
-            highlighted
-              ? "bg-white/15 text-white"
-              : "bg-brand/10 text-brand group-hover:bg-brand group-hover:text-brand-foreground"
-          } transition`}
+            dark ? "bg-white/15 text-white" : "bg-brand/10 text-brand"
+          } transition group-hover:scale-105`}
         >
           <Icon className="h-5 w-5" />
         </span>
         <span
           className={`grid h-9 w-9 place-items-center rounded-full transition ${
-            highlighted
-              ? "bg-white/15 text-white"
-              : "bg-secondary text-ink group-hover:bg-ink group-hover:text-white"
+            dark ? "bg-white/15 text-white" : "bg-secondary text-ink group-hover:bg-ink group-hover:text-white"
           }`}
         >
           <ArrowUpRight className="h-4 w-4" />
         </span>
       </div>
       <h3 className="mt-6 text-2xl font-bold">{title}</h3>
-      <p
-        className={`mt-3 text-sm ${
-          highlighted ? "text-white/85" : "text-muted-foreground"
-        }`}
-      >
+      <p className={`mt-3 text-sm leading-6 ${dark ? "text-white/80" : "text-muted-foreground"}`}>
         {desc}
       </p>
-      <ul
-        className={`mt-6 space-y-3 text-sm ${
-          highlighted ? "text-white/95" : "text-ink/80"
-        }`}
-      >
+      <ul className={`mt-6 grid gap-2 text-sm ${dark ? "text-white/95" : "text-ink/80"}`}>
         {bullets.map((b) => (
           <li key={b} className="flex items-center gap-2">
-            <BadgeCheck
-              className={`h-4 w-4 ${highlighted ? "text-white" : "text-brand"}`}
-            />
+            <BadgeCheck className={`h-4 w-4 shrink-0 ${dark ? "text-white" : "text-brand"}`} />
             {b}
           </li>
         ))}
@@ -360,7 +362,6 @@ function ProblemCard({
     </a>
   );
 }
-
 
 /* ---------- ALL SERVICES GRID ---------- */
 function ServicesGrid() {
