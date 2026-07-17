@@ -18,17 +18,10 @@ import {
   Headset,
   Wrench,
   CalendarClock,
-  Menu,
-  X,
   Plus,
   Minus,
-  Facebook,
-  Instagram,
-  Youtube,
-  Twitter,
 } from "lucide-react";
 
-import logoAsset from "@/assets/numunix-logo.asset.json";
 import heroImg from "@/assets/hero-technician.webp";
 import teamImg from "@/assets/team-it.webp";
 
@@ -41,6 +34,10 @@ import resSlow from "@/assets/res-slow-laptop.webp";
 import resBsod from "@/assets/res-bsod.webp";
 import resCctv from "@/assets/res-cctv.webp";
 import findBanner from "@/assets/find-banner.webp";
+
+import { SiteNav, SiteFooter } from "@/components/site-chrome";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
+import { CONTACT } from "@/lib/contact";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -55,6 +52,7 @@ export const Route = createFileRoute("/")({
     ],
   }),
 });
+
 
 const LOGO = logoAsset.url;
 
