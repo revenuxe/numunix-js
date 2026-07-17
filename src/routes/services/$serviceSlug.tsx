@@ -169,9 +169,6 @@ export const Route = createFileRoute("/services/$serviceSlug")({
 function ServiceHeroActions() {
   return (
     <div className="mb-4 grid gap-3">
-      <button form="service-booking-form" type="submit" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-5 py-4 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110">
-        Schedule Service <ArrowRight className="h-4 w-4" />
-      </button>
       <a href={CONTACT.whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/30 bg-ink/45 px-5 py-4 text-sm font-semibold text-white backdrop-blur transition hover:bg-white hover:text-ink">
         <WhatsAppIcon className="h-4 w-4" /> Reach us on WhatsApp
       </a>
@@ -223,7 +220,7 @@ function ServicePage() {
           <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-ink">Complete {service.name.toLowerCase()} support.</h2>
           <p className="mt-5 leading-7 text-muted-foreground">Our service is designed around clear advice, skilled repair and a practical result you can rely on.</p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">{service.subServices.map((item, index) => <article key={item} className="group rounded-3xl border border-border bg-white p-6 shadow-soft transition hover:-translate-y-1 hover:border-brand/40 hover:shadow-card"><span className="text-xs font-bold tracking-widest text-brand">0{index + 1}</span><h3 className="mt-6 text-lg font-bold text-ink">{item}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">Professional assessment and dependable workmanship from a certified Numunix engineer.</p></article>)}</div>
+        <div className="grid gap-5 sm:grid-cols-2">{service.subServices.map((item, index) => <article key={item} className="group relative overflow-hidden rounded-[1.75rem] border border-border bg-white p-6 shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card"><span aria-hidden className="absolute -right-8 -top-8 h-24 w-24 rounded-full border-[14px] border-brand/[0.07] transition duration-500 group-hover:scale-125 group-hover:border-brand/[0.12]" /><div className="relative flex items-start justify-between"><span className="grid h-10 w-10 place-items-center rounded-xl border border-brand/20 bg-brand/10 text-xs font-bold text-brand">0{index + 1}</span><ArrowRight className="h-5 w-5 text-brand transition duration-300 group-hover:translate-x-1" /></div><h3 className="relative mt-7 text-lg font-bold leading-snug text-ink">{item}</h3><p className="relative mt-3 text-sm leading-6 text-muted-foreground">Professional assessment and dependable workmanship from a certified Numunix engineer.</p><span aria-hidden className="relative mt-6 block h-px w-12 bg-brand/40 transition-all duration-300 group-hover:w-full" /></article>)}</div>
       </section>
 
       <section className="bg-secondary/45 px-4 py-20 md:px-8 md:py-28"><div className="mx-auto max-w-6xl"><div className="max-w-2xl"><p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand">Common issues</p><h2 className="mt-3 text-4xl font-extrabold tracking-tight text-ink">We solve the problems that interrupt your day.</h2></div><div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{service.problems.map((problem) => <div key={problem} className="rounded-3xl bg-white p-6 ring-1 ring-border"><Wrench className="h-5 w-5 text-brand" /><h3 className="mt-5 font-bold text-ink">{problem}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">Get a clear diagnosis and the right next step.</p></div>)}</div></div></section>
