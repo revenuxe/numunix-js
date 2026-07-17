@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   BadgeCheck,
-  Check,
   Clock3,
   Headset,
   ShieldCheck,
@@ -167,6 +166,24 @@ export const Route = createFileRoute("/services/$serviceSlug")({
   },
 });
 
+function ServiceBookingForm({ serviceName }: { serviceName: string }) {
+  return (
+    <form
+      onSubmit={(event) => event.preventDefault()}
+      className="w-full rounded-[2rem] bg-slate-800/85 p-6 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-7"
+    >
+      <h2 className="text-2xl font-bold text-white">Book {serviceName}</h2>
+      <p className="mt-2 text-sm leading-6 text-white/70">Get a free callback from a certified Numunix engineer.</p>
+      <div className="mt-5 space-y-3">
+        <label className="block"><span className="text-xs font-semibold text-white/80">Name</span><input required maxLength={100} placeholder="Your full name" className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 focus:outline-none focus:ring-brand" /></label>
+        <label className="block"><span className="text-xs font-semibold text-white/80">Email</span><input type="email" required maxLength={255} placeholder="you@example.com" className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 focus:outline-none focus:ring-brand" /></label>
+        <label className="block"><span className="text-xs font-semibold text-white/80">Postal Code</span><input required maxLength={12} placeholder="Enter your PIN / ZIP" className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 focus:outline-none focus:ring-brand" /></label>
+      </div>
+      <button type="submit" className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110">Schedule Service <ArrowRight className="h-4 w-4" /></button>
+      <a href={CONTACT.whatsappUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/25 px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-white hover:text-ink"><WhatsAppIcon className="h-4 w-4" /> Reach us on WhatsApp</a>
+    </form>
+  );
+}
 function ServicePage() {
   const { serviceSlug } = Route.useParams();
   const service = getService(serviceSlug);
@@ -177,21 +194,12 @@ function ServicePage() {
         <img src={service.image} alt="" className="absolute inset-0 -z-20 h-full w-full object-cover opacity-35" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/90 to-ink/60" />
         <SiteNav variant="dark" />
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-16 pt-28 md:px-8 md:pb-24 md:pt-36 lg:grid-cols-[1.15fr_.85fr] lg:items-end">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand">Numunix services</p>
-            <h1 className="mt-4 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">{service.hero}</h1>
-            <p className="mt-6 max-w-2xl text-base leading-7 text-white/75 md:text-lg">{service.intro}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#book-service" className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink transition hover:bg-white/90">Book {service.name} <ArrowRight className="h-4 w-4" /></a>
-              <a href={CONTACT.whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-ink/45 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white hover:text-ink"><WhatsAppIcon className="h-4 w-4" /> WhatsApp an engineer</a>
-            </div>
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 pb-10 pt-24 md:px-8 md:pb-14 md:pt-28 lg:grid-cols-[1.1fr_.9fr] lg:items-center lg:gap-12">
+          <div className="max-w-2xl">
+            <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">{service.hero}</h1>
+            <p className="mt-5 max-w-xl text-base leading-7 text-white/75 md:text-lg">{service.intro}</p>
           </div>
-          <aside className="rounded-[2rem] bg-white/10 p-6 ring-1 ring-white/20 backdrop-blur-xl sm:p-8">
-            <p className="text-sm font-semibold text-white/70">Popular {service.name.toLowerCase()} support</p>
-            <ul className="mt-5 space-y-3">{service.keywords.map((item) => <li key={item} className="flex items-center gap-3 text-sm font-medium"><Check className="h-4 w-4 text-brand" />{item}</li>)}</ul>
-            <a href={`tel:${CONTACT.phone}`} className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-brand">Call {CONTACT.phoneDisplay} <ArrowRight className="h-4 w-4" /></a>
-          </aside>
+          <ServiceBookingForm serviceName={service.name} />
         </div>
       </section>
 
