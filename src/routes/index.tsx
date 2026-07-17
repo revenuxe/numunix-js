@@ -243,8 +243,7 @@ function CommonProblems() {
         </p>
       </div>
 
-      <div className="relative mx-auto mt-16 grid max-w-6xl gap-6 lg:grid-cols-3">
-        {/* Left */}
+      <div className="relative mx-auto mt-14 grid max-w-6xl gap-5 sm:mt-16 md:gap-6 lg:grid-cols-3">
         <ProblemCard
           Icon={Laptop}
           title="Laptop Repair"
@@ -256,42 +255,18 @@ function CommonProblems() {
             "Broken screen or keyboard",
           ]}
         />
-        {/* Center (blue overlay card) */}
-        <div className="relative order-first lg:order-none">
-          <div className="overflow-hidden rounded-3xl">
-            <img
-              src={teamImg}
-              alt="Numunix engineers"
-              width={900}
-              height={900}
-              loading="lazy"
-              className="aspect-[4/5] w-full object-cover"
-            />
-          </div>
-          <div className="absolute inset-x-4 -bottom-6 rounded-3xl bg-brand p-6 text-brand-foreground shadow-brand md:inset-x-8">
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-white/15">
-              <Network className="h-5 w-5" />
-            </span>
-            <h3 className="mt-4 text-2xl font-bold">Networking</h3>
-            <p className="mt-2 text-sm text-white/85">
-              We design and troubleshoot business networks — Wi-Fi, LAN,
-              routers and firewalls — for stable, secure connectivity.
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-white/90">
-              {[
-                "Slow or dropping Wi-Fi",
-                "Router & firewall setup",
-                "Structured LAN cabling",
-                "VPN & remote access",
-              ].map((t) => (
-                <li key={t} className="flex items-center gap-2">
-                  <BadgeCheck className="h-4 w-4" /> {t}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        {/* Right */}
+        <ProblemCard
+          Icon={Network}
+          title="Networking"
+          desc="We design and troubleshoot business networks — Wi-Fi, LAN, routers and firewalls — for stable, secure connectivity."
+          bullets={[
+            "Slow or dropping Wi-Fi",
+            "Router & firewall setup",
+            "Structured LAN cabling",
+            "VPN & remote access",
+          ]}
+          highlighted
+        />
         <ProblemCard
           Icon={Camera}
           title="CCTV & Security"
@@ -313,29 +288,69 @@ function ProblemCard({
   title,
   desc,
   bullets,
+  highlighted = false,
 }: {
   Icon: typeof Laptop;
   title: string;
   desc: string;
   bullets: string[];
+  highlighted?: boolean;
 }) {
   return (
-    <div className="rounded-3xl bg-secondary/60 p-8 ring-1 ring-border shadow-card">
-      <span className="grid h-11 w-11 place-items-center rounded-full bg-brand text-brand-foreground">
-        <Icon className="h-5 w-5" />
-      </span>
-      <h3 className="mt-6 text-2xl font-bold text-ink">{title}</h3>
-      <p className="mt-3 text-sm text-muted-foreground">{desc}</p>
-      <ul className="mt-6 space-y-3 text-sm text-ink/80">
+    <a
+      href="#book"
+      className={`group relative flex h-full flex-col rounded-3xl p-7 md:p-8 transition duration-300 ${
+        highlighted
+          ? "bg-brand text-brand-foreground ring-1 ring-brand shadow-brand hover:-translate-y-1"
+          : "bg-white text-ink ring-1 ring-border hover:-translate-y-1 hover:border-brand hover:ring-brand/60 hover:shadow-card"
+      }`}
+    >
+      <div className="flex items-start justify-between">
+        <span
+          className={`grid h-12 w-12 place-items-center rounded-2xl ${
+            highlighted
+              ? "bg-white/15 text-white"
+              : "bg-brand/10 text-brand group-hover:bg-brand group-hover:text-brand-foreground"
+          } transition`}
+        >
+          <Icon className="h-5 w-5" />
+        </span>
+        <span
+          className={`grid h-9 w-9 place-items-center rounded-full transition ${
+            highlighted
+              ? "bg-white/15 text-white"
+              : "bg-secondary text-ink group-hover:bg-ink group-hover:text-white"
+          }`}
+        >
+          <ArrowUpRight className="h-4 w-4" />
+        </span>
+      </div>
+      <h3 className="mt-6 text-2xl font-bold">{title}</h3>
+      <p
+        className={`mt-3 text-sm ${
+          highlighted ? "text-white/85" : "text-muted-foreground"
+        }`}
+      >
+        {desc}
+      </p>
+      <ul
+        className={`mt-6 space-y-3 text-sm ${
+          highlighted ? "text-white/95" : "text-ink/80"
+        }`}
+      >
         {bullets.map((b) => (
           <li key={b} className="flex items-center gap-2">
-            <BadgeCheck className="h-4 w-4 text-brand" /> {b}
+            <BadgeCheck
+              className={`h-4 w-4 ${highlighted ? "text-white" : "text-brand"}`}
+            />
+            {b}
           </li>
         ))}
       </ul>
-    </div>
+    </a>
   );
 }
+
 
 /* ---------- ALL SERVICES GRID ---------- */
 function ServicesGrid() {
