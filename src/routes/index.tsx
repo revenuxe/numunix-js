@@ -29,17 +29,17 @@ import {
 } from "lucide-react";
 
 import logoAsset from "@/assets/numunix-logo.asset.json";
-import heroImg from "@/assets/hero-technician.jpg";
-import teamImg from "@/assets/team-it.jpg";
-import svcLaptop from "@/assets/service-laptop.jpg";
-import svcDesktop from "@/assets/service-desktop.jpg";
-import svcCctv from "@/assets/service-cctv.jpg";
-import svcBusiness from "@/assets/service-business.jpg";
-import whyImg from "@/assets/why-choose.jpg";
-import resSlow from "@/assets/res-slow-laptop.jpg";
-import resBsod from "@/assets/res-bsod.jpg";
-import resCctv from "@/assets/res-cctv.jpg";
-import findBanner from "@/assets/find-banner.jpg";
+import heroImg from "@/assets/hero-technician.webp";
+import teamImg from "@/assets/team-it.webp";
+import svcLaptop from "@/assets/service-laptop.webp";
+import svcDesktop from "@/assets/service-desktop.webp";
+import svcCctv from "@/assets/service-cctv.webp";
+import svcBusiness from "@/assets/service-business.webp";
+import whyImg from "@/assets/why-choose.webp";
+import resSlow from "@/assets/res-slow-laptop.webp";
+import resBsod from "@/assets/res-bsod.webp";
+import resCctv from "@/assets/res-cctv.webp";
+import findBanner from "@/assets/find-banner.webp";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
