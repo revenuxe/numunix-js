@@ -257,6 +257,7 @@ function CommonProblems() {
             "Slow performance",
             "Broken screen or keyboard",
           ]}
+          highlighted
         />
         <ProblemCard
           Icon={Network}
@@ -268,7 +269,6 @@ function CommonProblems() {
             "Structured LAN cabling",
             "VPN & remote access",
           ]}
-          highlighted
         />
         <ProblemCard
           Icon={Camera}
@@ -281,6 +281,7 @@ function CommonProblems() {
             "Remote mobile access",
           ]}
         />
+
       </div>
     </section>
   );
