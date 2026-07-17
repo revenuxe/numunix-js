@@ -45,11 +45,11 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
   head: () => ({
     meta: [
-      { title: "NUMUNIX — Reliable IT Support & Hardware Services" },
+      { title: "Numunix — Reliable IT Support & Hardware Services" },
       {
         name: "description",
         content:
-          "Laptop repair, desktop repair, CCTV installation, networking, AMC and business IT support by NUMUNIX certified engineers. We Keep IT Running.",
+          "Laptop repair, desktop repair, CCTV installation, networking, AMC and business IT support by Numunix certified engineers. We Keep IT Running.",
       },
     ],
   }),
@@ -61,7 +61,7 @@ function LogoMark({ className = "h-8" }: { className?: string }) {
   return (
     <img
       src={LOGO}
-      alt="NUMUNIX — We Keep IT Running"
+      alt="Numunix — We Keep IT Running"
       className={className}
       width={200}
       height={50}
@@ -166,7 +166,7 @@ function Hero() {
     <section className="relative overflow-hidden bg-ink text-white">
       <img
         src={heroImg}
-        alt="NUMUNIX engineer repairing a laptop"
+        alt="Numunix engineer repairing a laptop"
         width={1400}
         height={1200}
         className="absolute inset-0 h-full w-full object-cover object-center opacity-70"
@@ -188,7 +188,7 @@ function Hero() {
             <span className="text-brand">& Hardware</span> Services
           </h1>
           <p className="mt-6 max-w-xl text-base text-white/80 sm:text-lg">
-            NUMUNIX provides reliable onsite and business IT support with
+            Numunix provides reliable onsite and business IT support with
             certified technicians, transparent pricing and fast turnaround —
             laptop repair, CCTV, networking, AMC and more.
           </p>
@@ -260,7 +260,7 @@ function CommonProblems() {
           <div className="overflow-hidden rounded-3xl">
             <img
               src={teamImg}
-              alt="NUMUNIX engineers"
+              alt="Numunix engineers"
               width={900}
               height={900}
               loading="lazy"
@@ -479,7 +479,7 @@ function FindBanner() {
       <div className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl">
         <img
           src={findBanner}
-          alt="NUMUNIX data center"
+          alt="Numunix data center"
           width={1600}
           height={700}
           loading="lazy"
@@ -489,10 +489,10 @@ function FindBanner() {
         <div className="absolute inset-0 flex items-center justify-center px-6">
           <div className="max-w-md rounded-3xl bg-white/10 p-6 text-center text-white ring-1 ring-white/20 backdrop-blur-md md:p-8">
             <h3 className="text-2xl font-bold md:text-3xl">
-              Find NUMUNIX Support Near You
+              Find Numunix Support Near You
             </h3>
             <p className="mt-2 text-sm text-white/80">
-              Discover a NUMUNIX engineer today for expert, reliable and
+              Discover a Numunix engineer today for expert, reliable and
               friendly IT service.
             </p>
             <form
@@ -534,7 +534,7 @@ function WhyUs() {
       <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2 lg:items-start">
         <div>
           <h2 className="text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
-            Why Choose <span className="text-brand">NUMUNIX</span> for IT
+            Why Choose <span className="text-brand">Numunix</span> for IT
           </h2>
           <p className="mt-4 max-w-md text-muted-foreground">
             Reliable IT support with skilled engineers ensuring satisfaction on
@@ -589,7 +589,7 @@ function WhyUs() {
         <div className="relative">
           <img
             src={whyImg}
-            alt="NUMUNIX technician"
+            alt="Numunix technician"
             width={900}
             height={1000}
             loading="lazy"
@@ -681,7 +681,7 @@ function Resources() {
 function FAQ() {
   const faqs = [
     {
-      q: "What makes NUMUNIX different from other IT support providers?",
+      q: "What makes Numunix different from other IT support providers?",
       a: "Certified engineers, transparent pricing, genuine parts, fast turnaround and dedicated support for both homes and businesses.",
     },
     {
@@ -698,7 +698,7 @@ function FAQ() {
     },
     {
       q: "Do you use genuine parts and offer warranty?",
-      a: "Yes. Every repair uses genuine, warrantied components and comes with a NUMUNIX service warranty.",
+      a: "Yes. Every repair uses genuine, warrantied components and comes with a Numunix service warranty.",
     },
   ];
   const [open, setOpen] = useState<number | null>(0);
@@ -773,7 +773,7 @@ function FAQ() {
               href="#book"
               className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-ink px-4 py-3 text-sm font-semibold text-white"
             >
-              Let's Talk NUMUNIX
+              Let's Talk Numunix
             </a>
           </div>
         </div>
@@ -831,11 +831,11 @@ function Footer() {
         aria-hidden
         className="pointer-events-none mt-16 select-none text-center text-[18vw] font-extrabold leading-none tracking-tighter text-ink/[0.04] md:text-[14vw]"
       >
-        NUMUNIX
+        Numunix
       </div>
 
       <div className="mx-auto mt-8 flex max-w-6xl flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
-        <p>© {new Date().getFullYear()} NUMUNIX. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Numunix. All rights reserved.</p>
         <div className="flex items-center gap-4">
           <a href="#" className="hover:text-ink">Privacy Policy</a>
           <a href="#" className="hover:text-ink">Terms</a>
