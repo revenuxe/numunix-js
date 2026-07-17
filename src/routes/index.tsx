@@ -29,27 +29,27 @@ import {
 } from "lucide-react";
 
 import logoAsset from "@/assets/numunix-logo.asset.json";
-import heroImg from "@/assets/hero-technician.jpg";
-import teamImg from "@/assets/team-it.jpg";
-import svcLaptop from "@/assets/service-laptop.jpg";
-import svcDesktop from "@/assets/service-desktop.jpg";
-import svcCctv from "@/assets/service-cctv.jpg";
-import svcBusiness from "@/assets/service-business.jpg";
-import whyImg from "@/assets/why-choose.jpg";
-import resSlow from "@/assets/res-slow-laptop.jpg";
-import resBsod from "@/assets/res-bsod.jpg";
-import resCctv from "@/assets/res-cctv.jpg";
-import findBanner from "@/assets/find-banner.jpg";
+import heroImg from "@/assets/hero-technician.webp";
+
+import svcLaptop from "@/assets/service-laptop.webp";
+import svcDesktop from "@/assets/service-desktop.webp";
+import svcCctv from "@/assets/service-cctv.webp";
+import svcBusiness from "@/assets/service-business.webp";
+import whyImg from "@/assets/why-choose.webp";
+import resSlow from "@/assets/res-slow-laptop.webp";
+import resBsod from "@/assets/res-bsod.webp";
+import resCctv from "@/assets/res-cctv.webp";
+import findBanner from "@/assets/find-banner.webp";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
   head: () => ({
     meta: [
-      { title: "NUMUNIX — Reliable IT Support & Hardware Services" },
+      { title: "Numunix — Reliable IT Support & Hardware Services" },
       {
         name: "description",
         content:
-          "Laptop repair, desktop repair, CCTV installation, networking, AMC and business IT support by NUMUNIX certified engineers. We Keep IT Running.",
+          "Laptop repair, desktop repair, CCTV installation, networking, AMC and business IT support by Numunix certified engineers. We Keep IT Running.",
       },
     ],
   }),
@@ -61,7 +61,7 @@ function LogoMark({ className = "h-8" }: { className?: string }) {
   return (
     <img
       src={LOGO}
-      alt="NUMUNIX — We Keep IT Running"
+      alt="Numunix — We Keep IT Running"
       className={className}
       width={200}
       height={50}
@@ -166,7 +166,7 @@ function Hero() {
     <section className="relative overflow-hidden bg-ink text-white">
       <img
         src={heroImg}
-        alt="NUMUNIX engineer repairing a laptop"
+        alt="Numunix engineer repairing a laptop"
         width={1400}
         height={1200}
         className="absolute inset-0 h-full w-full object-cover object-center opacity-70"
@@ -176,57 +176,58 @@ function Hero() {
 
       <Nav />
 
-      <div className="relative mx-auto max-w-7xl px-4 pt-40 pb-24 md:px-8 md:pt-48 md:pb-40 lg:pt-56 lg:pb-52">
+      <div className="relative mx-auto max-w-7xl px-4 pt-24 pb-32 md:px-8 md:pt-40 md:pb-40 lg:pt-52 lg:pb-52">
         <div className="max-w-2xl">
           <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium ring-1 ring-white/20 backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-brand" />
             We Keep IT Running
           </span>
-          <h1 className="mt-6 text-[2.5rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+          <h1 className="mt-5 text-[2.25rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
             Reliable IT Support
-            <br />
+            <br className="hidden sm:block" />{" "}
             <span className="text-brand">& Hardware</span> Services
           </h1>
-          <p className="mt-6 max-w-xl text-base text-white/80 sm:text-lg">
-            NUMUNIX provides reliable onsite and business IT support with
+          <p className="mt-5 max-w-xl text-sm text-white/80 sm:mt-6 sm:text-lg">
+            Numunix provides reliable onsite and business IT support with
             certified technicians, transparent pricing and fast turnaround —
             laptop repair, CCTV, networking, AMC and more.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center gap-3 sm:mt-8">
             <a
               href="#book"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-4 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90"
             >
               Book Service
               <ArrowRight className="h-4 w-4" />
             </a>
             <a
               href="#book"
-              className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-4 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10"
+              className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10"
             >
               Get Free Consultation
             </a>
           </div>
-        </div>
 
-        {/* Floating service chips */}
-        <div className="pointer-events-none absolute inset-x-4 bottom-6 flex flex-wrap justify-center gap-2 md:inset-x-8 lg:right-12 lg:left-auto lg:bottom-24 lg:max-w-md lg:justify-end">
-          {floating.map(({ label, Icon }) => (
-            <div
-              key={label}
-              className="pointer-events-auto inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-medium text-white ring-1 ring-white/20 backdrop-blur-md"
-            >
-              <span className="grid h-6 w-6 place-items-center rounded-full bg-brand text-brand-foreground">
-                <Icon className="h-3.5 w-3.5" />
-              </span>
-              {label}
-            </div>
-          ))}
+          {/* Floating service chips — inline on mobile, absolute on desktop */}
+          <div className="mt-8 flex flex-wrap gap-2 sm:mt-10 lg:absolute lg:right-12 lg:bottom-24 lg:mt-0 lg:max-w-md lg:justify-end">
+            {floating.map(({ label, Icon }) => (
+              <div
+                key={label}
+                className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-medium text-white ring-1 ring-white/20 backdrop-blur-md"
+              >
+                <span className="grid h-6 w-6 place-items-center rounded-full bg-brand text-brand-foreground">
+                  <Icon className="h-3.5 w-3.5" />
+                </span>
+                {label}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 /* ---------- COMMON PROBLEMS (matches reference layout with 3 cards + center) ---------- */
 function CommonProblems() {
@@ -242,8 +243,7 @@ function CommonProblems() {
         </p>
       </div>
 
-      <div className="relative mx-auto mt-16 grid max-w-6xl gap-6 lg:grid-cols-3">
-        {/* Left */}
+      <div className="relative mx-auto mt-14 grid max-w-6xl gap-5 sm:mt-16 md:gap-6 lg:grid-cols-3">
         <ProblemCard
           Icon={Laptop}
           title="Laptop Repair"
@@ -255,42 +255,18 @@ function CommonProblems() {
             "Broken screen or keyboard",
           ]}
         />
-        {/* Center (blue overlay card) */}
-        <div className="relative order-first lg:order-none">
-          <div className="overflow-hidden rounded-3xl">
-            <img
-              src={teamImg}
-              alt="NUMUNIX engineers"
-              width={900}
-              height={900}
-              loading="lazy"
-              className="aspect-[4/5] w-full object-cover"
-            />
-          </div>
-          <div className="absolute inset-x-4 -bottom-6 rounded-3xl bg-brand p-6 text-brand-foreground shadow-brand md:inset-x-8">
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-white/15">
-              <Network className="h-5 w-5" />
-            </span>
-            <h3 className="mt-4 text-2xl font-bold">Networking</h3>
-            <p className="mt-2 text-sm text-white/85">
-              We design and troubleshoot business networks — Wi-Fi, LAN,
-              routers and firewalls — for stable, secure connectivity.
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-white/90">
-              {[
-                "Slow or dropping Wi-Fi",
-                "Router & firewall setup",
-                "Structured LAN cabling",
-                "VPN & remote access",
-              ].map((t) => (
-                <li key={t} className="flex items-center gap-2">
-                  <BadgeCheck className="h-4 w-4" /> {t}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        {/* Right */}
+        <ProblemCard
+          Icon={Network}
+          title="Networking"
+          desc="We design and troubleshoot business networks — Wi-Fi, LAN, routers and firewalls — for stable, secure connectivity."
+          bullets={[
+            "Slow or dropping Wi-Fi",
+            "Router & firewall setup",
+            "Structured LAN cabling",
+            "VPN & remote access",
+          ]}
+          highlighted
+        />
         <ProblemCard
           Icon={Camera}
           title="CCTV & Security"
@@ -312,29 +288,69 @@ function ProblemCard({
   title,
   desc,
   bullets,
+  highlighted = false,
 }: {
   Icon: typeof Laptop;
   title: string;
   desc: string;
   bullets: string[];
+  highlighted?: boolean;
 }) {
   return (
-    <div className="rounded-3xl bg-secondary/60 p-8 ring-1 ring-border shadow-card">
-      <span className="grid h-11 w-11 place-items-center rounded-full bg-brand text-brand-foreground">
-        <Icon className="h-5 w-5" />
-      </span>
-      <h3 className="mt-6 text-2xl font-bold text-ink">{title}</h3>
-      <p className="mt-3 text-sm text-muted-foreground">{desc}</p>
-      <ul className="mt-6 space-y-3 text-sm text-ink/80">
+    <a
+      href="#book"
+      className={`group relative flex h-full flex-col rounded-3xl p-7 md:p-8 transition duration-300 ${
+        highlighted
+          ? "bg-brand text-brand-foreground ring-1 ring-brand shadow-brand hover:-translate-y-1"
+          : "bg-white text-ink ring-1 ring-border hover:-translate-y-1 hover:border-brand hover:ring-brand/60 hover:shadow-card"
+      }`}
+    >
+      <div className="flex items-start justify-between">
+        <span
+          className={`grid h-12 w-12 place-items-center rounded-2xl ${
+            highlighted
+              ? "bg-white/15 text-white"
+              : "bg-brand/10 text-brand group-hover:bg-brand group-hover:text-brand-foreground"
+          } transition`}
+        >
+          <Icon className="h-5 w-5" />
+        </span>
+        <span
+          className={`grid h-9 w-9 place-items-center rounded-full transition ${
+            highlighted
+              ? "bg-white/15 text-white"
+              : "bg-secondary text-ink group-hover:bg-ink group-hover:text-white"
+          }`}
+        >
+          <ArrowUpRight className="h-4 w-4" />
+        </span>
+      </div>
+      <h3 className="mt-6 text-2xl font-bold">{title}</h3>
+      <p
+        className={`mt-3 text-sm ${
+          highlighted ? "text-white/85" : "text-muted-foreground"
+        }`}
+      >
+        {desc}
+      </p>
+      <ul
+        className={`mt-6 space-y-3 text-sm ${
+          highlighted ? "text-white/95" : "text-ink/80"
+        }`}
+      >
         {bullets.map((b) => (
           <li key={b} className="flex items-center gap-2">
-            <BadgeCheck className="h-4 w-4 text-brand" /> {b}
+            <BadgeCheck
+              className={`h-4 w-4 ${highlighted ? "text-white" : "text-brand"}`}
+            />
+            {b}
           </li>
         ))}
       </ul>
-    </div>
+    </a>
   );
 }
+
 
 /* ---------- ALL SERVICES GRID ---------- */
 function ServicesGrid() {
@@ -438,39 +454,36 @@ function ShowcaseCard({
   badge?: string;
 }) {
   return (
-    <div className="rounded-3xl bg-secondary/40 p-4 ring-1 ring-border">
-      <div className="flex flex-col gap-4 md:flex-row md:items-stretch">
-        <div className="flex-1 p-4 md:p-6">
-          <h3 className="text-xl font-bold text-ink md:text-2xl">{title}</h3>
-          <p className="mt-3 text-sm text-muted-foreground">{desc}</p>
-          {cta && (
-            <a
-              href="#book"
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-xs font-semibold text-white"
-            >
-              {cta} <ArrowRight className="h-3.5 w-3.5" />
-            </a>
-          )}
-        </div>
-        <div className="relative flex-1 overflow-hidden rounded-2xl">
-          <img
-            src={image}
-            alt={title}
-            width={1200}
-            height={700}
-            loading="lazy"
-            className="h-56 w-full object-cover md:h-full"
-          />
-          {badge && (
-            <div className="absolute bottom-3 right-3 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-ink shadow-soft">
-              {badge}
-            </div>
-          )}
-        </div>
+    <div className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-border shadow-soft transition hover:-translate-y-1 hover:shadow-card">
+      <div className="relative overflow-hidden">
+        <img
+          src={image}
+          alt={title}
+          width={1200}
+          height={800}
+          loading="lazy"
+          className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105"
+        />
+        {badge && (
+          <div className="absolute bottom-3 right-3 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-ink shadow-soft">
+            {badge}
+          </div>
+        )}
+      </div>
+      <div className="flex flex-1 flex-col p-6">
+        <h3 className="text-xl font-bold text-ink md:text-2xl">{title}</h3>
+        <p className="mt-3 text-sm text-muted-foreground">{desc}</p>
+        <a
+          href="#book"
+          className="mt-auto inline-flex w-fit items-center gap-2 pt-6 text-sm font-semibold text-ink transition group-hover:text-brand"
+        >
+          {cta ?? "Learn more"} <ArrowRight className="h-4 w-4" />
+        </a>
       </div>
     </div>
   );
 }
+
 
 /* ---------- FIND / BOOK BANNER + WHY US ---------- */
 function FindBanner() {
@@ -479,7 +492,7 @@ function FindBanner() {
       <div className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl">
         <img
           src={findBanner}
-          alt="NUMUNIX data center"
+          alt="Numunix data center"
           width={1600}
           height={700}
           loading="lazy"
@@ -489,10 +502,10 @@ function FindBanner() {
         <div className="absolute inset-0 flex items-center justify-center px-6">
           <div className="max-w-md rounded-3xl bg-white/10 p-6 text-center text-white ring-1 ring-white/20 backdrop-blur-md md:p-8">
             <h3 className="text-2xl font-bold md:text-3xl">
-              Find NUMUNIX Support Near You
+              Find Numunix Support Near You
             </h3>
             <p className="mt-2 text-sm text-white/80">
-              Discover a NUMUNIX engineer today for expert, reliable and
+              Discover a Numunix engineer today for expert, reliable and
               friendly IT service.
             </p>
             <form
@@ -534,7 +547,7 @@ function WhyUs() {
       <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2 lg:items-start">
         <div>
           <h2 className="text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
-            Why Choose <span className="text-brand">NUMUNIX</span> for IT
+            Why Choose <span className="text-brand">Numunix</span> for IT
           </h2>
           <p className="mt-4 max-w-md text-muted-foreground">
             Reliable IT support with skilled engineers ensuring satisfaction on
@@ -589,7 +602,7 @@ function WhyUs() {
         <div className="relative">
           <img
             src={whyImg}
-            alt="NUMUNIX technician"
+            alt="Numunix technician"
             width={900}
             height={1000}
             loading="lazy"
@@ -681,7 +694,7 @@ function Resources() {
 function FAQ() {
   const faqs = [
     {
-      q: "What makes NUMUNIX different from other IT support providers?",
+      q: "What makes Numunix different from other IT support providers?",
       a: "Certified engineers, transparent pricing, genuine parts, fast turnaround and dedicated support for both homes and businesses.",
     },
     {
@@ -698,7 +711,7 @@ function FAQ() {
     },
     {
       q: "Do you use genuine parts and offer warranty?",
-      a: "Yes. Every repair uses genuine, warrantied components and comes with a NUMUNIX service warranty.",
+      a: "Yes. Every repair uses genuine, warrantied components and comes with a Numunix service warranty.",
     },
   ];
   const [open, setOpen] = useState<number | null>(0);
@@ -773,7 +786,7 @@ function FAQ() {
               href="#book"
               className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-ink px-4 py-3 text-sm font-semibold text-white"
             >
-              Let's Talk NUMUNIX
+              Let's Talk Numunix
             </a>
           </div>
         </div>
@@ -831,11 +844,11 @@ function Footer() {
         aria-hidden
         className="pointer-events-none mt-16 select-none text-center text-[18vw] font-extrabold leading-none tracking-tighter text-ink/[0.04] md:text-[14vw]"
       >
-        NUMUNIX
+        Numunix
       </div>
 
       <div className="mx-auto mt-8 flex max-w-6xl flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
-        <p>© {new Date().getFullYear()} NUMUNIX. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Numunix. All rights reserved.</p>
         <div className="flex items-center gap-4">
           <a href="#" className="hover:text-ink">Privacy Policy</a>
           <a href="#" className="hover:text-ink">Terms</a>
