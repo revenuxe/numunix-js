@@ -198,62 +198,7 @@ function BookingForm() {
 }
 
 
-function BookingForm() {
-  return (
-    <form
-      onSubmit={(e) => e.preventDefault()}
-      className="rounded-3xl bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-6"
-    >
-      <h3 className="text-lg font-bold text-white sm:text-xl">
-        Book a Service
-      </h3>
-      <p className="mt-1 text-xs text-white/70">
-        Get a free callback from a certified Numunix engineer.
-      </p>
-      <div className="mt-4 space-y-3">
-        <label className="block">
-          <span className="text-xs font-semibold text-white/80">Name</span>
-          <input
-            type="text"
-            required
-            maxLength={100}
-            placeholder="Your full name"
-            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
-          />
-        </label>
-        <label className="block">
-          <span className="text-xs font-semibold text-white/80">Email</span>
-          <input
-            type="email"
-            required
-            maxLength={255}
-            placeholder="you@example.com"
-            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
-          />
-        </label>
-        <label className="block">
-          <span className="text-xs font-semibold text-white/80">
-            Postal Code
-          </span>
-          <input
-            type="text"
-            required
-            maxLength={12}
-            placeholder="Enter your PIN / ZIP"
-            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
-          />
-        </label>
-      </div>
-      <button
-        type="submit"
-        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110"
-      >
-        Schedule Service
-        <ArrowRight className="h-4 w-4" />
-      </button>
-    </form>
-  );
-}
+
 
 
 
