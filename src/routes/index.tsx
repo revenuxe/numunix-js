@@ -30,7 +30,7 @@ import {
 
 import logoAsset from "@/assets/numunix-logo.asset.json";
 import heroImg from "@/assets/hero-technician.webp";
-import teamImg from "@/assets/team-it.webp";
+
 import svcLaptop from "@/assets/service-laptop.webp";
 import svcDesktop from "@/assets/service-desktop.webp";
 import svcCctv from "@/assets/service-cctv.webp";
