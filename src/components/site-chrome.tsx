@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X, Facebook, Instagram, Youtube, Twitter, Mail, Phone } from "lucide-react";
-import logoAsset from "@/assets/numunix-logo.asset.json";
+import logo from "@/assets/numunix-logo.webp";
 import { CONTACT } from "@/lib/contact";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 
-const LOGO = logoAsset.url;
+const LOGO = logo;
 
 export function LogoMark({ className = "h-9 w-auto" }: { className?: string }) {
   return (

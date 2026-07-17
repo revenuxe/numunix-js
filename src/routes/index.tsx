@@ -235,19 +235,37 @@ function CommonProblems() {
         </div>
 
         <div className="relative grid gap-5 md:gap-6 lg:grid-cols-3 lg:gap-8">
-          <ProblemCard
-            number="01"
-            Icon={Laptop}
-            title="Laptop Repair"
-            desc="If your laptop keeps freezing or won't power on, our engineers diagnose it fast and get it running."
-            bullets={[
-              "Won't turn on or boot",
-              "Overheating or fan noise",
-              "Slow performance",
-              "Broken screen or keyboard",
-            ]}
-            highlighted
-          />
+          <div className="relative pt-24 lg:pt-0">
+            <div
+              aria-hidden
+              className="absolute inset-x-5 top-0 h-40 overflow-hidden rounded-[1.75rem] shadow-card ring-1 ring-border lg:hidden"
+            >
+              <img
+                src={svcLaptop}
+                alt=""
+                width={800}
+                height={460}
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand/80 via-brand/10 to-transparent" />
+            </div>
+            <div className="relative z-10">
+              <ProblemCard
+                number="01"
+                Icon={Laptop}
+                title="Laptop Repair"
+                desc="If your laptop keeps freezing or won't power on, our engineers diagnose it fast and get it running."
+                bullets={[
+                  "Won't turn on or boot",
+                  "Overheating or fan noise",
+                  "Slow performance",
+                  "Broken screen or keyboard",
+                ]}
+                highlighted
+              />
+            </div>
+          </div>
           <div className="hidden lg:block" aria-hidden />
           <ProblemCard
             number="02"
