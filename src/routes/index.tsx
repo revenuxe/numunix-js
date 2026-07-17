@@ -454,39 +454,36 @@ function ShowcaseCard({
   badge?: string;
 }) {
   return (
-    <div className="rounded-3xl bg-secondary/40 p-4 ring-1 ring-border">
-      <div className="flex flex-col gap-4 md:flex-row md:items-stretch">
-        <div className="flex-1 p-4 md:p-6">
-          <h3 className="text-xl font-bold text-ink md:text-2xl">{title}</h3>
-          <p className="mt-3 text-sm text-muted-foreground">{desc}</p>
-          {cta && (
-            <a
-              href="#book"
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-xs font-semibold text-white"
-            >
-              {cta} <ArrowRight className="h-3.5 w-3.5" />
-            </a>
-          )}
-        </div>
-        <div className="relative flex-1 overflow-hidden rounded-2xl">
-          <img
-            src={image}
-            alt={title}
-            width={1200}
-            height={700}
-            loading="lazy"
-            className="h-56 w-full object-cover md:h-full"
-          />
-          {badge && (
-            <div className="absolute bottom-3 right-3 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-ink shadow-soft">
-              {badge}
-            </div>
-          )}
-        </div>
+    <div className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-border shadow-soft transition hover:-translate-y-1 hover:shadow-card">
+      <div className="relative overflow-hidden">
+        <img
+          src={image}
+          alt={title}
+          width={1200}
+          height={800}
+          loading="lazy"
+          className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105"
+        />
+        {badge && (
+          <div className="absolute bottom-3 right-3 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-ink shadow-soft">
+            {badge}
+          </div>
+        )}
+      </div>
+      <div className="flex flex-1 flex-col p-6">
+        <h3 className="text-xl font-bold text-ink md:text-2xl">{title}</h3>
+        <p className="mt-3 text-sm text-muted-foreground">{desc}</p>
+        <a
+          href="#book"
+          className="mt-auto inline-flex w-fit items-center gap-2 pt-6 text-sm font-semibold text-ink transition group-hover:text-brand"
+        >
+          {cta ?? "Learn more"} <ArrowRight className="h-4 w-4" />
+        </a>
       </div>
     </div>
   );
 }
+
 
 /* ---------- FIND / BOOK BANNER + WHY US ---------- */
 function FindBanner() {
