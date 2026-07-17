@@ -259,6 +259,7 @@ function CommonProblems() {
                   "Broken screen or keyboard",
                 ]}
                 highlighted
+                href="/services/laptop-repair"
               />
             </div>
           </div>
@@ -274,6 +275,7 @@ function CommonProblems() {
               "DVR / NVR issues",
               "Remote mobile access",
             ]}
+            href="/services/cctv-installation"
           />
 
           <div className="relative pt-24 lg:col-span-3 lg:mx-auto lg:-mt-24 lg:w-[380px] lg:rotate-[2deg] lg:pt-0">
@@ -304,6 +306,7 @@ function CommonProblems() {
                   "VPN & remote access",
                 ]}
                 featured
+                href="/services/networking"
               />
             </div>
           </div>
@@ -321,6 +324,7 @@ function ProblemCard({
   bullets,
   highlighted = false,
   featured = false,
+  href = "#book",
 }: {
   number: string;
   Icon: typeof Laptop;
@@ -329,11 +333,12 @@ function ProblemCard({
   bullets: string[];
   highlighted?: boolean;
   featured?: boolean;
+  href?: string;
 }) {
   const dark = highlighted || featured;
   return (
     <a
-      href="#book"
+      href={href}
       className={`group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] p-6 shadow-card transition duration-300 hover:-translate-y-1 md:p-8 ${
         highlighted
           ? "bg-brand text-brand-foreground ring-1 ring-brand shadow-brand"
@@ -380,14 +385,14 @@ function ProblemCard({
 /* ---------- ALL SERVICES GRID ---------- */
 function ServicesGrid() {
   const items = [
-    { title: "Laptop Repair", Icon: Laptop },
-    { title: "Desktop Repair", Icon: Monitor },
-    { title: "CCTV Installation", Icon: Camera },
-    { title: "Networking", Icon: Network },
-    { title: "Printer Repair", Icon: Printer },
-    { title: "Business AMC", Icon: Briefcase },
-    { title: "Data Recovery", Icon: HardDrive },
-    { title: "Hardware Upgrades", Icon: Cpu },
+    { title: "Laptop Repair", slug: "laptop-repair", Icon: Laptop },
+    { title: "Desktop Repair", slug: "desktop-repair", Icon: Monitor },
+    { title: "CCTV Installation", slug: "cctv-installation", Icon: Camera },
+    { title: "Networking", slug: "networking", Icon: Network },
+    { title: "Printer Repair", slug: "printer-repair", Icon: Printer },
+    { title: "Business AMC", slug: "business-amc", Icon: Briefcase },
+    { title: "Data Recovery", slug: "data-recovery", Icon: HardDrive },
+    { title: "Hardware Upgrades", slug: "hardware-upgrades", Icon: Cpu },
   ];
   return (
     <section className="bg-secondary/40 px-4 py-24 md:px-8 md:py-28">
@@ -401,10 +406,10 @@ function ServicesGrid() {
         </p>
       </div>
       <div className="mx-auto mt-14 grid max-w-6xl grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 lg:grid-cols-4">
-        {items.map(({ title, Icon }, index) => (
+        {items.map(({ title, slug, Icon }, index) => (
           <a
             key={title}
-            href="#book"
+            href={`/services/${slug}`}
             className="group relative flex min-h-[236px] flex-col overflow-hidden rounded-[1.75rem] bg-white p-5 ring-1 ring-border shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card md:min-h-[260px] md:p-6"
           >
             <span
@@ -456,23 +461,27 @@ function Showcase() {
           title="Laptop Repair"
           desc="Schedule your laptop repair with certified engineers and genuine parts."
           image={svcLaptop}
+          href="/services/laptop-repair"
         />
         <ShowcaseCard
           title="Desktop Repair"
           desc="Expert desktop repair to restore full performance and stability."
           image={svcDesktop}
+          href="/services/desktop-repair"
           badge="240+ engineers"
         />
         <ShowcaseCard
           title="CCTV Installation"
           desc="Fast, reliable CCTV installation and remote-access setup, anytime."
           image={svcCctv}
+          href="/services/cctv-installation"
           cta="View All Services"
         />
         <ShowcaseCard
           title="Business IT Support"
           desc="Expert commercial IT support for offices, retail and workspaces."
           image={svcBusiness}
+          href="/services/business-amc"
         />
       </div>
     </section>
@@ -485,12 +494,14 @@ function ShowcaseCard({
   image,
   cta,
   badge,
+  href,
 }: {
   title: string;
   desc: string;
   image: string;
   cta?: string;
   badge?: string;
+  href?: string;
 }) {
   return (
     <div className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-border shadow-soft transition hover:-translate-y-1 hover:shadow-card">
@@ -513,7 +524,7 @@ function ShowcaseCard({
         <h3 className="text-xl font-bold text-ink md:text-2xl">{title}</h3>
         <p className="mt-3 text-sm text-muted-foreground">{desc}</p>
         <a
-          href="#book"
+          href={href ?? "#book"}
           className="mt-auto inline-flex w-fit items-center gap-2 pt-6 text-sm font-semibold text-ink transition group-hover:text-brand"
         >
           {cta ?? "Learn more"} <ArrowRight className="h-4 w-4" />
