@@ -122,7 +122,7 @@ export function SiteNav({ variant = "light" }: { variant?: "light" | "dark" }) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-4 text-base font-semibold text-white"
+              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-5 py-4 text-base font-semibold text-white transition hover:bg-brand"
             >
               <WhatsAppIcon className="h-5 w-5" />
               WhatsApp Us

@@ -39,7 +39,7 @@ function ContactPage() {
               href={CONTACT.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-5 rounded-3xl bg-[#25D366] p-6 text-white shadow-card transition hover:brightness-110"
+              className="group flex items-center gap-5 rounded-3xl bg-[#12347d] p-6 text-white shadow-card transition hover:bg-[#0d2863]"
             >
               <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white/20">
                 <WhatsAppIcon className="h-6 w-6" />
