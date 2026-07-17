@@ -81,16 +81,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Numunix provides professional laptop repair, desktop repair, CCTV installation, networking, AMC and business IT solutions with certified technicians and fast turnaround.",
+          "Laptop repair, desktop repair, CCTV installation, networking, AMC and business IT support by Numunix certified engineers. We Keep IT Running.",
       },
-      { property: "og:title", content: "Numunix — We Keep IT Running" },
+      { property: "og:title", content: "Numunix — Reliable IT Support & Hardware Services" },
       {
         property: "og:description",
         content:
-          "Certified engineers for laptop repair, desktop repair, CCTV, networking and business IT support. Transparent pricing. Fast turnaround.",
+          "Laptop repair, desktop repair, CCTV installation, networking, AMC and business IT support by Numunix certified engineers. We Keep IT Running.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Numunix — Reliable IT Support & Hardware Services" },
+      { name: "twitter:description", content: "Laptop repair, desktop repair, CCTV installation, networking, AMC and business IT support by Numunix certified engineers. We Keep IT Running." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/af559630-74d9-43d4-ac77-d8db6932f2ef/id-preview-34df767e--880eedc7-7af0-4933-ac7c-f36e30664d34.lovable.app-1784306119280.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/af559630-74d9-43d4-ac77-d8db6932f2ef/id-preview-34df767e--880eedc7-7af0-4933-ac7c-f36e30664d34.lovable.app-1784306119280.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
