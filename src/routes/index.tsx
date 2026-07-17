@@ -176,57 +176,58 @@ function Hero() {
 
       <Nav />
 
-      <div className="relative mx-auto max-w-7xl px-4 pt-40 pb-24 md:px-8 md:pt-48 md:pb-40 lg:pt-56 lg:pb-52">
+      <div className="relative mx-auto max-w-7xl px-4 pt-24 pb-32 md:px-8 md:pt-40 md:pb-40 lg:pt-52 lg:pb-52">
         <div className="max-w-2xl">
           <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium ring-1 ring-white/20 backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-brand" />
             We Keep IT Running
           </span>
-          <h1 className="mt-6 text-[2.5rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+          <h1 className="mt-5 text-[2.25rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
             Reliable IT Support
-            <br />
+            <br className="hidden sm:block" />{" "}
             <span className="text-brand">& Hardware</span> Services
           </h1>
-          <p className="mt-6 max-w-xl text-base text-white/80 sm:text-lg">
+          <p className="mt-5 max-w-xl text-sm text-white/80 sm:mt-6 sm:text-lg">
             Numunix provides reliable onsite and business IT support with
             certified technicians, transparent pricing and fast turnaround —
             laptop repair, CCTV, networking, AMC and more.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center gap-3 sm:mt-8">
             <a
               href="#book"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-4 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90"
             >
               Book Service
               <ArrowRight className="h-4 w-4" />
             </a>
             <a
               href="#book"
-              className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-4 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10"
+              className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10"
             >
               Get Free Consultation
             </a>
           </div>
-        </div>
 
-        {/* Floating service chips */}
-        <div className="pointer-events-none absolute inset-x-4 bottom-6 flex flex-wrap justify-center gap-2 md:inset-x-8 lg:right-12 lg:left-auto lg:bottom-24 lg:max-w-md lg:justify-end">
-          {floating.map(({ label, Icon }) => (
-            <div
-              key={label}
-              className="pointer-events-auto inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-medium text-white ring-1 ring-white/20 backdrop-blur-md"
-            >
-              <span className="grid h-6 w-6 place-items-center rounded-full bg-brand text-brand-foreground">
-                <Icon className="h-3.5 w-3.5" />
-              </span>
-              {label}
-            </div>
-          ))}
+          {/* Floating service chips — inline on mobile, absolute on desktop */}
+          <div className="mt-8 flex flex-wrap gap-2 sm:mt-10 lg:absolute lg:right-12 lg:bottom-24 lg:mt-0 lg:max-w-md lg:justify-end">
+            {floating.map(({ label, Icon }) => (
+              <div
+                key={label}
+                className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-medium text-white ring-1 ring-white/20 backdrop-blur-md"
+              >
+                <span className="grid h-6 w-6 place-items-center rounded-full bg-brand text-brand-foreground">
+                  <Icon className="h-3.5 w-3.5" />
+                </span>
+                {label}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 /* ---------- COMMON PROBLEMS (matches reference layout with 3 cards + center) ---------- */
 function CommonProblems() {
