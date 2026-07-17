@@ -34,7 +34,7 @@ function ContactPage() {
       <section className="mx-auto max-w-6xl px-5 py-20 sm:px-6 md:px-8 md:py-28">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           {/* Info cards */}
-          <div className="mx-auto w-full max-w-xl space-y-5 lg:mx-0 lg:max-w-none">
+          <div className="mx-auto w-full max-w-xl space-y-5 pr-6 sm:pr-8 lg:mx-0 lg:max-w-none lg:pr-0">
             <a
               href={CONTACT.whatsappUrl}
               target="_blank"
