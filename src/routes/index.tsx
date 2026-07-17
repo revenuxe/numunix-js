@@ -30,6 +30,7 @@ import {
 
 import logoAsset from "@/assets/numunix-logo.asset.json";
 import heroImg from "@/assets/hero-technician.webp";
+import teamImg from "@/assets/team-it.webp";
 
 import svcLaptop from "@/assets/service-laptop.webp";
 import svcDesktop from "@/assets/service-desktop.webp";
@@ -166,7 +167,7 @@ function Hero() {
     { label: "AMC", Icon: Briefcase },
   ];
   return (
-    <section className="relative overflow-hidden bg-ink text-white">
+    <section className="relative flex min-h-screen flex-col overflow-hidden bg-ink text-white">
       <img
         src={heroImg}
         alt="Numunix engineer repairing a laptop"
@@ -174,62 +175,133 @@ function Hero() {
         height={1200}
         className="absolute inset-0 h-full w-full object-cover object-center opacity-70"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/40 lg:to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
 
       <Nav />
 
-      <div className="relative mx-auto max-w-7xl px-4 pt-24 pb-32 md:px-8 md:pt-40 md:pb-40 lg:pt-52 lg:pb-52">
-        <div className="max-w-2xl">
-          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium ring-1 ring-white/20 backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-brand" />
-            We Keep IT Running
-          </span>
-          <h1 className="mt-5 text-[2.25rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-            Reliable IT Support
-            <br className="hidden sm:block" />{" "}
-            <span className="text-brand">& Hardware</span> Services
-          </h1>
-          <p className="mt-5 max-w-xl text-sm text-white/80 sm:mt-6 sm:text-lg">
-            Numunix provides reliable onsite and business IT support with
-            certified technicians, transparent pricing and fast turnaround —
-            laptop repair, CCTV, networking, AMC and more.
-          </p>
-          <div className="mt-6 flex flex-wrap items-center gap-3 sm:mt-8">
-            <a
-              href="#book"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90"
-            >
-              Book Service
-              <ArrowRight className="h-4 w-4" />
-            </a>
-            <a
-              href="#book"
-              className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10"
-            >
-              Get Free Consultation
-            </a>
+      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pt-28 pb-12 md:px-8 md:pt-32 md:pb-20 lg:pt-36 lg:pb-24">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-12">
+          {/* Left column */}
+          <div className="max-w-2xl">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium ring-1 ring-white/20 backdrop-blur">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+              We Keep IT Running
+            </span>
+            <h1 className="mt-5 text-[2.5rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+              Reliable IT Support
+              <br className="hidden sm:block" />{" "}
+              <span className="text-brand">& Hardware</span> Services
+            </h1>
+            <p className="mt-5 max-w-xl text-sm text-white/80 sm:mt-6 sm:text-lg">
+              Numunix provides reliable onsite and business IT support with
+              certified technicians, transparent pricing and fast turnaround —
+              laptop repair, CCTV, networking, AMC and more.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-3 sm:mt-8">
+              <a
+                href="#book"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90"
+              >
+                Book Service
+                <ArrowRight className="h-4 w-4" />
+              </a>
+              <a
+                href="#book"
+                className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10"
+              >
+                Get Free Consultation
+              </a>
+            </div>
+
+            {/* Service chips */}
+            <div className="mt-8 flex flex-wrap gap-2 sm:mt-10">
+              {floating.map(({ label, Icon }) => (
+                <div
+                  key={label}
+                  className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-medium text-white ring-1 ring-white/20 backdrop-blur-md"
+                >
+                  <span className="grid h-6 w-6 place-items-center rounded-full bg-brand text-brand-foreground">
+                    <Icon className="h-3.5 w-3.5" />
+                  </span>
+                  {label}
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile booking form — appears below chips on mobile only */}
+            <div className="mt-8 lg:hidden">
+              <BookingForm />
+            </div>
           </div>
 
-          {/* Floating service chips — inline on mobile, absolute on desktop */}
-          <div className="mt-8 flex flex-wrap gap-2 sm:mt-10 lg:absolute lg:right-12 lg:bottom-24 lg:mt-0 lg:max-w-md lg:justify-end">
-            {floating.map(({ label, Icon }) => (
-              <div
-                key={label}
-                className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-medium text-white ring-1 ring-white/20 backdrop-blur-md"
-              >
-                <span className="grid h-6 w-6 place-items-center rounded-full bg-brand text-brand-foreground">
-                  <Icon className="h-3.5 w-3.5" />
-                </span>
-                {label}
-              </div>
-            ))}
+          {/* Right column — desktop booking form */}
+          <div className="hidden lg:block lg:w-[380px]">
+            <BookingForm />
           </div>
         </div>
       </div>
     </section>
   );
 }
+
+function BookingForm() {
+  return (
+    <form
+      onSubmit={(e) => e.preventDefault()}
+      className="rounded-3xl bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-6"
+    >
+      <h3 className="text-lg font-bold text-white sm:text-xl">
+        Book a Service
+      </h3>
+      <p className="mt-1 text-xs text-white/70">
+        Get a free callback from a certified Numunix engineer.
+      </p>
+      <div className="mt-4 space-y-3">
+        <label className="block">
+          <span className="text-xs font-semibold text-white/80">Name</span>
+          <input
+            type="text"
+            required
+            maxLength={100}
+            placeholder="Your full name"
+            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
+          />
+        </label>
+        <label className="block">
+          <span className="text-xs font-semibold text-white/80">Email</span>
+          <input
+            type="email"
+            required
+            maxLength={255}
+            placeholder="you@example.com"
+            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
+          />
+        </label>
+        <label className="block">
+          <span className="text-xs font-semibold text-white/80">
+            Postal Code
+          </span>
+          <input
+            type="text"
+            required
+            maxLength={12}
+            placeholder="Enter your PIN / ZIP"
+            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
+          />
+        </label>
+      </div>
+      <button
+        type="submit"
+        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110"
+      >
+        Schedule Service
+        <ArrowRight className="h-4 w-4" />
+      </button>
+    </form>
+  );
+}
+
 
 
 /* ---------- COMMON PROBLEMS (matches reference layout with 3 cards + center) ---------- */
@@ -246,43 +318,79 @@ function CommonProblems() {
         </p>
       </div>
 
-      <div className="relative mx-auto mt-14 grid max-w-6xl gap-5 sm:mt-16 md:gap-6 lg:grid-cols-3">
-        <ProblemCard
-          Icon={Laptop}
-          title="Laptop Repair"
-          desc="If your laptop keeps freezing or won't power on, our engineers diagnose it fast and get it running."
-          bullets={[
-            "Won't turn on or boot",
-            "Overheating or fan noise",
-            "Slow performance",
-            "Broken screen or keyboard",
-          ]}
-          highlighted
-        />
-        <ProblemCard
-          Icon={Network}
-          title="Networking"
-          desc="We design and troubleshoot business networks — Wi-Fi, LAN, routers and firewalls — for stable, secure connectivity."
-          bullets={[
-            "Slow or dropping Wi-Fi",
-            "Router & firewall setup",
-            "Structured LAN cabling",
-            "VPN & remote access",
-          ]}
-        />
-        <ProblemCard
-          Icon={Camera}
-          title="CCTV & Security"
-          desc="We install and service CCTV systems for homes and businesses with clear footage and remote access."
-          bullets={[
-            "Camera not recording",
-            "Blurry or offline feeds",
-            "DVR / NVR issues",
-            "Remote mobile access",
-          ]}
-        />
+      <div className="relative mx-auto mt-14 max-w-6xl sm:mt-16">
+        {/* Central floating team image — behind cards on desktop */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-0 hidden -translate-x-1/2 lg:block"
+        >
+          <div className="overflow-hidden rounded-[2rem] shadow-card ring-1 ring-border rotate-[-3deg]">
+            <img
+              src={teamImg}
+              alt=""
+              width={520}
+              height={620}
+              loading="lazy"
+              className="h-[440px] w-[340px] object-cover"
+            />
+          </div>
+        </div>
 
+        {/* Mobile team image */}
+        <div className="mb-8 overflow-hidden rounded-3xl shadow-card ring-1 ring-border lg:hidden">
+          <img
+            src={teamImg}
+            alt="Numunix engineering team"
+            width={1200}
+            height={700}
+            loading="lazy"
+            className="h-56 w-full object-cover sm:h-72"
+          />
+        </div>
+
+        <div className="relative grid gap-5 md:gap-6 lg:grid-cols-3 lg:gap-8">
+          <ProblemCard
+            Icon={Laptop}
+            title="Laptop Repair"
+            desc="If your laptop keeps freezing or won't power on, our engineers diagnose it fast and get it running."
+            bullets={[
+              "Won't turn on or boot",
+              "Overheating or fan noise",
+              "Slow performance",
+              "Broken screen or keyboard",
+            ]}
+            highlighted
+          />
+          {/* Spacer on desktop to reveal the central team image */}
+          <div className="hidden lg:block" aria-hidden />
+          <ProblemCard
+            Icon={Camera}
+            title="CCTV & Security"
+            desc="We install and service CCTV systems for homes and businesses with clear footage and remote access."
+            bullets={[
+              "Camera not recording",
+              "Blurry or offline feeds",
+              "DVR / NVR issues",
+              "Remote mobile access",
+            ]}
+          />
+          {/* Networking card — sits below center image on desktop, overlapping */}
+          <div className="lg:col-span-3 lg:mx-auto lg:-mt-24 lg:w-[380px] lg:rotate-[2deg]">
+            <ProblemCard
+              Icon={Network}
+              title="Networking"
+              desc="We design and troubleshoot business networks — Wi-Fi, LAN, routers and firewalls — for stable, secure connectivity."
+              bullets={[
+                "Slow or dropping Wi-Fi",
+                "Router & firewall setup",
+                "Structured LAN cabling",
+                "VPN & remote access",
+              ]}
+            />
+          </div>
+        </div>
       </div>
+
     </section>
   );
 }
@@ -493,36 +601,46 @@ function ShowcaseCard({
 function FindBanner() {
   return (
     <section id="book" className="bg-white px-4 pb-16 md:px-8">
-      <div className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl">
+      <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem]">
         <img
           src={findBanner}
           alt="Numunix data center"
           width={1600}
-          height={700}
+          height={900}
           loading="lazy"
-          className="h-72 w-full object-cover md:h-80"
+          className="h-[420px] w-full object-cover sm:h-[460px] md:h-[500px]"
         />
-        <div className="absolute inset-0 bg-ink/50" />
-        <div className="absolute inset-0 flex items-center justify-center px-6">
-          <div className="max-w-md rounded-3xl bg-white/10 p-6 text-center text-white ring-1 ring-white/20 backdrop-blur-md md:p-8">
-            <h3 className="text-2xl font-bold md:text-3xl">
-              Find Numunix Support Near You
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/50 to-ink/30" />
+        <div className="absolute inset-0 flex items-center px-6 md:px-12 lg:px-16">
+          <div className="w-full max-w-lg rounded-3xl bg-white/10 p-7 text-white ring-1 ring-white/25 shadow-card backdrop-blur-xl md:p-10">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium ring-1 ring-white/20">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+              Nearby Support
+            </span>
+            <h3 className="mt-4 text-2xl font-bold leading-tight md:text-3xl lg:text-4xl">
+              Find Numunix Support{" "}
+              <span className="text-brand">Near You</span>
             </h3>
-            <p className="mt-2 text-sm text-white/80">
+            <p className="mt-3 text-sm text-white/80 md:text-base">
               Discover a Numunix engineer today for expert, reliable and
               friendly IT service.
             </p>
             <form
               onSubmit={(e) => e.preventDefault()}
-              className="mt-5 flex items-center gap-2 rounded-full bg-white/10 p-1.5 ring-1 ring-white/25"
+              className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-2 sm:rounded-full sm:bg-white/10 sm:p-1.5 sm:ring-1 sm:ring-white/25"
             >
               <input
                 type="text"
+                maxLength={12}
                 placeholder="Enter your PIN / ZIP"
-                className="w-full bg-transparent px-4 py-2 text-sm text-white placeholder:text-white/60 focus:outline-none"
+                className="w-full rounded-full bg-white/10 px-5 py-3 text-sm text-white ring-1 ring-white/20 placeholder:text-white/60 focus:outline-none focus:ring-brand sm:bg-transparent sm:ring-0 sm:focus:ring-0"
               />
-              <button className="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ink">
+              <button
+                type="submit"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-white/90"
+              >
                 Find Now
+                <ArrowRight className="h-4 w-4" />
               </button>
             </form>
           </div>
@@ -531,6 +649,7 @@ function FindBanner() {
     </section>
   );
 }
+
 
 function WhyUs() {
   const items = [
