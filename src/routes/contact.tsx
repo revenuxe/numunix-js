@@ -34,7 +34,7 @@ function ContactPage() {
       <section className="mx-auto max-w-6xl px-5 py-20 sm:px-6 md:px-8 md:py-28">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           {/* Info cards */}
-          <div className="mx-auto w-full max-w-xl space-y-5 pr-6 sm:pr-8 lg:mx-0 lg:max-w-none lg:pr-0">
+          <div className="mx-auto w-full max-w-[calc(100vw-3rem)] min-w-0 space-y-5 lg:mx-0 lg:max-w-none">
             <a
               href={CONTACT.whatsappUrl}
               target="_blank"
@@ -102,7 +102,7 @@ function ContactPage() {
           {/* Form */}
           <form
             onSubmit={(e) => e.preventDefault()}
-            className="rounded-[2rem] bg-ink p-6 text-white shadow-card md:p-10"
+            className="mx-auto w-full max-w-[calc(100vw-3rem)] rounded-[2rem] bg-ink p-6 text-white shadow-card md:p-10 lg:mx-0 lg:max-w-none"
           >
             <h2 className="text-2xl font-extrabold tracking-tight md:text-3xl">
               Send us a <span className="text-brand">quick request</span>
