@@ -318,43 +318,79 @@ function CommonProblems() {
         </p>
       </div>
 
-      <div className="relative mx-auto mt-14 grid max-w-6xl gap-5 sm:mt-16 md:gap-6 lg:grid-cols-3">
-        <ProblemCard
-          Icon={Laptop}
-          title="Laptop Repair"
-          desc="If your laptop keeps freezing or won't power on, our engineers diagnose it fast and get it running."
-          bullets={[
-            "Won't turn on or boot",
-            "Overheating or fan noise",
-            "Slow performance",
-            "Broken screen or keyboard",
-          ]}
-          highlighted
-        />
-        <ProblemCard
-          Icon={Network}
-          title="Networking"
-          desc="We design and troubleshoot business networks — Wi-Fi, LAN, routers and firewalls — for stable, secure connectivity."
-          bullets={[
-            "Slow or dropping Wi-Fi",
-            "Router & firewall setup",
-            "Structured LAN cabling",
-            "VPN & remote access",
-          ]}
-        />
-        <ProblemCard
-          Icon={Camera}
-          title="CCTV & Security"
-          desc="We install and service CCTV systems for homes and businesses with clear footage and remote access."
-          bullets={[
-            "Camera not recording",
-            "Blurry or offline feeds",
-            "DVR / NVR issues",
-            "Remote mobile access",
-          ]}
-        />
+      <div className="relative mx-auto mt-14 max-w-6xl sm:mt-16">
+        {/* Central floating team image — behind cards on desktop */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-0 hidden -translate-x-1/2 lg:block"
+        >
+          <div className="overflow-hidden rounded-[2rem] shadow-card ring-1 ring-border rotate-[-3deg]">
+            <img
+              src={teamImg}
+              alt=""
+              width={520}
+              height={620}
+              loading="lazy"
+              className="h-[440px] w-[340px] object-cover"
+            />
+          </div>
+        </div>
 
+        {/* Mobile team image */}
+        <div className="mb-8 overflow-hidden rounded-3xl shadow-card ring-1 ring-border lg:hidden">
+          <img
+            src={teamImg}
+            alt="Numunix engineering team"
+            width={1200}
+            height={700}
+            loading="lazy"
+            className="h-56 w-full object-cover sm:h-72"
+          />
+        </div>
+
+        <div className="relative grid gap-5 md:gap-6 lg:grid-cols-3 lg:gap-8">
+          <ProblemCard
+            Icon={Laptop}
+            title="Laptop Repair"
+            desc="If your laptop keeps freezing or won't power on, our engineers diagnose it fast and get it running."
+            bullets={[
+              "Won't turn on or boot",
+              "Overheating or fan noise",
+              "Slow performance",
+              "Broken screen or keyboard",
+            ]}
+            highlighted
+          />
+          {/* Spacer on desktop to reveal the central team image */}
+          <div className="hidden lg:block" aria-hidden />
+          <ProblemCard
+            Icon={Camera}
+            title="CCTV & Security"
+            desc="We install and service CCTV systems for homes and businesses with clear footage and remote access."
+            bullets={[
+              "Camera not recording",
+              "Blurry or offline feeds",
+              "DVR / NVR issues",
+              "Remote mobile access",
+            ]}
+          />
+          {/* Networking card — sits below center image on desktop, overlapping */}
+          <div className="lg:col-span-3 lg:mx-auto lg:-mt-24 lg:w-[380px] lg:rotate-[2deg]">
+            <ProblemCard
+              Icon={Network}
+              title="Networking"
+              desc="We design and troubleshoot business networks — Wi-Fi, LAN, routers and firewalls — for stable, secure connectivity."
+              bullets={[
+                "Slow or dropping Wi-Fi",
+                "Router & firewall setup",
+                "Structured LAN cabling",
+                "VPN & remote access",
+              ]}
+            />
+          </div>
+        </div>
       </div>
+
     </section>
   );
 }
