@@ -18,17 +18,10 @@ import {
   Headset,
   Wrench,
   CalendarClock,
-  Menu,
-  X,
   Plus,
   Minus,
-  Facebook,
-  Instagram,
-  Youtube,
-  Twitter,
 } from "lucide-react";
 
-import logoAsset from "@/assets/numunix-logo.asset.json";
 import heroImg from "@/assets/hero-technician.webp";
 import teamImg from "@/assets/team-it.webp";
 
@@ -41,6 +34,10 @@ import resSlow from "@/assets/res-slow-laptop.webp";
 import resBsod from "@/assets/res-bsod.webp";
 import resCctv from "@/assets/res-cctv.webp";
 import findBanner from "@/assets/find-banner.webp";
+
+import { SiteNav, SiteFooter } from "@/components/site-chrome";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
+import { CONTACT } from "@/lib/contact";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -56,106 +53,6 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const LOGO = logoAsset.url;
-
-function LogoMark({ className = "h-8" }: { className?: string }) {
-  return (
-    <img
-      src={LOGO}
-      alt="Numunix — We Keep IT Running"
-      className={className}
-      width={200}
-      height={50}
-    />
-  );
-}
-
-/* ---------- NAV ---------- */
-function Nav() {
-  const [open, setOpen] = useState(false);
-  const links = [
-    { label: "Services", href: "#services" },
-    { label: "Business", href: "#showcase" },
-    { label: "Why Us", href: "#why" },
-    { label: "Resources", href: "#resources" },
-    { label: "FAQ", href: "#faq" },
-  ];
-  return (
-    <header className="absolute inset-x-0 top-0 z-30">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 md:px-8 md:py-6">
-        <div className="flex h-12 items-center rounded-2xl bg-white/95 px-3 shadow-soft backdrop-blur md:h-14 md:rounded-full md:px-5">
-          <LogoMark className="h-6 md:h-8" />
-        </div>
-
-        <nav className="hidden h-14 items-center gap-1 rounded-full bg-white/10 px-2 backdrop-blur-md ring-1 ring-white/20 lg:flex">
-          {links.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              className="rounded-full px-4 py-2 text-sm font-medium text-white/90 transition hover:bg-white/15 hover:text-white"
-            >
-              {l.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className="hidden lg:block">
-          <a
-            href="#book"
-            className="inline-flex h-14 items-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90"
-          >
-            Book a Service
-          </a>
-        </div>
-
-        <button
-          onClick={() => setOpen(true)}
-          className="grid h-12 w-12 place-items-center rounded-2xl bg-white/95 text-ink shadow-soft lg:hidden"
-          aria-label="Open menu"
-        >
-          <Menu className="h-5 w-5" />
-        </button>
-      </div>
-
-      {open && (
-        <div className="fixed inset-0 z-50 bg-ink/95 backdrop-blur-xl lg:hidden">
-          <div className="flex items-center justify-between px-4 py-4">
-            <div className="flex h-12 items-center rounded-2xl bg-white/95 px-3 shadow-soft">
-              <LogoMark className="h-6" />
-            </div>
-            <button
-              onClick={() => setOpen(false)}
-              className="grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-white"
-              aria-label="Close menu"
-            >
-              <X className="h-5 w-5" />
-            </button>
-          </div>
-          <div className="flex flex-col gap-2 px-6 py-8">
-            {links.map((l) => (
-              <a
-                key={l.label}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="rounded-2xl px-4 py-4 text-2xl font-semibold text-white hover:bg-white/10"
-              >
-                {l.label}
-              </a>
-            ))}
-            <a
-              href="#book"
-              onClick={() => setOpen(false)}
-              className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-brand px-5 py-4 text-base font-semibold text-brand-foreground"
-            >
-              Book a Service
-            </a>
-          </div>
-        </div>
-      )}
-    </header>
-  );
-}
-
 
 /* ---------- HERO ---------- */
 function Hero() {
@@ -167,7 +64,7 @@ function Hero() {
     { label: "AMC", Icon: Briefcase },
   ];
   return (
-    <section className="relative flex min-h-screen flex-col overflow-hidden bg-ink text-white">
+    <section className="relative flex min-h-[100svh] flex-col overflow-hidden bg-ink text-white">
       <img
         src={heroImg}
         alt="Numunix engineer repairing a laptop"
@@ -178,44 +75,47 @@ function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/40 lg:to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
 
-      <Nav />
+      <SiteNav variant="dark" />
 
-      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pt-28 pb-12 md:px-8 md:pt-32 md:pb-20 lg:pt-36 lg:pb-24">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-12">
+      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pb-8 pt-24 md:px-8 md:pt-32 md:pb-20 lg:pt-36 lg:pb-24">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-12">
           {/* Left column */}
           <div className="max-w-2xl">
             <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium ring-1 ring-white/20 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-brand" />
               We Keep IT Running
             </span>
-            <h1 className="mt-5 text-[2.5rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-              Reliable IT Support
-              <br className="hidden sm:block" />{" "}
-              <span className="text-brand">& Hardware</span> Services
+            <h1 className="mt-4 text-[2rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+              Reliable IT Support{" "}
+              <span className="text-brand">&amp; Hardware</span> Services
             </h1>
-            <p className="mt-5 max-w-xl text-sm text-white/80 sm:mt-6 sm:text-lg">
-              Numunix provides reliable onsite and business IT support with
-              certified technicians, transparent pricing and fast turnaround —
-              laptop repair, CCTV, networking, AMC and more.
+            <p className="mt-4 max-w-xl text-sm text-white/75 sm:mt-6 sm:text-lg">
+              Certified engineers, transparent pricing, fast turnaround —
+              laptop repair, CCTV, networking, AMC &amp; more.
             </p>
-            <div className="mt-6 flex flex-wrap items-center gap-3 sm:mt-8">
+
+            {/* Mobile CTAs — full width */}
+            <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
               <a
                 href="#book"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90 sm:w-auto"
               >
                 Book Service
                 <ArrowRight className="h-4 w-4" />
               </a>
               <a
-                href="#book"
-                className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10"
+                href={CONTACT.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110 sm:w-auto sm:bg-white/5 sm:text-white sm:ring-1 sm:ring-white/25 sm:backdrop-blur"
               >
-                Get Free Consultation
+                <WhatsAppIcon className="h-4 w-4" />
+                Reach us on WhatsApp
               </a>
             </div>
 
-            {/* Service chips */}
-            <div className="mt-8 flex flex-wrap gap-2 sm:mt-10">
+            {/* Service chips — desktop / tablet only */}
+            <div className="mt-8 hidden flex-wrap gap-2 sm:mt-10 sm:flex">
               {floating.map(({ label, Icon }) => (
                 <div
                   key={label}
@@ -228,14 +128,9 @@ function Hero() {
                 </div>
               ))}
             </div>
-
-            {/* Mobile booking form — appears below chips on mobile only */}
-            <div className="mt-8 lg:hidden">
-              <BookingForm />
-            </div>
           </div>
 
-          {/* Right column — desktop booking form */}
+          {/* Right column — desktop booking form only */}
           <div className="hidden lg:block lg:w-[380px]">
             <BookingForm />
           </div>
@@ -301,6 +196,9 @@ function BookingForm() {
     </form>
   );
 }
+
+
+
 
 
 
@@ -918,69 +816,6 @@ function FAQ() {
   );
 }
 
-/* ---------- FOOTER ---------- */
-function Footer() {
-  const cols: { title: string; links: string[] }[] = [
-    { title: "Company", links: ["About Us", "Why Us", "Careers", "Contact Us"] },
-    { title: "Services", links: ["Laptop Repair", "Desktop Repair", "CCTV", "Networking"] },
-    { title: "Resources", links: ["Expert Tips", "Guides", "Locations", "Site Map"] },
-  ];
-  return (
-    <footer className="relative overflow-hidden bg-white px-4 pt-20 pb-8 md:px-8">
-      <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr]">
-        <div>
-          <LogoMark className="h-9" />
-          <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-            Reliable nationwide IT support, hardware services and business AMC.
-            We Keep IT Running.
-          </p>
-          <div className="mt-6 flex items-center gap-3">
-            {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                aria-label="social"
-                className="grid h-9 w-9 place-items-center rounded-full bg-secondary text-ink transition hover:bg-brand hover:text-brand-foreground"
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
-          </div>
-        </div>
-        {cols.map((c) => (
-          <div key={c.title}>
-            <h4 className="text-sm font-semibold text-ink">{c.title}</h4>
-            <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              {c.links.map((l) => (
-                <li key={l}>
-                  <a href="#" className="transition hover:text-ink">
-                    {l}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-
-      <div
-        aria-hidden
-        className="pointer-events-none mt-16 select-none text-center text-[18vw] font-extrabold leading-none tracking-tighter text-ink/[0.04] md:text-[14vw]"
-      >
-        Numunix
-      </div>
-
-      <div className="mx-auto mt-8 flex max-w-6xl flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
-        <p>© {new Date().getFullYear()} Numunix. All rights reserved.</p>
-        <div className="flex items-center gap-4">
-          <a href="#" className="hover:text-ink">Privacy Policy</a>
-          <a href="#" className="hover:text-ink">Terms</a>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
 /* ---------- PAGE ---------- */
 function LandingPage() {
   return (
@@ -993,7 +828,8 @@ function LandingPage() {
       <WhyUs />
       <Resources />
       <FAQ />
-      <Footer />
+      <SiteFooter />
     </main>
   );
 }
+
