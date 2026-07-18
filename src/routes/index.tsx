@@ -913,6 +913,12 @@ function LandingPage() {
   return (
     <main className="bg-white text-ink">
       <Hero />
+      {/* Mobile booking form (desktop has it inline in hero) */}
+      <section id="book" className="bg-secondary/50 px-4 py-12 lg:hidden">
+        <div className="mx-auto max-w-md">
+          <BookingForm variant="light" />
+        </div>
+      </section>
       <CommonProblems />
       <ServicesGrid />
       <Showcase />
