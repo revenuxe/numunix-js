@@ -1,5 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { ArrowRight, Phone, Mail, MapPin, Clock } from "lucide-react";
+import { submitLead } from "@/lib/leads.functions";
 import { SiteNav, SiteFooter, PageHero } from "@/components/site-chrome";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { CONTACT } from "@/lib/contact";
