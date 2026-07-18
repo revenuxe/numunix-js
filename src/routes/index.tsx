@@ -38,12 +38,13 @@ import findBanner from "@/assets/find-banner.webp";
 import { SiteNav, SiteFooter } from "@/components/site-chrome";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { CONTACT } from "@/lib/contact";
+import { createLead } from "@/lib/leads";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
   head: () => ({
     meta: [
-      { title: "Numunix — Reliable IT Support & Hardware Services" },
+      { title: "Numunix â€” Reliable IT Support & Hardware Services" },
       {
         name: "description",
         content:
@@ -86,7 +87,7 @@ function Hero() {
               <span className="text-brand">&amp; Hardware</span> Services
             </h1>
             <p className="mt-4 max-w-xl text-sm text-white/75 sm:mt-6 sm:text-lg">
-              Certified engineers, transparent pricing, fast turnaround —
+              Certified engineers, transparent pricing, fast turnaround â€”
               laptop repair, CCTV, networking, AMC &amp; more.
             </p>
 
@@ -110,7 +111,7 @@ function Hero() {
               </a>
             </div>
 
-            {/* Service chips — desktop / tablet only */}
+            {/* Service chips â€” desktop / tablet only */}
             <div className="mt-8 hidden flex-wrap gap-2 lg:mt-10 lg:flex">
               {floating.map(({ label, Icon }) => (
                 <div
@@ -137,64 +138,37 @@ function Hero() {
 }
 
 function BookingForm() {
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState("");
+
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    setBusy(true);
+    setMessage("");
+    try {
+      await createLead({ name: String(data.get("name")), email: String(data.get("email")), postalCode: String(data.get("postalCode")), service: "General IT Support", source: "hero" });
+      event.currentTarget.reset();
+      setMessage("Thanks — a Numunix engineer will contact you shortly.");
+    } catch {
+      setMessage("We could not send your request. Please try again.");
+    } finally { setBusy(false); }
+  }
+
   return (
-    <form
-      onSubmit={(e) => e.preventDefault()}
-      className="rounded-3xl bg-slate-800/75 p-5 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-6"
-    >
-      <h3 className="text-lg font-bold text-white sm:text-xl">
-        Book a Service
-      </h3>
-      <p className="mt-1 text-xs text-white/70">
-        Get a free callback from a certified Numunix engineer.
-      </p>
+    <form onSubmit={onSubmit} className="rounded-3xl bg-slate-800/75 p-5 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-6">
+      <h3 className="text-lg font-bold text-white sm:text-xl">Book a Service</h3>
+      <p className="mt-1 text-xs text-white/70">Get a free callback from a certified Numunix engineer.</p>
       <div className="mt-4 space-y-3">
-        <label className="block">
-          <span className="text-xs font-semibold text-white/80">Name</span>
-          <input
-            type="text"
-            required
-            maxLength={100}
-            placeholder="Your full name"
-            className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 backdrop-blur focus:outline-none focus:ring-brand"
-          />
-        </label>
-        <label className="block">
-          <span className="text-xs font-semibold text-white/80">Email</span>
-          <input
-            type="email"
-            required
-            maxLength={255}
-            placeholder="you@example.com"
-            className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 backdrop-blur focus:outline-none focus:ring-brand"
-          />
-        </label>
-        <label className="block">
-          <span className="text-xs font-semibold text-white/80">
-            Postal Code
-          </span>
-          <input
-            type="text"
-            required
-            maxLength={12}
-            placeholder="Enter your PIN / ZIP"
-            className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 backdrop-blur focus:outline-none focus:ring-brand"
-          />
-        </label>
+        <label className="block"><span className="text-xs font-semibold text-white/80">Name</span><input name="name" type="text" required maxLength={100} placeholder="Your full name" className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 backdrop-blur focus:outline-none focus:ring-brand" /></label>
+        <label className="block"><span className="text-xs font-semibold text-white/80">Email</span><input name="email" type="email" required maxLength={255} placeholder="you@example.com" className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 backdrop-blur focus:outline-none focus:ring-brand" /></label>
+        <label className="block"><span className="text-xs font-semibold text-white/80">Postal Code</span><input name="postalCode" type="text" required maxLength={12} placeholder="Enter your PIN / ZIP" className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 backdrop-blur focus:outline-none focus:ring-brand" /></label>
       </div>
-      <button
-        type="submit"
-        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110"
-      >
-        Schedule Service
-        <ArrowRight className="h-4 w-4" />
-      </button>
+      {message && <p className="mt-3 text-xs text-white/80">{message}</p>}
+      <button type="submit" disabled={busy} className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110 disabled:opacity-60">{busy ? "Sending…" : "Schedule Service"}<ArrowRight className="h-4 w-4" /></button>
     </form>
   );
 }
-
-
-
 
 
 
@@ -208,7 +182,7 @@ function CommonProblems() {
         </h2>
         <p className="mt-5 text-muted-foreground">
           We diagnose and resolve the everyday issues that slow your business
-          down — quickly, professionally and with certified engineers.
+          down â€” quickly, professionally and with certified engineers.
         </p>
       </div>
 
@@ -298,7 +272,7 @@ function CommonProblems() {
                 number="03"
                 Icon={Network}
                 title="Networking"
-                desc="We design and troubleshoot business networks — Wi-Fi, LAN, routers and firewalls — for stable, secure connectivity."
+                desc="We design and troubleshoot business networks â€” Wi-Fi, LAN, routers and firewalls â€” for stable, secure connectivity."
                 bullets={[
                   "Slow or dropping Wi-Fi",
                   "Router & firewall setup",
@@ -401,7 +375,7 @@ function ServicesGrid() {
           Everything IT, <span className="text-brand">One Team</span>
         </h2>
         <p className="mt-4 text-muted-foreground">
-          From single-laptop fixes to complete business IT — we cover every
+          From single-laptop fixes to complete business IT â€” we cover every
           layer so your team stays productive.
         </p>
       </div>
@@ -451,7 +425,7 @@ function Showcase() {
           <span className="text-brand">IT Environments</span>
         </h2>
         <p className="mt-5 text-muted-foreground">
-          Quick, professional and reliable — for households, small offices and
+          Quick, professional and reliable â€” for households, small offices and
           growing businesses across the region.
         </p>
       </div>
@@ -596,11 +570,11 @@ function WhyUs() {
       title: "Certified Engineers",
       desc: "Our technicians are certified, insured and trained on the latest hardware & platforms.",
     },
-    { Icon: Zap, title: "Quick Diagnosis", desc: "Fast, transparent diagnostics — usually within the same day." },
+    { Icon: Zap, title: "Quick Diagnosis", desc: "Fast, transparent diagnostics â€” usually within the same day." },
     { Icon: ShieldCheck, title: "Original Components", desc: "Only genuine, warrantied parts and licensed software." },
-    { Icon: Wallet, title: "Transparent Pricing", desc: "Upfront estimates before any work begins — no surprises." },
+    { Icon: Wallet, title: "Transparent Pricing", desc: "Upfront estimates before any work begins â€” no surprises." },
     { Icon: CalendarClock, title: "Business AMC", desc: "Annual maintenance contracts with SLAs to keep IT running." },
-    { Icon: Headset, title: "Onsite & Remote Support", desc: "Onsite visits or secure remote support — you choose." },
+    { Icon: Headset, title: "Onsite & Remote Support", desc: "Onsite visits or secure remote support â€” you choose." },
   ];
   const [open, setOpen] = useState(0);
   return (
@@ -612,7 +586,7 @@ function WhyUs() {
           </h2>
           <p className="mt-4 max-w-md text-muted-foreground">
             Reliable IT support with skilled engineers ensuring satisfaction on
-            every ticket — from a single laptop to your entire office.
+            every ticket â€” from a single laptop to your entire office.
           </p>
 
           <div className="mt-8 space-y-3">
@@ -702,7 +676,7 @@ function Resources() {
     {
       image: resCctv,
       title: "Best CCTV Guide",
-      desc: "Choosing the right CCTV — resolution, storage and coverage for homes and small offices.",
+      desc: "Choosing the right CCTV â€” resolution, storage and coverage for homes and small offices.",
     },
   ];
   return (
@@ -764,11 +738,11 @@ function FAQ() {
     },
     {
       q: "Do you offer onsite support for offices?",
-      a: "Yes — we offer onsite visits, remote support and business AMC plans with defined SLAs.",
+      a: "Yes â€” we offer onsite visits, remote support and business AMC plans with defined SLAs.",
     },
     {
       q: "How quickly can you diagnose an issue?",
-      a: "Most issues are diagnosed the same day. Complex hardware faults are diagnosed within 24–48 hours.",
+      a: "Most issues are diagnosed the same day. Complex hardware faults are diagnosed within 24â€“48 hours.",
     },
     {
       q: "Do you use genuine parts and offer warranty?",

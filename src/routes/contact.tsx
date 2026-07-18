@@ -1,14 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { ArrowRight, Phone, Mail, MapPin, Clock } from "lucide-react";
 import { SiteNav, SiteFooter, PageHero } from "@/components/site-chrome";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { CONTACT } from "@/lib/contact";
+import { createLead } from "@/lib/leads";
 
 export const Route = createFileRoute("/contact")({
   component: ContactPage,
   head: () => ({
     meta: [
-      { title: "Contact Numunix — Book IT Support & Repairs" },
+      { title: "Contact Numunix ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Book IT Support & Repairs" },
       {
         name: "description",
         content: `Get in touch with Numunix. Call ${CONTACT.phoneDisplay}, email ${CONTACT.email} or send a WhatsApp message for laptop repair, CCTV, networking and business IT support.`,
@@ -21,6 +23,18 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
+  const [busy, setBusy] = useState(false);
+  const [formMessage, setFormMessage] = useState("");
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    setBusy(true); setFormMessage("");
+    try {
+      await createLead({ name: String(data.get("name")), email: String(data.get("email")), phone: String(data.get("phone")), service: String(data.get("service")), message: String(data.get("message")), source: "contact" });
+      event.currentTarget.reset(); setFormMessage("Thanks Ã¢â‚¬â€ your request has been sent.");
+    } catch { setFormMessage("We could not send your request. Please try again."); }
+    finally { setBusy(false); }
+  }
   return (
     <main className="bg-white text-ink">
       <SiteNav variant="dark" />
@@ -28,7 +42,7 @@ function ContactPage() {
         eyebrow="Contact Us"
         title="Talk to a real"
         accent="Numunix engineer."
-        description="Call, WhatsApp, email or send a request — we'll get back to you fast. No call centres, no bots."
+        description="Call, WhatsApp, email or send a request ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â we'll get back to you fast. No call centres, no bots."
       />
 
       <section className="mx-auto max-w-6xl px-5 py-20 sm:px-6 md:px-8 md:py-28">
@@ -62,7 +76,7 @@ function ContactPage() {
               <div className="min-w-0 flex-1">
                 <p className="text-xs uppercase tracking-widest opacity-70">Call us</p>
                 <p className="mt-1 truncate text-lg font-bold">{CONTACT.phoneDisplay}</p>
-                <p className="text-sm opacity-80">Mon–Sat · 9:00 AM – 8:00 PM</p>
+                <p className="text-sm opacity-80">MonÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Sat Ãƒâ€šÃ‚Â· 9:00 AM ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“ 8:00 PM</p>
               </div>
               <ArrowRight className="h-5 w-5 shrink-0 transition group-hover:translate-x-1" />
             </a>
@@ -92,8 +106,8 @@ function ContactPage() {
                 <Clock className="h-5 w-5 text-brand" />
                 <p className="mt-3 text-sm font-semibold text-ink">Working Hours</p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Mon–Sat · 9 AM – 8 PM<br />
-                  Sun · Emergency only
+                  MonÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Sat Ãƒâ€šÃ‚Â· 9 AM ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“ 8 PM<br />
+                  Sun Ãƒâ€šÃ‚Â· Emergency only
                 </p>
               </div>
             </div>
@@ -101,19 +115,20 @@ function ContactPage() {
 
           {/* Form */}
           <form
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={onSubmit}
             className="mx-auto w-full max-w-[calc(100vw-3rem)] rounded-[2rem] bg-ink p-6 text-white shadow-card md:p-10 lg:mx-0 lg:max-w-none"
           >
             <h2 className="text-2xl font-extrabold tracking-tight md:text-3xl">
               Send us a <span className="text-brand">quick request</span>
             </h2>
             <p className="mt-2 text-sm text-white/70">
-              Tell us what you need — a certified engineer will call you back.
+              Tell us what you need ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â a certified engineer will call you back.
             </p>
             <div className="mt-6 space-y-4">
               <label className="block">
                 <span className="text-xs font-semibold text-white/80">Full name</span>
                 <input
+                  name="name"
                   type="text"
                   required
                   maxLength={100}
@@ -125,16 +140,18 @@ function ContactPage() {
                 <label className="block">
                   <span className="text-xs font-semibold text-white/80">Phone</span>
                   <input
+                    name="phone"
                     type="tel"
                     required
                     maxLength={15}
-                    placeholder="+91 …"
+                    placeholder="+91 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦"
                     className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 focus:outline-none focus:ring-brand"
                   />
                 </label>
                 <label className="block">
                   <span className="text-xs font-semibold text-white/80">Email</span>
                   <input
+                    name="email"
                     type="email"
                     required
                     maxLength={255}
@@ -146,6 +163,7 @@ function ContactPage() {
               <label className="block">
                 <span className="text-xs font-semibold text-white/80">Service needed</span>
                 <select
+                  name="service"
                   required
                   className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white ring-1 ring-white/20 focus:outline-none focus:ring-brand"
                   defaultValue=""
@@ -162,19 +180,22 @@ function ContactPage() {
               <label className="block">
                 <span className="text-xs font-semibold text-white/80">Message</span>
                 <textarea
+                  name="message"
                   rows={4}
                   maxLength={1000}
-                  placeholder="Describe the issue…"
+                  placeholder="Describe the issueÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦"
                   className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 focus:outline-none focus:ring-brand"
                 />
               </label>
             </div>
             <button
               type="submit"
+              disabled={busy}
               className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110"
             >
-              Send request <ArrowRight className="h-4 w-4" />
+              {busy ? "SendingÃ¢â‚¬Â¦" : "Send request"} <ArrowRight className="h-4 w-4" />
             </button>
+            {formMessage && <p className="mt-3 text-center text-xs text-white/80">{formMessage}</p>}
             <p className="mt-3 text-center text-xs text-white/60">
               We reply within a few hours during working days.
             </p>

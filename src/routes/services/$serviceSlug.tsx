@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import {
   ArrowRight,
   BadgeCheck,
@@ -11,6 +12,7 @@ import {
 import { SiteFooter, SiteNav } from "@/components/site-chrome";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { CONTACT } from "@/lib/contact";
+import { createLead } from "@/lib/leads";
 import svcLaptop from "@/assets/service-laptop.webp";
 import svcDesktop from "@/assets/service-desktop.webp";
 import svcCctv from "@/assets/service-cctv.webp";
@@ -176,21 +178,15 @@ function ServiceHeroActions() {
   );
 }
 function ServiceBookingForm({ serviceName }: { serviceName: string }) {
-  return (
-    <form
-      id="service-booking-form"
-      onSubmit={(event) => event.preventDefault()}
-      className="w-full rounded-[2rem] bg-slate-800/85 p-6 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-7"
-    >
-      <h2 className="text-2xl font-bold text-white">Book {serviceName}</h2>
-      <p className="mt-2 text-sm leading-6 text-white/70">Get a free callback from a certified Numunix engineer.</p>
-      <div className="mt-5 space-y-3">
-        <label className="block"><span className="text-xs font-semibold text-white/80">Name</span><input required maxLength={100} placeholder="Your full name" className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 focus:outline-none focus:ring-brand" /></label>
-        <label className="block"><span className="text-xs font-semibold text-white/80">Email</span><input type="email" required maxLength={255} placeholder="you@example.com" className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 focus:outline-none focus:ring-brand" /></label>
-        <label className="block"><span className="text-xs font-semibold text-white/80">Postal Code</span><input required maxLength={12} placeholder="Enter your PIN / ZIP" className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 focus:outline-none focus:ring-brand" /></label>
-      </div>
-    </form>
-  );
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState("");
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault(); const data = new FormData(event.currentTarget); setBusy(true); setMessage("");
+    try { await createLead({ name: String(data.get("name")), email: String(data.get("email")), postalCode: String(data.get("postalCode")), service: serviceName, source: "service" }); event.currentTarget.reset(); setMessage("Thanks — your request has been sent."); }
+    catch { setMessage("We could not send your request. Please try again."); }
+    finally { setBusy(false); }
+  }
+  return <form id="service-booking-form" onSubmit={onSubmit} className="w-full rounded-[2rem] bg-slate-800/85 p-6 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-7"><h2 className="text-2xl font-bold text-white">Book {serviceName}</h2><p className="mt-2 text-sm leading-6 text-white/70">Get a free callback from a certified Numunix engineer.</p><div className="mt-5 space-y-3"><label className="block"><span className="text-xs font-semibold text-white/80">Name</span><input name="name" required maxLength={100} placeholder="Your full name" className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 focus:outline-none focus:ring-brand" /></label><label className="block"><span className="text-xs font-semibold text-white/80">Email</span><input name="email" type="email" required maxLength={255} placeholder="you@example.com" className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 focus:outline-none focus:ring-brand" /></label><label className="block"><span className="text-xs font-semibold text-white/80">Postal Code</span><input name="postalCode" required maxLength={12} placeholder="Enter your PIN / ZIP" className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 focus:outline-none focus:ring-brand" /></label></div>{message && <p className="mt-3 text-xs text-white/80">{message}</p>}<button type="submit" disabled={busy} className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110 disabled:opacity-60">{busy ? "Sending…" : "Schedule Service"}<ArrowRight className="h-4 w-4" /></button></form>;
 }
 function ServicePage() {
   const { serviceSlug } = Route.useParams();
