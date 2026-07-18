@@ -549,8 +549,29 @@ function ShowcaseCard({
 
 /* ---------- FIND / BOOK BANNER + WHY US ---------- */
 function FindBanner() {
+  const check = useServerFn(checkPincode);
+  const [pin, setPin] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [result, setResult] = useState<
+    | { available: true; city: string | null }
+    | { available: false; city: null }
+    | null
+  >(null);
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!pin.trim()) return;
+    setBusy(true);
+    try {
+      const res = await check({ data: { pincode: pin.trim() } });
+      setResult(res as never);
+    } finally {
+      setBusy(false);
+    }
+  }
+
   return (
-    <section id="book" className="bg-white px-4 pb-16 md:px-8">
+    <section id="find" className="bg-white px-4 pb-16 md:px-8">
       <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem]">
         <img
           src={findBanner}
@@ -568,31 +589,50 @@ function FindBanner() {
               Nearby Support
             </span>
             <h3 className="mt-4 text-2xl font-bold leading-tight md:text-3xl lg:text-4xl">
-              Find Numunix Support{" "}
-              <span className="text-brand">Near You</span>
+              Find Numunix Support <span className="text-brand">Near You</span>
             </h3>
             <p className="mt-3 text-sm text-white/80 md:text-base">
-              Discover a Numunix engineer today for expert, reliable and
-              friendly IT service.
+              Enter your pincode to check if we service your area.
             </p>
             <form
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={onSubmit}
               className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-2 sm:rounded-full sm:bg-white/10 sm:p-1.5 sm:ring-1 sm:ring-white/25"
             >
               <input
                 type="text"
                 maxLength={12}
+                value={pin}
+                onChange={(e) => {
+                  setPin(e.target.value);
+                  setResult(null);
+                }}
                 placeholder="Enter your PIN / ZIP"
                 className="w-full rounded-full bg-white/10 px-5 py-3 text-sm text-white ring-1 ring-white/20 placeholder:text-white/60 focus:outline-none focus:ring-brand sm:bg-transparent sm:ring-0 sm:focus:ring-0"
               />
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-white/90"
+                disabled={busy}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-white/90 disabled:opacity-60"
               >
-                Find Now
+                {busy ? "Checking…" : "Find Now"}
                 <ArrowRight className="h-4 w-4" />
               </button>
             </form>
+            {result && (
+              <div
+                className={`mt-4 rounded-2xl px-4 py-3 text-sm ring-1 ${
+                  result.available
+                    ? "bg-green-500/15 text-green-100 ring-green-400/40"
+                    : "bg-red-500/15 text-red-100 ring-red-400/40"
+                }`}
+              >
+                {result.available ? (
+                  <>✅ Great news — we service <b>{pin}</b>{result.city ? ` (${result.city})` : ""}. Book below!</>
+                ) : (
+                  <>Sorry, we don't service <b>{pin}</b> yet. Contact us on WhatsApp for special requests.</>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
