@@ -1,7 +1,5 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { useServerFn } from "@tanstack/react-start";
-import { submitLead } from "@/lib/leads.functions";
 import {
   ArrowUpRight,
   ArrowRight,
@@ -143,33 +141,9 @@ function Hero() {
 }
 
 function BookingForm() {
-  const navigate = useNavigate();
-  const submit = useServerFn(submitLead);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [postal, setPostal] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [err, setErr] = useState<string | null>(null);
-
-  async function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setBusy(true);
-    setErr(null);
-    try {
-      const res = await submit({
-        data: { service: "General Service Request", name, email, postal_code: postal, source: "hero" },
-      });
-      navigate({ to: "/thank-you", search: { id: res.booking_id, service: "General Service Request" } });
-    } catch (e) {
-      setErr((e as Error).message || "Something went wrong.");
-    } finally {
-      setBusy(false);
-    }
-  }
-
   return (
     <form
-      onSubmit={onSubmit}
+      onSubmit={(e) => e.preventDefault()}
       className="rounded-3xl bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-6"
     >
       <h3 className="text-lg font-bold text-white sm:text-xl">
@@ -181,25 +155,50 @@ function BookingForm() {
       <div className="mt-4 space-y-3">
         <label className="block">
           <span className="text-xs font-semibold text-white/80">Name</span>
-          <input type="text" required maxLength={100} value={name} onChange={(e) => setName(e.target.value)} placeholder="Your full name" className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand" />
+          <input
+            type="text"
+            required
+            maxLength={100}
+            placeholder="Your full name"
+            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
+          />
         </label>
         <label className="block">
           <span className="text-xs font-semibold text-white/80">Email</span>
-          <input type="email" required maxLength={255} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand" />
+          <input
+            type="email"
+            required
+            maxLength={255}
+            placeholder="you@example.com"
+            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
+          />
         </label>
         <label className="block">
-          <span className="text-xs font-semibold text-white/80">Postal Code</span>
-          <input type="text" required maxLength={12} value={postal} onChange={(e) => setPostal(e.target.value)} placeholder="Enter your PIN / ZIP" className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand" />
+          <span className="text-xs font-semibold text-white/80">
+            Postal Code
+          </span>
+          <input
+            type="text"
+            required
+            maxLength={12}
+            placeholder="Enter your PIN / ZIP"
+            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
+          />
         </label>
       </div>
-      {err && <p className="mt-3 rounded-lg bg-red-500/10 px-3 py-2 text-xs text-red-300 ring-1 ring-red-500/30">{err}</p>}
-      <button type="submit" disabled={busy} className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110 disabled:opacity-60">
-        {busy ? "Sending…" : "Schedule Service"}
+      <button
+        type="submit"
+        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110"
+      >
+        Schedule Service
         <ArrowRight className="h-4 w-4" />
       </button>
     </form>
   );
 }
+
+
+
 
 
 
@@ -833,3 +832,4 @@ function LandingPage() {
     </main>
   );
 }
+
