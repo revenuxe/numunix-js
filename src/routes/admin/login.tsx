@@ -83,9 +83,10 @@ function AdminLoginPage() {
         </div>
 
         {error && (
-          <p className="mt-4 rounded-lg bg-red-500/10 px-3 py-2 text-xs text-red-300 ring-1 ring-red-500/30">
-            {error}
-          </p>
+          <p className="mt-4 rounded-lg bg-red-500/10 px-3 py-2 text-xs text-red-300 ring-1 ring-red-500/30">{error}</p>
+        )}
+        {notice && (
+          <p className="mt-4 rounded-lg bg-brand/10 px-3 py-2 text-xs text-brand ring-1 ring-brand/30">{notice}</p>
         )}
 
         <button
@@ -93,7 +94,16 @@ function AdminLoginPage() {
           disabled={loading}
           className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110 disabled:opacity-60"
         >
-          {loading ? "Signing in…" : "Sign in"} <ArrowRight className="h-4 w-4" />
+          {loading ? "Please wait…" : mode === "signin" ? "Sign in" : "Create admin account"}
+          <ArrowRight className="h-4 w-4" />
+        </button>
+
+        <button
+          type="button"
+          onClick={() => { setMode(mode === "signin" ? "signup" : "signin"); setError(null); setNotice(null); }}
+          className="mt-3 w-full text-center text-xs text-white/60 hover:text-white"
+        >
+          {mode === "signin" ? "First time? Create admin account" : "Already have an account? Sign in"}
         </button>
       </form>
     </main>
