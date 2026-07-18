@@ -143,57 +143,106 @@ function Hero() {
   );
 }
 
-function BookingForm() {
+const SERVICES = [
+  "Laptop Repair",
+  "Desktop Repair",
+  "CCTV Installation",
+  "Networking",
+  "Printer Repair",
+  "Data Recovery",
+  "Business AMC",
+  "Other",
+];
+
+function BookingForm({
+  variant = "dark",
+  defaultService = "Laptop Repair",
+}: {
+  variant?: "dark" | "light";
+  defaultService?: string;
+}) {
+  const navigate = useNavigate();
+  const submit = useServerFn(submitLead);
+  const [service, setService] = useState(defaultService);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [postal, setPostal] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+
+  const dark = variant === "dark";
+  const inputCls = dark
+    ? "mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
+    : "mt-1.5 w-full rounded-xl border border-border bg-white px-4 py-3 text-sm text-ink placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-brand";
+  const labelCls = dark ? "text-xs font-semibold text-white/80" : "text-xs font-semibold text-muted-foreground";
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    setErr(null);
+    try {
+      const res = await submit({
+        data: { service, name, email, phone, postal_code: postal, source: "hero" },
+      });
+      navigate({ to: "/thank-you", search: { id: res.booking_id, service } });
+    } catch (e) {
+      setErr((e as Error).message || "Something went wrong.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
   return (
     <form
-      onSubmit={(e) => e.preventDefault()}
-      className="rounded-3xl bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-6"
+      onSubmit={onSubmit}
+      className={
+        dark
+          ? "rounded-3xl bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-6"
+          : "rounded-3xl bg-white p-6 shadow-card ring-1 ring-border"
+      }
     >
-      <h3 className="text-lg font-bold text-white sm:text-xl">
-        Book a Service
-      </h3>
-      <p className="mt-1 text-xs text-white/70">
+      <h3 className={`text-lg font-bold sm:text-xl ${dark ? "text-white" : "text-ink"}`}>Book a Service</h3>
+      <p className={`mt-1 text-xs ${dark ? "text-white/70" : "text-muted-foreground"}`}>
         Get a free callback from a certified Numunix engineer.
       </p>
       <div className="mt-4 space-y-3">
         <label className="block">
-          <span className="text-xs font-semibold text-white/80">Name</span>
-          <input
-            type="text"
-            required
-            maxLength={100}
-            placeholder="Your full name"
-            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
-          />
+          <span className={labelCls}>Service needed</span>
+          <select value={service} onChange={(e) => setService(e.target.value)} className={inputCls} required>
+            {SERVICES.map((s) => (
+              <option key={s} value={s} className="bg-ink text-white">
+                {s}
+              </option>
+            ))}
+          </select>
         </label>
         <label className="block">
-          <span className="text-xs font-semibold text-white/80">Email</span>
-          <input
-            type="email"
-            required
-            maxLength={255}
-            placeholder="you@example.com"
-            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
-          />
+          <span className={labelCls}>Name</span>
+          <input type="text" required maxLength={100} value={name} onChange={(e) => setName(e.target.value)} placeholder="Your full name" className={inputCls} />
         </label>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <label className="block">
+            <span className={labelCls}>Phone</span>
+            <input type="tel" required maxLength={15} value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+91 …" className={inputCls} />
+          </label>
+          <label className="block">
+            <span className={labelCls}>Pincode</span>
+            <input type="text" maxLength={12} value={postal} onChange={(e) => setPostal(e.target.value)} placeholder="PIN" className={inputCls} />
+          </label>
+        </div>
         <label className="block">
-          <span className="text-xs font-semibold text-white/80">
-            Postal Code
-          </span>
-          <input
-            type="text"
-            required
-            maxLength={12}
-            placeholder="Enter your PIN / ZIP"
-            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
-          />
+          <span className={labelCls}>Email (optional)</span>
+          <input type="email" maxLength={255} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" className={inputCls} />
         </label>
       </div>
+      {err && <p className={`mt-3 rounded-lg px-3 py-2 text-xs ${dark ? "bg-red-500/10 text-red-300 ring-1 ring-red-500/30" : "bg-red-50 text-red-700 ring-1 ring-red-200"}`}>{err}</p>}
       <button
         type="submit"
-        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110"
+        disabled={busy}
+        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110 disabled:opacity-60"
       >
-        Schedule Service
+        {busy ? "Sending…" : "Schedule Service"}
         <ArrowRight className="h-4 w-4" />
       </button>
     </form>
