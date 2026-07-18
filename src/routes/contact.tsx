@@ -24,6 +24,26 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
+  const navigate = useNavigate();
+  const submit = useServerFn(submitLead);
+  const [form, setForm] = useState({ name: "", phone: "", email: "", service: "", message: "" });
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!form.service) return setErr("Please choose a service.");
+    setBusy(true);
+    setErr(null);
+    try {
+      const res = await submit({ data: { ...form, source: "contact" } });
+      navigate({ to: "/thank-you", search: { id: res.booking_id, service: form.service } });
+    } catch (e) {
+      setErr((e as Error).message || "Something went wrong.");
+      setBusy(false);
+    }
+  }
+
   return (
     <main className="bg-white text-ink">
       <SiteNav variant="dark" />
