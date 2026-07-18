@@ -1,5 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { submitLead } from "@/lib/leads.functions";
+import { checkPincode } from "@/lib/pincodes.functions";
 import {
   ArrowUpRight,
   ArrowRight,
@@ -140,57 +143,106 @@ function Hero() {
   );
 }
 
-function BookingForm() {
+const SERVICES = [
+  "Laptop Repair",
+  "Desktop Repair",
+  "CCTV Installation",
+  "Networking",
+  "Printer Repair",
+  "Data Recovery",
+  "Business AMC",
+  "Other",
+];
+
+function BookingForm({
+  variant = "dark",
+  defaultService = "Laptop Repair",
+}: {
+  variant?: "dark" | "light";
+  defaultService?: string;
+}) {
+  const navigate = useNavigate();
+  const submit = useServerFn(submitLead);
+  const [service, setService] = useState(defaultService);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [postal, setPostal] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+
+  const dark = variant === "dark";
+  const inputCls = dark
+    ? "mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
+    : "mt-1.5 w-full rounded-xl border border-border bg-white px-4 py-3 text-sm text-ink placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-brand";
+  const labelCls = dark ? "text-xs font-semibold text-white/80" : "text-xs font-semibold text-muted-foreground";
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    setErr(null);
+    try {
+      const res = await submit({
+        data: { service, name, email, phone, postal_code: postal, source: "hero" },
+      });
+      navigate({ to: "/thank-you", search: { id: res.booking_id, service } });
+    } catch (e) {
+      setErr((e as Error).message || "Something went wrong.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
   return (
     <form
-      onSubmit={(e) => e.preventDefault()}
-      className="rounded-3xl bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-6"
+      onSubmit={onSubmit}
+      className={
+        dark
+          ? "rounded-3xl bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-6"
+          : "rounded-3xl bg-white p-6 shadow-card ring-1 ring-border"
+      }
     >
-      <h3 className="text-lg font-bold text-white sm:text-xl">
-        Book a Service
-      </h3>
-      <p className="mt-1 text-xs text-white/70">
+      <h3 className={`text-lg font-bold sm:text-xl ${dark ? "text-white" : "text-ink"}`}>Book a Service</h3>
+      <p className={`mt-1 text-xs ${dark ? "text-white/70" : "text-muted-foreground"}`}>
         Get a free callback from a certified Numunix engineer.
       </p>
       <div className="mt-4 space-y-3">
         <label className="block">
-          <span className="text-xs font-semibold text-white/80">Name</span>
-          <input
-            type="text"
-            required
-            maxLength={100}
-            placeholder="Your full name"
-            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
-          />
+          <span className={labelCls}>Service needed</span>
+          <select value={service} onChange={(e) => setService(e.target.value)} className={inputCls} required>
+            {SERVICES.map((s) => (
+              <option key={s} value={s} className="bg-ink text-white">
+                {s}
+              </option>
+            ))}
+          </select>
         </label>
         <label className="block">
-          <span className="text-xs font-semibold text-white/80">Email</span>
-          <input
-            type="email"
-            required
-            maxLength={255}
-            placeholder="you@example.com"
-            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
-          />
+          <span className={labelCls}>Name</span>
+          <input type="text" required maxLength={100} value={name} onChange={(e) => setName(e.target.value)} placeholder="Your full name" className={inputCls} />
         </label>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <label className="block">
+            <span className={labelCls}>Phone</span>
+            <input type="tel" required maxLength={15} value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+91 …" className={inputCls} />
+          </label>
+          <label className="block">
+            <span className={labelCls}>Pincode</span>
+            <input type="text" maxLength={12} value={postal} onChange={(e) => setPostal(e.target.value)} placeholder="PIN" className={inputCls} />
+          </label>
+        </div>
         <label className="block">
-          <span className="text-xs font-semibold text-white/80">
-            Postal Code
-          </span>
-          <input
-            type="text"
-            required
-            maxLength={12}
-            placeholder="Enter your PIN / ZIP"
-            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
-          />
+          <span className={labelCls}>Email (optional)</span>
+          <input type="email" maxLength={255} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" className={inputCls} />
         </label>
       </div>
+      {err && <p className={`mt-3 rounded-lg px-3 py-2 text-xs ${dark ? "bg-red-500/10 text-red-300 ring-1 ring-red-500/30" : "bg-red-50 text-red-700 ring-1 ring-red-200"}`}>{err}</p>}
       <button
         type="submit"
-        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110"
+        disabled={busy}
+        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110 disabled:opacity-60"
       >
-        Schedule Service
+        {busy ? "Sending…" : "Schedule Service"}
         <ArrowRight className="h-4 w-4" />
       </button>
     </form>
@@ -497,8 +549,29 @@ function ShowcaseCard({
 
 /* ---------- FIND / BOOK BANNER + WHY US ---------- */
 function FindBanner() {
+  const check = useServerFn(checkPincode);
+  const [pin, setPin] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [result, setResult] = useState<
+    | { available: true; city: string | null }
+    | { available: false; city: null }
+    | null
+  >(null);
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!pin.trim()) return;
+    setBusy(true);
+    try {
+      const res = await check({ data: { pincode: pin.trim() } });
+      setResult(res as never);
+    } finally {
+      setBusy(false);
+    }
+  }
+
   return (
-    <section id="book" className="bg-white px-4 pb-16 md:px-8">
+    <section id="find" className="bg-white px-4 pb-16 md:px-8">
       <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem]">
         <img
           src={findBanner}
@@ -516,31 +589,50 @@ function FindBanner() {
               Nearby Support
             </span>
             <h3 className="mt-4 text-2xl font-bold leading-tight md:text-3xl lg:text-4xl">
-              Find Numunix Support{" "}
-              <span className="text-brand">Near You</span>
+              Find Numunix Support <span className="text-brand">Near You</span>
             </h3>
             <p className="mt-3 text-sm text-white/80 md:text-base">
-              Discover a Numunix engineer today for expert, reliable and
-              friendly IT service.
+              Enter your pincode to check if we service your area.
             </p>
             <form
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={onSubmit}
               className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-2 sm:rounded-full sm:bg-white/10 sm:p-1.5 sm:ring-1 sm:ring-white/25"
             >
               <input
                 type="text"
                 maxLength={12}
+                value={pin}
+                onChange={(e) => {
+                  setPin(e.target.value);
+                  setResult(null);
+                }}
                 placeholder="Enter your PIN / ZIP"
                 className="w-full rounded-full bg-white/10 px-5 py-3 text-sm text-white ring-1 ring-white/20 placeholder:text-white/60 focus:outline-none focus:ring-brand sm:bg-transparent sm:ring-0 sm:focus:ring-0"
               />
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-white/90"
+                disabled={busy}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-white/90 disabled:opacity-60"
               >
-                Find Now
+                {busy ? "Checking…" : "Find Now"}
                 <ArrowRight className="h-4 w-4" />
               </button>
             </form>
+            {result && (
+              <div
+                className={`mt-4 rounded-2xl px-4 py-3 text-sm ring-1 ${
+                  result.available
+                    ? "bg-green-500/15 text-green-100 ring-green-400/40"
+                    : "bg-red-500/15 text-red-100 ring-red-400/40"
+                }`}
+              >
+                {result.available ? (
+                  <>✅ Great news — we service <b>{pin}</b>{result.city ? ` (${result.city})` : ""}. Book below!</>
+                ) : (
+                  <>Sorry, we don't service <b>{pin}</b> yet. Contact us on WhatsApp for special requests.</>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -821,6 +913,12 @@ function LandingPage() {
   return (
     <main className="bg-white text-ink">
       <Hero />
+      {/* Mobile booking form (desktop has it inline in hero) */}
+      <section id="book" className="bg-secondary/50 px-4 py-12 lg:hidden">
+        <div className="mx-auto max-w-md">
+          <BookingForm variant="light" />
+        </div>
+      </section>
       <CommonProblems />
       <ServicesGrid />
       <Showcase />

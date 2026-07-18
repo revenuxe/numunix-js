@@ -1,5 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { ArrowRight, Phone, Mail, MapPin, Clock } from "lucide-react";
+import { submitLead } from "@/lib/leads.functions";
 import { SiteNav, SiteFooter, PageHero } from "@/components/site-chrome";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { CONTACT } from "@/lib/contact";
@@ -21,6 +24,26 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
+  const navigate = useNavigate();
+  const submit = useServerFn(submitLead);
+  const [form, setForm] = useState({ name: "", phone: "", email: "", service: "", message: "" });
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!form.service) return setErr("Please choose a service.");
+    setBusy(true);
+    setErr(null);
+    try {
+      const res = await submit({ data: { ...form, source: "contact" } });
+      navigate({ to: "/thank-you", search: { id: res.booking_id, service: form.service } });
+    } catch (e) {
+      setErr((e as Error).message || "Something went wrong.");
+      setBusy(false);
+    }
+  }
+
   return (
     <main className="bg-white text-ink">
       <SiteNav variant="dark" />
@@ -101,7 +124,7 @@ function ContactPage() {
 
           {/* Form */}
           <form
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={onSubmit}
             className="rounded-[2rem] bg-ink p-6 text-white shadow-card md:p-10"
           >
             <h2 className="text-2xl font-extrabold tracking-tight md:text-3xl">
@@ -114,9 +137,8 @@ function ContactPage() {
               <label className="block">
                 <span className="text-xs font-semibold text-white/80">Full name</span>
                 <input
-                  type="text"
-                  required
-                  maxLength={100}
+                  type="text" required maxLength={100}
+                  value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
                   placeholder="Your name"
                   className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 focus:outline-none focus:ring-brand"
                 />
@@ -125,9 +147,8 @@ function ContactPage() {
                 <label className="block">
                   <span className="text-xs font-semibold text-white/80">Phone</span>
                   <input
-                    type="tel"
-                    required
-                    maxLength={15}
+                    type="tel" required maxLength={15}
+                    value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })}
                     placeholder="+91 …"
                     className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 focus:outline-none focus:ring-brand"
                   />
@@ -135,9 +156,8 @@ function ContactPage() {
                 <label className="block">
                   <span className="text-xs font-semibold text-white/80">Email</span>
                   <input
-                    type="email"
-                    required
-                    maxLength={255}
+                    type="email" maxLength={255}
+                    value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="you@example.com"
                     className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 focus:outline-none focus:ring-brand"
                   />
@@ -147,8 +167,9 @@ function ContactPage() {
                 <span className="text-xs font-semibold text-white/80">Service needed</span>
                 <select
                   required
+                  value={form.service}
+                  onChange={(e) => setForm({ ...form, service: e.target.value })}
                   className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white ring-1 ring-white/20 focus:outline-none focus:ring-brand"
-                  defaultValue=""
                 >
                   <option value="" disabled className="bg-ink">Choose a service</option>
                   <option className="bg-ink">Laptop Repair</option>
@@ -162,18 +183,22 @@ function ContactPage() {
               <label className="block">
                 <span className="text-xs font-semibold text-white/80">Message</span>
                 <textarea
-                  rows={4}
-                  maxLength={1000}
+                  rows={4} maxLength={1000}
+                  value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
                   placeholder="Describe the issue…"
                   className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 focus:outline-none focus:ring-brand"
                 />
               </label>
             </div>
+            {err && (
+              <p className="mt-4 rounded-lg bg-red-500/10 px-3 py-2 text-xs text-red-300 ring-1 ring-red-500/30">{err}</p>
+            )}
             <button
               type="submit"
-              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110"
+              disabled={busy}
+              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110 disabled:opacity-60"
             >
-              Send request <ArrowRight className="h-4 w-4" />
+              {busy ? "Sending…" : "Send request"} <ArrowRight className="h-4 w-4" />
             </button>
             <p className="mt-3 text-center text-xs text-white/60">
               We reply within a few hours during working days.
