@@ -2,8 +2,7 @@
 
 export type LeadInput = {
   name: string;
-  email: string;
-  phone?: string;
+  phone: string;
   postalCode?: string;
   service: string;
   message?: string;
@@ -13,8 +12,8 @@ export type LeadInput = {
 export async function createLead(input: LeadInput) {
   const { error } = await supabase.from("leads").insert({
     name: input.name.trim(),
-    email: input.email.trim(),
-    phone: input.phone?.trim() || null,
+    email: null,
+    phone: input.phone.trim(),
     postal_code: input.postalCode?.trim() || null,
     service: input.service,
     message: input.message?.trim() || null,
