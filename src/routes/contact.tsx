@@ -31,15 +31,15 @@ function ContactPage() {
         description="Call, WhatsApp, email or send a request — we'll get back to you fast. No call centres, no bots."
       />
 
-      <section className="mx-auto max-w-6xl px-5 py-20 sm:px-6 md:px-8 md:py-28">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
+      <section className="mx-auto max-w-6xl px-4 py-20 md:px-8 md:py-28">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           {/* Info cards */}
-          <div className="mx-auto w-full max-w-[calc(100vw-3rem)] min-w-0 space-y-5 lg:mx-0 lg:max-w-none">
+          <div className="space-y-4">
             <a
               href={CONTACT.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-5 rounded-3xl bg-[#12347d] p-6 text-white shadow-card transition hover:bg-[#0d2863]"
+              className="group flex items-center gap-5 rounded-3xl bg-[#25D366] p-6 text-white shadow-card transition hover:brightness-110"
             >
               <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white/20">
                 <WhatsAppIcon className="h-6 w-6" />
@@ -102,7 +102,7 @@ function ContactPage() {
           {/* Form */}
           <form
             onSubmit={(e) => e.preventDefault()}
-            className="mx-auto w-full max-w-[calc(100vw-3rem)] rounded-[2rem] bg-ink p-6 text-white shadow-card md:p-10 lg:mx-0 lg:max-w-none"
+            className="rounded-[2rem] bg-ink p-6 text-white shadow-card md:p-10"
           >
             <h2 className="text-2xl font-extrabold tracking-tight md:text-3xl">
               Send us a <span className="text-brand">quick request</span>

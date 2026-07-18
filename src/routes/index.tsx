@@ -77,11 +77,15 @@ function Hero() {
 
       <SiteNav variant="dark" />
 
-      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pb-6 pt-20 md:px-8 md:pt-24 md:pb-8 lg:pt-24 lg:pb-10">
-        <div className="grid gap-7 md:grid-cols-[minmax(0,1fr)_minmax(300px,380px)] md:items-center md:gap-8 lg:gap-12">
+      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pb-8 pt-24 md:px-8 md:pt-32 md:pb-20 lg:pt-36 lg:pb-24">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-12">
           {/* Left column */}
           <div className="max-w-2xl">
-            <h1 className="mt-4 lg:mt-5 text-[2rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-6xl">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium ring-1 ring-white/20 backdrop-blur">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+              We Keep IT Running
+            </span>
+            <h1 className="mt-4 text-[2rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
               Reliable IT Support{" "}
               <span className="text-brand">&amp; Hardware</span> Services
             </h1>
@@ -90,11 +94,11 @@ function Hero() {
               laptop repair, CCTV, networking, AMC &amp; more.
             </p>
 
-            {/* Hero CTAs */}
-            <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap lg:mt-8">
+            {/* Mobile CTAs — full width */}
+            <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
               <a
-                href="#hero-booking-form"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90 sm:w-auto lg:h-[62px] lg:px-8 lg:text-base"
+                href="#book"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90 sm:w-auto"
               >
                 Book Service
                 <ArrowRight className="h-4 w-4" />
@@ -103,7 +107,7 @@ function Hero() {
                 href={CONTACT.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-ink/60 px-6 py-3.5 text-sm font-semibold text-white shadow-soft backdrop-blur transition hover:bg-white hover:text-ink sm:w-auto lg:h-[62px] lg:px-8 lg:text-base"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110 sm:w-auto sm:bg-white/5 sm:text-white sm:ring-1 sm:ring-white/25 sm:backdrop-blur"
               >
                 <WhatsAppIcon className="h-4 w-4" />
                 Reach us on WhatsApp
@@ -111,13 +115,13 @@ function Hero() {
             </div>
 
             {/* Service chips — desktop / tablet only */}
-            <div className="mt-8 hidden flex-wrap gap-2 lg:mt-10 lg:flex">
+            <div className="mt-8 hidden flex-wrap gap-2 sm:mt-10 sm:flex">
               {floating.map(({ label, Icon }) => (
                 <div
                   key={label}
-                  className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-medium text-white ring-1 ring-white/20 backdrop-blur-md lg:h-[52px] lg:px-4 lg:text-sm"
+                  className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-medium text-white ring-1 ring-white/20 backdrop-blur-md"
                 >
-                  <span className="grid h-6 w-6 place-items-center rounded-full bg-brand text-brand-foreground lg:h-7 lg:w-7">
+                  <span className="grid h-6 w-6 place-items-center rounded-full bg-brand text-brand-foreground">
                     <Icon className="h-3.5 w-3.5" />
                   </span>
                   {label}
@@ -126,8 +130,8 @@ function Hero() {
             </div>
           </div>
 
-          {/* Booking form stays inside the hero at every viewport size. */}
-          <div id="hero-booking-form" className="w-full md:max-w-[380px] md:justify-self-end">
+          {/* Right column — desktop booking form only */}
+          <div className="hidden lg:block lg:w-[380px]">
             <BookingForm />
           </div>
         </div>
@@ -140,7 +144,7 @@ function BookingForm() {
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
-      className="rounded-3xl bg-slate-800/75 p-5 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-6"
+      className="rounded-3xl bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-6"
     >
       <h3 className="text-lg font-bold text-white sm:text-xl">
         Book a Service
@@ -156,7 +160,7 @@ function BookingForm() {
             required
             maxLength={100}
             placeholder="Your full name"
-            className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 backdrop-blur focus:outline-none focus:ring-brand"
+            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
           />
         </label>
         <label className="block">
@@ -166,7 +170,7 @@ function BookingForm() {
             required
             maxLength={255}
             placeholder="you@example.com"
-            className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 backdrop-blur focus:outline-none focus:ring-brand"
+            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
           />
         </label>
         <label className="block">
@@ -178,13 +182,13 @@ function BookingForm() {
             required
             maxLength={12}
             placeholder="Enter your PIN / ZIP"
-            className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 backdrop-blur focus:outline-none focus:ring-brand"
+            className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
           />
         </label>
       </div>
       <button
         type="submit"
-        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110"
+        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110"
       >
         Schedule Service
         <ArrowRight className="h-4 w-4" />
@@ -198,7 +202,7 @@ function BookingForm() {
 
 
 
-/* ---------- COMMON PROBLEMS ---------- */
+/* ---------- COMMON PROBLEMS (matches reference layout with 3 cards + center) ---------- */
 function CommonProblems() {
   return (
     <section id="services" className="relative bg-white px-4 py-24 md:px-8 md:py-32">
@@ -213,7 +217,7 @@ function CommonProblems() {
       </div>
 
       <div className="relative mx-auto mt-14 max-w-6xl sm:mt-16">
-        {/* Center image is deliberately layered behind the networking service. */}
+        {/* Central floating team image — behind cards on desktop */}
         <div
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-0 hidden -translate-x-1/2 lg:block"
@@ -230,42 +234,34 @@ function CommonProblems() {
           </div>
         </div>
 
+        {/* Mobile team image */}
+        <div className="mb-8 overflow-hidden rounded-3xl shadow-card ring-1 ring-border lg:hidden">
+          <img
+            src={teamImg}
+            alt="Numunix engineering team"
+            width={1200}
+            height={700}
+            loading="lazy"
+            className="h-56 w-full object-cover sm:h-72"
+          />
+        </div>
+
         <div className="relative grid gap-5 md:gap-6 lg:grid-cols-3 lg:gap-8">
-          <div className="relative pt-24 lg:pt-0">
-            <div
-              aria-hidden
-              className="absolute inset-x-5 top-0 h-40 overflow-hidden rounded-[1.75rem] shadow-card ring-1 ring-border lg:hidden"
-            >
-              <img
-                src={svcLaptop}
-                alt=""
-                width={800}
-                height={460}
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand/80 via-brand/10 to-transparent" />
-            </div>
-            <div className="relative z-10">
-              <ProblemCard
-                number="01"
-                Icon={Laptop}
-                title="Laptop Repair"
-                desc="If your laptop keeps freezing or won't power on, our engineers diagnose it fast and get it running."
-                bullets={[
-                  "Won't turn on or boot",
-                  "Overheating or fan noise",
-                  "Slow performance",
-                  "Broken screen or keyboard",
-                ]}
-                highlighted
-                href="/services/laptop-repair"
-              />
-            </div>
-          </div>
+          <ProblemCard
+            Icon={Laptop}
+            title="Laptop Repair"
+            desc="If your laptop keeps freezing or won't power on, our engineers diagnose it fast and get it running."
+            bullets={[
+              "Won't turn on or boot",
+              "Overheating or fan noise",
+              "Slow performance",
+              "Broken screen or keyboard",
+            ]}
+            highlighted
+          />
+          {/* Spacer on desktop to reveal the central team image */}
           <div className="hidden lg:block" aria-hidden />
           <ProblemCard
-            number="02"
             Icon={Camera}
             title="CCTV & Security"
             desc="We install and service CCTV systems for homes and businesses with clear footage and remote access."
@@ -275,105 +271,88 @@ function CommonProblems() {
               "DVR / NVR issues",
               "Remote mobile access",
             ]}
-            href="/services/cctv-installation"
           />
-
-          <div className="relative pt-24 lg:col-span-3 lg:mx-auto lg:-mt-24 lg:w-[380px] lg:rotate-[2deg] lg:pt-0">
-            <div
-              aria-hidden
-              className="absolute inset-x-5 top-0 h-40 overflow-hidden rounded-[1.75rem] shadow-card ring-1 ring-border lg:hidden"
-            >
-              <img
-                src={teamImg}
-                alt=""
-                width={800}
-                height={460}
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
-            </div>
-            <div className="relative z-10">
-              <ProblemCard
-                number="03"
-                Icon={Network}
-                title="Networking"
-                desc="We design and troubleshoot business networks — Wi-Fi, LAN, routers and firewalls — for stable, secure connectivity."
-                bullets={[
-                  "Slow or dropping Wi-Fi",
-                  "Router & firewall setup",
-                  "Structured LAN cabling",
-                  "VPN & remote access",
-                ]}
-                featured
-                href="/services/networking"
-              />
-            </div>
+          {/* Networking card — sits below center image on desktop, overlapping */}
+          <div className="lg:col-span-3 lg:mx-auto lg:-mt-24 lg:w-[380px] lg:rotate-[2deg]">
+            <ProblemCard
+              Icon={Network}
+              title="Networking"
+              desc="We design and troubleshoot business networks — Wi-Fi, LAN, routers and firewalls — for stable, secure connectivity."
+              bullets={[
+                "Slow or dropping Wi-Fi",
+                "Router & firewall setup",
+                "Structured LAN cabling",
+                "VPN & remote access",
+              ]}
+            />
           </div>
         </div>
       </div>
+
     </section>
   );
 }
 
 function ProblemCard({
-  number,
   Icon,
   title,
   desc,
   bullets,
   highlighted = false,
-  featured = false,
-  href = "#book",
 }: {
-  number: string;
   Icon: typeof Laptop;
   title: string;
   desc: string;
   bullets: string[];
   highlighted?: boolean;
-  featured?: boolean;
-  href?: string;
 }) {
-  const dark = highlighted || featured;
   return (
     <a
-      href={href}
-      className={`group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] p-6 shadow-card transition duration-300 hover:-translate-y-1 md:p-8 ${
+      href="#book"
+      className={`group relative flex h-full flex-col rounded-3xl p-7 md:p-8 transition duration-300 ${
         highlighted
-          ? "bg-brand text-brand-foreground ring-1 ring-brand shadow-brand"
-          : featured
-            ? "bg-ink text-white ring-1 ring-ink"
-            : "bg-white text-ink ring-1 ring-border hover:border-brand hover:ring-brand/60"
+          ? "bg-brand text-brand-foreground ring-1 ring-brand shadow-brand hover:-translate-y-1"
+          : "bg-white text-ink ring-1 ring-border hover:-translate-y-1 hover:border-brand hover:ring-brand/60 hover:shadow-card"
       }`}
     >
-      <div className="absolute right-6 top-5 text-xs font-bold tracking-[0.2em] opacity-40 md:right-8 md:top-7">
-        {number}
-      </div>
       <div className="flex items-start justify-between">
         <span
           className={`grid h-12 w-12 place-items-center rounded-2xl ${
-            dark ? "bg-white/15 text-white" : "bg-brand/10 text-brand"
-          } transition group-hover:scale-105`}
+            highlighted
+              ? "bg-white/15 text-white"
+              : "bg-brand/10 text-brand group-hover:bg-brand group-hover:text-brand-foreground"
+          } transition`}
         >
           <Icon className="h-5 w-5" />
         </span>
         <span
           className={`grid h-9 w-9 place-items-center rounded-full transition ${
-            dark ? "bg-white/15 text-white" : "bg-secondary text-ink group-hover:bg-ink group-hover:text-white"
+            highlighted
+              ? "bg-white/15 text-white"
+              : "bg-secondary text-ink group-hover:bg-ink group-hover:text-white"
           }`}
         >
           <ArrowUpRight className="h-4 w-4" />
         </span>
       </div>
       <h3 className="mt-6 text-2xl font-bold">{title}</h3>
-      <p className={`mt-3 text-sm leading-6 ${dark ? "text-white/80" : "text-muted-foreground"}`}>
+      <p
+        className={`mt-3 text-sm ${
+          highlighted ? "text-white/85" : "text-muted-foreground"
+        }`}
+      >
         {desc}
       </p>
-      <ul className={`mt-6 grid gap-2 text-sm ${dark ? "text-white/95" : "text-ink/80"}`}>
+      <ul
+        className={`mt-6 space-y-3 text-sm ${
+          highlighted ? "text-white/95" : "text-ink/80"
+        }`}
+      >
         {bullets.map((b) => (
           <li key={b} className="flex items-center gap-2">
-            <BadgeCheck className={`h-4 w-4 shrink-0 ${dark ? "text-white" : "text-brand"}`} />
+            <BadgeCheck
+              className={`h-4 w-4 ${highlighted ? "text-white" : "text-brand"}`}
+            />
             {b}
           </li>
         ))}
@@ -382,17 +361,18 @@ function ProblemCard({
   );
 }
 
+
 /* ---------- ALL SERVICES GRID ---------- */
 function ServicesGrid() {
   const items = [
-    { title: "Laptop Repair", slug: "laptop-repair", Icon: Laptop },
-    { title: "Desktop Repair", slug: "desktop-repair", Icon: Monitor },
-    { title: "CCTV Installation", slug: "cctv-installation", Icon: Camera },
-    { title: "Networking", slug: "networking", Icon: Network },
-    { title: "Printer Repair", slug: "printer-repair", Icon: Printer },
-    { title: "Business AMC", slug: "business-amc", Icon: Briefcase },
-    { title: "Data Recovery", slug: "data-recovery", Icon: HardDrive },
-    { title: "Hardware Upgrades", slug: "hardware-upgrades", Icon: Cpu },
+    { title: "Laptop Repair", Icon: Laptop },
+    { title: "Desktop Repair", Icon: Monitor },
+    { title: "CCTV Installation", Icon: Camera },
+    { title: "Networking", Icon: Network },
+    { title: "Printer Repair", Icon: Printer },
+    { title: "Business AMC", Icon: Briefcase },
+    { title: "Data Recovery", Icon: HardDrive },
+    { title: "Hardware Upgrades", Icon: Cpu },
   ];
   return (
     <section className="bg-secondary/40 px-4 py-24 md:px-8 md:py-28">
@@ -406,35 +386,21 @@ function ServicesGrid() {
         </p>
       </div>
       <div className="mx-auto mt-14 grid max-w-6xl grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 lg:grid-cols-4">
-        {items.map(({ title, slug, Icon }, index) => (
-          <a
+        {items.map(({ title, Icon }) => (
+          <div
             key={title}
-            href={`/services/${slug}`}
-            className="group relative flex min-h-[236px] flex-col overflow-hidden rounded-[1.75rem] bg-white p-5 ring-1 ring-border shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card md:min-h-[260px] md:p-6"
+            className="group rounded-2xl bg-white p-6 ring-1 ring-border shadow-soft transition hover:-translate-y-1 hover:shadow-card"
           >
-            <span
-              aria-hidden
-              className="absolute -right-9 -top-9 h-28 w-28 rounded-full bg-brand/[0.07] transition duration-500 group-hover:scale-150 group-hover:bg-brand/[0.12]"
-            />
-            <div className="relative flex items-start justify-between">
-              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-brand transition duration-300 group-hover:scale-105 group-hover:bg-brand group-hover:text-brand-foreground">
-                <Icon className="h-5 w-5" />
-              </span>
-              <span className="flex items-center gap-1 text-[10px] font-bold tracking-[0.16em] text-muted-foreground">
-                0{index + 1}
-                <ArrowUpRight className="h-4 w-4 text-brand transition duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </span>
-            </div>
-            <div className="relative mt-auto">
-              <h3 className="text-base font-bold text-ink md:text-lg">{title}</h3>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                Expert diagnostics, genuine parts and fast turnaround.
-              </p>
-              <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-brand opacity-80 transition group-hover:opacity-100">
-                Explore service <ArrowRight className="h-3.5 w-3.5" />
-              </span>
-            </div>
-          </a>
+            <span className="grid h-11 w-11 place-items-center rounded-xl bg-brand/10 text-brand transition group-hover:bg-brand group-hover:text-brand-foreground">
+              <Icon className="h-5 w-5" />
+            </span>
+            <h3 className="mt-6 text-base font-semibold text-ink md:text-lg">
+              {title}
+            </h3>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Expert diagnostics & fast turnaround with genuine parts.
+            </p>
+          </div>
         ))}
       </div>
     </section>
@@ -461,27 +427,23 @@ function Showcase() {
           title="Laptop Repair"
           desc="Schedule your laptop repair with certified engineers and genuine parts."
           image={svcLaptop}
-          href="/services/laptop-repair"
         />
         <ShowcaseCard
           title="Desktop Repair"
           desc="Expert desktop repair to restore full performance and stability."
           image={svcDesktop}
-          href="/services/desktop-repair"
           badge="240+ engineers"
         />
         <ShowcaseCard
           title="CCTV Installation"
           desc="Fast, reliable CCTV installation and remote-access setup, anytime."
           image={svcCctv}
-          href="/services/cctv-installation"
           cta="View All Services"
         />
         <ShowcaseCard
           title="Business IT Support"
           desc="Expert commercial IT support for offices, retail and workspaces."
           image={svcBusiness}
-          href="/services/business-amc"
         />
       </div>
     </section>
@@ -494,14 +456,12 @@ function ShowcaseCard({
   image,
   cta,
   badge,
-  href,
 }: {
   title: string;
   desc: string;
   image: string;
   cta?: string;
   badge?: string;
-  href?: string;
 }) {
   return (
     <div className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-border shadow-soft transition hover:-translate-y-1 hover:shadow-card">
@@ -524,7 +484,7 @@ function ShowcaseCard({
         <h3 className="text-xl font-bold text-ink md:text-2xl">{title}</h3>
         <p className="mt-3 text-sm text-muted-foreground">{desc}</p>
         <a
-          href={href ?? "#book"}
+          href="#book"
           className="mt-auto inline-flex w-fit items-center gap-2 pt-6 text-sm font-semibold text-ink transition group-hover:text-brand"
         >
           {cta ?? "Learn more"} <ArrowRight className="h-4 w-4" />
