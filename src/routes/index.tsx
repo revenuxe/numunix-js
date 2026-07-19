@@ -141,14 +141,37 @@ function Hero() {
 }
 
 function BookingForm() {
+  const [form, setForm] = useState({ name: "", email: "", postal_code: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errMsg, setErrMsg] = useState<string | null>(null);
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("sending");
+    setErrMsg(null);
+    const { supabase } = await import("@/integrations/supabase/client");
+    const { error } = await supabase.from("leads").insert({
+      name: form.name,
+      email: form.email || null,
+      postal_code: form.postal_code || null,
+      service: "General Inquiry",
+      source: "hero-booking",
+    });
+    if (error) {
+      setStatus("error");
+      setErrMsg(error.message);
+      return;
+    }
+    setStatus("success");
+    setForm({ name: "", email: "", postal_code: "" });
+  }
+
   return (
     <form
-      onSubmit={(e) => e.preventDefault()}
+      onSubmit={onSubmit}
       className="rounded-3xl bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur-xl shadow-card sm:p-6"
     >
-      <h3 className="text-lg font-bold text-white sm:text-xl">
-        Book a Service
-      </h3>
+      <h3 className="text-lg font-bold text-white sm:text-xl">Book a Service</h3>
       <p className="mt-1 text-xs text-white/70">
         Get a free callback from a certified Numunix engineer.
       </p>
@@ -159,6 +182,8 @@ function BookingForm() {
             type="text"
             required
             maxLength={100}
+            value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
             placeholder="Your full name"
             className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
           />
@@ -169,18 +194,20 @@ function BookingForm() {
             type="email"
             required
             maxLength={255}
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
             placeholder="you@example.com"
             className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
           />
         </label>
         <label className="block">
-          <span className="text-xs font-semibold text-white/80">
-            Postal Code
-          </span>
+          <span className="text-xs font-semibold text-white/80">Postal Code</span>
           <input
             type="text"
             required
             maxLength={12}
+            value={form.postal_code}
+            onChange={(e) => setForm({ ...form, postal_code: e.target.value })}
             placeholder="Enter your PIN / ZIP"
             className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 backdrop-blur focus:outline-none focus:ring-brand"
           />
@@ -188,11 +215,18 @@ function BookingForm() {
       </div>
       <button
         type="submit"
-        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110"
+        disabled={status === "sending"}
+        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110 disabled:opacity-60"
       >
-        Schedule Service
+        {status === "sending" ? "Sending..." : "Schedule Service"}
         <ArrowRight className="h-4 w-4" />
       </button>
+      {status === "success" && (
+        <p className="mt-3 text-center text-xs text-brand">Thanks! We'll call you back shortly.</p>
+      )}
+      {status === "error" && (
+        <p className="mt-3 text-center text-xs text-red-300">{errMsg ?? "Something went wrong. Please try again."}</p>
+      )}
     </form>
   );
 }
@@ -497,6 +531,23 @@ function ShowcaseCard({
 
 /* ---------- FIND / BOOK BANNER + WHY US ---------- */
 function FindBanner() {
+  const [pin, setPin] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!pin.trim()) return;
+    setStatus("sending");
+    const { supabase } = await import("@/integrations/supabase/client");
+    const { error } = await supabase.from("leads").insert({
+      name: "Pincode Lookup",
+      postal_code: pin,
+      service: "Coverage Check",
+      source: "find-banner",
+    });
+    setStatus(error ? "error" : "success");
+    if (!error) setPin("");
+  }
   return (
     <section id="book" className="bg-white px-4 pb-16 md:px-8">
       <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem]">
@@ -524,23 +575,33 @@ function FindBanner() {
               friendly IT service.
             </p>
             <form
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={submit}
               className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-2 sm:rounded-full sm:bg-white/10 sm:p-1.5 sm:ring-1 sm:ring-white/25"
             >
               <input
                 type="text"
+                required
                 maxLength={12}
+                value={pin}
+                onChange={(e) => setPin(e.target.value)}
                 placeholder="Enter your PIN / ZIP"
                 className="w-full rounded-full bg-white/10 px-5 py-3 text-sm text-white ring-1 ring-white/20 placeholder:text-white/60 focus:outline-none focus:ring-brand sm:bg-transparent sm:ring-0 sm:focus:ring-0"
               />
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-white/90"
+                disabled={status === "sending"}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-white/90 disabled:opacity-60"
               >
-                Find Now
+                {status === "sending" ? "Checking..." : "Find Now"}
                 <ArrowRight className="h-4 w-4" />
               </button>
             </form>
+            {status === "success" && (
+              <p className="mt-3 text-sm text-brand">Thanks! An engineer will reach out shortly.</p>
+            )}
+            {status === "error" && (
+              <p className="mt-3 text-sm text-red-300">Something went wrong. Please try again.</p>
+            )}
           </div>
         </div>
       </div>
