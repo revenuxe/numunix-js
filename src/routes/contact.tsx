@@ -76,7 +76,7 @@ function ContactPage() {
               <div className="min-w-0 flex-1">
                 <p className="text-xs uppercase tracking-widest opacity-70">Call us</p>
                 <p className="mt-1 truncate text-lg font-bold">{CONTACT.phoneDisplay}</p>
-                <p className="text-sm opacity-80">Mon-Sat Â· 9:00 AM - 8:00 PM</p>
+                <p className="text-sm opacity-80">Mon-Sat · 9:00 AM - 8:00 PM</p>
               </div>
               <ArrowRight className="h-5 w-5 shrink-0 transition group-hover:translate-x-1" />
             </a>
@@ -106,8 +106,8 @@ function ContactPage() {
                 <Clock className="h-5 w-5 text-brand" />
                 <p className="mt-3 text-sm font-semibold text-ink">Working Hours</p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Mon-Sat Â· 9 AM - 8 PM<br />
-                  Sun Â· Emergency only
+                  Mon-Sat · 9 AM - 8 PM<br />
+                  Sun · Emergency only
                 </p>
               </div>
             </div>
@@ -175,7 +175,7 @@ function ContactPage() {
               disabled={busy}
               className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110"
             >
-              {busy ? "Sendingâ€¦" : "Send request"} <ArrowRight className="h-4 w-4" />
+              {busy ? "Sending..." : "Send request"} <ArrowRight className="h-4 w-4" />
             </button>
             {formMessage && <p className="mt-3 text-center text-xs text-white/80">{formMessage}</p>}
             <p className="mt-3 text-center text-xs text-white/60">

@@ -45,7 +45,7 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
   head: () => ({
     meta: [
-      { title: "Numunix â€” Reliable IT Support & Hardware Services" },
+      { title: "Numunix — Reliable IT Support & Hardware Services" },
       {
         name: "description",
         content:
@@ -88,7 +88,7 @@ function Hero() {
               <span className="text-brand">&amp; Hardware</span> Services
             </h1>
             <p className="mt-4 max-w-xl text-sm text-white/75 sm:mt-6 sm:text-lg">
-              Certified engineers, transparent pricing, fast turnaround â€”
+              Certified engineers, transparent pricing, fast turnaround —
               laptop repair, CCTV, networking, AMC &amp; more.
             </p>
 
@@ -112,7 +112,7 @@ function Hero() {
               </a>
             </div>
 
-            {/* Service chips â€” desktop / tablet only */}
+            {/* Service chips — desktop / tablet only */}
             <div className="mt-8 hidden flex-wrap gap-2 lg:mt-10 lg:flex">
               {floating.map(({ label, Icon }) => (
                 <div
@@ -182,7 +182,7 @@ function CommonProblems() {
         </h2>
         <p className="mt-5 text-muted-foreground">
           We diagnose and resolve the everyday issues that slow your business
-          down â€” quickly, professionally and with certified engineers.
+          down — quickly, professionally and with certified engineers.
         </p>
       </div>
 
@@ -272,7 +272,7 @@ function CommonProblems() {
                 number="03"
                 Icon={Network}
                 title="Networking"
-                desc="We design and troubleshoot business networks â€” Wi-Fi, LAN, routers and firewalls â€” for stable, secure connectivity."
+                desc="We design and troubleshoot business networks — Wi-Fi, LAN, routers and firewalls — for stable, secure connectivity."
                 bullets={[
                   "Slow or dropping Wi-Fi",
                   "Router & firewall setup",
@@ -375,7 +375,7 @@ function ServicesGrid() {
           Everything IT, <span className="text-brand">One Team</span>
         </h2>
         <p className="mt-4 text-muted-foreground">
-          From single-laptop fixes to complete business IT â€” we cover every
+          From single-laptop fixes to complete business IT — we cover every
           layer so your team stays productive.
         </p>
       </div>
@@ -425,7 +425,7 @@ function Showcase() {
           <span className="text-brand">IT Environments</span>
         </h2>
         <p className="mt-5 text-muted-foreground">
-          Quick, professional and reliable â€” for households, small offices and
+          Quick, professional and reliable — for households, small offices and
           growing businesses across the region.
         </p>
       </div>
@@ -547,11 +547,11 @@ function WhyUs() {
       title: "Certified Engineers",
       desc: "Our technicians are certified, insured and trained on the latest hardware & platforms.",
     },
-    { Icon: Zap, title: "Quick Diagnosis", desc: "Fast, transparent diagnostics â€” usually within the same day." },
+    { Icon: Zap, title: "Quick Diagnosis", desc: "Fast, transparent diagnostics — usually within the same day." },
     { Icon: ShieldCheck, title: "Original Components", desc: "Only genuine, warrantied parts and licensed software." },
-    { Icon: Wallet, title: "Transparent Pricing", desc: "Upfront estimates before any work begins â€” no surprises." },
+    { Icon: Wallet, title: "Transparent Pricing", desc: "Upfront estimates before any work begins — no surprises." },
     { Icon: CalendarClock, title: "Business AMC", desc: "Annual maintenance contracts with SLAs to keep IT running." },
-    { Icon: Headset, title: "Onsite & Remote Support", desc: "Onsite visits or secure remote support â€” you choose." },
+    { Icon: Headset, title: "Onsite & Remote Support", desc: "Onsite visits or secure remote support — you choose." },
   ];
   const [open, setOpen] = useState(0);
   return (
@@ -563,7 +563,7 @@ function WhyUs() {
           </h2>
           <p className="mt-4 max-w-md text-muted-foreground">
             Reliable IT support with skilled engineers ensuring satisfaction on
-            every ticket â€” from a single laptop to your entire office.
+            every ticket — from a single laptop to your entire office.
           </p>
 
           <div className="mt-8 space-y-3">
@@ -653,7 +653,7 @@ function Resources() {
     {
       image: resCctv,
       title: "Best CCTV Guide",
-      desc: "Choosing the right CCTV â€” resolution, storage and coverage for homes and small offices.",
+      desc: "Choosing the right CCTV — resolution, storage and coverage for homes and small offices.",
     },
   ];
   return (
@@ -715,11 +715,11 @@ function FAQ() {
     },
     {
       q: "Do you offer onsite support for offices?",
-      a: "Yes â€” we offer onsite visits, remote support and business AMC plans with defined SLAs.",
+      a: "Yes — we offer onsite visits, remote support and business AMC plans with defined SLAs.",
     },
     {
       q: "How quickly can you diagnose an issue?",
-      a: "Most issues are diagnosed the same day. Complex hardware faults are diagnosed within 24â€“48 hours.",
+      a: "Most issues are diagnosed the same day. Complex hardware faults are diagnosed within 24–48 hours.",
     },
     {
       q: "Do you use genuine parts and offer warranty?",
