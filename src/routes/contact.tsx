@@ -23,6 +23,31 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
+  const [form, setForm] = useState({ name: "", phone: "", email: "", service: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errMsg, setErrMsg] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("sending");
+    setErrMsg(null);
+    const { error } = await supabase.from("leads").insert({
+      name: form.name,
+      phone: form.phone || null,
+      email: form.email || null,
+      service: form.service || "Other",
+      message: form.message || null,
+      source: "contact-page",
+    });
+    if (error) {
+      setStatus("error");
+      setErrMsg(error.message);
+      return;
+    }
+    setStatus("success");
+    setForm({ name: "", phone: "", email: "", service: "", message: "" });
+  }
+
   return (
     <main className="bg-white text-ink">
       <SiteNav variant="dark" />
