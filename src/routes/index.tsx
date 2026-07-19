@@ -575,23 +575,33 @@ function FindBanner() {
               friendly IT service.
             </p>
             <form
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={submit}
               className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-2 sm:rounded-full sm:bg-white/10 sm:p-1.5 sm:ring-1 sm:ring-white/25"
             >
               <input
                 type="text"
+                required
                 maxLength={12}
+                value={pin}
+                onChange={(e) => setPin(e.target.value)}
                 placeholder="Enter your PIN / ZIP"
                 className="w-full rounded-full bg-white/10 px-5 py-3 text-sm text-white ring-1 ring-white/20 placeholder:text-white/60 focus:outline-none focus:ring-brand sm:bg-transparent sm:ring-0 sm:focus:ring-0"
               />
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-white/90"
+                disabled={status === "sending"}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-white/90 disabled:opacity-60"
               >
-                Find Now
+                {status === "sending" ? "Checking..." : "Find Now"}
                 <ArrowRight className="h-4 w-4" />
               </button>
             </form>
+            {status === "success" && (
+              <p className="mt-3 text-sm text-brand">Thanks! An engineer will reach out shortly.</p>
+            )}
+            {status === "error" && (
+              <p className="mt-3 text-sm text-red-300">Something went wrong. Please try again.</p>
+            )}
           </div>
         </div>
       </div>
