@@ -128,7 +128,7 @@ function ContactPage() {
 
           {/* Form */}
           <form
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleSubmit}
             className="rounded-[2rem] bg-ink p-6 text-white shadow-card md:p-10"
           >
             <h2 className="text-2xl font-extrabold tracking-tight md:text-3xl">
@@ -144,6 +144,8 @@ function ContactPage() {
                   type="text"
                   required
                   maxLength={100}
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
                   placeholder="Your name"
                   className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 focus:outline-none focus:ring-brand"
                 />
@@ -155,6 +157,8 @@ function ContactPage() {
                     type="tel"
                     required
                     maxLength={15}
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
                     placeholder="+91 …"
                     className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 focus:outline-none focus:ring-brand"
                   />
@@ -165,6 +169,8 @@ function ContactPage() {
                     type="email"
                     required
                     maxLength={255}
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="you@example.com"
                     className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 focus:outline-none focus:ring-brand"
                   />
@@ -174,8 +180,9 @@ function ContactPage() {
                 <span className="text-xs font-semibold text-white/80">Service needed</span>
                 <select
                   required
+                  value={form.service}
+                  onChange={(e) => setForm({ ...form, service: e.target.value })}
                   className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white ring-1 ring-white/20 focus:outline-none focus:ring-brand"
-                  defaultValue=""
                 >
                   <option value="" disabled className="bg-ink">Choose a service</option>
                   <option className="bg-ink">Laptop Repair</option>
@@ -191,6 +198,8 @@ function ContactPage() {
                 <textarea
                   rows={4}
                   maxLength={1000}
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
                   placeholder="Describe the issue…"
                   className="mt-1.5 w-full rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 ring-1 ring-white/20 focus:outline-none focus:ring-brand"
                 />
@@ -198,13 +207,22 @@ function ContactPage() {
             </div>
             <button
               type="submit"
-              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110"
+              disabled={status === "sending"}
+              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-brand transition hover:brightness-110 disabled:opacity-60"
             >
-              Send request <ArrowRight className="h-4 w-4" />
+              {status === "sending" ? "Sending..." : "Send request"} <ArrowRight className="h-4 w-4" />
             </button>
-            <p className="mt-3 text-center text-xs text-white/60">
-              We reply within a few hours during working days.
-            </p>
+            {status === "success" && (
+              <p className="mt-3 text-center text-xs text-brand">Thanks! We'll be in touch shortly.</p>
+            )}
+            {status === "error" && (
+              <p className="mt-3 text-center text-xs text-red-300">{errMsg ?? "Something went wrong. Please try again."}</p>
+            )}
+            {status !== "success" && status !== "error" && (
+              <p className="mt-3 text-center text-xs text-white/60">
+                We reply within a few hours during working days.
+              </p>
+            )}
           </form>
         </div>
       </section>
