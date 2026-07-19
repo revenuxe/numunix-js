@@ -531,6 +531,23 @@ function ShowcaseCard({
 
 /* ---------- FIND / BOOK BANNER + WHY US ---------- */
 function FindBanner() {
+  const [pin, setPin] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!pin.trim()) return;
+    setStatus("sending");
+    const { supabase } = await import("@/integrations/supabase/client");
+    const { error } = await supabase.from("leads").insert({
+      name: "Pincode Lookup",
+      postal_code: pin,
+      service: "Coverage Check",
+      source: "find-banner",
+    });
+    setStatus(error ? "error" : "success");
+    if (!error) setPin("");
+  }
   return (
     <section id="book" className="bg-white px-4 pb-16 md:px-8">
       <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem]">
