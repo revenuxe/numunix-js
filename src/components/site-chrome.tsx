@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X, Facebook, Instagram, Youtube, Twitter, Mail, Phone } from "lucide-react";
-import logo from "@/assets/numunix-logo.webp";
+import logoAsset from "@/assets/numunix-logo.asset.json";
 import { CONTACT } from "@/lib/contact";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 
-const LOGO = logo;
+const LOGO = logoAsset.url;
 
 export function LogoMark({ className = "h-9 w-auto" }: { className?: string }) {
   return (
@@ -70,10 +70,8 @@ export function SiteNav({ variant = "light" }: { variant?: "light" | "dark" }) {
             href={CONTACT.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className={`inline-flex h-14 items-center gap-2 rounded-full border px-6 text-sm font-semibold shadow-soft transition ${
-              isDark
-                ? "border-white/30 bg-ink/55 text-white backdrop-blur hover:bg-white hover:text-ink"
-                : "border-ink/20 bg-ink text-white hover:bg-brand"
+            className={`inline-flex h-14 items-center gap-2 rounded-full px-6 text-sm font-semibold shadow-soft transition ${
+              isDark ? "bg-white text-ink hover:bg-white/90" : "bg-ink text-white hover:opacity-90"
             }`}
           >
             <WhatsAppIcon className="h-4 w-4" />
@@ -122,7 +120,7 @@ export function SiteNav({ variant = "light" }: { variant?: "light" | "dark" }) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-5 py-4 text-base font-semibold text-white transition hover:bg-brand"
+              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-4 text-base font-semibold text-white"
             >
               <WhatsAppIcon className="h-5 w-5" />
               WhatsApp Us
