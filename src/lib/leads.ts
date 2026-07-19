@@ -1,4 +1,4 @@
-﻿import { supabase } from "@/lib/supabase";
+import { publicSupabase } from "@/lib/supabase";
 
 export type LeadInput = {
   name: string;
@@ -10,7 +10,7 @@ export type LeadInput = {
 };
 
 export async function createLead(input: LeadInput) {
-  const { error } = await supabase.from("leads").insert({
+  const { error } = await publicSupabase.from("leads").insert({
     name: input.name.trim(),
     email: null,
     phone: input.phone.trim(),
