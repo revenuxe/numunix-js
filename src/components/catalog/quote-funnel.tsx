@@ -21,7 +21,7 @@ import { CONTACT } from "@/lib/contact";
 import {
   buildAnswers,
   calculateQuote,
-  deriveSelectedProcessorFamily,
+  deriveSelectedFamilyTags,
   getVisibleConfigurationGroups,
   submitDeviceOrder,
 } from "@/lib/quote";
@@ -91,10 +91,31 @@ export function QuoteFunnel({
     () =>
       getVisibleConfigurationGroups(
         configGroups,
-        deriveSelectedProcessorFamily(configGroups, configSelections),
+        deriveSelectedFamilyTags(configGroups, configSelections),
       ),
     [configGroups, configSelections],
   );
+
+  // If an earlier answer changes and a dependent sub-category question (e.g.
+  // a GPU model list) disappears as a result, drop its now-stale selection so
+  // it never leaks into the final answers/quote once it's no longer shown.
+  useEffect(() => {
+    const visibleIds = new Set(visibleConfigGroups.map((g) => g.id));
+    setConfigSelections((current) => {
+      let changed = false;
+      const next: Record<string, string[]> = {};
+      for (const group of configGroups) {
+        const selected = current[group.id];
+        if (!selected) continue;
+        if (group.depends_on_processor_family && !visibleIds.has(group.id)) {
+          changed = true;
+          continue;
+        }
+        next[group.id] = selected;
+      }
+      return changed ? next : current;
+    });
+  }, [visibleConfigGroups, configGroups]);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {

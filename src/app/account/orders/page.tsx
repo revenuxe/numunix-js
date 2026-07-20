@@ -3,20 +3,34 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Download, LoaderCircle, LogOut, UserCog } from "lucide-react";
+import { Ban, Download, LoaderCircle, LogOut, UserCog } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/lib/supabase";
-import { getMyDeviceOrders } from "@/lib/quote";
+import { cancelMyDeviceOrder, getMyDeviceOrders } from "@/lib/quote";
 import { generateInvoicePdf } from "@/lib/invoice";
 import { OrderStatusBadge } from "@/components/order-status-badge";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import type { DeviceOrder } from "@/lib/quote-types";
+
+const CANCELLABLE_STATUSES: DeviceOrder["status"][] = ["new", "contacted", "scheduled"];
 
 export default function MyOrdersPage() {
   const router = useRouter();
   const [orders, setOrders] = useState<DeviceOrder[]>([]);
   const [loading, setLoading] = useState(true);
+  const [cancellingId, setCancellingId] = useState<string | null>(null);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
@@ -34,6 +48,21 @@ export default function MyOrdersPage() {
   async function signOut() {
     await supabase.auth.signOut();
     router.push("/");
+  }
+
+  async function onCancel(order: DeviceOrder) {
+    setCancellingId(order.id);
+    try {
+      await cancelMyDeviceOrder(order.id);
+      setOrders((current) =>
+        current.map((o) => (o.id === order.id ? { ...o, status: "cancelled" } : o)),
+      );
+      toast.success("Booking cancelled.");
+    } catch {
+      toast.error("Could not cancel this booking. Please try again.");
+    } finally {
+      setCancellingId(null);
+    }
   }
 
   return (
@@ -102,17 +131,50 @@ export default function MyOrdersPage() {
                   Pickup {order.pickup_date} · {order.pickup_slot} · Booked{" "}
                   {new Date(order.created_at).toLocaleDateString("en-IN")}
                 </p>
-                <button
-                  onClick={() =>
-                    void generateInvoicePdf(order).catch(() =>
-                      toast.error("Could not generate the invoice PDF. Please try again."),
-                    )
-                  }
-                  className="mt-4 inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-semibold text-ink transition hover:bg-secondary"
-                >
-                  <Download className="h-3.5 w-3.5" />
-                  Download invoice
-                </button>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <button
+                    onClick={() =>
+                      void generateInvoicePdf(order).catch(() =>
+                        toast.error("Could not generate the invoice PDF. Please try again."),
+                      )
+                    }
+                    className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-semibold text-ink transition hover:bg-secondary"
+                  >
+                    <Download className="h-3.5 w-3.5" />
+                    Download invoice
+                  </button>
+                  {CANCELLABLE_STATUSES.includes(order.status) && (
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <button
+                          disabled={cancellingId === order.id}
+                          className="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-4 py-2 text-xs font-semibold text-red-700 transition hover:bg-red-600 hover:text-white disabled:opacity-60"
+                        >
+                          <Ban className="h-3.5 w-3.5" />
+                          {cancellingId === order.id ? "Cancelling…" : "Cancel booking"}
+                        </button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Cancel this pickup booking?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            We won&apos;t send a pickup agent for your {order.model_name}. You can
+                            book again any time.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Keep booking</AlertDialogCancel>
+                          <AlertDialogAction
+                            onClick={() => void onCancel(order)}
+                            className="bg-red-600 hover:bg-red-700"
+                          >
+                            Cancel booking
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  )}
+                </div>
               </article>
             ))}
           </div>

@@ -137,6 +137,21 @@ export function ConfigurationSubtab({ categoryId }: { categoryId: string }) {
     return byPlatform;
   }, [groups]);
 
+  // Maps a family tag (e.g. "gpu_gtx") back to the question + option that
+  // produces it, so a dependent sub-question can say what reveals it in
+  // plain language instead of showing the raw internal tag string.
+  const tagLabels = useMemo(() => {
+    const map: Record<string, string> = {};
+    for (const group of groups) {
+      for (const option of group.configuration_options) {
+        if (option.processor_family) {
+          map[option.processor_family] = `${group.title} — ${option.label}`;
+        }
+      }
+    }
+    return map;
+  }, [groups]);
+
   function openCreateGroup(defaultPlatform: Platform | null) {
     setEditingGroup(null);
     setGroupForm({ ...EMPTY_GROUP, platform: defaultPlatform, step_order: groups.length + 1 });
@@ -308,108 +323,121 @@ export function ConfigurationSubtab({ categoryId }: { categoryId: string }) {
                 ) : (
                   <Accordion type="multiple" className="mt-3 space-y-2.5">
                     {sectionGroups.map((group) => (
-                      <AccordionItem
+                      <div
                         key={group.id}
-                        value={group.id}
-                        className="rounded-2xl border border-border bg-white px-4"
+                        className={
+                          group.depends_on_processor_family
+                            ? "ml-5 border-l-2 border-dashed border-brand/25 pl-4"
+                            : undefined
+                        }
                       >
-                        <div className="flex items-center gap-2">
-                          <AccordionTrigger className="flex-1 hover:no-underline">
-                            <span className="flex flex-wrap items-center gap-2 text-left">
-                              <span className="rounded-full bg-brand/10 px-2 py-0.5 text-xs font-bold text-brand">
-                                Step {group.step_order}
-                              </span>
-                              <span className="font-bold text-ink">{group.title}</span>
-                              <span className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-semibold uppercase text-muted-foreground">
-                                {group.selection_mode === "multi"
-                                  ? "Multi-select"
-                                  : "Single choice"}
-                              </span>
-                              {group.depends_on_processor_family && (
+                        <AccordionItem
+                          value={group.id}
+                          className="rounded-2xl border border-border bg-white px-4"
+                        >
+                          <div className="flex items-center gap-2">
+                            <AccordionTrigger className="flex-1 hover:no-underline">
+                              <span className="flex flex-wrap items-center gap-2 text-left">
+                                <span className="rounded-full bg-brand/10 px-2 py-0.5 text-xs font-bold text-brand">
+                                  Step {group.step_order}
+                                </span>
+                                {group.depends_on_processor_family && (
+                                  <span className="text-xs font-bold text-brand/60">↳</span>
+                                )}
+                                <span className="font-bold text-ink">{group.title}</span>
                                 <span className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-semibold uppercase text-muted-foreground">
-                                  Needs: {group.depends_on_processor_family}
+                                  {group.selection_mode === "multi"
+                                    ? "Multi-select"
+                                    : "Single choice"}
                                 </span>
-                              )}
-                              {!group.active && (
-                                <span className="rounded-full bg-red-50 px-2 py-0.5 text-[10px] font-semibold uppercase text-red-600">
-                                  Hidden
-                                </span>
-                              )}
-                            </span>
-                          </AccordionTrigger>
-                          <button
-                            onClick={() => openEditGroup(group)}
-                            aria-label="Edit question"
-                            className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-secondary text-ink"
-                          >
-                            <Pencil className="h-3.5 w-3.5" />
-                          </button>
-                          <ConfirmDeleteDialog
-                            title="Delete this question?"
-                            description="All of its answer options will be removed too."
-                            onConfirm={() => void onDeleteGroup(group.id)}
-                          />
-                        </div>
-                        <AccordionContent>
-                          {group.helper_text && (
-                            <p className="mb-3 text-xs text-muted-foreground">
-                              {group.helper_text}
-                            </p>
-                          )}
-                          <div className="space-y-2">
-                            {group.configuration_options.map((option) => (
-                              <div
-                                key={option.id}
-                                className="flex items-center justify-between gap-3 rounded-xl bg-secondary/40 px-3 py-2"
-                              >
-                                <div className="min-w-0">
-                                  <p className="truncate text-sm font-semibold text-ink">
-                                    {option.label}
-                                    {option.processor_family && (
-                                      <span className="ml-2 rounded-full bg-white px-1.5 py-0.5 text-[10px] font-semibold uppercase text-muted-foreground ring-1 ring-border">
-                                        {option.processor_family}
-                                      </span>
-                                    )}
-                                  </p>
-                                  {option.description && (
-                                    <p className="truncate text-xs text-muted-foreground">
-                                      {option.description}
-                                    </p>
-                                  )}
-                                </div>
-                                <div className="flex shrink-0 items-center gap-2">
-                                  <PriceEffectBadge
-                                    type={option.price_effect_type}
-                                    amount={option.price_effect_amount}
-                                  />
-                                  <button
-                                    onClick={() => openEditOption(group.id, option)}
-                                    aria-label="Edit option"
-                                    className="grid h-7 w-7 place-items-center rounded-lg bg-white text-ink ring-1 ring-border"
-                                  >
-                                    <Pencil className="h-3 w-3" />
-                                  </button>
-                                  <button
-                                    onClick={() => void onDeleteOption(option.id)}
-                                    aria-label="Delete option"
-                                    className="grid h-7 w-7 place-items-center rounded-lg bg-white text-red-600 ring-1 ring-border"
-                                  >
-                                    <Trash2 className="h-3 w-3" />
-                                  </button>
-                                </div>
-                              </div>
-                            ))}
+                                {group.depends_on_processor_family && (
+                                  <span className="rounded-full bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand">
+                                    Sub-question — shown after:{" "}
+                                    {tagLabels[group.depends_on_processor_family] ??
+                                      group.depends_on_processor_family}
+                                  </span>
+                                )}
+                                {!group.active && (
+                                  <span className="rounded-full bg-red-50 px-2 py-0.5 text-[10px] font-semibold uppercase text-red-600">
+                                    Hidden
+                                  </span>
+                                )}
+                              </span>
+                            </AccordionTrigger>
+                            <button
+                              onClick={() => openEditGroup(group)}
+                              aria-label="Edit question"
+                              className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-secondary text-ink"
+                            >
+                              <Pencil className="h-3.5 w-3.5" />
+                            </button>
+                            <ConfirmDeleteDialog
+                              title="Delete this question?"
+                              description="All of its answer options will be removed too."
+                              onConfirm={() => void onDeleteGroup(group.id)}
+                            />
                           </div>
-                          <button
-                            onClick={() =>
-                              openCreateOption(group.id, group.configuration_options.length)
-                            }
-                            className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-brand"
-                          >
-                            <Plus className="h-3.5 w-3.5" /> Add option
-                          </button>
-                        </AccordionContent>
-                      </AccordionItem>
+                          <AccordionContent>
+                            {group.helper_text && (
+                              <p className="mb-3 text-xs text-muted-foreground">
+                                {group.helper_text}
+                              </p>
+                            )}
+                            <div className="space-y-2">
+                              {group.configuration_options.map((option) => (
+                                <div
+                                  key={option.id}
+                                  className="flex items-center justify-between gap-3 rounded-xl bg-secondary/40 px-3 py-2"
+                                >
+                                  <div className="min-w-0">
+                                    <p className="truncate text-sm font-semibold text-ink">
+                                      {option.label}
+                                      {option.processor_family && (
+                                        <span className="ml-2 rounded-full bg-white px-1.5 py-0.5 text-[10px] font-semibold uppercase text-muted-foreground ring-1 ring-border">
+                                          sets: {option.processor_family}
+                                        </span>
+                                      )}
+                                    </p>
+                                    {option.description && (
+                                      <p className="truncate text-xs text-muted-foreground">
+                                        {option.description}
+                                      </p>
+                                    )}
+                                  </div>
+                                  <div className="flex shrink-0 items-center gap-2">
+                                    <PriceEffectBadge
+                                      type={option.price_effect_type}
+                                      amount={option.price_effect_amount}
+                                    />
+                                    <button
+                                      onClick={() => openEditOption(group.id, option)}
+                                      aria-label="Edit option"
+                                      className="grid h-7 w-7 place-items-center rounded-lg bg-white text-ink ring-1 ring-border"
+                                    >
+                                      <Pencil className="h-3 w-3" />
+                                    </button>
+                                    <button
+                                      onClick={() => void onDeleteOption(option.id)}
+                                      aria-label="Delete option"
+                                      className="grid h-7 w-7 place-items-center rounded-lg bg-white text-red-600 ring-1 ring-border"
+                                    >
+                                      <Trash2 className="h-3 w-3" />
+                                    </button>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                            <button
+                              onClick={() =>
+                                openCreateOption(group.id, group.configuration_options.length)
+                              }
+                              className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-brand"
+                            >
+                              <Plus className="h-3.5 w-3.5" /> Add option
+                            </button>
+                          </AccordionContent>
+                        </AccordionItem>
+                      </div>
                     ))}
                   </Accordion>
                 )}
@@ -502,10 +530,10 @@ export function ConfigurationSubtab({ categoryId }: { categoryId: string }) {
               </label>
               <label className="block">
                 <span className="text-xs font-semibold text-ink/70">
-                  Depends on processor family
+                  Sub-question of tag (optional)
                 </span>
                 <input
-                  placeholder="e.g. intel"
+                  placeholder="e.g. intel, dedicated_gpu, gpu_gtx"
                   value={groupForm.depends_on_processor_family ?? ""}
                   onChange={(e) =>
                     setGroupForm({ ...groupForm, depends_on_processor_family: e.target.value })
@@ -513,8 +541,9 @@ export function ConfigurationSubtab({ categoryId }: { categoryId: string }) {
                   className="mt-1.5 w-full rounded-xl border border-border px-3 py-2 text-sm outline-none focus:border-brand"
                 />
                 <span className="mt-1 block text-[11px] text-muted-foreground">
-                  Only appears after the buyer picks this processor family. Leave blank to always
-                  show.
+                  Only appears after the buyer picks an option elsewhere that sets this tag (see
+                  &quot;Sets tag&quot; on that option below). Chain any number of these to build a
+                  sub-category — e.g. Graphics → GPU type → GPU model. Leave blank to always show.
                 </span>
               </label>
             </div>
@@ -614,16 +643,16 @@ export function ConfigurationSubtab({ categoryId }: { categoryId: string }) {
               </label>
             </div>
             <label className="block">
-              <span className="text-xs font-semibold text-ink/70">Processor family (optional)</span>
+              <span className="text-xs font-semibold text-ink/70">Sets tag (optional)</span>
               <input
-                placeholder="intel / amd / apple_silicon"
+                placeholder="intel / dedicated_gpu / gpu_gtx"
                 value={optionForm.processor_family ?? ""}
                 onChange={(e) => setOptionForm({ ...optionForm, processor_family: e.target.value })}
                 className="mt-1.5 w-full rounded-xl border border-border px-3 py-2 text-sm outline-none focus:border-brand"
               />
               <span className="mt-1 block text-[11px] text-muted-foreground">
-                Set this on the option that identifies the family (e.g. the &quot;Intel&quot;
-                option), so a dependent question can key off it.
+                Set this on the option that should reveal a sub-question (e.g. the &quot;Yes,
+                dedicated graphics&quot; option), so a dependent question can key off it.
               </span>
             </label>
           </div>
