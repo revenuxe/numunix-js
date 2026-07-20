@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { LoaderCircle } from "lucide-react";
+import { toast } from "sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { OrdersSubtab } from "@/components/admin/orders-subtab";
 import { BrandsSubtab } from "@/components/admin/brands-subtab";
@@ -9,15 +10,29 @@ import { SeriesSubtab } from "@/components/admin/series-subtab";
 import { ModelsSubtab } from "@/components/admin/models-subtab";
 import { ConfigurationSubtab } from "@/components/admin/configuration-subtab";
 import { ConditionSubtab } from "@/components/admin/condition-subtab";
-import { getLaptopCategory } from "@/lib/catalog";
+import { getLaptopCategoryForAdmin } from "@/lib/admin-catalog";
 import type { Category } from "@/lib/quote-types";
 
 export function DevicesTab() {
   const [category, setCategory] = useState<Category | null>(null);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    void getLaptopCategory().then(setCategory);
+    getLaptopCategoryForAdmin()
+      .then(setCategory)
+      .catch(() => {
+        setError(true);
+        toast.error("Could not load the device category.");
+      });
   }, []);
+
+  if (error) {
+    return (
+      <p className="rounded-2xl bg-red-50 p-6 text-center text-sm text-red-700 ring-1 ring-red-200">
+        Could not load the Laptops category. Confirm it exists and is reachable, then refresh.
+      </p>
+    );
+  }
 
   if (!category) {
     return (

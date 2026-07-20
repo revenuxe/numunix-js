@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import type {
   Brand,
+  Category,
   ConditionGroup,
   ConditionOption,
   ConfigurationGroup,
@@ -18,6 +19,20 @@ export { slugify } from "@/lib/slug";
 const DEVICE_ASSETS_BUCKET = "device-assets";
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
 const ALLOWED_IMAGE_TYPES = ["image/png", "image/jpeg", "image/webp", "image/svg+xml"];
+
+// Plain (uncached) read for client components. `@/lib/catalog` wraps its
+// reads in `unstable_cache`, which is a server-only API — calling it from a
+// 'use client' component throws "incrementalCache missing in unstable_cache"
+// at runtime, so the admin dashboard needs its own copy of this query.
+export async function getLaptopCategoryForAdmin(): Promise<Category | null> {
+  const { data, error } = await supabase
+    .from("device_categories")
+    .select("*")
+    .eq("slug", "laptops")
+    .maybeSingle();
+  if (error) throw error;
+  return data as Category | null;
+}
 
 export async function uploadDeviceAsset(file: File): Promise<string> {
   if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
