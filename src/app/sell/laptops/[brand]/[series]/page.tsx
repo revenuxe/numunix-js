@@ -6,11 +6,32 @@ import { SiteFooter } from "@/components/site-footer";
 import { CatalogBreadcrumb } from "@/components/catalog/catalog-breadcrumb";
 import { CatalogNotFound } from "@/components/catalog/catalog-not-found";
 import { ModelGrid } from "@/components/catalog/model-grid";
-import { getActiveModels, getBrandBySlug, getLaptopCategory, getSeriesBySlug } from "@/lib/catalog";
+import {
+  getActiveBrands,
+  getActiveModels,
+  getActiveSeries,
+  getBrandBySlug,
+  getLaptopCategory,
+  getSeriesBySlug,
+} from "@/lib/catalog";
 
 export const revalidate = 60;
 
 type Params = { brand: string; series: string };
+
+export async function generateStaticParams() {
+  const category = await getLaptopCategory();
+  if (!category) return [];
+  const brands = await getActiveBrands(category.id);
+  const params: Params[] = [];
+  for (const brand of brands) {
+    const series = await getActiveSeries(brand.id);
+    for (const s of series) {
+      params.push({ brand: brand.slug, series: s.slug });
+    }
+  }
+  return params;
+}
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { brand: brandSlug, series: seriesSlug } = await params;

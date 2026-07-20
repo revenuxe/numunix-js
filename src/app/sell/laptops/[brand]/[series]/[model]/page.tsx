@@ -6,6 +6,9 @@ import { CatalogBreadcrumb } from "@/components/catalog/catalog-breadcrumb";
 import { CatalogNotFound } from "@/components/catalog/catalog-not-found";
 import { QuoteFunnel } from "@/components/catalog/quote-funnel";
 import {
+  getActiveBrands,
+  getActiveModels,
+  getActiveSeries,
   getBrandBySlug,
   getConditionGroups,
   getConfigurationGroups,
@@ -17,6 +20,23 @@ import {
 export const revalidate = 60;
 
 type Params = { brand: string; series: string; model: string };
+
+export async function generateStaticParams() {
+  const category = await getLaptopCategory();
+  if (!category) return [];
+  const brands = await getActiveBrands(category.id);
+  const params: Params[] = [];
+  for (const brand of brands) {
+    const seriesList = await getActiveSeries(brand.id);
+    for (const series of seriesList) {
+      const models = await getActiveModels(series.id);
+      for (const model of models) {
+        params.push({ brand: brand.slug, series: series.slug, model: model.slug });
+      }
+    }
+  }
+  return params;
+}
 
 async function loadContext(params: Params) {
   const category = await getLaptopCategory();
