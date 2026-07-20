@@ -151,44 +151,6 @@ export async function generateInvoicePdf(order: DeviceOrder): Promise<void> {
   });
   y += 30;
 
-  // Price breakdown
-  const b = order.quote_breakdown;
-  const rows: [string, string][] = [
-    ["Base price", formatInr(b.base_price)],
-    ["Configuration effects", formatInr(b.config_amount)],
-    [`Age depreciation (${b.age_percent}%)`, `-${formatInr(b.age_amount)}`],
-    ["Condition deductions", formatInr(b.condition_amount)],
-  ];
-  ensureSpace(rows.length * 18 + 40);
-  text("Price breakdown", marginX, { size: 10.5, bold: true });
-  y += 14;
-  for (const [label, value] of rows) {
-    text(label, marginX, { size: 9.5, color: MUTED });
-    text(value, pageWidth - marginX, { size: 9.5, align: "right" });
-    y += 16;
-  }
-  for (const answer of order.answers) {
-    const sign = answer.price_effect_type === "bonus_fixed" ? "+" : "-";
-    const amount =
-      answer.price_effect_type === "deduct_percent"
-        ? `${sign}${answer.price_effect_amount}%`
-        : `${sign}${formatInr(answer.price_effect_amount)}`;
-    ensureSpace(16);
-    text(`${answer.group_title}: ${answer.option_label}`, marginX, {
-      size: 9,
-      color: MUTED,
-      maxWidth: contentWidth - 100,
-    });
-    text(amount, pageWidth - marginX, { size: 9, align: "right" });
-    y += 15;
-  }
-  y += 4;
-  rule();
-  y += 16;
-  text("Final quote", marginX, { size: 11, bold: true });
-  text(formatInr(b.final_quote), pageWidth - marginX, { size: 11, bold: true, align: "right" });
-  y += 30;
-
   // Terms & conditions
   ensureSpace(40);
   text("Booking terms & conditions", marginX, { size: 11, bold: true });
