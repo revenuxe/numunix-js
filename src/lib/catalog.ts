@@ -149,12 +149,13 @@ export const getConfigurationGroups = unstable_cache(
 );
 
 export const getConditionGroups = unstable_cache(
-  async (categoryId: string): Promise<ConditionGroup[]> => {
+  async (categoryId: string, platform: Platform): Promise<ConditionGroup[]> => {
     const { data, error } = await publicSupabase
       .from("condition_groups")
       .select("*, condition_options(*)")
       .eq("category_id", categoryId)
       .eq("active", true)
+      .or(`platform.is.null,platform.eq.${platform}`)
       .order("step_order", { ascending: true });
     if (error) throw error;
     return ((data ?? []) as ConditionGroup[]).map((group) => ({

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Download, LoaderCircle, LogOut } from "lucide-react";
+import { Download, LoaderCircle, LogOut, UserCog } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/lib/supabase";
 import { getMyDeviceOrders } from "@/lib/quote";
@@ -45,13 +45,22 @@ export default function MyOrdersPage() {
             <p className="text-xs font-semibold uppercase tracking-[.2em] text-brand">My account</p>
             <h1 className="mt-1 text-3xl font-extrabold">My requests</h1>
           </div>
-          <button
-            onClick={signOut}
-            className="inline-flex items-center gap-2 rounded-xl border border-border bg-white px-4 py-2.5 text-sm font-semibold transition hover:bg-secondary"
-          >
-            <LogOut className="h-4 w-4" />
-            Sign out
-          </button>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/account"
+              className="inline-flex items-center gap-2 rounded-xl border border-border bg-white px-4 py-2.5 text-sm font-semibold transition hover:bg-secondary"
+            >
+              <UserCog className="h-4 w-4" />
+              Edit profile
+            </Link>
+            <button
+              onClick={signOut}
+              className="inline-flex items-center gap-2 rounded-xl border border-border bg-white px-4 py-2.5 text-sm font-semibold transition hover:bg-secondary"
+            >
+              <LogOut className="h-4 w-4" />
+              Sign out
+            </button>
+          </div>
         </div>
 
         {loading ? (
@@ -86,12 +95,19 @@ export default function MyOrdersPage() {
                   </div>
                   <OrderStatusBadge status={order.status} />
                 </div>
-                <p className="mt-3 text-sm text-muted-foreground">
+                <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  Booking ID: <span className="text-ink">{order.booking_id}</span>
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground">
                   Pickup {order.pickup_date} · {order.pickup_slot} · Booked{" "}
                   {new Date(order.created_at).toLocaleDateString("en-IN")}
                 </p>
                 <button
-                  onClick={() => void generateInvoicePdf(order)}
+                  onClick={() =>
+                    void generateInvoicePdf(order).catch(() =>
+                      toast.error("Could not generate the invoice PDF. Please try again."),
+                    )
+                  }
                   className="mt-4 inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-semibold text-ink transition hover:bg-secondary"
                 >
                   <Download className="h-3.5 w-3.5" />

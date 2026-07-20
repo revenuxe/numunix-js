@@ -282,6 +282,7 @@ export async function deleteConfigOption(id: string) {
 export type ConditionGroupInput = {
   title: string;
   helper_text: string | null;
+  platform: Platform | null;
   selection_mode: SelectionMode;
   step_order: number;
   active: boolean;

@@ -130,6 +130,7 @@ export function OrdersSubtab() {
           <table className="w-full min-w-[640px] text-sm">
             <thead>
               <tr className="border-b border-border text-left text-xs uppercase tracking-wider text-muted-foreground">
+                <th className="px-4 py-3">Booking ID</th>
                 <th className="px-4 py-3">Customer</th>
                 <th className="px-4 py-3">Device</th>
                 <th className="px-4 py-3">Quote</th>
@@ -144,6 +145,7 @@ export function OrdersSubtab() {
                   onClick={() => setSelected(order)}
                   className="cursor-pointer border-b border-border last:border-0 hover:bg-secondary/40"
                 >
+                  <td className="px-4 py-3 font-mono text-xs text-ink">{order.booking_id}</td>
                   <td className="px-4 py-3">
                     <p className="font-semibold text-ink">{order.customer_name}</p>
                     <p className="text-xs text-muted-foreground">{order.phone}</p>
@@ -182,6 +184,12 @@ export function OrdersSubtab() {
               </SheetHeader>
 
               <div className="space-y-5 px-4 pb-6">
+                <div>
+                  <p className="text-xs font-semibold uppercase text-muted-foreground">
+                    Booking ID
+                  </p>
+                  <p className="mt-1 font-mono text-sm font-bold text-ink">{selected.booking_id}</p>
+                </div>
                 <div>
                   <p className="text-xs font-semibold uppercase text-muted-foreground">Contact</p>
                   <p className="mt-1 text-sm text-ink">{selected.phone}</p>

@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { LoaderCircle, Pencil, Plus, Trash2 } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Apple, Laptop, LoaderCircle, Monitor, Pencil, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import {
   Accordion,
@@ -17,6 +17,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ConfirmDeleteDialog } from "@/components/admin/confirm-delete-dialog";
 import { PriceEffectBadge } from "@/components/admin/price-effect-badge";
 import {
@@ -30,11 +31,12 @@ import {
   type ConditionGroupInput,
   type ConditionOptionInput,
 } from "@/lib/admin-catalog";
-import type { ConditionGroup, ConditionOption, PriceEffectType } from "@/lib/quote-types";
+import type { ConditionGroup, ConditionOption, Platform, PriceEffectType } from "@/lib/quote-types";
 
 const EMPTY_GROUP: ConditionGroupInput = {
   title: "",
   helper_text: "",
+  platform: null,
   selection_mode: "single",
   step_order: 1,
   active: true,
@@ -47,9 +49,48 @@ const EMPTY_OPTION: ConditionOptionInput = {
   sort_order: 1,
 };
 
+const PLATFORM_LABEL: Record<string, string> = {
+  all: "All platforms",
+  apple: "Apple only",
+  windows: "Windows only",
+};
+
+type PlatformKey = "all" | "windows" | "apple";
+
+const PLATFORM_SECTIONS: {
+  key: PlatformKey;
+  title: string;
+  subtitle: string;
+  Icon: typeof Laptop;
+}[] = [
+  {
+    key: "all",
+    title: "Universal",
+    subtitle: "Condition checks every laptop gets, no matter the platform.",
+    Icon: Laptop,
+  },
+  {
+    key: "windows",
+    title: "Windows-only",
+    subtitle: "Only shown while evaluating a Windows brand.",
+    Icon: Monitor,
+  },
+  {
+    key: "apple",
+    title: "Apple-only",
+    subtitle: "Only shown while evaluating an Apple brand.",
+    Icon: Apple,
+  },
+];
+
+function platformKey(group: ConditionGroup): PlatformKey {
+  return (group.platform ?? "all") as PlatformKey;
+}
+
 export function ConditionSubtab({ categoryId }: { categoryId: string }) {
   const [groups, setGroups] = useState<ConditionGroup[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<PlatformKey>("all");
 
   const [groupDialogOpen, setGroupDialogOpen] = useState(false);
   const [editingGroup, setEditingGroup] = useState<ConditionGroup | null>(null);
@@ -78,9 +119,15 @@ export function ConditionSubtab({ categoryId }: { categoryId: string }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId]);
 
-  function openCreateGroup() {
+  const grouped = useMemo(() => {
+    const byPlatform: Record<PlatformKey, ConditionGroup[]> = { all: [], windows: [], apple: [] };
+    for (const group of groups) byPlatform[platformKey(group)].push(group);
+    return byPlatform;
+  }, [groups]);
+
+  function openCreateGroup(defaultPlatform: Platform | null) {
     setEditingGroup(null);
-    setGroupForm({ ...EMPTY_GROUP, step_order: groups.length + 1 });
+    setGroupForm({ ...EMPTY_GROUP, platform: defaultPlatform, step_order: groups.length + 1 });
     setGroupDialogOpen(true);
   }
 
@@ -89,6 +136,7 @@ export function ConditionSubtab({ categoryId }: { categoryId: string }) {
     setGroupForm({
       title: group.title,
       helper_text: group.helper_text ?? "",
+      platform: group.platform,
       selection_mode: group.selection_mode,
       step_order: group.step_order,
       active: group.active,
@@ -193,112 +241,149 @@ export function ConditionSubtab({ categoryId }: { categoryId: string }) {
   return (
     <div>
       <p className="rounded-2xl bg-secondary/40 p-4 text-sm text-muted-foreground">
-        Evaluation questions buyers answer — each option adjusts the quote.
+        Evaluation questions buyers answer — each option adjusts the quote. Questions are grouped by
+        platform below — a Windows brand only sees <strong>Universal</strong> and{" "}
+        <strong>Windows-only</strong> checks; an Apple brand only sees <strong>Universal</strong>{" "}
+        and <strong>Apple-only</strong>.
       </p>
-
-      <div className="mt-4 flex justify-end">
-        <button
-          onClick={openCreateGroup}
-          className="inline-flex items-center gap-2 rounded-full bg-brand px-4 py-2 text-sm font-semibold text-brand-foreground"
-        >
-          <Plus className="h-4 w-4" /> Add question
-        </button>
-      </div>
 
       {loading ? (
         <div className="grid place-items-center py-16 text-muted-foreground">
           <LoaderCircle className="h-5 w-5 animate-spin" />
         </div>
-      ) : groups.length === 0 ? (
-        <p className="mt-6 rounded-2xl bg-secondary/40 p-6 text-center text-sm text-muted-foreground">
-          No condition questions yet.
-        </p>
       ) : (
-        <Accordion type="multiple" className="mt-5 space-y-3">
-          {groups.map((group) => (
-            <AccordionItem
-              key={group.id}
-              value={group.id}
-              className="rounded-2xl border border-border bg-white px-4"
-            >
-              <div className="flex items-center gap-2">
-                <AccordionTrigger className="flex-1 hover:no-underline">
-                  <span className="flex flex-wrap items-center gap-2 text-left">
-                    <span className="rounded-full bg-secondary px-2 py-0.5 text-xs font-bold text-ink">
-                      Step {group.step_order}
-                    </span>
-                    <span className="font-bold text-ink">{group.title}</span>
-                    <span className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-semibold uppercase text-muted-foreground">
-                      {group.selection_mode === "multi" ? "Multi-select" : "Single choice"}
-                    </span>
-                    {!group.active && (
-                      <span className="rounded-full bg-red-50 px-2 py-0.5 text-[10px] font-semibold uppercase text-red-600">
-                        Hidden
-                      </span>
-                    )}
-                  </span>
-                </AccordionTrigger>
-                <button
-                  onClick={() => openEditGroup(group)}
-                  aria-label="Edit question"
-                  className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-secondary text-ink"
-                >
-                  <Pencil className="h-3.5 w-3.5" />
-                </button>
-                <ConfirmDeleteDialog
-                  title="Delete this question?"
-                  description="All of its answer options will be removed too."
-                  onConfirm={() => void onDeleteGroup(group.id)}
-                />
-              </div>
-              <AccordionContent>
-                <div className="space-y-2">
-                  {group.condition_options.map((option) => (
-                    <div
-                      key={option.id}
-                      className="flex items-center justify-between gap-3 rounded-xl bg-secondary/40 px-3 py-2"
-                    >
-                      <div className="min-w-0">
-                        <p className="truncate text-sm font-semibold text-ink">{option.label}</p>
-                        {option.description && (
-                          <p className="truncate text-xs text-muted-foreground">
-                            {option.description}
-                          </p>
-                        )}
-                      </div>
-                      <div className="flex shrink-0 items-center gap-2">
-                        <PriceEffectBadge
-                          type={option.price_effect_type}
-                          amount={option.price_effect_amount}
-                        />
-                        <button
-                          onClick={() => openEditOption(group.id, option)}
-                          aria-label="Edit option"
-                          className="grid h-7 w-7 place-items-center rounded-lg bg-white text-ink ring-1 ring-border"
-                        >
-                          <Pencil className="h-3 w-3" />
-                        </button>
-                        <button
-                          onClick={() => void onDeleteOption(option.id)}
-                          aria-label="Delete option"
-                          className="grid h-7 w-7 place-items-center rounded-lg bg-white text-red-600 ring-1 ring-border"
-                        >
-                          <Trash2 className="h-3 w-3" />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
+        <Tabs
+          value={activeTab}
+          onValueChange={(v) => setActiveTab(v as PlatformKey)}
+          className="mt-6"
+        >
+          <TabsList className="h-auto flex-wrap gap-1 bg-secondary p-1.5">
+            {PLATFORM_SECTIONS.map(({ key, title, Icon }) => (
+              <TabsTrigger key={key} value={key} className="gap-1.5 px-3 py-1.5">
+                <Icon className="h-3.5 w-3.5" />
+                {title}
+                <span className="ml-1 rounded-full bg-black/5 px-1.5 py-0.5 text-[10px] font-bold">
+                  {grouped[key].length}
+                </span>
+              </TabsTrigger>
+            ))}
+          </TabsList>
+
+          {PLATFORM_SECTIONS.map(({ key, title, subtitle }) => {
+            const sectionGroups = grouped[key];
+            return (
+              <TabsContent key={key} value={key} className="mt-5">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <p className="text-xs text-muted-foreground">{subtitle}</p>
+                  <button
+                    onClick={() => openCreateGroup(key === "all" ? null : (key as Platform))}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-semibold text-ink transition hover:bg-secondary"
+                  >
+                    <Plus className="h-3.5 w-3.5" /> Add question
+                  </button>
                 </div>
-                <button
-                  onClick={() => openCreateOption(group.id, group.condition_options.length)}
-                  className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-brand"
-                >
-                  <Plus className="h-3.5 w-3.5" /> Add option
-                </button>
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+
+                {sectionGroups.length === 0 ? (
+                  <p className="mt-3 rounded-2xl bg-secondary/40 p-4 text-center text-xs text-muted-foreground">
+                    No {title.toLowerCase()} condition questions yet.
+                  </p>
+                ) : (
+                  <Accordion type="multiple" className="mt-3 space-y-2.5">
+                    {sectionGroups.map((group) => (
+                      <AccordionItem
+                        key={group.id}
+                        value={group.id}
+                        className="rounded-2xl border border-border bg-white px-4"
+                      >
+                        <div className="flex items-center gap-2">
+                          <AccordionTrigger className="flex-1 hover:no-underline">
+                            <span className="flex flex-wrap items-center gap-2 text-left">
+                              <span className="rounded-full bg-secondary px-2 py-0.5 text-xs font-bold text-ink">
+                                Step {group.step_order}
+                              </span>
+                              <span className="font-bold text-ink">{group.title}</span>
+                              <span className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-semibold uppercase text-muted-foreground">
+                                {group.selection_mode === "multi"
+                                  ? "Multi-select"
+                                  : "Single choice"}
+                              </span>
+                              {!group.active && (
+                                <span className="rounded-full bg-red-50 px-2 py-0.5 text-[10px] font-semibold uppercase text-red-600">
+                                  Hidden
+                                </span>
+                              )}
+                            </span>
+                          </AccordionTrigger>
+                          <button
+                            onClick={() => openEditGroup(group)}
+                            aria-label="Edit question"
+                            className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-secondary text-ink"
+                          >
+                            <Pencil className="h-3.5 w-3.5" />
+                          </button>
+                          <ConfirmDeleteDialog
+                            title="Delete this question?"
+                            description="All of its answer options will be removed too."
+                            onConfirm={() => void onDeleteGroup(group.id)}
+                          />
+                        </div>
+                        <AccordionContent>
+                          <div className="space-y-2">
+                            {group.condition_options.map((option) => (
+                              <div
+                                key={option.id}
+                                className="flex items-center justify-between gap-3 rounded-xl bg-secondary/40 px-3 py-2"
+                              >
+                                <div className="min-w-0">
+                                  <p className="truncate text-sm font-semibold text-ink">
+                                    {option.label}
+                                  </p>
+                                  {option.description && (
+                                    <p className="truncate text-xs text-muted-foreground">
+                                      {option.description}
+                                    </p>
+                                  )}
+                                </div>
+                                <div className="flex shrink-0 items-center gap-2">
+                                  <PriceEffectBadge
+                                    type={option.price_effect_type}
+                                    amount={option.price_effect_amount}
+                                  />
+                                  <button
+                                    onClick={() => openEditOption(group.id, option)}
+                                    aria-label="Edit option"
+                                    className="grid h-7 w-7 place-items-center rounded-lg bg-white text-ink ring-1 ring-border"
+                                  >
+                                    <Pencil className="h-3 w-3" />
+                                  </button>
+                                  <button
+                                    onClick={() => void onDeleteOption(option.id)}
+                                    aria-label="Delete option"
+                                    className="grid h-7 w-7 place-items-center rounded-lg bg-white text-red-600 ring-1 ring-border"
+                                  >
+                                    <Trash2 className="h-3 w-3" />
+                                  </button>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                          <button
+                            onClick={() =>
+                              openCreateOption(group.id, group.condition_options.length)
+                            }
+                            className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-brand"
+                          >
+                            <Plus className="h-3.5 w-3.5" /> Add option
+                          </button>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                )}
+              </TabsContent>
+            );
+          })}
+        </Tabs>
       )}
 
       <Dialog open={groupDialogOpen} onOpenChange={setGroupDialogOpen}>
@@ -325,6 +410,28 @@ export function ConditionSubtab({ categoryId }: { categoryId: string }) {
                 className="mt-1.5 w-full rounded-xl border border-border px-3 py-2 text-sm outline-none focus:border-brand"
               />
             </label>
+            <div>
+              <span className="text-xs font-semibold text-ink/70">Platform</span>
+              <p className="mt-0.5 text-xs text-muted-foreground">
+                Which brands should see this condition question?
+              </p>
+              <div className="mt-1.5 grid grid-cols-3 gap-2">
+                {([null, "windows", "apple"] as (Platform | null)[]).map((p) => (
+                  <button
+                    key={p ?? "all"}
+                    type="button"
+                    onClick={() => setGroupForm({ ...groupForm, platform: p })}
+                    className={`rounded-xl border px-2 py-2 text-xs font-semibold transition ${
+                      groupForm.platform === p
+                        ? "border-brand bg-brand/10 text-brand"
+                        : "border-border text-ink"
+                    }`}
+                  >
+                    {PLATFORM_LABEL[p ?? "all"]}
+                  </button>
+                ))}
+              </div>
+            </div>
             <div>
               <span className="text-xs font-semibold text-ink/70">Selection</span>
               <div className="mt-1.5 grid grid-cols-2 gap-2">

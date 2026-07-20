@@ -65,7 +65,7 @@ export default async function ModelQuotePage({ params }: { params: Promise<Param
     brand && model
       ? await Promise.all([
           getConfigurationGroups(brand.category_id, brand.platform),
-          getConditionGroups(brand.category_id),
+          getConditionGroups(brand.category_id, brand.platform),
         ])
       : [[], []];
 

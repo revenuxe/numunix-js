@@ -17,6 +17,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ConfirmDeleteDialog } from "@/components/admin/confirm-delete-dialog";
 import { PriceEffectBadge } from "@/components/admin/price-effect-badge";
 import {
@@ -97,6 +98,7 @@ function platformKey(group: ConfigurationGroup): PlatformKey {
 export function ConfigurationSubtab({ categoryId }: { categoryId: string }) {
   const [groups, setGroups] = useState<ConfigurationGroup[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<PlatformKey>("all");
 
   const [groupDialogOpen, setGroupDialogOpen] = useState(false);
   const [editingGroup, setEditingGroup] = useState<ConfigurationGroup | null>(null);
@@ -268,21 +270,29 @@ export function ConfigurationSubtab({ categoryId }: { categoryId: string }) {
           <LoaderCircle className="h-5 w-5 animate-spin" />
         </div>
       ) : (
-        <div className="mt-6 space-y-8">
-          {PLATFORM_SECTIONS.map(({ key, title, subtitle, Icon }) => {
+        <Tabs
+          value={activeTab}
+          onValueChange={(v) => setActiveTab(v as PlatformKey)}
+          className="mt-6"
+        >
+          <TabsList className="h-auto flex-wrap gap-1 bg-secondary p-1.5">
+            {PLATFORM_SECTIONS.map(({ key, title, Icon }) => (
+              <TabsTrigger key={key} value={key} className="gap-1.5 px-3 py-1.5">
+                <Icon className="h-3.5 w-3.5" />
+                {title}
+                <span className="ml-1 rounded-full bg-black/5 px-1.5 py-0.5 text-[10px] font-bold">
+                  {grouped[key].length}
+                </span>
+              </TabsTrigger>
+            ))}
+          </TabsList>
+
+          {PLATFORM_SECTIONS.map(({ key, title, subtitle }) => {
             const sectionGroups = grouped[key];
             return (
-              <div key={key}>
+              <TabsContent key={key} value={key} className="mt-5">
                 <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
-                      <Icon className="h-4 w-4" />
-                    </span>
-                    <div>
-                      <p className="text-sm font-bold text-ink">{title}</p>
-                      <p className="text-xs text-muted-foreground">{subtitle}</p>
-                    </div>
-                  </div>
+                  <p className="text-xs text-muted-foreground">{subtitle}</p>
                   <button
                     onClick={() => openCreateGroup(key === "all" ? null : (key as Platform))}
                     className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-semibold text-ink transition hover:bg-secondary"
@@ -403,10 +413,10 @@ export function ConfigurationSubtab({ categoryId }: { categoryId: string }) {
                     ))}
                   </Accordion>
                 )}
-              </div>
+              </TabsContent>
             );
           })}
-        </div>
+        </Tabs>
       )}
 
       <Dialog open={groupDialogOpen} onOpenChange={setGroupDialogOpen}>

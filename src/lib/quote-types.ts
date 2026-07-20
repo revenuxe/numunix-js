@@ -84,6 +84,7 @@ export type ConditionOption = {
 export type ConditionGroup = {
   id: string;
   category_id: string;
+  platform: Platform | null;
   title: string;
   helper_text: string | null;
   selection_mode: SelectionMode;
@@ -117,8 +118,19 @@ export type AnswerRecord = {
   price_effect_amount: number;
 };
 
+export type CustomerProfile = {
+  id: string;
+  full_name: string | null;
+  phone: string | null;
+  email: string | null;
+  address: string | null;
+  pincode: string | null;
+  updated_at: string;
+};
+
 export type DeviceOrder = {
   id: string;
+  booking_id: string;
   created_at: string;
   user_id: string;
   status: DeviceOrderStatus;

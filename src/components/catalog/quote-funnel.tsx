@@ -6,7 +6,6 @@ import { toast } from "sonner";
 import {
   ArrowLeft,
   ArrowRight,
-  Calendar as CalendarIcon,
   Check,
   CheckCircle2,
   Download,
@@ -27,6 +26,7 @@ import {
   submitDeviceOrder,
 } from "@/lib/quote";
 import { generateInvoicePdf } from "@/lib/invoice";
+import { getMyProfile } from "@/lib/customer-profile";
 import {
   clearQuoteSession,
   getSavedPincode,
@@ -743,6 +743,18 @@ function PickupPhase({
 
   useEffect(() => {
     setPincode(getSavedPincode());
+    getMyProfile()
+      .then((profile) => {
+        if (!profile) return;
+        if (profile.full_name) setCustomerName(profile.full_name);
+        if (profile.phone) setPhone(profile.phone);
+        if (profile.email) setEmail(profile.email);
+        if (profile.address) setAddress(profile.address);
+        if (profile.pincode) setPincode(profile.pincode);
+      })
+      .catch(() => {
+        // ignore — the buyer just types their details in manually
+      });
   }, []);
 
   const today = new Date().toISOString().slice(0, 10);
@@ -819,17 +831,14 @@ function PickupPhase({
           </label>
           <label className="block">
             <span className="text-xs font-semibold text-ink/70">Preferred pickup date</span>
-            <span className="relative mt-1.5 block">
-              <input
-                required
-                type="date"
-                min={today}
-                value={pickupDate}
-                onChange={(e) => setPickupDate(e.target.value)}
-                className="w-full rounded-xl border border-border px-4 py-3 text-sm outline-none focus:border-brand"
-              />
-              <CalendarIcon className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            </span>
+            <input
+              required
+              type="date"
+              min={today}
+              value={pickupDate}
+              onChange={(e) => setPickupDate(e.target.value)}
+              className="mt-1.5 w-full rounded-xl border border-border px-4 py-3 text-sm outline-none focus:border-brand"
+            />
           </label>
         </div>
         <div>
@@ -887,7 +896,11 @@ function PickupPhase({
         </button>
       </div>
       <p className="mt-3 text-center text-xs text-muted-foreground">
-        Free to book · You approve the rate before anything is sold.
+        Free to book · You approve the rate before anything is sold. By booking, you agree to our{" "}
+        <a href="/sell-laptop/terms" target="_blank" className="font-semibold text-brand underline">
+          Buyback Terms &amp; Privacy Policy
+        </a>
+        .
       </p>
     </form>
   );
@@ -898,13 +911,20 @@ function ConfirmationPhase({ order }: { order: DeviceOrder }) {
     <div className="rounded-3xl bg-white p-8 text-center shadow-card ring-1 ring-border">
       <CheckCircle2 className="mx-auto h-14 w-14 text-brand" />
       <h2 className="mt-4 text-2xl font-extrabold text-ink">Pickup requested!</h2>
+      <p className="mx-auto mt-3 inline-block rounded-full bg-secondary px-3 py-1 text-xs font-semibold uppercase tracking-wider text-ink">
+        Booking ID: {order.booking_id}
+      </p>
       <p className="mx-auto mt-3 max-w-sm text-sm text-muted-foreground">
         Our team will call you shortly to confirm your {order.model_name} pickup and final price of{" "}
         {formatInr(order.final_quote)}.
       </p>
       <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
         <button
-          onClick={() => void generateInvoicePdf(order)}
+          onClick={() =>
+            void generateInvoicePdf(order).catch(() =>
+              toast.error("Could not generate the invoice PDF. Please try again."),
+            )
+          }
           className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-semibold text-ink"
         >
           <Download className="h-4 w-4" /> Download invoice

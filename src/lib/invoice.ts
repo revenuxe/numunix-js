@@ -1,88 +1,233 @@
+import { CONTACT } from "@/lib/contact";
 import type { DeviceOrder } from "@/lib/quote-types";
+
+// Renders with jsPDF's own vector text/shape APIs rather than an HTML +
+// html2canvas snapshot. html2canvas can't parse the oklch() color functions
+// this site's Tailwind theme uses on document.body/:root, and throws before
+// ever producing a canvas — that was the root cause of the PDF download
+// silently failing. Drawing directly with jsPDF sidesteps that entirely and
+// also gives crisp (non-rasterized) text and reliable multi-page pagination.
+
+const INK = "#111827";
+const MUTED = "#6b7280";
+const BORDER = "#e5e7eb";
+const BRAND = "#0f6dfb";
 
 function formatInr(value: number): string {
   return `Rs ${Math.round(value).toLocaleString("en-IN")}`;
 }
 
-function buildInvoiceHtml(order: DeviceOrder): string {
-  const rows = order.answers
-    .map((a) => {
-      const sign = a.price_effect_type === "bonus_fixed" ? "+" : "-";
-      const amount =
-        a.price_effect_type === "deduct_percent"
-          ? `${sign}${a.price_effect_amount}%`
-          : `${sign}${formatInr(a.price_effect_amount)}`;
-      return `<tr><td style="padding:6px 0;color:#334155;">${a.group_title}: ${a.option_label}</td><td style="padding:6px 0;text-align:right;color:${a.price_effect_type === "bonus_fixed" ? "#059669" : "#dc2626"};">${amount}</td></tr>`;
-    })
-    .join("");
-
-  const b = order.quote_breakdown;
-
-  return `
-  <div style="width:640px;padding:32px;font-family:Arial,Helvetica,sans-serif;color:#111827;background:#ffffff;">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #111827;padding-bottom:16px;">
-      <div>
-        <p style="margin:0;font-size:20px;font-weight:800;">Numunix</p>
-        <p style="margin:2px 0 0;font-size:12px;color:#6b7280;">Laptop buyback pickup invoice</p>
-      </div>
-      <div style="text-align:right;">
-        <p style="margin:0;font-size:12px;color:#6b7280;">Booking reference</p>
-        <p style="margin:2px 0 0;font-size:14px;font-weight:700;">${order.id}</p>
-      </div>
-    </div>
-
-    <div style="display:flex;justify-content:space-between;margin-top:20px;font-size:13px;">
-      <div>
-        <p style="margin:0;font-weight:700;">${order.customer_name}</p>
-        <p style="margin:4px 0 0;color:#6b7280;">${order.phone}${order.email ? ` &middot; ${order.email}` : ""}</p>
-        <p style="margin:4px 0 0;color:#6b7280;max-width:320px;">${order.address}, ${order.pincode}</p>
-      </div>
-      <div style="text-align:right;color:#6b7280;">
-        <p style="margin:0;">Pickup date: ${order.pickup_date}</p>
-        <p style="margin:4px 0 0;">Time slot: ${order.pickup_slot}</p>
-      </div>
-    </div>
-
-    <div style="margin-top:24px;padding:16px;border-radius:12px;background:#f0fdf4;border:1px solid #bbf7d0;">
-      <p style="margin:0;font-size:12px;color:#065f46;">${order.brand_name} &middot; ${order.series_name}</p>
-      <p style="margin:4px 0 0;font-size:16px;font-weight:700;">${order.model_name}</p>
-      <p style="margin:10px 0 0;font-size:24px;font-weight:800;color:#059669;">${formatInr(order.final_quote)}</p>
-      <p style="margin:4px 0 0;font-size:11px;color:#6b7280;">Final price is confirmed after doorstep inspection.</p>
-    </div>
-
-    <table style="width:100%;margin-top:20px;border-collapse:collapse;font-size:12px;">
-      <tr><td style="padding:6px 0;color:#334155;">Base price</td><td style="padding:6px 0;text-align:right;">${formatInr(b.base_price)}</td></tr>
-      <tr><td style="padding:6px 0;color:#334155;">Configuration effects</td><td style="padding:6px 0;text-align:right;">${formatInr(b.config_amount)}</td></tr>
-      <tr><td style="padding:6px 0;color:#334155;">Age depreciation (${b.age_percent}%)</td><td style="padding:6px 0;text-align:right;">-${formatInr(b.age_amount)}</td></tr>
-      <tr><td style="padding:6px 0;color:#334155;">Condition deductions</td><td style="padding:6px 0;text-align:right;">${formatInr(b.condition_amount)}</td></tr>
-      ${rows}
-      <tr><td style="padding:10px 0 0;font-weight:700;border-top:1px solid #e5e7eb;">Final quote</td><td style="padding:10px 0 0;text-align:right;font-weight:700;border-top:1px solid #e5e7eb;">${formatInr(b.final_quote)}</td></tr>
-    </table>
-
-    <p style="margin-top:24px;font-size:11px;color:#9ca3af;">Free to book. You approve the rate before anything is sold. Generated ${new Date(order.created_at).toLocaleString("en-IN")}.</p>
-  </div>`;
+async function loadLogoAsPngDataUrl(): Promise<{ dataUrl: string; ratio: number } | null> {
+  try {
+    const response = await fetch("/og-image.webp");
+    if (!response.ok) return null;
+    const blob = await response.blob();
+    const bitmap = await createImageBitmap(blob);
+    const canvas = document.createElement("canvas");
+    canvas.width = bitmap.width;
+    canvas.height = bitmap.height;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return null;
+    ctx.drawImage(bitmap, 0, 0);
+    return { dataUrl: canvas.toDataURL("image/png"), ratio: bitmap.width / bitmap.height };
+  } catch {
+    return null;
+  }
 }
 
+const TERMS: string[] = [
+  "The amount quoted here is provisional. The final payout is confirmed only after our pickup agent physically inspects the device and verifies the condition, functioning and accessories declared in this booking.",
+  "The seller confirms they are the rightful owner of this device. Numunix bears no responsibility for any legal dispute, theft claim or ownership issue linked to the device — full responsibility for a stolen, financed or disputed device rests solely with the seller.",
+  "If the original purchase invoice or bill is not available, a valid government-issued photo ID (Aadhaar, PAN, passport or driving licence) must be produced at the time of pickup for verification.",
+  "Please back up and sign out of all personal accounts and factory-reset the device before handover. Numunix is not responsible for any personal data left on a device at the time of pickup.",
+  "Payment is released only after the device passes inspection at pickup and the seller confirms the final revised quote, if any.",
+  "This booking can be rescheduled or cancelled any time before pickup at no cost.",
+];
+
 export async function generateInvoicePdf(order: DeviceOrder): Promise<void> {
-  const [{ default: jsPDF }, { default: html2canvas }] = await Promise.all([
-    import("jspdf"),
-    import("html2canvas"),
-  ]);
+  const { default: jsPDF } = await import("jspdf");
+  const logo = await loadLogoAsPngDataUrl();
 
-  const container = document.createElement("div");
-  container.style.position = "fixed";
-  container.style.left = "-9999px";
-  container.style.top = "0";
-  container.innerHTML = buildInvoiceHtml(order);
-  document.body.appendChild(container);
+  const pdf = new jsPDF({ unit: "pt", format: "a4" });
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
+  const marginX = 48;
+  const contentWidth = pageWidth - marginX * 2;
+  let y = 56;
 
-  try {
-    const canvas = await html2canvas(container.firstElementChild as HTMLElement, { scale: 2 });
-    const imageData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF({ unit: "px", format: [canvas.width, canvas.height] });
-    pdf.addImage(imageData, "PNG", 0, 0, canvas.width, canvas.height);
-    pdf.save(`numunix-pickup-${order.id.slice(0, 8)}.pdf`);
-  } finally {
-    document.body.removeChild(container);
+  function ensureSpace(needed: number) {
+    if (y + needed > pageHeight - 56) {
+      pdf.addPage();
+      y = 56;
+    }
   }
+
+  function text(
+    value: string,
+    x: number,
+    options: {
+      size?: number;
+      color?: string;
+      bold?: boolean;
+      align?: "left" | "right" | "center";
+      maxWidth?: number;
+    } = {},
+  ) {
+    pdf.setFontSize(options.size ?? 10);
+    pdf.setFont("helvetica", options.bold ? "bold" : "normal");
+    pdf.setTextColor(options.color ?? INK);
+    pdf.text(value, x, y, { align: options.align, maxWidth: options.maxWidth });
+  }
+
+  function wrapped(value: string, x: number, size: number, color: string, maxWidth: number) {
+    pdf.setFontSize(size);
+    pdf.setFont("helvetica", "normal");
+    pdf.setTextColor(color);
+    const lines = pdf.splitTextToSize(value, maxWidth) as string[];
+    ensureSpace(lines.length * (size + 4));
+    pdf.text(lines, x, y);
+    y += lines.length * (size + 4);
+  }
+
+  function rule(color = BORDER) {
+    pdf.setDrawColor(color);
+    pdf.setLineWidth(1);
+    pdf.line(marginX, y, pageWidth - marginX, y);
+  }
+
+  // Header
+  if (logo) {
+    const logoHeight = 34;
+    const logoWidth = logoHeight * logo.ratio;
+    pdf.addImage(logo.dataUrl, "PNG", marginX, y - 24, logoWidth, logoHeight);
+  } else {
+    text("NUMUNIX", marginX, { size: 18, bold: true, color: BRAND });
+  }
+  text("Booking ID", pageWidth - marginX, { size: 9, color: MUTED, align: "right" });
+  y += 14;
+  text(order.booking_id, pageWidth - marginX, { size: 13, bold: true, align: "right" });
+  y += 18;
+  text("Laptop buyback — pickup booking invoice", marginX, { size: 10, color: MUTED });
+  y += 14;
+  rule(INK);
+  y += 22;
+
+  // Customer + pickup
+  text(order.customer_name, marginX, { size: 12, bold: true });
+  text(`Pickup date: ${order.pickup_date}`, pageWidth - marginX, {
+    size: 10,
+    color: MUTED,
+    align: "right",
+  });
+  y += 15;
+  text(`${order.phone}${order.email ? `  ·  ${order.email}` : ""}`, marginX, {
+    size: 10,
+    color: MUTED,
+  });
+  text(`Time slot: ${order.pickup_slot}`, pageWidth - marginX, {
+    size: 10,
+    color: MUTED,
+    align: "right",
+  });
+  y += 16;
+  wrapped(`${order.address}, ${order.pincode}`, marginX, 10, MUTED, contentWidth - 160);
+  y += 10;
+
+  // Device + price box
+  ensureSpace(90);
+  pdf.setFillColor("#eff6ff");
+  pdf.setDrawColor("#bfdbfe");
+  pdf.roundedRect(marginX, y, contentWidth, 80, 10, 10, "FD");
+  y += 22;
+  text(`${order.brand_name} · ${order.series_name}`, marginX + 16, { size: 9, color: BRAND });
+  y += 16;
+  text(order.model_name, marginX + 16, { size: 13, bold: true });
+  y += 22;
+  text(formatInr(order.final_quote), marginX + 16, { size: 20, bold: true, color: BRAND });
+  text("Confirmed after doorstep inspection", pageWidth - marginX - 16, {
+    size: 8.5,
+    color: MUTED,
+    align: "right",
+  });
+  y += 30;
+
+  // Price breakdown
+  const b = order.quote_breakdown;
+  const rows: [string, string][] = [
+    ["Base price", formatInr(b.base_price)],
+    ["Configuration effects", formatInr(b.config_amount)],
+    [`Age depreciation (${b.age_percent}%)`, `-${formatInr(b.age_amount)}`],
+    ["Condition deductions", formatInr(b.condition_amount)],
+  ];
+  ensureSpace(rows.length * 18 + 40);
+  text("Price breakdown", marginX, { size: 10.5, bold: true });
+  y += 14;
+  for (const [label, value] of rows) {
+    text(label, marginX, { size: 9.5, color: MUTED });
+    text(value, pageWidth - marginX, { size: 9.5, align: "right" });
+    y += 16;
+  }
+  for (const answer of order.answers) {
+    const sign = answer.price_effect_type === "bonus_fixed" ? "+" : "-";
+    const amount =
+      answer.price_effect_type === "deduct_percent"
+        ? `${sign}${answer.price_effect_amount}%`
+        : `${sign}${formatInr(answer.price_effect_amount)}`;
+    ensureSpace(16);
+    text(`${answer.group_title}: ${answer.option_label}`, marginX, {
+      size: 9,
+      color: MUTED,
+      maxWidth: contentWidth - 100,
+    });
+    text(amount, pageWidth - marginX, { size: 9, align: "right" });
+    y += 15;
+  }
+  y += 4;
+  rule();
+  y += 16;
+  text("Final quote", marginX, { size: 11, bold: true });
+  text(formatInr(b.final_quote), pageWidth - marginX, { size: 11, bold: true, align: "right" });
+  y += 30;
+
+  // Terms & conditions
+  ensureSpace(40);
+  text("Booking terms & conditions", marginX, { size: 11, bold: true });
+  y += 16;
+  for (const term of TERMS) {
+    ensureSpace(20);
+    const bulletLines = pdf.splitTextToSize(term, contentWidth - 14) as string[];
+    pdf.setFontSize(9);
+    pdf.setFont("helvetica", "normal");
+    pdf.setTextColor(MUTED);
+    pdf.text("•", marginX, y);
+    pdf.text(bulletLines, marginX + 14, y);
+    y += bulletLines.length * 13 + 6;
+  }
+  y += 6;
+
+  // Disclaimer callout
+  ensureSpace(60);
+  const disclaimer =
+    "This is just a booking invoice, not a real pickup/sale invoice. It will not be considered as proof of sale or ownership transfer — it is provided for reference only.";
+  const disclaimerLines = pdf.splitTextToSize(disclaimer, contentWidth - 24) as string[];
+  const boxHeight = disclaimerLines.length * 13 + 22;
+  pdf.setFillColor("#fef3c7");
+  pdf.setDrawColor("#fde68a");
+  pdf.roundedRect(marginX, y, contentWidth, boxHeight, 8, 8, "FD");
+  y += 16;
+  pdf.setFontSize(9);
+  pdf.setFont("helvetica", "bold");
+  pdf.setTextColor("#92400e");
+  pdf.text(disclaimerLines, marginX + 12, y);
+  y += disclaimerLines.length * 13 + 16;
+
+  // Footer
+  ensureSpace(24);
+  text(
+    `Generated ${new Date(order.created_at).toLocaleString("en-IN")} · ${CONTACT.phoneDisplay} · ${CONTACT.email}`,
+    marginX,
+    { size: 8, color: MUTED },
+  );
+
+  pdf.save(`numunix-booking-${order.booking_id}.pdf`);
 }

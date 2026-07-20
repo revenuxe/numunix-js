@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabase";
+import { saveMyProfile } from "@/lib/customer-profile";
 import type {
   AnswerRecord,
   ConditionGroup,
@@ -145,6 +146,22 @@ export async function submitDeviceOrder(input: SubmitDeviceOrderInput): Promise<
     .single();
 
   if (error) throw error;
+
+  // Best-effort: remember this customer's details so their next booking (same
+  // or different laptop) can be prefilled without asking again. Never blocks
+  // the order itself if it fails.
+  try {
+    await saveMyProfile({
+      full_name: input.customerName,
+      phone: input.phone,
+      email: input.email,
+      address: input.address,
+      pincode: input.pincode,
+    });
+  } catch {
+    // ignore — the order already succeeded, profile save is a convenience
+  }
+
   return data as DeviceOrder;
 }
 

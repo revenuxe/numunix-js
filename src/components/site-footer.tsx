@@ -34,6 +34,7 @@ const FOOTER_COLUMNS: { title: string; links: { label: string; href: string }[] 
     links: [
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms & Conditions", href: "/terms" },
+      { label: "Laptop Buyback Terms", href: "/sell-laptop/terms" },
     ],
   },
 ];
