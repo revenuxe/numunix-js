@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WhyUsRouteImport } from './routes/why-us'
 import { Route as ThankYouRouteImport } from './routes/thank-you'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as SellLaptopRouteImport } from './routes/sell-laptop'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
@@ -33,6 +34,11 @@ const ThankYouRoute = ThankYouRouteImport.update({
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SellLaptopRoute = SellLaptopRouteImport.update({
+  id: '/sell-laptop',
+  path: '/sell-laptop',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -76,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
+  '/sell-laptop': typeof SellLaptopRoute
   '/terms': typeof TermsRoute
   '/thank-you': typeof ThankYouRoute
   '/why-us': typeof WhyUsRoute
@@ -88,6 +95,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
+  '/sell-laptop': typeof SellLaptopRoute
   '/terms': typeof TermsRoute
   '/thank-you': typeof ThankYouRoute
   '/why-us': typeof WhyUsRoute
@@ -101,6 +109,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
+  '/sell-laptop': typeof SellLaptopRoute
   '/terms': typeof TermsRoute
   '/thank-you': typeof ThankYouRoute
   '/why-us': typeof WhyUsRoute
@@ -115,6 +124,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/privacy'
+    | '/sell-laptop'
     | '/terms'
     | '/thank-you'
     | '/why-us'
@@ -127,6 +137,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/privacy'
+    | '/sell-laptop'
     | '/terms'
     | '/thank-you'
     | '/why-us'
@@ -139,6 +150,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/privacy'
+    | '/sell-laptop'
     | '/terms'
     | '/thank-you'
     | '/why-us'
@@ -152,6 +164,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   PrivacyRoute: typeof PrivacyRoute
+  SellLaptopRoute: typeof SellLaptopRoute
   TermsRoute: typeof TermsRoute
   ThankYouRoute: typeof ThankYouRoute
   WhyUsRoute: typeof WhyUsRoute
@@ -181,6 +194,13 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sell-laptop': {
+      id: '/sell-laptop'
+      path: '/sell-laptop'
+      fullPath: '/sell-laptop'
+      preLoaderRoute: typeof SellLaptopRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -240,6 +260,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   PrivacyRoute: PrivacyRoute,
+  SellLaptopRoute: SellLaptopRoute,
   TermsRoute: TermsRoute,
   ThankYouRoute: ThankYouRoute,
   WhyUsRoute: WhyUsRoute,

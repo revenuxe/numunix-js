@@ -21,6 +21,7 @@ export function LogoMark({ className = "h-9 w-auto" }: { className?: string }) {
 
 const NAV_LINKS: { label: string; to: string }[] = [
   { label: "Home", to: "/" },
+  { label: "Sell Laptop", to: "/sell-laptop" },
   { label: "About", to: "/about" },
   { label: "Why Us", to: "/why-us" },
   { label: "Contact", to: "/contact" },
