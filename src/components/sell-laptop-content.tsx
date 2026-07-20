@@ -21,7 +21,12 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { SELL_LAPTOP_FAQS } from "@/lib/faq-data";
-import { BANGALORE_AREAS, type BangaloreArea } from "@/lib/bangalore-areas";
+import {
+  BANGALORE_AREAS,
+  buildAreaCopy,
+  getNearbyAreas,
+  type BangaloreArea,
+} from "@/lib/bangalore-areas";
 import { setSavedPincode } from "@/lib/session-quote";
 import type { Brand } from "@/lib/quote-types";
 
@@ -67,7 +72,12 @@ export function SellLaptopContent({ brands, area }: { brands: Brand[]; area?: Ba
     () => brands.filter((b) => b.name.toLowerCase().includes(query.toLowerCase())),
     [brands, query],
   );
-  const nearbyAreas = useMemo(() => BANGALORE_AREAS.filter((a) => a.slug !== area?.slug), [area]);
+  const nearbyAreas = useMemo(() => (area ? getNearbyAreas(area) : BANGALORE_AREAS), [area]);
+  const areaCopy = useMemo(() => (area ? buildAreaCopy(area) : null), [area]);
+  const faqs = useMemo(
+    () => (areaCopy ? [...areaCopy.faqs, ...SELL_LAPTOP_FAQS] : SELL_LAPTOP_FAQS),
+    [areaCopy],
+  );
 
   function onPincodeSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -156,6 +166,37 @@ export function SellLaptopContent({ brands, area }: { brands: Brand[]; area?: Ba
         </div>
       </section>
 
+      {areaCopy && area && (
+        <section className="px-4 py-16 md:px-8 md:py-20">
+          <div className="mx-auto max-w-4xl">
+            <p className="text-xs font-extrabold tracking-[.16em] text-brand">
+              LAPTOP BUYBACK IN {area.name.toUpperCase()}
+            </p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Sell your laptop in {area.name}, Bangalore
+            </h2>
+            <div className="mt-6 space-y-4 text-muted-foreground">
+              {areaCopy.intro.map((paragraph, i) => (
+                <p key={i} className="leading-7">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              {areaCopy.whyBullets.map((bullet) => (
+                <div
+                  key={bullet}
+                  className="flex items-start gap-3 rounded-2xl border border-border bg-white p-4 text-sm"
+                >
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                  <span>{bullet}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       <section id="brands" className="scroll-mt-20 px-4 py-16 md:px-8 md:py-24">
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
@@ -214,11 +255,12 @@ export function SellLaptopContent({ brands, area }: { brands: Brand[]; area?: Ba
         <div className="mx-auto max-w-6xl">
           <p className="text-xs font-extrabold tracking-[.16em] text-brand">SELL LAPTOP NEAR YOU</p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-            Sell used laptops across Bangalore
+            {area ? `Areas near ${area.name} we also cover` : "Sell used laptops across Bangalore"}
           </h2>
           <p className="mt-3 max-w-2xl text-muted-foreground">
-            Free doorstep laptop pickup in every major Bangalore locality. Tap your area for a
-            dedicated local page and instant quote.
+            {area
+              ? `Free doorstep laptop pickup in ${area.name} and every neighbouring locality. Tap an area for its dedicated local page and instant quote.`
+              : "Free doorstep laptop pickup in every major Bangalore locality. Tap your area for a dedicated local page and instant quote."}
           </p>
           <div className="mt-8 flex gap-3 overflow-x-auto pb-3">
             {nearbyAreas.map((a) => (
@@ -288,7 +330,7 @@ export function SellLaptopContent({ brands, area }: { brands: Brand[]; area?: Ba
             Frequently asked questions
           </h2>
           <div className="mt-9 space-y-3">
-            {SELL_LAPTOP_FAQS.map(([q, a], i) => (
+            {faqs.map(([q, a], i) => (
               <article key={q} className="rounded-2xl bg-white p-5 shadow-soft">
                 <button
                   onClick={() => setOpen(i)}
