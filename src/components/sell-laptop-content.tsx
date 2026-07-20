@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   Check,
@@ -20,36 +21,15 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { SELL_LAPTOP_FAQS } from "@/lib/faq-data";
-import { slugify } from "@/lib/slug";
+import { BANGALORE_AREAS, type BangaloreArea } from "@/lib/bangalore-areas";
 import { setSavedPincode } from "@/lib/session-quote";
+import type { Brand } from "@/lib/quote-types";
 
 const whatsapp =
   "https://wa.me/919886285028?text=" +
   encodeURIComponent(
     "Hi Numunix, I want to sell my used laptop in Bangalore. Please help me get a quote.",
   );
-const brands = [
-  "Apple",
-  "Dell",
-  "HP",
-  "Lenovo",
-  "Asus",
-  "Acer",
-  "Microsoft",
-  "MSI",
-  "Samsung",
-  "LG",
-];
-const areas = [
-  "Whitefield",
-  "HSR Layout",
-  "Indiranagar",
-  "Koramangala",
-  "Electronic City",
-  "Jayanagar",
-  "Marathahalli",
-  "JP Nagar",
-];
 const steps: [string, string, typeof Laptop][] = [
   [
     "Get an instant quote",
@@ -78,15 +58,16 @@ const benefits: [string, string, typeof Laptop][] = [
   ["Instant payment", "Money in your account the moment we verify your device.", Wallet],
 ];
 
-export function SellLaptopContent() {
+export function SellLaptopContent({ brands, area }: { brands: Brand[]; area?: BangaloreArea }) {
   const [pin, setPin] = useState("");
   const [status, setStatus] = useState<"available" | "unavailable" | null>(null);
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(0);
   const filtered = useMemo(
-    () => brands.filter((x) => x.toLowerCase().includes(query.toLowerCase())),
-    [query],
+    () => brands.filter((b) => b.name.toLowerCase().includes(query.toLowerCase())),
+    [brands, query],
   );
+  const nearbyAreas = useMemo(() => BANGALORE_AREAS.filter((a) => a.slug !== area?.slug), [area]);
 
   function onPincodeSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -108,7 +89,7 @@ export function SellLaptopContent() {
             <span className="bg-gradient-to-r from-brand to-emerald-300 bg-clip-text text-transparent">
               laptop
             </span>{" "}
-            in Bangalore
+            in {area?.name ?? "Bangalore"}
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/75 md:text-lg">
             Get the best price for your used laptop in minutes. Free doorstep pickup across
@@ -196,20 +177,36 @@ export function SellLaptopContent() {
               />
             </label>
           </div>
-          <div className="mt-9 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-            {filtered.map((b) => (
-              <Link
-                key={b}
-                href={`/sell/laptops/${slugify(b)}`}
-                className="flex min-h-28 flex-col items-center justify-center rounded-2xl border border-border bg-white p-4 shadow-soft transition duration-200 hover:-translate-y-1 hover:border-brand"
-              >
-                <span className="grid h-10 w-10 place-items-center rounded-xl bg-secondary text-lg font-extrabold text-brand">
-                  {b[0]}
-                </span>
-                <span className="mt-3 text-sm font-bold">{b}</span>
-              </Link>
-            ))}
-          </div>
+          {brands.length === 0 ? (
+            <p className="mt-9 rounded-2xl bg-secondary/40 p-6 text-center text-sm text-muted-foreground">
+              Brands are being added soon. Message us on WhatsApp to sell your laptop right away.
+            </p>
+          ) : (
+            <div className="mt-9 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+              {filtered.map((b) => (
+                <Link
+                  key={b.id}
+                  href={`/sell/laptops/${b.slug}`}
+                  className="flex min-h-28 flex-col items-center justify-center rounded-2xl border border-border bg-white p-4 shadow-soft transition duration-200 hover:-translate-y-1 hover:border-brand"
+                >
+                  {b.logo ? (
+                    <Image
+                      src={b.logo}
+                      alt={b.name}
+                      width={40}
+                      height={40}
+                      className="h-10 w-10 rounded-xl object-contain"
+                    />
+                  ) : (
+                    <span className="grid h-10 w-10 place-items-center rounded-xl bg-secondary text-lg font-extrabold text-brand">
+                      {b.name[0]}
+                    </span>
+                  )}
+                  <span className="mt-3 text-sm font-bold">{b.name}</span>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -224,17 +221,17 @@ export function SellLaptopContent() {
             dedicated local page and instant quote.
           </p>
           <div className="mt-8 flex gap-3 overflow-x-auto pb-3">
-            {areas.map((a) => (
-              <a
-                href="#brands"
-                key={a}
+            {nearbyAreas.map((a) => (
+              <Link
+                href={`/sell-laptop/${a.slug}`}
+                key={a.slug}
                 className="flex min-w-28 flex-col items-center gap-3 rounded-2xl bg-white p-4 text-center text-sm font-semibold shadow-soft transition hover:-translate-y-1 hover:text-brand"
               >
                 <span className="grid h-11 w-11 place-items-center rounded-full bg-emerald-50 text-brand">
                   <MapPin className="h-5 w-5" />
                 </span>
-                {a}
-              </a>
+                {a.name}
+              </Link>
             ))}
           </div>
         </div>
@@ -309,27 +306,29 @@ export function SellLaptopContent() {
         </div>
       </section>
 
-      <section className="border-t border-border px-4 py-16 md:px-8">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="text-3xl font-extrabold tracking-tight">
-            Sell used laptop by brand in Bangalore
-          </h2>
-          <p className="mt-3 text-muted-foreground">
-            Explore detailed guides and instant prices for every laptop brand we buy in Bengaluru.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
-            {brands.slice(0, 6).map((b) => (
-              <Link
-                href={`/sell/laptops/${slugify(b)}`}
-                key={b}
-                className="text-sm font-semibold underline-offset-4 hover:text-brand hover:underline"
-              >
-                Sell used {b} laptop
-              </Link>
-            ))}
+      {brands.length > 0 && (
+        <section className="border-t border-border px-4 py-16 md:px-8">
+          <div className="mx-auto max-w-6xl">
+            <h2 className="text-3xl font-extrabold tracking-tight">
+              Sell used laptop by brand in Bangalore
+            </h2>
+            <p className="mt-3 text-muted-foreground">
+              Explore detailed guides and instant prices for every laptop brand we buy in Bengaluru.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
+              {brands.slice(0, 6).map((b) => (
+                <Link
+                  href={`/sell/laptops/${b.slug}`}
+                  key={b.id}
+                  className="text-sm font-semibold underline-offset-4 hover:text-brand hover:underline"
+                >
+                  Sell used {b.name} laptop
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <section className="px-4 py-16 md:px-8 md:py-24">
         <div className="mx-auto max-w-6xl rounded-3xl bg-[radial-gradient(circle_at_20%_20%,rgba(30,201,150,.2),transparent_24%),linear-gradient(135deg,#12203b,#0e2d34)] px-6 py-14 text-center text-white shadow-card">

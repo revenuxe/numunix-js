@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { SellLaptopContent } from "@/components/sell-laptop-content";
 import { SELL_LAPTOP_FAQS } from "@/lib/faq-data";
+import { getActiveBrands, getLaptopCategory } from "@/lib/catalog";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: { absolute: "Sell Old Laptop in Bangalore - Instant Cash | Numunix" },
@@ -23,10 +26,13 @@ const faqJsonLd = {
   })),
 };
 
-export default function SellLaptopPage() {
+export default async function SellLaptopPage() {
+  const category = await getLaptopCategory();
+  const brands = category ? await getActiveBrands(category.id) : [];
+
   return (
     <>
-      <SellLaptopContent />
+      <SellLaptopContent brands={brands} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
