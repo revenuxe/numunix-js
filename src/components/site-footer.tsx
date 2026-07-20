@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Facebook, Instagram, Youtube, Twitter, Mail, Phone } from "lucide-react";
 import { LogoMark } from "@/components/logo-mark";
 import { CONTACT } from "@/lib/contact";
+import { SELL_LAPTOP_BRANDS } from "@/lib/sell-laptop-brands";
 
 const FOOTER_COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
@@ -22,6 +23,13 @@ const FOOTER_COLUMNS: { title: string; links: { label: string; href: string }[] 
     ],
   },
   {
+    title: "Sell Your Laptop",
+    links: SELL_LAPTOP_BRANDS.map((b) => ({
+      label: b.footerLabel,
+      href: `/sell-laptop/brand/${b.slug}`,
+    })),
+  },
+  {
     title: "Legal",
     links: [
       { label: "Privacy Policy", href: "/privacy" },
@@ -33,7 +41,7 @@ const FOOTER_COLUMNS: { title: string; links: { label: string; href: string }[] 
 export function SiteFooter() {
   return (
     <footer className="relative overflow-hidden bg-white px-4 pt-20 pb-8 md:px-8">
-      <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr]">
+      <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-3 lg:grid-cols-[1.2fr_1fr_1fr_1fr_1fr]">
         <div>
           <LogoMark className="h-10 w-auto" />
           <p className="mt-4 max-w-xs text-sm text-muted-foreground">

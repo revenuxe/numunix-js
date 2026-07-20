@@ -20,6 +20,18 @@ const DEVICE_ASSETS_BUCKET = "device-assets";
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
 const ALLOWED_IMAGE_TYPES = ["image/png", "image/jpeg", "image/webp", "image/svg+xml"];
 
+// Every catalog write calls this so the public site's cached reads
+// (unstable_cache, tagged "catalog") refresh immediately instead of waiting
+// out their revalidate window. Best-effort: a failed revalidate never blocks
+// the admin action, the cache just self-heals on its normal TTL instead.
+async function revalidateCatalog() {
+  try {
+    await fetch("/api/revalidate", { method: "POST" });
+  } catch {
+    // ignore — TTL-based revalidation is the fallback
+  }
+}
+
 // Plain (uncached) read for client components. `@/lib/catalog` wraps its
 // reads in `unstable_cache`, which is a server-only API — calling it from a
 // 'use client' component throws "incrementalCache missing in unstable_cache"
@@ -65,6 +77,7 @@ async function swapSortOrder(
     .update({ sort_order: a.sort_order })
     .eq("id", b.id);
   if (e2) throw e2;
+  await revalidateCatalog();
 }
 
 // ---------- Brands ----------
@@ -92,16 +105,19 @@ export async function createBrand(categoryId: string, input: BrandInput, sortOrd
     .from("device_brands")
     .insert({ category_id: categoryId, ...input, sort_order: sortOrder });
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 export async function updateBrand(id: string, input: BrandInput) {
   const { error } = await supabase.from("device_brands").update(input).eq("id", id);
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 export async function deleteBrand(id: string) {
   const { error } = await supabase.from("device_brands").delete().eq("id", id);
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 export async function reorderBrand(a: Brand, b: Brand) {
@@ -127,16 +143,19 @@ export async function createSeries(brandId: string, input: SeriesInput, sortOrde
     .from("device_series")
     .insert({ brand_id: brandId, ...input, sort_order: sortOrder });
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 export async function updateSeries(id: string, input: SeriesInput) {
   const { error } = await supabase.from("device_series").update(input).eq("id", id);
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 export async function deleteSeries(id: string) {
   const { error } = await supabase.from("device_series").delete().eq("id", id);
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 export async function reorderSeries(a: Series, b: Series) {
@@ -169,16 +188,19 @@ export async function createModel(seriesId: string, input: ModelInput, sortOrder
     .from("device_models")
     .insert({ series_id: seriesId, ...input, sort_order: sortOrder });
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 export async function updateModel(id: string, input: ModelInput) {
   const { error } = await supabase.from("device_models").update(input).eq("id", id);
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 export async function deleteModel(id: string) {
   const { error } = await supabase.from("device_models").delete().eq("id", id);
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 // ---------- Configuration groups & options ----------
@@ -211,16 +233,19 @@ export async function createConfigGroup(categoryId: string, input: ConfigGroupIn
     .from("configuration_groups")
     .insert({ category_id: categoryId, ...input });
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 export async function updateConfigGroup(id: string, input: ConfigGroupInput) {
   const { error } = await supabase.from("configuration_groups").update(input).eq("id", id);
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 export async function deleteConfigGroup(id: string) {
   const { error } = await supabase.from("configuration_groups").delete().eq("id", id);
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 export type ConfigOptionInput = {
@@ -237,16 +262,19 @@ export async function createConfigOption(groupId: string, input: ConfigOptionInp
     .from("configuration_options")
     .insert({ group_id: groupId, ...input });
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 export async function updateConfigOption(id: string, input: ConfigOptionInput) {
   const { error } = await supabase.from("configuration_options").update(input).eq("id", id);
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 export async function deleteConfigOption(id: string) {
   const { error } = await supabase.from("configuration_options").delete().eq("id", id);
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 // ---------- Condition groups & options ----------
@@ -277,16 +305,19 @@ export async function createConditionGroup(categoryId: string, input: ConditionG
     .from("condition_groups")
     .insert({ category_id: categoryId, ...input });
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 export async function updateConditionGroup(id: string, input: ConditionGroupInput) {
   const { error } = await supabase.from("condition_groups").update(input).eq("id", id);
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 export async function deleteConditionGroup(id: string) {
   const { error } = await supabase.from("condition_groups").delete().eq("id", id);
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 export type ConditionOptionInput = {
@@ -302,16 +333,19 @@ export async function createConditionOption(groupId: string, input: ConditionOpt
     .from("condition_options")
     .insert({ group_id: groupId, ...input });
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 export async function updateConditionOption(id: string, input: ConditionOptionInput) {
   const { error } = await supabase.from("condition_options").update(input).eq("id", id);
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 export async function deleteConditionOption(id: string) {
   const { error } = await supabase.from("condition_options").delete().eq("id", id);
   if (error) throw error;
+  await revalidateCatalog();
 }
 
 // ---------- Orders ----------

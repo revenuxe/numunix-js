@@ -52,7 +52,7 @@ export function ModelGrid({
             <Link
               key={m.id}
               href={`/sell/laptops/${brandSlug}/${seriesSlug}/${m.slug}`}
-              className="group rounded-2xl border border-border bg-white p-4 shadow-soft transition duration-200 hover:-translate-y-1 hover:border-emerald-400"
+              className="group rounded-2xl border border-border bg-white p-4 shadow-soft transition duration-200 hover:-translate-y-1 hover:border-brand"
             >
               <div className="grid aspect-square place-items-center overflow-hidden rounded-xl bg-secondary/60">
                 {m.image ? (

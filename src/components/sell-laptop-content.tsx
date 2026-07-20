@@ -27,6 +27,7 @@ import {
   getNearbyAreas,
   type BangaloreArea,
 } from "@/lib/bangalore-areas";
+import { buildBrandCopy, heroProductName, type SellLaptopBrand } from "@/lib/sell-laptop-brands";
 import { setSavedPincode } from "@/lib/session-quote";
 import type { Brand } from "@/lib/quote-types";
 
@@ -63,7 +64,15 @@ const benefits: [string, string, typeof Laptop][] = [
   ["Instant payment", "Money in your account the moment we verify your device.", Wallet],
 ];
 
-export function SellLaptopContent({ brands, area }: { brands: Brand[]; area?: BangaloreArea }) {
+export function SellLaptopContent({
+  brands,
+  area,
+  brandSeo,
+}: {
+  brands: Brand[];
+  area?: BangaloreArea;
+  brandSeo?: SellLaptopBrand;
+}) {
   const [pin, setPin] = useState("");
   const [status, setStatus] = useState<"available" | "unavailable" | null>(null);
   const [query, setQuery] = useState("");
@@ -74,10 +83,11 @@ export function SellLaptopContent({ brands, area }: { brands: Brand[]; area?: Ba
   );
   const nearbyAreas = useMemo(() => (area ? getNearbyAreas(area) : BANGALORE_AREAS), [area]);
   const areaCopy = useMemo(() => (area ? buildAreaCopy(area) : null), [area]);
-  const faqs = useMemo(
-    () => (areaCopy ? [...areaCopy.faqs, ...SELL_LAPTOP_FAQS] : SELL_LAPTOP_FAQS),
-    [areaCopy],
-  );
+  const brandCopy = useMemo(() => (brandSeo ? buildBrandCopy(brandSeo) : null), [brandSeo]);
+  const faqs = useMemo(() => {
+    const extra = areaCopy?.faqs ?? brandCopy?.faqs ?? [];
+    return [...extra, ...SELL_LAPTOP_FAQS];
+  }, [areaCopy, brandCopy]);
 
   function onPincodeSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -88,18 +98,30 @@ export function SellLaptopContent({ brands, area }: { brands: Brand[]; area?: Ba
 
   return (
     <main className="bg-white text-ink">
-      <SiteNav />
+      <SiteNav variant="dark" />
 
-      <section className="relative isolate overflow-hidden bg-[linear-gradient(135deg,#111a34_0%,#182847_55%,#0c172d_100%)] px-4 py-16 text-white md:px-8 md:py-24">
+      <section className="relative isolate overflow-hidden bg-[linear-gradient(135deg,#111a34_0%,#182847_55%,#0c172d_100%)] px-4 pt-28 pb-16 text-white md:px-8 md:pb-24 md:pt-36">
         <div className="absolute -right-28 -top-20 h-80 w-80 rounded-full bg-brand/35 blur-3xl" />
-        <div className="absolute -bottom-40 -left-24 h-72 w-72 rounded-full bg-emerald-400/20 blur-3xl" />
+        <div className="absolute -bottom-40 -left-24 h-72 w-72 rounded-full bg-brand/20 blur-3xl" />
         <div className="relative mx-auto max-w-3xl text-center">
-          <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl md:text-6xl">
-            Sell your old{" "}
-            <span className="bg-gradient-to-r from-brand to-emerald-300 bg-clip-text text-transparent">
-              laptop
-            </span>{" "}
-            in {area?.name ?? "Bangalore"}
+          <h1 className="mt-2 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl md:mt-3 md:text-6xl">
+            {brandSeo ? (
+              <>
+                Sell Used{" "}
+                <span className="bg-gradient-to-r from-brand to-brand/50 bg-clip-text text-transparent">
+                  {heroProductName(brandSeo)}
+                </span>{" "}
+                in Bangalore
+              </>
+            ) : (
+              <>
+                Sell your old{" "}
+                <span className="bg-gradient-to-r from-brand to-brand/50 bg-clip-text text-transparent">
+                  laptop
+                </span>{" "}
+                in {area?.name ?? "Bangalore"}
+              </>
+            )}
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/75 md:text-lg">
             Get the best price for your used laptop in minutes. Free doorstep pickup across
@@ -138,7 +160,7 @@ export function SellLaptopContent({ brands, area }: { brands: Brand[]; area?: Ba
             </div>
             {status && (
               <p
-                className={`mt-3 flex items-center gap-2 text-sm ${status === "available" ? "text-emerald-300" : "text-amber-300"}`}
+                className={`mt-3 flex items-center gap-2 text-sm font-medium ${status === "available" ? "text-brand" : "text-amber-300"}`}
               >
                 {status === "available" ? (
                   <Check className="h-4 w-4" />
@@ -165,37 +187,6 @@ export function SellLaptopContent({ brands, area }: { brands: Brand[]; area?: Ba
           </form>
         </div>
       </section>
-
-      {areaCopy && area && (
-        <section className="px-4 py-16 md:px-8 md:py-20">
-          <div className="mx-auto max-w-4xl">
-            <p className="text-xs font-extrabold tracking-[.16em] text-brand">
-              LAPTOP BUYBACK IN {area.name.toUpperCase()}
-            </p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Sell your laptop in {area.name}, Bangalore
-            </h2>
-            <div className="mt-6 space-y-4 text-muted-foreground">
-              {areaCopy.intro.map((paragraph, i) => (
-                <p key={i} className="leading-7">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-            <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              {areaCopy.whyBullets.map((bullet) => (
-                <div
-                  key={bullet}
-                  className="flex items-start gap-3 rounded-2xl border border-border bg-white p-4 text-sm"
-                >
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                  <span>{bullet}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       <section id="brands" className="scroll-mt-20 px-4 py-16 md:px-8 md:py-24">
         <div className="mx-auto max-w-6xl">
@@ -251,7 +242,42 @@ export function SellLaptopContent({ brands, area }: { brands: Brand[]; area?: Ba
         </div>
       </section>
 
-      <section className="bg-emerald-50/55 px-4 py-16 md:px-8 md:py-24">
+      {(areaCopy || brandCopy) && (
+        <section className="px-4 py-16 md:px-8 md:py-20">
+          <div className="mx-auto max-w-4xl">
+            <p className="text-xs font-extrabold tracking-[.16em] text-brand">
+              {area
+                ? `LAPTOP BUYBACK IN ${area.name.toUpperCase()}`
+                : `SELL ${brandSeo?.name.toUpperCase()} LAPTOPS`}
+            </p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
+              {area
+                ? `Sell your laptop in ${area.name}, Bangalore`
+                : `Sell your used ${heroProductName(brandSeo!)} in Bangalore`}
+            </h2>
+            <div className="mt-6 space-y-4 text-muted-foreground">
+              {(areaCopy ?? brandCopy)!.intro.map((paragraph, i) => (
+                <p key={i} className="leading-7">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              {(areaCopy ?? brandCopy)!.whyBullets.map((bullet) => (
+                <div
+                  key={bullet}
+                  className="flex items-start gap-3 rounded-2xl border border-border bg-white p-4 text-sm"
+                >
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                  <span>{bullet}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <section className="bg-brand/5 px-4 py-16 md:px-8 md:py-24">
         <div className="mx-auto max-w-6xl">
           <p className="text-xs font-extrabold tracking-[.16em] text-brand">SELL LAPTOP NEAR YOU</p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">

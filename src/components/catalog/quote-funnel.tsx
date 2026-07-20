@@ -16,12 +16,6 @@ import {
   Truck,
   Zap,
 } from "lucide-react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { supabase } from "@/lib/supabase";
 import { CONTACT } from "@/lib/contact";
@@ -301,9 +295,10 @@ export function QuoteFunnel({
 
       {phase === "configuration" && visibleConfigGroups[configIndex] && (
         <StepPhase
+          key={visibleConfigGroups[configIndex].id}
           label="CONFIGURATION"
           stepNumber={configIndex + 1}
-          totalSteps={visibleConfigGroups.length}
+          totalSteps={visibleConfigGroups.length + conditionGroups.length}
           step={toConfigStep(visibleConfigGroups[configIndex])}
           selected={configSelections[visibleConfigGroups[configIndex].id] ?? []}
           onToggle={(optionId) =>
@@ -326,9 +321,10 @@ export function QuoteFunnel({
 
       {phase === "condition" && conditionGroups[conditionIndex] && (
         <StepPhase
+          key={conditionGroups[conditionIndex].id}
           label="CONDITION"
-          stepNumber={conditionIndex + 1}
-          totalSteps={conditionGroups.length}
+          stepNumber={visibleConfigGroups.length + conditionIndex + 1}
+          totalSteps={visibleConfigGroups.length + conditionGroups.length}
           step={toConditionStep(conditionGroups[conditionIndex])}
           selected={conditionSelections[conditionGroups[conditionIndex].id] ?? []}
           onToggle={(optionId) =>
@@ -416,7 +412,7 @@ function IntroPhase({
 
       <div className="mt-5 rounded-[2rem] bg-ink p-7 text-white shadow-card">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">Best price up to</p>
-        <p className="mt-3 bg-gradient-to-r from-brand to-emerald-300 bg-clip-text text-5xl font-extrabold text-transparent">
+        <p className="mt-3 bg-gradient-to-r from-brand to-brand/50 bg-clip-text text-5xl font-extrabold text-transparent">
           {formatInr(model.base_price)}
         </p>
         <p className="mt-4 text-sm leading-6 text-white/75">
@@ -482,34 +478,81 @@ function StepPhase({
 }) {
   const canContinue = selected.length > 0;
   const progressPercent = Math.round((stepNumber / totalSteps) * 100);
+  const remaining = totalSteps - stepNumber;
+  const isCompact =
+    step.options.every((o) => !o.description) &&
+    step.options.every((o) => o.label.length <= 22) &&
+    step.options.length > 2;
 
   return (
-    <div className="pb-24">
-      <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600">{label}</p>
-      <p className="mt-1 text-xs text-muted-foreground">
-        Step {stepNumber} of {totalSteps}
-      </p>
-      <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-secondary">
-        <div
-          className="h-full rounded-full bg-emerald-500 transition-all"
-          style={{ width: `${progressPercent}%` }}
-        />
+    <div className="animate-in fade-in slide-in-from-right-4 pb-28 duration-300">
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">{label}</p>
+        <p className="text-xs font-semibold text-muted-foreground">
+          {remaining > 0 ? `${remaining} question${remaining === 1 ? "" : "s"} to go` : "Last one!"}
+        </p>
+      </div>
+      <div className="mt-3 flex items-center gap-2">
+        <div className="h-2 w-full overflow-hidden rounded-full bg-secondary">
+          <div
+            className="h-full rounded-full bg-brand transition-all duration-500 ease-out"
+            style={{ width: `${progressPercent}%` }}
+          />
+        </div>
+        <span className="shrink-0 text-xs font-bold text-muted-foreground">
+          {stepNumber}/{totalSteps}
+        </span>
       </div>
 
       <h2 className="mt-6 text-2xl font-extrabold text-ink">{step.title}</h2>
-      {step.helperText && <p className="mt-2 text-sm text-muted-foreground">{step.helperText}</p>}
+      <div className="mt-2 flex flex-wrap items-center gap-2">
+        {step.helperText && <p className="text-sm text-muted-foreground">{step.helperText}</p>}
+        <span className="rounded-full bg-secondary px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+          {step.multi ? "Select all that apply" : "Choose one"}
+        </span>
+      </div>
 
-      <div className="mt-6 grid gap-3">
+      <div
+        className={isCompact ? "mt-6 grid grid-cols-2 gap-2.5 sm:grid-cols-3" : "mt-6 grid gap-3"}
+      >
         {step.options.map((option) => {
           const isSelected = selected.includes(option.id);
+
+          if (isCompact) {
+            return (
+              <button
+                key={option.id}
+                onClick={() => onToggle(option.id)}
+                aria-pressed={isSelected}
+                className={`relative flex items-center justify-center rounded-2xl border px-3 py-4 text-center text-sm font-bold transition-all duration-150 active:scale-[0.97] ${
+                  isSelected
+                    ? "border-brand bg-brand/10 text-brand ring-2 ring-brand/15"
+                    : "border-border bg-white text-ink hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-soft"
+                }`}
+              >
+                {option.label}
+                {isSelected && (
+                  <span
+                    className={`absolute -right-1.5 -top-1.5 grid h-5 w-5 place-items-center border-2 border-white bg-brand text-brand-foreground ${
+                      step.multi ? "rounded-md" : "rounded-full"
+                    }`}
+                  >
+                    <Check className="h-3 w-3" />
+                  </span>
+                )}
+              </button>
+            );
+          }
+
           return (
             <button
               key={option.id}
               onClick={() => onToggle(option.id)}
-              className={`flex w-full items-center justify-between gap-3 rounded-2xl border p-4 text-left transition ${
+              aria-pressed={isSelected}
+              className={`group flex w-full items-center justify-between gap-3 rounded-2xl border p-4 text-left transition-all duration-150 active:scale-[0.99] ${
                 isSelected
-                  ? "border-emerald-500 bg-emerald-50"
-                  : "border-border bg-white hover:border-emerald-300"
+                  ? "border-brand bg-brand/10 ring-2 ring-brand/15"
+                  : "border-border bg-white hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-soft"
               }`}
             >
               <span>
@@ -520,11 +563,17 @@ function StepPhase({
                   </span>
                 )}
               </span>
-              {isSelected && (
-                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-emerald-500 text-white">
-                  <Check className="h-3.5 w-3.5" />
-                </span>
-              )}
+              <span
+                className={`grid h-6 w-6 shrink-0 place-items-center border-2 transition-all ${
+                  step.multi ? "rounded-md" : "rounded-full"
+                } ${
+                  isSelected
+                    ? "border-brand bg-brand text-brand-foreground"
+                    : "border-border bg-white text-transparent group-hover:border-brand/40"
+                }`}
+              >
+                <Check className="h-3.5 w-3.5" />
+              </span>
             </button>
           );
         })}
@@ -534,14 +583,14 @@ function StepPhase({
         <div className="mx-auto flex max-w-[768px] gap-3">
           <button
             onClick={onBack}
-            className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-semibold text-ink"
+            className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-semibold text-ink transition hover:bg-secondary"
           >
             <ArrowLeft className="h-4 w-4" /> Back
           </button>
           <button
             onClick={onContinue}
             disabled={!canContinue}
-            className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-emerald-500 px-5 py-3 text-sm font-semibold text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
+            className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-semibold text-brand-foreground shadow-soft transition hover:brightness-110 disabled:cursor-not-allowed disabled:bg-secondary disabled:text-muted-foreground disabled:shadow-none"
           >
             {continueLabel} <ArrowRight className="h-4 w-4" />
           </button>
@@ -613,12 +662,12 @@ function ResultsPhase({
   }
 
   return (
-    <div>
+    <div className="animate-in fade-in zoom-in-95 duration-300">
       <div className="rounded-3xl bg-white p-7 text-center shadow-card ring-1 ring-border">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600">
+        <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
           Your estimated buyback price
         </p>
-        <p className="mt-3 text-5xl font-extrabold text-emerald-600">
+        <p className="mt-3 text-5xl font-extrabold text-brand">
           {formatInr(breakdown.final_quote)}
         </p>
         <p className="mt-2 text-sm text-muted-foreground">{modelName}</p>
@@ -626,36 +675,16 @@ function ResultsPhase({
           Final price is confirmed after doorstep inspection.
         </p>
 
-        <Accordion type="single" collapsible className="mt-6 text-left">
-          <AccordionItem value="breakdown">
-            <AccordionTrigger className="justify-center gap-2 text-sm font-semibold text-ink">
-              View price breakdown
-            </AccordionTrigger>
-            <AccordionContent>
-              <dl className="space-y-2 text-sm">
-                <Row label="Base price" value={formatInr(breakdown.base_price)} />
-                <Row label="Configuration effects" value={formatInr(breakdown.config_amount)} />
-                <Row
-                  label={`Age depreciation (${breakdown.age_percent}%)`}
-                  value={`-${formatInr(breakdown.age_amount)}`}
-                />
-                <Row label="Condition deductions" value={formatInr(breakdown.condition_amount)} />
-                <Row label="Final amount" value={formatInr(breakdown.final_quote)} strong />
-              </dl>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-
         <div className="mt-7 flex flex-col gap-3 sm:flex-row">
           <button
             onClick={onBack}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-semibold text-ink"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-semibold text-ink transition hover:bg-secondary"
           >
             <ArrowLeft className="h-4 w-4" /> Edit answers
           </button>
           <button
             onClick={onBookPickup}
-            className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground"
+            className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-soft transition hover:brightness-110"
           >
             Book free pickup <ArrowRight className="h-4 w-4" />
           </button>
@@ -666,21 +695,19 @@ function ResultsPhase({
         href={`${CONTACT.whatsappUrl}?text=${whatsappMessage}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-4 flex items-center justify-center gap-2 text-sm font-semibold text-emerald-600"
+        className="mt-4 flex items-center gap-4 rounded-2xl border border-emerald-200 bg-emerald-50/70 p-4 shadow-soft transition hover:-translate-y-0.5 hover:border-emerald-300"
       >
-        <WhatsAppIcon className="h-4 w-4" /> Prefer WhatsApp support instead?
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-emerald-500 text-white">
+          <WhatsAppIcon className="h-5 w-5" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="text-sm font-bold text-ink">Prefer WhatsApp support instead?</p>
+          <p className="mt-0.5 text-xs text-muted-foreground">
+            Chat with our team if you have questions about your quote.
+          </p>
+        </div>
+        <ArrowRight className="h-4 w-4 shrink-0 text-emerald-700" />
       </a>
-    </div>
-  );
-}
-
-function Row({ label, value, strong = false }: { label: string; value: string; strong?: boolean }) {
-  return (
-    <div
-      className={`flex items-center justify-between ${strong ? "border-t border-border pt-2 font-bold text-ink" : "text-muted-foreground"}`}
-    >
-      <dt>{label}</dt>
-      <dd>{value}</dd>
     </div>
   );
 }
@@ -869,7 +896,7 @@ function PickupPhase({
 function ConfirmationPhase({ order }: { order: DeviceOrder }) {
   return (
     <div className="rounded-3xl bg-white p-8 text-center shadow-card ring-1 ring-border">
-      <CheckCircle2 className="mx-auto h-14 w-14 text-emerald-500" />
+      <CheckCircle2 className="mx-auto h-14 w-14 text-brand" />
       <h2 className="mt-4 text-2xl font-extrabold text-ink">Pickup requested!</h2>
       <p className="mx-auto mt-3 max-w-sm text-sm text-muted-foreground">
         Our team will call you shortly to confirm your {order.model_name} pickup and final price of{" "}

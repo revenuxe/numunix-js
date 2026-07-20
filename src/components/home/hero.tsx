@@ -28,10 +28,10 @@ export function Hero() {
 
       <SiteNav variant="dark" />
 
-      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pb-6 pt-20 md:px-8 md:pt-24 md:pb-8 lg:pt-24 lg:pb-10">
+      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pb-6 pt-28 md:px-8 md:pb-8 md:pt-32 lg:pb-10 lg:pt-32">
         <div className="grid gap-7 md:grid-cols-[minmax(0,1fr)_minmax(300px,380px)] md:items-center md:gap-8 lg:gap-12">
           <div className="max-w-2xl">
-            <h1 className="mt-4 lg:mt-5 text-[2rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-6xl">
+            <h1 className="mt-6 text-[2rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:mt-8 lg:text-6xl">
               Reliable IT Support <span className="text-brand">&amp; Hardware</span> Services
             </h1>
             <p className="mt-4 max-w-xl text-sm text-white/75 sm:mt-6 sm:text-lg">

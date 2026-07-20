@@ -7,6 +7,7 @@ import {
   getLaptopCategory,
 } from "@/lib/catalog";
 import { BANGALORE_AREAS } from "@/lib/bangalore-areas";
+import { SELL_LAPTOP_BRANDS } from "@/lib/sell-laptop-brands";
 import { SITE_URL } from "@/lib/site";
 
 const STATIC_ROUTES = [
@@ -37,6 +38,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const areaEntries: MetadataRoute.Sitemap = BANGALORE_AREAS.map((area) => ({
     url: `${SITE_URL}/sell-laptop/${area.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 0.65,
+  }));
+
+  const brandSeoEntries: MetadataRoute.Sitemap = SELL_LAPTOP_BRANDS.map((brand) => ({
+    url: `${SITE_URL}/sell-laptop/brand/${brand.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
     priority: 0.65,
@@ -78,5 +86,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Supabase unreachable at build time — sitemap still returns the static/service routes.
   }
 
-  return [...staticEntries, ...serviceEntries, ...areaEntries, ...catalogEntries];
+  return [
+    ...staticEntries,
+    ...serviceEntries,
+    ...areaEntries,
+    ...brandSeoEntries,
+    ...catalogEntries,
+  ];
 }

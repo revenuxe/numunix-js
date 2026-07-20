@@ -47,13 +47,13 @@ export function SeriesGrid({
             <Link
               key={s.id}
               href={`/sell/laptops/${brandSlug}/${s.slug}`}
-              className="group rounded-2xl border border-border bg-white p-5 shadow-soft transition duration-200 hover:-translate-y-1 hover:border-emerald-400 hover:shadow-[0_0_0_4px_rgba(16,185,129,0.12)]"
+              className="group rounded-2xl border border-border bg-white p-5 shadow-soft ring-0 ring-brand/10 transition duration-200 hover:-translate-y-1 hover:border-brand hover:ring-4"
             >
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-600 transition group-hover:bg-emerald-500 group-hover:text-white">
+              <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand transition group-hover:bg-brand group-hover:text-brand-foreground">
                 <Tag className="h-5 w-5" />
               </span>
               <h3 className="mt-4 font-bold text-ink">{s.name}</h3>
-              <span className="mt-4 flex items-center gap-1 text-xs font-semibold text-emerald-600">
+              <span className="mt-4 flex items-center gap-1 text-xs font-semibold text-brand">
                 View <ArrowRight className="h-3.5 w-3.5" />
               </span>
             </Link>

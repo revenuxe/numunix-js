@@ -9,6 +9,8 @@ import { supabase } from "@/lib/supabase";
 import { getMyDeviceOrders } from "@/lib/quote";
 import { generateInvoicePdf } from "@/lib/invoice";
 import { OrderStatusBadge } from "@/components/order-status-badge";
+import { SiteNav } from "@/components/site-nav";
+import { SiteFooter } from "@/components/site-footer";
 import type { DeviceOrder } from "@/lib/quote-types";
 
 export default function MyOrdersPage() {
@@ -35,8 +37,9 @@ export default function MyOrdersPage() {
   }
 
   return (
-    <main className="min-h-screen bg-secondary/40 px-4 py-10 text-ink md:px-8">
-      <div className="mx-auto max-w-3xl">
+    <main className="min-h-screen bg-secondary/40 text-ink">
+      <SiteNav />
+      <div className="mx-auto max-w-3xl px-4 py-10 md:px-8">
         <div className="mb-8 flex items-center justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[.2em] text-brand">My account</p>
@@ -99,6 +102,7 @@ export default function MyOrdersPage() {
           </div>
         )}
       </div>
+      <SiteFooter />
     </main>
   );
 }
