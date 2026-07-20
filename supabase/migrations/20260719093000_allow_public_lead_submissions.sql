@@ -1,4 +1,4 @@
-﻿-- Permit the public booking and contact forms to create leads.
+-- Permit the public booking and contact forms to create leads.
 -- This is safe to run repeatedly and does not grant read, update, or delete access.
 grant usage on schema public to anon, authenticated;
 grant insert on table public.leads to anon, authenticated;

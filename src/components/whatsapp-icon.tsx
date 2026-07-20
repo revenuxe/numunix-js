@@ -1,11 +1,6 @@
 export function WhatsAppIcon({ className = "h-4 w-4" }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-      className={className}
-    >
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"

@@ -1,4 +1,4 @@
-﻿-- Insert a public lead and return only its generated booking reference.
+-- Insert a public lead and return only its generated booking reference.
 -- SECURITY DEFINER keeps the public role from reading the leads table.
 create or replace function public.submit_public_lead(
   p_name text,
