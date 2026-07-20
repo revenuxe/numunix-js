@@ -4,7 +4,7 @@ import { LogoMark } from "@/components/logo-mark";
 import { CONTACT } from "@/lib/contact";
 import { SELL_LAPTOP_BRANDS } from "@/lib/sell-laptop-brands";
 
-const FOOTER_COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
+const BASE_FOOTER_COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Company",
     links: [
@@ -23,13 +23,6 @@ const FOOTER_COLUMNS: { title: string; links: { label: string; href: string }[] 
     ],
   },
   {
-    title: "Sell Your Laptop",
-    links: SELL_LAPTOP_BRANDS.map((b) => ({
-      label: b.footerLabel,
-      href: `/sell-laptop/brand/${b.slug}`,
-    })),
-  },
-  {
     title: "Legal",
     links: [
       { label: "Privacy Policy", href: "/privacy" },
@@ -39,10 +32,31 @@ const FOOTER_COLUMNS: { title: string; links: { label: string; href: string }[] 
   },
 ];
 
-export function SiteFooter() {
+const SELL_LAPTOP_COLUMN = {
+  title: "Sell Your Laptop",
+  links: SELL_LAPTOP_BRANDS.map((b) => ({
+    label: b.footerLabel,
+    href: `/sell-laptop/brand/${b.slug}`,
+  })),
+};
+
+// The "Sell Your Laptop" brand links only make sense in the context of the
+// buyback flow, so they only show on sell-laptop pages, not the footer used
+// by the rest of the site (homepage, services, legal pages, etc.).
+export function SiteFooter({ showSellLaptopMenu = false }: { showSellLaptopMenu?: boolean }) {
+  const columns = showSellLaptopMenu
+    ? [BASE_FOOTER_COLUMNS[0], BASE_FOOTER_COLUMNS[1], SELL_LAPTOP_COLUMN, BASE_FOOTER_COLUMNS[2]]
+    : BASE_FOOTER_COLUMNS;
+
   return (
     <footer className="relative overflow-hidden bg-white px-4 pt-20 pb-8 md:px-8">
-      <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-3 lg:grid-cols-[1.2fr_1fr_1fr_1fr_1fr]">
+      <div
+        className={`mx-auto grid max-w-6xl gap-10 md:grid-cols-3 ${
+          showSellLaptopMenu
+            ? "lg:grid-cols-[1.2fr_1fr_1fr_1fr_1fr]"
+            : "lg:grid-cols-[1.2fr_1fr_1fr_1fr]"
+        }`}
+      >
         <div>
           <LogoMark className="h-10 w-auto" />
           <p className="mt-4 max-w-xs text-sm text-muted-foreground">
@@ -72,7 +86,7 @@ export function SiteFooter() {
             ))}
           </div>
         </div>
-        {FOOTER_COLUMNS.map((c) => (
+        {columns.map((c) => (
           <div key={c.title}>
             <h4 className="text-sm font-semibold text-ink">{c.title}</h4>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">

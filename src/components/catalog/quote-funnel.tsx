@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
 import { toast } from "sonner";
 import {
   ArrowLeft,
@@ -11,10 +12,10 @@ import {
   Download,
   LoaderCircle,
   ShieldCheck,
-  Sparkles,
   Truck,
   Zap,
 } from "lucide-react";
+import numunixIcon from "@/assets/numunix-icon.png";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { supabase } from "@/lib/supabase";
 import { CONTACT } from "@/lib/contact";
@@ -433,7 +434,7 @@ function IntroPhase({
 
       <div className="mt-5 rounded-[2rem] bg-ink p-7 text-white shadow-card">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">Best price up to</p>
-        <p className="mt-3 bg-gradient-to-r from-brand to-brand/50 bg-clip-text text-5xl font-extrabold text-transparent">
+        <p className="mt-3 bg-gradient-to-r from-sky-400 via-brand to-indigo-500 bg-clip-text text-5xl font-extrabold text-transparent">
           {formatInr(model.base_price)}
         </p>
         <p className="mt-4 text-sm leading-6 text-white/75">
@@ -651,7 +652,7 @@ function ResultsPhase({
   if (!isAuthenticated) {
     return (
       <div className="rounded-3xl bg-white p-7 text-center shadow-soft ring-1 ring-border">
-        <Sparkles className="mx-auto h-8 w-8 text-brand" />
+        <Image src={numunixIcon} alt="" className="mx-auto h-10 w-auto" />
         <h2 className="mt-4 text-xl font-extrabold text-ink">
           Sign in to save your quote and book pickup
         </h2>

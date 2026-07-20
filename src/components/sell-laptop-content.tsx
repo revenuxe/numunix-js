@@ -108,7 +108,7 @@ export function SellLaptopContent({
             {brandSeo ? (
               <>
                 Sell Used{" "}
-                <span className="bg-gradient-to-r from-brand to-brand/50 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-sky-400 via-brand to-indigo-500 bg-clip-text text-transparent">
                   {heroProductName(brandSeo)}
                 </span>{" "}
                 in Bangalore
@@ -116,7 +116,7 @@ export function SellLaptopContent({
             ) : (
               <>
                 Sell your old{" "}
-                <span className="bg-gradient-to-r from-brand to-brand/50 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-sky-400 via-brand to-indigo-500 bg-clip-text text-transparent">
                   laptop
                 </span>{" "}
                 in {area?.name ?? "Bangalore"}
@@ -160,7 +160,7 @@ export function SellLaptopContent({
             </div>
             {status && (
               <p
-                className={`mt-3 flex items-center gap-2 text-sm font-medium ${status === "available" ? "text-brand" : "text-amber-300"}`}
+                className={`mt-3 flex items-center gap-2 text-sm font-medium ${status === "available" ? "text-white" : "text-amber-300"}`}
               >
                 {status === "available" ? (
                   <Check className="h-4 w-4" />
@@ -434,7 +434,7 @@ export function SellLaptopContent({
       >
         <WhatsAppIcon className="h-7 w-7" />
       </a>
-      <SiteFooter />
+      <SiteFooter showSellLaptopMenu />
     </main>
   );
 }
