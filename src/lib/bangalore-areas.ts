@@ -280,15 +280,15 @@ export function getNearbyAreas(area: BangaloreArea): BangaloreArea[] {
 
 const VIBE_INTRO: Record<AreaVibe, (area: BangaloreArea) => string> = {
   "it-hub": (a) =>
-    `${a.name} is one of Bangalore's busiest IT corridors, packed with tech parks, startups and the professionals who keep them running. That also means a steady stream of ageing work laptops, old MacBooks and company-issued Windows machines looking for a second life once they're upgraded.`,
+    `${a.name} is one of Bangalore's busiest IT corridors, packed with tech parks, startups and the professionals who keep them running. That also means a steady stream of laptops needing screen replacements, battery swaps and quick software fixes to get back to work.`,
   "tech-corridor": (a) =>
-    `${a.name} sits along ${a.mainRoad}, one of the city's key connector routes between Bangalore's tech clusters. With so many IT commuters and home offices in the neighbourhood, ${a.name} sees a steady flow of laptops that are due for an upgrade.`,
+    `${a.name} sits along ${a.mainRoad}, one of the city's key connector routes between Bangalore's tech clusters. With so many IT commuters and home offices in the neighbourhood, ${a.name} sees a steady flow of laptops that need a reliable repair, not a replacement.`,
   residential: (a) =>
-    `${a.name} is one of Bangalore's well-established residential neighbourhoods along ${a.mainRoad}, home to families, students and working professionals who'd rather sell an old laptop for real cash than let it gather dust in a drawer.`,
+    `${a.name} is one of Bangalore's well-established residential neighbourhoods along ${a.mainRoad}, home to families, students and working professionals who'd rather get a laptop repaired properly than pay for a costly replacement.`,
   commercial: (a) =>
-    `${a.name} is one of Bangalore's most walkable commercial and residential neighbourhoods, centred around ${a.mainRoad}. Between the offices, cafes and apartments here, old laptops pile up fast — and ${a.name} residents want a fair price without the hassle of listing one online.`,
+    `${a.name} is one of Bangalore's most walkable commercial and residential neighbourhoods, centred around ${a.mainRoad}. Between the offices, cafes and apartments here, laptop issues come up fast — and ${a.name} residents want a certified repair without the hassle of hunting for a trustworthy technician.`,
   "old-bangalore": (a) =>
-    `${a.name} is one of Bangalore's classic, tree-lined neighbourhoods around ${a.mainRoad}, where multi-generational households and long-time residents often have an old laptop or two sitting unused in a cupboard.`,
+    `${a.name} is one of Bangalore's classic, tree-lined neighbourhoods around ${a.mainRoad}, where multi-generational households and long-time residents want a dependable local option to get an old laptop working again.`,
 };
 
 export type AreaCopy = {
@@ -307,24 +307,24 @@ export function buildAreaCopy(area: BangaloreArea): AreaCopy {
 
   const intro = [
     VIBE_INTRO[area.vibe](area),
-    `Numunix offers free doorstep laptop pickup across ${area.name} (PIN ${area.pincode}) and neighbouring areas like ${nearbyList}. Book online, get an instant price based on your exact model and condition, and our verified agent collects the device and pays you on the spot — no need to step outside ${area.name}.`,
+    `Numunix offers free doorstep laptop repair pickup across ${area.name} (PIN ${area.pincode}) and neighbouring areas like ${nearbyList}. Book online, get a transparent diagnosis and price, and our certified engineer collects the device, repairs it and returns it fully tested — no need to step outside ${area.name}.`,
   ];
 
   const whyBullets = [
-    `Certified pickup agents cover every street in ${area.name}, ${area.mainRoad} included.`,
-    `Instant, model-specific pricing — no lowball guesses when you sell a laptop in ${area.name}.`,
-    `Certified data wiping on every device, so your information stays safe.`,
-    `Same-day UPI or bank transfer once your ${area.name} pickup is verified.`,
+    `Certified repair engineers cover every street in ${area.name}, ${area.mainRoad} included.`,
+    `Transparent, upfront pricing — no lowball guesses when you repair a laptop in ${area.name}.`,
+    `Genuine or certified-compatible parts, backed by a warranty on every repair.`,
+    `Free doorstep pickup and drop once your ${area.name} repair is complete.`,
   ];
 
   const faqs: [string, string][] = [
     [
-      `Do you offer laptop pickup in ${area.name}?`,
-      `Yes. Numunix offers free doorstep laptop pickup across ${area.name} (PIN ${area.pincode}) and nearby localities including ${nearbyList}. Book online and choose a pickup slot that works for you.`,
+      `Do you offer laptop repair pickup in ${area.name}?`,
+      `Yes. Numunix offers free doorstep laptop repair pickup across ${area.name} (PIN ${area.pincode}) and nearby localities including ${nearbyList}. Book online and choose a pickup slot that works for you.`,
     ],
     [
-      `How fast can I sell my laptop in ${area.name}?`,
-      `Most ${area.name} pickups are scheduled within 24 hours of booking. Once our agent verifies the device at your doorstep, payment is instant via UPI or bank transfer.`,
+      `How fast can I get my laptop repaired in ${area.name}?`,
+      `Most ${area.name} repairs are diagnosed within 24 hours of pickup, with most common repairs completed in 24-48 hours. We'll confirm the exact timeline once your device is diagnosed.`,
     ],
   ];
 

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Facebook, Instagram, Youtube, Twitter, Mail, Phone } from "lucide-react";
 import { LogoMark } from "@/components/logo-mark";
 import { CONTACT } from "@/lib/contact";
-import { SELL_LAPTOP_BRANDS } from "@/lib/sell-laptop-brands";
+import { REPAIR_LAPTOP_BRANDS } from "@/lib/repair-laptop-brands";
 
 const BASE_FOOTER_COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
@@ -27,32 +27,32 @@ const BASE_FOOTER_COLUMNS: { title: string; links: { label: string; href: string
     links: [
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms & Conditions", href: "/terms" },
-      { label: "Laptop Buyback Terms", href: "/sell-laptop/terms" },
+      { label: "Laptop Buyback Terms", href: "/sell/laptops/terms" },
     ],
   },
 ];
 
-const SELL_LAPTOP_COLUMN = {
-  title: "Sell Your Laptop",
-  links: SELL_LAPTOP_BRANDS.map((b) => ({
+const REPAIR_LAPTOP_COLUMN = {
+  title: "Repair Your Laptop",
+  links: REPAIR_LAPTOP_BRANDS.map((b) => ({
     label: b.footerLabel,
-    href: `/sell-laptop/brand/${b.slug}`,
+    href: `/repair-laptop/brand/${b.slug}`,
   })),
 };
 
-// The "Sell Your Laptop" brand links only make sense in the context of the
-// buyback flow, so they only show on sell-laptop pages, not the footer used
+// The "Repair Your Laptop" brand links only make sense in the context of the
+// repair flow, so they only show on repair-laptop pages, not the footer used
 // by the rest of the site (homepage, services, legal pages, etc.).
-export function SiteFooter({ showSellLaptopMenu = false }: { showSellLaptopMenu?: boolean }) {
-  const columns = showSellLaptopMenu
-    ? [BASE_FOOTER_COLUMNS[0], BASE_FOOTER_COLUMNS[1], SELL_LAPTOP_COLUMN, BASE_FOOTER_COLUMNS[2]]
+export function SiteFooter({ showRepairLaptopMenu = false }: { showRepairLaptopMenu?: boolean }) {
+  const columns = showRepairLaptopMenu
+    ? [BASE_FOOTER_COLUMNS[0], BASE_FOOTER_COLUMNS[1], REPAIR_LAPTOP_COLUMN, BASE_FOOTER_COLUMNS[2]]
     : BASE_FOOTER_COLUMNS;
 
   return (
     <footer className="relative overflow-hidden bg-white px-4 pt-20 pb-8 md:px-8">
       <div
         className={`mx-auto grid max-w-6xl gap-10 md:grid-cols-3 ${
-          showSellLaptopMenu
+          showRepairLaptopMenu
             ? "lg:grid-cols-[1.2fr_1fr_1fr_1fr_1fr]"
             : "lg:grid-cols-[1.2fr_1fr_1fr_1fr]"
         }`}

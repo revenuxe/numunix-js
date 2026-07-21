@@ -11,7 +11,7 @@ import { supabase } from "@/lib/supabase";
 
 const NAV_LINKS: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
-  { label: "Sell Laptop", href: "/sell-laptop" },
+  { label: "Repair Laptop", href: "/repair-laptop" },
   { label: "About", href: "/about" },
   { label: "Why Us", href: "/why-us" },
   { label: "Contact", href: "/contact" },

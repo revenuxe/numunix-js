@@ -1,48 +1,6 @@
-export type Platform = "apple" | "windows";
 export type DeviceOrderStatus =
   "new" | "contacted" | "scheduled" | "paid" | "cancelled" | "rejected";
 export type PickupSlot = "morning" | "afternoon" | "evening";
-
-export type Category = {
-  id: string;
-  name: string;
-  slug: string;
-  icon: string | null;
-  active: boolean;
-  sort_order: number;
-};
-
-export type Brand = {
-  id: string;
-  category_id: string;
-  name: string;
-  slug: string;
-  logo: string | null;
-  platform: Platform;
-  active: boolean;
-  sort_order: number;
-};
-
-export type Series = {
-  id: string;
-  brand_id: string;
-  name: string;
-  slug: string;
-  image: string | null;
-  active: boolean;
-  sort_order: number;
-};
-
-export type Model = {
-  id: string;
-  series_id: string;
-  name: string;
-  slug: string;
-  year: number;
-  image: string | null;
-  active: boolean;
-  sort_order: number;
-};
 
 export type CustomerProfile = {
   id: string;

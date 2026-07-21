@@ -12,6 +12,7 @@ import { OrderStatusBadge } from "@/components/order-status-badge";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { Spinner } from "@/components/spinner";
+import { CONTACT } from "@/lib/contact";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -101,9 +102,14 @@ export default function MyOrdersPage() {
           <div className="rounded-3xl bg-white p-8 text-center text-sm text-muted-foreground ring-1 ring-border">
             You haven&apos;t booked a pickup yet.
             <div className="mt-4">
-              <Link href="/sell/laptops" className="text-sm font-semibold text-brand">
-                Sell a laptop
-              </Link>
+              <a
+                href={CONTACT.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-semibold text-brand"
+              >
+                Sell a laptop on WhatsApp
+              </a>
             </div>
           </div>
         ) : (
