@@ -10,6 +10,7 @@ import { ServiceBookingForm } from "@/components/service-booking-form";
 import { CONTACT } from "@/lib/contact";
 import { getService, getServiceSlugs } from "@/lib/services";
 import { SITE_NAME } from "@/lib/site";
+import heroHandoff from "@/assets/hero-handoff.webp";
 
 export function generateStaticParams() {
   return getServiceSlugs().map((serviceSlug) => ({ serviceSlug }));
@@ -72,11 +73,12 @@ export default async function ServicePage({
     <main className="bg-white text-ink">
       <section className="relative isolate overflow-hidden bg-ink text-white">
         <Image
-          src={service.image}
+          src={heroHandoff}
           alt=""
-          className="absolute inset-0 -z-20 h-full w-full object-cover opacity-35"
+          priority
+          className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/90 to-ink/60" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/80 via-black/55 to-black/70" />
         <SiteNav variant="dark" />
         <div className="mx-auto grid max-w-7xl gap-8 px-4 pb-10 pt-24 md:px-8 md:pb-14 md:pt-28 lg:grid-cols-[1.1fr_.9fr] lg:items-center lg:gap-12">
           <div className="max-w-2xl">

@@ -30,6 +30,7 @@ import {
 import { buildBrandCopy, heroProductName, type SellLaptopBrand } from "@/lib/sell-laptop-brands";
 import { setSavedPincode } from "@/lib/session-quote";
 import type { Brand } from "@/lib/quote-types";
+import heroHandoff from "@/assets/hero-handoff.webp";
 
 const whatsapp =
   "https://wa.me/919886285028?text=" +
@@ -100,9 +101,16 @@ export function SellLaptopContent({
     <main className="bg-white text-ink">
       <SiteNav variant="dark" />
 
-      <section className="relative isolate overflow-hidden bg-[linear-gradient(135deg,#111a34_0%,#182847_55%,#0c172d_100%)] px-4 pt-28 pb-16 text-white md:px-8 md:pb-24 md:pt-36">
-        <div className="absolute -right-28 -top-20 h-80 w-80 rounded-full bg-brand/35 blur-3xl" />
-        <div className="absolute -bottom-40 -left-24 h-72 w-72 rounded-full bg-brand/20 blur-3xl" />
+      <section className="relative isolate overflow-hidden bg-ink px-4 pt-28 pb-16 text-white md:px-8 md:pb-24 md:pt-36">
+        <Image
+          src={heroHandoff}
+          alt=""
+          priority
+          className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+        />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(0,0,0,0.68)_0%,rgba(0,0,0,0.48)_45%,rgba(0,0,0,0.8)_100%)]" />
+        <div className="absolute -right-28 -top-20 h-80 w-80 rounded-full bg-brand/25 blur-3xl" />
+        <div className="absolute -bottom-40 -left-24 h-72 w-72 rounded-full bg-brand/15 blur-3xl" />
         <div className="relative mx-auto max-w-3xl text-center">
           <h1 className="mt-2 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl md:mt-3 md:text-6xl">
             {brandSeo ? (
