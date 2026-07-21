@@ -5,7 +5,7 @@ export default function Loading() {
   return (
     <main className="min-h-screen bg-secondary/40 text-ink">
       <SiteNav />
-      <PageLoader minHeight="70vh" label="Loading models…" />
+      <PageLoader minHeight="70dvh" label="Loading models…" />
     </main>
   );
 }

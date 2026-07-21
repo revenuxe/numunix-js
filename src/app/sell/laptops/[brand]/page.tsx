@@ -6,24 +6,22 @@ import { SiteFooter } from "@/components/site-footer";
 import { CatalogBreadcrumb } from "@/components/catalog/catalog-breadcrumb";
 import { CatalogNotFound } from "@/components/catalog/catalog-not-found";
 import { SeriesGrid } from "@/components/catalog/series-grid";
-import { getActiveBrands, getActiveSeries, getBrandBySlug, getLaptopCategory } from "@/lib/catalog";
+import { getActiveBrandsForLaptops, getBrandWithSeries } from "@/lib/catalog";
 
 export const revalidate = 60;
 
 type Params = { brand: string };
 
 export async function generateStaticParams() {
-  const category = await getLaptopCategory();
-  if (!category) return [];
-  const brands = await getActiveBrands(category.id);
+  const brands = await getActiveBrandsForLaptops();
   return brands.map((brand) => ({ brand: brand.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { brand: brandSlug } = await params;
-  const category = await getLaptopCategory();
-  const brand = category ? await getBrandBySlug(category.id, brandSlug) : null;
-  if (!brand) return {};
+  const result = await getBrandWithSeries(brandSlug);
+  if (!result) return {};
+  const { brand } = result;
   return {
     title: { absolute: `${brand.name} Laptop Series — Sell Your ${brand.name} Laptop | Numunix` },
     description: `Select your ${brand.name} laptop series to get an instant buyback quote and free doorstep pickup in Bangalore.`,
@@ -33,9 +31,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
 export default async function BrandSeriesPage({ params }: { params: Promise<Params> }) {
   const { brand: brandSlug } = await params;
-  const category = await getLaptopCategory();
-  const brand = category ? await getBrandBySlug(category.id, brandSlug) : null;
-  const series = brand ? await getActiveSeries(brand.id) : [];
+  const result = await getBrandWithSeries(brandSlug);
+  const brand = result?.brand ?? null;
+  const series = result?.series ?? [];
 
   return (
     <main className="min-h-screen bg-secondary/40 text-ink">

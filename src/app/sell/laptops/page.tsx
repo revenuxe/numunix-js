@@ -3,7 +3,7 @@ import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { PageHero } from "@/components/page-hero";
 import { BrandGrid } from "@/components/catalog/brand-grid";
-import { getActiveBrands, getLaptopCategory } from "@/lib/catalog";
+import { getActiveBrandsForLaptops } from "@/lib/catalog";
 
 export const metadata: Metadata = {
   title: { absolute: "Sell Your Laptop — Choose a Brand | Numunix" },
@@ -15,8 +15,7 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function SellLaptopsPage() {
-  const category = await getLaptopCategory();
-  const brands = category ? await getActiveBrands(category.id) : [];
+  const brands = await getActiveBrandsForLaptops();
 
   return (
     <main className="bg-white text-ink">

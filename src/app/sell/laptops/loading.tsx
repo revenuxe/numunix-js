@@ -5,7 +5,9 @@ export default function Loading() {
   return (
     <main className="min-h-screen bg-white text-ink">
       <SiteNav variant="dark" />
-      <PageLoader minHeight="70vh" label="Loading brands…" />
+      <section className="bg-ink px-4 pt-28 pb-20 md:px-8 md:pt-32 md:pb-28">
+        <PageLoader minHeight="16rem" />
+      </section>
     </main>
   );
 }

@@ -6,13 +6,10 @@ import { CatalogBreadcrumb } from "@/components/catalog/catalog-breadcrumb";
 import { CatalogNotFound } from "@/components/catalog/catalog-not-found";
 import { QuoteFunnel } from "@/components/catalog/quote-funnel";
 import {
-  getActiveBrands,
-  getActiveModels,
-  getActiveSeries,
-  getBrandBySlug,
-  getLaptopCategory,
-  getModelBySlug,
-  getSeriesBySlug,
+  getActiveBrandsForLaptops,
+  getBrandWithSeries,
+  getModelWithContext,
+  getSeriesWithModels,
 } from "@/lib/catalog";
 
 export const revalidate = 60;
@@ -20,15 +17,13 @@ export const revalidate = 60;
 type Params = { brand: string; series: string; model: string };
 
 export async function generateStaticParams() {
-  const category = await getLaptopCategory();
-  if (!category) return [];
-  const brands = await getActiveBrands(category.id);
+  const brands = await getActiveBrandsForLaptops();
   const params: Params[] = [];
   for (const brand of brands) {
-    const seriesList = await getActiveSeries(brand.id);
-    for (const series of seriesList) {
-      const models = await getActiveModels(series.id);
-      for (const model of models) {
+    const brandResult = await getBrandWithSeries(brand.slug);
+    for (const series of brandResult?.series ?? []) {
+      const seriesResult = await getSeriesWithModels(brand.slug, series.slug);
+      for (const model of seriesResult?.models ?? []) {
         params.push({ brand: brand.slug, series: series.slug, model: model.slug });
       }
     }
@@ -37,11 +32,16 @@ export async function generateStaticParams() {
 }
 
 async function loadContext(params: Params) {
-  const category = await getLaptopCategory();
-  const brand = category ? await getBrandBySlug(category.id, params.brand) : null;
-  const series = brand ? await getSeriesBySlug(brand.id, params.series) : null;
-  const model = series ? await getModelBySlug(series.id, params.model) : null;
-  return { brand, series, model };
+  const result = await getModelWithContext(params.brand, params.series, params.model);
+  if (result) return result;
+  // Only hit the DB again in the rare not-found case, so we can still tell
+  // "no such series" apart from "no such model under this series".
+  const seriesResult = await getSeriesWithModels(params.brand, params.series);
+  return {
+    brand: seriesResult?.brand ?? null,
+    series: seriesResult?.series ?? null,
+    model: null,
+  };
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {

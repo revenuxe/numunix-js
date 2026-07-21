@@ -6,27 +6,18 @@ import { SiteFooter } from "@/components/site-footer";
 import { CatalogBreadcrumb } from "@/components/catalog/catalog-breadcrumb";
 import { CatalogNotFound } from "@/components/catalog/catalog-not-found";
 import { ModelGrid } from "@/components/catalog/model-grid";
-import {
-  getActiveBrands,
-  getActiveModels,
-  getActiveSeries,
-  getBrandBySlug,
-  getLaptopCategory,
-  getSeriesBySlug,
-} from "@/lib/catalog";
+import { getActiveBrandsForLaptops, getBrandWithSeries, getSeriesWithModels } from "@/lib/catalog";
 
 export const revalidate = 60;
 
 type Params = { brand: string; series: string };
 
 export async function generateStaticParams() {
-  const category = await getLaptopCategory();
-  if (!category) return [];
-  const brands = await getActiveBrands(category.id);
+  const brands = await getActiveBrandsForLaptops();
   const params: Params[] = [];
   for (const brand of brands) {
-    const series = await getActiveSeries(brand.id);
-    for (const s of series) {
+    const result = await getBrandWithSeries(brand.slug);
+    for (const s of result?.series ?? []) {
       params.push({ brand: brand.slug, series: s.slug });
     }
   }
@@ -35,10 +26,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { brand: brandSlug, series: seriesSlug } = await params;
-  const category = await getLaptopCategory();
-  const brand = category ? await getBrandBySlug(category.id, brandSlug) : null;
-  const series = brand ? await getSeriesBySlug(brand.id, seriesSlug) : null;
-  if (!brand || !series) return {};
+  const result = await getSeriesWithModels(brandSlug, seriesSlug);
+  if (!result) return {};
+  const { brand, series } = result;
   return {
     title: { absolute: `${brand.name} ${series.name} Models — Instant Buyback Price | Numunix` },
     description: `Select your ${brand.name} ${series.name} model to get an instant laptop buyback price.`,
@@ -48,10 +38,13 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
 export default async function SeriesModelsPage({ params }: { params: Promise<Params> }) {
   const { brand: brandSlug, series: seriesSlug } = await params;
-  const category = await getLaptopCategory();
-  const brand = category ? await getBrandBySlug(category.id, brandSlug) : null;
-  const series = brand ? await getSeriesBySlug(brand.id, seriesSlug) : null;
-  const models = series ? await getActiveModels(series.id) : [];
+  const result = await getSeriesWithModels(brandSlug, seriesSlug);
+  // Only hit the DB a second time in the rare not-found case, so we can
+  // still tell "no such brand" apart from "no such series under this brand".
+  const brandOnly = result ? null : await getBrandWithSeries(brandSlug);
+  const brand = result?.brand ?? brandOnly?.brand ?? null;
+  const series = result?.series ?? null;
+  const models = result?.models ?? [];
 
   return (
     <main className="min-h-screen bg-secondary/40 text-ink">

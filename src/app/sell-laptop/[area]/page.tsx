@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SellLaptopContent } from "@/components/sell-laptop-content";
 import { BANGALORE_AREAS, buildAreaCopy, getBangaloreArea } from "@/lib/bangalore-areas";
-import { getActiveBrands, getLaptopCategory } from "@/lib/catalog";
+import { getActiveBrandsForLaptops } from "@/lib/catalog";
 import { SELL_LAPTOP_FAQS } from "@/lib/faq-data";
 import { SITE_URL } from "@/lib/site";
 
@@ -34,8 +34,7 @@ export default async function SellLaptopAreaPage({ params }: { params: Promise<P
   const area = getBangaloreArea(areaSlug);
   if (!area) notFound();
 
-  const category = await getLaptopCategory();
-  const brands = category ? await getActiveBrands(category.id) : [];
+  const brands = await getActiveBrandsForLaptops();
   const areaCopy = buildAreaCopy(area);
 
   const faqJsonLd = {

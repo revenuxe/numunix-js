@@ -1,7 +1,7 @@
 import Image from "next/image";
 import numunixIcon from "@/assets/numunix-icon.png";
 
-export function PageLoader({ label, minHeight = "60vh" }: { label?: string; minHeight?: string }) {
+export function PageLoader({ label, minHeight = "60dvh" }: { label?: string; minHeight?: string }) {
   return (
     <div className="grid animate-in fade-in place-items-center duration-300" style={{ minHeight }}>
       <div className="flex flex-col items-center gap-4">

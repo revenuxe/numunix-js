@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SellLaptopContent } from "@/components/sell-laptop-content";
-import { getActiveBrands, getLaptopCategory } from "@/lib/catalog";
+import { getActiveBrandsForLaptops } from "@/lib/catalog";
 import { SELL_LAPTOP_FAQS } from "@/lib/faq-data";
 import {
   SELL_LAPTOP_BRANDS,
@@ -40,8 +40,7 @@ export default async function SellLaptopBrandPage({ params }: { params: Promise<
   const brand = getSellLaptopBrand(brandSlug);
   if (!brand) notFound();
 
-  const category = await getLaptopCategory();
-  const brands = category ? await getActiveBrands(category.id) : [];
+  const brands = await getActiveBrandsForLaptops();
   const brandCopy = buildBrandCopy(brand);
   const product = heroProductName(brand);
 
