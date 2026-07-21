@@ -8,8 +8,6 @@ import { OrdersSubtab } from "@/components/admin/orders-subtab";
 import { BrandsSubtab } from "@/components/admin/brands-subtab";
 import { SeriesSubtab } from "@/components/admin/series-subtab";
 import { ModelsSubtab } from "@/components/admin/models-subtab";
-import { ConfigurationSubtab } from "@/components/admin/configuration-subtab";
-import { ConditionSubtab } from "@/components/admin/condition-subtab";
 import { getLaptopCategoryForAdmin } from "@/lib/admin-catalog";
 import type { Category } from "@/lib/quote-types";
 
@@ -67,8 +65,6 @@ export function DevicesTab() {
           <TabsTrigger value="brands">Brands</TabsTrigger>
           <TabsTrigger value="series">Series</TabsTrigger>
           <TabsTrigger value="models">Models</TabsTrigger>
-          <TabsTrigger value="configuration">Configuration</TabsTrigger>
-          <TabsTrigger value="condition">Condition price</TabsTrigger>
         </TabsList>
         <TabsContent value="orders" className="mt-5">
           <OrdersSubtab />
@@ -81,12 +77,6 @@ export function DevicesTab() {
         </TabsContent>
         <TabsContent value="models" className="mt-5">
           <ModelsSubtab categoryId={category.id} />
-        </TabsContent>
-        <TabsContent value="configuration" className="mt-5">
-          <ConfigurationSubtab categoryId={category.id} />
-        </TabsContent>
-        <TabsContent value="condition" className="mt-5">
-          <ConditionSubtab categoryId={category.id} />
         </TabsContent>
       </Tabs>
     </div>

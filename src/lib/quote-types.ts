@@ -1,6 +1,4 @@
 export type Platform = "apple" | "windows";
-export type SelectionMode = "single" | "multi";
-export type PriceEffectType = "bonus_fixed" | "deduct_fixed" | "deduct_percent";
 export type DeviceOrderStatus =
   "new" | "contacted" | "scheduled" | "paid" | "cancelled" | "rejected";
 export type PickupSlot = "morning" | "afternoon" | "evening";
@@ -47,77 +45,6 @@ export type Model = {
   sort_order: number;
 };
 
-export type ConfigurationOption = {
-  id: string;
-  group_id: string;
-  label: string;
-  description: string | null;
-  price_effect_type: PriceEffectType;
-  price_effect_amount: number;
-  processor_family: string | null;
-  sort_order: number;
-};
-
-export type ConfigurationGroup = {
-  id: string;
-  category_id: string;
-  platform: Platform | null;
-  title: string;
-  helper_text: string | null;
-  selection_mode: SelectionMode;
-  step_order: number;
-  depends_on_processor_family: string | null;
-  active: boolean;
-  configuration_options: ConfigurationOption[];
-};
-
-export type ConditionOption = {
-  id: string;
-  group_id: string;
-  label: string;
-  description: string | null;
-  price_effect_type: PriceEffectType;
-  price_effect_amount: number;
-  sort_order: number;
-};
-
-export type ConditionGroup = {
-  id: string;
-  category_id: string;
-  platform: Platform | null;
-  title: string;
-  helper_text: string | null;
-  selection_mode: SelectionMode;
-  step_order: number;
-  active: boolean;
-  condition_options: ConditionOption[];
-};
-
-export type QuoteBreakdown = {
-  category: string;
-  brand: string;
-  series: string;
-  model: string;
-  base_price: number;
-  config_amount: number;
-  after_config: number;
-  age_percent: number;
-  age_amount: number;
-  after_age: number;
-  condition_amount: number;
-  final_quote: number;
-};
-
-export type AnswerRecord = {
-  kind: "configuration" | "condition";
-  group_id: string;
-  group_title: string;
-  option_id: string;
-  option_label: string;
-  price_effect_type: PriceEffectType;
-  price_effect_amount: number;
-};
-
 export type CustomerProfile = {
   id: string;
   full_name: string | null;
@@ -149,6 +76,4 @@ export type DeviceOrder = {
   model_id: string | null;
   base_price: number;
   final_quote: number;
-  answers: AnswerRecord[];
-  quote_breakdown: QuoteBreakdown;
 };

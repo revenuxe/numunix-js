@@ -2,15 +2,10 @@ import { supabase } from "@/lib/supabase";
 import type {
   Brand,
   Category,
-  ConditionGroup,
-  ConditionOption,
-  ConfigurationGroup,
-  ConfigurationOption,
   DeviceOrder,
   DeviceOrderStatus,
   Model,
   Platform,
-  SelectionMode,
   Series,
 } from "@/lib/quote-types";
 
@@ -199,152 +194,6 @@ export async function updateModel(id: string, input: ModelInput) {
 
 export async function deleteModel(id: string) {
   const { error } = await supabase.from("device_models").delete().eq("id", id);
-  if (error) throw error;
-  await revalidateCatalog();
-}
-
-// ---------- Configuration groups & options ----------
-
-export type ConfigGroupInput = {
-  title: string;
-  helper_text: string | null;
-  platform: Platform | null;
-  selection_mode: SelectionMode;
-  step_order: number;
-  depends_on_processor_family: string | null;
-  active: boolean;
-};
-
-export async function listConfigurationGroups(categoryId: string): Promise<ConfigurationGroup[]> {
-  const { data, error } = await supabase
-    .from("configuration_groups")
-    .select("*, configuration_options(*)")
-    .eq("category_id", categoryId)
-    .order("step_order", { ascending: true });
-  if (error) throw error;
-  return ((data ?? []) as ConfigurationGroup[]).map((g) => ({
-    ...g,
-    configuration_options: [...g.configuration_options].sort((a, b) => a.sort_order - b.sort_order),
-  }));
-}
-
-export async function createConfigGroup(categoryId: string, input: ConfigGroupInput) {
-  const { error } = await supabase
-    .from("configuration_groups")
-    .insert({ category_id: categoryId, ...input });
-  if (error) throw error;
-  await revalidateCatalog();
-}
-
-export async function updateConfigGroup(id: string, input: ConfigGroupInput) {
-  const { error } = await supabase.from("configuration_groups").update(input).eq("id", id);
-  if (error) throw error;
-  await revalidateCatalog();
-}
-
-export async function deleteConfigGroup(id: string) {
-  const { error } = await supabase.from("configuration_groups").delete().eq("id", id);
-  if (error) throw error;
-  await revalidateCatalog();
-}
-
-export type ConfigOptionInput = {
-  label: string;
-  description: string | null;
-  price_effect_type: ConfigurationOption["price_effect_type"];
-  price_effect_amount: number;
-  processor_family: string | null;
-  sort_order: number;
-};
-
-export async function createConfigOption(groupId: string, input: ConfigOptionInput) {
-  const { error } = await supabase
-    .from("configuration_options")
-    .insert({ group_id: groupId, ...input });
-  if (error) throw error;
-  await revalidateCatalog();
-}
-
-export async function updateConfigOption(id: string, input: ConfigOptionInput) {
-  const { error } = await supabase.from("configuration_options").update(input).eq("id", id);
-  if (error) throw error;
-  await revalidateCatalog();
-}
-
-export async function deleteConfigOption(id: string) {
-  const { error } = await supabase.from("configuration_options").delete().eq("id", id);
-  if (error) throw error;
-  await revalidateCatalog();
-}
-
-// ---------- Condition groups & options ----------
-
-export type ConditionGroupInput = {
-  title: string;
-  helper_text: string | null;
-  platform: Platform | null;
-  selection_mode: SelectionMode;
-  step_order: number;
-  active: boolean;
-};
-
-export async function listConditionGroups(categoryId: string): Promise<ConditionGroup[]> {
-  const { data, error } = await supabase
-    .from("condition_groups")
-    .select("*, condition_options(*)")
-    .eq("category_id", categoryId)
-    .order("step_order", { ascending: true });
-  if (error) throw error;
-  return ((data ?? []) as ConditionGroup[]).map((g) => ({
-    ...g,
-    condition_options: [...g.condition_options].sort((a, b) => a.sort_order - b.sort_order),
-  }));
-}
-
-export async function createConditionGroup(categoryId: string, input: ConditionGroupInput) {
-  const { error } = await supabase
-    .from("condition_groups")
-    .insert({ category_id: categoryId, ...input });
-  if (error) throw error;
-  await revalidateCatalog();
-}
-
-export async function updateConditionGroup(id: string, input: ConditionGroupInput) {
-  const { error } = await supabase.from("condition_groups").update(input).eq("id", id);
-  if (error) throw error;
-  await revalidateCatalog();
-}
-
-export async function deleteConditionGroup(id: string) {
-  const { error } = await supabase.from("condition_groups").delete().eq("id", id);
-  if (error) throw error;
-  await revalidateCatalog();
-}
-
-export type ConditionOptionInput = {
-  label: string;
-  description: string | null;
-  price_effect_type: ConditionOption["price_effect_type"];
-  price_effect_amount: number;
-  sort_order: number;
-};
-
-export async function createConditionOption(groupId: string, input: ConditionOptionInput) {
-  const { error } = await supabase
-    .from("condition_options")
-    .insert({ group_id: groupId, ...input });
-  if (error) throw error;
-  await revalidateCatalog();
-}
-
-export async function updateConditionOption(id: string, input: ConditionOptionInput) {
-  const { error } = await supabase.from("condition_options").update(input).eq("id", id);
-  if (error) throw error;
-  await revalidateCatalog();
-}
-
-export async function deleteConditionOption(id: string) {
-  const { error } = await supabase.from("condition_options").delete().eq("id", id);
   if (error) throw error;
   await revalidateCatalog();
 }

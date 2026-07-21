@@ -1,14 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { publicSupabase } from "@/lib/supabase";
-import type {
-  Brand,
-  Category,
-  ConditionGroup,
-  ConfigurationGroup,
-  Model,
-  Platform,
-  Series,
-} from "@/lib/quote-types";
+import type { Brand, Category, Model, Series } from "@/lib/quote-types";
 
 // Catalog reads are wrapped in Next's Data Cache so repeat requests (and the
 // duplicate generateMetadata + page fetch Next.js makes for every route) are
@@ -122,47 +114,5 @@ export const getModelBySlug = unstable_cache(
     return data as Model | null;
   },
   ["model-by-slug"],
-  { revalidate: REVALIDATE_SECONDS, tags: CATALOG_TAGS },
-);
-
-// Groups visible for a given platform: platform-agnostic (null) groups always
-// show; platform-specific groups only show for a matching brand platform.
-export const getConfigurationGroups = unstable_cache(
-  async (categoryId: string, platform: Platform): Promise<ConfigurationGroup[]> => {
-    const { data, error } = await publicSupabase
-      .from("configuration_groups")
-      .select("*, configuration_options(*)")
-      .eq("category_id", categoryId)
-      .eq("active", true)
-      .or(`platform.is.null,platform.eq.${platform}`)
-      .order("step_order", { ascending: true });
-    if (error) throw error;
-    return ((data ?? []) as ConfigurationGroup[]).map((group) => ({
-      ...group,
-      configuration_options: [...group.configuration_options].sort(
-        (a, b) => a.sort_order - b.sort_order,
-      ),
-    }));
-  },
-  ["configuration-groups"],
-  { revalidate: REVALIDATE_SECONDS, tags: CATALOG_TAGS },
-);
-
-export const getConditionGroups = unstable_cache(
-  async (categoryId: string, platform: Platform): Promise<ConditionGroup[]> => {
-    const { data, error } = await publicSupabase
-      .from("condition_groups")
-      .select("*, condition_options(*)")
-      .eq("category_id", categoryId)
-      .eq("active", true)
-      .or(`platform.is.null,platform.eq.${platform}`)
-      .order("step_order", { ascending: true });
-    if (error) throw error;
-    return ((data ?? []) as ConditionGroup[]).map((group) => ({
-      ...group,
-      condition_options: [...group.condition_options].sort((a, b) => a.sort_order - b.sort_order),
-    }));
-  },
-  ["condition-groups"],
   { revalidate: REVALIDATE_SECONDS, tags: CATALOG_TAGS },
 );

@@ -18,7 +18,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { OrderStatusBadge, DEVICE_ORDER_STATUSES } from "@/components/order-status-badge";
-import { PriceEffectBadge } from "@/components/admin/price-effect-badge";
 import { ConfirmDeleteDialog } from "@/components/admin/confirm-delete-dialog";
 import {
   deleteDeviceOrder,
@@ -209,32 +208,10 @@ export function OrdersSubtab() {
                   )}
                 </div>
                 <div>
-                  <p className="text-xs font-semibold uppercase text-muted-foreground">Pricing</p>
-                  <p className="mt-1 text-sm text-ink">
-                    Base price: {formatInr(selected.base_price)}
+                  <p className="text-xs font-semibold uppercase text-muted-foreground">Quote</p>
+                  <p className="mt-1 text-sm font-bold text-emerald-600">
+                    {formatInr(selected.final_quote)}
                   </p>
-                  <p className="text-sm font-bold text-emerald-600">
-                    Final quote: {formatInr(selected.final_quote)}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs font-semibold uppercase text-muted-foreground">Answers</p>
-                  <div className="mt-2 space-y-2">
-                    {selected.answers.map((a, i) => (
-                      <div
-                        key={i}
-                        className="flex items-center justify-between gap-2 rounded-xl bg-secondary/40 px-3 py-2"
-                      >
-                        <span className="min-w-0 truncate text-xs text-ink">
-                          {a.group_title}: {a.option_label}
-                        </span>
-                        <PriceEffectBadge
-                          type={a.price_effect_type}
-                          amount={a.price_effect_amount}
-                        />
-                      </div>
-                    ))}
-                  </div>
                 </div>
                 <div>
                   <p className="text-xs font-semibold uppercase text-muted-foreground">Status</p>
