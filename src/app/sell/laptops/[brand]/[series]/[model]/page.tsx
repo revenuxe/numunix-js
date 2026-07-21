@@ -10,8 +10,6 @@ import {
   getActiveModels,
   getActiveSeries,
   getBrandBySlug,
-  getConditionGroups,
-  getConfigurationGroups,
   getLaptopCategory,
   getModelBySlug,
   getSeriesBySlug,
@@ -60,14 +58,6 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 export default async function ModelQuotePage({ params }: { params: Promise<Params> }) {
   const resolved = await params;
   const { brand, series, model } = await loadContext(resolved);
-
-  const [configGroups, conditionGroups] =
-    brand && model
-      ? await Promise.all([
-          getConfigurationGroups(brand.category_id, brand.platform),
-          getConditionGroups(brand.category_id, brand.platform),
-        ])
-      : [[], []];
 
   return (
     <main className="min-h-screen bg-[#f3faf7] text-ink">
@@ -126,15 +116,7 @@ export default async function ModelQuotePage({ params }: { params: Promise<Param
         )}
       </div>
 
-      {brand && series && model && (
-        <QuoteFunnel
-          brand={brand}
-          series={series}
-          model={model}
-          configGroups={configGroups}
-          conditionGroups={conditionGroups}
-        />
-      )}
+      {brand && series && model && <QuoteFunnel brand={brand} series={series} model={model} />}
     </main>
   );
 }
