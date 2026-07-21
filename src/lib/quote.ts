@@ -16,7 +16,6 @@ export type SubmitDeviceOrderInput = {
   seriesName: string;
   modelName: string;
   modelId: string;
-  basePrice: number;
 };
 
 export async function submitDeviceOrder(input: SubmitDeviceOrderInput): Promise<DeviceOrder> {
@@ -40,8 +39,10 @@ export async function submitDeviceOrder(input: SubmitDeviceOrderInput): Promise<
       series_name: input.seriesName,
       model_name: input.modelName,
       model_id: input.modelId,
-      base_price: input.basePrice,
-      final_quote: input.basePrice,
+      // The model no longer carries a price — actual value is agreed with the
+      // customer after doorstep inspection, so these just start at 0.
+      base_price: 0,
+      final_quote: 0,
     })
     .select("*")
     .single();

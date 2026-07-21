@@ -162,7 +162,6 @@ export async function reorderSeries(a: Series, b: Series) {
 export type ModelInput = {
   name: string;
   slug: string;
-  base_price: number;
   year: number;
   image: string | null;
   active: boolean;
@@ -179,9 +178,11 @@ export async function listAllModels(seriesId: string): Promise<Model[]> {
 }
 
 export async function createModel(seriesId: string, input: ModelInput, sortOrder: number) {
+  // device_models.base_price is still a not-null DB column with no default;
+  // the field is retired from the admin UI, so every new row just gets 0.
   const { error } = await supabase
     .from("device_models")
-    .insert({ series_id: seriesId, ...input, sort_order: sortOrder });
+    .insert({ series_id: seriesId, ...input, base_price: 0, sort_order: sortOrder });
   if (error) throw error;
   await revalidateCatalog();
 }

@@ -1,15 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LoaderCircle, Package, PhoneCall, Tag, Wallet } from "lucide-react";
+import { Package, PhoneCall, Tag, Wallet } from "lucide-react";
 import { toast } from "sonner";
 import { OrderStatusBadge } from "@/components/order-status-badge";
+import { Spinner } from "@/components/spinner";
 import { countActiveCategories, listAllDeviceOrders } from "@/lib/admin-catalog";
 import type { DeviceOrder } from "@/lib/quote-types";
-
-function formatInr(value: number): string {
-  return `₹${Math.round(value).toLocaleString("en-IN")}`;
-}
 
 export function OverviewTab() {
   const [orders, setOrders] = useState<DeviceOrder[]>([]);
@@ -29,7 +26,7 @@ export function OverviewTab() {
   if (loading) {
     return (
       <div className="grid place-items-center py-20 text-muted-foreground">
-        <LoaderCircle className="h-6 w-6 animate-spin" />
+        <Spinner className="h-6 w-6" />
       </div>
     );
   }

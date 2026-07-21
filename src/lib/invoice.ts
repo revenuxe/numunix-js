@@ -143,7 +143,11 @@ export async function generateInvoicePdf(order: DeviceOrder): Promise<void> {
   y += 16;
   text(order.model_name, marginX + 16, { size: 13, bold: true });
   y += 22;
-  text(formatInr(order.final_quote), marginX + 16, { size: 20, bold: true, color: BRAND });
+  text(
+    order.final_quote > 0 ? formatInr(order.final_quote) : "Price pending inspection",
+    marginX + 16,
+    { size: order.final_quote > 0 ? 20 : 14, bold: true, color: BRAND },
+  );
   text("Confirmed after doorstep inspection", pageWidth - marginX - 16, {
     size: 8.5,
     color: MUTED,

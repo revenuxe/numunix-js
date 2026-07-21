@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Eye, LoaderCircle, Trash2, X } from "lucide-react";
+import { Eye, Trash2, X } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { Spinner } from "@/components/spinner";
 
 type Lead = {
   id: string;
@@ -65,7 +66,7 @@ export function LeadsTab() {
       )}
       {loading ? (
         <div className="grid place-items-center py-20 text-muted-foreground">
-          <LoaderCircle className="h-6 w-6 animate-spin" />
+          <Spinner className="h-6 w-6" />
         </div>
       ) : leads.length === 0 ? (
         <div className="rounded-3xl bg-white p-8 text-center text-sm text-muted-foreground ring-1 ring-border">

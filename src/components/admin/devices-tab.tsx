@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LoaderCircle } from "lucide-react";
 import { toast } from "sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Spinner } from "@/components/spinner";
 import { OrdersSubtab } from "@/components/admin/orders-subtab";
 import { BrandsSubtab } from "@/components/admin/brands-subtab";
 import { SeriesSubtab } from "@/components/admin/series-subtab";
@@ -35,7 +35,7 @@ export function DevicesTab() {
   if (!category) {
     return (
       <div className="grid place-items-center py-20 text-muted-foreground">
-        <LoaderCircle className="h-6 w-6 animate-spin" />
+        <Spinner className="h-6 w-6" />
       </div>
     );
   }
@@ -45,7 +45,7 @@ export function DevicesTab() {
       <div className="rounded-2xl bg-white p-5 shadow-soft ring-1 ring-border">
         <p className="text-sm font-bold text-ink">Device buyback</p>
         <p className="mt-1 text-sm text-muted-foreground">
-          Manage the sell-your-device catalog, pricing and orders.
+          Manage the sell-your-device catalog and pickup orders.
         </p>
         <label className="mt-3 block max-w-xs">
           <span className="text-xs font-semibold text-ink/70">Category</span>

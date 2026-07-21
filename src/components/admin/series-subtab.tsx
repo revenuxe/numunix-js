@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { LoaderCircle, Pencil, Plus, Tag } from "lucide-react";
+import { Pencil, Plus, Tag } from "lucide-react";
 import { toast } from "sonner";
+import { Spinner } from "@/components/spinner";
 import {
   Dialog,
   DialogContent,
@@ -194,7 +195,7 @@ export function SeriesSubtab({ categoryId }: { categoryId: string }) {
 
       {loading ? (
         <div className="grid place-items-center py-16 text-muted-foreground">
-          <LoaderCircle className="h-5 w-5 animate-spin" />
+          <Spinner className="h-5 w-5" />
         </div>
       ) : series.length === 0 ? (
         <p className="mt-6 rounded-2xl bg-secondary/40 p-6 text-center text-sm text-muted-foreground">

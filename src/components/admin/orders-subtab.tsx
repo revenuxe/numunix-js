@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { LoaderCircle, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { toast } from "sonner";
+import { Spinner } from "@/components/spinner";
 import {
   Sheet,
   SheetContent,
@@ -26,8 +27,8 @@ import {
 } from "@/lib/admin-catalog";
 import type { DeviceOrder, DeviceOrderStatus } from "@/lib/quote-types";
 
-function formatInr(value: number): string {
-  return `₹${Math.round(value).toLocaleString("en-IN")}`;
+function formatQuote(value: number): string {
+  return value > 0 ? `₹${Math.round(value).toLocaleString("en-IN")}` : "Pending inspection";
 }
 
 export function OrdersSubtab() {
@@ -118,7 +119,7 @@ export function OrdersSubtab() {
 
       {loading ? (
         <div className="grid place-items-center py-16 text-muted-foreground">
-          <LoaderCircle className="h-5 w-5 animate-spin" />
+          <Spinner className="h-5 w-5" />
         </div>
       ) : filtered.length === 0 ? (
         <p className="mt-6 rounded-2xl bg-secondary/40 p-6 text-center text-sm text-muted-foreground">
@@ -155,8 +156,10 @@ export function OrdersSubtab() {
                       {order.brand_name} · {order.series_name}
                     </p>
                   </td>
-                  <td className="px-4 py-3 font-bold text-emerald-600">
-                    {formatInr(order.final_quote)}
+                  <td
+                    className={`px-4 py-3 font-bold ${order.final_quote > 0 ? "text-emerald-600" : "text-muted-foreground"}`}
+                  >
+                    {formatQuote(order.final_quote)}
                   </td>
                   <td className="px-4 py-3 text-xs text-muted-foreground">
                     {order.pickup_date} · {order.pickup_slot}
@@ -209,8 +212,12 @@ export function OrdersSubtab() {
                 </div>
                 <div>
                   <p className="text-xs font-semibold uppercase text-muted-foreground">Quote</p>
-                  <p className="mt-1 text-sm font-bold text-emerald-600">
-                    {formatInr(selected.final_quote)}
+                  <p
+                    className={`mt-1 text-sm font-bold ${
+                      selected.final_quote > 0 ? "text-emerald-600" : "text-muted-foreground"
+                    }`}
+                  >
+                    {formatQuote(selected.final_quote)}
                   </p>
                 </div>
                 <div>

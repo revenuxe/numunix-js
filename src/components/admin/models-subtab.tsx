@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Laptop, LoaderCircle, Pencil, Plus } from "lucide-react";
+import { Laptop, Pencil, Plus } from "lucide-react";
 import { toast } from "sonner";
+import { Spinner } from "@/components/spinner";
 import {
   Dialog,
   DialogContent,
@@ -30,7 +31,6 @@ import type { Brand, Model, Series } from "@/lib/quote-types";
 const EMPTY_FORM: ModelInput = {
   name: "",
   slug: "",
-  base_price: 0,
   year: new Date().getFullYear(),
   image: null,
   active: true,
@@ -90,7 +90,6 @@ export function ModelsSubtab({ categoryId }: { categoryId: string }) {
     setForm({
       name: m.name,
       slug: m.slug,
-      base_price: m.base_price,
       year: m.year,
       image: m.image,
       active: m.active,
@@ -136,7 +135,6 @@ export function ModelsSubtab({ categoryId }: { categoryId: string }) {
       await updateModel(m.id, {
         name: m.name,
         slug: m.slug,
-        base_price: m.base_price,
         year: m.year,
         image: m.image,
         active: !m.active,
@@ -211,29 +209,17 @@ export function ModelsSubtab({ categoryId }: { categoryId: string }) {
                   className="mt-1.5 w-full rounded-xl border border-border px-3 py-2 text-sm outline-none focus:border-brand"
                 />
               </label>
-              <div className="grid grid-cols-2 gap-3">
-                <label className="block">
-                  <span className="text-xs font-semibold text-ink/70">Best-case price (₹)</span>
-                  <input
-                    type="number"
-                    min={0}
-                    value={form.base_price}
-                    onChange={(e) => setForm({ ...form, base_price: Number(e.target.value) })}
-                    className="mt-1.5 w-full rounded-xl border border-border px-3 py-2 text-sm outline-none focus:border-brand"
-                  />
-                </label>
-                <label className="block">
-                  <span className="text-xs font-semibold text-ink/70">Model year</span>
-                  <input
-                    type="number"
-                    min={1990}
-                    max={2100}
-                    value={form.year}
-                    onChange={(e) => setForm({ ...form, year: Number(e.target.value) })}
-                    className="mt-1.5 w-full rounded-xl border border-border px-3 py-2 text-sm outline-none focus:border-brand"
-                  />
-                </label>
-              </div>
+              <label className="block">
+                <span className="text-xs font-semibold text-ink/70">Model year</span>
+                <input
+                  type="number"
+                  min={1990}
+                  max={2100}
+                  value={form.year}
+                  onChange={(e) => setForm({ ...form, year: Number(e.target.value) })}
+                  className="mt-1.5 w-full rounded-xl border border-border px-3 py-2 text-sm outline-none focus:border-brand"
+                />
+              </label>
               <ImageUploadField
                 label="Product image"
                 value={form.image}
@@ -262,7 +248,7 @@ export function ModelsSubtab({ categoryId }: { categoryId: string }) {
 
       {loading ? (
         <div className="grid place-items-center py-16 text-muted-foreground">
-          <LoaderCircle className="h-5 w-5 animate-spin" />
+          <Spinner className="h-5 w-5" />
         </div>
       ) : models.length === 0 ? (
         <p className="mt-6 rounded-2xl bg-secondary/40 p-6 text-center text-sm text-muted-foreground">
@@ -289,9 +275,6 @@ export function ModelsSubtab({ categoryId }: { categoryId: string }) {
                 <p className="truncate font-bold text-ink">{m.name}</p>
                 <p className="text-xs text-muted-foreground">{m.year}</p>
               </div>
-              <p className="shrink-0 font-bold text-emerald-600">
-                ₹{m.base_price.toLocaleString("en-IN")}
-              </p>
               {!m.active && (
                 <span className="shrink-0 rounded-full bg-secondary px-2 py-0.5 text-[10px] font-semibold uppercase text-muted-foreground">
                   Hidden

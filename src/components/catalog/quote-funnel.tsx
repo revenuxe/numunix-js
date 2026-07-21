@@ -1,18 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  ArrowRight,
-  CheckCircle2,
-  Download,
-  LoaderCircle,
-  ShieldCheck,
-  Truck,
-  Zap,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, Download, ShieldCheck, Truck, Zap } from "lucide-react";
 import { toast } from "sonner";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { InlineLoginForm } from "@/components/inline-login-form";
+import { PageLoader } from "@/components/page-loader";
 import { supabase } from "@/lib/supabase";
 import { CONTACT } from "@/lib/contact";
 import { submitDeviceOrder } from "@/lib/quote";
@@ -72,7 +65,6 @@ export function QuoteFunnel({
         seriesName: series.name,
         modelName: model.name,
         modelId: model.id,
-        basePrice: model.base_price,
       });
       setSavedPincode(input.pincode);
       setOrder(created);
@@ -155,8 +147,8 @@ function StartPhase({
 
       <div className="mt-5">
         {isAuthenticated === null ? (
-          <div className="grid place-items-center rounded-[2rem] bg-ink py-24 text-white/70">
-            <LoaderCircle className="h-6 w-6 animate-spin" />
+          <div className="rounded-[2rem] bg-ink">
+            <PageLoader minHeight="14rem" />
           </div>
         ) : !isAuthenticated ? (
           <InlineLoginForm

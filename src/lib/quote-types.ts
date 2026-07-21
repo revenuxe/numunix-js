@@ -38,7 +38,6 @@ export type Model = {
   series_id: string;
   name: string;
   slug: string;
-  base_price: number;
   year: number;
   image: string | null;
   active: boolean;

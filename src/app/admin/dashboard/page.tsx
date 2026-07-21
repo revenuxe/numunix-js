@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { LoaderCircle, LogOut } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LogoMark } from "@/components/logo-mark";
+import { PageLoader } from "@/components/page-loader";
 import { OverviewTab } from "@/components/admin/overview-tab";
 import { DevicesTab } from "@/components/admin/devices-tab";
 import { LeadsTab } from "@/components/admin/leads-tab";
@@ -29,7 +30,7 @@ export default function AdminDashboard() {
   if (checking) {
     return (
       <main className="grid min-h-screen place-items-center bg-secondary/40">
-        <LoaderCircle className="h-6 w-6 animate-spin text-muted-foreground" />
+        <PageLoader label="Checking admin access…" minHeight="auto" />
       </main>
     );
   }

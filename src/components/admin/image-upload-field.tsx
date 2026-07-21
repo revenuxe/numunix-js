@@ -2,8 +2,9 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { LoaderCircle, Upload, X } from "lucide-react";
+import { Upload, X } from "lucide-react";
 import { toast } from "sonner";
+import { Spinner } from "@/components/spinner";
 import { uploadDeviceAsset } from "@/lib/admin-catalog";
 
 export function ImageUploadField({
@@ -65,11 +66,7 @@ export function ImageUploadField({
               disabled={busy}
               className="inline-flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-xs font-semibold text-ink disabled:opacity-50"
             >
-              {busy ? (
-                <LoaderCircle className="h-3.5 w-3.5 animate-spin" />
-              ) : (
-                <Upload className="h-3.5 w-3.5" />
-              )}
+              {busy ? <Spinner className="h-3.5 w-3.5" /> : <Upload className="h-3.5 w-3.5" />}
               Upload
             </button>
             {value && (

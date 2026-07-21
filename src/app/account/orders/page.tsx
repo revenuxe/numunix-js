@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Ban, Download, LoaderCircle, LogOut, UserCog } from "lucide-react";
+import { Ban, Download, LogOut, UserCog } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/lib/supabase";
 import { cancelMyDeviceOrder, getMyDeviceOrders } from "@/lib/quote";
@@ -11,6 +11,7 @@ import { generateInvoicePdf } from "@/lib/invoice";
 import { OrderStatusBadge } from "@/components/order-status-badge";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
+import { Spinner } from "@/components/spinner";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -94,7 +95,7 @@ export default function MyOrdersPage() {
 
         {loading ? (
           <div className="grid place-items-center py-20 text-muted-foreground">
-            <LoaderCircle className="h-6 w-6 animate-spin" />
+            <Spinner className="h-6 w-6" />
           </div>
         ) : orders.length === 0 ? (
           <div className="rounded-3xl bg-white p-8 text-center text-sm text-muted-foreground ring-1 ring-border">
@@ -118,8 +119,10 @@ export default function MyOrdersPage() {
                       {order.brand_name} · {order.series_name}
                     </p>
                     <h2 className="mt-1 text-lg font-bold text-ink">{order.model_name}</h2>
-                    <p className="mt-1 text-2xl font-extrabold text-brand">
-                      ₹{Math.round(order.final_quote).toLocaleString("en-IN")}
+                    <p className="mt-1 text-sm font-semibold text-muted-foreground">
+                      {order.final_quote > 0
+                        ? `₹${Math.round(order.final_quote).toLocaleString("en-IN")}`
+                        : "Price pending inspection"}
                     </p>
                   </div>
                   <OrderStatusBadge status={order.status} />

@@ -3,12 +3,13 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ClipboardList, LoaderCircle, LogOut, Save } from "lucide-react";
+import { ClipboardList, LogOut, Save } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/lib/supabase";
 import { getMyProfile, saveMyProfile } from "@/lib/customer-profile";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
+import { Spinner } from "@/components/spinner";
 
 export default function AccountPage() {
   const router = useRouter();
@@ -104,7 +105,7 @@ export default function AccountPage() {
 
         {loading ? (
           <div className="grid place-items-center py-20 text-muted-foreground">
-            <LoaderCircle className="h-6 w-6 animate-spin" />
+            <Spinner className="h-6 w-6" />
           </div>
         ) : (
           <form
