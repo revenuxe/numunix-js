@@ -19,6 +19,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { PageHero } from "@/components/page-hero";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { CONTACT } from "@/lib/contact";
+import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 import whyImg from "@/assets/why-choose.webp";
 
 export const metadata: Metadata = {
@@ -31,6 +32,11 @@ export const metadata: Metadata = {
     url: "/why-us",
   },
 };
+
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Why Us", path: "/why-us" },
+]);
 
 const REASONS = [
   {
@@ -229,6 +235,10 @@ export default function WhyUsPage() {
       </section>
 
       <SiteFooter />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
     </main>
   );
 }

@@ -7,7 +7,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LogoMark } from "@/components/logo-mark";
 import { PageLoader } from "@/components/page-loader";
 import { OverviewTab } from "@/components/admin/overview-tab";
-import { OrdersSubtab } from "@/components/admin/orders-subtab";
 import { LeadsTab } from "@/components/admin/leads-tab";
 import { supabase } from "@/lib/supabase";
 
@@ -57,21 +56,15 @@ export default function AdminDashboard() {
 
       <section className="mx-auto max-w-6xl px-4 py-8 md:px-8">
         <h1 className="text-2xl font-extrabold">Dashboard</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Manage laptop buyback orders and service leads.
-        </p>
+        <p className="mt-1 text-sm text-muted-foreground">Manage incoming service leads.</p>
 
         <Tabs defaultValue="overview" className="mt-6">
           <TabsList>
             <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="orders">Orders</TabsTrigger>
             <TabsTrigger value="leads">Leads</TabsTrigger>
           </TabsList>
           <TabsContent value="overview" className="mt-6">
             <OverviewTab />
-          </TabsContent>
-          <TabsContent value="orders" className="mt-6">
-            <OrdersSubtab />
           </TabsContent>
           <TabsContent value="leads" className="mt-6">
             <LeadsTab />

@@ -4,6 +4,7 @@ import { RepairLaptopContent } from "@/components/repair-laptop-content";
 import { BANGALORE_AREAS, buildAreaCopy, getBangaloreArea } from "@/lib/bangalore-areas";
 import { REPAIR_LAPTOP_FAQS } from "@/lib/faq-data";
 import { SITE_URL } from "@/lib/site";
+import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 
 export const revalidate = 3600;
 
@@ -65,6 +66,12 @@ export default async function RepairLaptopAreaPage({ params }: { params: Promise
     url: `${SITE_URL}/repair-laptop/${area.slug}`,
   };
 
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: "Home", path: "/" },
+    { name: "Repair Laptop", path: "/repair-laptop" },
+    { name: area.name, path: `/repair-laptop/${area.slug}` },
+  ]);
+
   return (
     <>
       <RepairLaptopContent area={area} />
@@ -75,6 +82,10 @@ export default async function RepairLaptopAreaPage({ params }: { params: Promise
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
     </>
   );

@@ -7,5 +7,13 @@ export const CONTACT = {
   mailUrl: "mailto:numunix@gmail.com",
   founded: "2020",
   onlineSince: "2025",
+  // Short form — used for legal/jurisdiction copy and general area-served text.
   address: "Bengaluru, Karnataka, India",
+  // Full postal address — used for the Contact page, footer and structured data.
+  street: "No 11, 4th Cross, 2nd Main Road, Shampura",
+  locality: "Bengaluru",
+  region: "Karnataka",
+  postalCode: "560045",
+  country: "IN",
+  fullAddress: "No 11, 4th Cross, 2nd Main Road, Shampura, Bengaluru, Karnataka 560045",
 };

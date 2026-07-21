@@ -3,6 +3,8 @@ import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { PageHero } from "@/components/page-hero";
 import { CONTACT } from "@/lib/contact";
+import { SITE_URL } from "@/lib/site";
+import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 
 export const metadata: Metadata = {
   title: { absolute: "Privacy Policy — Numunix" },
@@ -11,6 +13,19 @@ export const metadata: Metadata = {
   alternates: { canonical: "/privacy" },
   openGraph: { url: "/privacy" },
   robots: { index: true, follow: true },
+};
+
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Privacy Policy", path: "/privacy" },
+]);
+
+const webPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Privacy Policy",
+  url: `${SITE_URL}/privacy`,
+  isPartOf: { "@id": `${SITE_URL}/#website` },
 };
 
 const SECTIONS: { heading: string; body: string[] }[] = [
@@ -125,6 +140,14 @@ export default function PrivacyPage() {
         </div>
       </section>
       <SiteFooter />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
     </main>
   );
 }

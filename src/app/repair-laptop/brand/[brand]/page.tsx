@@ -9,6 +9,7 @@ import {
   heroProductName,
 } from "@/lib/repair-laptop-brands";
 import { SITE_URL } from "@/lib/site";
+import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 
 export const revalidate = 3600;
 
@@ -62,6 +63,12 @@ export default async function RepairLaptopBrandPage({ params }: { params: Promis
     url: `${SITE_URL}/repair-laptop/brand/${brand.slug}`,
   };
 
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: "Home", path: "/" },
+    { name: "Repair Laptop", path: "/repair-laptop" },
+    { name: brand.name, path: `/repair-laptop/brand/${brand.slug}` },
+  ]);
+
   return (
     <>
       <RepairLaptopContent brandSeo={brand} />
@@ -72,6 +79,10 @@ export default async function RepairLaptopBrandPage({ params }: { params: Promis
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
     </>
   );

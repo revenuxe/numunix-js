@@ -7,18 +7,33 @@ import { SiteFooter } from "@/components/site-footer";
 import { PageHero } from "@/components/page-hero";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { CONTACT } from "@/lib/contact";
+import { SITE_URL } from "@/lib/site";
+import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 import teamImg from "@/assets/team-it.webp";
 import whyImg from "@/assets/why-choose.webp";
 
 export const metadata: Metadata = {
-  title: { absolute: "About Numunix — Trusted IT Support Since 2020" },
+  title: { absolute: "About Numunix — Trusted IT Support in Bangalore Since 2020" },
   description:
-    "Numunix has been serving customers with reliable laptop repair, desktop repair, CCTV and networking services since 2020, now available online since 2025.",
+    "Numunix has been serving Bangalore with reliable laptop repair, desktop repair, CCTV installation and networking services since 2020, now available online since 2025.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About Numunix",
     url: "/about",
   },
+};
+
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+]);
+
+const aboutPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: "About Numunix",
+  url: `${SITE_URL}/about`,
+  mainEntity: { "@id": `${SITE_URL}/#organization` },
 };
 
 const VALUES = [
@@ -227,6 +242,14 @@ export default function AboutPage() {
       </section>
 
       <SiteFooter />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
     </main>
   );
 }

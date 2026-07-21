@@ -6,12 +6,27 @@ import { PageHero } from "@/components/page-hero";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { ContactForm } from "@/components/contact-form";
 import { CONTACT } from "@/lib/contact";
+import { SITE_URL } from "@/lib/site";
+import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 
 export const metadata: Metadata = {
-  title: { absolute: "Contact Numunix - Book IT Support & Repairs" },
-  description: `Get in touch with Numunix. Call ${CONTACT.phoneDisplay}, email ${CONTACT.email} or send a WhatsApp message for laptop repair, CCTV, networking and business IT support.`,
+  title: { absolute: "Contact Numunix - Book IT Support & Repairs in Bangalore" },
+  description: `Get in touch with Numunix in Bangalore. Call ${CONTACT.phoneDisplay}, email ${CONTACT.email} or send a WhatsApp message for laptop repair, CCTV, networking and business IT support.`,
   alternates: { canonical: "/contact" },
   openGraph: { title: "Contact Numunix", url: "/contact" },
+};
+
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Contact", path: "/contact" },
+]);
+
+const contactPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Contact Numunix",
+  url: `${SITE_URL}/contact`,
+  mainEntity: { "@id": `${SITE_URL}/#organization` },
 };
 
 export default function ContactPage() {
@@ -79,8 +94,8 @@ export default function ContactPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-3xl bg-secondary/60 p-5 ring-1 ring-border">
                 <MapPin className="h-5 w-5 text-brand" />
-                <p className="mt-3 text-sm font-semibold text-ink">Service Area</p>
-                <p className="mt-1 text-sm text-muted-foreground">{CONTACT.address}</p>
+                <p className="mt-3 text-sm font-semibold text-ink">Our Address</p>
+                <p className="mt-1 text-sm text-muted-foreground">{CONTACT.fullAddress}</p>
               </div>
               <div className="rounded-3xl bg-secondary/60 p-5 ring-1 ring-border">
                 <Clock className="h-5 w-5 text-brand" />
@@ -99,6 +114,14 @@ export default function ContactPage() {
       </section>
 
       <SiteFooter />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
     </main>
   );
 }

@@ -3,6 +3,8 @@ import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { PageHero } from "@/components/page-hero";
 import { CONTACT } from "@/lib/contact";
+import { SITE_URL } from "@/lib/site";
+import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 
 export const metadata: Metadata = {
   title: { absolute: "Terms & Conditions — Numunix" },
@@ -10,6 +12,19 @@ export const metadata: Metadata = {
     "The terms and conditions that apply when you use Numunix services, including repairs, warranties, payments and liability.",
   alternates: { canonical: "/terms" },
   openGraph: { url: "/terms" },
+};
+
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Terms & Conditions", path: "/terms" },
+]);
+
+const webPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Terms & Conditions",
+  url: `${SITE_URL}/terms`,
+  isPartOf: { "@id": `${SITE_URL}/#website` },
 };
 
 const SECTIONS: { heading: string; body: string[] }[] = [
@@ -153,6 +168,14 @@ export default function TermsPage() {
         </div>
       </section>
       <SiteFooter />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
     </main>
   );
 }

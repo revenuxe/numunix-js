@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Facebook, Instagram, Youtube, Twitter, Mail, Phone } from "lucide-react";
+import { Facebook, Instagram, Youtube, Twitter, Mail, MapPin, Phone } from "lucide-react";
 import { LogoMark } from "@/components/logo-mark";
 import { CONTACT } from "@/lib/contact";
 import { REPAIR_LAPTOP_BRANDS } from "@/lib/repair-laptop-brands";
@@ -72,6 +72,10 @@ export function SiteFooter({ showRepairLaptopMenu = false }: { showRepairLaptopM
               <Mail className="h-4 w-4" />
               {CONTACT.email}
             </a>
+            <p className="flex items-start gap-2 text-muted-foreground">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
+              <span>{CONTACT.fullAddress}</span>
+            </p>
           </div>
           <div className="mt-6 flex items-center gap-3">
             {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (

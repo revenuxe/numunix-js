@@ -1,26 +1,47 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Package, PhoneCall, Tag, Wallet } from "lucide-react";
+import { CalendarDays, ListChecks, PhoneCall, Users } from "lucide-react";
 import { toast } from "sonner";
-import { OrderStatusBadge } from "@/components/order-status-badge";
 import { Spinner } from "@/components/spinner";
-import { countActiveCategories, listAllDeviceOrders } from "@/lib/admin-catalog";
-import type { DeviceOrder } from "@/lib/quote-types";
+import { supabase } from "@/lib/supabase";
+
+type Lead = {
+  id: string;
+  created_at: string;
+  name: string;
+  service: string;
+  source: string;
+};
+
+function isSameDay(a: Date, b: Date) {
+  return (
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()
+  );
+}
 
 export function OverviewTab() {
-  const [orders, setOrders] = useState<DeviceOrder[]>([]);
-  const [activeCategories, setActiveCategories] = useState(0);
+  const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([listAllDeviceOrders(), countActiveCategories()])
-      .then(([o, c]) => {
-        setOrders(o);
-        setActiveCategories(c);
-      })
-      .catch(() => toast.error("Could not load overview stats."))
-      .finally(() => setLoading(false));
+    async function load() {
+      try {
+        const { data, error } = await supabase
+          .from("leads")
+          .select("id, created_at, name, service, source")
+          .order("created_at", { ascending: false });
+        if (error) throw error;
+        setLeads((data ?? []) as Lead[]);
+      } catch {
+        toast.error("Could not load overview stats.");
+      } finally {
+        setLoading(false);
+      }
+    }
+    void load();
   }, []);
 
   if (loading) {
@@ -31,16 +52,17 @@ export function OverviewTab() {
     );
   }
 
-  const newOrContacted = orders.filter(
-    (o) => o.status === "new" || o.status === "contacted",
-  ).length;
-  const paid = orders.filter((o) => o.status === "paid").length;
+  const now = new Date();
+  const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+  const today = leads.filter((l) => isSameDay(new Date(l.created_at), now)).length;
+  const thisWeek = leads.filter((l) => new Date(l.created_at) >= weekAgo).length;
+  const whatsappOrCall = leads.filter((l) => l.source !== "contact").length;
 
   const stats = [
-    { label: "Total laptop orders", value: orders.length, Icon: Package },
-    { label: "New / contacted", value: newOrContacted, Icon: PhoneCall },
-    { label: "Paid orders", value: paid, Icon: Wallet },
-    { label: "Active device categories", value: activeCategories, Icon: Tag },
+    { label: "Total leads", value: leads.length, Icon: Users },
+    { label: "New today", value: today, Icon: CalendarDays },
+    { label: "New this week", value: thisWeek, Icon: ListChecks },
+    { label: "Booking-form leads", value: whatsappOrCall, Icon: PhoneCall },
   ];
 
   return (
@@ -58,24 +80,20 @@ export function OverviewTab() {
       </div>
 
       <div className="mt-6 rounded-2xl bg-white p-5 shadow-soft ring-1 ring-border">
-        <p className="text-sm font-bold text-ink">Latest laptop orders</p>
-        {orders.length === 0 ? (
-          <p className="mt-4 text-sm text-muted-foreground">No orders yet.</p>
+        <p className="text-sm font-bold text-ink">Latest leads</p>
+        {leads.length === 0 ? (
+          <p className="mt-4 text-sm text-muted-foreground">No leads yet.</p>
         ) : (
           <div className="mt-4 divide-y divide-border">
-            {orders.slice(0, 8).map((order) => (
-              <div
-                key={order.id}
-                className="flex flex-wrap items-center justify-between gap-2 py-3"
-              >
+            {leads.slice(0, 8).map((lead) => (
+              <div key={lead.id} className="flex flex-wrap items-center justify-between gap-2 py-3">
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold text-ink">{order.customer_name}</p>
-                  <p className="truncate text-xs text-muted-foreground">{order.model_name}</p>
+                  <p className="truncate text-sm font-semibold text-ink">{lead.name}</p>
+                  <p className="truncate text-xs text-muted-foreground">{lead.service}</p>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  {new Date(order.created_at).toLocaleDateString("en-IN")}
+                  {new Date(lead.created_at).toLocaleDateString("en-IN")}
                 </p>
-                <OrderStatusBadge status={order.status} />
               </div>
             ))}
           </div>

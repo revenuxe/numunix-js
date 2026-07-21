@@ -7,9 +7,11 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { ServiceBookingForm } from "@/components/service-booking-form";
+import { CctvBrandSelect } from "@/components/cctv-brand-select";
 import { CONTACT } from "@/lib/contact";
 import { getService, getServiceSlugs } from "@/lib/services";
 import { SITE_NAME } from "@/lib/site";
+import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 import heroHandoff from "@/assets/hero-handoff.webp";
 
 export function generateStaticParams() {
@@ -68,6 +70,10 @@ export default async function ServicePage({
       acceptedAnswer: { "@type": "Answer", text: faq.answer },
     })),
   };
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: "Home", path: "/" },
+    { name: service.name, path },
+  ]);
 
   return (
     <main className="bg-white text-ink">
@@ -104,6 +110,8 @@ export default async function ServicePage({
           </div>
         </div>
       </section>
+
+      {serviceSlug === "cctv-installation" && <CctvBrandSelect />}
 
       <section className="mx-auto grid max-w-6xl gap-12 px-4 py-20 md:px-8 md:py-28 lg:grid-cols-[.8fr_1.2fr] lg:items-start">
         <div className="lg:sticky lg:top-24">
@@ -237,6 +245,10 @@ export default async function ServicePage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
     </main>
   );

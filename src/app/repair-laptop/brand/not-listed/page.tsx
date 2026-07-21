@@ -8,6 +8,7 @@ import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { ServiceBookingForm } from "@/components/service-booking-form";
 import { REPAIR_LAPTOP_BRANDS } from "@/lib/repair-laptop-brands";
 import { SITE_URL } from "@/lib/site";
+import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 import heroHandoff from "@/assets/hero-handoff.webp";
 
 const whatsapp =
@@ -82,6 +83,12 @@ const serviceJsonLd = {
   areaServed: { "@type": "Place", name: "Bangalore, Karnataka" },
   url: `${SITE_URL}/repair-laptop/brand/not-listed`,
 };
+
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Repair Laptop", path: "/repair-laptop" },
+  { name: "Not Listed", path: "/repair-laptop/brand/not-listed" },
+]);
 
 export default function NotListedBrandPage() {
   return (
@@ -235,6 +242,10 @@ export default function NotListedBrandPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
     </main>
   );

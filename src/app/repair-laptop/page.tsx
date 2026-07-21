@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { RepairLaptopContent } from "@/components/repair-laptop-content";
 import { REPAIR_LAPTOP_FAQS } from "@/lib/faq-data";
+import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
+
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Repair Laptop", path: "/repair-laptop" },
+]);
 
 export const metadata: Metadata = {
   title: { absolute: "Laptop Repair in Bangalore - Certified Technicians | Numunix" },
@@ -30,6 +36,10 @@ export default function RepairLaptopPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
     </>
   );
