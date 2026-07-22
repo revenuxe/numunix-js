@@ -21,5 +21,20 @@ export async function createLead(input: LeadInput): Promise<string> {
 
   if (error) throw error;
   if (!data) throw new Error("The lead was saved without a booking reference.");
+
+  notifyLeadByEmail({ ...input, bookingId: data });
+
   return data;
+}
+
+// Fire-and-forget: the lead is already saved in Supabase, so an email outage
+// must never fail the booking. `keepalive` lets the request finish even
+// though the form immediately redirects to /thank-you afterwards.
+function notifyLeadByEmail(input: LeadInput & { bookingId: string }) {
+  fetch("/api/send-lead-email", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(input),
+    keepalive: true,
+  }).catch(() => {});
 }
