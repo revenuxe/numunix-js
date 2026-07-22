@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Facebook, Instagram, Youtube, Twitter, Mail, MapPin, Phone } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Youtube, Twitter, Mail, MapPin, Phone } from "lucide-react";
 import { LogoMark } from "@/components/logo-mark";
 import { CONTACT } from "@/lib/contact";
 import { REPAIR_LAPTOP_BRANDS } from "@/lib/repair-laptop-brands";
@@ -79,11 +79,19 @@ export function SiteFooter({ showRepairLaptopMenu = false }: { showRepairLaptopM
             </p>
           </div>
           <div className="mt-6 flex items-center gap-3">
-            {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
+            {[
+              { Icon: Facebook, href: "#", label: "Facebook" },
+              { Icon: Twitter, href: "#", label: "Twitter" },
+              { Icon: Instagram, href: "https://www.instagram.com/numunix/", label: "Instagram" },
+              { Icon: Linkedin, href: "https://www.linkedin.com/company/numunix", label: "LinkedIn" },
+              { Icon: Youtube, href: "#", label: "YouTube" },
+            ].map(({ Icon, href, label }) => (
               <a
-                key={i}
-                href="#"
-                aria-label="social"
+                key={label}
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                aria-label={label}
                 className="grid h-9 w-9 place-items-center rounded-full bg-secondary text-ink transition hover:bg-brand hover:text-brand-foreground"
               >
                 <Icon className="h-4 w-4" />
