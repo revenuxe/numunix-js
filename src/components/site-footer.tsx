@@ -83,7 +83,11 @@ export function SiteFooter({ showRepairLaptopMenu = false }: { showRepairLaptopM
               { Icon: Facebook, href: "#", label: "Facebook" },
               { Icon: Twitter, href: "#", label: "Twitter" },
               { Icon: Instagram, href: "https://www.instagram.com/numunix/", label: "Instagram" },
-              { Icon: Linkedin, href: "https://www.linkedin.com/company/numunix", label: "LinkedIn" },
+              {
+                Icon: Linkedin,
+                href: "https://www.linkedin.com/company/numunix",
+                label: "LinkedIn",
+              },
               { Icon: Youtube, href: "#", label: "YouTube" },
             ].map(({ Icon, href, label }) => (
               <a
