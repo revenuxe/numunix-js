@@ -7,6 +7,8 @@ import { Ban, Download, LogOut, UserCog } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/lib/supabase";
 import { cancelMyDeviceOrder, getMyDeviceOrders } from "@/lib/quote";
+import { getMyLeads } from "@/lib/leads";
+import type { MyLead } from "@/lib/leads";
 import { generateInvoicePdf } from "@/lib/invoice";
 import { OrderStatusBadge } from "@/components/order-status-badge";
 import { SiteNav } from "@/components/site-nav";
@@ -31,6 +33,7 @@ const CANCELLABLE_STATUSES: DeviceOrder["status"][] = ["new", "contacted", "sche
 export default function MyOrdersPage() {
   const router = useRouter();
   const [orders, setOrders] = useState<DeviceOrder[]>([]);
+  const [leads, setLeads] = useState<MyLead[]>([]);
   const [loading, setLoading] = useState(true);
   const [cancellingId, setCancellingId] = useState<string | null>(null);
 
@@ -40,8 +43,11 @@ export default function MyOrdersPage() {
         router.push("/login?redirect=/account/orders");
         return;
       }
-      getMyDeviceOrders()
-        .then(setOrders)
+      Promise.all([getMyDeviceOrders().catch(() => []), getMyLeads().catch(() => [])])
+        .then(([deviceOrders, myLeads]) => {
+          setOrders(deviceOrders);
+          setLeads(myLeads);
+        })
         .catch(() => toast.error("Could not load your requests."))
         .finally(() => setLoading(false));
     });
@@ -98,9 +104,9 @@ export default function MyOrdersPage() {
           <div className="grid place-items-center py-20 text-muted-foreground">
             <Spinner className="h-6 w-6" />
           </div>
-        ) : orders.length === 0 ? (
+        ) : orders.length === 0 && leads.length === 0 ? (
           <div className="rounded-3xl bg-white p-8 text-center text-sm text-muted-foreground ring-1 ring-border">
-            You haven&apos;t booked a pickup yet.
+            You haven&apos;t submitted a repair request yet.
             <div className="mt-4">
               <a
                 href={CONTACT.whatsappUrl}
@@ -108,84 +114,123 @@ export default function MyOrdersPage() {
                 rel="noopener noreferrer"
                 className="text-sm font-semibold text-brand"
               >
-                Sell a laptop on WhatsApp
+                Book a repair on WhatsApp
               </a>
             </div>
           </div>
         ) : (
-          <div className="grid gap-4">
-            {orders.map((order) => (
-              <article
-                key={order.id}
-                className="rounded-3xl bg-white p-5 shadow-soft ring-1 ring-border"
-              >
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
-                    <p className="text-xs uppercase tracking-widest text-muted-foreground">
-                      {order.brand_name} · {order.series_name}
-                    </p>
-                    <h2 className="mt-1 text-lg font-bold text-ink">{order.model_name}</h2>
-                    <p className="mt-1 text-sm font-semibold text-muted-foreground">
-                      {order.final_quote > 0
-                        ? `₹${Math.round(order.final_quote).toLocaleString("en-IN")}`
-                        : "Price pending inspection"}
-                    </p>
-                  </div>
-                  <OrderStatusBadge status={order.status} />
-                </div>
-                <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Booking ID: <span className="text-ink">{order.booking_id}</span>
-                </p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Pickup {order.pickup_date} · {order.pickup_slot} · Booked{" "}
-                  {new Date(order.created_at).toLocaleDateString("en-IN")}
-                </p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  <button
-                    onClick={() =>
-                      void generateInvoicePdf(order).catch(() =>
-                        toast.error("Could not generate the invoice PDF. Please try again."),
-                      )
-                    }
-                    className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-semibold text-ink transition hover:bg-secondary"
+          <div className="grid gap-8">
+            {leads.length > 0 && (
+              <div className="grid gap-4">
+                <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                  Repair requests
+                </h2>
+                {leads.map((lead) => (
+                  <article
+                    key={lead.id}
+                    className="rounded-3xl bg-white p-5 shadow-soft ring-1 ring-border"
                   >
-                    <Download className="h-3.5 w-3.5" />
-                    Download invoice
-                  </button>
-                  {CANCELLABLE_STATUSES.includes(order.status) && (
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
-                        <button
-                          disabled={cancellingId === order.id}
-                          className="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-4 py-2 text-xs font-semibold text-red-700 transition hover:bg-red-600 hover:text-white disabled:opacity-60"
-                        >
-                          <Ban className="h-3.5 w-3.5" />
-                          {cancellingId === order.id ? "Cancelling…" : "Cancel booking"}
-                        </button>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>Cancel this pickup booking?</AlertDialogTitle>
-                          <AlertDialogDescription>
-                            We won&apos;t send a pickup agent for your {order.model_name}. You can
-                            book again any time.
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Keep booking</AlertDialogCancel>
-                          <AlertDialogAction
-                            onClick={() => void onCancel(order)}
-                            className="bg-red-600 hover:bg-red-700"
-                          >
-                            Cancel booking
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
-                  )}
-                </div>
-              </article>
-            ))}
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <h3 className="text-lg font-bold text-ink">{lead.service}</h3>
+                      <span className="rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold text-brand">
+                        Submitted
+                      </span>
+                    </div>
+                    {lead.booking_id && (
+                      <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                        Booking ID: <span className="text-ink">{lead.booking_id}</span>
+                      </p>
+                    )}
+                    {lead.message && (
+                      <p className="mt-1 text-sm text-muted-foreground">{lead.message}</p>
+                    )}
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {lead.postal_code ? `${lead.postal_code} · ` : ""}Requested{" "}
+                      {new Date(lead.created_at).toLocaleDateString("en-IN")}
+                    </p>
+                  </article>
+                ))}
+              </div>
+            )}
+            {orders.length > 0 && (
+              <div className="grid gap-4">
+                <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                  Device pickup bookings
+                </h2>
+                {orders.map((order) => (
+                  <article
+                    key={order.id}
+                    className="rounded-3xl bg-white p-5 shadow-soft ring-1 ring-border"
+                  >
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div>
+                        <p className="text-xs uppercase tracking-widest text-muted-foreground">
+                          {order.brand_name} · {order.series_name}
+                        </p>
+                        <h3 className="mt-1 text-lg font-bold text-ink">{order.model_name}</h3>
+                        <p className="mt-1 text-sm font-semibold text-muted-foreground">
+                          {order.final_quote > 0
+                            ? `₹${Math.round(order.final_quote).toLocaleString("en-IN")}`
+                            : "Price pending inspection"}
+                        </p>
+                      </div>
+                      <OrderStatusBadge status={order.status} />
+                    </div>
+                    <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      Booking ID: <span className="text-ink">{order.booking_id}</span>
+                    </p>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      Pickup {order.pickup_date} · {order.pickup_slot} · Booked{" "}
+                      {new Date(order.created_at).toLocaleDateString("en-IN")}
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      <button
+                        onClick={() =>
+                          void generateInvoicePdf(order).catch(() =>
+                            toast.error("Could not generate the invoice PDF. Please try again."),
+                          )
+                        }
+                        className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-semibold text-ink transition hover:bg-secondary"
+                      >
+                        <Download className="h-3.5 w-3.5" />
+                        Download invoice
+                      </button>
+                      {CANCELLABLE_STATUSES.includes(order.status) && (
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <button
+                              disabled={cancellingId === order.id}
+                              className="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-4 py-2 text-xs font-semibold text-red-700 transition hover:bg-red-600 hover:text-white disabled:opacity-60"
+                            >
+                              <Ban className="h-3.5 w-3.5" />
+                              {cancellingId === order.id ? "Cancelling…" : "Cancel booking"}
+                            </button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Cancel this pickup booking?</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                We won&apos;t send a pickup agent for your {order.model_name}. You
+                                can book again any time.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Keep booking</AlertDialogCancel>
+                              <AlertDialogAction
+                                onClick={() => void onCancel(order)}
+                                className="bg-red-600 hover:bg-red-700"
+                              >
+                                Cancel booking
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      )}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>

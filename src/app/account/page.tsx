@@ -99,7 +99,7 @@ export default function AccountPage() {
           </span>
           <div>
             <p className="text-sm font-bold text-ink">My requests</p>
-            <p className="text-xs text-muted-foreground">View your laptop pickup bookings</p>
+            <p className="text-xs text-muted-foreground">View your repair requests and bookings</p>
           </div>
         </Link>
 
