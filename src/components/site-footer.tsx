@@ -10,6 +10,7 @@ const BASE_FOOTER_COLUMNS: { title: string; links: { label: string; href: string
     links: [
       { label: "About Us", href: "/about" },
       { label: "Why Us", href: "/why-us" },
+      { label: "Blog", href: "/blog" },
       { label: "Contact Us", href: "/contact" },
     ],
   },

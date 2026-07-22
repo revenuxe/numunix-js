@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import resSlow from "@/assets/res-slow-laptop.webp";
 import resBsod from "@/assets/res-bsod.webp";
@@ -6,16 +7,19 @@ import resCctv from "@/assets/res-cctv.webp";
 
 const CARDS = [
   {
+    slug: "laptop-running-slow",
     image: resSlow,
     title: "Laptop Running Slow",
     desc: "Simple fixes that can bring your laptop back to speed without spending on new hardware.",
   },
   {
+    slug: "blue-screen-fixes",
     image: resBsod,
     title: "Blue Screen Fixes",
     desc: "How to diagnose and safely fix the most common Windows blue-screen errors at home.",
   },
   {
+    slug: "best-cctv-guide",
     image: resCctv,
     title: "Best CCTV Guide",
     desc: "Choosing the right CCTV — resolution, storage and coverage for homes and small offices.",
@@ -38,8 +42,9 @@ export function Resources() {
 
       <div className="mx-auto mt-12 grid max-w-6xl gap-6 md:grid-cols-3">
         {CARDS.map((c) => (
-          <article
+          <Link
             key={c.title}
+            href={`/blog/${c.slug}`}
             className="group relative overflow-hidden rounded-3xl ring-1 ring-border shadow-soft"
           >
             <Image
@@ -51,16 +56,16 @@ export function Resources() {
               <h3 className="text-lg font-bold md:text-xl">{c.title}</h3>
               <p className="mt-2 text-sm text-white/80">{c.desc}</p>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
       <div className="mt-10 flex justify-center">
-        <a
-          href="#resources"
-          className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white"
+        <Link
+          href="/blog"
+          className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand"
         >
           View All Resources <ArrowRight className="h-4 w-4" />
-        </a>
+        </Link>
       </div>
     </section>
   );

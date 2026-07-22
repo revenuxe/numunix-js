@@ -3,6 +3,7 @@ import { getServiceSlugs } from "@/lib/services";
 import { BANGALORE_AREAS } from "@/lib/bangalore-areas";
 import { REPAIR_LAPTOP_BRANDS } from "@/lib/repair-laptop-brands";
 import { CCTV_BRANDS } from "@/lib/cctv-brands";
+import { getBlogSlugs } from "@/lib/blog-posts";
 import { SITE_URL } from "@/lib/site";
 
 const STATIC_ROUTES = [
@@ -14,6 +15,7 @@ const STATIC_ROUTES = [
   "/repair-laptop/brand/not-listed",
   "/services/cctv-installation/brand/not-sure",
   "/sell/laptops/terms",
+  "/blog",
   "/privacy",
   "/terms",
 ];
@@ -54,11 +56,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.65,
   }));
 
+  const blogEntries: MetadataRoute.Sitemap = getBlogSlugs().map((slug) => ({
+    url: `${SITE_URL}/blog/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
   return [
     ...staticEntries,
     ...serviceEntries,
     ...areaEntries,
     ...brandSeoEntries,
     ...cctvBrandEntries,
+    ...blogEntries,
   ];
 }
