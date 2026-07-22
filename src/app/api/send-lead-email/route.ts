@@ -69,6 +69,13 @@ export async function POST(request: Request) {
     </div>
   `;
 
+  const text = [
+    "New lead from numunix.com",
+    "",
+    ...rows.map(([label, value]) => `${label}: ${value}`),
+    ...(message ? ["", "Message:", message] : []),
+  ].join("\n");
+
   const resend = new Resend(apiKey);
   const from = process.env.RESEND_FROM_EMAIL || "Numunix Website <onboarding@resend.dev>";
 
@@ -78,6 +85,7 @@ export async function POST(request: Request) {
       to: CONTACT.email,
       subject: `New lead: ${service || "General"} — ${name}`,
       html,
+      text,
     });
     if (error) throw error;
   } catch (err) {
