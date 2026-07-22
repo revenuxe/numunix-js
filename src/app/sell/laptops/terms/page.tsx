@@ -66,7 +66,7 @@ const TERMS_SECTIONS: { heading: string; body: string[] }[] = [
   {
     heading: "8. Booking Invoice",
     body: [
-      `Any PDF invoice generated from your account or emailed to you after booking is a booking reference document only. It confirms that a pickup has been scheduled and states the provisional quote — it is not a sale receipt, proof of ownership transfer, or legal proof of purchase, and cannot be used as such.`,
+      `Any booking confirmation sent to you after booking is a booking reference document only. It confirms that a pickup has been scheduled and states the provisional quote — it is not a sale receipt, proof of ownership transfer, or legal proof of purchase, and cannot be used as such.`,
     ],
   },
   {
@@ -88,7 +88,6 @@ const PRIVACY_SECTIONS: { heading: string; body: string[] }[] = [
     heading: "1. What We Collect",
     body: [
       `When you request a quote or book a pickup, we collect your name, phone number, email (optional), pickup address and pincode, the device details and answers you provide, and the resulting quote.`,
-      `To speed up future bookings, we save these details to your Numunix account after your first booking, and use them to pre-fill later bookings for the same or a different device — you can review or edit them any time from "My Account".`,
       `If you provide a government ID for verification at pickup, we record only the ID type and the minimum information needed to confirm your identity for that purchase; we do not publish or share this information.`,
     ],
   },
@@ -96,7 +95,6 @@ const PRIVACY_SECTIONS: { heading: string; body: string[] }[] = [
     heading: "2. How We Use It",
     body: [
       `To calculate your quote, schedule and complete your pickup, verify ownership, process payment, and provide customer support if you have a question about a booking.`,
-      `To prefill your details on future bookings so you are not asked to re-enter the same information.`,
     ],
   },
   {
@@ -115,13 +113,13 @@ const PRIVACY_SECTIONS: { heading: string; body: string[] }[] = [
   {
     heading: "5. Retention",
     body: [
-      `We retain booking and account information for as long as needed to provide the Buyback Service, honour any related support request, and meet our legal and accounting obligations, after which it is securely deleted or anonymised.`,
+      `We retain booking information for as long as needed to provide the Buyback Service, honour any related support request, and meet our legal and accounting obligations, after which it is securely deleted or anonymised.`,
     ],
   },
   {
     heading: "6. Your Rights",
     body: [
-      `You can view and edit your saved profile any time from "My Account", or request that we delete your account information by contacting ${CONTACT.email}.`,
+      `You can request a copy of, or the deletion of, your saved booking information at any time by contacting ${CONTACT.email}.`,
     ],
   },
 ];

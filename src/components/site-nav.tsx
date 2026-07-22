@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, User, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { LogoMark } from "@/components/logo-mark";
 import { CONTACT } from "@/lib/contact";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
-import { supabase } from "@/lib/supabase";
 
 const NAV_LINKS: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
@@ -19,23 +18,12 @@ const NAV_LINKS: { label: string; href: string }[] = [
 
 export function SiteNav({ variant = "light" }: { variant?: "light" | "dark" }) {
   const [open, setOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const pathname = usePathname();
   const isDark = variant === "dark";
 
   function isActive(href: string) {
     return href === "/" ? pathname === "/" : pathname.startsWith(href);
   }
-
-  useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => setIsAuthenticated(Boolean(data.user)));
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
-      setIsAuthenticated(Boolean(session?.user));
-    });
-    return () => sub.subscription.unsubscribe();
-  }, []);
-
-  const accountHref = isAuthenticated ? "/account" : "/login?redirect=/account";
 
   return (
     <header
@@ -79,17 +67,6 @@ export function SiteNav({ variant = "light" }: { variant?: "light" | "dark" }) {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <Link
-            href={accountHref}
-            aria-label="My account"
-            className={`grid h-14 w-14 shrink-0 place-items-center rounded-full border shadow-soft transition ${
-              isDark
-                ? "border-white/30 bg-ink/55 text-white backdrop-blur hover:bg-white hover:text-ink"
-                : "border-ink/20 bg-white text-ink hover:bg-secondary"
-            }`}
-          >
-            <User className="h-5 w-5" />
-          </Link>
           <a
             href={CONTACT.whatsappUrl}
             target="_blank"
@@ -106,15 +83,6 @@ export function SiteNav({ variant = "light" }: { variant?: "light" | "dark" }) {
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
-          <Link
-            href={accountHref}
-            aria-label="My account"
-            className={`grid h-12 w-12 place-items-center rounded-2xl shadow-soft ${
-              isDark ? "bg-white/95 text-ink" : "bg-white text-ink ring-1 ring-border"
-            }`}
-          >
-            <User className="h-5 w-5" />
-          </Link>
           <button
             onClick={() => setOpen(true)}
             className={`grid h-12 w-12 place-items-center rounded-2xl shadow-soft ${
@@ -152,13 +120,6 @@ export function SiteNav({ variant = "light" }: { variant?: "light" | "dark" }) {
                 {l.label}
               </Link>
             ))}
-            <Link
-              href={accountHref}
-              onClick={() => setOpen(false)}
-              className="rounded-2xl px-4 py-4 text-2xl font-semibold text-white hover:bg-white/10"
-            >
-              My Account
-            </Link>
             <a
               href={CONTACT.whatsappUrl}
               target="_blank"
