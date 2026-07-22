@@ -37,7 +37,7 @@ import {
 import heroHandoff from "@/assets/hero-handoff.webp";
 
 const whatsapp =
-  "https://wa.me/919886285028?text=" +
+  "https://wa.me/919886579923?text=" +
   encodeURIComponent(
     "Hi Numunix, I want to get my laptop repaired in Bangalore. Please help me book a service.",
   );

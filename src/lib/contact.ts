@@ -1,9 +1,9 @@
 export const CONTACT = {
-  phone: "9886285028",
-  phoneDisplay: "+91 98862 85028",
+  phone: "9886579923",
+  phoneDisplay: "+91 98865 79923",
   email: "numunix@gmail.com",
-  whatsappUrl: "https://wa.me/919886285028",
-  telUrl: "tel:+919886285028",
+  whatsappUrl: "https://wa.me/919886579923",
+  telUrl: "tel:+919886579923",
   mailUrl: "mailto:numunix@gmail.com",
   founded: "2020",
   onlineSince: "2025",

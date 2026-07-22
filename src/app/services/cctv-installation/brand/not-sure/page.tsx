@@ -13,7 +13,7 @@ import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 import heroHandoff from "@/assets/hero-handoff.webp";
 
 const whatsapp =
-  "https://wa.me/919886285028?text=" +
+  "https://wa.me/919886579923?text=" +
   encodeURIComponent(
     "Hi Numunix, I'm not sure which CCTV brand I need. Can you help me choose and install one?",
   );

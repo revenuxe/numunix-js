@@ -12,7 +12,7 @@ import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 import heroHandoff from "@/assets/hero-handoff.webp";
 
 const whatsapp =
-  "https://wa.me/919886285028?text=" +
+  "https://wa.me/919886579923?text=" +
   encodeURIComponent("Hi Numunix, my laptop brand isn't on your website. Can you still repair it?");
 
 const REASONS: [string, string, typeof Wrench][] = [
