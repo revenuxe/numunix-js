@@ -11,6 +11,17 @@ const nextConfig: NextConfig = {
       { protocol: "http", hostname: "**" },
     ],
   },
+  async headers() {
+    return [
+      // Defense in depth on top of robots.txt's disallow and the admin
+      // layout's noindex metadata: this header keeps the admin area out of
+      // search results even if a crawler fetches it directly.
+      {
+        source: "/admin/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+    ];
+  },
   async redirects() {
     return [
       // Canonicalize the apex domain to www so search engines don't index two
