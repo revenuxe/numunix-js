@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Facebook, Instagram, Linkedin, Youtube, Twitter, Mail, MapPin, Phone } from "lucide-react";
+import { Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { LogoMark } from "@/components/logo-mark";
 import { CONTACT } from "@/lib/contact";
 import { REPAIR_LAPTOP_BRANDS } from "@/lib/repair-laptop-brands";
@@ -80,15 +80,12 @@ export function SiteFooter({ showRepairLaptopMenu = false }: { showRepairLaptopM
           </div>
           <div className="mt-6 flex items-center gap-3">
             {[
-              { Icon: Facebook, href: "#", label: "Facebook" },
-              { Icon: Twitter, href: "#", label: "Twitter" },
               { Icon: Instagram, href: "https://www.instagram.com/numunix/", label: "Instagram" },
               {
                 Icon: Linkedin,
                 href: "https://www.linkedin.com/company/numunix",
                 label: "LinkedIn",
               },
-              { Icon: Youtube, href: "#", label: "YouTube" },
             ].map(({ Icon, href, label }) => (
               <a
                 key={label}
