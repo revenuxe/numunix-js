@@ -30,41 +30,43 @@ export function Hero() {
 
       <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pb-6 pt-28 md:px-8 md:pb-8 md:pt-32 lg:pb-10 lg:pt-32">
         <div className="grid gap-7 md:grid-cols-[minmax(0,1fr)_minmax(300px,380px)] md:items-center md:gap-8 lg:gap-12">
-          <div className="max-w-2xl">
-            <h1 className="mt-6 text-[2rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:mt-8 lg:text-6xl">
-              Reliable IT Support <span className="text-brand">&amp; Hardware</span> Services
-            </h1>
-            <p className="mt-4 max-w-xl text-sm text-white/75 sm:mt-6 sm:text-lg">
-              Certified engineers, transparent pricing, fast turnaround — laptop repair, CCTV,
-              networking, AMC &amp; more.
-            </p>
+          <div>
+            <div className="max-w-2xl">
+              <h1 className="mt-6 text-[2rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:mt-8 lg:text-6xl">
+                Reliable IT Support <span className="text-brand">&amp; Hardware</span> Services
+              </h1>
+              <p className="mt-4 max-w-xl text-sm text-white/75 sm:mt-6 sm:text-lg">
+                Certified engineers, transparent pricing, fast turnaround — laptop repair, CCTV,
+                networking, AMC &amp; more.
+              </p>
 
-            <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap lg:mt-8">
-              <a
-                href="#hero-booking-form"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90 sm:w-auto lg:h-[62px] lg:px-8 lg:text-base"
-              >
-                Book Service
-                <ArrowRight className="h-4 w-4" />
-              </a>
-              <a
-                href={CONTACT.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-ink/60 px-6 py-3.5 text-sm font-semibold text-white shadow-soft backdrop-blur transition hover:bg-white hover:text-ink sm:w-auto lg:h-[62px] lg:px-8 lg:text-base"
-              >
-                <WhatsAppIcon className="h-4 w-4" />
-                Reach us on WhatsApp
-              </a>
+              <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap lg:mt-8">
+                <a
+                  href="#hero-booking-form"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90 sm:w-auto lg:h-[62px] lg:px-8 lg:text-base"
+                >
+                  Book Service
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+                <a
+                  href={CONTACT.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-ink/60 px-6 py-3.5 text-sm font-semibold text-white shadow-soft backdrop-blur transition hover:bg-white hover:text-ink sm:w-auto lg:h-[62px] lg:px-8 lg:text-base"
+                >
+                  <WhatsAppIcon className="h-4 w-4" />
+                  Reach us on WhatsApp
+                </a>
+              </div>
             </div>
 
-            <div className="mt-8 hidden flex-wrap gap-2 lg:mt-10 lg:flex">
+            <div className="mt-8 hidden flex-nowrap gap-2 lg:mt-10 lg:flex">
               {FLOATING_CHIPS.map(({ label, Icon }) => (
                 <div
                   key={label}
-                  className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-medium text-white ring-1 ring-white/20 backdrop-blur-md lg:h-[52px] lg:px-4 lg:text-sm"
+                  className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-white/10 px-3 py-2 text-xs font-medium text-white ring-1 ring-white/20 backdrop-blur-md lg:h-[52px] lg:px-4 lg:text-sm"
                 >
-                  <span className="grid h-6 w-6 place-items-center rounded-full bg-brand text-brand-foreground lg:h-7 lg:w-7">
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand text-brand-foreground lg:h-7 lg:w-7">
                     <Icon className="h-3.5 w-3.5" />
                   </span>
                   {label}
