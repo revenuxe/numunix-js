@@ -180,30 +180,35 @@ export function ElectricalWorkContent() {
             </div>
           ))}
 
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
             {COMBINED_GROUPS.map((group) => (
               <Link
                 key={group.title}
                 href="#service-booking-form"
-                className="group relative flex flex-col overflow-hidden rounded-[1.75rem] bg-white p-6 ring-1 ring-border shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card md:p-8"
+                className="group relative flex flex-col overflow-hidden rounded-[1.75rem] bg-white p-6 ring-1 ring-border shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card md:p-8 lg:min-h-[340px] lg:p-10"
               >
                 <span
                   aria-hidden
                   className="absolute -right-9 -top-9 h-28 w-28 rounded-full bg-brand/[0.07] transition duration-500 group-hover:scale-150 group-hover:bg-brand/[0.12]"
                 />
-                <span className="relative grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-brand transition duration-300 group-hover:scale-105 group-hover:bg-brand group-hover:text-brand-foreground">
-                  <group.Icon className="h-5 w-5" />
+                <span className="relative grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-brand transition duration-300 group-hover:scale-105 group-hover:bg-brand group-hover:text-brand-foreground lg:h-14 lg:w-14">
+                  <group.Icon className="h-5 w-5 lg:h-6 lg:w-6" />
                 </span>
-                <h3 className="relative mt-6 text-2xl font-bold text-ink">{group.title}</h3>
+                <h3 className="relative mt-6 text-2xl font-bold text-ink lg:text-3xl">
+                  {group.title}
+                </h3>
                 <ul className="relative mt-5 space-y-3">
                   {group.items.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm leading-6">
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 text-sm leading-6 lg:text-base"
+                    >
                       <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
                       <span className="font-medium text-ink">{item}</span>
                     </li>
                   ))}
                 </ul>
-                <span className="relative mt-6 inline-flex items-center gap-1 text-xs font-semibold text-brand opacity-80 transition group-hover:opacity-100">
+                <span className="relative mt-auto inline-flex items-center gap-1 pt-6 text-xs font-semibold text-brand opacity-80 transition group-hover:opacity-100">
                   Book this service <ArrowRight className="h-3.5 w-3.5" />
                 </span>
               </Link>
