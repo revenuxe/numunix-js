@@ -201,7 +201,9 @@ export function ElectricalWorkContent() {
                       </span>
                     </div>
                     <div className="relative mt-auto min-w-0">
-                      <h3 className="break-words text-base font-bold text-ink md:text-lg">{item}</h3>
+                      <h3 className="break-words text-base font-bold text-ink md:text-lg">
+                        {item}
+                      </h3>
                       <p className="mt-2 text-sm leading-6 text-muted-foreground">
                         Expert diagnostics, genuine parts and fast turnaround.
                       </p>

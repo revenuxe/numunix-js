@@ -141,7 +141,9 @@ export default async function ServicePage({
                 </span>
                 <ArrowRight className="h-5 w-5 shrink-0 text-brand transition duration-300 group-hover:translate-x-1" />
               </div>
-              <h3 className="relative mt-7 break-words text-lg font-bold leading-snug text-ink">{item}</h3>
+              <h3 className="relative mt-7 break-words text-lg font-bold leading-snug text-ink">
+                {item}
+              </h3>
               <p className="relative mt-3 text-sm leading-6 text-muted-foreground">
                 Professional assessment and dependable workmanship from a certified Numunix
                 engineer.
