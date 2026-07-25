@@ -150,7 +150,7 @@ export function ElectricalWorkContent() {
                 {group.items.map((item, i) => (
                   <Link
                     key={item}
-                    href="#book-service"
+                    href="#service-booking-form"
                     className="group relative flex min-h-[220px] flex-col overflow-hidden rounded-[1.75rem] bg-white p-5 ring-1 ring-border shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card md:min-h-[240px] md:p-6"
                   >
                     <span
@@ -184,7 +184,7 @@ export function ElectricalWorkContent() {
             {COMBINED_GROUPS.map((group) => (
               <Link
                 key={group.title}
-                href="#book-service"
+                href="#service-booking-form"
                 className="group relative flex flex-col overflow-hidden rounded-[1.75rem] bg-white p-6 ring-1 ring-border shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card md:p-8"
               >
                 <span
