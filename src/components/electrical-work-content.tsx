@@ -101,8 +101,8 @@ export function ElectricalWorkContent() {
         <SiteNav variant="dark" />
         <div className="mx-auto grid max-w-7xl gap-8 px-4 pb-10 pt-24 md:px-8 md:pb-14 md:pt-28 lg:grid-cols-[1.1fr_.9fr] lg:items-center lg:gap-12">
           <div className="max-w-2xl">
-            <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-              Trusted electricians in Bangalore for every home and office job.
+            <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
+              Electricians in Bangalore for Home & Office Electrical Work
             </h1>
             <p className="mt-5 max-w-xl text-base leading-7 text-white/75 md:text-lg">
               From a flickering light to a full wiring fault, Numunix connects you with verified,

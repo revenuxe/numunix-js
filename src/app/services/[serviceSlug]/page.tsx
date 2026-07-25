@@ -126,8 +126,9 @@ export default async function ServicePage({
         </div>
         <div className="grid gap-5 sm:grid-cols-2">
           {service.subServices.map((item, index) => (
-            <article
+            <Link
               key={item}
+              href="#service-booking-form"
               className="group relative overflow-hidden rounded-[1.75rem] border border-border bg-white p-6 shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card"
             >
               <span
@@ -149,7 +150,7 @@ export default async function ServicePage({
                 aria-hidden
                 className="relative mt-6 block h-px w-12 bg-brand/40 transition-all duration-300 group-hover:w-full"
               />
-            </article>
+            </Link>
           ))}
         </div>
       </section>
