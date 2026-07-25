@@ -10,12 +10,12 @@ import {
   Check,
   ChevronDown,
   Clock3,
+  Cog,
   Droplets,
   Headset,
   MessageCircleQuestion,
   Plug,
   ShieldCheck,
-  Wrench,
 } from "lucide-react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
@@ -46,7 +46,7 @@ const COMBINED_GROUPS: { title: string; Icon: typeof Plug; items: string[] }[] =
   },
   {
     title: "Repair & Maintenance",
-    Icon: Wrench,
+    Icon: Cog,
     items: [
       "Wiring & Circuit Repairs Consultation",
       "MCB & Fuse Box Repair/Installation Consultation",
@@ -138,6 +138,41 @@ export function ElectricalWorkContent() {
           </p>
         </div>
         <div className="mt-14 space-y-14">
+          <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
+            {COMBINED_GROUPS.map((group) => (
+              <Link
+                key={group.title}
+                href="#service-booking-form"
+                className="group relative flex min-w-0 flex-col overflow-hidden rounded-[1.75rem] bg-white p-6 ring-1 ring-border shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card md:p-8 lg:min-h-[340px] lg:p-10"
+              >
+                <span
+                  aria-hidden
+                  className="absolute -right-9 -top-9 h-28 w-28 rounded-full bg-brand/[0.07] transition duration-500 group-hover:scale-150 group-hover:bg-brand/[0.12]"
+                />
+                <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand transition duration-300 group-hover:scale-105 group-hover:bg-brand group-hover:text-brand-foreground lg:h-14 lg:w-14">
+                  <group.Icon className="h-5 w-5 lg:h-6 lg:w-6" />
+                </span>
+                <h3 className="relative mt-6 break-words text-2xl font-bold text-ink lg:text-3xl">
+                  {group.title}
+                </h3>
+                <ul className="relative mt-5 space-y-3">
+                  {group.items.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 text-sm leading-6 lg:text-base"
+                    >
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                      <span className="break-words font-medium text-ink">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <span className="relative mt-auto inline-flex items-center gap-1 pt-6 text-xs font-semibold text-brand opacity-80 transition group-hover:opacity-100">
+                  Book this service <ArrowRight className="h-3.5 w-3.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+
           {GRID_GROUPS_WITH_OFFSETS.map((group) => (
             <div key={group.title}>
               <div className="flex items-center gap-3">
@@ -146,27 +181,27 @@ export function ElectricalWorkContent() {
                 </span>
                 <h3 className="text-xl font-bold text-ink">{group.title}</h3>
               </div>
-              <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 lg:grid-cols-4">
+              <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
                 {group.items.map((item, i) => (
                   <Link
                     key={item}
                     href="#service-booking-form"
-                    className="group relative flex min-h-[220px] flex-col overflow-hidden rounded-[1.75rem] bg-white p-5 ring-1 ring-border shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card md:min-h-[240px] md:p-6"
+                    className="group relative flex min-h-[220px] min-w-0 flex-col overflow-hidden rounded-[1.75rem] bg-white p-5 ring-1 ring-border shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card md:min-h-[240px] md:p-6"
                   >
                     <span
                       aria-hidden
                       className="absolute -right-9 -top-9 h-28 w-28 rounded-full bg-brand/[0.07] transition duration-500 group-hover:scale-150 group-hover:bg-brand/[0.12]"
                     />
                     <div className="relative flex items-start justify-between">
-                      <span className="grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-brand transition duration-300 group-hover:scale-105 group-hover:bg-brand group-hover:text-brand-foreground">
+                      <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand transition duration-300 group-hover:scale-105 group-hover:bg-brand group-hover:text-brand-foreground">
                         <group.Icon className="h-5 w-5" />
                       </span>
                       <span className="text-[10px] font-bold tracking-[0.16em] text-muted-foreground">
                         {String(group.start + i + 1).padStart(2, "0")}
                       </span>
                     </div>
-                    <div className="relative mt-auto">
-                      <h3 className="text-base font-bold text-ink md:text-lg">{item}</h3>
+                    <div className="relative mt-auto min-w-0">
+                      <h3 className="break-words text-base font-bold text-ink md:text-lg">{item}</h3>
                       <p className="mt-2 text-sm leading-6 text-muted-foreground">
                         Expert diagnostics, genuine parts and fast turnaround.
                       </p>
@@ -179,41 +214,6 @@ export function ElectricalWorkContent() {
               </div>
             </div>
           ))}
-
-          <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
-            {COMBINED_GROUPS.map((group) => (
-              <Link
-                key={group.title}
-                href="#service-booking-form"
-                className="group relative flex flex-col overflow-hidden rounded-[1.75rem] bg-white p-6 ring-1 ring-border shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card md:p-8 lg:min-h-[340px] lg:p-10"
-              >
-                <span
-                  aria-hidden
-                  className="absolute -right-9 -top-9 h-28 w-28 rounded-full bg-brand/[0.07] transition duration-500 group-hover:scale-150 group-hover:bg-brand/[0.12]"
-                />
-                <span className="relative grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-brand transition duration-300 group-hover:scale-105 group-hover:bg-brand group-hover:text-brand-foreground lg:h-14 lg:w-14">
-                  <group.Icon className="h-5 w-5 lg:h-6 lg:w-6" />
-                </span>
-                <h3 className="relative mt-6 text-2xl font-bold text-ink lg:text-3xl">
-                  {group.title}
-                </h3>
-                <ul className="relative mt-5 space-y-3">
-                  {group.items.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-3 text-sm leading-6 lg:text-base"
-                    >
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                      <span className="font-medium text-ink">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <span className="relative mt-auto inline-flex items-center gap-1 pt-6 text-xs font-semibold text-brand opacity-80 transition group-hover:opacity-100">
-                  Book this service <ArrowRight className="h-3.5 w-3.5" />
-                </span>
-              </Link>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -230,7 +230,7 @@ export function ElectricalWorkContent() {
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {PROBLEMS.map((problem) => (
               <div key={problem} className="rounded-3xl bg-white p-6 ring-1 ring-border">
-                <Wrench className="h-5 w-5 text-brand" />
+                <Cog className="h-5 w-5 text-brand" />
                 <h3 className="mt-5 font-bold text-ink">{problem}</h3>
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">
                   Get a clear diagnosis and the right next step.

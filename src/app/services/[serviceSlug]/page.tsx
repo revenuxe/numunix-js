@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowRight, BadgeCheck, Clock3, Headset, ShieldCheck, Wrench } from "lucide-react";
+import { ArrowRight, BadgeCheck, Clock3, Cog, Headset, ShieldCheck } from "lucide-react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
@@ -129,19 +129,19 @@ export default async function ServicePage({
             <Link
               key={item}
               href="#service-booking-form"
-              className="group relative overflow-hidden rounded-[1.75rem] border border-border bg-white p-6 shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card"
+              className="group relative min-w-0 overflow-hidden rounded-[1.75rem] border border-border bg-white p-6 shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card"
             >
               <span
                 aria-hidden
                 className="absolute -right-8 -top-8 h-24 w-24 rounded-full border-[14px] border-brand/[0.07] transition duration-500 group-hover:scale-125 group-hover:border-brand/[0.12]"
               />
               <div className="relative flex items-start justify-between">
-                <span className="grid h-10 w-10 place-items-center rounded-xl border border-brand/20 bg-brand/10 text-xs font-bold text-brand">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-brand/20 bg-brand/10 text-xs font-bold text-brand">
                   0{index + 1}
                 </span>
-                <ArrowRight className="h-5 w-5 text-brand transition duration-300 group-hover:translate-x-1" />
+                <ArrowRight className="h-5 w-5 shrink-0 text-brand transition duration-300 group-hover:translate-x-1" />
               </div>
-              <h3 className="relative mt-7 text-lg font-bold leading-snug text-ink">{item}</h3>
+              <h3 className="relative mt-7 break-words text-lg font-bold leading-snug text-ink">{item}</h3>
               <p className="relative mt-3 text-sm leading-6 text-muted-foreground">
                 Professional assessment and dependable workmanship from a certified Numunix
                 engineer.
@@ -168,7 +168,7 @@ export default async function ServicePage({
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {service.problems.map((problem) => (
               <div key={problem} className="rounded-3xl bg-white p-6 ring-1 ring-border">
-                <Wrench className="h-5 w-5 text-brand" />
+                <Cog className="h-5 w-5 text-brand" />
                 <h3 className="mt-5 font-bold text-ink">{problem}</h3>
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">
                   Get a clear diagnosis and the right next step.
