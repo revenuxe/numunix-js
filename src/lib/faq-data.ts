@@ -21,6 +21,39 @@ export const HOME_FAQS = [
   },
 ];
 
+export const ELECTRICAL_WORK_FAQS: { question: string; answer: string }[] = [
+  {
+    question: "Are your electricians licensed and experienced?",
+    answer:
+      "Yes. Every Numunix electrician is vetted, experienced and trained to work safely on residential and commercial electrical systems.",
+  },
+  {
+    question: "Do you provide same-day electrician service in Bangalore?",
+    answer:
+      "In most areas, yes. Share your issue and location, and we will confirm the earliest available slot, including same-day visits where possible.",
+  },
+  {
+    question: "Can you handle both installation and repair work?",
+    answer:
+      "Yes. We cover new installations — sockets, switchboards, fans, lights, wiring — as well as repair and maintenance of existing electrical systems.",
+  },
+  {
+    question: "Do you install and service inverters and UPS systems?",
+    answer:
+      "Yes. We handle inverter installation, uninstallation and routine check-ups to keep your backup power reliable.",
+  },
+  {
+    question: "Is water motor installation covered too?",
+    answer:
+      "Yes. Our electricians install, repair and maintain water motor connections and wiring.",
+  },
+  {
+    question: "What safety precautions do you follow during electrical work?",
+    answer:
+      "Our electricians isolate the circuit before starting work, use insulated tools, and test the repair before handover to ensure it is safe to use.",
+  },
+];
+
 export const REPAIR_LAPTOP_FAQS: [string, string][] = [
   [
     "How long does a laptop repair take?",

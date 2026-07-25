@@ -6,7 +6,7 @@ import {
   Network,
   Printer,
   Briefcase,
-  HardDrive,
+  Zap,
   Cpu,
   ArrowUpRight,
   ArrowRight,
@@ -19,7 +19,7 @@ const ITEMS = [
   { title: "Networking", slug: "networking", Icon: Network },
   { title: "Printer Repair", slug: "printer-repair", Icon: Printer },
   { title: "Business AMC", slug: "business-amc", Icon: Briefcase },
-  { title: "Data Recovery", slug: "data-recovery", Icon: HardDrive },
+  { title: "Electrical Work", slug: "electrical-work", Icon: Zap },
   { title: "Hardware Upgrades", slug: "hardware-upgrades", Icon: Cpu },
 ];
 
