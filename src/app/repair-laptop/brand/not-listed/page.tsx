@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Check, MapPin, ShieldCheck, Wrench } from "lucide-react";
+import { ArrowRight, Check, MapPin, ShieldCheck, Cog } from "lucide-react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
@@ -15,11 +15,11 @@ const whatsapp =
   "https://wa.me/919886579923?text=" +
   encodeURIComponent("Hi Numunix, my laptop brand isn't on your website. Can you still repair it?");
 
-const REASONS: [string, string, typeof Wrench][] = [
+const REASONS: [string, string, typeof Cog][] = [
   [
     "Cross-brand expertise",
     "Our engineers diagnose and repair laptops from every manufacturer, not just the popular names — the fault-finding process is the same regardless of the badge on the lid.",
-    Wrench,
+    Cog,
   ],
   [
     "Genuine or certified-compatible parts",

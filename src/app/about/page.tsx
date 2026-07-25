@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ShieldCheck, Users, Wrench, Sparkles, Rocket, Heart } from "lucide-react";
+import { ArrowRight, ShieldCheck, Users, Cog, Sparkles, Rocket, Heart } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { PageHero } from "@/components/page-hero";
@@ -13,7 +13,7 @@ import teamImg from "@/assets/team-it.webp";
 import whyImg from "@/assets/why-choose.webp";
 
 export const metadata: Metadata = {
-  title: { absolute: "About Numunix — Trusted IT Support in Bangalore Since 2020" },
+  title: { absolute: "About Numunix | Trusted IT Support in Bangalore Since 2020" },
   description:
     "Numunix has been serving Bangalore with reliable laptop repair, desktop repair, CCTV installation and networking services since 2020, now available online since 2025.",
   alternates: { canonical: "/about" },
@@ -43,7 +43,7 @@ const VALUES = [
     desc: "Transparent estimates, honest diagnostics and genuine parts on every job — no upsells, no surprises.",
   },
   {
-    Icon: Wrench,
+    Icon: Cog,
     title: "Craftsmanship",
     desc: "Every repair is signed off by a certified engineer who takes personal responsibility for the work.",
   },

@@ -10,7 +10,7 @@ import {
   CalendarClock,
   Headset,
   ArrowUpRight,
-  Wrench,
+  Cog,
 } from "lucide-react";
 import whyImg from "@/assets/why-choose.webp";
 
@@ -114,7 +114,7 @@ export function WhyChooseUs() {
               <p className="text-lg font-bold text-ink">99.9% reliability</p>
             </div>
             <span className="grid h-11 w-11 place-items-center rounded-full bg-brand text-brand-foreground">
-              <Wrench className="h-5 w-5" />
+              <Cog className="h-5 w-5" />
             </span>
           </div>
         </div>

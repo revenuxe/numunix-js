@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Check, ShieldCheck, Wallet, Wrench } from "lucide-react";
+import { ArrowRight, Check, ShieldCheck, Wallet, Cog } from "lucide-react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
@@ -18,11 +18,11 @@ const whatsapp =
     "Hi Numunix, I'm not sure which CCTV brand I need. Can you help me choose and install one?",
   );
 
-const REASONS: [string, string, typeof Wrench][] = [
+const REASONS: [string, string, typeof Cog][] = [
   [
     "We help you choose the right brand",
     "Tell us your property size, budget and how many cameras you need — we'll recommend the right brand and models, not just the one we have in stock.",
-    Wrench,
+    Cog,
   ],
   [
     "Certified across every major brand",

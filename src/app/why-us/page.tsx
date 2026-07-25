@@ -9,7 +9,7 @@ import {
   Wallet,
   CalendarClock,
   Headset,
-  Wrench,
+  Cog,
   Users,
   Cpu,
   Sparkles,
@@ -23,7 +23,7 @@ import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 import whyImg from "@/assets/why-choose.webp";
 
 export const metadata: Metadata = {
-  title: { absolute: "Why Numunix — Certified IT Engineers You Can Trust" },
+  title: { absolute: "Why Numunix | Certified IT Engineers You Can Trust" },
   description:
     "Certified engineers, transparent pricing, genuine parts and fast turnaround. Here's why Numunix has been the trusted choice for IT support since 2020.",
   alternates: { canonical: "/why-us" },
@@ -70,7 +70,7 @@ const REASONS = [
     desc: "Choose an onsite visit for hands-on work or a secure remote session for quick fixes — whichever suits you.",
   },
   {
-    Icon: Wrench,
+    Icon: Cog,
     title: "Service warranty",
     desc: "Every Numunix repair comes with a service warranty. If the same issue returns, we fix it — no charge.",
   },

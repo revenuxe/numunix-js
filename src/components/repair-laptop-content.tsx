@@ -14,7 +14,7 @@ import {
   ShieldCheck,
   Sparkles,
   Truck,
-  Wrench,
+  Cog,
 } from "lucide-react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
@@ -62,7 +62,7 @@ const benefits: [string, string, typeof Laptop][] = [
   [
     "Certified technicians",
     "Trained and experienced across every major laptop brand and model.",
-    Wrench,
+    Cog,
   ],
   [
     "Genuine parts & warranty",
