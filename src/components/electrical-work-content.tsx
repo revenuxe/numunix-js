@@ -27,11 +27,6 @@ import heroHandoff from "@/assets/hero-handoff.webp";
 
 const GRID_GROUPS: { title: string; Icon: typeof Plug; items: string[] }[] = [
   {
-    title: "Electrician Consultation",
-    Icon: MessageCircleQuestion,
-    items: ["General Electrical Consultation", "Emergency Electrician Consultation"],
-  },
-  {
     title: "Installation Services",
     Icon: Plug,
     items: [
@@ -41,6 +36,14 @@ const GRID_GROUPS: { title: string; Icon: typeof Plug; items: string[] }[] = [
       "Appliance Wiring & Installation Consultation",
     ],
   },
+];
+
+const COMBINED_GROUPS: { title: string; Icon: typeof Plug; items: string[] }[] = [
+  {
+    title: "Electrician Consultation",
+    Icon: MessageCircleQuestion,
+    items: ["General Electrical Consultation", "Emergency Electrician Consultation"],
+  },
   {
     title: "Repair & Maintenance",
     Icon: Wrench,
@@ -49,9 +52,6 @@ const GRID_GROUPS: { title: string; Icon: typeof Plug; items: string[] }[] = [
       "MCB & Fuse Box Repair/Installation Consultation",
     ],
   },
-];
-
-const COMBINED_GROUPS: { title: string; Icon: typeof Plug; items: string[] }[] = [
   {
     title: "UPS Inverter",
     Icon: BatteryCharging,
