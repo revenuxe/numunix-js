@@ -7,7 +7,7 @@ import { SITE_URL } from "@/lib/site";
 import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 
 export const metadata: Metadata = {
-  title: { absolute: "Privacy Policy — Numunix" },
+  title: { absolute: "Privacy Policy | Numunix" },
   description:
     "How Numunix collects, uses and protects your personal information. Read our full privacy policy.",
   alternates: { canonical: "/privacy" },

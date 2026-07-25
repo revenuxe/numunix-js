@@ -7,7 +7,7 @@ import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { CONTACT } from "@/lib/contact";
 
 export const metadata: Metadata = {
-  title: { absolute: "Thank You — Numunix" },
+  title: { absolute: "Thank You | Numunix" },
   robots: { index: false, follow: true },
 };
 

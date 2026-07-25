@@ -5,7 +5,7 @@ import { PageHero } from "@/components/page-hero";
 import { CONTACT } from "@/lib/contact";
 
 export const metadata: Metadata = {
-  title: { absolute: "Laptop Buyback Terms & Privacy Policy — Numunix" },
+  title: { absolute: "Laptop Buyback Terms & Privacy Policy | Numunix" },
   description:
     "Terms and conditions and privacy policy that apply when you sell your used laptop to Numunix — ownership, condition verification, ID checks, payment and data handling.",
   alternates: { canonical: "/sell/laptops/terms" },

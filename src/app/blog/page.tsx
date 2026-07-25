@@ -9,12 +9,12 @@ import { BLOG_POSTS } from "@/lib/blog-posts";
 import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 
 export const metadata: Metadata = {
-  title: { absolute: "Blog — Laptop, CCTV & IT Support Guides | Numunix" },
+  title: { absolute: "Blog | Laptop, CCTV & IT Support Guides | Numunix" },
   description:
     "Practical, in-depth guides on laptop care, troubleshooting and CCTV security from Numunix's certified technicians in Bangalore — no jargon, just what actually works.",
   alternates: { canonical: "/blog" },
   openGraph: {
-    title: "Blog — Laptop, CCTV & IT Support Guides | Numunix",
+    title: "Blog | Laptop, CCTV & IT Support Guides | Numunix",
     description:
       "Practical, in-depth guides on laptop care, troubleshooting and CCTV security from Numunix's certified technicians in Bangalore.",
     type: "website",

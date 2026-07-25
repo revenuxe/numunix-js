@@ -7,7 +7,7 @@ import { SITE_URL } from "@/lib/site";
 import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 
 export const metadata: Metadata = {
-  title: { absolute: "Terms & Conditions — Numunix" },
+  title: { absolute: "Terms & Conditions | Numunix" },
   description:
     "The terms and conditions that apply when you use Numunix services, including repairs, warranties, payments and liability.",
   alternates: { canonical: "/terms" },
