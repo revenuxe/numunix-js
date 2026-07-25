@@ -5,9 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   ArrowRight,
-  ArrowUpRight,
   BadgeCheck,
   BatteryCharging,
+  Check,
   ChevronDown,
   Clock3,
   Droplets,
@@ -25,11 +25,11 @@ import { CONTACT } from "@/lib/contact";
 import { ELECTRICAL_WORK_FAQS } from "@/lib/faq-data";
 import heroHandoff from "@/assets/hero-handoff.webp";
 
-const SUBCATEGORY_GROUPS: { title: string; Icon: typeof Plug; items: string[] }[] = [
+const GRID_GROUPS: { title: string; Icon: typeof Plug; items: string[] }[] = [
   {
     title: "Electrician Consultation",
     Icon: MessageCircleQuestion,
-    items: ["General Electrical Consultation"],
+    items: ["General Electrical Consultation", "Emergency Electrician Consultation"],
   },
   {
     title: "Installation Services",
@@ -49,6 +49,9 @@ const SUBCATEGORY_GROUPS: { title: string; Icon: typeof Plug; items: string[] }[
       "MCB & Fuse Box Repair/Installation Consultation",
     ],
   },
+];
+
+const COMBINED_GROUPS: { title: string; Icon: typeof Plug; items: string[] }[] = [
   {
     title: "UPS Inverter",
     Icon: BatteryCharging,
@@ -76,7 +79,7 @@ const BENEFITS = [
 ];
 
 let offset = 0;
-const SUBCATEGORY_GROUPS_WITH_OFFSETS = SUBCATEGORY_GROUPS.map((group) => {
+const GRID_GROUPS_WITH_OFFSETS = GRID_GROUPS.map((group) => {
   const start = offset;
   offset += group.items.length;
   return { ...group, start };
@@ -135,7 +138,7 @@ export function ElectricalWorkContent() {
           </p>
         </div>
         <div className="mt-14 space-y-14">
-          {SUBCATEGORY_GROUPS_WITH_OFFSETS.map((group) => (
+          {GRID_GROUPS_WITH_OFFSETS.map((group) => (
             <div key={group.title}>
               <div className="flex items-center gap-3">
                 <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
@@ -158,9 +161,8 @@ export function ElectricalWorkContent() {
                       <span className="grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-brand transition duration-300 group-hover:scale-105 group-hover:bg-brand group-hover:text-brand-foreground">
                         <group.Icon className="h-5 w-5" />
                       </span>
-                      <span className="flex items-center gap-1 text-[10px] font-bold tracking-[0.16em] text-muted-foreground">
+                      <span className="text-[10px] font-bold tracking-[0.16em] text-muted-foreground">
                         {String(group.start + i + 1).padStart(2, "0")}
-                        <ArrowUpRight className="h-4 w-4 text-brand transition duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </span>
                     </div>
                     <div className="relative mt-auto">
@@ -177,6 +179,36 @@ export function ElectricalWorkContent() {
               </div>
             </div>
           ))}
+
+          <div className="grid gap-6 sm:grid-cols-2">
+            {COMBINED_GROUPS.map((group) => (
+              <Link
+                key={group.title}
+                href="#book-service"
+                className="group relative flex flex-col overflow-hidden rounded-[1.75rem] bg-white p-6 ring-1 ring-border shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card md:p-8"
+              >
+                <span
+                  aria-hidden
+                  className="absolute -right-9 -top-9 h-28 w-28 rounded-full bg-brand/[0.07] transition duration-500 group-hover:scale-150 group-hover:bg-brand/[0.12]"
+                />
+                <span className="relative grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-brand transition duration-300 group-hover:scale-105 group-hover:bg-brand group-hover:text-brand-foreground">
+                  <group.Icon className="h-5 w-5" />
+                </span>
+                <h3 className="relative mt-6 text-2xl font-bold text-ink">{group.title}</h3>
+                <ul className="relative mt-5 space-y-3">
+                  {group.items.map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-sm leading-6">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                      <span className="font-medium text-ink">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <span className="relative mt-6 inline-flex items-center gap-1 text-xs font-semibold text-brand opacity-80 transition group-hover:opacity-100">
+                  Book this service <ArrowRight className="h-3.5 w-3.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
