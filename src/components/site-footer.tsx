@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { LogoMark } from "@/components/logo-mark";
 import { CONTACT } from "@/lib/contact";
 import { REPAIR_LAPTOP_BRANDS } from "@/lib/repair-laptop-brands";
@@ -85,6 +85,11 @@ export function SiteFooter({ showRepairLaptopMenu = false }: { showRepairLaptopM
                 Icon: Linkedin,
                 href: "https://www.linkedin.com/company/numunix",
                 label: "LinkedIn",
+              },
+              {
+                Icon: Facebook,
+                href: "https://www.facebook.com/people/Numunix/61592696692436/",
+                label: "Facebook",
               },
             ].map(({ Icon, href, label }) => (
               <a
