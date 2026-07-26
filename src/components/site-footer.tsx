@@ -1,8 +1,16 @@
 import Link from "next/link";
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, X } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { LogoMark } from "@/components/logo-mark";
 import { CONTACT } from "@/lib/contact";
 import { REPAIR_LAPTOP_BRANDS } from "@/lib/repair-laptop-brands";
+
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" className={className}>
+      <path d="M12.6 0.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867 -5.07 -4.425 5.07H0.316l5.733 -6.57L0 0.75h5.063l3.495 4.633L12.601 0.75Zm-0.86 13.028h1.36L4.323 2.145H2.865z" />
+    </svg>
+  );
+}
 
 const BASE_FOOTER_COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
@@ -92,7 +100,7 @@ export function SiteFooter({ showRepairLaptopMenu = false }: { showRepairLaptopM
                 label: "Facebook",
               },
               {
-                Icon: X,
+                Icon: XIcon,
                 href: "https://x.com/Numunix",
                 label: "X",
               },
