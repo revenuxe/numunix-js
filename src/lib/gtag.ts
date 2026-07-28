@@ -1,7 +1,10 @@
-// Google Analytics 4 (gtag.js) config. Reads the measurement ID from the
-// environment so analytics can be disabled (e.g. in local dev) by leaving
-// NEXT_PUBLIC_GA_MEASUREMENT_ID unset — see .env.example.
-export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+// Google Analytics 4 (gtag.js) config. Hardcoded so analytics works on every
+// deploy without relying on an environment variable being set in the hosting
+// dashboard — NEXT_PUBLIC_GA_MEASUREMENT_ID can still override it (e.g. to
+// point a preview/staging deploy at a different GA property) via .env.example.
+const DEFAULT_GA_MEASUREMENT_ID = "G-LF768EGWC7";
+export const GA_MEASUREMENT_ID =
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || DEFAULT_GA_MEASUREMENT_ID;
 
 declare global {
   interface Window {
