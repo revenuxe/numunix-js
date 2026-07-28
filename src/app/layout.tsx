@@ -4,6 +4,7 @@ import { Manrope } from "next/font/google";
 import { CONTACT } from "@/lib/contact";
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME, SITE_URL } from "@/lib/site";
 import { Toaster } from "@/components/ui/sonner";
+import { GoogleAnalytics } from "@/components/google-analytics";
 import "./globals.css";
 
 export const revalidate = 86400;
@@ -103,6 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-IN" className={manrope.variable}>
       <body className="overflow-x-hidden">
+        <GoogleAnalytics />
         {children}
         <Toaster position="top-center" richColors />
         <script
