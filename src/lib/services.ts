@@ -10,6 +10,9 @@ export type Service = {
   seoTitle: string;
   seoDescription: string;
   hero: string;
+  // Optional substring of `hero` to render in brand color, e.g. "laptop repair".
+  // Must match `hero` exactly (case + spacing) or it's ignored.
+  heroAccent?: string;
   image: StaticImageData;
   intro: string;
   keywords: string[];
@@ -25,10 +28,11 @@ export const SERVICES: Record<string, Service> = {
     seoTitle: "Laptop Repair Service | Certified Laptop Technicians | Numunix",
     seoDescription:
       "Professional laptop repair service for slow, damaged, overheating and non-booting laptops. Get certified diagnostics, genuine parts and fast turnaround from Numunix.",
-    hero: "Professional laptop repair that gets you back to work.",
+    hero: "Laptop repair that gets you back to work, fast.",
+    heroAccent: "Laptop repair",
     image: svcLaptop,
     intro:
-      "Numunix provides reliable laptop repair for home users, students and businesses. From a cracked display to a laptop that will not start, our certified technicians diagnose the fault clearly and repair it with genuine, warrantied parts.",
+      "Certified technicians diagnose the issue clearly and repair it with genuine, warrantied parts.",
     keywords: [
       "Laptop diagnostics",
       "Screen replacement",
@@ -121,10 +125,11 @@ export const SERVICES: Record<string, Service> = {
     seoTitle: "CCTV Installation & Repair Service | Home and Business Security | Numunix",
     seoDescription:
       "Professional CCTV installation, camera repair, DVR/NVR setup and remote mobile viewing for homes and businesses by Numunix certified engineers.",
-    hero: "CCTV security that keeps your home or business in view.",
+    hero: "CCTV security that keeps your property in view.",
+    heroAccent: "CCTV security",
     image: svcCctv,
     intro:
-      "Numunix designs, installs and maintains CCTV systems with clear coverage, dependable recording and easy mobile access. We help homes, retail stores and offices choose the right cameras and secure their property with confidence.",
+      "Clear coverage, reliable recording and easy mobile access — installed by certified engineers.",
     keywords: [
       "CCTV camera installation",
       "DVR and NVR setup",

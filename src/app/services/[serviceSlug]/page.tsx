@@ -51,6 +51,11 @@ export default async function ServicePage({
   const service = getService(serviceSlug);
   if (!service) notFound();
 
+  const accentIndex = service.heroAccent ? service.hero.indexOf(service.heroAccent) : -1;
+  const heroBefore = accentIndex >= 0 ? service.hero.slice(0, accentIndex) : service.hero;
+  const heroAfter =
+    accentIndex >= 0 ? service.hero.slice(accentIndex + (service.heroAccent?.length ?? 0)) : "";
+
   const path = `/services/${serviceSlug}`;
   const jsonLd = {
     "@context": "https://schema.org",
@@ -89,7 +94,9 @@ export default async function ServicePage({
         <div className="mx-auto grid max-w-7xl gap-8 px-4 pb-10 pt-24 md:px-8 md:pb-14 md:pt-28 lg:grid-cols-[1.1fr_.9fr] lg:items-center lg:gap-12">
           <div className="max-w-2xl">
             <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-              {service.hero}
+              {heroBefore}
+              {accentIndex >= 0 && <span className="text-brand">{service.heroAccent}</span>}
+              {heroAfter}
             </h1>
             <p className="mt-5 max-w-xl text-base leading-7 text-white/75 md:text-lg">
               {service.intro}
