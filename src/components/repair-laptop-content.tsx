@@ -31,6 +31,8 @@ import {
   NOT_LISTED_BRAND_LOGO,
   REPAIR_LAPTOP_BRANDS,
   buildBrandCopy,
+  buildBrandDisclaimer,
+  buildServiceCenterCopy,
   heroProductName,
   type RepairLaptopBrand,
 } from "@/lib/repair-laptop-brands";
@@ -80,86 +82,192 @@ const benefits: [string, string, typeof Laptop][] = [
 export function RepairLaptopContent({
   area,
   brandSeo,
+  variant = "repair",
 }: {
   area?: BangaloreArea;
   brandSeo?: RepairLaptopBrand;
+  // "service-center" renders the dedicated "{Brand} Service Center" landing
+  // pages (/repair-laptop/service-center/[brand]) — same layout as the plain
+  // repair pages, but with service-center framed copy, brand-grid links that
+  // stay within the service-center section, and the independent-provider
+  // disclaimer. Ignored unless brandSeo is set.
+  variant?: "repair" | "service-center";
 }) {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(0);
+  const isServiceCenter = Boolean(brandSeo) && variant === "service-center";
   const filtered = useMemo(
     () => REPAIR_LAPTOP_BRANDS.filter((b) => b.name.toLowerCase().includes(query.toLowerCase())),
     [query],
   );
   const nearbyAreas = useMemo(() => (area ? getNearbyAreas(area) : BANGALORE_AREAS), [area]);
   const areaCopy = useMemo(() => (area ? buildAreaCopy(area) : null), [area]);
-  const brandCopy = useMemo(() => (brandSeo ? buildBrandCopy(brandSeo) : null), [brandSeo]);
+  const brandCopy = useMemo(
+    () =>
+      brandSeo
+        ? isServiceCenter
+          ? buildServiceCenterCopy(brandSeo)
+          : buildBrandCopy(brandSeo)
+        : null,
+    [brandSeo, isServiceCenter],
+  );
+  const brandDisclaimer = useMemo(
+    () => (brandSeo && isServiceCenter ? buildBrandDisclaimer(brandSeo) : null),
+    [brandSeo, isServiceCenter],
+  );
   const faqs = useMemo(() => {
     const extra = areaCopy?.faqs ?? brandCopy?.faqs ?? [];
     return [...extra, ...REPAIR_LAPTOP_FAQS];
   }, [areaCopy, brandCopy]);
   const serviceName = brandSeo
-    ? `${heroProductName(brandSeo)} Repair`
+    ? `${heroProductName(brandSeo)} ${isServiceCenter ? "Service" : "Repair"}`
     : area
       ? `Laptop Repair in ${area.name}`
       : "Laptop Repair";
+  const brandHref = (slug: string) =>
+    isServiceCenter ? `/repair-laptop/service-center/${slug}` : `/repair-laptop/brand/${slug}`;
 
   return (
     <main className="bg-white text-ink">
       <SiteNav variant="dark" />
 
-      <section className="relative isolate overflow-hidden bg-ink px-4 pt-28 pb-16 text-white md:px-8 md:pb-24 md:pt-36">
-        <Image
-          src={heroHandoff}
-          alt=""
-          priority
-          className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
-        />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(0,0,0,0.68)_0%,rgba(0,0,0,0.48)_45%,rgba(0,0,0,0.8)_100%)]" />
-        <div className="absolute -right-28 -top-20 h-80 w-80 rounded-full bg-brand/25 blur-3xl" />
-        <div className="absolute -bottom-40 -left-24 h-72 w-72 rounded-full bg-brand/15 blur-3xl" />
-        <div className="relative mx-auto max-w-3xl text-center">
-          <h1 className="mt-2 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl md:mt-3 md:text-6xl">
-            {brandSeo ? (
-              <>
-                Repair Your{" "}
-                <span className="bg-gradient-to-r from-sky-400 via-brand to-indigo-500 bg-clip-text text-transparent">
-                  {heroProductName(brandSeo)}
-                </span>{" "}
-                in Bangalore
-              </>
-            ) : (
-              <>
-                Repair your{" "}
-                <span className="bg-gradient-to-r from-sky-400 via-brand to-indigo-500 bg-clip-text text-transparent">
-                  laptop
-                </span>{" "}
-                in {area?.name ?? "Bangalore"}
-              </>
-            )}
-          </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/75 md:text-lg">
-            Get your laptop repaired by certified technicians. Free doorstep pickup across
-            Bengaluru, transparent pricing and warrantied repairs — most done in 24-48 hours.
-          </p>
+      {brandSeo ? (
+        <section className="relative flex min-h-[100svh] flex-col overflow-hidden bg-ink text-white">
+          <Image
+            src={heroHandoff}
+            alt={`Numunix engineer repairing a ${brandSeo.name} laptop`}
+            priority
+            className="absolute inset-0 h-full w-full object-cover object-center opacity-70"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/40 lg:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
 
-          <div className="mx-auto mt-8 max-w-xl text-left">
-            <ServiceBookingForm serviceName={serviceName} />
-          </div>
+          <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pb-6 pt-28 md:px-8 md:pb-8 md:pt-32 lg:pb-10 lg:pt-32">
+            <div className="grid gap-7 md:grid-cols-[minmax(0,1fr)_minmax(300px,380px)] md:items-center md:gap-8 lg:gap-12">
+              <div>
+                <div className="max-w-2xl">
+                  <h1 className="mt-6 text-[2rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:mt-8 lg:text-6xl">
+                    {isServiceCenter ? (
+                      <>
+                        <span className="text-brand">
+                          {brandSeo.serviceCenterName.replace(" Service Center", "")}
+                        </span>{" "}
+                        Service Center
+                      </>
+                    ) : (
+                      <>
+                        Repair Your <span className="text-brand">{heroProductName(brandSeo)}</span>{" "}
+                        in Bangalore
+                      </>
+                    )}
+                  </h1>
+                  <p className="mt-4 max-w-xl text-sm text-white/75 sm:mt-6 sm:text-lg">
+                    {isServiceCenter ? (
+                      <>
+                        Certified expert technicians, transparent pricing, fast turnaround —{" "}
+                        {heroProductName(brandSeo)} service with free doorstep pickup across
+                        Bangalore.
+                      </>
+                    ) : (
+                      <>
+                        Certified technicians, transparent pricing, fast turnaround — free doorstep
+                        pickup, genuine parts and a warranty on every {heroProductName(brandSeo)}{" "}
+                        repair.
+                      </>
+                    )}
+                  </p>
 
-          <div className="mx-auto mt-4 flex max-w-xl items-center gap-3 text-xs text-white/45 before:h-px before:flex-1 before:bg-white/15 after:h-px after:flex-1 after:bg-white/15">
-            OR
+                  <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap lg:mt-8">
+                    <a
+                      href="#hero-booking-form"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90 sm:w-auto lg:h-[62px] lg:px-8 lg:text-base"
+                    >
+                      Book Service
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
+                    <a
+                      href={whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-ink/60 px-6 py-3.5 text-sm font-semibold text-white shadow-soft backdrop-blur transition hover:bg-white hover:text-ink sm:w-auto lg:h-[62px] lg:px-8 lg:text-base"
+                    >
+                      <WhatsAppIcon className="h-4 w-4" />
+                      Reach us on WhatsApp
+                    </a>
+                  </div>
+                </div>
+
+                <div className="mt-8 hidden flex-nowrap gap-2 lg:mt-10 lg:flex">
+                  {(
+                    [
+                      ["Certified Technicians", Cog],
+                      ["Genuine Parts", ShieldCheck],
+                      ["Free Pickup", Truck],
+                      ["Warranty Included", Check],
+                    ] as [string, typeof Cog][]
+                  ).map(([label, Icon]) => (
+                    <div
+                      key={label}
+                      className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-white/10 px-3 py-2 text-xs font-medium text-white ring-1 ring-white/20 backdrop-blur-md lg:h-[52px] lg:px-4 lg:text-sm"
+                    >
+                      <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand text-brand-foreground lg:h-7 lg:w-7">
+                        <Icon className="h-3.5 w-3.5" />
+                      </span>
+                      {label}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div id="hero-booking-form" className="w-full md:max-w-[380px] md:justify-self-end">
+                <ServiceBookingForm serviceName={serviceName} />
+              </div>
+            </div>
           </div>
-          <a
-            href={whatsapp}
-            target="_blank"
-            rel="noreferrer"
-            className="mx-auto mt-4 flex max-w-xl items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 py-3 text-sm font-bold"
-          >
-            <WhatsAppIcon className="h-5 w-5" />
-            Book instantly on WhatsApp
-          </a>
-        </div>
-      </section>
+        </section>
+      ) : (
+        <section className="relative isolate overflow-hidden bg-ink px-4 pt-28 pb-16 text-white md:px-8 md:pb-24 md:pt-36">
+          <Image
+            src={heroHandoff}
+            alt=""
+            priority
+            className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+          />
+          <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(0,0,0,0.68)_0%,rgba(0,0,0,0.48)_45%,rgba(0,0,0,0.8)_100%)]" />
+          <div className="absolute -right-28 -top-20 h-80 w-80 rounded-full bg-brand/25 blur-3xl" />
+          <div className="absolute -bottom-40 -left-24 h-72 w-72 rounded-full bg-brand/15 blur-3xl" />
+          <div className="relative mx-auto max-w-3xl text-center">
+            <h1 className="mt-2 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl md:mt-3 md:text-6xl">
+              Repair your{" "}
+              <span className="bg-gradient-to-r from-sky-400 via-brand to-indigo-500 bg-clip-text text-transparent">
+                laptop
+              </span>{" "}
+              in {area?.name ?? "Bangalore"}
+            </h1>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/75 md:text-lg">
+              Get your laptop repaired by certified technicians. Free doorstep pickup across
+              Bengaluru, transparent pricing and warrantied repairs — most done in 24-48 hours.
+            </p>
+
+            <div className="mx-auto mt-8 max-w-xl text-left">
+              <ServiceBookingForm serviceName={serviceName} />
+            </div>
+
+            <div className="mx-auto mt-4 flex max-w-xl items-center gap-3 text-xs text-white/45 before:h-px before:flex-1 before:bg-white/15 after:h-px after:flex-1 after:bg-white/15">
+              OR
+            </div>
+            <a
+              href={whatsapp}
+              target="_blank"
+              rel="noreferrer"
+              className="mx-auto mt-4 flex max-w-xl items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 py-3 text-sm font-bold"
+            >
+              <WhatsAppIcon className="h-5 w-5" />
+              Book instantly on WhatsApp
+            </a>
+          </div>
+        </section>
+      )}
 
       <section id="brands" className="scroll-mt-20 px-4 py-16 md:px-8 md:py-24">
         <div className="mx-auto max-w-6xl">
@@ -186,7 +294,7 @@ export function RepairLaptopContent({
             {filtered.map((b) => (
               <Link
                 key={b.slug}
-                href={`/repair-laptop/brand/${b.slug}`}
+                href={brandHref(b.slug)}
                 className="flex min-h-28 flex-col items-center justify-center rounded-2xl border border-border bg-white p-4 shadow-soft transition duration-200 hover:-translate-y-1 hover:border-brand"
               >
                 {b.logo ? (
@@ -226,12 +334,16 @@ export function RepairLaptopContent({
             <p className="text-xs font-extrabold tracking-[.16em] text-brand">
               {area
                 ? `LAPTOP REPAIR IN ${area.name.toUpperCase()}`
-                : `REPAIR ${brandSeo?.name.toUpperCase()} LAPTOPS`}
+                : isServiceCenter
+                  ? `${brandSeo?.name.toUpperCase()} SERVICE CENTER`
+                  : `REPAIR ${brandSeo?.name.toUpperCase()} LAPTOPS`}
             </p>
             <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
               {area
                 ? `Repair your laptop in ${area.name}, Bangalore`
-                : `Repair your ${heroProductName(brandSeo!)} in Bangalore`}
+                : isServiceCenter
+                  ? `${brandSeo?.serviceCenterName} in Bangalore`
+                  : `Repair your ${heroProductName(brandSeo!)} in Bangalore`}
             </h2>
             <div className="mt-6 space-y-4 text-muted-foreground">
               {(areaCopy ?? brandCopy)!.intro.map((paragraph, i) => (
@@ -357,20 +469,23 @@ export function RepairLaptopContent({
       <section className="border-t border-border px-4 py-16 md:px-8">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-3xl font-extrabold tracking-tight">
-            Repair laptop by brand in Bangalore
+            {isServiceCenter
+              ? "Laptop service center by brand in Bangalore"
+              : "Repair laptop by brand in Bangalore"}
           </h2>
           <p className="mt-3 text-muted-foreground">
-            Explore detailed repair guides and book a service for every laptop brand we support in
-            Bengaluru.
+            {isServiceCenter
+              ? "Explore dedicated service center pages and book a service for every laptop brand we support in Bengaluru."
+              : "Explore detailed repair guides and book a service for every laptop brand we support in Bengaluru."}
           </p>
           <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
             {REPAIR_LAPTOP_BRANDS.map((b) => (
               <Link
-                href={`/repair-laptop/brand/${b.slug}`}
+                href={brandHref(b.slug)}
                 key={b.slug}
                 className="text-sm font-semibold underline-offset-4 hover:text-brand hover:underline"
               >
-                Repair {b.name} laptop
+                {isServiceCenter ? b.serviceCenterName : `Repair ${b.name} laptop`}
               </Link>
             ))}
           </div>
@@ -403,6 +518,15 @@ export function RepairLaptopContent({
           </div>
         </div>
       </section>
+
+      {brandDisclaimer && (
+        <section className="border-t border-border px-4 py-10 md:px-8">
+          <div className="mx-auto max-w-4xl rounded-2xl bg-secondary/55 p-6 text-sm leading-6 text-muted-foreground md:p-7">
+            <h2 className="text-sm font-bold text-ink">{brandDisclaimer.heading}</h2>
+            <p className="mt-2">{brandDisclaimer.body}</p>
+          </div>
+        </section>
+      )}
 
       <a
         href={whatsapp}

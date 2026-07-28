@@ -6,7 +6,12 @@ import { REPAIR_LAPTOP_BRANDS } from "@/lib/repair-laptop-brands";
 
 function XIcon({ className }: { className?: string }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" className={className}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      viewBox="0 0 16 16"
+      className={className}
+    >
       <path d="M12.6 0.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867 -5.07 -4.425 5.07H0.316l5.733 -6.57L0 0.75h5.063l3.495 4.633L12.601 0.75Zm-0.86 13.028h1.36L4.323 2.145H2.865z" />
     </svg>
   );
@@ -49,12 +54,27 @@ const REPAIR_LAPTOP_COLUMN = {
   })),
 };
 
-// The "Repair Your Laptop" brand links only make sense in the context of the
-// repair flow, so they only show on repair-laptop pages, not the footer used
-// by the rest of the site (homepage, services, legal pages, etc.).
+const SERVICE_CENTER_COLUMN = {
+  title: "Laptop Service Center",
+  links: REPAIR_LAPTOP_BRANDS.map((b) => ({
+    label: b.serviceCenterName,
+    href: `/repair-laptop/service-center/${b.slug}`,
+  })),
+};
+
+// The "Repair Your Laptop" and "Laptop Service Center" brand link columns
+// only make sense in the context of the repair flow, so they only show on
+// repair-laptop pages, not the footer used by the rest of the site (homepage,
+// services, legal pages, etc.).
 export function SiteFooter({ showRepairLaptopMenu = false }: { showRepairLaptopMenu?: boolean }) {
   const columns = showRepairLaptopMenu
-    ? [BASE_FOOTER_COLUMNS[0], BASE_FOOTER_COLUMNS[1], REPAIR_LAPTOP_COLUMN, BASE_FOOTER_COLUMNS[2]]
+    ? [
+        BASE_FOOTER_COLUMNS[0],
+        BASE_FOOTER_COLUMNS[1],
+        REPAIR_LAPTOP_COLUMN,
+        SERVICE_CENTER_COLUMN,
+        BASE_FOOTER_COLUMNS[2],
+      ]
     : BASE_FOOTER_COLUMNS;
 
   return (
@@ -62,7 +82,7 @@ export function SiteFooter({ showRepairLaptopMenu = false }: { showRepairLaptopM
       <div
         className={`mx-auto grid max-w-6xl gap-10 md:grid-cols-3 ${
           showRepairLaptopMenu
-            ? "lg:grid-cols-[1.2fr_1fr_1fr_1fr_1fr]"
+            ? "lg:grid-cols-[1.1fr_1fr_1fr_1fr_1fr_1fr]"
             : "lg:grid-cols-[1.2fr_1fr_1fr_1fr]"
         }`}
       >
