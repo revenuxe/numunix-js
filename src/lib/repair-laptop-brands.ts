@@ -26,6 +26,13 @@ export type RepairLaptopBrand = {
   // page title on that brand's landing page, e.g. "Lenovo Service Center" or
   // "MacBook Service Center" (Apple laptops are searched as "MacBook", not "Apple").
   serviceCenterName: string;
+  // A short, brand-specific line about that brand's laptop line-up, used to
+  // open its intro paragraph. Written per brand (not a single shared
+  // template) so the 14 non-Apple brand pages — repeated again for their
+  // /repair-laptop/service-center/[brand] counterparts — don't read as one
+  // template with the brand name swapped in, which search engines were
+  // treating as near-duplicate content and leaving mostly uncrawled.
+  blurb: string;
   logo?: StaticImageData;
 };
 
@@ -40,6 +47,8 @@ export const REPAIR_LAPTOP_BRANDS: RepairLaptopBrand[] = [
     product: "MacBook",
     footerLabel: "Repair Apple MacBook",
     serviceCenterName: "MacBook Service Center",
+    blurb:
+      "MacBook Air and MacBook Pro models, from older Intel-based units to recent Apple Silicon",
     logo: logoApple,
   },
   {
@@ -48,6 +57,8 @@ export const REPAIR_LAPTOP_BRANDS: RepairLaptopBrand[] = [
     product: "Laptop",
     footerLabel: "Repair Dell laptop",
     serviceCenterName: "Dell Service Center",
+    blurb:
+      "Dell laptops, from everyday Inspiron models to premium XPS ultrabooks and business Latitude machines",
     logo: logoDell,
   },
   {
@@ -56,6 +67,8 @@ export const REPAIR_LAPTOP_BRANDS: RepairLaptopBrand[] = [
     product: "Laptop",
     footerLabel: "Repair HP laptop",
     serviceCenterName: "HP Service Center",
+    blurb:
+      "HP laptops, from Pavilion and Envy home and creative models to EliteBook and ProBook business machines",
     logo: logoHp,
   },
   {
@@ -64,6 +77,8 @@ export const REPAIR_LAPTOP_BRANDS: RepairLaptopBrand[] = [
     product: "Laptop",
     footerLabel: "Repair Lenovo laptop",
     serviceCenterName: "Lenovo Service Center",
+    blurb:
+      "Lenovo laptops, from ThinkPad business machines built around durability and keyboard feel to IdeaPad everyday laptops and Legion gaming rigs",
     logo: logoLenovo,
   },
   {
@@ -72,6 +87,8 @@ export const REPAIR_LAPTOP_BRANDS: RepairLaptopBrand[] = [
     product: "Laptop",
     footerLabel: "Repair Asus laptop",
     serviceCenterName: "Asus Service Center",
+    blurb:
+      "Asus laptops, from slim ZenBook and everyday VivoBook models to high-performance ROG gaming laptops",
     logo: logoAsus,
   },
   {
@@ -80,6 +97,8 @@ export const REPAIR_LAPTOP_BRANDS: RepairLaptopBrand[] = [
     product: "Laptop",
     footerLabel: "Repair Acer laptop",
     serviceCenterName: "Acer Service Center",
+    blurb:
+      "Acer laptops, from budget-friendly Aspire models and slim Swift ultrabooks to Predator and Nitro gaming laptops",
     logo: logoAcer,
   },
   {
@@ -88,6 +107,8 @@ export const REPAIR_LAPTOP_BRANDS: RepairLaptopBrand[] = [
     product: "Laptop",
     footerLabel: "Repair MSI laptop",
     serviceCenterName: "MSI Service Center",
+    blurb:
+      "MSI laptops, mostly high-performance gaming and creator models built around discrete graphics and heavier cooling",
     logo: logoMsi,
   },
   {
@@ -96,6 +117,8 @@ export const REPAIR_LAPTOP_BRANDS: RepairLaptopBrand[] = [
     product: "Laptop",
     footerLabel: "Repair Avita laptop",
     serviceCenterName: "Avita Service Center",
+    blurb:
+      "Avita laptops, popular budget-friendly models like the Cosmos, Liber and Pura ranges favoured by students and first-time buyers",
     logo: logoAvita,
   },
   {
@@ -104,6 +127,8 @@ export const REPAIR_LAPTOP_BRANDS: RepairLaptopBrand[] = [
     product: "Gram",
     footerLabel: "Repair LG Gram laptop",
     serviceCenterName: "LG Gram Service Center",
+    blurb:
+      "LG Gram laptops, known for their unusually light magnesium-alloy build and long battery life",
     logo: logoLg,
   },
   {
@@ -112,6 +137,8 @@ export const REPAIR_LAPTOP_BRANDS: RepairLaptopBrand[] = [
     product: "Surface",
     footerLabel: "Repair Microsoft Surface laptop",
     serviceCenterName: "Microsoft Surface Service Center",
+    blurb:
+      "Microsoft Surface laptops and 2-in-1 devices, including detachable and convertible touchscreen models",
     logo: logoMicrosoft,
   },
   {
@@ -120,6 +147,8 @@ export const REPAIR_LAPTOP_BRANDS: RepairLaptopBrand[] = [
     product: "Galaxy Book",
     footerLabel: "Repair Samsung Galaxy Book laptop",
     serviceCenterName: "Samsung Galaxy Book Service Center",
+    blurb:
+      "Samsung Galaxy Book laptops, slim ultrabooks known for their AMOLED displays and tight integration with Samsung's phone and tablet ecosystem",
     logo: logoSamsung,
   },
   {
@@ -128,6 +157,8 @@ export const REPAIR_LAPTOP_BRANDS: RepairLaptopBrand[] = [
     product: "Notebook",
     footerLabel: "Repair Xiaomi Notebook laptop",
     serviceCenterName: "Xiaomi Notebook Service Center",
+    blurb:
+      "Xiaomi Notebook and RedmiBook laptops, popular value-for-money models aimed at everyday and student use",
     logo: logoXiaomi,
   },
   {
@@ -136,6 +167,8 @@ export const REPAIR_LAPTOP_BRANDS: RepairLaptopBrand[] = [
     product: "Laptop",
     footerLabel: "Repair Nokia laptop",
     serviceCenterName: "Nokia Service Center",
+    blurb:
+      "Nokia-branded laptops, licensed budget and mid-range models built for everyday, no-frills computing",
     logo: logoNokia,
   },
   {
@@ -144,6 +177,8 @@ export const REPAIR_LAPTOP_BRANDS: RepairLaptopBrand[] = [
     product: "Laptop",
     footerLabel: "Repair Realme laptop",
     serviceCenterName: "Realme Service Center",
+    blurb:
+      "Realme Book laptops, budget-to-mid-range models popular with Realme's smartphone-first customer base",
     logo: logoRealme,
   },
   {
@@ -152,6 +187,8 @@ export const REPAIR_LAPTOP_BRANDS: RepairLaptopBrand[] = [
     product: "Blade",
     footerLabel: "Repair Razer Blade laptop",
     serviceCenterName: "Razer Blade Service Center",
+    blurb:
+      "Razer Blade laptops, premium all-metal gaming machines built around high-end discrete graphics",
     logo: logoRazer,
   },
 ];
@@ -182,8 +219,8 @@ export function buildBrandCopy(brand: RepairLaptopBrand): BrandCopy {
 
   const intro = [
     isApple
-      ? `MacBooks need specialised care — logic board diagnostics, genuine Apple parts and technicians trained specifically on Apple hardware. Numunix repairs MacBook Air and MacBook Pro models across Bangalore, from cracked screens and battery replacements to liquid damage and boot issues, whether it's an older Intel-based MacBook or a recent Apple Silicon model.`
-      : `Numunix repairs used ${brand.name} laptops for homes, students and businesses across Bangalore — screen replacements, battery swaps, keyboard repairs, motherboard-level diagnostics and more. Our engineers work on your ${product} using genuine or certified-compatible parts.`,
+      ? `Numunix repairs ${brand.blurb} across Bangalore — from cracked screens and battery replacements to liquid damage and boot issues. MacBooks need specialised care: logic board diagnostics, genuine Apple parts and technicians trained specifically on Apple hardware.`
+      : `Numunix repairs ${brand.blurb} across Bangalore for homes, students and businesses — screen replacements, battery swaps, keyboard repairs, motherboard-level diagnostics and more, using genuine or certified-compatible parts.`,
     `Book online in a couple of minutes. A certified Numunix engineer can visit your doorstep for pickup, diagnose the exact fault, quote a transparent price before starting any work, and return your ${product} fully tested — most repairs are done within 24-48 hours.`,
   ];
 
@@ -219,8 +256,8 @@ export function buildServiceCenterCopy(brand: RepairLaptopBrand): BrandCopy {
 
   const intro = [
     isApple
-      ? `Looking for a reliable MacBook Service Center in Bangalore? MacBooks need specialised care — logic board diagnostics, genuine Apple parts and technicians trained specifically on Apple hardware. Numunix is an independent, certified MacBook service provider in Bangalore, repairing MacBook Air and MacBook Pro models from cracked screens and battery replacements to liquid damage and boot issues, whether it's an older Intel-based MacBook or a recent Apple Silicon model.`
-      : `Looking for a reliable ${brand.serviceCenterName} in Bangalore? Numunix is an independent, certified ${brand.name} repair provider serving homes, students and businesses across the city — screen replacements, battery swaps, keyboard repairs, motherboard-level diagnostics and more. Our certified expert technicians are trained specifically on ${product} hardware and use genuine or certified-compatible parts.`,
+      ? `Looking for a reliable MacBook Service Center in Bangalore? Numunix is an independent, certified service provider for ${brand.blurb}, repairing cracked screens, battery replacements, liquid damage and boot issues. MacBooks need specialised care — logic board diagnostics, genuine Apple parts and technicians trained specifically on Apple hardware.`
+      : `Looking for a reliable ${brand.serviceCenterName} in Bangalore? Numunix is an independent, certified repair provider for ${brand.blurb}, serving homes, students and businesses across the city. Our certified expert technicians are trained specifically on ${product} hardware — screen replacements, battery swaps, keyboard repairs, motherboard-level diagnostics and more — using genuine or certified-compatible parts.`,
     `Book online in a couple of minutes. A certified Numunix engineer can visit your doorstep for pickup, diagnose the exact fault, quote a transparent price before starting any work, and return your ${product} fully tested — most repairs are done within 24-48 hours.`,
   ];
 

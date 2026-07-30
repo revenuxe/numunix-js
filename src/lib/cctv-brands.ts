@@ -13,6 +13,13 @@ export type CctvBrand = {
   name: string;
   slug: string;
   footerLabel: string;
+  // A short, brand-specific line about that brand's camera line-up, used to
+  // open its intro paragraph. Written per brand (not a single shared
+  // template) so the 7 brand pages don't read as one template with the
+  // brand name swapped in — search engines were treating the old shared
+  // paragraph as near-duplicate content and leaving most of these pages
+  // uncrawled.
+  blurb: string;
   logo: StaticImageData;
 };
 
@@ -20,31 +27,59 @@ export type CctvBrand = {
 // installation Bangalore"). Shown below the hero on the CCTV Installation
 // service page.
 export const CCTV_BRANDS: CctvBrand[] = [
-  { name: "CP Plus", slug: "cp-plus", footerLabel: "CP Plus CCTV installation", logo: logoCpPlus },
+  {
+    name: "CP Plus",
+    slug: "cp-plus",
+    footerLabel: "CP Plus CCTV installation",
+    blurb:
+      "CP Plus, one of India's most widely installed security brands, with analog and IP camera ranges for homes, shops and offices",
+    logo: logoCpPlus,
+  },
   {
     name: "Hikvision",
     slug: "hikvision",
     footerLabel: "Hikvision CCTV installation",
+    blurb:
+      "Hikvision, one of the world's largest CCTV manufacturers, with a wide range of IP and analog cameras suited to both small properties and large multi-camera sites",
     logo: logoHikvision,
   },
-  { name: "Dahua", slug: "dahua", footerLabel: "Dahua CCTV installation", logo: logoDahua },
-  { name: "EZVIZ", slug: "ezviz", footerLabel: "EZVIZ camera installation", logo: logoEzviz },
+  {
+    name: "Dahua",
+    slug: "dahua",
+    footerLabel: "Dahua CCTV installation",
+    blurb:
+      "Dahua, a major global CCTV manufacturer known for AI-enabled cameras and NVR/DVR recording systems",
+    logo: logoDahua,
+  },
+  {
+    name: "EZVIZ",
+    slug: "ezviz",
+    footerLabel: "EZVIZ camera installation",
+    blurb:
+      "EZVIZ, a consumer smart-camera brand known for Wi-Fi and cloud-connected cameras that are easy to monitor from a phone",
+    logo: logoEzviz,
+  },
   {
     name: "Godrej",
     slug: "godrej",
     footerLabel: "Godrej security camera installation",
+    blurb:
+      "Godrej Security Solutions' CCTV cameras and DVR/NVR systems, a familiar Indian brand for home and small-business monitoring",
     logo: logoGodrej,
   },
   {
     name: "Hi-Focus",
     slug: "hi-focus",
     footerLabel: "Hi-Focus CCTV installation",
+    blurb: "Hi-Focus, an Indian CCTV brand known for budget-friendly analog and IP camera systems",
     logo: logoHifocus,
   },
   {
     name: "TP-Link",
     slug: "tp-link",
     footerLabel: "TP-Link camera installation",
+    blurb:
+      "TP-Link's Tapo and VIGI camera ranges, Wi-Fi-first cameras built by a brand better known for its routers and networking gear",
     logo: logoTplink,
   },
 ];
@@ -66,7 +101,7 @@ export type CctvBrandCopy = {
 
 export function buildCctvBrandCopy(brand: CctvBrand): CctvBrandCopy {
   const intro = [
-    `Numunix installs, configures and services ${brand.name} CCTV cameras for homes, shops and offices across Bangalore. From choosing the right ${brand.name} camera and DVR/NVR combination for your property to running the cabling and setting up remote mobile viewing, our certified engineers handle the full ${brand.name} CCTV installation end to end.`,
+    `Numunix installs, configures and services ${brand.blurb}, for homes, shops and offices across Bangalore. From choosing the right ${brand.name} camera and DVR/NVR combination for your property to running the cabling and setting up remote mobile viewing, our certified engineers handle the full installation end to end.`,
     `Already have a ${brand.name} CCTV system that's stopped recording, gone offline, or lost its remote view? We troubleshoot and repair existing ${brand.name} installations too — camera and DVR/NVR diagnostics, hard-drive replacement, cable and connector faults, and app/remote-viewing reconfiguration — with a clear, upfront quote before any work starts.`,
   ];
 
