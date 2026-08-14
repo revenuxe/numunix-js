@@ -13,7 +13,11 @@ import { FloatingCallWidget } from "@/components/floating-call-widget";
 import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 import { CONTACT } from "@/lib/contact";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
-import { getWashingMachineBrand, WASHING_MACHINE_BRANDS } from "@/lib/washing-machine-brands";
+import {
+  getWashingMachineBrand,
+  getWashingMachineBrandCopy,
+  WASHING_MACHINE_BRANDS,
+} from "@/lib/washing-machine-brands";
 import heroHandoff from "@/assets/hero-handoff.webp";
 
 type Params = { brand: string };
@@ -39,6 +43,8 @@ export default async function WashingMachineBrandPage({ params }: { params: Prom
   const { brand: slug } = await params;
   const brand = getWashingMachineBrand(slug);
   if (!brand) notFound();
+  const brandCopy = getWashingMachineBrandCopy(slug);
+  if (!brandCopy) notFound();
 
   const pagePath = `/services/washing-machine-repair/brand/${brand.slug}`;
   const faqs = [
@@ -54,6 +60,7 @@ export default async function WashingMachineBrandPage({ params }: { params: Prom
       `Can you fix a leaking ${brand.name} washing machine?`,
       `Yes. We inspect the inlet, hoses, door seal, drain system and internal connections to locate the leak before recommending a repair.`,
     ],
+    brandCopy.faq,
   ];
   const serviceJsonLd = {
     "@context": "https://schema.org",
@@ -63,6 +70,15 @@ export default async function WashingMachineBrandPage({ params }: { params: Prom
     provider: { "@type": "LocalBusiness", name: SITE_NAME },
     areaServed: { "@type": "City", name: "Bangalore" },
     url: `${SITE_URL}${pagePath}`,
+  };
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map(([question, answer]) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: { "@type": "Answer", text: answer },
+    })),
   };
 
   return (
@@ -121,6 +137,12 @@ export default async function WashingMachineBrandPage({ params }: { params: Prom
             leak, or leave clothes too wet after spinning. We also assist with routine servicing,
             installation checks and maintenance guidance.
           </p>
+          <p>
+            Our service experience includes {brand.repairFocus} Share the model number and the
+            symptoms you notice when booking so our technician can plan the right inspection.
+          </p>
+          <p>{brandCopy.details}</p>
+          <p>{brandCopy.tip}</p>
         </div>
         <div className="mt-10 grid gap-3 sm:grid-cols-2">
           {[
@@ -148,12 +170,7 @@ export default async function WashingMachineBrandPage({ params }: { params: Prom
             </h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
-            {[
-              "Not spinning or draining",
-              "Water leakage",
-              "Machine not starting",
-              "Noise and heavy vibration",
-            ].map((item) => (
+            {brandCopy.issues.map((item) => (
               <div key={item} className="rounded-2xl bg-white p-5 shadow-soft">
                 <BadgeCheck className="h-5 w-5 text-brand" />
                 <h3 className="mt-4 font-bold">{item}</h3>
@@ -221,6 +238,10 @@ export default async function WashingMachineBrandPage({ params }: { params: Prom
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <script
         type="application/ld+json"

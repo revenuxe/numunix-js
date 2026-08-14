@@ -3,6 +3,7 @@ import { getServiceSlugs } from "@/lib/services";
 import { BANGALORE_AREAS } from "@/lib/bangalore-areas";
 import { REPAIR_LAPTOP_BRANDS } from "@/lib/repair-laptop-brands";
 import { CCTV_BRANDS } from "@/lib/cctv-brands";
+import { WASHING_MACHINE_BRANDS } from "@/lib/washing-machine-brands";
 import { getBlogSlugs } from "@/lib/blog-posts";
 import { SITE_URL } from "@/lib/site";
 
@@ -55,6 +56,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "weekly",
     priority: 0.65,
   }));
+  const washingMachineBrandEntries: MetadataRoute.Sitemap = WASHING_MACHINE_BRANDS.map((brand) => ({
+    url: `${SITE_URL}/services/washing-machine-repair/brand/${brand.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
 
   const blogEntries: MetadataRoute.Sitemap = getBlogSlugs().map((slug) => ({
     url: `${SITE_URL}/blog/${slug}`,
@@ -69,6 +77,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...areaEntries,
     ...brandSeoEntries,
     ...cctvBrandEntries,
+    ...washingMachineBrandEntries,
     ...blogEntries,
   ];
 }
