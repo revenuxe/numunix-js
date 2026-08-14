@@ -23,6 +23,7 @@ import { ServiceBookingForm } from "@/components/service-booking-form";
 import { CctvBrandSelect } from "@/components/cctv-brand-select";
 import { WashingMachineBrandSelect } from "@/components/washing-machine-brand-select";
 import { WashingMachineServiceDisclaimer } from "@/components/washing-machine-service-disclaimer";
+import { FloatingCallWidget } from "@/components/floating-call-widget";
 import { CONTACT } from "@/lib/contact";
 import { getService, getServiceSlugs } from "@/lib/services";
 import { SITE_NAME } from "@/lib/site";
@@ -320,6 +321,7 @@ export default async function ServicePage({
       </section>
       {serviceSlug === "washing-machine-repair" && <WashingMachineServiceDisclaimer />}
       <SiteFooter />
+      {serviceSlug === "washing-machine-repair" && <FloatingCallWidget />}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
