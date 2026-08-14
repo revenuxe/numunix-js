@@ -17,6 +17,7 @@ export type Service = {
   intro: string;
   keywords: string[];
   subServices: string[];
+  subServiceLinks?: Record<string, string>;
   problems: string[];
   benefits: string[];
   faqs: { question: string; answer: string }[];
@@ -217,51 +218,108 @@ export const SERVICES: Record<string, Service> = {
       },
     ],
   },
-  "printer-repair": {
-    name: "Printer Repair",
-    seoTitle: "Printer Repair Service | Laser & Inkjet Printer Support | Numunix",
+  "appliances-repair": {
+    name: "Appliances Repair",
+    seoTitle: "Home Appliances Repair Service | AC, Refrigerator & Washing Machine | Numunix",
     seoDescription:
-      "Fast printer repair and setup for laser and inkjet printers. Numunix fixes paper jams, print-quality problems, network printer and scanner issues.",
-    hero: "Printer repair that keeps documents moving.",
+      "Reliable home appliance repair for washing machines, refrigerators, air conditioners and more. Numunix provides clear diagnostics, genuine parts and dependable repairs.",
+    hero: "Appliance repair that keeps your home running smoothly.",
     image: svcDesktop,
     intro:
-      "Numunix repairs and maintains home and office printers, from paper-feed faults to network and scan configuration. We diagnose the actual cause and help you keep printing without repeated downtime.",
+      "Numunix repairs essential home appliances, including washing machines, refrigerators and air conditioners. We find the real fault, explain the repair clearly and use quality replacement parts for a dependable result.",
     keywords: [
-      "Printer repair",
-      "Network printer setup",
-      "Scanner troubleshooting",
-      "Laser printer service",
+      "Home appliance repair",
+      "Washing machine repair",
+      "Refrigerator repair",
+      "AC repair",
     ],
     subServices: [
-      "Paper jam and feed repair",
-      "Print quality and cartridge issues",
-      "Network printer setup",
-      "Scanner and driver troubleshooting",
-      "Laser printer maintenance",
-      "Office printer support",
+      "Washing Machine Repair",
+      "Refrigerator Repair",
+      "AC Repair",
+      "Microwave Oven Repair",
+      "Dishwasher Repair",
+      "Water Purifier Repair",
     ],
+    subServiceLinks: {
+      "Washing Machine Repair": "/services/washing-machine-repair",
+    },
     problems: [
-      "Printer is offline",
-      "Paper keeps jamming",
-      "Print is faded or streaked",
-      "Scanner is not detected",
+      "Washing machine is not spinning or draining",
+      "Refrigerator is not cooling properly",
+      "AC is leaking, noisy or not cooling",
+      "Appliance will not switch on",
     ],
     benefits: [
-      "Home and office printer support",
+      "Repair support for essential home appliances",
       "Clear repair recommendations",
-      "Network setup included",
-      "Preventive maintenance advice",
+      "Quality parts and dependable workmanship",
+      "Preventive maintenance advice for longer appliance life",
     ],
     faqs: [
       {
-        question: "Can you set up a printer on every office computer?",
+        question: "Which appliances do you repair?",
         answer:
-          "Yes. We connect and configure network printers for the appropriate office devices.",
+          "We repair common household appliances including washing machines, refrigerators, air conditioners, microwave ovens, dishwashers and water purifiers.",
       },
       {
-        question: "Do you repair laser printers?",
+        question: "Do you use genuine replacement parts?",
         answer:
-          "Yes. We diagnose common laser-printer feed, toner, drum, connectivity and maintenance faults.",
+          "We recommend suitable quality replacement parts after diagnosis and explain the repair before work begins.",
+      },
+    ],
+  },
+  "washing-machine-repair": {
+    name: "Washing Machine Repair",
+    seoTitle: "Washing Machine Repair Service | Front Load & Top Load Repair | Numunix",
+    seoDescription:
+      "Professional washing machine repair for front-load, top-load and semi-automatic machines. Numunix fixes drainage, spin, noise, vibration and power faults across leading brands.",
+    hero: "Reliable washing machine repair, right when you need it.",
+    heroAccent: "washing machine repair",
+    image: svcDesktop,
+    intro:
+      "From a machine that will not start to poor draining, excessive vibration or a failed spin cycle, our technicians diagnose the fault clearly and provide a dependable washing machine repair solution for your home.",
+    keywords: [
+      "Washing machine repair",
+      "Front load washing machine repair",
+      "Top load washing machine repair",
+      "Washing machine service near me",
+    ],
+    subServices: [
+      "Front Load Washing Machine Repair",
+      "Top Load Washing Machine Repair",
+      "Semi-Automatic Washing Machine Repair",
+      "Drainage and Spin Cycle Repair",
+      "Motor, Belt and Drum Repair",
+      "Washing Machine Installation and Service",
+    ],
+    problems: [
+      "Washing machine is not starting",
+      "Machine is not draining water",
+      "Drum is noisy, shaking or not spinning",
+      "Water is leaking from the machine",
+    ],
+    benefits: [
+      "Support for front-load, top-load and semi-automatic machines",
+      "Clear fault diagnosis before repair work begins",
+      "Quality replacement parts when required",
+      "Practical maintenance guidance after every visit",
+    ],
+    faqs: [
+      {
+        question: "Do you repair both front-load and top-load washing machines?",
+        answer:
+          "Yes. Our washing machine repair service covers front-load, top-load and semi-automatic models across leading home-appliance brands.",
+      },
+      {
+        question: "Why is my washing machine not draining or spinning?",
+        answer:
+          "Drainage and spin problems can be caused by a blocked filter, pump fault, belt issue, motor problem or control-board fault. We inspect the machine and recommend the right repair.",
+      },
+      {
+        question: "Can you repair a leaking washing machine?",
+        answer:
+          "Yes. We check hoses, inlet valves, door seals, the drain system and internal connections to identify the source of the leak before repairing it.",
       },
     ],
   },

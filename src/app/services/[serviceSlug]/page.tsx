@@ -2,17 +2,41 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowRight, BadgeCheck, Clock3, Cog, Headset, ShieldCheck } from "lucide-react";
+import {
+  AirVent,
+  ArrowRight,
+  BadgeCheck,
+  Clock3,
+  Cog,
+  Droplets,
+  Headset,
+  Microwave,
+  Refrigerator,
+  ShieldCheck,
+  UtensilsCrossed,
+  WashingMachine,
+} from "lucide-react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { ServiceBookingForm } from "@/components/service-booking-form";
 import { CctvBrandSelect } from "@/components/cctv-brand-select";
+import { WashingMachineBrandSelect } from "@/components/washing-machine-brand-select";
+import { WashingMachineServiceDisclaimer } from "@/components/washing-machine-service-disclaimer";
 import { CONTACT } from "@/lib/contact";
 import { getService, getServiceSlugs } from "@/lib/services";
 import { SITE_NAME } from "@/lib/site";
 import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 import heroHandoff from "@/assets/hero-handoff.webp";
+
+const APPLIANCE_SERVICE_ICONS = {
+  "Washing Machine Repair": WashingMachine,
+  "Refrigerator Repair": Refrigerator,
+  "AC Repair": AirVent,
+  "Microwave Oven Repair": Microwave,
+  "Dishwasher Repair": UtensilsCrossed,
+  "Water Purifier Repair": Droplets,
+};
 
 export function generateStaticParams() {
   return getServiceSlugs().map((serviceSlug) => ({ serviceSlug }));
@@ -119,6 +143,7 @@ export default async function ServicePage({
       </section>
 
       {serviceSlug === "cctv-installation" && <CctvBrandSelect />}
+      {serviceSlug === "washing-machine-repair" && <WashingMachineBrandSelect />}
 
       <section className="mx-auto grid max-w-6xl gap-12 px-4 py-20 md:px-8 md:py-28 lg:grid-cols-[.8fr_1.2fr] lg:items-start">
         <div className="lg:sticky lg:top-24">
@@ -132,37 +157,83 @@ export default async function ServicePage({
           </p>
         </div>
         <div className="grid gap-5 sm:grid-cols-2">
-          {service.subServices.map((item, index) => (
-            <Link
-              key={item}
-              href="#service-booking-form"
-              className="group relative min-w-0 overflow-hidden rounded-[1.75rem] border border-border bg-white p-6 shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card"
-            >
-              <span
-                aria-hidden
-                className="absolute -right-8 -top-8 h-24 w-24 rounded-full border-[14px] border-brand/[0.07] transition duration-500 group-hover:scale-125 group-hover:border-brand/[0.12]"
-              />
-              <div className="relative flex items-start justify-between">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-brand/20 bg-brand/10 text-xs font-bold text-brand">
-                  0{index + 1}
-                </span>
-                <ArrowRight className="h-5 w-5 shrink-0 text-brand transition duration-300 group-hover:translate-x-1" />
-              </div>
-              <h3 className="relative mt-7 break-words text-lg font-bold leading-snug text-ink">
-                {item}
-              </h3>
-              <p className="relative mt-3 text-sm leading-6 text-muted-foreground">
-                Professional assessment and dependable workmanship from a certified Numunix
-                engineer.
-              </p>
-              <span
-                aria-hidden
-                className="relative mt-6 block h-px w-12 bg-brand/40 transition-all duration-300 group-hover:w-full"
-              />
-            </Link>
-          ))}
+          {service.subServices.map((item, index) => {
+            const ApplianceIcon =
+              serviceSlug === "appliances-repair"
+                ? APPLIANCE_SERVICE_ICONS[item as keyof typeof APPLIANCE_SERVICE_ICONS]
+                : undefined;
+
+            return (
+              <Link
+                key={item}
+                href={service.subServiceLinks?.[item] ?? "#service-booking-form"}
+                className="group relative min-w-0 overflow-hidden rounded-[1.75rem] border border-border bg-white p-6 shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card"
+              >
+                <span
+                  aria-hidden
+                  className="absolute -right-8 -top-8 h-24 w-24 rounded-full border-[14px] border-brand/[0.07] transition duration-500 group-hover:scale-125 group-hover:border-brand/[0.12]"
+                />
+                <div className="relative flex items-start justify-between">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-brand/20 bg-brand/10 text-xs font-bold text-brand">
+                    {ApplianceIcon ? (
+                      <ApplianceIcon className="h-5 w-5" aria-hidden />
+                    ) : (
+                      `0${index + 1}`
+                    )}
+                  </span>
+                  <ArrowRight className="h-5 w-5 shrink-0 text-brand transition duration-300 group-hover:translate-x-1" />
+                </div>
+                <h3 className="relative mt-7 break-words text-lg font-bold leading-snug text-ink">
+                  {item}
+                </h3>
+                <p className="relative mt-3 text-sm leading-6 text-muted-foreground">
+                  Professional assessment and dependable workmanship from a certified Numunix
+                  engineer.
+                </p>
+                <span
+                  aria-hidden
+                  className="relative mt-6 block h-px w-12 bg-brand/40 transition-all duration-300 group-hover:w-full"
+                />
+              </Link>
+            );
+          })}
         </div>
       </section>
+
+      {serviceSlug === "washing-machine-repair" && (
+        <section className="mx-auto max-w-6xl px-4 py-20 md:px-8 md:py-28">
+          <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand">
+                Expert washing machine service
+              </p>
+              <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-ink">
+                A practical repair for every wash-day problem.
+              </h2>
+            </div>
+            <div className="space-y-5 leading-7 text-muted-foreground">
+              <p>
+                A washing machine fault can disrupt an entire household. Whether you need front-load
+                washing machine repair, top-load washing machine service or help with a
+                semi-automatic model, Numunix starts with a careful inspection instead of guessing
+                at the problem.
+              </p>
+              <p>
+                We assess common faults such as drainage failure, spin-cycle issues, unusual noise,
+                water leakage, door-lock errors, detergent dispenser problems and machines that will
+                not power on. Once the cause is clear, we explain the recommended repair and any
+                parts required, helping you make an informed decision.
+              </p>
+              <p>
+                Regular washing machine maintenance can also prevent avoidable breakdowns. Our team
+                can check hoses, filters, inlet connections, drum movement and general machine
+                performance, then share simple care advice to help your appliance run reliably for
+                longer.
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="bg-secondary/45 px-4 py-20 md:px-8 md:py-28">
         <div className="mx-auto max-w-6xl">
@@ -247,6 +318,7 @@ export default async function ServicePage({
           </div>
         </div>
       </section>
+      {serviceSlug === "washing-machine-repair" && <WashingMachineServiceDisclaimer />}
       <SiteFooter />
       <script
         type="application/ld+json"
