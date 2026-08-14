@@ -11,6 +11,7 @@ import { WhatsAppIcon } from "@/components/whatsapp-icon";
 const NAV_LINKS: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
   { label: "Repair Laptop", href: "/repair-laptop" },
+  { label: "Appliances Repair", href: "/services/appliances-repair" },
   { label: "About", href: "/about" },
   { label: "Why Us", href: "/why-us" },
   { label: "Contact", href: "/contact" },
