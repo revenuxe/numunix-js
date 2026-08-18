@@ -29,11 +29,10 @@ export const SERVICES: Record<string, Service> = {
     seoTitle: "Laptop Repair Service | Certified Laptop Technicians | Numunix",
     seoDescription:
       "Professional laptop repair service for slow, damaged, overheating and non-booting laptops. Get certified diagnostics, genuine parts and fast turnaround from Numunix.",
-    hero: "Laptop repair that gets you back to work, fast.",
-    heroAccent: "Laptop repair",
+    hero: "Laptop Repair Service in Bangalore",
+    heroAccent: "Laptop Repair",
     image: svcLaptop,
-    intro:
-      "Certified technicians diagnose the issue clearly and repair it with genuine, warrantied parts.",
+    intro: "Same-day laptop repair with pickup in Bangalore.",
     keywords: [
       "Laptop diagnostics",
       "Screen replacement",
@@ -78,10 +77,10 @@ export const SERVICES: Record<string, Service> = {
     seoTitle: "Desktop Repair Service | PC Repair & Upgrade Experts | Numunix",
     seoDescription:
       "Fast desktop repair, PC diagnostics, upgrades and maintenance for homes and offices. Numunix certified technicians restore desktop performance and reliability.",
-    hero: "Desktop repair and upgrades built for dependable performance.",
+    hero: "Desktop Repair Service in Bangalore",
+    heroAccent: "Desktop Repair",
     image: svcDesktop,
-    intro:
-      "Our desktop repair service fixes performance, boot, hardware and operating-system problems for home PCs and business workstations. We also plan practical upgrades that make an existing desktop faster and more reliable.",
+    intro: "PC repair and upgrades for homes and offices in Bangalore.",
     keywords: [
       "PC diagnostics",
       "Desktop upgrades",
@@ -126,11 +125,10 @@ export const SERVICES: Record<string, Service> = {
     seoTitle: "CCTV Installation & Repair Service | Home and Business Security | Numunix",
     seoDescription:
       "Professional CCTV installation, camera repair, DVR/NVR setup and remote mobile viewing for homes and businesses by Numunix certified engineers.",
-    hero: "CCTV security that keeps your property in view.",
-    heroAccent: "CCTV security",
+    hero: "CCTV Installation Service in Bangalore",
+    heroAccent: "CCTV Installation",
     image: svcCctv,
-    intro:
-      "Clear coverage, reliable recording and easy mobile access — installed by certified engineers.",
+    intro: "Home and office CCTV installation with mobile viewing.",
     keywords: [
       "CCTV camera installation",
       "DVR and NVR setup",
@@ -175,10 +173,10 @@ export const SERVICES: Record<string, Service> = {
     seoTitle: "Network Setup & Wi-Fi Troubleshooting | Business Networking Service | Numunix",
     seoDescription:
       "Professional Wi-Fi, LAN, router, firewall and office networking setup. Numunix resolves slow and unreliable network connections for homes and businesses.",
-    hero: "Stable, secure networking for every connected workspace.",
+    hero: "Office Network Setup in Bangalore",
+    heroAccent: "Network Setup",
     image: svcBusiness,
-    intro:
-      "From unreliable Wi-Fi to a growing office network, Numunix provides practical networking support that improves speed, coverage and security. Our engineers design and troubleshoot wired and wireless networks around how you work.",
+    intro: "Wi-Fi, LAN and network troubleshooting for Bangalore businesses.",
     keywords: [
       "Wi-Fi troubleshooting",
       "Office network setup",
@@ -223,10 +221,10 @@ export const SERVICES: Record<string, Service> = {
     seoTitle: "Home Appliances Repair Service | AC, Refrigerator & Washing Machine | Numunix",
     seoDescription:
       "Reliable home appliance repair for washing machines, refrigerators, air conditioners and more. Numunix provides clear diagnostics, genuine parts and dependable repairs.",
-    hero: "Appliance repair that keeps your home running smoothly.",
+    hero: "Home Appliance Repair in Bangalore",
+    heroAccent: "Appliance Repair",
     image: svcDesktop,
-    intro:
-      "Numunix repairs essential home appliances, including washing machines, refrigerators and air conditioners. We find the real fault, explain the repair clearly and use quality replacement parts for a dependable result.",
+    intro: "Washing machine, refrigerator and AC repair at home.",
     keywords: [
       "Home appliance repair",
       "Washing machine repair",
@@ -274,11 +272,10 @@ export const SERVICES: Record<string, Service> = {
     seoTitle: "Washing Machine Repair Service | Front Load & Top Load Repair | Numunix",
     seoDescription:
       "Professional washing machine repair for front-load, top-load and semi-automatic machines. Numunix fixes drainage, spin, noise, vibration and power faults across leading brands.",
-    hero: "Reliable washing machine repair, right when you need it.",
-    heroAccent: "washing machine repair",
+    hero: "Washing Machine Repair in Bangalore",
+    heroAccent: "Washing Machine Repair",
     image: svcDesktop,
-    intro:
-      "From a machine that will not start to poor draining, excessive vibration or a failed spin cycle, our technicians diagnose the fault clearly and provide a dependable washing machine repair solution for your home.",
+    intro: "Front-load and top-load washing machine repair at home.",
     keywords: [
       "Washing machine repair",
       "Front load washing machine repair",
@@ -328,10 +325,10 @@ export const SERVICES: Record<string, Service> = {
     seoTitle: "Business IT AMC Service | Annual Maintenance Contract | Numunix",
     seoDescription:
       "Business IT annual maintenance contracts for proactive computer, network, CCTV and onsite support. Keep your technology reliable with Numunix AMC plans.",
-    hero: "Proactive IT maintenance for businesses that cannot stop.",
+    hero: "Business IT AMC Services in Bangalore",
+    heroAccent: "IT AMC Services",
     image: svcBusiness,
-    intro:
-      "Numunix Business AMC plans give organisations one dependable team for routine maintenance, fast issue resolution and technology planning. We keep systems, networks and workstations healthy so your team can stay productive.",
+    intro: "Annual IT maintenance for Bangalore offices and businesses.",
     keywords: [
       "IT annual maintenance contract",
       "Business IT support",
@@ -376,10 +373,10 @@ export const SERVICES: Record<string, Service> = {
     seoTitle: "Data Recovery Service | Laptop, Desktop & Drive Recovery | Numunix",
     seoDescription:
       "Professional data recovery assistance for laptops, desktops, SSDs and hard drives. Numunix helps recover important files after drive, system or accidental deletion issues.",
-    hero: "Careful data recovery when your important files matter most.",
+    hero: "Laptop Data Recovery Service in Bangalore",
+    heroAccent: "Data Recovery",
     image: svcLaptop,
-    intro:
-      "When a device fails, the data on it can be more valuable than the hardware. Numunix assesses laptop, desktop, SSD and hard-drive issues carefully, then recommends the safest recovery path for your important files.",
+    intro: "Hard drive and laptop data recovery by local experts.",
     keywords: [
       "Data recovery service",
       "Hard drive recovery",
@@ -424,10 +421,10 @@ export const SERVICES: Record<string, Service> = {
     seoTitle: "Laptop & PC Hardware Upgrades | SSD, RAM & Performance Upgrade | Numunix",
     seoDescription:
       "Upgrade your laptop or desktop with SSD, RAM, storage and performance improvements. Numunix recommends and installs compatible hardware for faster everyday computing.",
-    hero: "Smart hardware upgrades with a noticeable performance difference.",
+    hero: "Laptop SSD & RAM Upgrade in Bangalore",
+    heroAccent: "SSD & RAM Upgrade",
     image: svcDesktop,
-    intro:
-      "A well-chosen hardware upgrade can extend the useful life of your laptop or desktop. Numunix assesses compatibility and your daily workload, then installs reliable upgrades that deliver a clear improvement.",
+    intro: "Fast SSD and RAM upgrades for laptops and desktops.",
     keywords: [
       "SSD upgrade",
       "RAM upgrade",

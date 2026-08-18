@@ -69,7 +69,7 @@ export function Hero() {
               </div>
             </div>
 
-            <div className="mt-8 hidden flex-nowrap gap-2 lg:mt-10 lg:flex">
+            <div className="mt-8 hidden max-w-2xl flex-wrap gap-2 lg:mt-10 lg:flex">
               {FLOATING_CHIPS.map(({ label, Icon }) => (
                 <div
                   key={label}
