@@ -1,5 +1,13 @@
 import Image from "next/image";
-import { Laptop, Monitor, Camera, Network, Briefcase, ArrowRight } from "lucide-react";
+import {
+  Laptop,
+  Monitor,
+  Camera,
+  Network,
+  Briefcase,
+  Refrigerator,
+  ArrowRight,
+} from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { CONTACT } from "@/lib/contact";
@@ -10,6 +18,7 @@ const FLOATING_CHIPS = [
   { label: "Laptop Repair", Icon: Laptop },
   { label: "Desktop Repair", Icon: Monitor },
   { label: "CCTV", Icon: Camera },
+  { label: "Appliance Repair", Icon: Refrigerator },
   { label: "Networking", Icon: Network },
   { label: "AMC", Icon: Briefcase },
 ];
@@ -33,11 +42,10 @@ export function Hero() {
           <div>
             <div className="max-w-2xl">
               <h1 className="mt-6 text-[2rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:mt-8 lg:text-6xl">
-                Reliable IT Support <span className="text-brand">&amp; Hardware</span> Services
+                Bangalore IT Support <span className="text-brand">&amp; Hardware Repair</span>
               </h1>
               <p className="mt-4 max-w-xl text-sm text-white/75 sm:mt-6 sm:text-lg">
-                Certified engineers, transparent pricing, fast turnaround — laptop repair, CCTV,
-                networking, AMC &amp; more.
+                Laptop, appliance repair, CCTV installation and business IT support.
               </p>
 
               <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap lg:mt-8">
