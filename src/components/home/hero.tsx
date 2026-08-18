@@ -45,7 +45,7 @@ export function Hero() {
                 Reliable IT Support <span className="text-brand">&amp; Hardware Repair</span>
               </h1>
               <p className="mt-4 max-w-xl text-sm text-white/75 sm:mt-6 sm:text-lg">
-                Laptop Repair, Appliance Repair, CCTV Installation and Business IT Support.
+                Laptop Repair, Appliance Repair, CCTV Installation, Networking, AMC and Business IT Support.
               </p>
 
               <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap lg:mt-8">
