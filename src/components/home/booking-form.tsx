@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { createLead } from "@/lib/leads";
+import { SERVICES } from "@/lib/services";
+
+const serviceOptions = Object.values(SERVICES).map((service) => service.name);
 
 export function BookingForm() {
   const [busy, setBusy] = useState(false);
@@ -18,7 +21,7 @@ export function BookingForm() {
         name: String(data.get("name")),
         phone: String(data.get("phone")),
         postalCode: String(data.get("postalCode")),
-        service: "General IT Support",
+        service: String(data.get("service")),
         source: "hero",
       });
       window.location.assign(`/thank-you?bookingId=${encodeURIComponent(bookingId)}`);
@@ -38,7 +41,7 @@ export function BookingForm() {
       <p className="mt-1 text-xs text-white/70">
         Get a free callback from a certified Numunix engineer.
       </p>
-      <div className="mt-4 space-y-3">
+      <div className="mt-4 grid grid-cols-2 gap-3">
         <label className="block">
           <span className="text-xs font-semibold text-white/80">Name</span>
           <input
@@ -72,6 +75,24 @@ export function BookingForm() {
             placeholder="Enter your PIN / ZIP"
             className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white placeholder:text-white/55 ring-1 ring-white/10 backdrop-blur focus:outline-none focus:ring-brand"
           />
+        </label>
+        <label className="block">
+          <span className="text-xs font-semibold text-white/80">Select Service</span>
+          <select
+            name="service"
+            required
+            defaultValue=""
+            className="mt-1.5 w-full rounded-2xl bg-white/20 px-4 py-3 text-sm text-white ring-1 ring-white/10 backdrop-blur focus:outline-none focus:ring-brand"
+          >
+            <option value="" disabled className="bg-slate-800">
+              Choose a service
+            </option>
+            {serviceOptions.map((service) => (
+              <option key={service} value={service} className="bg-slate-800">
+                {service}
+              </option>
+            ))}
+          </select>
         </label>
       </div>
       {message && <p className="mt-3 text-xs text-white/80">{message}</p>}
