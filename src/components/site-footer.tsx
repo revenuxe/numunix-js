@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Star } from "lucide-react";
 import { LogoMark } from "@/components/logo-mark";
 import { CONTACT } from "@/lib/contact";
 import { REPAIR_LAPTOP_BRANDS } from "@/lib/repair-laptop-brands";
@@ -62,6 +62,24 @@ const SERVICE_CENTER_COLUMN = {
   })),
 };
 
+const CUSTOMER_REVIEWS = [
+  {
+    name: "Deen Express",
+    service: "Laptop motherboard repair",
+    quote: "I've got my laptop motherboard repair in very best price.",
+  },
+  {
+    name: "Touheed Rahman",
+    service: "CCTV service in HBR Layout",
+    quote: "Best CCTV service provider in HBR Layout.",
+  },
+  {
+    name: "Shaiz Md",
+    service: "Numunix customer",
+    quote: "Highly recommend.",
+  },
+];
+
 // The "Repair Your Laptop" and "Laptop Service Center" brand link columns
 // only make sense in the context of the repair flow, so they only show on
 // repair-laptop pages, not the footer used by the rest of the site (homepage,
@@ -79,6 +97,33 @@ export function SiteFooter({ showRepairLaptopMenu = false }: { showRepairLaptopM
 
   return (
     <footer className="relative overflow-hidden bg-white px-4 pt-20 pb-8 md:px-8">
+      <section className="mx-auto mb-16 max-w-6xl rounded-[2rem] bg-secondary/65 p-6 md:p-10">
+        <div className="max-w-2xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand">
+            Customer reviews
+          </p>
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+            Trusted by local customers.
+          </h2>
+        </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {CUSTOMER_REVIEWS.map((review) => (
+            <article
+              key={review.name}
+              className="rounded-2xl bg-white p-5 shadow-soft ring-1 ring-border"
+            >
+              <div className="flex gap-1 text-amber-400" aria-label="5 out of 5 stars">
+                {Array.from({ length: 5 }, (_, index) => (
+                  <Star key={index} className="h-4 w-4 fill-current" aria-hidden />
+                ))}
+              </div>
+              <blockquote className="mt-4 text-sm leading-6 text-ink">“{review.quote}”</blockquote>
+              <p className="mt-5 text-sm font-bold text-ink">{review.name}</p>
+              <p className="mt-1 text-xs text-muted-foreground">{review.service}</p>
+            </article>
+          ))}
+        </div>
+      </section>
       <div
         className={`mx-auto grid max-w-6xl gap-10 md:grid-cols-3 ${
           showRepairLaptopMenu
