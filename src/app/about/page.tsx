@@ -1,7 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ShieldCheck, Users, Cog, Sparkles, Rocket, Heart } from "lucide-react";
+import {
+  ArrowRight,
+  ExternalLink,
+  ShieldCheck,
+  Users,
+  Cog,
+  Sparkles,
+  Rocket,
+  Heart,
+} from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { PageHero } from "@/components/page-hero";
@@ -11,6 +20,8 @@ import { SITE_URL } from "@/lib/site";
 import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 import teamImg from "@/assets/team-it.webp";
 import whyImg from "@/assets/why-choose.webp";
+import doorifixLogo from "@/assets/platform-logos/doorifix.webp";
+import hulumartLogo from "@/assets/platform-logos/hulumart.webp";
 
 export const metadata: Metadata = {
   title: { absolute: "About Numunix | Trusted IT Support in Bangalore Since 2020" },
@@ -201,6 +212,75 @@ export default function AboutPage() {
             </li>
           ))}
         </ol>
+      </section>
+
+      {/* Platforms */}
+      <section className="bg-secondary/40 px-4 py-20 md:px-8 md:py-28">
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="text-sm font-semibold uppercase tracking-widest text-brand">
+            Explore our platforms
+          </span>
+          <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
+            More ways we make life easier.
+          </h2>
+          <p className="mt-5 text-muted-foreground">
+            Beyond IT support, our trusted platforms bring convenient doorstep services to homes and
+            businesses.
+          </p>
+        </div>
+        <div className="mx-auto mt-12 grid max-w-6xl gap-6 lg:grid-cols-2">
+          <article className="flex flex-col rounded-[2rem] bg-white p-7 ring-1 ring-border shadow-soft md:p-9">
+            <div className="flex h-28 items-center rounded-2xl bg-slate-50 p-5">
+              <Image
+                src={doorifixLogo}
+                alt="Doorifix"
+                className="h-full w-full object-contain object-left"
+              />
+            </div>
+            <p className="mt-7 text-sm font-semibold uppercase tracking-widest text-brand">
+              Appliance service at your door
+            </p>
+            <h3 className="mt-3 text-2xl font-extrabold text-ink">Doorifix</h3>
+            <p className="mt-3 flex-1 text-muted-foreground">
+              Reliable doorstep appliance repair services that help keep your everyday essentials
+              running smoothly. Book skilled assistance for convenient, dependable care at home.
+            </p>
+            <a
+              href="https://www.doorifix.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-7 inline-flex w-fit items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand"
+            >
+              Visit Doorifix <ExternalLink className="h-4 w-4" />
+            </a>
+          </article>
+          <article className="flex flex-col rounded-[2rem] bg-white p-7 ring-1 ring-border shadow-soft md:p-9">
+            <div className="flex h-28 items-center rounded-2xl bg-slate-50 p-5">
+              <Image
+                src={hulumartLogo}
+                alt="Hulumart"
+                className="h-full w-full object-contain object-left"
+              />
+            </div>
+            <p className="mt-7 text-sm font-semibold uppercase tracking-widest text-brand">
+              Reuse, recycle, repeat
+            </p>
+            <h3 className="mt-3 text-2xl font-extrabold text-ink">Hulumart</h3>
+            <p className="mt-3 flex-1 text-muted-foreground">
+              A simple, responsible way to arrange doorstep scrap pickup or sell your used laptop.
+              Give valuable materials and devices a second life while enjoying a seamless pickup
+              experience.
+            </p>
+            <a
+              href="https://www.hulumart.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-7 inline-flex w-fit items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand"
+            >
+              Visit Hulumart <ExternalLink className="h-4 w-4" />
+            </a>
+          </article>
+        </div>
       </section>
 
       {/* CTA banner */}
