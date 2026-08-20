@@ -211,6 +211,8 @@ export type BrandCopy = {
   intro: string[];
   whyBullets: string[];
   faqs: [string, string][];
+  commonChecks: string[];
+  bookingAdvice: string;
 };
 
 export function buildBrandCopy(brand: RepairLaptopBrand): BrandCopy {
@@ -242,7 +244,15 @@ export function buildBrandCopy(brand: RepairLaptopBrand): BrandCopy {
     ],
   ];
 
-  return { intro, whyBullets, faqs };
+  const commonChecks = [
+    `Display, hinge and keyboard checks when your ${product} has physical damage or an intermittent input problem.`,
+    "Battery, charging-port and adapter diagnosis when it will not charge, loses power quickly or shuts down unexpectedly.",
+    "Storage, memory and software assessment for slow performance, boot failures and recurring errors.",
+    "Cooling and motherboard-level diagnosis for overheating, liquid damage or a laptop that will not turn on.",
+  ];
+  const bookingAdvice = `When you book ${product} repair, share the model or serial number if it is easy to find, explain when the fault started and mention any error message. Back up important files if the laptop still starts, but do not keep forcing it on if it is overheating, has liquid damage or makes an unusual sound.`;
+
+  return { intro, whyBullets, faqs, commonChecks, bookingAdvice };
 }
 
 // Copy for the dedicated "{Brand} Service Center" landing pages
@@ -283,7 +293,15 @@ export function buildServiceCenterCopy(brand: RepairLaptopBrand): BrandCopy {
     ],
   ];
 
-  return { intro, whyBullets, faqs };
+  const commonChecks = [
+    `Display, hinge and keyboard checks when your ${product} has physical damage or an intermittent input problem.`,
+    "Battery, charging-port and adapter diagnosis when it will not charge, loses power quickly or shuts down unexpectedly.",
+    "Storage, memory and software assessment for slow performance, boot failures and recurring errors.",
+    "Cooling and motherboard-level diagnosis for overheating, liquid damage or a laptop that will not turn on.",
+  ];
+  const bookingAdvice = `Before booking ${product} service, note the model or serial number if available, when the problem began and any error message. Back up files if the laptop starts, and avoid repeatedly powering it on if there is heat, liquid damage or an unusual sound.`;
+
+  return { intro, whyBullets, faqs, commonChecks, bookingAdvice };
 }
 
 // Independent-service disclaimer shown on every "{Brand} Service Center"

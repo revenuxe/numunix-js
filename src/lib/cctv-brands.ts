@@ -97,9 +97,14 @@ export type CctvBrandCopy = {
   intro: string[];
   whyBullets: string[];
   faqs: [string, string][];
+  planningNotes: string[];
+  repairChecks: string[];
+  careAdvice: string;
 };
 
 export function buildCctvBrandCopy(brand: CctvBrand): CctvBrandCopy {
+  const wirelessFirst = brand.slug === "ezviz" || brand.slug === "tp-link";
+  const advancedRecording = brand.slug === "hikvision" || brand.slug === "dahua";
   const intro = [
     `Numunix installs, configures and services ${brand.blurb}, for homes, shops and offices across Bangalore. From choosing the right ${brand.name} camera and DVR/NVR combination for your property to running the cabling and setting up remote mobile viewing, our certified engineers handle the full installation end to end.`,
     `Already have a ${brand.name} CCTV system that's stopped recording, gone offline, or lost its remote view? We troubleshoot and repair existing ${brand.name} installations too — camera and DVR/NVR diagnostics, hard-drive replacement, cable and connector faults, and app/remote-viewing reconfiguration — with a clear, upfront quote before any work starts.`,
@@ -121,7 +126,34 @@ export function buildCctvBrandCopy(brand: CctvBrand): CctvBrandCopy {
       `Can you repair or service an existing ${brand.name} CCTV setup?`,
       `Yes. Our engineers diagnose ${brand.name} camera, DVR and NVR issues on site — offline cameras, recording failures, hard-drive faults and app connectivity problems — and share a transparent repair quote before starting work.`,
     ],
+    [
+      `Can I view my ${brand.name} cameras on my phone?`,
+      `Yes. Once the recorder or camera is connected securely to the network, we configure remote viewing and make sure you can access the ${brand.name} system before the visit is complete.`,
+    ],
   ];
 
-  return { intro, whyBullets, faqs };
+  const planningNotes = wirelessFirst
+    ? [
+        `Check Wi-Fi coverage where each ${brand.name} camera will be placed; a strong phone signal does not always mean reliable camera connectivity.`,
+        "Decide whether you need local recording, cloud storage, or both before choosing the camera and memory/storage setup.",
+        "Plan outdoor camera locations with weather protection, a practical power route and a view that does not point into a neighbour's private space.",
+      ]
+    : [
+        "Start with the points that matter most: entrances, gates, parking, cash counters, stairways or delivery areas.",
+        `Choose the ${brand.name} camera type and lens only after looking at the distance, lighting and detail you need to capture.`,
+        "Plan recording storage around the number of cameras, recording quality and how long you need footage to be available.",
+      ];
+
+  const repairChecks = [
+    `Power, camera feed and network checks for a ${brand.name} camera that is offline.`,
+    `${advancedRecording ? "DVR/NVR settings, recording schedule and hard-drive health" : "Recorder or app settings, storage status and recording availability"}.`,
+    "Cable, connector and power-supply inspection where the image drops, flickers or shows interference.",
+    "Secure remote-viewing setup when the system works locally but is unavailable on a phone.",
+  ];
+
+  const careAdvice = wirelessFirst
+    ? `Keep your ${brand.name} camera app, router firmware and account password current. If a Wi-Fi camera repeatedly disconnects, moving it closer to the router or adding suitable coverage is usually more reliable than repeatedly resetting it.`
+    : `A quick monthly check of live view and playback makes it easier to spot a ${brand.name} camera, recorder or hard-drive problem before important footage is needed. Keep camera lenses clean and avoid changing recorder settings unless you know what they control.`;
+
+  return { intro, whyBullets, faqs, planningNotes, repairChecks, careAdvice };
 }

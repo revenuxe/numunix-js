@@ -7,6 +7,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { ServiceBookingForm } from "@/components/service-booking-form";
+import { ServiceContentCta } from "@/components/service-content-cta";
 import { CONTACT } from "@/lib/contact";
 import { CCTV_BRANDS, buildCctvBrandCopy, getCctvBrand } from "@/lib/cctv-brands";
 import { SITE_URL } from "@/lib/site";
@@ -84,15 +85,11 @@ export default async function CctvBrandPage({ params }: { params: Promise<Params
         <div className="mx-auto grid max-w-7xl gap-8 px-4 pb-10 pt-24 md:px-8 md:pb-14 md:pt-28 lg:grid-cols-[1.1fr_.9fr] lg:items-center lg:gap-12">
           <div className="max-w-2xl">
             <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-              {brand.name}{" "}
-              <span className="bg-gradient-to-r from-sky-400 via-brand to-indigo-500 bg-clip-text text-transparent">
-                CCTV
-              </span>{" "}
-              Installation &amp; Repair in Bangalore
+              {brand.name} <span className="text-[#0168fd]">CCTV</span> Installation &amp; Repair in
+              Bangalore
             </h1>
             <p className="mt-5 max-w-xl text-base leading-7 text-white/75 md:text-lg">
-              Certified {brand.name} camera installation, DVR/NVR setup, remote mobile viewing and
-              repair for homes and businesses across Bangalore.
+              {brand.name} CCTV installation and repair for Bangalore homes and offices.
             </p>
           </div>
           <div className="w-full">
@@ -136,6 +133,62 @@ export default async function CctvBrandPage({ params }: { params: Promise<Params
                 <span>{bullet}</span>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-secondary/45 px-4 py-16 md:px-8 md:py-24">
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand">
+              Before installation
+            </p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Plan your {brand.name} CCTV system around real coverage.
+            </h2>
+            <p className="mt-5 leading-7 text-muted-foreground">
+              The best camera setup is built around what you need to see, when you need to see it
+              and how you will use the footage. A site discussion keeps the system practical from
+              day one.
+            </p>
+            <div className="mt-7 space-y-4">
+              {copy.planningNotes.map((note) => (
+                <p
+                  key={note}
+                  className="flex gap-3 rounded-2xl bg-white p-4 text-sm leading-6 shadow-soft"
+                >
+                  <Check className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
+                  {note}
+                </p>
+              ))}
+            </div>
+          </div>
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand">
+              Existing system support
+            </p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
+              When your {brand.name} CCTV system needs attention.
+            </h2>
+            <p className="mt-5 leading-7 text-muted-foreground">
+              A black screen or missing recording does not automatically mean every camera needs
+              replacing. We check the most likely points in a clear order and explain what we find.
+            </p>
+            <div className="mt-7 space-y-4">
+              {copy.repairChecks.map((check) => (
+                <p
+                  key={check}
+                  className="flex gap-3 rounded-2xl border border-border bg-white p-4 text-sm leading-6"
+                >
+                  <Check className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
+                  {check}
+                </p>
+              ))}
+            </div>
+            <p className="mt-6 rounded-2xl border border-brand/20 bg-brand/5 p-5 text-sm leading-6 text-muted-foreground">
+              <span className="font-bold text-ink">Simple care tip: </span>
+              {copy.careAdvice}
+            </p>
           </div>
         </div>
       </section>
@@ -184,6 +237,19 @@ export default async function CctvBrandPage({ params }: { params: Promise<Params
           </div>
         </div>
       </section>
+
+      <ServiceContentCta
+        eyebrow="Plan it properly"
+        title={`Get the right ${brand.name} CCTV setup for your space.`}
+        description="A useful camera system starts with the areas you need to protect, not the number of cameras. Tell us about your entry points, lighting and where you want to view footage. We will help you plan a practical setup and explain the options clearly."
+        points={[
+          "Share a few photos or a simple layout of the property.",
+          "Mention entrances, parking, blind spots and night-time concerns.",
+          "Ask about storage, remote viewing and future expansion.",
+          "Receive a clear recommendation before installation begins.",
+        ]}
+        bookingLabel={`Plan your ${brand.name} CCTV visit`}
+      />
 
       <section className="bg-secondary/45 px-4 py-20 md:px-8 md:py-28">
         <div className="mx-auto max-w-4xl">

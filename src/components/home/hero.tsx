@@ -1,15 +1,7 @@
 import Image from "next/image";
-import {
-  Laptop,
-  Monitor,
-  Camera,
-  Network,
-  Briefcase,
-  Refrigerator,
-  ArrowRight,
-} from "lucide-react";
+import { Laptop, Monitor, Camera, Network, Briefcase, Refrigerator } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
-import { WhatsAppIcon } from "@/components/whatsapp-icon";
+import { HeroWhatsAppCta } from "@/components/hero-whatsapp-cta";
 import { CONTACT } from "@/lib/contact";
 import heroImg from "@/assets/hero-technician.webp";
 import { BookingForm } from "./booking-form";
@@ -42,31 +34,12 @@ export function Hero() {
           <div>
             <div className="max-w-2xl">
               <h1 className="mt-6 text-[2rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:mt-8 lg:text-6xl">
-                Reliable IT Support <span className="text-brand">&amp; Hardware Repair</span>
+                Reliable IT Support <span className="text-[#0168fd]">&amp; Hardware Repair</span>
               </h1>
               <p className="mt-4 max-w-xl text-sm text-white/75 sm:mt-6 sm:text-lg">
                 Laptop Repair, Appliance Repair, CCTV Installation, Networking, AMC and Business IT
                 Support.
               </p>
-
-              <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap lg:mt-8">
-                <a
-                  href="#hero-booking-form"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition hover:bg-white/90 sm:w-auto lg:h-[62px] lg:px-8 lg:text-base"
-                >
-                  Book Service
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-                <a
-                  href={CONTACT.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-ink/60 px-6 py-3.5 text-sm font-semibold text-white shadow-soft backdrop-blur transition hover:bg-white hover:text-ink sm:w-auto lg:h-[62px] lg:px-8 lg:text-base"
-                >
-                  <WhatsAppIcon className="h-4 w-4" />
-                  Reach us on WhatsApp
-                </a>
-              </div>
             </div>
 
             <div className="mt-8 hidden max-w-2xl flex-wrap gap-2 lg:mt-10 lg:flex">
@@ -86,6 +59,9 @@ export function Hero() {
 
           <div id="hero-booking-form" className="w-full md:max-w-[380px] md:justify-self-end">
             <BookingForm />
+            <div className="mt-4">
+              <HeroWhatsAppCta href={CONTACT.whatsappUrl} />
+            </div>
           </div>
         </div>
       </div>
