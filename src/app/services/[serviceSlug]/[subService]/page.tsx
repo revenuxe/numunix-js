@@ -136,6 +136,7 @@ export default async function ComputerSubservicePage({
       </main>
     );
   }
+  if (!guide) notFound();
   const accent =
     guide.parent === "laptop-repair"
       ? (LAPTOP_H1_ACCENTS[guide.slug] ?? "in Bangalore")
