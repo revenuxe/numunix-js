@@ -24,6 +24,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      {
+        source: "/repair-laptop",
+        destination: "/services/laptop-repair",
+        permanent: true,
+      },
       // Canonicalize the apex domain to www so search engines don't index two
       // hosts for the same content. Note: this only fires once a request
       // actually reaches this app, so the apex domain must also be added as a

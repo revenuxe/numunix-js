@@ -46,8 +46,8 @@ const REASONS = [
   },
   {
     Icon: Zap,
-    title: "Fast diagnosis, faster fixes",
-    desc: "Most issues are diagnosed the same day. Common laptop, desktop and network fixes are turned around within 24 hours.",
+    title: "Clear diagnosis and timing",
+    desc: "We assess the issue first and confirm the practical repair path and expected turnaround before work begins.",
   },
   {
     Icon: ShieldCheck,
@@ -202,9 +202,9 @@ export default function WhyUsPage() {
             <ul className="mt-8 space-y-4 text-sm text-ink/80">
               {[
                 "One dedicated engineer for your ticket, start to finish.",
-                "Free basic diagnosis before any billable work.",
+                "A clear estimate before approved repair work begins.",
                 "Photos and updates during larger repairs so you're never in the dark.",
-                "Doorstep pickup and drop for supported service areas.",
+                "Pickup, drop and doorstep availability confirmed for your area and service.",
                 "Business AMC with clear SLAs and monthly health reports.",
                 "Post-repair follow-up so we know the fix actually stuck.",
               ].map((line) => (

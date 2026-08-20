@@ -15,6 +15,7 @@ import {
 import { getService } from "@/lib/services";
 import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 import { CONTACT } from "@/lib/contact";
+import { getLocalServicePage, LOCAL_SERVICE_PAGES } from "@/lib/local-service-pages";
 
 const LAPTOP_H1_ACCENTS: Record<string, string> = {
   "screen-hinge-repair": "Repair in Bangalore",
@@ -26,7 +27,10 @@ const LAPTOP_H1_ACCENTS: Record<string, string> = {
 };
 
 export function generateStaticParams() {
-  return getComputerSubserviceParams();
+  return [
+    ...getComputerSubserviceParams(),
+    ...LOCAL_SERVICE_PAGES.map(({ serviceSlug, slug }) => ({ serviceSlug, subService: slug })),
+  ];
 }
 
 export async function generateMetadata({
@@ -36,13 +40,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { serviceSlug, subService } = await params;
   const guide = getComputerSubservice(serviceSlug, subService);
-  if (!guide) return {};
+  const localPage = getLocalServicePage(serviceSlug, subService);
+  if (!guide && !localPage) return {};
   const path = `/services/${serviceSlug}/${subService}`;
   return {
-    title: { absolute: `${guide.title} | Numunix` },
-    description: guide.description,
+    title: { absolute: `${(guide ?? localPage)!.title} | Numunix` },
+    description: (guide ?? localPage)!.description,
     alternates: { canonical: path },
-    openGraph: { title: guide.title, description: guide.description, url: path },
+    openGraph: {
+      title: (guide ?? localPage)!.title,
+      description: (guide ?? localPage)!.description,
+      url: path,
+    },
   };
 }
 
@@ -54,7 +63,79 @@ export default async function ComputerSubservicePage({
   const { serviceSlug, subService } = await params;
   const guide = getComputerSubservice(serviceSlug, subService);
   const parent = getService(serviceSlug);
-  if (!guide || !parent) notFound();
+  const localPage = getLocalServicePage(serviceSlug, subService);
+  if (!parent || (!guide && !localPage)) notFound();
+  if (localPage) {
+    const path = `/services/${serviceSlug}/${subService}`;
+    return (
+      <main className="bg-white text-ink">
+        <section className="bg-ink text-white">
+          <SiteNav variant="dark" />
+          <div className="mx-auto max-w-6xl px-4 pb-16 pt-28 md:px-8">
+            <p className="text-sm font-semibold uppercase tracking-[.2em] text-brand">
+              {parent.name} in {localPage.location}
+            </p>
+            <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
+              {localPage.title}
+            </h1>
+            <p className="mt-5 max-w-3xl leading-7 text-white/75">{localPage.description}</p>
+          </div>
+        </section>
+        <section className="mx-auto max-w-6xl px-4 py-16 md:px-8 md:py-24">
+          <h2 className="text-3xl font-extrabold tracking-tight">
+            Local service planning, based on the job.
+          </h2>
+          <p className="mt-6 max-w-4xl leading-7 text-muted-foreground">{localPage.localContext}</p>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {localPage.coverage.map((item) => (
+              <div key={item} className="rounded-2xl border border-border p-5 font-semibold">
+                {item}
+              </div>
+            ))}
+          </div>
+        </section>
+        <section className="bg-secondary/45 px-4 py-16 md:px-8 md:py-24">
+          <div className="mx-auto max-w-4xl">
+            <h2 className="text-3xl font-extrabold tracking-tight">
+              Questions about service in {localPage.location}.
+            </h2>
+            <div className="mt-8 space-y-4">
+              {localPage.faqs.map(([question, answer]) => (
+                <article key={question} className="rounded-2xl bg-white p-6">
+                  <h3 className="font-bold">{question}</h3>
+                  <p className="mt-3 leading-7 text-muted-foreground">{answer}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+        <ServiceContentCta
+          eyebrow="Discuss your requirements"
+          title={`Need ${parent.name.toLowerCase()} in ${localPage.location}?`}
+          description="Tell us about the property, equipment and the issue or outcome you need. We will confirm availability, scope, timing and applicable warranty terms before work is approved."
+          points={[
+            "Share photos or a simple layout when helpful.",
+            "Confirm access, equipment and coverage priorities.",
+            "Get the work and estimate explained before approval.",
+          ]}
+          bookingLabel="Request a callback"
+        />
+        <SiteFooter />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              buildBreadcrumbJsonLd([
+                { name: "Home", path: "/" },
+                { name: parent.name, path: `/services/${serviceSlug}` },
+                { name: localPage.location, path },
+              ]),
+            ),
+          }}
+        />
+      </main>
+    );
+  }
   const accent =
     guide.parent === "laptop-repair"
       ? (LAPTOP_H1_ACCENTS[guide.slug] ?? "in Bangalore")

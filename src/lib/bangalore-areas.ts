@@ -117,6 +117,26 @@ export const BANGALORE_AREAS: BangaloreArea[] = [
     nearbyAreaSlugs: ["hbr-layout", "kalyan-nagar", "hebbal"],
   },
   {
+    name: "Banaswadi",
+    slug: "banaswadi",
+    pincode: "560043",
+    mainRoad: "Banaswadi Main Road and CMR Road",
+    vibe: "residential",
+    blurb:
+      "Banaswadi is an established north-east Bengaluru residential and commercial area, connected to nearby HRBR Layout, Kalyan Nagar and Outer Ring Road corridors.",
+    nearbyAreaSlugs: ["hbr-layout", "kalyan-nagar", "horamavu"],
+  },
+  {
+    name: "Kammanahalli",
+    slug: "kammanahalli",
+    pincode: "560084",
+    mainRoad: "Kammanahalli Main Road and Outer Ring Road",
+    vibe: "residential",
+    blurb:
+      "Kammanahalli is a busy north-east Bengaluru neighbourhood with homes, shops and offices along Kammanahalli Main Road, close to Banaswadi and HRBR Layout.",
+    nearbyAreaSlugs: ["hbr-layout", "kalyan-nagar", "banaswadi"],
+  },
+  {
     name: "BTM Layout",
     slug: "btm-layout",
     pincode: "560068",
