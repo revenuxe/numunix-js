@@ -7,6 +7,7 @@ import { WASHING_MACHINE_BRANDS } from "@/lib/washing-machine-brands";
 import { getBlogSlugs } from "@/lib/blog-posts";
 import { getElectricalServiceSlugs } from "@/lib/electrical-services";
 import { getComputerSubserviceParams } from "@/lib/computer-subservices";
+import { LOCAL_SERVICE_PAGES } from "@/lib/local-service-pages";
 import { SITE_URL } from "@/lib/site";
 
 const STATIC_ROUTES = [
@@ -14,7 +15,6 @@ const STATIC_ROUTES = [
   "/about",
   "/why-us",
   "/contact",
-  "/repair-laptop",
   "/repair-laptop/brand/not-listed",
   "/services/cctv-installation/brand/not-sure",
   "/sell/laptops/terms",
@@ -50,6 +50,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     }),
   );
+  const localServiceEntries: MetadataRoute.Sitemap = LOCAL_SERVICE_PAGES.map((page) => ({
+    url: `${SITE_URL}/services/${page.serviceSlug}/${page.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.75,
+  }));
 
   const areaEntries: MetadataRoute.Sitemap = BANGALORE_AREAS.map((area) => ({
     url: `${SITE_URL}/repair-laptop/${area.slug}`,
@@ -86,6 +91,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...serviceEntries,
     ...electricalServiceEntries,
     ...computerSubserviceEntries,
+    ...localServiceEntries,
     ...areaEntries,
     ...brandSeoEntries,
     ...cctvBrandEntries,
