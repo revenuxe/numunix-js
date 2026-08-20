@@ -19,13 +19,18 @@ import {
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
+import { HeroWhatsAppCta } from "@/components/hero-whatsapp-cta";
 import { ServiceBookingForm } from "@/components/service-booking-form";
 import { CctvBrandSelect } from "@/components/cctv-brand-select";
 import { WashingMachineBrandSelect } from "@/components/washing-machine-brand-select";
 import { WashingMachineServiceDisclaimer } from "@/components/washing-machine-service-disclaimer";
 import { FloatingCallWidget } from "@/components/floating-call-widget";
+import { InternalLinksSection } from "@/components/internal-links-section";
+import { ServiceContentCta } from "@/components/service-content-cta";
 import { CONTACT } from "@/lib/contact";
 import { getService, getServiceSlugs } from "@/lib/services";
+import { getServiceGuide } from "@/lib/service-guides";
+import { getSubserviceHref } from "@/lib/computer-subservices";
 import { SITE_NAME } from "@/lib/site";
 import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 import heroHandoff from "@/assets/hero-handoff.webp";
@@ -75,6 +80,7 @@ export default async function ServicePage({
   const { serviceSlug } = await params;
   const service = getService(serviceSlug);
   if (!service) notFound();
+  const guide = getServiceGuide(serviceSlug);
 
   const accentIndex = service.heroAccent ? service.hero.indexOf(service.heroAccent) : -1;
   const heroBefore = accentIndex >= 0 ? service.hero.slice(0, accentIndex) : service.hero;
@@ -120,7 +126,7 @@ export default async function ServicePage({
           <div className="max-w-2xl">
             <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
               {heroBefore}
-              {accentIndex >= 0 && <span className="text-brand">{service.heroAccent}</span>}
+              {accentIndex >= 0 && <span className="text-[#0168fd]">{service.heroAccent}</span>}
               {heroAfter}
             </h1>
             <p className="mt-5 max-w-xl text-base leading-7 text-white/75 md:text-lg">
@@ -128,17 +134,10 @@ export default async function ServicePage({
             </p>
           </div>
           <div className="w-full">
-            <div className="mb-4 grid gap-3">
-              <a
-                href={CONTACT.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/30 bg-ink/45 px-5 py-4 text-sm font-semibold text-white backdrop-blur transition hover:bg-white hover:text-ink"
-              >
-                <WhatsAppIcon className="h-4 w-4" /> Reach us on WhatsApp
-              </a>
-            </div>
             <ServiceBookingForm serviceName={service.name} />
+            <div className="mt-4">
+              <HeroWhatsAppCta href={CONTACT.whatsappUrl} />
+            </div>
           </div>
         </div>
       </section>
@@ -167,7 +166,11 @@ export default async function ServicePage({
             return (
               <Link
                 key={item}
-                href={service.subServiceLinks?.[item] ?? "#service-booking-form"}
+                href={
+                  service.subServiceLinks?.[item] ??
+                  getSubserviceHref(serviceSlug, item) ??
+                  "#service-booking-form"
+                }
                 className="group relative min-w-0 overflow-hidden rounded-[1.75rem] border border-border bg-white p-6 shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card"
               >
                 <span
@@ -236,6 +239,40 @@ export default async function ServicePage({
         </section>
       )}
 
+      {guide && (
+        <section className="mx-auto max-w-6xl px-4 py-20 md:px-8 md:py-28">
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_.9fr] lg:gap-16">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand">
+                Helpful before you book
+              </p>
+              <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-ink">
+                {guide.heading}
+              </h2>
+              <div className="mt-6 space-y-5 leading-7 text-muted-foreground">
+                {guide.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+            <aside className="rounded-[2rem] bg-secondary/55 p-7 md:p-8">
+              <h3 className="text-2xl font-bold text-ink">Useful details to share</h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                A little context helps us guide you to the right next step.
+              </p>
+              <div className="mt-6 space-y-3">
+                {guide.checklist.map((item) => (
+                  <p key={item} className="flex gap-3 text-sm leading-6 text-ink">
+                    <BadgeCheck className="h-5 w-5 shrink-0 text-brand" />
+                    {item}
+                  </p>
+                ))}
+              </div>
+            </aside>
+          </div>
+        </section>
+      )}
+
       <section className="bg-secondary/45 px-4 py-20 md:px-8 md:py-28">
         <div className="mx-auto max-w-6xl">
           <div className="max-w-2xl">
@@ -259,6 +296,19 @@ export default async function ServicePage({
           </div>
         </div>
       </section>
+
+      <ServiceContentCta
+        eyebrow="Before you book"
+        title={`A straightforward way to arrange ${service.name.toLowerCase()}.`}
+        description={`Start with the symptoms, not a guess at the repair. Tell Numunix what has changed, when it started and what you have already tried. We will explain the sensible options, expected work and next step in plain language.`}
+        points={[
+          "Share photos or error messages when you have them.",
+          "Get the recommended work explained before it begins.",
+          "Ask about timing, parts and after-service support.",
+          "Choose a visit or callback that suits your schedule.",
+        ]}
+        bookingLabel={`Discuss your ${service.name.toLowerCase()}`}
+      />
 
       <section className="mx-auto max-w-6xl px-4 py-20 md:px-8 md:py-28">
         <div className="grid gap-10 rounded-[2rem] bg-ink p-7 text-white shadow-card md:p-12 lg:grid-cols-2 lg:gap-16">
@@ -319,6 +369,7 @@ export default async function ServicePage({
           </div>
         </div>
       </section>
+      <InternalLinksSection currentServiceSlug={serviceSlug} />
       {serviceSlug === "washing-machine-repair" && <WashingMachineServiceDisclaimer />}
       <SiteFooter />
       {serviceSlug === "washing-machine-repair" && <FloatingCallWidget />}

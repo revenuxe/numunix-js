@@ -23,15 +23,13 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { brand: brandSlug } = await params;
   const brand = getRepairLaptopBrand(brandSlug);
   if (!brand) return {};
-  const title = `${brand.serviceCenterName} in Bangalore - Numunix`;
+  const canonicalPath = `/repair-laptop/brand/${brand.slug}`;
   return {
-    title: { absolute: title },
-    description: `Independent, certified ${heroProductName(brand)} service center in Bangalore. Free doorstep pickup, genuine parts, transparent pricing and expert technicians. Not an authorized ${brand.name} service center.`,
-    alternates: { canonical: `/repair-laptop/service-center/${brand.slug}` },
-    openGraph: {
-      title,
-      url: `/repair-laptop/service-center/${brand.slug}`,
-    },
+    // This URL is a useful navigation route, but it is an alternate framing
+    // of the corresponding repair page and does not contain enough distinct
+    // primary content to deserve a competing search result.
+    robots: { index: false, follow: true },
+    alternates: { canonical: canonicalPath },
   };
 }
 

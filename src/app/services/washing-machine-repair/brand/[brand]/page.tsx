@@ -10,6 +10,7 @@ import { SiteNav } from "@/components/site-nav";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { WashingMachineServiceDisclaimer } from "@/components/washing-machine-service-disclaimer";
 import { FloatingCallWidget } from "@/components/floating-call-widget";
+import { ServiceContentCta } from "@/components/service-content-cta";
 import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 import { CONTACT } from "@/lib/contact";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -96,11 +97,10 @@ export default async function WashingMachineBrandPage({ params }: { params: Prom
           <div className="max-w-2xl">
             <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
               {brand.name} Washing Machine{" "}
-              <span className="text-brand">Service Center Bangalore</span>
+              <span className="text-[#0168fd]">Service Center Bangalore</span>
             </h1>
             <p className="mt-5 max-w-xl text-base leading-7 text-white/75 md:text-lg">
-              Dependable {brand.name} washing machine repair for drainage, spin, noise, leakage and
-              power issues at your home in Bangalore.
+              {brand.name} washing machine repair at home in Bangalore.
             </p>
           </div>
           <div>
@@ -182,6 +182,19 @@ export default async function WashingMachineBrandPage({ params }: { params: Prom
           </div>
         </div>
       </section>
+
+      <ServiceContentCta
+        eyebrow="Make the visit useful"
+        title={`Help us understand your ${brand.name} washing machine issue.`}
+        description="A short description can save time on the day. Let us know the model, whether the machine fills, drains or spins, and any error code or unusual sound. We will use that information to plan the right inspection and explain the repair in simple terms."
+        points={[
+          "Share the model number if it is easy to find.",
+          "Note when in the wash cycle the problem occurs.",
+          "Do not keep running a leaking or unusually noisy machine.",
+          "Ask about the repair, parts and care advice before deciding.",
+        ]}
+        bookingLabel={`Discuss your ${brand.name} machine`}
+      />
 
       <section className="mx-auto max-w-6xl px-4 py-20 md:px-8 md:py-28">
         <div className="grid gap-10 rounded-[2rem] bg-ink p-7 text-white md:p-12 lg:grid-cols-2">

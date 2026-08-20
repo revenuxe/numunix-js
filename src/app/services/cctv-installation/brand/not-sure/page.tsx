@@ -105,15 +105,10 @@ export default function CctvNotSurePage() {
         <div className="mx-auto grid max-w-7xl gap-8 px-4 pb-10 pt-24 md:px-8 md:pb-14 md:pt-28 lg:grid-cols-[1.1fr_.9fr] lg:items-center lg:gap-12">
           <div className="max-w-2xl">
             <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-              Not Sure Which{" "}
-              <span className="bg-gradient-to-r from-sky-400 via-brand to-indigo-500 bg-clip-text text-transparent">
-                CCTV Brand
-              </span>{" "}
-              You Need?
+              Not Sure Which <span className="text-[#0168fd]">CCTV Brand</span> You Need?
             </h1>
             <p className="mt-5 max-w-xl text-base leading-7 text-white/75 md:text-lg">
-              You don't need to know the brand to get started. Tell us about your property and we'll
-              recommend, install and service the right CCTV setup for you in Bangalore.
+              CCTV installation and repair for homes and offices in Bangalore.
             </p>
           </div>
           <div className="w-full">

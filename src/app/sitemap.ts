@@ -5,6 +5,8 @@ import { REPAIR_LAPTOP_BRANDS } from "@/lib/repair-laptop-brands";
 import { CCTV_BRANDS } from "@/lib/cctv-brands";
 import { WASHING_MACHINE_BRANDS } from "@/lib/washing-machine-brands";
 import { getBlogSlugs } from "@/lib/blog-posts";
+import { getElectricalServiceSlugs } from "@/lib/electrical-services";
+import { getComputerSubserviceParams } from "@/lib/computer-subservices";
 import { SITE_URL } from "@/lib/site";
 
 const STATIC_ROUTES = [
@@ -33,6 +35,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "monthly",
     priority: 0.8,
   }));
+
+  const electricalServiceEntries: MetadataRoute.Sitemap = getElectricalServiceSlugs().map(
+    (slug) => ({
+      url: `${SITE_URL}/services/electrical-work/${slug}`,
+      changeFrequency: "monthly",
+      priority: 0.75,
+    }),
+  );
+  const computerSubserviceEntries: MetadataRoute.Sitemap = getComputerSubserviceParams().map(
+    ({ serviceSlug, subService }) => ({
+      url: `${SITE_URL}/services/${serviceSlug}/${subService}`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    }),
+  );
 
   const areaEntries: MetadataRoute.Sitemap = BANGALORE_AREAS.map((area) => ({
     url: `${SITE_URL}/repair-laptop/${area.slug}`,
@@ -67,6 +84,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...staticEntries,
     ...serviceEntries,
+    ...electricalServiceEntries,
+    ...computerSubserviceEntries,
     ...areaEntries,
     ...brandSeoEntries,
     ...cctvBrandEntries,

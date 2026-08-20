@@ -20,8 +20,11 @@ import {
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
+import { HeroWhatsAppCta } from "@/components/hero-whatsapp-cta";
 import { ServiceBookingForm } from "@/components/service-booking-form";
+import { ServiceContentCta } from "@/components/service-content-cta";
 import { CONTACT } from "@/lib/contact";
+import { ELECTRICAL_SERVICES } from "@/lib/electrical-services";
 import { ELECTRICAL_WORK_FAQS } from "@/lib/faq-data";
 import heroHandoff from "@/assets/hero-handoff.webp";
 
@@ -78,6 +81,21 @@ const BENEFITS = [
   "Support for homes, offices and shops across Bangalore",
 ];
 
+const SERVICE_LINKS: Record<string, string> = {
+  "Electrician Consultation": "electrician-consultation",
+  "Emergency Electrician Consultation": "electrician-consultation",
+  "Wiring & Circuit Repairs Consultation": "electrical-repairs",
+  "MCB & Fuse Box Repair/Installation Consultation": "electrical-repairs",
+  "Inverter Installation": "inverter-ups-service",
+  "Inverter Uninstallation": "inverter-ups-service",
+  "Inverter Check up": "inverter-ups-service",
+  "Water Motor Installation & Repair Consultation": "water-motor-service",
+  "Socket & Switchboard Repair/Installation Consultation": "electrical-installation",
+  "Fan Installation & Repair Consultation": "electrical-installation",
+  "Light Installation & Repair Consultation": "electrical-installation",
+  "Appliance Wiring & Installation Consultation": "electrical-installation",
+};
+
 let offset = 0;
 const GRID_GROUPS_WITH_OFFSETS = GRID_GROUPS.map((group) => {
   const start = offset;
@@ -102,26 +120,17 @@ export function ElectricalWorkContent() {
         <div className="mx-auto grid max-w-7xl gap-8 px-4 pb-10 pt-24 md:px-8 md:pb-14 md:pt-28 lg:grid-cols-[1.1fr_.9fr] lg:items-center lg:gap-12">
           <div className="max-w-2xl">
             <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-              Electricians in Bangalore for Home & Office Electrical Work
+              Home &amp; Office <span className="text-[#0168fd]">Electricians</span> in Bangalore
             </h1>
             <p className="mt-5 max-w-xl text-base leading-7 text-white/75 md:text-lg">
-              From a flickering light to a full wiring fault, Numunix connects you with verified,
-              certified electricians in Bangalore for safe, dependable repair and installation work
-              — at home or in the office.
+              Electrician repair, installation and wiring services in Bangalore.
             </p>
           </div>
           <div className="w-full">
-            <div className="mb-4 grid gap-3">
-              <a
-                href={CONTACT.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/30 bg-ink/45 px-5 py-4 text-sm font-semibold text-white backdrop-blur transition hover:bg-white hover:text-ink"
-              >
-                <WhatsAppIcon className="h-4 w-4" /> Reach us on WhatsApp
-              </a>
-            </div>
             <ServiceBookingForm serviceName="Electrical Work" />
+            <div className="mt-4">
+              <HeroWhatsAppCta href={CONTACT.whatsappUrl} />
+            </div>
           </div>
         </div>
       </section>
@@ -142,7 +151,7 @@ export function ElectricalWorkContent() {
             {COMBINED_GROUPS.map((group) => (
               <Link
                 key={group.title}
-                href="#service-booking-form"
+                href={`/services/electrical-work/${SERVICE_LINKS[group.items[0]]}`}
                 className="group relative flex min-w-0 flex-col overflow-hidden rounded-[1.75rem] bg-white p-6 ring-1 ring-border shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card md:p-8 lg:min-h-[340px] lg:p-10"
               >
                 <span
@@ -185,7 +194,7 @@ export function ElectricalWorkContent() {
                 {group.items.map((item, i) => (
                   <Link
                     key={item}
-                    href="#service-booking-form"
+                    href={`/services/electrical-work/${SERVICE_LINKS[item]}`}
                     className="group relative flex min-h-[220px] min-w-0 flex-col overflow-hidden rounded-[1.75rem] bg-white p-5 ring-1 ring-border shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card md:min-h-[240px] md:p-6"
                   >
                     <span
@@ -219,6 +228,53 @@ export function ElectricalWorkContent() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-6xl px-4 py-20 md:px-8 md:py-28">
+        <div className="max-w-3xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand">
+            Electrical services in Bangalore
+          </p>
+          <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-ink">
+            Get the right kind of electrical help, first time.
+          </h2>
+          <div className="mt-6 space-y-5 leading-7 text-muted-foreground">
+            <p>
+              Electrical work is rarely one-size-fits-all. A tripping MCB needs a different starting
+              point from a new ceiling fan, an inverter with poor backup or a water motor that will
+              not start. Our Bangalore electrician service helps you describe the actual situation,
+              then connects you with the right service path instead of treating every job as a
+              generic repair.
+            </p>
+            <p>
+              For homes, we support everyday issues such as sockets, switches, lights, fans,
+              appliance wiring and backup power. For offices and shops, we can help with electrical
+              fault checks, safe installation planning and maintenance concerns that interrupt the
+              working day. In every case, safety and a clear explanation come before the work.
+            </p>
+            <p>
+              If you can do so safely, note the affected room, the appliance or circuit involved,
+              and what happens when the issue occurs. Those small details help the electrician
+              arrive better prepared and give you a more useful conversation from the start.
+            </p>
+          </div>
+        </div>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {Object.values(ELECTRICAL_SERVICES).map((service) => (
+            <Link
+              key={service.slug}
+              href={`/services/electrical-work/${service.slug}`}
+              className="group rounded-3xl border border-border bg-white p-6 shadow-soft transition hover:-translate-y-1 hover:border-brand"
+            >
+              <h3 className="text-xl font-bold text-ink">{service.name}</h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">{service.description}</p>
+              <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand">
+                View detailed service{" "}
+                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className="bg-secondary/45 px-4 py-20 md:px-8 md:py-28">
         <div className="mx-auto max-w-6xl">
           <div className="max-w-2xl">
@@ -242,6 +298,19 @@ export function ElectricalWorkContent() {
           </div>
         </div>
       </section>
+
+      <ServiceContentCta
+        eyebrow="Before an electrician visits"
+        title="A safer, clearer way to get electrical help."
+        description="Let us know what you are seeing: a tripping MCB, a dead socket, flickering light or installation need. If it is safe, share a photo of the affected point. We will help you arrange the right kind of visit and explain the work clearly."
+        points={[
+          "Switch off power if you notice burning, sparks or exposed wiring.",
+          "Describe which room, appliance or circuit is affected.",
+          "Ask for the repair or installation plan before work starts.",
+          "Keep children and pets away from an unsafe electrical point.",
+        ]}
+        bookingLabel="Discuss an electrical issue"
+      />
 
       <section className="mx-auto max-w-6xl px-4 py-20 md:px-8 md:py-28">
         <div className="grid gap-10 rounded-[2rem] bg-ink p-7 text-white shadow-card md:p-12 lg:grid-cols-2 lg:gap-16">

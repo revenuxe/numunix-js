@@ -25,7 +25,7 @@ export function PageHero({
           {accent && (
             <>
               {" "}
-              <span className="text-brand">{accent}</span>
+              <span className="text-[#0168fd]">{accent}</span>
             </>
           )}
         </h1>

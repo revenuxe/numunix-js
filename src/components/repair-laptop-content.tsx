@@ -19,7 +19,10 @@ import {
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
+import { HeroWhatsAppCta } from "@/components/hero-whatsapp-cta";
 import { ServiceBookingForm } from "@/components/service-booking-form";
+import { InternalLinksSection } from "@/components/internal-links-section";
+import { ServiceContentCta } from "@/components/service-content-cta";
 import { REPAIR_LAPTOP_FAQS } from "@/lib/faq-data";
 import {
   BANGALORE_AREAS,
@@ -96,6 +99,7 @@ export function RepairLaptopContent({
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(0);
   const isServiceCenter = Boolean(brandSeo) && variant === "service-center";
+  const isSpecificLandingPage = Boolean(area || brandSeo);
   const filtered = useMemo(
     () => REPAIR_LAPTOP_BRANDS.filter((b) => b.name.toLowerCase().includes(query.toLowerCase())),
     [query],
@@ -116,8 +120,12 @@ export function RepairLaptopContent({
     [brandSeo, isServiceCenter],
   );
   const faqs = useMemo(() => {
-    const extra = areaCopy?.faqs ?? brandCopy?.faqs ?? [];
-    return [...extra, ...REPAIR_LAPTOP_FAQS];
+    // Repeating the same generic questions on every area and brand URL makes
+    // the primary content of those pages needlessly similar. Specific landing
+    // pages show only their local/product questions; the parent repair page
+    // remains the home for the general repair FAQ.
+    if (areaCopy || brandCopy) return areaCopy?.faqs ?? brandCopy?.faqs ?? [];
+    return REPAIR_LAPTOP_FAQS;
   }, [areaCopy, brandCopy]);
   const serviceName = brandSeo
     ? `${heroProductName(brandSeo)} ${isServiceCenter ? "Service" : "Repair"}`
@@ -163,16 +171,10 @@ export function RepairLaptopContent({
                   </h1>
                   <p className="mt-4 max-w-xl text-sm text-white/75 sm:mt-6 sm:text-lg">
                     {isServiceCenter ? (
-                      <>
-                        Certified expert technicians, transparent pricing, fast turnaround —{" "}
-                        {heroProductName(brandSeo)} service with free doorstep pickup across
-                        Bangalore.
-                      </>
+                      <>{heroProductName(brandSeo)} laptop service center in Bangalore.</>
                     ) : (
                       <>
-                        Certified technicians, transparent pricing, fast turnaround — free doorstep
-                        pickup, genuine parts and a warranty on every {heroProductName(brandSeo)}{" "}
-                        repair.
+                        {heroProductName(brandSeo)} laptop repair with doorstep pickup in Bangalore.
                       </>
                     )}
                   </p>
@@ -185,15 +187,9 @@ export function RepairLaptopContent({
                       Book Service
                       <ArrowRight className="h-4 w-4" />
                     </a>
-                    <a
-                      href={whatsapp}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-ink/60 px-6 py-3.5 text-sm font-semibold text-white shadow-soft backdrop-blur transition hover:bg-white hover:text-ink sm:w-auto lg:h-[62px] lg:px-8 lg:text-base"
-                    >
-                      <WhatsAppIcon className="h-4 w-4" />
-                      Reach us on WhatsApp
-                    </a>
+                    <div className="w-full sm:max-w-sm">
+                      <HeroWhatsAppCta href={whatsapp} />
+                    </div>
                   </div>
                 </div>
 
@@ -238,15 +234,11 @@ export function RepairLaptopContent({
           <div className="absolute -bottom-40 -left-24 h-72 w-72 rounded-full bg-brand/15 blur-3xl" />
           <div className="relative mx-auto max-w-3xl text-center">
             <h1 className="mt-2 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl md:mt-3 md:text-6xl">
-              Repair your{" "}
-              <span className="bg-gradient-to-r from-sky-400 via-brand to-indigo-500 bg-clip-text text-transparent">
-                laptop
-              </span>{" "}
-              in {area?.name ?? "Bangalore"}
+              Repair your <span className="text-[#0168fd]">laptop</span> in{" "}
+              {area?.name ?? "Bangalore"}
             </h1>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/75 md:text-lg">
-              Get your laptop repaired by certified technicians. Free doorstep pickup across
-              Bengaluru, transparent pricing and warrantied repairs — most done in 24-48 hours.
+              Laptop repair with free doorstep pickup in {area?.name ?? "Bangalore"}.
             </p>
 
             <div className="mx-auto mt-8 max-w-xl text-left">
@@ -367,6 +359,51 @@ export function RepairLaptopContent({
         </section>
       )}
 
+      {brandCopy && brandSeo && (
+        <section className="bg-secondary/45 px-4 py-16 md:px-8 md:py-24">
+          <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand">
+                Common repair checks
+              </p>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
+                A careful look at your {heroProductName(brandSeo)}.
+              </h2>
+              <p className="mt-5 leading-7 text-muted-foreground">
+                Different symptoms can have the same cause, so a proper diagnosis comes before a
+                repair recommendation. These are some of the areas our technicians assess.
+              </p>
+              <div className="mt-7 grid gap-3">
+                {brandCopy.commonChecks.map((check) => (
+                  <p
+                    key={check}
+                    className="flex gap-3 rounded-2xl bg-white p-4 text-sm leading-6 shadow-soft"
+                  >
+                    <Check className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
+                    {check}
+                  </p>
+                ))}
+              </div>
+            </div>
+            <div className="rounded-[2rem] bg-ink p-7 text-white shadow-card md:p-9">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand">
+                Before pickup
+              </p>
+              <h2 className="mt-4 text-3xl font-extrabold tracking-tight">
+                Help us start with the right information.
+              </h2>
+              <p className="mt-5 leading-7 text-white/75">{brandCopy.bookingAdvice}</p>
+              <a
+                href="#service-booking-form"
+                className="mt-7 inline-flex items-center gap-2 rounded-full bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground"
+              >
+                Book {heroProductName(brandSeo)} repair <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="bg-brand/5 px-4 py-16 md:px-8 md:py-24">
         <div className="mx-auto max-w-6xl">
           <p className="text-xs font-extrabold tracking-[.16em] text-brand">
@@ -397,50 +434,75 @@ export function RepairLaptopContent({
         </div>
       </section>
 
-      <section className="bg-secondary/55 px-4 py-16 md:px-8 md:py-24">
-        <div className="mx-auto max-w-6xl text-center">
-          <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-            How laptop repair works
-          </h2>
-          <p className="mt-3 text-muted-foreground">
-            Three simple steps to a fully working laptop, anywhere in Bangalore.
-          </p>
-          <div className="mt-10 grid gap-5 text-left md:grid-cols-3">
-            {steps.map(([t, d, I], i) => (
-              <article
-                key={t}
-                className="relative overflow-hidden rounded-2xl bg-white p-6 shadow-soft"
-              >
-                <span className="absolute right-5 top-1 text-7xl font-extrabold text-brand/10">
-                  0{i + 1}
-                </span>
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-emerald-50 text-brand">
-                  <I className="h-5 w-5" />
-                </span>
-                <h3 className="mt-5 text-lg font-bold">{t}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">{d}</p>
-              </article>
-            ))}
+      {!isSpecificLandingPage && (
+        <section className="bg-secondary/55 px-4 py-16 md:px-8 md:py-24">
+          <div className="mx-auto max-w-6xl text-center">
+            <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
+              How laptop repair works
+            </h2>
+            <p className="mt-3 text-muted-foreground">
+              Three simple steps to a fully working laptop, anywhere in Bangalore.
+            </p>
+            <div className="mt-10 grid gap-5 text-left md:grid-cols-3">
+              {steps.map(([t, d, I], i) => (
+                <article
+                  key={t}
+                  className="relative overflow-hidden rounded-2xl bg-white p-6 shadow-soft"
+                >
+                  <span className="absolute right-5 top-1 text-7xl font-extrabold text-brand/10">
+                    0{i + 1}
+                  </span>
+                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-emerald-50 text-brand">
+                    <I className="h-5 w-5" />
+                  </span>
+                  <h3 className="mt-5 text-lg font-bold">{t}</h3>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">{d}</p>
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      <section className="px-4 py-16 md:px-8 md:py-24">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-            A more trustworthy way to repair
-          </h2>
-          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {benefits.map(([t, d, I]) => (
-              <article key={t} className="rounded-2xl border border-border p-5">
-                <I className="h-6 w-6 text-brand" />
-                <h3 className="mt-4 font-bold">{t}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">{d}</p>
-              </article>
-            ))}
+      {!isSpecificLandingPage && (
+        <section className="px-4 py-16 md:px-8 md:py-24">
+          <div className="mx-auto max-w-6xl">
+            <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
+              A more trustworthy way to repair
+            </h2>
+            <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {benefits.map(([t, d, I]) => (
+                <article key={t} className="rounded-2xl border border-border p-5">
+                  <I className="h-6 w-6 text-brand" />
+                  <h3 className="mt-4 font-bold">{t}</h3>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">{d}</p>
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
+      <ServiceContentCta
+        eyebrow={area ? `Local support in ${area.name}` : "Before you book"}
+        title={
+          area
+            ? `Laptop repair in ${area.name}, without the runaround.`
+            : "A simple start to laptop repair."
+        }
+        description={
+          area
+            ? `Describe the problem and your laptop model, then choose a convenient pickup time in ${area.name}. We will confirm the next step, keep you updated after diagnosis and only proceed once you understand the recommendation.`
+            : "A slow, damaged or unreliable laptop can have more than one cause. Share the symptoms and your model with us first; we will help you understand the practical repair options before arranging pickup."
+        }
+        points={[
+          "Tell us the laptop brand, model and the issue you notice.",
+          "Back up important files if the laptop still starts.",
+          "Receive the diagnosis and price before repair work starts.",
+          "Ask anything you need about parts, timing or warranty.",
+        ]}
+        bookingLabel="Tell us about your laptop"
+      />
 
       <section className="bg-secondary/55 px-4 py-16 md:px-8 md:py-24">
         <div className="mx-auto max-w-3xl">
@@ -527,6 +589,8 @@ export function RepairLaptopContent({
           </div>
         </section>
       )}
+
+      <InternalLinksSection currentServiceSlug="laptop-repair" currentAreaSlug={area?.slug} />
 
       <a
         href={whatsapp}

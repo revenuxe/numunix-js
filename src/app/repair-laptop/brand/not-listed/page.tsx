@@ -107,16 +107,11 @@ export default function NotListedBrandPage() {
         <div className="absolute -bottom-40 -left-24 h-72 w-72 rounded-full bg-brand/15 blur-3xl" />
         <div className="relative mx-auto max-w-3xl text-center">
           <h1 className="mt-2 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl md:mt-3 md:text-6xl">
-            Don&apos;t See Your{" "}
-            <span className="bg-gradient-to-r from-sky-400 via-brand to-indigo-500 bg-clip-text text-transparent">
-              Laptop Brand
-            </span>
-            ? We Repair It Anyway
+            Don&apos;t See Your <span className="text-[#0168fd]">Laptop Brand</span>? We Repair It
+            Anyway
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/75 md:text-lg">
-            The brands on our site are just the most searched ones — our certified technicians
-            repair laptops from every manufacturer in Bangalore, with the same free pickup,
-            transparent pricing and warranty.
+            All-brand laptop repair with free pickup in Bangalore.
           </p>
 
           <div className="mx-auto mt-8 max-w-xl text-left">
