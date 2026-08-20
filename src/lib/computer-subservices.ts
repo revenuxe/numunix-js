@@ -9,6 +9,8 @@ export type ComputerSubservice = {
   faqs: [string, string][];
 };
 
+import { getService, SERVICES } from "@/lib/services";
+
 const laptop = (
   slug: string,
   title: string,
@@ -806,19 +808,80 @@ export const COMPUTER_SUBSERVICES: ComputerSubservice[] = [
 ];
 
 export function getComputerSubservice(parent: string, slug: string) {
-  return COMPUTER_SUBSERVICES.find((item) => item.parent === parent && item.slug === slug);
+  return (
+    COMPUTER_SUBSERVICES.find((item) => item.parent === parent && item.slug === slug) ??
+    getGeneratedSubservice(parent, slug)
+  );
 }
 export function getComputerSubserviceParams() {
-  return COMPUTER_SUBSERVICES.map(({ parent, slug }) => ({
+  const explicitParams = COMPUTER_SUBSERVICES.map(({ parent, slug }) => ({
     serviceSlug: parent,
     subService: slug,
   }));
+  const generatedParams = Object.keys(SERVICES).flatMap((parent) => {
+    const service = getService(parent)!;
+    return service.subServices
+      .filter((title) => !getExplicitSubservice(parent, title))
+      .map((title) => ({ serviceSlug: parent, subService: subserviceSlug(title) }));
+  });
+  return [...explicitParams, ...generatedParams];
 }
 export function getSubserviceHref(parent: string, title: string) {
-  const item = COMPUTER_SUBSERVICES.find(
-    (entry) =>
-      entry.parent === parent &&
-      entry.title.toLowerCase().startsWith(title.split(" ").slice(0, 2).join(" ").toLowerCase()),
+  const item = getExplicitSubservice(parent, title);
+  return `/services/${parent}/${item?.slug ?? subserviceSlug(title)}`;
+}
+
+function getExplicitSubservice(parent: string, title: string) {
+  const prefix = title.split(" ").slice(0, 2).join(" ").toLowerCase();
+  return COMPUTER_SUBSERVICES.find(
+    (entry) => entry.parent === parent && entry.title.toLowerCase().startsWith(prefix),
   );
-  return item ? `/services/${parent}/${item.slug}` : undefined;
+}
+
+function subserviceSlug(title: string) {
+  return title
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function getGeneratedSubservice(parent: string, slug: string): ComputerSubservice | undefined {
+  const service = getService(parent);
+  const title = service?.subServices.find(
+    (item) => !getExplicitSubservice(parent, item) && subserviceSlug(item) === slug,
+  );
+  if (!service || !title) return undefined;
+
+  return {
+    parent,
+    slug,
+    title: `${title} in Bangalore`,
+    description: `${title} service in Bangalore from Numunix, with a clear assessment, practical recommendations and dependable support for homes and businesses.`,
+    overview: [
+      `${title} needs the right starting point. We begin by understanding the equipment, setup and outcome you need before recommending any work.`,
+      `Numunix provides ${service.name.toLowerCase()} support in Bangalore with clear communication about the scope, likely next steps and any parts or follow-up that may be required.`,
+    ],
+    symptoms: [
+      `You need help with ${title.toLowerCase()}`,
+      "The equipment or setup is not working as expected",
+      "You need an assessment before repair, replacement or expansion",
+      "You want clear advice from a qualified technician",
+    ],
+    assessment: [
+      "Review the equipment, setup and reported requirement",
+      "Check the relevant components, connections or configuration",
+      "Explain the suitable repair, installation or maintenance path",
+    ],
+    faqs: [
+      [
+        `What information should I share for ${title.toLowerCase()}?`,
+        "Share the model or equipment details, the exact issue or outcome you need, and any error messages or changes you have noticed.",
+      ],
+      [
+        "Will the work be explained before it starts?",
+        "Yes. We explain the assessment and recommended next step before work is approved.",
+      ],
+    ],
+  };
 }

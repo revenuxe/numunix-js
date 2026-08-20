@@ -41,7 +41,7 @@ const GRID_GROUPS: { title: string; Icon: typeof Plug; items: string[] }[] = [
   },
 ];
 
-const COMBINED_GROUPS: { title: string; Icon: typeof Plug; items: string[] }[] = [
+const COMBINED_GROUPS: { title: string; slug?: string; Icon: typeof Plug; items: string[] }[] = [
   {
     title: "Electrician Consultation",
     Icon: MessageCircleQuestion,
@@ -49,6 +49,7 @@ const COMBINED_GROUPS: { title: string; Icon: typeof Plug; items: string[] }[] =
   },
   {
     title: "Repair & Maintenance",
+    slug: "repair-maintenance",
     Icon: Cog,
     items: [
       "Wiring & Circuit Repairs Consultation",
@@ -82,18 +83,18 @@ const BENEFITS = [
 ];
 
 const SERVICE_LINKS: Record<string, string> = {
-  "Electrician Consultation": "electrician-consultation",
-  "Emergency Electrician Consultation": "electrician-consultation",
-  "Wiring & Circuit Repairs Consultation": "electrical-repairs",
-  "MCB & Fuse Box Repair/Installation Consultation": "electrical-repairs",
-  "Inverter Installation": "inverter-ups-service",
-  "Inverter Uninstallation": "inverter-ups-service",
-  "Inverter Check up": "inverter-ups-service",
-  "Water Motor Installation & Repair Consultation": "water-motor-service",
-  "Socket & Switchboard Repair/Installation Consultation": "electrical-installation",
-  "Fan Installation & Repair Consultation": "electrical-installation",
-  "Light Installation & Repair Consultation": "electrical-installation",
-  "Appliance Wiring & Installation Consultation": "electrical-installation",
+  "General Electrical Consultation": "electrician-consultation",
+  "Emergency Electrician Consultation": "emergency-electrician-consultation",
+  "Wiring & Circuit Repairs Consultation": "wiring-circuit-repairs",
+  "MCB & Fuse Box Repair/Installation Consultation": "mcb-fuse-box-service",
+  "Inverter Installation": "inverter-installation",
+  "Inverter Uninstallation": "inverter-uninstallation",
+  "Inverter Check up": "inverter-check-up",
+  "Water Motor Installation & Repair Consultation": "water-motor-installation-repair",
+  "Socket & Switchboard Repair/Installation Consultation": "socket-switchboard-service",
+  "Fan Installation & Repair Consultation": "fan-installation-repair",
+  "Light Installation & Repair Consultation": "light-installation-repair",
+  "Appliance Wiring & Installation Consultation": "appliance-wiring-installation",
 };
 
 let offset = 0;
@@ -149,9 +150,8 @@ export function ElectricalWorkContent() {
         <div className="mt-14 space-y-14">
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
             {COMBINED_GROUPS.map((group) => (
-              <Link
+              <div
                 key={group.title}
-                href={`/services/electrical-work/${SERVICE_LINKS[group.items[0]]}`}
                 className="group relative flex min-w-0 flex-col overflow-hidden rounded-[1.75rem] bg-white p-6 ring-1 ring-border shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-card md:p-8 lg:min-h-[340px] lg:p-10"
               >
                 <span
@@ -161,24 +161,35 @@ export function ElectricalWorkContent() {
                 <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand transition duration-300 group-hover:scale-105 group-hover:bg-brand group-hover:text-brand-foreground lg:h-14 lg:w-14">
                   <group.Icon className="h-5 w-5 lg:h-6 lg:w-6" />
                 </span>
-                <h3 className="relative mt-6 break-words text-2xl font-bold text-ink lg:text-3xl">
-                  {group.title}
-                </h3>
+                {group.slug ? (
+                  <Link
+                    href={`/services/electrical-work/${group.slug}`}
+                    className="relative mt-6 break-words text-2xl font-bold text-ink transition hover:text-brand lg:text-3xl"
+                  >
+                    {group.title}
+                  </Link>
+                ) : (
+                  <h3 className="relative mt-6 break-words text-2xl font-bold text-ink lg:text-3xl">
+                    {group.title}
+                  </h3>
+                )}
                 <ul className="relative mt-5 space-y-3">
                   {group.items.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-3 text-sm leading-6 lg:text-base"
-                    >
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                      <span className="break-words font-medium text-ink">{item}</span>
+                    <li key={item}>
+                      <Link
+                        href={`/services/electrical-work/${SERVICE_LINKS[item]}`}
+                        className="flex items-start gap-3 text-sm leading-6 transition hover:text-brand lg:text-base"
+                      >
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                        <span className="break-words font-medium text-ink">{item}</span>
+                      </Link>
                     </li>
                   ))}
                 </ul>
                 <span className="relative mt-auto inline-flex items-center gap-1 pt-6 text-xs font-semibold text-brand opacity-80 transition group-hover:opacity-100">
                   Book this service <ArrowRight className="h-3.5 w-3.5" />
                 </span>
-              </Link>
+              </div>
             ))}
           </div>
 
