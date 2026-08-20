@@ -24,7 +24,6 @@ import { ServiceBookingForm } from "@/components/service-booking-form";
 import { CctvBrandSelect } from "@/components/cctv-brand-select";
 import { WashingMachineBrandSelect } from "@/components/washing-machine-brand-select";
 import { WashingMachineServiceDisclaimer } from "@/components/washing-machine-service-disclaimer";
-import { FloatingCallWidget } from "@/components/floating-call-widget";
 import { InternalLinksSection } from "@/components/internal-links-section";
 import { ServiceContentCta } from "@/components/service-content-cta";
 import { RepairLaptopContent } from "@/components/repair-laptop-content";
@@ -410,7 +409,6 @@ export default async function ServicePage({
       <InternalLinksSection currentServiceSlug={serviceSlug} />
       {serviceSlug === "washing-machine-repair" && <WashingMachineServiceDisclaimer />}
       <SiteFooter />
-      {serviceSlug === "washing-machine-repair" && <FloatingCallWidget />}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

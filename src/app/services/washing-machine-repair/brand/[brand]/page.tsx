@@ -9,7 +9,6 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { WashingMachineServiceDisclaimer } from "@/components/washing-machine-service-disclaimer";
-import { FloatingCallWidget } from "@/components/floating-call-widget";
 import { ServiceContentCta } from "@/components/service-content-cta";
 import { buildBreadcrumbJsonLd } from "@/lib/breadcrumb";
 import { CONTACT } from "@/lib/contact";
@@ -247,7 +246,6 @@ export default async function WashingMachineBrandPage({ params }: { params: Prom
       </section>
       <WashingMachineServiceDisclaimer brandName={brand.name} />
       <SiteFooter />
-      <FloatingCallWidget />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
