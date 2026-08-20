@@ -27,8 +27,10 @@ import { WashingMachineServiceDisclaimer } from "@/components/washing-machine-se
 import { FloatingCallWidget } from "@/components/floating-call-widget";
 import { InternalLinksSection } from "@/components/internal-links-section";
 import { ServiceContentCta } from "@/components/service-content-cta";
+import { RepairLaptopContent } from "@/components/repair-laptop-content";
 import { CONTACT } from "@/lib/contact";
 import { getService, getServiceSlugs } from "@/lib/services";
+import { REPAIR_LAPTOP_FAQS } from "@/lib/faq-data";
 import { getServiceGuide } from "@/lib/service-guides";
 import { getSubserviceHref } from "@/lib/computer-subservices";
 import { SITE_NAME } from "@/lib/site";
@@ -80,6 +82,42 @@ export default async function ServicePage({
   const { serviceSlug } = await params;
   const service = getService(serviceSlug);
   if (!service) notFound();
+
+  // This is the canonical commercial laptop-repair page. Keep the complete
+  // model, brand, service-centre, locality and booking hub here rather than
+  // splitting that content between /repair-laptop and /services/laptop-repair.
+  if (serviceSlug === "laptop-repair") {
+    const path = "/services/laptop-repair";
+    const faqJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: REPAIR_LAPTOP_FAQS.map(([question, answer]) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: { "@type": "Answer", text: answer },
+      })),
+    };
+    return (
+      <>
+        <RepairLaptopContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              buildBreadcrumbJsonLd([
+                { name: "Home", path: "/" },
+                { name: "Laptop Repair", path },
+              ]),
+            ),
+          }}
+        />
+      </>
+    );
+  }
   const guide = getServiceGuide(serviceSlug);
 
   const accentIndex = service.heroAccent ? service.hero.indexOf(service.heroAccent) : -1;

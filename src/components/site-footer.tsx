@@ -74,13 +74,16 @@ const LAPTOP_SUBSERVICES_COLUMN = {
 };
 
 export function SiteFooter({ showRepairLaptopMenu = false }: { showRepairLaptopMenu?: boolean }) {
-  const columns = [
-    BASE_FOOTER_COLUMNS[0],
-    BASE_FOOTER_COLUMNS[1],
-    LAPTOP_SUBSERVICES_COLUMN,
-    ...(showRepairLaptopMenu ? [REPAIR_LAPTOP_COLUMN, SERVICE_CENTER_COLUMN] : []),
-    BASE_FOOTER_COLUMNS[2],
-  ];
+  const columns = showRepairLaptopMenu
+    ? [
+        BASE_FOOTER_COLUMNS[0],
+        BASE_FOOTER_COLUMNS[1],
+        LAPTOP_SUBSERVICES_COLUMN,
+        REPAIR_LAPTOP_COLUMN,
+        SERVICE_CENTER_COLUMN,
+        BASE_FOOTER_COLUMNS[2],
+      ]
+    : BASE_FOOTER_COLUMNS;
 
   return (
     <footer className="relative overflow-hidden bg-white px-4 pt-20 pb-8 md:px-8">
