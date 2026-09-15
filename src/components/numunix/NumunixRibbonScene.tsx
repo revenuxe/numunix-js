@@ -82,28 +82,32 @@ export function NumunixRibbonScene({
     let raf = 0;
     let visible = true;
     const io = new IntersectionObserver(
-      ([e]) => {
-        visible = e.isIntersecting;
+      (entries) => {
+        visible = entries[0]?.isIntersecting ?? true;
       },
       { threshold: 0.01 },
     );
     io.observe(parent);
 
-    const mix = (a: number[], b: number[], k: number) =>
+    type RGB = readonly [number, number, number];
+    const mix = (a: RGB, b: RGB, k: number) =>
       `rgb(${Math.round(a[0] + (b[0] - a[0]) * k)},${Math.round(
         a[1] + (b[1] - a[1]) * k,
       )},${Math.round(a[2] + (b[2] - a[2]) * k)})`;
 
-    const NAVY = [8, 20, 44];
-    const ROYAL = [23, 71, 184];
-    const ELECTRIC = [59, 130, 246];
-    const CYAN = [120, 200, 250];
+    const NAVY: RGB = [8, 20, 44];
+    const ROYAL: RGB = [23, 71, 184];
+    const ELECTRIC: RGB = [59, 130, 246];
 
     const drawRibbon = (b: Ribbon, time: number, boost: number) => {
       const steps = 46;
-      const top: [number, number][] = [];
-      const bottom: [number, number][] = [];
-      const shade: number[] = [];
+      const n = steps + 1;
+      const tx = new Float32Array(n);
+      const ty = new Float32Array(n);
+      const bx = new Float32Array(n);
+      const by = new Float32Array(n);
+      const shade = new Float32Array(n);
+
 
       for (let i = 0; i <= steps; i++) {
         const u = i / steps;
