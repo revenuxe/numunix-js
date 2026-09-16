@@ -127,7 +127,7 @@ export function FeatureScroller() {
   }, []);
 
   return (
-    <section className="bg-[#f7f9fc] py-24 lg:py-[140px]">
+    <section className="bg-[#f7f9fc] py-16 sm:py-24 lg:py-[140px]">
       <div className="shell">
         <div className="grid gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:gap-24">
           {/* LEFT — sticky index */}
