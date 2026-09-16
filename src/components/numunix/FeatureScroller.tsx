@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Label, Reveal } from "./primitives";
+import { Label } from "./primitives";
 import AICallDemo from "./AICallDemo";
 import {
   BookingDemo,
@@ -7,15 +7,6 @@ import {
   ServiceOperations,
   InvoiceDemo,
 } from "./demos";
-
-const ITEMS = [
-  "AI CALL AGENTS",
-  "AUTOMATED BOOKING",
-  "SMART TECHNICIAN ASSIGNMENT",
-  "SERVICE OPERATIONS",
-  "INVOICING & BILLING",
-  "BUSINESS AUTOMATION",
-];
 
 function AutomationPanel() {
   const rows = [
@@ -48,13 +39,56 @@ function AutomationPanel() {
   );
 }
 
-const PANELS = [
-  <AICallDemo key="a" customer="Ananya" issue="AC Repair" reply="Hi Ananya, I can help you schedule an AC technician." />,
-  <BookingDemo key="b" />,
-  <TechnicianDispatch key="c" />,
-  <ServiceOperations key="d" />,
-  <InvoiceDemo key="e" />,
-  <AutomationPanel key="f" />,
+type Item = {
+  nav: string;
+  title: string;
+  body: string;
+  panel: React.ReactNode;
+};
+
+const ITEMS: Item[] = [
+  {
+    nav: "AI CALL AGENTS",
+    title: "Every call answered, qualified and booked.",
+    body: "Numunix AI agents pick up instantly, understand the customer's issue, capture service details and confirm a slot — day, night or peak hours.",
+    panel: (
+      <AICallDemo
+        customer="Ananya"
+        issue="AC Repair"
+        reply="Hi Ananya, I can help you schedule an AC technician."
+      />
+    ),
+  },
+  {
+    nav: "AUTOMATED BOOKING",
+    title: "Appointments that schedule themselves.",
+    body: "Availability, service duration and technician coverage are checked in real time, so the slot offered to a customer is a slot you can actually deliver.",
+    panel: <BookingDemo />,
+  },
+  {
+    nav: "SMART TECHNICIAN ASSIGNMENT",
+    title: "The right technician on every job.",
+    body: "Distance, skill match, workload and current status are scored together, and the best technician is recommended before the job is dispatched.",
+    panel: <TechnicianDispatch />,
+  },
+  {
+    nav: "SERVICE OPERATIONS",
+    title: "One live view of the working day.",
+    body: "Track every service job from scheduled to in progress to complete, with technician, location and status visible across teams and locations.",
+    panel: <ServiceOperations />,
+  },
+  {
+    nav: "INVOICING & BILLING",
+    title: "Invoices raised the moment work ends.",
+    body: "Service, parts and tax are calculated automatically, sent over WhatsApp, and tracked through to payment without anyone chasing paperwork.",
+    panel: <InvoiceDemo />,
+  },
+  {
+    nav: "BUSINESS AUTOMATION",
+    title: "The follow-up work runs itself.",
+    body: "Reminders, confirmations, feedback requests and repeat-service nudges run on their own, so nothing is dropped after the job is closed.",
+    panel: <AutomationPanel />,
+  },
 ];
 
 export function FeatureScroller() {
@@ -66,83 +100,69 @@ export function FeatureScroller() {
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            const i = Number((e.target as HTMLElement).dataset["i"]);
-            setActive(i);
+            setActive(Number((e.target as HTMLElement).dataset["i"]));
           }
         });
       },
-      { rootMargin: "-45% 0px -45% 0px" },
+      { rootMargin: "-40% 0px -50% 0px" },
     );
     refs.current.forEach((r) => r && io.observe(r));
     return () => io.disconnect();
   }, []);
 
   return (
-    <section className="bg-[#eef3f8] py-24 lg:py-[150px]">
+    <section className="rounded-t-[32px] bg-[#f7f9fc] py-24 lg:rounded-t-[48px] lg:py-[140px]">
       <div className="shell">
-        <Label tone="light">WHY NUMUNIX</Label>
-
-        <div className="mt-14 grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
+        <div className="grid gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:gap-24">
+          {/* LEFT — sticky index */}
           <div>
-            {/* desktop: sticky scroll list */}
-            <div className="hidden lg:block lg:sticky lg:top-32">
-              {ITEMS.map((t, i) => (
-                <button
-                  key={t}
-                  onClick={() => setActive(i)}
-                  className="block w-full text-left"
-                >
-                  <span
-                    className={`block py-3 text-[clamp(1.8rem,3.2vw,3.2rem)] font-light leading-[1.14] tracking-[-0.03em] transition-colors duration-500 ${
-                      active === i ? "text-[#0b1b38]" : "text-[#b3c4dc]"
-                    }`}
+            <div className="lg:sticky lg:top-32">
+              <Label tone="light">WHY NUMUNIX</Label>
+              <div className="mt-8 hidden lg:block">
+                {ITEMS.map((it, i) => (
+                  <button
+                    key={it.nav}
+                    onClick={() =>
+                      refs.current[i]?.scrollIntoView({ behavior: "smooth", block: "center" })
+                    }
+                    className="block w-full text-left"
                   >
-                    {t}
-                  </span>
-                </button>
-              ))}
-            </div>
-
-            {/* mobile: stacked */}
-            <div className="space-y-14 lg:hidden">
-              {ITEMS.map((t, i) => (
-                <div
-                  key={t}
-                  data-i={i}
-                  ref={(el) => {
-                    refs.current[i] = el;
-                  }}
-                >
-                  <h3 className="text-[2rem] font-light leading-tight tracking-[-0.03em] text-[#0b1b38]">
-                    {t}
-                  </h3>
-                  <div className="mt-6">{PANELS[i]}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="hidden lg:block">
-            <div className="sticky top-28">
-              <div key={active} style={{ animation: "nx-rise 500ms ease both" }}>
-                {PANELS[active]}
+                    <span
+                      className={`block py-[6px] text-[clamp(1.6rem,2.5vw,2.45rem)] font-light leading-[1.22] tracking-[-0.035em] transition-colors duration-500 ${
+                        active === i ? "text-[#0b1b38]" : "text-[#c2cfe2]"
+                      }`}
+                    >
+                      {it.nav}
+                    </span>
+                  </button>
+                ))}
               </div>
             </div>
           </div>
-        </div>
 
-        {/* desktop scroll drivers */}
-        <div className="hidden lg:block">
-          {ITEMS.map((t, i) => (
-            <div
-              key={t}
-              data-i={i}
-              ref={(el) => {
-                refs.current[i] = el;
-              }}
-              className="h-[42vh]"
-            />
-          ))}
+          {/* RIGHT — continuous panel stack */}
+          <div className="space-y-24 lg:space-y-[170px]">
+            {ITEMS.map((it, i) => (
+              <div
+                key={it.nav}
+                data-i={i}
+                ref={(el) => {
+                  refs.current[i] = el;
+                }}
+              >
+                <div className="lg:hidden">
+                  <span className="label-mono text-[#5d76a3]">{it.nav}</span>
+                </div>
+                <div className="mt-4 lg:mt-0">{it.panel}</div>
+                <h3 className="mt-10 max-w-[620px] text-[clamp(1.35rem,1.9vw,1.75rem)] font-normal leading-[1.28] tracking-[-0.02em] text-[#0b1b38]">
+                  {it.title}
+                </h3>
+                <p className="mt-4 max-w-[560px] text-[16px] leading-[1.65] text-[#5d76a3] lg:text-[17px]">
+                  {it.body}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -150,11 +170,3 @@ export function FeatureScroller() {
 }
 
 export default FeatureScroller;
-
-export function FeatureScrollerIntro() {
-  return (
-    <Reveal>
-      <div />
-    </Reveal>
-  );
-}
