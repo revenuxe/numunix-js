@@ -97,21 +97,8 @@ export function FeatureScroller() {
 
   useEffect(() => {
     const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            setActive(Number((e.target as HTMLElement).dataset["i"]));
-          }
-        });
-      },
-      { rootMargin: "-40% 0px -50% 0px" },
-    );
-    refs.current.forEach((r) => r && io.observe(r));
-    return () => io.disconnect();
-  }, []);
-
   return (
-    <section className="rounded-t-[32px] bg-[#f7f9fc] py-24 lg:rounded-t-[48px] lg:py-[140px]">
+    <section className="bg-[#f7f9fc] py-24 lg:py-[140px]">
       <div className="shell">
         <div className="grid gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:gap-24">
           {/* LEFT — sticky index */}
