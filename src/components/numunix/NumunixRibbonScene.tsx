@@ -117,21 +117,21 @@ export function NumunixRibbonScene({
           (u - 0.5) * b.tilt * h;
         const y = b.yBase * h + curve;
 
-        // twist: simulated by band width + shading
         const tw = Math.sin(u * 3.1 * b.twist + b.phase + time * b.speed * 1.4);
         const half = (b.width * (0.35 + Math.abs(tw) * 0.9)) / 2;
         const nx = 0.18;
-        top.push([x + nx * half, y - half]);
-        bottom.push([x - nx * half, y + half]);
-        shade.push(tw);
+        tx[i] = x + nx * half;
+        ty[i] = y - half;
+        bx[i] = x - nx * half;
+        by[i] = y + half;
+        shade[i] = tw;
       }
 
       // body
       ctx.beginPath();
-      ctx.moveTo(top[0][0], top[0][1]);
-      for (const p of top) ctx.lineTo(p[0], p[1]);
-      for (let i = bottom.length - 1; i >= 0; i--)
-        ctx.lineTo(bottom[i][0], bottom[i][1]);
+      ctx.moveTo(tx[0]!, ty[0]!);
+      for (let i = 1; i < n; i++) ctx.lineTo(tx[i]!, ty[i]!);
+      for (let i = n - 1; i >= 0; i--) ctx.lineTo(bx[i]!, by[i]!);
       ctx.closePath();
 
       const g = ctx.createLinearGradient(0, b.yBase * h - 260, w, b.yBase * h + 260);
@@ -149,10 +149,10 @@ export function NumunixRibbonScene({
 
       // glossy highlight following the twist
       ctx.beginPath();
-      for (let i = 0; i < top.length; i++) {
-        const k = 0.5 + shade[i] * 0.34;
-        const x = top[i][0] + (bottom[i][0] - top[i][0]) * k;
-        const y = top[i][1] + (bottom[i][1] - top[i][1]) * k;
+      for (let i = 0; i < n; i++) {
+        const k = 0.5 + shade[i]! * 0.34;
+        const x = tx[i]! + (bx[i]! - tx[i]!) * k;
+        const y = ty[i]! + (by[i]! - ty[i]!) * k;
         if (i === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       }
@@ -162,8 +162,8 @@ export function NumunixRibbonScene({
 
       // edge light
       ctx.beginPath();
-      ctx.moveTo(top[0][0], top[0][1]);
-      for (const p of top) ctx.lineTo(p[0], p[1]);
+      ctx.moveTo(tx[0]!, ty[0]!);
+      for (let i = 1; i < n; i++) ctx.lineTo(tx[i]!, ty[i]!);
       const eg = ctx.createLinearGradient(0, 0, w, 0);
       eg.addColorStop(0, "rgba(56,189,248,0.05)");
       eg.addColorStop(0.5, `rgba(96,171,255,${0.5 + 0.3 * boost})`);
@@ -174,8 +174,8 @@ export function NumunixRibbonScene({
 
       // dark underside
       ctx.beginPath();
-      ctx.moveTo(bottom[0][0], bottom[0][1]);
-      for (const p of bottom) ctx.lineTo(p[0], p[1]);
+      ctx.moveTo(bx[0]!, by[0]!);
+      for (let i = 1; i < n; i++) ctx.lineTo(bx[i]!, by[i]!);
       ctx.strokeStyle = "rgba(3,6,14,0.75)";
       ctx.lineWidth = 2;
       ctx.stroke();
