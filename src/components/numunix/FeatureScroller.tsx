@@ -96,22 +96,38 @@ export function FeatureScroller() {
   const refs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            setActive(Number((e.target as HTMLElement).dataset["i"]));
-          }
-        });
-      },
-      { rootMargin: "-40% 0px -50% 0px" },
-    );
-    refs.current.forEach((r) => r && io.observe(r));
-    return () => io.disconnect();
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const mid = window.innerHeight * 0.45;
+      let best = 0;
+      let bestDist = Infinity;
+      refs.current.forEach((el, i) => {
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        const d = Math.abs(r.top + r.height / 2 - mid);
+        if (d < bestDist) {
+          bestDist = d;
+          best = i;
+        }
+      });
+      setActive(best);
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
   return (
-    <section className="rounded-t-[32px] bg-[#f7f9fc] py-24 lg:rounded-t-[48px] lg:py-[140px]">
+    <section className="bg-[#f7f9fc] py-24 lg:py-[140px]">
       <div className="shell">
         <div className="grid gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:gap-24">
           {/* LEFT — sticky index */}
