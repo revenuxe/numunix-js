@@ -96,7 +96,36 @@ export function FeatureScroller() {
   const refs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const io = new IntersectionObserver(
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const mid = window.innerHeight * 0.45;
+      let best = 0;
+      let bestDist = Infinity;
+      refs.current.forEach((el, i) => {
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        const d = Math.abs(r.top + r.height / 2 - mid);
+        if (d < bestDist) {
+          bestDist = d;
+          best = i;
+        }
+      });
+      setActive(best);
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
     <section className="bg-[#f7f9fc] py-24 lg:py-[140px]">
       <div className="shell">
