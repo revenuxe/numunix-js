@@ -6,16 +6,11 @@ const NAV = ["PRODUCT", "SOLUTIONS", "PRICING", "RESOURCES", "COMPANY"];
 
 function Logo() {
   return (
-    <a href="#top" className="flex items-center gap-2.5">
-      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden>
-        <rect x="2" y="4" width="16" height="3" rx="1.5" fill="#3b82f6" />
-        <rect x="2" y="11.5" width="11" height="3" rx="1.5" fill="#1e4ed8" />
-        <rect x="2" y="19" width="19" height="3" rx="1.5" fill="#38bdf8" />
-        <circle cx="22" cy="12.9" r="2.1" fill="#3b82f6" />
-      </svg>
-      <span className="text-[1.15rem] font-medium tracking-[-0.02em] text-white">
-        NUMUNIX
-      </span>
+    <a
+      href="#top"
+      className="text-[1.15rem] font-medium tracking-[-0.02em] text-white"
+    >
+      NUMUNIX
     </a>
   );
 }
