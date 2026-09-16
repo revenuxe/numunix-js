@@ -75,7 +75,7 @@ export function IndustryCarousel() {
     ref.current?.scrollBy({ left: dir * 420, behavior: "smooth" });
 
   return (
-    <section className="bg-[#eef3f8] py-24 lg:py-[150px]">
+    <section className="bg-[#eef3f8] py-16 sm:py-24 lg:py-[150px]">
       <div className="shell">
         <div className="grid items-end gap-8 lg:grid-cols-[1fr_auto]">
           <Reveal>

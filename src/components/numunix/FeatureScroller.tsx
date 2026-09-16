@@ -127,7 +127,7 @@ export function FeatureScroller() {
   }, []);
 
   return (
-    <section className="bg-[#f7f9fc] py-24 lg:py-[140px]">
+    <section className="bg-[#f7f9fc] py-16 sm:py-24 lg:py-[140px]">
       <div className="shell">
         <div className="grid gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:gap-24">
           {/* LEFT — sticky index */}
@@ -156,8 +156,30 @@ export function FeatureScroller() {
             </div>
           </div>
 
-          {/* RIGHT — continuous panel stack */}
-          <div className="space-y-24 lg:space-y-[170px]">
+          {/* MOBILE — swipeable one-card-at-a-time */}
+          <div className="lg:hidden">
+            <div className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {ITEMS.map((it) => (
+                <div
+                  key={it.nav}
+                  className="w-[85vw] max-w-[380px] shrink-0 snap-center"
+                >
+                  <span className="label-mono text-[#5d76a3]">{it.nav}</span>
+                  <div className="mt-3">{it.panel}</div>
+                  <h3 className="mt-6 text-[1.28rem] font-normal leading-[1.3] tracking-[-0.02em] text-[#0b1b38]">
+                    {it.title}
+                  </h3>
+                  <p className="mt-3 text-[15px] leading-[1.6] text-[#5d76a3]">
+                    {it.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <div className="label-mono mt-2 text-[#8190aa]">SWIPE →</div>
+          </div>
+
+          {/* DESKTOP — continuous panel stack */}
+          <div className="hidden lg:block lg:space-y-[170px]">
             {ITEMS.map((it, i) => (
               <div
                 key={it.nav}
@@ -166,14 +188,11 @@ export function FeatureScroller() {
                   refs.current[i] = el;
                 }}
               >
-                <div className="lg:hidden">
-                  <span className="label-mono text-[#5d76a3]">{it.nav}</span>
-                </div>
-                <div className="mt-4 lg:mt-0">{it.panel}</div>
+                <div>{it.panel}</div>
                 <h3 className="mt-10 max-w-[620px] text-[clamp(1.35rem,1.9vw,1.75rem)] font-normal leading-[1.28] tracking-[-0.02em] text-[#0b1b38]">
                   {it.title}
                 </h3>
-                <p className="mt-4 max-w-[560px] text-[16px] leading-[1.65] text-[#5d76a3] lg:text-[17px]">
+                <p className="mt-4 max-w-[560px] text-[17px] leading-[1.65] text-[#5d76a3]">
                   {it.body}
                 </p>
               </div>

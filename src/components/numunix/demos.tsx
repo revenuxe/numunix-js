@@ -2,7 +2,7 @@ import { Pill, Waveform } from "./primitives";
 import { MapPin, Star, Download, MessageCircle, Wrench } from "lucide-react";
 
 const CARD =
-  "w-full rounded-[22px] border border-[#dfe7f1] bg-white p-6 shadow-[0_30px_80px_-50px_rgba(16,42,99,0.6)]";
+  "w-full rounded-[22px] border border-[#dfe7f1] bg-white p-5 sm:p-6 shadow-[0_30px_80px_-50px_rgba(16,42,99,0.6)]";
 
 export function BookingDemo() {
   const days = ["MON", "TUE", "WED", "THU", "FRI"];
@@ -28,7 +28,7 @@ export function BookingDemo() {
           </div>
         ))}
       </div>
-      <div className="mt-4 grid grid-cols-5 gap-2">
+      <div className="mt-4 grid grid-cols-3 gap-2 sm:grid-cols-5">
         {slots.map((s) => (
           <div
             key={s}
@@ -127,12 +127,12 @@ export function TechnicianDispatch({ compact = false }: { compact?: boolean }) {
         ))}
       </div>
 
-      <div className="mt-5 flex items-center justify-between gap-3 border-t border-[#e6ecf4] pt-5">
+      <div className="mt-5 grid gap-4 border-t border-[#e6ecf4] pt-5 sm:flex sm:items-center sm:justify-between">
         <div>
           <div className="label-mono text-[#8190aa]">RECOMMENDED</div>
           <div className="text-[15px] text-[#08152e]">ARJUN · ETA 18 min</div>
         </div>
-        <span className="label-mono group inline-flex items-center gap-2 rounded-xl bg-[#1e4ed8] px-5 py-3 text-white">
+        <span className="label-mono group flex items-center gap-2 justify-center rounded-xl bg-[#1e4ed8] px-5 py-3 text-white sm:inline-flex">
           ASSIGN JOB <span className="hover-arrow">→</span>
         </span>
       </div>
@@ -265,7 +265,7 @@ export function InvoiceDemo() {
 
 export function VoiceAgentPanel() {
   return (
-    <div className="w-full rounded-[22px] border border-white/10 bg-[#07111f]/80 p-6 backdrop-blur-xl">
+    <div className="w-full rounded-[22px] border border-white/10 bg-[#07111f]/80 p-5 backdrop-blur-xl sm:p-6">
       <div className="flex items-center justify-between">
         <span className="label-mono text-[#8fb4e8]">AI VOICE AGENT</span>
         <span className="label-mono text-white/40">CALL TIME 01:42</span>

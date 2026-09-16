@@ -6,7 +6,7 @@ import { ShieldCheck, Users, Activity, FileSearch } from "lucide-react";
 
 export function AIAgentsSection() {
   return (
-    <section className="grain relative overflow-hidden bg-[#05070c] py-24 lg:py-[150px]">
+    <section className="grain relative overflow-hidden bg-[#05070c] py-16 sm:py-24 lg:py-[150px]">
       <div className="pointer-events-none absolute inset-0 opacity-90">
         <NumunixRibbonScene className="h-full w-full" ribbons={4} intensity={0.85} />
       </div>
@@ -51,7 +51,7 @@ export function AIAgentsSection() {
 
 export function DispatchSection() {
   return (
-    <section className="relative overflow-hidden bg-[#07111f] py-24 lg:py-[150px]">
+    <section className="relative overflow-hidden bg-[#07111f] py-16 sm:py-24 lg:py-[150px]">
       <div className="shell grid gap-14 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-20">
         <div>
           <Reveal>
@@ -126,7 +126,7 @@ const SECURITY = [
 
 export function SecuritySection() {
   return (
-    <section className="grain relative overflow-hidden bg-[#05070c] py-24 lg:py-[150px]">
+    <section className="grain relative overflow-hidden bg-[#05070c] py-16 sm:py-24 lg:py-[150px]">
       <div className="pointer-events-none absolute inset-0">
         <NumunixRibbonScene className="h-full w-full" ribbons={5} intensity={0.8} />
       </div>
@@ -177,7 +177,7 @@ const BUILT_CARDS = [
 export function BuiltWithNumunix() {
   const [tab, setTab] = useState(0);
   return (
-    <section className="grain relative overflow-hidden bg-[#07111f] py-24 lg:py-[150px]">
+    <section className="grain relative overflow-hidden bg-[#07111f] py-16 sm:py-24 lg:py-[150px]">
       <div className="pointer-events-none absolute inset-0 opacity-70">
         <NumunixRibbonScene className="h-full w-full" ribbons={3} intensity={0.6} />
       </div>
@@ -234,7 +234,7 @@ export function FinalCTA() {
   return (
     <section
       id="cta"
-      className="grain relative overflow-hidden bg-[#05070c] py-28 lg:py-[190px]"
+      className="grain relative overflow-hidden bg-[#05070c] py-20 sm:py-28 lg:py-[190px]"
     >
       <div className="pointer-events-none absolute inset-0">
         <NumunixRibbonScene className="h-full w-full" ribbons={6} />
