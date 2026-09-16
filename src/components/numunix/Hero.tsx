@@ -10,7 +10,8 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0">
         <NumunixRibbonScene className="h-full w-full" ribbons={6} />
       </div>
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(130%_90%_at_5%_15%,rgba(5,7,12,0.96),rgba(5,7,12,0.35)_55%,transparent)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#05070c_0%,rgba(5,7,12,0.94)_34%,rgba(5,7,12,0.45)_58%,transparent_82%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,12,0.9)_0%,transparent_40%)]" />
 
       <div className="shell relative flex min-h-[780px] flex-col justify-end pt-40 pb-20 lg:min-h-[100vh] lg:pb-24">
         <div className="grid items-end gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:gap-20">
