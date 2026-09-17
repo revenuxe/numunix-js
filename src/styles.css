@@ -128,9 +128,9 @@
 }
 
 @utility section-pad {
-  padding-block: 88px;
+  padding-block: 64px;
   @media (min-width: 1024px) {
-    padding-block: 150px;
+    padding-block: 110px;
   }
 }
 
