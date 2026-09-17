@@ -164,26 +164,18 @@ export function FeatureScroller() {
             </div>
           </div>
 
-          {/* MOBILE — swipeable one-card-at-a-time */}
-          <div className="lg:hidden">
-            <div className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              {ITEMS.map((it) => (
-                <div
-                  key={it.nav}
-                  className="w-[85vw] max-w-[380px] shrink-0 snap-center"
-                >
-                  <span className="label-mono text-[#5d76a3]">{it.nav}</span>
-                  <div className="mt-3">{it.panel}</div>
-                  <h3 className="mt-6 text-[1.28rem] font-normal leading-[1.3] tracking-[-0.02em] text-[#0b1b38]">
-                    {it.title}
-                  </h3>
-                  <p className="mt-3 text-[15px] leading-[1.6] text-[#5d76a3]">
-                    {it.body}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <div className="label-mono mt-2 text-[#8190aa]">SWIPE →</div>
+          {/* MOBILE — continuous vertical flow: card → text → next card */}
+          <div className="space-y-20 lg:hidden">
+            {ITEMS.map((it) => (
+              <Reveal key={it.nav}>
+                <span className="label-mono text-[#5d76a3]">{it.nav}</span>
+                <div className="mt-4">{it.panel}</div>
+                <h3 className="mt-7 text-[1.32rem] font-normal leading-[1.3] tracking-[-0.025em] text-[#0b1b38]">
+                  {it.title}
+                </h3>
+                <p className="mt-3 text-[15px] leading-[1.65] text-[#5d76a3]">{it.body}</p>
+              </Reveal>
+            ))}
           </div>
 
           {/* DESKTOP — continuous panel stack */}
