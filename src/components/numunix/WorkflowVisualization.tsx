@@ -8,6 +8,7 @@ const NODES = [
   ["SERVICE JOB", "14 ACTIVE"],
   ["INVOICE", "₹48,250"],
   ["PAYMENT", "₹36,800"],
+  ["AMC RENEWAL", "9 DUE"],
 ];
 
 export function PlatformIntro() {
@@ -59,7 +60,7 @@ export function WorkflowVisualization() {
         </div>
       </div>
 
-      <div className="mt-8 grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-4 lg:mt-10 lg:grid-cols-7">
+      <div className="mt-8 grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-4 lg:mt-10 lg:grid-cols-4 xl:grid-cols-8">
         {NODES.map(([n, v], i) => (
           <div key={n} className="relative">
             <div className="group h-full rounded-xl border border-[#e6ecf4] bg-[#f7f9fc] p-3.5 transition-all duration-250 hover:-translate-y-1 hover:border-[#3b82f6]/45 hover:bg-white hover:shadow-[0_18px_40px_-26px_rgba(16,42,99,0.5)] sm:rounded-2xl lg:p-5">
@@ -73,7 +74,7 @@ export function WorkflowVisualization() {
               <div className="mt-3.5 h-1 w-full overflow-hidden rounded-full bg-[#e2e9f3] lg:mt-5">
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-[#1747b8] to-[#38bdf8]"
-                  style={{ width: `${40 + i * 8}%` }}
+                  style={{ width: `${38 + i * 7}%` }}
                 />
               </div>
             </div>
@@ -102,7 +103,7 @@ export function WorkflowVisualization() {
           {NODES.map((_, i) => (
             <circle
               key={i}
-              cx={60 + i * 180}
+              cx={75 + i * 150}
               cy={45}
               r="6"
               fill="#38bdf8"
