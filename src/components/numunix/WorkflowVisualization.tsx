@@ -45,7 +45,7 @@ export function PlatformIntro() {
 
 export function WorkflowVisualization() {
   return (
-    <div className="mt-20 overflow-hidden rounded-[28px] border border-[#dfe7f1] bg-white p-6 shadow-[0_50px_140px_-70px_rgba(16,42,99,0.55)] lg:p-12">
+    <div className="mt-12 overflow-hidden rounded-[28px] border border-[#dfe7f1] bg-white p-5 lg:mt-20 shadow-[0_50px_140px_-70px_rgba(16,42,99,0.55)] lg:p-12">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <div className="label-mono text-[#8190aa]">NUMUNIX OPERATIONS</div>
@@ -59,16 +59,18 @@ export function WorkflowVisualization() {
         </div>
       </div>
 
-      <div className="mt-10 grid gap-3 md:grid-cols-4 lg:grid-cols-7">
+      <div className="mt-8 grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-4 lg:mt-10 lg:grid-cols-7">
         {NODES.map(([n, v], i) => (
           <div key={n} className="relative">
-            <div className="group h-full rounded-2xl border border-[#e6ecf4] bg-[#f7f9fc] p-5 transition-all duration-250 hover:-translate-y-1 hover:border-[#3b82f6]/45 hover:bg-white hover:shadow-[0_18px_40px_-26px_rgba(16,42,99,0.5)]">
+            <div className="group h-full rounded-xl border border-[#e6ecf4] bg-[#f7f9fc] p-3.5 transition-all duration-250 hover:-translate-y-1 hover:border-[#3b82f6]/45 hover:bg-white hover:shadow-[0_18px_40px_-26px_rgba(16,42,99,0.5)] sm:rounded-2xl lg:p-5">
               <div className="label-mono text-[#8190aa]">
                 {String(i + 1).padStart(2, "0")}
               </div>
-              <div className="mt-6 text-[15px] tracking-[-0.01em] text-[#08152e]">{n}</div>
-              <div className="label-mono mt-2 text-[#1747b8]">{v}</div>
-              <div className="mt-5 h-1 w-full overflow-hidden rounded-full bg-[#e2e9f3]">
+              <div className="mt-3 text-[13px] tracking-[-0.01em] text-[#08152e] sm:text-[15px] lg:mt-6">
+                {n}
+              </div>
+              <div className="label-mono mt-1.5 text-[#1747b8] lg:mt-2">{v}</div>
+              <div className="mt-3.5 h-1 w-full overflow-hidden rounded-full bg-[#e2e9f3] lg:mt-5">
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-[#1747b8] to-[#38bdf8]"
                   style={{ width: `${40 + i * 8}%` }}
@@ -84,7 +86,7 @@ export function WorkflowVisualization() {
         ))}
       </div>
 
-      <div className="mt-10 overflow-hidden rounded-2xl bg-[#0b1b38] p-6">
+      <div className="mt-8 overflow-hidden rounded-2xl bg-[#0b1b38] p-4 lg:mt-10 lg:p-6">
         <svg viewBox="0 0 1200 90" className="h-auto w-full">
           <line x1="0" y1="45" x2="1200" y2="45" stroke="#1b3a72" strokeWidth="1" />
           <line
