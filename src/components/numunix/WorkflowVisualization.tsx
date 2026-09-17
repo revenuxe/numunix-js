@@ -45,7 +45,7 @@ export function PlatformIntro() {
 
 export function WorkflowVisualization() {
   return (
-    <div className="mt-20 overflow-hidden rounded-[28px] border border-[#dfe7f1] bg-white p-6 shadow-[0_50px_140px_-70px_rgba(16,42,99,0.55)] lg:p-12">
+    <div className="mt-12 overflow-hidden rounded-[28px] border border-[#dfe7f1] bg-white p-5 lg:mt-20 shadow-[0_50px_140px_-70px_rgba(16,42,99,0.55)] lg:p-12">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <div className="label-mono text-[#8190aa]">NUMUNIX OPERATIONS</div>
@@ -86,7 +86,7 @@ export function WorkflowVisualization() {
         ))}
       </div>
 
-      <div className="mt-10 overflow-hidden rounded-2xl bg-[#0b1b38] p-6">
+      <div className="mt-8 overflow-hidden rounded-2xl bg-[#0b1b38] p-4 lg:mt-10 lg:p-6">
         <svg viewBox="0 0 1200 90" className="h-auto w-full">
           <line x1="0" y1="45" x2="1200" y2="45" stroke="#1b3a72" strokeWidth="1" />
           <line
