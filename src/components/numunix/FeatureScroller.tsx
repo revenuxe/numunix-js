@@ -99,6 +99,103 @@ const ITEMS: Item[] = [
   },
 ];
 
+function MobileStage() {
+  const wrap = useRef<HTMLDivElement>(null);
+  const [i, setI] = useState(0);
+
+  useEffect(() => {
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const el = wrap.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const total = r.height - window.innerHeight;
+      const p = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 0;
+      const idx = Math.min(ITEMS.length - 1, Math.floor(p * ITEMS.length * 0.999));
+      setI(idx);
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={wrap}
+      className="lg:hidden"
+      style={{ height: `${ITEMS.length * 95}vh` }}
+    >
+      <div className="sticky top-24 overflow-hidden">
+        <div className="flex items-center justify-between">
+          <span className="label-mono text-[#1747b8]">{ITEMS[i]?.nav}</span>
+          <span className="label-mono text-[#8190aa]">
+            {String(i + 1).padStart(2, "0")} / {String(ITEMS.length).padStart(2, "0")}
+          </span>
+        </div>
+
+        <div className="mt-2 flex gap-1.5">
+          {ITEMS.map((it, j) => (
+            <span
+              key={it.nav}
+              className={`h-[2px] flex-1 rounded-full transition-colors duration-500 ${
+                j <= i ? "bg-[#1e4ed8]" : "bg-[#dbe5f2]"
+              }`}
+            />
+          ))}
+        </div>
+
+        <div className="mt-5 grid">
+          {ITEMS.map((it, j) => (
+            <div
+              key={it.nav}
+              className="[grid-area:1/1] transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+              style={{
+                opacity: j === i ? 1 : 0,
+                transform:
+                  j === i
+                    ? "translateX(0) scale(1)"
+                    : j > i
+                      ? "translateX(34%) scale(0.95)"
+                      : "translateX(-22%) scale(0.95)",
+                pointerEvents: j === i ? "auto" : "none",
+              }}
+            >
+              {it.panel}
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-6 grid">
+          {ITEMS.map((it, j) => (
+            <div
+              key={it.nav}
+              className="[grid-area:1/1] transition-all duration-500"
+              style={{
+                opacity: j === i ? 1 : 0,
+                transform: j === i ? "translateY(0)" : "translateY(10px)",
+              }}
+            >
+              <h3 className="text-[1.3rem] font-normal leading-[1.3] tracking-[-0.025em] text-[#0b1b38]">
+                {it.title}
+              </h3>
+              <p className="mt-3 text-[15px] leading-[1.65] text-[#5d76a3]">{it.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function FeatureScroller() {
   const [active, setActive] = useState(0);
   const refs = useRef<(HTMLDivElement | null)[]>([]);
