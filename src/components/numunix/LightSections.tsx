@@ -19,6 +19,7 @@ const STEPS = [
   ["05", "COMPLETE", "Track the service from start to finish."],
   ["06", "INVOICE", "Generate and send professional invoices."],
   ["07", "FOLLOW UP", "Automatically request feedback and re-engage customers."],
+  ["08", "AMC RENEWAL", "Track service contracts and trigger renewal reminders on time."],
 ];
 
 export function AutomationWorkflow() {
