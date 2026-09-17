@@ -1,69 +1,62 @@
-import { Pill, Waveform } from "./primitives";
-import { MapPin, Star, Download, MessageCircle, Wrench } from "lucide-react";
-
-const CARD =
-  "w-full rounded-[22px] border border-[#dfe7f1] bg-white p-5 sm:p-6 shadow-[0_30px_80px_-50px_rgba(16,42,99,0.6)]";
+import { Waveform } from "./primitives";
+import { MapPin, Star } from "lucide-react";
+import {
+  Card,
+  CardHead,
+  MetricGrid,
+  CardBody,
+  Quote,
+  Tag,
+  CardAction,
+  Chip,
+} from "./cardkit";
 
 export function BookingDemo() {
   const days = ["MON", "TUE", "WED", "THU", "FRI"];
   const slots = ["09:00", "11:00", "13:30", "16:30", "18:00"];
   return (
-    <div className={CARD}>
-      <div className="flex items-center justify-between">
-        <span className="label-mono text-[#5d76a3]">AUTOMATED BOOKING</span>
-        <Pill tone="blue">CALENDAR</Pill>
-      </div>
-      <div className="mt-6 grid grid-cols-5 gap-2">
-        {days.map((d, i) => (
-          <div
-            key={d}
-            className={`rounded-xl border p-3 text-center ${
-              i === 2
-                ? "border-[#1e4ed8] bg-[#e7eefb]"
-                : "border-[#e6ecf4] bg-[#f7f9fc]"
-            }`}
-          >
-            <div className="label-mono text-[#8190aa]">{d}</div>
-            <div className="mt-1 text-[15px] text-[#102a63]">{12 + i}</div>
-          </div>
-        ))}
-      </div>
-      <div className="mt-4 grid grid-cols-3 gap-2 sm:grid-cols-5">
-        {slots.map((s) => (
-          <div
-            key={s}
-            className={`rounded-lg px-2 py-2 text-center font-mono text-[11px] ${
-              s === "16:30"
-                ? "bg-[#1e4ed8] text-white"
-                : "bg-[#f1f5f9] text-[#5d76a3]"
-            }`}
-          >
-            {s}
-          </div>
-        ))}
-      </div>
-      <div className="mt-6 rounded-xl border border-[#c9dcf7] bg-[#eef3f8] p-5">
-        <div className="text-2xl font-light text-[#08152e]">4:30 PM</div>
-        <dl className="mt-4 space-y-2 text-[14px]">
-          {[
-            ["CUSTOMER", "Rahul Sharma"],
-            ["SERVICE", "Washing Machine Repair"],
-            ["TECHNICIAN", "Arjun"],
-          ].map(([k, v]) => (
-            <div key={k} className="flex justify-between gap-4">
-              <dt className="label-mono text-[#8190aa]">{k}</dt>
-              <dd className="text-[#102a63]">{v}</dd>
+    <Card>
+      <CardHead chip="AUTOMATED BOOKING" status="CALENDAR" title="Wednesday, 4:30 PM" />
+
+      <CardBody divide tint={false}>
+        <div className="grid grid-cols-5 gap-1.5">
+          {days.map((d, i) => (
+            <div
+              key={d}
+              className={`rounded-lg border px-1 py-3 text-center ${
+                i === 2 ? "border-[#1e4ed8] bg-[#e7eefb]" : "border-[#eef3f8] bg-[#f7f9fc]"
+              }`}
+            >
+              <div className="label-mono text-[#8190aa]">{d}</div>
+              <div className="mt-1 text-[14px] text-[#102a63]">{12 + i}</div>
             </div>
           ))}
-          <div className="flex items-center justify-between gap-4 pt-1">
-            <dt className="label-mono text-[#8190aa]">STATUS</dt>
-            <dd>
-              <Pill tone="green">CONFIRMED</Pill>
-            </dd>
-          </div>
-        </dl>
-      </div>
-    </div>
+        </div>
+        <div className="mt-2 grid grid-cols-5 gap-1.5">
+          {slots.map((s) => (
+            <div
+              key={s}
+              className={`rounded-lg px-1 py-2 text-center font-mono text-[10px] ${
+                s === "16:30" ? "bg-[#1e4ed8] text-white" : "bg-[#f1f5f9] text-[#5d76a3]"
+              }`}
+            >
+              {s}
+            </div>
+          ))}
+        </div>
+      </CardBody>
+
+      <MetricGrid
+        items={[
+          { k: "CUSTOMER", v: "Rahul Sharma" },
+          { k: "SERVICE", v: "Washing Machine" },
+          { k: "TECHNICIAN", v: "Arjun" },
+          { k: "STATUS", v: "CONFIRMED" },
+        ]}
+      />
+
+      <CardAction>SLOT CONFIRMED</CardAction>
+    </Card>
   );
 }
 
@@ -75,68 +68,61 @@ const TECHS = [
 
 export function TechnicianDispatch({ compact = false }: { compact?: boolean }) {
   return (
-    <div className={CARD}>
-      <div className="flex items-center justify-between">
-        <span className="label-mono text-[#5d76a3]">SMART ASSIGNMENT</span>
-        <Pill tone="amber">NEW JOB</Pill>
-      </div>
-      <div className="mt-5 flex flex-wrap items-center gap-x-8 gap-y-2">
-        <div>
-          <div className="label-mono text-[#8190aa]">JOB</div>
-          <div className="text-[15px] text-[#08152e]">AC not cooling</div>
-        </div>
-        <div>
-          <div className="label-mono text-[#8190aa]">LOCATION</div>
-          <div className="flex items-center gap-1 text-[15px] text-[#08152e]">
-            <MapPin size={13} className="text-[#1e4ed8]" /> HSR Layout
-          </div>
-        </div>
-      </div>
+    <Card>
+      <CardHead chip="SMART ASSIGNMENT" status="NEW JOB" title="AC not cooling" />
 
-      {!compact && <AbstractMap />}
+      <MetricGrid
+        items={[
+          {
+            k: "LOCATION",
+            v: (
+              <span className="inline-flex items-center gap-1.5">
+                <MapPin size={13} className="text-[#1e4ed8]" /> HSR Layout
+              </span>
+            ),
+          },
+          { k: "ETA", v: "18 min" },
+        ]}
+      />
 
-      <div className="mt-5 space-y-2">
+      {!compact && (
+        <div className="border-b border-[#eef3f8]">
+          <AbstractMap />
+        </div>
+      )}
+
+      <div className="border-b border-[#eef3f8]">
         {TECHS.map((t, i) => (
           <div
             key={t.n}
-            className={`grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-xl border p-4 transition-colors ${
-              i === 0
-                ? "border-[#1e4ed8] bg-[#e7eefb]"
-                : "border-[#e6ecf4] bg-[#f7f9fc]"
-            }`}
+            className={`grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-5 py-4 sm:px-6 ${
+              i > 0 ? "border-t border-[#eef3f8]" : ""
+            } ${i === 0 ? "bg-[#f3f7fd]" : ""}`}
           >
             <div className="min-w-0">
               <div className="label-mono text-[#102a63]">{t.n}</div>
-              <div className="mt-1 truncate text-[13px] text-[#5d76a3]">
+              <div className="mt-1 truncate text-[13px] text-[#8190aa]">
                 {t.d} · {t.k}
               </div>
             </div>
             <div className="flex shrink-0 items-center gap-3">
-              <span className="flex">
+              <span className="hidden sm:flex">
                 {Array.from({ length: 5 }).map((_, j) => (
                   <Star
                     key={j}
-                    size={11}
+                    size={10}
                     className={j < t.r ? "fill-[#1e4ed8] text-[#1e4ed8]" : "text-[#c7d3e5]"}
                   />
                 ))}
               </span>
-              <Pill tone={t.s === "Available" ? "green" : "grey"}>{t.s}</Pill>
+              <span className="label-mono text-[#8190aa]">{t.s}</span>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="mt-5 grid gap-4 border-t border-[#e6ecf4] pt-5 sm:flex sm:items-center sm:justify-between">
-        <div>
-          <div className="label-mono text-[#8190aa]">RECOMMENDED</div>
-          <div className="text-[15px] text-[#08152e]">ARJUN · ETA 18 min</div>
-        </div>
-        <span className="label-mono group flex items-center gap-2 justify-center rounded-xl bg-[#1e4ed8] px-5 py-3 text-white sm:inline-flex">
-          ASSIGN JOB <span className="hover-arrow">→</span>
-        </span>
-      </div>
-    </div>
+      <CardAction>ASSIGN TO ARJUN</CardAction>
+    </Card>
   );
 }
 
@@ -145,7 +131,7 @@ export function AbstractMap() {
   for (let y = 0; y < 9; y++)
     for (let x = 0; x < 22; x++) dots.push({ x: x * 14 + 8, y: y * 14 + 8 });
   return (
-    <div className="mt-5 overflow-hidden rounded-xl border border-[#e6ecf4] bg-[#f1f5f9] p-3">
+    <div className="bg-[#f7f9fc] px-5 py-5 sm:px-6">
       <svg viewBox="0 0 320 132" className="h-auto w-full">
         {dots.map((d, i) => (
           <circle key={i} cx={d.x} cy={d.y} r="1.4" fill="#c3d2e6" />
@@ -168,42 +154,45 @@ export function AbstractMap() {
 }
 
 const JOBS = [
-  ["10:00", "Washing Machine Repair", "Koramangala", "ARJUN", "IN PROGRESS", "blue"],
-  ["11:30", "AC Service", "HSR Layout", "IMRAN", "ASSIGNED", "amber"],
-  ["12:15", "Laptop Repair", "Indiranagar", "RAHUL", "SCHEDULED", "grey"],
+  ["10:00", "Washing Machine Repair", "Koramangala · ARJUN", "IN PROGRESS"],
+  ["11:30", "AC Service", "HSR Layout · IMRAN", "ASSIGNED"],
+  ["12:15", "Laptop Repair", "Indiranagar · RAHUL", "SCHEDULED"],
 ] as const;
 
 export function ServiceOperations() {
   return (
-    <div className={CARD}>
-      <div className="flex items-center justify-between">
-        <span className="label-mono text-[#5d76a3]">TODAY&apos;S SERVICE JOBS</span>
-        <Pill tone="blue">14 ACTIVE</Pill>
-      </div>
-      <div className="mt-5 divide-y divide-[#eef1f6]">
-        {JOBS.map((j) => (
+    <Card>
+      <CardHead chip="SERVICE OPERATIONS" status="14 ACTIVE" title="Today’s service jobs" />
+
+      <div className="border-b border-[#eef3f8]">
+        {JOBS.map((j, i) => (
           <div
             key={j[0]}
-            className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 py-4"
+            className={`grid grid-cols-[auto_minmax(0,1fr)] items-start gap-4 px-5 py-4 sm:px-6 ${
+              i > 0 ? "border-t border-[#eef3f8]" : ""
+            }`}
           >
             <span className="shrink-0 font-mono text-[13px] text-[#1747b8]">{j[0]}</span>
             <div className="min-w-0">
               <div className="truncate text-[15px] text-[#08152e]">{j[1]}</div>
-              <div className="truncate text-[13px] text-[#8190aa]">
-                {j[2]} · {j[3]}
+              <div className="mt-1 truncate text-[13px] text-[#8190aa]">{j[2]}</div>
+              <div className="mt-2">
+                <Chip>{j[3]}</Chip>
               </div>
             </div>
-            <Pill tone={j[5] as "blue"}>{j[4]}</Pill>
           </div>
         ))}
       </div>
-      <div className="mt-2 flex items-center gap-2 rounded-xl bg-[#f7f9fc] p-4">
-        <Wrench size={14} className="text-[#1e4ed8]" />
-        <span className="text-[13px] text-[#5d76a3]">
-          7 technicians on shift · 3 routes optimised this morning
-        </span>
-      </div>
-    </div>
+
+      <MetricGrid
+        items={[
+          { k: "TECHNICIANS ON SHIFT", v: "7" },
+          { k: "ROUTES OPTIMISED", v: "3" },
+        ]}
+      />
+
+      <CardAction>OPEN JOB BOARD</CardAction>
+    </Card>
   );
 }
 
@@ -214,89 +203,62 @@ export function InvoiceDemo() {
     ["GST", "₹378"],
   ];
   return (
-    <div className={CARD}>
-      <div className="flex items-start justify-between">
-        <div>
-          <div className="text-[15px] font-medium tracking-[-0.02em] text-[#08152e]">
-            NUMUNIX
-          </div>
-          <div className="label-mono mt-1 text-[#8190aa]">SERVICE INVOICE</div>
+    <Card>
+      <CardHead chip="SERVICE INVOICE" status="PAID" live={false} title="₹2,478" />
+
+      <MetricGrid
+        items={[
+          { k: "CUSTOMER", v: "Rahul Sharma" },
+          { k: "TECHNICIAN", v: "Arjun Kumar" },
+        ]}
+      />
+
+      <CardBody divide>
+        <div className="space-y-2 text-[14px]">
+          {rows.map(([k, v]) => (
+            <div key={k} className="flex justify-between">
+              <span className="text-[#8190aa]">{k}</span>
+              <span className="text-[#102a63]">{v}</span>
+            </div>
+          ))}
         </div>
-        <Pill tone="green">PAID</Pill>
-      </div>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Tag dot="#1e4ed8">Auto-generated</Tag>
+          <Tag dot="#38bdf8">WhatsApp delivery</Tag>
+        </div>
+      </CardBody>
 
-      <dl className="mt-6 space-y-2 border-y border-[#eef1f6] py-5 text-[14px]">
-        {[
-          ["CUSTOMER", "Rahul Sharma"],
-          ["SERVICE", "Washing Machine Repair"],
-          ["TECHNICIAN", "Arjun Kumar"],
-        ].map(([k, v]) => (
-          <div key={k} className="flex justify-between gap-4">
-            <dt className="label-mono text-[#8190aa]">{k}</dt>
-            <dd className="text-[#102a63]">{v}</dd>
-          </div>
-        ))}
-      </dl>
-
-      <div className="mt-5 space-y-2 text-[15px]">
-        {rows.map(([k, v]) => (
-          <div key={k} className="flex justify-between">
-            <span className="text-[#5d76a3]">{k}</span>
-            <span className="text-[#102a63]">{v}</span>
-          </div>
-        ))}
-      </div>
-      <div className="mt-4 flex items-end justify-between border-t border-[#e6ecf4] pt-4">
-        <span className="label-mono text-[#8190aa]">TOTAL</span>
-        <span className="text-3xl font-light text-[#08152e]">₹2,478</span>
-      </div>
-
-      <div className="mt-6 flex flex-wrap gap-2">
-        <span className="label-mono inline-flex items-center gap-2 rounded-xl border border-[#dbe5f2] px-4 py-3 text-[#102a63]">
-          <Download size={13} /> DOWNLOAD PDF
-        </span>
-        <span className="label-mono inline-flex items-center gap-2 rounded-xl bg-[#1e4ed8] px-4 py-3 text-white">
-          <MessageCircle size={13} /> SEND WHATSAPP
-        </span>
-      </div>
-    </div>
+      <CardAction>SEND ON WHATSAPP</CardAction>
+    </Card>
   );
 }
 
 export function VoiceAgentPanel() {
   return (
-    <div className="w-full rounded-[22px] border border-white/10 bg-[#07111f]/80 p-5 backdrop-blur-xl sm:p-6">
-      <div className="flex items-center justify-between">
-        <span className="label-mono text-[#8fb4e8]">AI VOICE AGENT</span>
-        <span className="label-mono text-white/40">CALL TIME 01:42</span>
-      </div>
-      <div className="mt-6 rounded-xl border border-white/8 bg-white/[0.03] p-5">
+    <Card tone="dark">
+      <CardHead tone="dark" chip="AI VOICE AGENT" status="CALL TIME 01:42" title="Live conversation" />
+
+      <CardBody tone="dark" divide>
         <Waveform tone="dark" bars={34} />
-      </div>
-      <div className="mt-6 space-y-3">
-        <div className="rounded-xl bg-white/[0.04] p-4 text-[15px] text-white/75">
-          “My AC stopped cooling since yesterday.”
+        <div className="mt-5 space-y-3">
+          <Quote tone="dark">“My AC stopped cooling since yesterday.”</Quote>
+          <Quote tone="dark">
+            “Got it — I can send an AC specialist today at 4:30 PM. Shall I confirm?”
+          </Quote>
         </div>
-        <div className="rounded-xl bg-[#1e4ed8] p-4 text-[15px] text-white">
-          “Got it — I can send an AC specialist today at 4:30 PM. Shall I confirm?”
-        </div>
-      </div>
-      <div className="mt-6 grid grid-cols-2 gap-3">
-        {[
-          ["CUSTOMER", "IDENTIFIED"],
-          ["ISSUE", "CAPTURED"],
-          ["LOCATION", "CONFIRMED"],
-          ["SLOT", "AVAILABLE"],
-        ].map(([k, v]) => (
-          <div
-            key={k}
-            className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3"
-          >
-            <div className="label-mono text-white/40">{k}</div>
-            <div className="label-mono mt-1 text-[#6fb3ff]">✓ {v}</div>
-          </div>
-        ))}
-      </div>
-    </div>
+      </CardBody>
+
+      <MetricGrid
+        tone="dark"
+        items={[
+          { k: "CUSTOMER", v: "Identified" },
+          { k: "ISSUE", v: "Captured" },
+          { k: "LOCATION", v: "Confirmed" },
+          { k: "SLOT", v: "Available" },
+        ]}
+      />
+
+      <CardAction tone="dark">CONFIRM BOOKING</CardAction>
+    </Card>
   );
 }
