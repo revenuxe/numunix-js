@@ -8,6 +8,7 @@ const NODES = [
   ["SERVICE JOB", "14 ACTIVE"],
   ["INVOICE", "₹48,250"],
   ["PAYMENT", "₹36,800"],
+  ["AMC RENEWAL", "9 DUE"],
 ];
 
 export function PlatformIntro() {
