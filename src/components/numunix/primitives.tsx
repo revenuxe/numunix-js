@@ -42,11 +42,12 @@ export function Heading({
 }) {
   return (
     <h2
+      style={{ lineHeight: 1.04 }}
       className={cn(
-        "font-light tracking-[-0.03em] leading-[1.02]",
+        "font-light tracking-[-0.03em]",
         size === "xl"
-          ? "text-[clamp(2.6rem,7vw,7.4rem)]"
-          : "text-[clamp(2.2rem,5.2vw,5.6rem)]",
+          ? "text-[clamp(2.4rem,6.4vw,6.6rem)]"
+          : "text-[clamp(2rem,4.6vw,4.9rem)]",
         tone === "dark" ? "text-white" : "text-[#102a63]",
         className,
       )}
