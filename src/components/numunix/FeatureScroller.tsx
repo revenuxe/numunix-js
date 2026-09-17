@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Label } from "./primitives";
+import { Label, Reveal } from "./primitives";
 import AICallDemo from "./AICallDemo";
 import {
   BookingDemo,
