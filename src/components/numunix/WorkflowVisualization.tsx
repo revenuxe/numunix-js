@@ -59,16 +59,18 @@ export function WorkflowVisualization() {
         </div>
       </div>
 
-      <div className="mt-10 grid gap-3 md:grid-cols-4 lg:grid-cols-7">
+      <div className="mt-8 grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-4 lg:mt-10 lg:grid-cols-7">
         {NODES.map(([n, v], i) => (
           <div key={n} className="relative">
-            <div className="group h-full rounded-2xl border border-[#e6ecf4] bg-[#f7f9fc] p-5 transition-all duration-250 hover:-translate-y-1 hover:border-[#3b82f6]/45 hover:bg-white hover:shadow-[0_18px_40px_-26px_rgba(16,42,99,0.5)]">
+            <div className="group h-full rounded-xl border border-[#e6ecf4] bg-[#f7f9fc] p-3.5 transition-all duration-250 hover:-translate-y-1 hover:border-[#3b82f6]/45 hover:bg-white hover:shadow-[0_18px_40px_-26px_rgba(16,42,99,0.5)] sm:rounded-2xl lg:p-5">
               <div className="label-mono text-[#8190aa]">
                 {String(i + 1).padStart(2, "0")}
               </div>
-              <div className="mt-6 text-[15px] tracking-[-0.01em] text-[#08152e]">{n}</div>
-              <div className="label-mono mt-2 text-[#1747b8]">{v}</div>
-              <div className="mt-5 h-1 w-full overflow-hidden rounded-full bg-[#e2e9f3]">
+              <div className="mt-3 text-[13px] tracking-[-0.01em] text-[#08152e] sm:text-[15px] lg:mt-6">
+                {n}
+              </div>
+              <div className="label-mono mt-1.5 text-[#1747b8] lg:mt-2">{v}</div>
+              <div className="mt-3.5 h-1 w-full overflow-hidden rounded-full bg-[#e2e9f3] lg:mt-5">
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-[#1747b8] to-[#38bdf8]"
                   style={{ width: `${40 + i * 8}%` }}
