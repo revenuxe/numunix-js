@@ -7,6 +7,7 @@ import {
   ServiceOperations,
   InvoiceDemo,
 } from "./demos";
+import { Card, CardHead, MetricGrid, CardAction } from "./cardkit";
 
 function AutomationPanel() {
   const rows = [
@@ -16,26 +17,33 @@ function AutomationPanel() {
     ["FOLLOW-UP", "Feedback request scheduled +2d"],
   ];
   return (
-    <div className="w-full rounded-[22px] border border-[#dfe7f1] bg-white p-6 shadow-[0_30px_80px_-50px_rgba(16,42,99,0.6)]">
-      <div className="label-mono text-[#5d76a3]">AUTOMATION TIMELINE</div>
-      <div className="mt-6 space-y-4">
+    <Card>
+      <CardHead chip="BUSINESS AUTOMATION" status="RUNNING" title="Automation timeline" />
+      <div className="border-b border-[#eef3f8]">
         {rows.map(([k, v], i) => (
-          <div key={k} className="flex gap-4">
+          <div
+            key={k}
+            className={`flex gap-4 px-5 py-4 sm:px-6 ${i > 0 ? "border-t border-[#eef3f8]" : ""}`}
+          >
             <div className="flex flex-col items-center">
-              <span className="mt-1 h-2.5 w-2.5 rounded-full bg-[#1e4ed8]" />
+              <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#1e4ed8]" />
               {i < rows.length - 1 && <span className="mt-1 w-px flex-1 bg-[#dbe5f2]" />}
             </div>
-            <div className="pb-2">
+            <div className="min-w-0">
               <div className="label-mono text-[#102a63]">{k}</div>
-              <div className="mt-1 text-[14px] text-[#5d76a3]">{v}</div>
+              <div className="mt-1 text-[13px] text-[#8190aa]">{v}</div>
             </div>
           </div>
         ))}
       </div>
-      <div className="mt-4 rounded-xl bg-[#f1f5f9] p-4 text-[13px] text-[#5d76a3]">
-        4 workflows ran today without manual input.
-      </div>
-    </div>
+      <MetricGrid
+        items={[
+          { k: "WORKFLOWS TODAY", v: "4" },
+          { k: "MANUAL STEPS", v: "0" },
+        ]}
+      />
+      <CardAction>VIEW AUTOMATIONS</CardAction>
+    </Card>
   );
 }
 
