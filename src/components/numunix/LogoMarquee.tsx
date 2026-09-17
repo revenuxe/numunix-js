@@ -11,7 +11,7 @@ const NAMES = [
 export function LogoMarquee() {
   const row = [...NAMES, ...NAMES];
   return (
-    <section className="relative overflow-hidden border-t border-white/10 bg-[#05070c] py-16">
+    <section className="relative overflow-hidden border-t border-white/10 bg-[#05070c] py-12">
       <div className="shell">
         <div className="label-mono text-[#8fb4e8]">BUILT FOR SERVICE TEAMS</div>
       </div>
