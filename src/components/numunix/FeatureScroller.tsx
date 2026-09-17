@@ -164,19 +164,9 @@ export function FeatureScroller() {
             </div>
           </div>
 
-          {/* MOBILE — continuous vertical flow: card → text → next card */}
-          <div className="space-y-20 lg:hidden">
-            {ITEMS.map((it) => (
-              <Reveal key={it.nav}>
-                <span className="label-mono text-[#5d76a3]">{it.nav}</span>
-                <div className="mt-4">{it.panel}</div>
-                <h3 className="mt-7 text-[1.32rem] font-normal leading-[1.3] tracking-[-0.025em] text-[#0b1b38]">
-                  {it.title}
-                </h3>
-                <p className="mt-3 text-[15px] leading-[1.65] text-[#5d76a3]">{it.body}</p>
-              </Reveal>
-            ))}
-          </div>
+          {/* MOBILE — pinned stage, cards slide in from the right on scroll */}
+          <MobileStage />
+
 
           {/* DESKTOP — continuous panel stack */}
           <div className="hidden lg:block lg:space-y-[170px]">
