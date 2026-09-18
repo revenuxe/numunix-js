@@ -86,7 +86,7 @@ export function Footer() {
                 {items.map((i) => (
                   <li key={i}>
                     <a
-                      href="#top"
+                      href={FEATURE_LINKS[i] ?? "/features"}
                       className="text-[15px] text-white/65 transition-colors hover:text-white"
                     >
                       {i}
