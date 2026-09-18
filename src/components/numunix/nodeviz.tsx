@@ -150,8 +150,8 @@ export function VizPayment() {
         <span className="h-full" style={{ width: "10%", background: CYAN, opacity: 0.6 }} />
       </div>
       <div className="label-mono flex justify-between text-[9px] text-[#8190aa]">
-        <span>COLLECTED 76%</span>
-        <span>DUE 24%</span>
+        <span>76% IN</span>
+        <span>24% DUE</span>
       </div>
     </div>
   );
