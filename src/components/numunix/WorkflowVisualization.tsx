@@ -82,11 +82,11 @@ export function WorkflowVisualization() {
                 </span>
               </div>
 
-              <div className="mt-5 flex items-baseline gap-2">
-                <span className="font-mono text-[22px] leading-none font-light tracking-[-0.02em] text-white sm:text-[26px]">
+              <div className="mt-5">
+                <div className="font-mono text-[22px] leading-none font-light tracking-[-0.02em] text-white sm:text-[26px]">
                   {v}
-                </span>
-                <span className="label-mono truncate text-[#38bdf8]">{u}</span>
+                </div>
+                <div className="label-mono mt-2 truncate text-[#38bdf8]">{u}</div>
               </div>
 
               <div className="mt-4 h-px w-full bg-white/[0.08]">
