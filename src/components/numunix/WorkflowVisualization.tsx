@@ -1,14 +1,14 @@
 import { Label, Heading, Accent, Reveal } from "./primitives";
 
-const NODES = [
-  ["LEAD", "12 NEW"],
-  ["AI CALL", "8 QUALIFIED"],
-  ["BOOKING", "5 CONFIRMED"],
-  ["TECHNICIAN", "7 AVAILABLE"],
-  ["SERVICE JOB", "14 ACTIVE"],
-  ["INVOICE", "₹48,250"],
-  ["PAYMENT", "₹36,800"],
-  ["AMC RENEWAL", "9 DUE"],
+const NODES: [string, string, string][] = [
+  ["LEAD", "12", "NEW"],
+  ["AI CALL", "8", "QUALIFIED"],
+  ["BOOKING", "5", "CONFIRMED"],
+  ["TECHNICIAN", "7", "AVAILABLE"],
+  ["SERVICE JOB", "14", "ACTIVE"],
+  ["INVOICE", "₹48,250", "RAISED"],
+  ["PAYMENT", "₹36,800", "COLLECTED"],
+  ["AMC RENEWAL", "9", "DUE"],
 ];
 
 export function PlatformIntro() {
@@ -66,27 +66,30 @@ export function WorkflowVisualization() {
       <div className="relative">
         <div className="pointer-events-none absolute inset-x-0 top-1/2 hidden h-px bg-[linear-gradient(90deg,transparent,#1b3a72,transparent)] xl:block" />
         <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8">
-          {NODES.map(([n, v], i) => (
+          {NODES.map(([n, v, u], i) => (
             <div
               key={n}
-              className="group relative overflow-hidden border-r border-b border-white/[0.06] px-5 py-6 transition-colors duration-300 last:border-r-0 hover:bg-white/[0.03] sm:px-6 sm:py-7"
+              className="group relative flex flex-col justify-between overflow-hidden border-r border-b border-white/[0.06] px-4 py-5 transition-colors duration-300 hover:bg-white/[0.03] sm:px-6 sm:py-6"
             >
               <span className="pointer-events-none absolute inset-x-0 -top-px h-px scale-x-0 bg-gradient-to-r from-transparent via-[#38bdf8] to-transparent transition-transform duration-500 group-hover:scale-x-100" />
-              <div className="flex items-center justify-between">
+
+              <div className="flex items-center gap-2">
                 <span className="label-mono text-white/25">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="h-1 w-1 rounded-full bg-[#1e4ed8] transition-all duration-300 group-hover:bg-[#38bdf8] group-hover:shadow-[0_0_12px_2px_rgba(56,189,248,0.55)]" />
+                <span className="text-[12px] tracking-[0.04em] text-white/60 sm:text-[12.5px] xl:text-[11px]">
+                  {n}
+                </span>
               </div>
 
-              <div className="mt-10 text-[13px] tracking-[-0.01em] text-white/85 sm:text-[14px]">
-                {n}
-              </div>
-              <div className="mt-2 font-mono text-[20px] font-light tracking-[-0.02em] text-white sm:text-[24px]">
-                {v}
+              <div className="mt-5">
+                <div className="font-mono text-[22px] leading-none font-light tracking-[-0.02em] text-white sm:text-[26px]">
+                  {v}
+                </div>
+                <div className="label-mono mt-2 truncate text-[#38bdf8]">{u}</div>
               </div>
 
-              <div className="mt-5 h-px w-full bg-white/[0.08]">
+              <div className="mt-4 h-px w-full bg-white/[0.08]">
                 <div
                   className="h-px bg-gradient-to-r from-[#1e4ed8] to-[#38bdf8]"
                   style={{ width: `${38 + i * 7}%` }}
