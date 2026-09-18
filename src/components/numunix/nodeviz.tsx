@@ -2,7 +2,7 @@
 // Each is a tiny, calm, dark-surface instrument graphic (no generic progress bars).
 
 const BLUE = "#3b82f6";
-const CYAN = "#38bdf8";
+const CYAN = "#1747b8";
 
 function Frame({ children }: { children: React.ReactNode }) {
   return (
@@ -24,7 +24,7 @@ export function VizLead() {
           y={32 - v}
           width="4"
           height={v}
-          fill={i > 6 ? CYAN : "#1b3a72"}
+          fill={i > 6 ? CYAN : "#c7d7ef"}
           opacity={i > 6 ? 0.9 : 1}
         />
       ))}
@@ -39,7 +39,7 @@ export function VizCall() {
       {Array.from({ length: 26 }).map((_, i) => (
         <span
           key={i}
-          className="w-[2px] rounded-full bg-[#3b82f6]"
+          className="w-[2px] rounded-full bg-[#2563eb]"
           style={{
             height: `${22 + Math.abs(Math.sin(i * 0.9)) * 70}%`,
             animation: `nx-pulse-dot ${850 + (i % 6) * 150}ms ease-in-out ${i * 45}ms infinite`,
@@ -60,7 +60,7 @@ export function VizBooking() {
           key={i}
           className="rounded-[2px]"
           style={{
-            background: filled.includes(i) ? BLUE : "rgba(255,255,255,0.07)",
+            background: filled.includes(i) ? BLUE : "#e2eaf5",
             boxShadow: filled.includes(i) ? `0 0 10px -2px ${BLUE}` : undefined,
           }}
         />
@@ -74,7 +74,7 @@ export function VizTechnician() {
   return (
     <div className="flex h-9 items-center gap-2">
       <svg viewBox="0 0 36 36" className="h-9 w-9">
-        <circle cx="18" cy="18" r="14" fill="none" stroke="#12284f" strokeWidth="3" />
+        <circle cx="18" cy="18" r="14" fill="none" stroke="#dde7f5" strokeWidth="3" />
         <circle
           cx="18"
           cy="18"
@@ -92,7 +92,7 @@ export function VizTechnician() {
         {[1, 2, 3].map((i) => (
           <span
             key={i}
-            className="h-[2px] rounded-full bg-white/15"
+            className="h-[2px] rounded-full bg-[#c7d7ef]"
             style={{ width: 34 - i * 7 }}
           />
         ))}
@@ -107,7 +107,7 @@ export function VizJobs() {
   return (
     <div className="flex h-9 flex-col justify-center gap-[6px]">
       {lanes.map((w, i) => (
-        <div key={i} className="relative h-[3px] w-full rounded-full bg-white/[0.07]">
+        <div key={i} className="relative h-[3px] w-full rounded-full bg-[#e2eaf5]">
           <span
             className="absolute inset-y-0 left-0 rounded-full"
             style={{
@@ -145,11 +145,11 @@ export function VizInvoice() {
 export function VizPayment() {
   return (
     <div className="flex h-9 flex-col justify-center gap-2">
-      <div className="flex h-[6px] w-full overflow-hidden rounded-full bg-white/[0.07]">
+      <div className="flex h-[6px] w-full overflow-hidden rounded-full bg-[#e2eaf5]">
         <span className="h-full" style={{ width: "76%", background: BLUE }} />
         <span className="h-full" style={{ width: "10%", background: CYAN, opacity: 0.6 }} />
       </div>
-      <div className="label-mono flex justify-between text-[9px] text-white/30">
+      <div className="label-mono flex justify-between text-[9px] text-[#8190aa]">
         <span>COLLECTED 76%</span>
         <span>DUE 24%</span>
       </div>
@@ -167,7 +167,7 @@ export function VizAmc() {
           className="h-2 w-2 rotate-45"
           style={{
             background: i < 4 ? CYAN : "transparent",
-            border: i < 4 ? "none" : "1px solid rgba(255,255,255,0.16)",
+            border: i < 4 ? "none" : "1px solid #c7d7ef",
           }}
         />
       ))}
