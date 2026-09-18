@@ -46,69 +46,73 @@ export function PlatformIntro() {
 
 export function WorkflowVisualization() {
   return (
-    <div className="mt-12 overflow-hidden rounded-[28px] border border-[#dfe7f1] bg-white p-5 lg:mt-20 shadow-[0_50px_140px_-70px_rgba(16,42,99,0.55)] lg:p-12">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <div className="label-mono text-[#8190aa]">NUMUNIX OPERATIONS</div>
-          <div className="mt-1 text-[20px] font-light tracking-[-0.02em] text-[#08152e]">
-            Live operational flow
-          </div>
+    <div className="mt-12 overflow-hidden rounded-[28px] border border-[#0d2247] bg-[#05070c] lg:mt-20 shadow-[0_60px_160px_-70px_rgba(5,14,40,0.9)]">
+      {/* head */}
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.07] px-5 py-5 sm:px-8">
+        <div className="flex items-baseline gap-4">
+          <span className="label-mono text-[#3b82f6]">NUMUNIX OPERATIONS</span>
+          <span className="label-mono hidden text-white/25 sm:inline">/ LEAD → RENEWAL</span>
         </div>
-        <div className="label-mono flex items-center gap-2 rounded-lg bg-[#e7eefb] px-3 py-2 text-[#1747b8]">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#1e4ed8]" />
+        <span className="label-mono flex items-center gap-2 text-white/40">
+          <span
+            className="h-1.5 w-1.5 rounded-full bg-[#38bdf8]"
+            style={{ animation: "nx-pulse-dot 2.4s ease-in-out infinite" }}
+          />
           SYNCED 12s AGO
-        </div>
+        </span>
       </div>
 
-      <div className="mt-8 grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-4 lg:mt-10 lg:grid-cols-4 xl:grid-cols-8">
-        {NODES.map(([n, v], i) => (
-          <div key={n} className="relative">
-            <div className="group h-full rounded-xl border border-[#e6ecf4] bg-[#f7f9fc] p-3.5 transition-all duration-250 hover:-translate-y-1 hover:border-[#3b82f6]/45 hover:bg-white hover:shadow-[0_18px_40px_-26px_rgba(16,42,99,0.5)] sm:rounded-2xl lg:p-5">
-              <div className="label-mono text-[#8190aa]">
-                {String(i + 1).padStart(2, "0")}
+      {/* flow rail */}
+      <div className="relative">
+        <div className="pointer-events-none absolute inset-x-0 top-1/2 hidden h-px bg-[linear-gradient(90deg,transparent,#1b3a72,transparent)] xl:block" />
+        <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8">
+          {NODES.map(([n, v], i) => (
+            <div
+              key={n}
+              className="group relative overflow-hidden border-r border-b border-white/[0.06] px-5 py-6 transition-colors duration-300 last:border-r-0 hover:bg-white/[0.03] sm:px-6 sm:py-7"
+            >
+              <span className="pointer-events-none absolute inset-x-0 -top-px h-px scale-x-0 bg-gradient-to-r from-transparent via-[#38bdf8] to-transparent transition-transform duration-500 group-hover:scale-x-100" />
+              <div className="flex items-center justify-between">
+                <span className="label-mono text-white/25">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="h-1 w-1 rounded-full bg-[#1e4ed8] transition-all duration-300 group-hover:bg-[#38bdf8] group-hover:shadow-[0_0_12px_2px_rgba(56,189,248,0.55)]" />
               </div>
-              <div className="mt-3 text-[13px] tracking-[-0.01em] text-[#08152e] sm:text-[15px] lg:mt-6">
+
+              <div className="mt-10 text-[13px] tracking-[-0.01em] text-white/85 sm:text-[14px]">
                 {n}
               </div>
-              <div className="label-mono mt-1.5 text-[#1747b8] lg:mt-2">{v}</div>
-              <div className="mt-3.5 h-1 w-full overflow-hidden rounded-full bg-[#e2e9f3] lg:mt-5">
+              <div className="mt-2 font-mono text-[20px] font-light tracking-[-0.02em] text-white sm:text-[24px]">
+                {v}
+              </div>
+
+              <div className="mt-5 h-px w-full bg-white/[0.08]">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-[#1747b8] to-[#38bdf8]"
+                  className="h-px bg-gradient-to-r from-[#1e4ed8] to-[#38bdf8]"
                   style={{ width: `${38 + i * 7}%` }}
                 />
               </div>
             </div>
-            {i < NODES.length - 1 && (
-              <span className="pointer-events-none absolute top-1/2 -right-3 hidden text-[#9db4d6] lg:block">
-                →
-              </span>
-            )}
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      <div className="mt-8 overflow-hidden rounded-2xl bg-[#0b1b38] p-4 lg:mt-10 lg:p-6">
-        <svg viewBox="0 0 1200 90" className="h-auto w-full">
-          <line x1="0" y1="45" x2="1200" y2="45" stroke="#1b3a72" strokeWidth="1" />
+      {/* pulse line */}
+      <div className="border-t border-white/[0.07] px-5 py-5 sm:px-8">
+        <svg viewBox="0 0 1200 24" className="h-auto w-full">
+          <line x1="0" y1="12" x2="1200" y2="12" stroke="#11274d" strokeWidth="1" />
           <line
             x1="0"
-            y1="45"
+            y1="12"
             x2="1200"
-            y2="45"
+            y2="12"
             stroke="#3b82f6"
-            strokeWidth="2"
-            strokeDasharray="14 22"
+            strokeWidth="1.5"
+            strokeDasharray="10 26"
             style={{ animation: "nx-dash 5s linear infinite" }}
           />
           {NODES.map((_, i) => (
-            <circle
-              key={i}
-              cx={75 + i * 150}
-              cy={45}
-              r="6"
-              fill="#38bdf8"
-              opacity={0.9}
-            />
+            <circle key={i} cx={75 + i * 150} cy={12} r="3.5" fill="#38bdf8" opacity={0.85} />
           ))}
         </svg>
       </div>
