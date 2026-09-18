@@ -1,4 +1,5 @@
 import { Label, Heading, Accent, Reveal } from "./primitives";
+import { NODE_VIZ } from "./nodeviz";
 
 const NODES: [string, string, string][] = [
   ["LEAD", "12", "NEW"],
@@ -89,11 +90,11 @@ export function WorkflowVisualization() {
                 <div className="label-mono mt-2 truncate text-[#38bdf8]">{u}</div>
               </div>
 
-              <div className="mt-4 h-px w-full bg-white/[0.08]">
-                <div
-                  className="h-px bg-gradient-to-r from-[#1e4ed8] to-[#38bdf8]"
-                  style={{ width: `${38 + i * 7}%` }}
-                />
+              <div className="mt-4 opacity-80 transition-opacity duration-300 group-hover:opacity-100">
+                {(() => {
+                  const V = NODE_VIZ[i]!;
+                  return <V />;
+                })()}
               </div>
             </div>
           ))}
