@@ -1,14 +1,14 @@
 import { Label, Heading, Accent, Reveal } from "./primitives";
 
-const NODES = [
-  ["LEAD", "12 NEW"],
-  ["AI CALL", "8 QUALIFIED"],
-  ["BOOKING", "5 CONFIRMED"],
-  ["TECHNICIAN", "7 AVAILABLE"],
-  ["SERVICE JOB", "14 ACTIVE"],
-  ["INVOICE", "₹48,250"],
-  ["PAYMENT", "₹36,800"],
-  ["AMC RENEWAL", "9 DUE"],
+const NODES: [string, string, string][] = [
+  ["LEAD", "12", "NEW"],
+  ["AI CALL", "8", "QUALIFIED"],
+  ["BOOKING", "5", "CONFIRMED"],
+  ["TECHNICIAN", "7", "AVAILABLE"],
+  ["SERVICE JOB", "14", "ACTIVE"],
+  ["INVOICE", "₹48,250", "RAISED"],
+  ["PAYMENT", "₹36,800", "COLLECTED"],
+  ["AMC RENEWAL", "9", "DUE"],
 ];
 
 export function PlatformIntro() {
