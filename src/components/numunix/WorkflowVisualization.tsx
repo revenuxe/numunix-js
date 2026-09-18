@@ -1,4 +1,5 @@
 import { Label, Heading, Accent, Reveal } from "./primitives";
+import { NODE_VIZ } from "./nodeviz";
 
 const NODES: [string, string, string][] = [
   ["LEAD", "12", "NEW"],
