@@ -2,12 +2,18 @@ import { useEffect, useState } from "react";
 import { Menu, X, Grip } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const NAV = ["PRODUCT", "SOLUTIONS", "PRICING", "RESOURCES", "COMPANY"];
+const NAV: [string, string][] = [
+  ["PRODUCT", "/features"],
+  ["SOLUTIONS", "/features"],
+  ["PRICING", "/#cta"],
+  ["RESOURCES", "/features"],
+  ["COMPANY", "/#cta"],
+];
 
 function Logo() {
   return (
     <a
-      href="#top"
+      href="/"
       className="text-[1.15rem] font-medium tracking-[-0.02em] text-white"
     >
       NUMUNIX
@@ -45,10 +51,10 @@ export function Header() {
               )}
               style={{ backdropFilter: "blur(18px) saturate(140%)" }}
             >
-              {NAV.map((n) => (
+              {NAV.map(([n, href]) => (
                 <a
                   key={n}
-                  href="#top"
+                  href={href}
                   className="label-mono rounded-xl px-3.5 py-2 text-white/75 transition-colors hover:bg-white/6 hover:text-white"
                 >
                   {n}
@@ -95,10 +101,10 @@ export function Header() {
       {open && (
         <div className="lg:hidden">
           <div className="mx-6 rounded-2xl border border-white/10 bg-[#07111f]/95 p-4 backdrop-blur-xl">
-            {NAV.map((n) => (
+            {NAV.map(([n, href]) => (
               <a
                 key={n}
-                href="#top"
+                href={href}
                 onClick={() => setOpen(false)}
                 className="label-mono block border-b border-white/6 py-4 text-white/80 last:border-0"
               >

@@ -163,10 +163,25 @@ const RIGHT = [
   "API & Integrations",
 ];
 
+const ROW_LINKS: Record<string, string> = {
+  "AI Call Agents": "/features/ai-call-agents",
+  "Lead Capture": "/features/ai-call-agents",
+  "Booking & Calendar": "/features/automated-booking",
+  "Technician Scheduling": "/features/technician-dispatch",
+  "Technician Tracking": "/features/technician-dispatch",
+  "Service Jobs": "/features/service-jobs",
+  "Service History": "/features/service-jobs",
+  "Estimates & Quotes": "/features/invoicing-billing",
+  Invoicing: "/features/invoicing-billing",
+  Payments: "/features/invoicing-billing",
+  "WhatsApp Automation": "/features/whatsapp-communication",
+  Notifications: "/features/business-automation",
+};
+
 function Row({ label }: { label: string }) {
   return (
     <a
-      href="#cta"
+      href={ROW_LINKS[label] ?? "/features"}
       className="group flex items-center justify-between gap-6 border-b border-[#dde5f0] px-5 py-6 transition-all duration-250 hover:rounded-2xl hover:border-transparent hover:bg-white hover:shadow-[0_18px_44px_-30px_rgba(16,42,99,0.6)] hover:ring-1 hover:ring-[#3b82f6]/35"
     >
       <span className="text-[clamp(1.15rem,2vw,1.6rem)] font-light tracking-[-0.02em] text-[#102a63]">

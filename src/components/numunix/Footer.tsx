@@ -1,5 +1,15 @@
 import { Linkedin, Instagram, Youtube } from "lucide-react";
 
+const FEATURE_LINKS: Record<string, string> = {
+  "AI Agents": "/features/ai-call-agents",
+  "Scheduling": "/features/automated-booking",
+  "Technician Management": "/features/technician-dispatch",
+  "Service Jobs": "/features/service-jobs",
+  "Invoicing": "/features/invoicing-billing",
+  "Automation": "/features/business-automation",
+  "Lead Management": "/features/ai-call-agents",
+};
+
 const COLS: [string, string[]][] = [
   [
     "PRODUCT",
@@ -76,7 +86,7 @@ export function Footer() {
                 {items.map((i) => (
                   <li key={i}>
                     <a
-                      href="#top"
+                      href={FEATURE_LINKS[i] ?? "/features"}
                       className="text-[15px] text-white/65 transition-colors hover:text-white"
                     >
                       {i}

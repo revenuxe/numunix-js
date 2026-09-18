@@ -47,16 +47,16 @@ export function PlatformIntro() {
 
 export function WorkflowVisualization() {
   return (
-    <div className="mt-12 overflow-hidden rounded-[28px] border border-[#0d2247] bg-[#05070c] lg:mt-20 shadow-[0_60px_160px_-70px_rgba(5,14,40,0.9)]">
+    <div className="mt-12 overflow-hidden rounded-[28px] border border-[#dbe5f2] bg-white lg:mt-20 shadow-[0_50px_130px_-70px_rgba(16,42,99,0.45)]">
       {/* head */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.07] px-5 py-5 sm:px-8">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#e6ecf5] px-5 py-5 sm:px-8">
         <div className="flex items-baseline gap-4">
-          <span className="label-mono text-[#3b82f6]">NUMUNIX OPERATIONS</span>
-          <span className="label-mono hidden text-white/25 sm:inline">/ LEAD → RENEWAL</span>
+          <span className="label-mono text-[#1747b8]">NUMUNIX OPERATIONS</span>
+          <span className="label-mono hidden text-[#a8b7cc] sm:inline">/ LEAD → RENEWAL</span>
         </div>
-        <span className="label-mono flex items-center gap-2 text-white/40">
+        <span className="label-mono flex items-center gap-2 text-[#8190aa]">
           <span
-            className="h-1.5 w-1.5 rounded-full bg-[#38bdf8]"
+            className="h-1.5 w-1.5 rounded-full bg-[#2563eb]"
             style={{ animation: "nx-pulse-dot 2.4s ease-in-out infinite" }}
           />
           SYNCED 12s AGO
@@ -65,32 +65,32 @@ export function WorkflowVisualization() {
 
       {/* flow rail */}
       <div className="relative">
-        <div className="pointer-events-none absolute inset-x-0 top-1/2 hidden h-px bg-[linear-gradient(90deg,transparent,#1b3a72,transparent)] xl:block" />
+        <div className="pointer-events-none absolute inset-x-0 top-1/2 hidden h-px bg-[linear-gradient(90deg,transparent,#cddcf2,transparent)] xl:block" />
         <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8">
           {NODES.map(([n, v, u], i) => (
             <div
               key={n}
-              className="group relative flex flex-col justify-between overflow-hidden border-r border-b border-white/[0.06] px-4 py-5 transition-colors duration-300 hover:bg-white/[0.03] sm:px-6 sm:py-6"
+              className="group relative flex flex-col justify-between overflow-hidden border-r border-b border-[#e6ecf5] px-4 py-5 transition-colors duration-300 hover:bg-[#f5f8fd] sm:px-6 sm:py-6"
             >
-              <span className="pointer-events-none absolute inset-x-0 -top-px h-px scale-x-0 bg-gradient-to-r from-transparent via-[#38bdf8] to-transparent transition-transform duration-500 group-hover:scale-x-100" />
+              <span className="pointer-events-none absolute inset-x-0 -top-px h-px scale-x-0 bg-gradient-to-r from-transparent via-[#2563eb] to-transparent transition-transform duration-500 group-hover:scale-x-100" />
 
               <div className="flex items-center gap-2">
-                <span className="label-mono text-white/25">
+                <span className="label-mono text-[#b3c2d6]">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="text-[12px] tracking-[0.04em] text-white/60 sm:text-[12.5px] xl:text-[11px]">
+                <span className="text-[12px] tracking-[0.04em] text-[#5d76a3] sm:text-[12.5px] xl:text-[11px]">
                   {n}
                 </span>
               </div>
 
               <div className="mt-5">
-                <div className="font-mono text-[22px] leading-none font-light tracking-[-0.02em] text-white sm:text-[26px]">
+                <div className="font-mono text-[22px] leading-none font-light tracking-[-0.02em] text-[#08152e] sm:text-[26px]">
                   {v}
                 </div>
-                <div className="label-mono mt-2 truncate text-[#38bdf8]">{u}</div>
+                <div className="label-mono mt-2 truncate text-[#1747b8]">{u}</div>
               </div>
 
-              <div className="mt-4 opacity-80 transition-opacity duration-300 group-hover:opacity-100">
+              <div className="mt-4 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
                 {(() => {
                   const V = NODE_VIZ[i]!;
                   return <V />;
@@ -102,21 +102,21 @@ export function WorkflowVisualization() {
       </div>
 
       {/* pulse line */}
-      <div className="border-t border-white/[0.07] px-5 py-5 sm:px-8">
+      <div className="border-t border-[#e6ecf5] px-5 py-5 sm:px-8">
         <svg viewBox="0 0 1200 24" className="h-auto w-full">
-          <line x1="0" y1="12" x2="1200" y2="12" stroke="#11274d" strokeWidth="1" />
+          <line x1="0" y1="12" x2="1200" y2="12" stroke="#e1e9f5" strokeWidth="1" />
           <line
             x1="0"
             y1="12"
             x2="1200"
             y2="12"
-            stroke="#3b82f6"
+            stroke="#2563eb"
             strokeWidth="1.5"
             strokeDasharray="10 26"
             style={{ animation: "nx-dash 5s linear infinite" }}
           />
           {NODES.map((_, i) => (
-            <circle key={i} cx={75 + i * 150} cy={12} r="3.5" fill="#38bdf8" opacity={0.85} />
+            <circle key={i} cx={75 + i * 150} cy={12} r="3.5" fill="#1747b8" opacity={0.85} />
           ))}
         </svg>
       </div>
