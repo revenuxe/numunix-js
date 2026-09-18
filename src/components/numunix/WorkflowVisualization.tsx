@@ -77,7 +77,7 @@ export function WorkflowVisualization() {
                 <span className="label-mono text-white/25">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="truncate text-[12px] tracking-[0.06em] text-white/60 sm:text-[12.5px]">
+                <span className="text-[12px] tracking-[0.04em] text-white/60 sm:text-[12.5px] xl:text-[11px]">
                   {n}
                 </span>
               </div>
