@@ -1,8 +1,9 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check, X } from "lucide-react";
 import Header from "./Header";
 import Footer from "./Footer";
 import NumunixRibbonScene from "./NumunixRibbonScene";
+import ContactBand from "./ContactBand";
 import { Label, Heading, Accent, Btn, Reveal } from "./primitives";
 import { AICallDemo } from "./AICallDemo";
 import {
@@ -14,6 +15,7 @@ import {
 } from "./demos";
 import { WorkflowVisualization } from "./WorkflowVisualization";
 import { FEATURES, type Feature, type DemoKey } from "@/content/features";
+import { FEATURE_EXTRAS, DEFAULT_EXTRA, CONTACT } from "@/content/site";
 
 function Demo({ k }: { k: DemoKey }) {
   switch (k) {
@@ -48,6 +50,7 @@ function headline(title: string, accent: string) {
 
 export function FeaturePage({ feature }: { feature: Feature }) {
   const related = FEATURES.filter((f) => f.slug !== feature.slug).slice(0, 3);
+  const extra = FEATURE_EXTRAS[feature.slug] ?? DEFAULT_EXTRA;
 
   return (
     <div className="bg-[#05070c]">
@@ -74,11 +77,11 @@ export function FeaturePage({ feature }: { feature: Feature }) {
                 {feature.intro}
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Btn as="a" href="#cta">
+                <Btn as="a" href="/contact">
                   GET STARTED
                 </Btn>
-                <Btn as="a" href="#cta" variant="ghostDark">
-                  BOOK A DEMO
+                <Btn as="a" href={CONTACT.phoneHref} variant="ghostDark">
+                  CALL {CONTACT.phone}
                 </Btn>
               </div>
             </Reveal>
@@ -129,6 +132,50 @@ export function FeaturePage({ feature }: { feature: Feature }) {
               </Reveal>
               <Reveal delay={140}>
                 <Demo k={feature.demo} />
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* BEFORE / AFTER — dark split */}
+        <section className="section-pad bg-[#07111f]">
+          <div className="shell">
+            <Reveal>
+              <Label>THE DIFFERENCE</Label>
+              <Heading className="mt-6 max-w-[17ch]">
+                What changes the day <Accent>you switch this on.</Accent>
+              </Heading>
+            </Reveal>
+            <div className="mt-12 grid gap-5 lg:grid-cols-2">
+              <Reveal>
+                <div className="h-full rounded-[24px] border border-white/[0.07] bg-white/[0.02] p-7 lg:p-10">
+                  <span className="label-mono text-white/40">WITHOUT NUMUNIX</span>
+                  <ul className="mt-7 space-y-5">
+                    {extra.pains.map((p) => (
+                      <li key={p} className="flex gap-4 text-[16.5px] leading-relaxed text-white/45">
+                        <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-lg bg-white/[0.06] text-white/40">
+                          <X size={13} />
+                        </span>
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+              <Reveal delay={100}>
+                <div className="h-full rounded-[24px] border border-[#3b82f6]/30 bg-[#0b1b38]/60 p-7 lg:p-10">
+                  <span className="label-mono text-[#8fb4e8]">WITH NUMUNIX</span>
+                  <ul className="mt-7 space-y-5">
+                    {extra.gains.map((g) => (
+                      <li key={g} className="flex gap-4 text-[16.5px] leading-relaxed text-white/80">
+                        <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-lg bg-[#1e4ed8] text-white">
+                          <Check size={13} />
+                        </span>
+                        {g}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </Reveal>
             </div>
           </div>
@@ -191,8 +238,46 @@ export function FeaturePage({ feature }: { feature: Feature }) {
           </div>
         </section>
 
-        {/* QUESTIONS — light */}
+        {/* INCLUDED + USE CASES — light */}
         <section className="section-pad bg-[#f7f9fc]">
+          <div className="shell grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+            <Reveal>
+              <Label tone="light">WHAT'S INCLUDED</Label>
+              <Heading tone="light" className="mt-6 max-w-[14ch]">
+                Everything comes <Accent>in the box.</Accent>
+              </Heading>
+              <ul className="mt-8 space-y-4">
+                {extra.included.map((x) => (
+                  <li key={x} className="flex gap-3 text-[16.5px] text-[#5d76a3]">
+                    <span className="mt-0.5 grid h-5.5 w-5.5 shrink-0 place-items-center rounded-md bg-[#e7eefb] p-1 text-[#1747b8]">
+                      <Check size={12} />
+                    </span>
+                    {x}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+            <Reveal delay={100}>
+              <Label tone="light">WHERE IT FITS</Label>
+              <div className="mt-8 overflow-hidden rounded-[24px] border border-[#dbe5f2] bg-white">
+                {extra.useCases.map((u) => (
+                  <div
+                    key={u.industry}
+                    className="border-b border-[#e6edf7] px-6 py-7 transition-colors last:border-0 hover:bg-[#f4f8fd] lg:px-9"
+                  >
+                    <span className="label-mono text-[#1747b8]">{u.industry}</span>
+                    <p className="mt-3 text-[16.5px] leading-relaxed text-[#5d76a3]">
+                      {u.body}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* QUESTIONS — light */}
+        <section className="section-pad bg-[#eef3f8]">
           <div className="shell grid gap-12 lg:grid-cols-[0.4fr_1.6fr] lg:gap-20">
             <Reveal>
               <Label tone="light">QUESTIONS</Label>
@@ -213,6 +298,12 @@ export function FeaturePage({ feature }: { feature: Feature }) {
             </div>
           </div>
         </section>
+
+        <ContactBand
+          title={`Want to see ${feature.name} on your own operation?`}
+          accent="on your own operation?"
+          body="Share how your team runs today and we will walk you through the exact setup on a short call."
+        />
 
         {/* RELATED — light */}
         <section className="section-pad bg-[#eef3f8]">
@@ -258,11 +349,11 @@ export function FeaturePage({ feature }: { feature: Feature }) {
               focuses on customers, technicians and growth.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Btn as="a" href="#cta">
+              <Btn as="a" href="/contact">
                 GET STARTED
               </Btn>
-              <Btn as="a" href="#cta" variant="ghostDark">
-                BOOK A DEMO
+              <Btn as="a" href={CONTACT.emailHref} variant="ghostDark">
+                EMAIL US
               </Btn>
             </div>
           </div>
