@@ -6,9 +6,9 @@ import NumunixRibbonScene from "@/components/numunix/NumunixRibbonScene";
 import { Label, Heading, Accent, Reveal, Btn } from "@/components/numunix/primitives";
 import { FEATURES } from "@/content/features";
 
-const TITLE = "Features — AI Service Operations Platform | Numunix";
+const TITLE = "Digital Product Design & Development Services | Numunix";
 const DESC =
-  "Explore Numunix features: AI call agents, automated booking, technician dispatch, service job management, invoicing, automation, AMC renewals and WhatsApp communication.";
+  "Explore web development, mobile apps, custom software, SaaS, AI and automation, UI/UX design, cloud deployment, and ongoing product support.";
 
 export const Route = createFileRoute("/features/")({
   head: () => ({
@@ -37,22 +37,21 @@ function FeaturesIndex() {
           </div>
           <div className="shell relative grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end lg:gap-20">
             <Reveal>
-              <Label>PLATFORM</Label>
+              <Label>SERVICES</Label>
               <h1
                 style={{ lineHeight: 1.04 }}
                 className="mt-6 max-w-[16ch] font-light tracking-[-0.03em] text-white text-[clamp(2.4rem,6vw,5.6rem)]"
               >
-                Every part of your <Accent>service operation.</Accent>
+                Every stage of your <Accent>digital product.</Accent>
               </h1>
             </Reveal>
             <Reveal delay={120}>
               <p className="max-w-[46ch] text-[17px] leading-relaxed text-white/60 lg:text-[19px]">
-                From the first customer call to the final invoice and the next
-                renewal — one intelligent platform behind every service job.
+                Design, development, and ongoing support for your next digital product.
               </p>
               <div className="mt-6">
                 <Btn as="a" href="#list">
-                  BROWSE FEATURES
+                  BROWSE SERVICES
                 </Btn>
               </div>
             </Reveal>
@@ -61,9 +60,9 @@ function FeaturesIndex() {
 
         <section id="list" className="section-pad bg-[#f1f5f9]">
           <div className="shell">
-            <Label tone="light">FEATURES</Label>
+            <Label tone="light">SERVICES</Label>
             <Heading tone="light" className="mt-6 max-w-[18ch]">
-              Explore the platform, <Accent>module by module.</Accent>
+              Explore our services, <Accent>from idea to growth.</Accent>
             </Heading>
             <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {FEATURES.map((f, i) => (
@@ -78,7 +77,7 @@ function FeaturesIndex() {
                       {f.name}
                     </h2>
                     <p className="mt-3 flex-1 text-[16px] leading-relaxed text-[#5d76a3]">
-                      {f.intro.split(" ").slice(0, 24).join(" ")}…
+                      {f.intro}
                     </p>
                     <ArrowRight size={18} className="hover-arrow mt-7 text-[#1e4ed8]" />
                   </Link>

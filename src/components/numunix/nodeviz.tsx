@@ -41,7 +41,7 @@ export function VizCall() {
           key={i}
           className="w-[2px] rounded-full bg-[#2563eb]"
           style={{
-            height: `${22 + Math.abs(Math.sin(i * 0.9)) * 70}%`,
+            height: `${Number((22 + Math.abs(Math.sin(i * 0.9)) * 70).toFixed(3))}%`,
             animation: `nx-pulse-dot ${850 + (i % 6) * 150}ms ease-in-out ${i * 45}ms infinite`,
           }}
         />
@@ -150,8 +150,8 @@ export function VizPayment() {
         <span className="h-full" style={{ width: "10%", background: CYAN, opacity: 0.6 }} />
       </div>
       <div className="label-mono flex justify-between text-[9px] text-[#8190aa]">
-        <span>76% IN</span>
-        <span>24% DUE</span>
+        <span>BUILD</span>
+        <span>RELEASE</span>
       </div>
     </div>
   );

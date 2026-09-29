@@ -17,12 +17,17 @@ export function accented(title: string, accent?: string) {
   );
 }
 
+type HeroAction = {
+  label: string;
+  href: `/${string}` | `#${string}` | `mailto:${string}` | `https://${string}`;
+};
+
 export function PageHero({
   label,
   title,
   accent,
   body,
-  primary = { label: "GET STARTED", href: "/contact" },
+  primary = { label: "START YOUR PROJECT", href: "/contact" },
   secondary,
   compact = false,
 }: {
@@ -30,8 +35,8 @@ export function PageHero({
   title: string;
   accent?: string;
   body: string;
-  primary?: { label: string; href: string };
-  secondary?: { label: string; href: string };
+  primary?: HeroAction;
+  secondary?: HeroAction;
   compact?: boolean;
 }) {
   return (
@@ -143,9 +148,9 @@ export function SectionHead({
 }
 
 export function ClosingCTA({
-  title = "Your service business. Automated from lead to invoice.",
-  accent = "Automated from lead to invoice.",
-  body = "Let Numunix handle the repetitive operational work while your team focuses on customers, technicians and growth.",
+  title = "Have an idea? Let’s turn it into software.",
+  accent = "Let’s turn it into software.",
+  body = "Websites, mobile apps, SaaS, custom software, and AI — designed and developed around your business.",
 }: {
   title?: string;
   accent?: string;
@@ -168,10 +173,10 @@ export function ClosingCTA({
         </p>
         <div className="mt-9 flex flex-wrap justify-center gap-3">
           <Btn as="a" href="/contact">
-            GET STARTED
+            START YOUR PROJECT
           </Btn>
           <Btn as="a" href="/features" variant="ghostDark">
-            EXPLORE FEATURES
+            EXPLORE SERVICES
           </Btn>
         </div>
       </div>

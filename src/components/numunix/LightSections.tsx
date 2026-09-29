@@ -2,36 +2,36 @@ import { useRef } from "react";
 import { Label, Heading, Accent, Reveal } from "./primitives";
 import {
   ArrowRight,
-  Wind,
+  AppWindow,
   Cpu,
   Smartphone,
-  Car,
-  Home,
+  ShoppingBag,
+  PanelsTopLeft,
   Building2,
-  WashingMachine,
+  Globe,
 } from "lucide-react";
 
 const STEPS = [
-  ["01", "CAPTURE LEAD", "Automatically collect customer details and service requirements."],
-  ["02", "QUALIFY", "Understand the issue and identify the right service."],
-  ["03", "BOOK", "Schedule appointments based on availability."],
-  ["04", "ASSIGN", "Match the job with the right technician."],
-  ["05", "COMPLETE", "Track the service from start to finish."],
-  ["06", "INVOICE", "Generate and send professional invoices."],
-  ["07", "FOLLOW UP", "Automatically request feedback and re-engage customers."],
-  ["08", "AMC RENEWAL", "Track service contracts and trigger renewal reminders on time."],
+  ["01", "DISCOVER", "Understand your idea, users, business model, and requirements."],
+  ["02", "DEFINE", "Shape the product scope, priorities, and technical approach."],
+  ["03", "DESIGN", "Turn your concept into user flows, wireframes, and interfaces."],
+  ["04", "DEVELOP", "Turn approved designs into functional, scalable software."],
+  ["05", "INTEGRATE", "Connect APIs, databases, payments, AI, and business systems."],
+  ["06", "VALIDATE", "Check usability, functionality, performance, and security."],
+  ["07", "LAUNCH", "Deploy your product with modern cloud infrastructure."],
+  ["08", "GROW", "Improve, maintain, optimize, and add features as your needs evolve."],
 ];
 
 export function AutomationWorkflow() {
   return (
-    <section className="section-pad bg-[#f7f9fc]">
+    <section id="process" className="section-pad bg-[#f7f9fc]">
       <div className="shell">
         <Reveal>
-          <Label tone="light">AUTOMATION</Label>
+          <Label tone="light">OUR PROCESS</Label>
         </Reveal>
         <Reveal delay={60}>
           <Heading tone="light" className="mt-8 max-w-[18ch]">
-            From the first call to the <Accent>final invoice.</Accent>
+            From the business problem to <Accent>product growth.</Accent>
           </Heading>
         </Reveal>
 
@@ -61,13 +61,13 @@ export function AutomationWorkflow() {
 }
 
 const INDUSTRIES = [
-  [WashingMachine, "APPLIANCE REPAIR", "Washing machines, refrigerators, ovens and more."],
-  [Wind, "AC & HVAC", "Installations, servicing and seasonal maintenance."],
-  [Cpu, "ELECTRONICS REPAIR", "Boards, displays and component-level service."],
-  [Smartphone, "MOBILE & LAPTOP", "Walk-in and doorstep device repair."],
-  [Car, "AUTOMOTIVE", "Garages, roadside and mobile mechanics."],
-  [Home, "HOME SERVICES", "Plumbing, electrical and handyman teams."],
-  [Building2, "SERVICE CENTERS", "Multi-location authorised service operations."],
+  [Globe, "BUSINESS WEBSITES", "Corporate websites, landing pages, and service platforms.", "/features/web-development"],
+  [AppWindow, "WEB APPLICATIONS", "Dashboards, portals, booking systems, and internal tools.", "/features/web-applications"],
+  [Cpu, "SAAS PLATFORMS", "B2B software, subscription products, and vertical SaaS.", "/features/saas-development"],
+  [Smartphone, "MOBILE APPLICATIONS", "Consumer apps, business apps, and utility applications.", "/features/mobile-app-development"],
+  [ShoppingBag, "MARKETPLACES", "Platforms connecting customers, businesses, and providers.", "/features/marketplaces"],
+  [PanelsTopLeft, "BUSINESS SOFTWARE", "CRM, ERP, inventory, HR, and custom management systems.", "/features/custom-software"],
+  [Building2, "AI PRODUCTS", "AI assistants, intelligent SaaS, and automation tools.", "/features/ai-automation"],
 ] as const;
 
 export function IndustryCarousel() {
@@ -76,12 +76,12 @@ export function IndustryCarousel() {
     ref.current?.scrollBy({ left: dir * 420, behavior: "smooth" });
 
   return (
-    <section className="bg-[#eef3f8] py-14 sm:py-20 lg:py-[104px]">
+    <section id="products" className="bg-[#eef3f8] py-14 sm:py-20 lg:py-[104px]">
       <div className="shell">
         <div className="grid items-end gap-8 lg:grid-cols-[1fr_auto]">
           <Reveal>
             <Heading tone="light" className="max-w-[14ch]">
-              Built for <Accent>every</Accent> service business.
+              Digital products for <Accent>real business needs.</Accent>
             </Heading>
           </Reveal>
           <Reveal delay={80}>
@@ -105,8 +105,9 @@ export function IndustryCarousel() {
         ref={ref}
         className="mt-16 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-6 lg:px-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        {INDUSTRIES.map(([Icon, t, d]) => (
-          <article
+        {INDUSTRIES.map(([Icon, t, d, href]) => (
+          <a
+            href={href}
             key={t}
             className="group w-[300px] shrink-0 snap-start rounded-[24px] border border-[#dfe7f1] bg-white p-7 transition-all duration-250 hover:-translate-y-1.5 hover:border-[#3b82f6]/45 hover:shadow-[0_30px_70px_-45px_rgba(16,42,99,0.6)] sm:w-[380px]"
           >
@@ -135,7 +136,7 @@ export function IndustryCarousel() {
             </h3>
             <p className="mt-2 text-[14px] leading-relaxed text-[#5d76a3]">{d}</p>
             <ArrowRight size={16} className="hover-arrow mt-8 text-[#1e4ed8]" />
-          </article>
+          </a>
         ))}
       </div>
     </section>
@@ -143,39 +144,43 @@ export function IndustryCarousel() {
 }
 
 const LEFT = [
-  "AI Voice Agents",
-  "Lead Management",
-  "Automated Booking",
-  "Customer Management",
-  "Technician Scheduling",
-  "Service Jobs",
-  "Estimates & Quotes",
-  "Invoicing",
+  "Web Development",
+  "Web Applications",
+  "Mobile App Development",
+  "SaaS Development",
+  "Custom Software",
+  "E-commerce",
+  "AI & Automation",
+  "UI/UX Design"
 ];
 const RIGHT = [
-  "Payments",
-  "WhatsApp Automation",
-  "Notifications",
-  "Technician Tracking",
-  "Reports & Analytics",
-  "Service History",
-  "Multi-location",
   "API & Integrations",
+  "Cloud Deployment",
+  "Database Architecture",
+  "Authentication",
+  "Business Systems",
+  "Analytics Dashboards",
+  "Performance Optimization",
+  "Maintenance & Support"
 ];
 
-const ROW_LINKS: Record<string, string> = {
-  "AI Call Agents": "/features/ai-call-agents",
-  "Lead Capture": "/features/ai-call-agents",
-  "Booking & Calendar": "/features/automated-booking",
-  "Technician Scheduling": "/features/technician-dispatch",
-  "Technician Tracking": "/features/technician-dispatch",
-  "Service Jobs": "/features/service-jobs",
-  "Service History": "/features/service-jobs",
-  "Estimates & Quotes": "/features/invoicing-billing",
-  Invoicing: "/features/invoicing-billing",
-  Payments: "/features/invoicing-billing",
-  "WhatsApp Automation": "/features/whatsapp-communication",
-  Notifications: "/features/business-automation",
+const ROW_LINKS: Record<string,string> = {
+  "Web Development": "/features/web-development",
+  "Web Applications": "/features/web-applications",
+  "Mobile App Development": "/features/mobile-app-development",
+  "SaaS Development": "/features/saas-development",
+  "Custom Software": "/features/custom-software",
+  "E-commerce": "/features/e-commerce",
+  "AI & Automation": "/features/ai-automation",
+  "UI/UX Design": "/features/ui-ux-design",
+  "API & Integrations": "/features/cloud-integrations",
+  "Cloud Deployment": "/features/cloud-integrations",
+  "Database Architecture": "/features/custom-software",
+  "Authentication": "/features/cloud-integrations",
+  "Business Systems": "/features/custom-software",
+  "Analytics Dashboards": "/features/custom-software",
+  "Performance Optimization": "/features/maintenance-support",
+  "Maintenance & Support": "/features/maintenance-support"
 };
 
 function Row({ label }: { label: string }) {
@@ -197,7 +202,7 @@ export function FeatureDirectory() {
     <section className="section-pad bg-[#eef3f8]">
       <div className="shell grid gap-12 lg:grid-cols-[0.35fr_1.65fr] lg:gap-20">
         <Reveal>
-          <Label tone="light">FEATURES</Label>
+          <Label tone="light">WHAT WE BUILD</Label>
         </Reveal>
         <div className="grid gap-x-10 md:grid-cols-2">
           <div>
@@ -217,16 +222,16 @@ export function FeatureDirectory() {
 }
 
 const METRICS = [
-  ["NEW LEADS", "128"],
-  ["CALLS ANSWERED", "94%"],
-  ["BOOKING RATE", "72%"],
-  ["ACTIVE JOBS", "34"],
+  ["ACTIVE USERS", "128"],
+  ["ONBOARDING", "94%"],
+  ["ACTIVATION", "72%"],
+  ["NEW ACCOUNTS", "34"],
   ["REVENUE", "₹8.42L"],
 ];
 const TOP = [
-  ["AC Repair", 34],
-  ["Washing Machine", 27],
-  ["Laptop Repair", 21],
+  ["Web", 34],
+  ["iOS", 27],
+  ["Android", 21],
   ["Other", 18],
 ] as const;
 
@@ -236,14 +241,14 @@ export function AnalyticsDemo() {
     .map((p, i) => `${i === 0 ? "M" : "L"}${(i / (pts.length - 1)) * 640},${120 - p}`)
     .join(" ");
   return (
-    <section className="section-pad bg-[#f7f9fc]">
+    <section id="analytics" className="section-pad bg-[#f7f9fc]">
       <div className="shell">
         <Reveal>
-          <Label tone="light">REPORTS & ANALYTICS</Label>
+          <Label tone="light">CUSTOM ANALYTICS · SAMPLE DASHBOARD</Label>
         </Reveal>
         <Reveal delay={60}>
           <Heading tone="light" className="mt-8 max-w-[18ch]">
-            Know what is happening across your <Accent>operation.</Accent>
+            Build a clearer view of your <Accent>business.</Accent>
           </Heading>
         </Reveal>
 
@@ -262,7 +267,7 @@ export function AnalyticsDemo() {
 
             <div className="mt-6 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
               <div className="rounded-2xl border border-[#e6ecf4] p-6">
-                <div className="label-mono text-[#8190aa]">BOOKINGS · LAST 12 WEEKS</div>
+                <div className="label-mono text-[#8190aa]">ACTIVE USERS · SAMPLE 12 WEEKS</div>
                 <svg viewBox="0 0 640 130" className="mt-6 h-auto w-full">
                   {[30, 60, 90].map((y) => (
                     <line key={y} x1="0" y1={y} x2="640" y2={y} stroke="#eef1f6" />
@@ -282,7 +287,7 @@ export function AnalyticsDemo() {
                 </svg>
               </div>
               <div className="rounded-2xl border border-[#e6ecf4] p-6">
-                <div className="label-mono text-[#8190aa]">TOP SERVICE TYPES</div>
+                <div className="label-mono text-[#8190aa]">USERS BY CHANNEL</div>
                 <div className="mt-6 space-y-4">
                   {TOP.map(([k, v]) => (
                     <div key={k}>
@@ -309,9 +314,9 @@ export function AnalyticsDemo() {
 }
 
 const POSTS = [
-  ["JULY 15, 2026", "AI & AUTOMATION", "How AI Voice Agents Are Changing Repair Businesses"],
-  ["JULY 09, 2026", "OPERATIONS", "How to Automate Technician Scheduling"],
-  ["JULY 02, 2026", "SERVICE OPERATIONS", "From Lead to Invoice: The Modern Service Workflow"],
+  ["BUSINESS FIRST", "PRODUCT STRATEGY", "Start with the problem. Then choose the technology.", "/features/ui-ux-design"],
+  ["BUILT TO GROW", "ENGINEERING", "Architecture for performance, scale, and maintainability.", "/features/cloud-integrations"],
+  ["ONE TEAM", "END TO END", "Design, development, launch, and continuous improvement.", "/features/custom-software"],
 ];
 
 export function BlogCards() {
@@ -319,13 +324,13 @@ export function BlogCards() {
     <section className="section-pad bg-[#eef3f8]">
       <div className="shell">
         <Reveal>
-          <Heading tone="light">Latest from Numunix</Heading>
+          <Heading tone="light">Why build with Numunix</Heading>
         </Reveal>
         <div className="mt-16 grid gap-6 md:grid-cols-3">
-          {POSTS.map(([d, c, t], i) => (
+          {POSTS.map(([d, c, t, href], i) => (
             <Reveal key={t} delay={i * 70}>
               <a
-                href="#cta"
+                href={href}
                 className="group block h-full overflow-hidden rounded-[22px] border border-[#dfe7f1] bg-white transition-all duration-250 hover:-translate-y-1.5 hover:border-[#3b82f6]/40 hover:shadow-[0_30px_70px_-45px_rgba(16,42,99,0.6)]"
               >
                 <div className="relative h-56 overflow-hidden bg-[#05070c]">

@@ -12,9 +12,9 @@ import {
 } from "@/components/numunix/primitives";
 import { CONTACT } from "@/content/site";
 
-const TITLE = "Contact Numunix — Talk to our service operations team";
+const TITLE = "Contact Numunix — Start Your Digital Product Project";
 const DESC =
-  "Call +91 98862 85028 or email Numunix@gmail.com to see how Numunix automates calls, bookings, technician dispatch and invoicing for your service business.";
+  "Contact Numunix to discuss web development, mobile apps, SaaS, custom software, AI, and design. Call +91 98862 85028 or email Numunix@gmail.com.";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -32,10 +32,10 @@ export const Route = createFileRoute("/contact")({
 });
 
 const REASONS: [string, string][] = [
-  ["PRODUCT DEMO", "A guided walkthrough of Numunix on your own workflow."],
-  ["PRICING", "Plans based on technicians, locations and call volume."],
-  ["MIGRATION", "Moving customers, jobs and contracts from your current tools."],
-  ["SUPPORT", "Help with an existing Numunix workspace."],
+  ["NEW PROJECT", "Discuss your website, mobile app, SaaS, or software idea."],
+  ["PROJECT SCOPE", "Define requirements, priorities, timeline, and budget."],
+  ["MODERNIZATION", "Improve an existing product, migrate data, or connect systems."],
+  ["ONGOING SUPPORT", "Maintenance, optimization, security updates, and new features."],
 ];
 
 function ContactPage() {
@@ -55,20 +55,15 @@ function ContactPage() {
                 style={{ lineHeight: 1.04 }}
                 className="mt-6 max-w-[15ch] font-light tracking-[-0.03em] text-white text-[clamp(2.4rem,6vw,5.6rem)]"
               >
-                Let's talk about <Accent>your operation.</Accent>
+                Let's talk about <Accent>your next product.</Accent>
               </h1>
             </Reveal>
             <Reveal delay={120}>
               <p className="max-w-[44ch] text-[17px] leading-relaxed text-white/60 lg:text-[19px]">
-                Tell us how calls, bookings, technicians and invoices move
-                through your business today. We will show you what Numunix takes
-                off your plate first.
+                Share your idea and goals. We’ll help shape the next step.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Btn as="a" href={CONTACT.phoneHref}>
-                  CALL {CONTACT.phone}
-                </Btn>
-                <Btn as="a" href={CONTACT.emailHref} variant="ghostDark">
+                <Btn as="a" href={CONTACT.emailHref}>
                   EMAIL US
                 </Btn>
               </div>
@@ -88,7 +83,7 @@ function ContactPage() {
                   [Phone, "PHONE", CONTACT.phone, CONTACT.phoneHref],
                   [Mail, "EMAIL", CONTACT.email, CONTACT.emailHref],
                   [Clock, "HOURS", CONTACT.hours, ""],
-                  [MapPin, "SERVING", "Service businesses across India", ""],
+                  [MapPin, "SERVING", "Startups, businesses & organizations", ""],
                 ].map(([Icon, k, v, href]: any) => (
                   <a
                     key={k}
@@ -125,8 +120,7 @@ function ContactPage() {
                 ))}
               </div>
               <p className="mt-8 text-[16px] leading-relaxed text-[#5d76a3]">
-                Send a short note with your business name, city and team size —
-                we usually reply the same working day.
+                Send a short note with your idea, business goals, key requirements, and target timeline. Share any existing designs or product links that help explain your project.
               </p>
             </Reveal>
           </div>
@@ -138,13 +132,10 @@ function ContactPage() {
           </div>
           <div className="shell relative text-center">
             <Heading size="xl" className="mx-auto max-w-[17ch]">
-              One call is enough to <Accent>see the difference.</Accent>
+              Your next product starts with <Accent>a conversation.</Accent>
             </Heading>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Btn as="a" href={CONTACT.phoneHref}>
-                CALL {CONTACT.phone}
-              </Btn>
-              <Btn as="a" href={CONTACT.emailHref} variant="ghostDark">
+              <Btn as="a" href={CONTACT.emailHref}>
                 {CONTACT.email.toUpperCase()}
               </Btn>
             </div>

@@ -1,101 +1,57 @@
 import { useEffect, useRef, useState } from "react";
 import { Label } from "./primitives";
-import AICallDemo from "./AICallDemo";
-import {
-  BookingDemo,
-  TechnicianDispatch,
-  ServiceOperations,
-  InvoiceDemo,
-} from "./demos";
-import { Card, CardHead, MetricGrid, CardAction } from "./cardkit";
-
-function AutomationPanel() {
-  const rows = [
-    ["JOB COMPLETED", "Invoice generated automatically"],
-    ["INVOICE SENT", "Delivered on WhatsApp"],
-    ["PAYMENT RECEIVED", "Marked paid · ₹2,478"],
-    ["FOLLOW-UP", "Feedback request scheduled +2d"],
-  ];
-  return (
-    <Card>
-      <CardHead chip="BUSINESS AUTOMATION" status="RUNNING" title="Automation timeline" />
-      <div className="border-b border-[#eef3f8]">
-        {rows.map(([k, v], i) => (
-          <div
-            key={k}
-            className={`flex gap-4 px-5 py-4 sm:px-6 ${i > 0 ? "border-t border-[#eef3f8]" : ""}`}
-          >
-            <div className="flex flex-col items-center">
-              <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#1e4ed8]" />
-              {i < rows.length - 1 && <span className="mt-1 w-px flex-1 bg-[#dbe5f2]" />}
-            </div>
-            <div className="min-w-0">
-              <div className="label-mono text-[#102a63]">{k}</div>
-              <div className="mt-1 text-[13px] text-[#8190aa]">{v}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <MetricGrid
-        items={[
-          { k: "WORKFLOWS TODAY", v: "4" },
-          { k: "MANUAL STEPS", v: "0" },
-        ]}
-      />
-      <CardAction>VIEW AUTOMATIONS</CardAction>
-    </Card>
-  );
-}
+import ServiceDemo from "./ServiceDemo";
 
 type Item = {
   nav: string;
+  href: string;
   title: string;
   body: string;
-  panel: React.ReactNode;
+  slug: string;
 };
 
 const ITEMS: Item[] = [
   {
-    nav: "AI CALL AGENTS",
-    title: "Every call answered, qualified and booked.",
-    body: "Numunix AI agents pick up instantly, understand the customer's issue, capture service details and confirm a slot — day, night or peak hours.",
-    panel: (
-      <AICallDemo
-        customer="Ananya"
-        issue="AC Repair"
-        reply="Hi Ananya, I can help you schedule an AC technician."
-      />
-    ),
+    nav: "AI & AUTOMATION",
+    href: "/features/ai-automation",
+    title: "Intelligence built into your product.",
+    body: "Connect AI to your knowledge and tools, so it can understand requests and help complete the next step.",
+    slug: "ai-automation",
   },
   {
-    nav: "AUTOMATED BOOKING",
-    title: "Appointments that schedule themselves.",
-    body: "Availability, service duration and technician coverage are checked in real time, so the slot offered to a customer is a slot you can actually deliver.",
-    panel: <BookingDemo />,
+    nav: "WEB DEVELOPMENT",
+    href: "/features/web-development",
+    title: "Fast websites. Capable web applications.",
+    body: "From the first impression to the smallest screen, every page is designed to be clear, responsive, and easy to use.",
+    slug: "web-development",
   },
   {
-    nav: "SMART TECHNICIAN ASSIGNMENT",
-    title: "The right technician on every job.",
-    body: "Distance, skill match, workload and current status are scored together, and the best technician is recommended before the job is dispatched.",
-    panel: <TechnicianDispatch />,
+    nav: "MOBILE APP DEVELOPMENT",
+    href: "/features/mobile-app-development",
+    title: "Your product, wherever your users are.",
+    body: "Thoughtful iOS and Android experiences that make everyday tasks feel simple and connected.",
+    slug: "mobile-app-development",
   },
   {
-    nav: "SERVICE OPERATIONS",
-    title: "One live view of the working day.",
-    body: "Track every service job from scheduled to in progress to complete, with technician, location and status visible across teams and locations.",
-    panel: <ServiceOperations />,
+    nav: "CUSTOM SOFTWARE",
+    href: "/features/custom-software",
+    title: "Software that fits the way you work.",
+    body: "Bring requests, approvals, and business data into software that follows your process.",
+    slug: "custom-software",
   },
   {
-    nav: "INVOICING & BILLING",
-    title: "Invoices raised the moment work ends.",
-    body: "Service, parts and tax are calculated automatically, sent over WhatsApp, and tracked through to payment without anyone chasing paperwork.",
-    panel: <InvoiceDemo />,
+    nav: "SAAS DEVELOPMENT",
+    href: "/features/saas-development",
+    title: "From MVP to a scalable platform.",
+    body: "Turn a focused idea into a connected product, with onboarding, workspaces, subscriptions, and room to grow.",
+    slug: "saas-development",
   },
   {
-    nav: "BUSINESS AUTOMATION",
-    title: "The follow-up work runs itself.",
-    body: "Reminders, confirmations, feedback requests and repeat-service nudges run on their own, so nothing is dropped after the job is closed.",
-    panel: <AutomationPanel />,
+    nav: "UI/UX DESIGN",
+    href: "/features/ui-ux-design",
+    title: "Make complex products simple to use.",
+    body: "Move from user flows to wireframes to polished interfaces, with every interaction designed around a clear purpose.",
+    slug: "ui-ux-design",
   },
 ];
 
@@ -106,6 +62,7 @@ function SlideIn({ children, delay = 0 }: { children: React.ReactNode; delay?: n
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setShown(true); return; }
     const io = new IntersectionObserver(
       (entries) => {
         if (entries[0]?.isIntersecting) {
@@ -146,7 +103,7 @@ function MobileStage() {
                 {String(i + 1).padStart(2, "0")} / {String(ITEMS.length).padStart(2, "0")}
               </span>
             </div>
-            <div className="mt-4">{it.panel}</div>
+            <div className="mt-4"><ServiceDemo slug={it.slug} href={it.href} /></div>
           </SlideIn>
 
           <SlideIn delay={120}>
@@ -198,13 +155,13 @@ export function FeatureScroller() {
   }, []);
 
   return (
-    <section className="bg-[#f7f9fc] py-16 sm:py-20 lg:py-[104px]">
+    <section id="technology" className="bg-[#f7f9fc] py-16 sm:py-20 lg:py-[104px]">
       <div className="shell">
         <div className="grid gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:gap-24">
           {/* LEFT — sticky index */}
           <div>
             <div className="lg:sticky lg:top-32">
-              <Label tone="light">WHY NUMUNIX</Label>
+              <Label tone="light">OUR SERVICES & TECHNOLOGY</Label>
               <div className="mt-8 hidden lg:block">
                 {ITEMS.map((it, i) => (
                   <button
@@ -241,7 +198,7 @@ export function FeatureScroller() {
                   refs.current[i] = el;
                 }}
               >
-                <div>{it.panel}</div>
+                <ServiceDemo slug={it.slug} href={it.href} />
                 <h3 className="mt-10 max-w-[620px] text-[clamp(1.35rem,1.9vw,1.75rem)] font-normal leading-[1.28] tracking-[-0.02em] text-[#0b1b38]">
                   {it.title}
                 </h3>

@@ -16,7 +16,7 @@ export function BookingDemo() {
   const slots = ["09:00", "11:00", "13:30", "16:30", "18:00"];
   return (
     <Card>
-      <CardHead chip="AUTOMATED BOOKING" status="CALENDAR" title="Wednesday, 4:30 PM" />
+      <CardHead chip="BOOKING PLATFORM" status="EXAMPLE" title="Wednesday, 4:30 PM" />
 
       <CardBody divide tint={false}>
         <div className="grid grid-cols-5 gap-1.5">
@@ -49,8 +49,8 @@ export function BookingDemo() {
       <MetricGrid
         items={[
           { k: "CUSTOMER", v: "Rahul Sharma" },
-          { k: "SERVICE", v: "Washing Machine" },
-          { k: "TECHNICIAN", v: "Arjun" },
+          { k: "SESSION", v: "Product walkthrough" },
+          { k: "HOST", v: "Product team" },
           { k: "STATUS", v: "CONFIRMED" },
         ]}
       />
@@ -61,27 +61,27 @@ export function BookingDemo() {
 }
 
 const TECHS = [
-  { n: "ARJUN", d: "3.2 km", s: "Available", k: "AC Specialist", r: 5 },
-  { n: "IMRAN", d: "5.8 km", s: "Available", k: "AC + HVAC", r: 4 },
-  { n: "RAHUL", d: "8.1 km", s: "Busy", k: "Appliance", r: 4 },
+  { n: "DESIGN", d: "User flows", s: "Ready", k: "UI/UX", r: 5 },
+  { n: "BUILD", d: "Cross-platform", s: "Active", k: "React Native", r: 4 },
+  { n: "RELEASE", d: "Device testing", s: "Next", k: "iOS + Android", r: 4 },
 ];
 
 export function TechnicianDispatch({ compact = false }: { compact?: boolean }) {
   return (
     <Card>
-      <CardHead chip="SMART ASSIGNMENT" status="NEW JOB" title="AC not cooling" />
+      <CardHead chip="CONNECTED APP" status="EXAMPLE" title="Mobile product workspace" />
 
       <MetricGrid
         items={[
           {
-            k: "LOCATION",
+            k: "EXPERIENCE",
             v: (
               <span className="inline-flex items-center gap-1.5">
-                <MapPin size={13} className="text-[#1e4ed8]" /> HSR Layout
+                <MapPin size={13} className="text-[#1e4ed8]" /> Mobile-first
               </span>
             ),
           },
-          { k: "ETA", v: "18 min" },
+          { k: "PLATFORMS", v: "iOS + Android" },
         ]}
       />
 
@@ -121,7 +121,7 @@ export function TechnicianDispatch({ compact = false }: { compact?: boolean }) {
         ))}
       </div>
 
-      <CardAction>ASSIGN TO ARJUN</CardAction>
+      <CardAction>EXPLORE THE WORKFLOW</CardAction>
     </Card>
   );
 }
@@ -154,15 +154,15 @@ export function AbstractMap() {
 }
 
 const JOBS = [
-  ["10:00", "Washing Machine Repair", "Koramangala · ARJUN", "IN PROGRESS"],
-  ["11:30", "AC Service", "HSR Layout · IMRAN", "ASSIGNED"],
-  ["12:15", "Laptop Repair", "Indiranagar · RAHUL", "SCHEDULED"],
+  ["10:00", "Customer portal", "Frontend · PRODUCT TEAM", "IN PROGRESS"],
+  ["11:30", "Payment integration", "Backend · API TEAM", "IN REVIEW"],
+  ["12:15", "Reporting dashboard", "Analytics · DATA TEAM", "SCHEDULED"],
 ] as const;
 
 export function ServiceOperations() {
   return (
     <Card>
-      <CardHead chip="SERVICE OPERATIONS" status="14 ACTIVE" title="Today’s service jobs" />
+      <CardHead chip="BUSINESS SOFTWARE" status="EXAMPLE" title="Your team’s workspace" />
 
       <div className="border-b border-[#eef3f8]">
         {JOBS.map((j, i) => (
@@ -186,30 +186,30 @@ export function ServiceOperations() {
 
       <MetricGrid
         items={[
-          { k: "TECHNICIANS ON SHIFT", v: "7" },
-          { k: "ROUTES OPTIMISED", v: "3" },
+          { k: "TEAM MEMBERS", v: "7" },
+          { k: "ACTIVE WORKFLOWS", v: "3" },
         ]}
       />
 
-      <CardAction>OPEN JOB BOARD</CardAction>
+      <CardAction>EXPLORE THE WORKSPACE</CardAction>
     </Card>
   );
 }
 
 export function InvoiceDemo() {
   const rows = [
-    ["Service", "₹850"],
-    ["Parts", "₹1,250"],
+    ["Subscription", "₹850"],
+    ["Usage", "₹1,250"],
     ["GST", "₹378"],
   ];
   return (
     <Card>
-      <CardHead chip="SERVICE INVOICE" status="PAID" live={false} title="₹2,478" />
+      <CardHead chip="SAAS BILLING" status="EXAMPLE" live={false} title="₹2,478" />
 
       <MetricGrid
         items={[
           { k: "CUSTOMER", v: "Rahul Sharma" },
-          { k: "TECHNICIAN", v: "Arjun Kumar" },
+          { k: "ACCOUNT", v: "Example workspace" },
         ]}
       />
 
@@ -224,11 +224,11 @@ export function InvoiceDemo() {
         </div>
         <div className="mt-4 flex flex-wrap gap-2">
           <Tag dot="#1e4ed8">Auto-generated</Tag>
-          <Tag dot="#38bdf8">WhatsApp delivery</Tag>
+          <Tag dot="#38bdf8">Payment integration</Tag>
         </div>
       </CardBody>
 
-      <CardAction>SEND ON WHATSAPP</CardAction>
+      <CardAction>VIEW SAMPLE INVOICE</CardAction>
     </Card>
   );
 }
@@ -236,14 +236,14 @@ export function InvoiceDemo() {
 export function VoiceAgentPanel() {
   return (
     <Card tone="dark">
-      <CardHead tone="dark" chip="AI VOICE AGENT" status="CALL TIME 01:42" title="Live conversation" />
+      <CardHead tone="dark" chip="AI VOICE AGENT" status="EXAMPLE · 01:42" title="An assistant in your product" />
 
       <CardBody tone="dark" divide>
         <Waveform tone="dark" bars={34} />
         <div className="mt-5 space-y-3">
-          <Quote tone="dark">“My AC stopped cooling since yesterday.”</Quote>
+          <Quote tone="dark">“Can I book a walkthrough of your product?”</Quote>
           <Quote tone="dark">
-            “Got it — I can send an AC specialist today at 4:30 PM. Shall I confirm?”
+            “Of course — there’s a slot today at 4:30 PM. Shall I book it?”
           </Quote>
         </div>
       </CardBody>
@@ -252,8 +252,8 @@ export function VoiceAgentPanel() {
         tone="dark"
         items={[
           { k: "CUSTOMER", v: "Identified" },
-          { k: "ISSUE", v: "Captured" },
-          { k: "LOCATION", v: "Confirmed" },
+          { k: "INTEREST", v: "Captured" },
+          { k: "CONTEXT", v: "Confirmed" },
           { k: "SLOT", v: "Available" },
         ]}
       />

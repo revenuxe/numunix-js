@@ -5,15 +5,15 @@ import { Card, CardHead, MetricGrid, CardBody, Quote, CardAction } from "./cardk
 
 const STEPS = [
   "Customer identified",
-  "Service address confirmed",
-  "Issue captured",
-  "Technician availability checked",
+  "Product interest confirmed",
+  "Requirements captured",
+  "Calendar availability checked",
 ];
 
 export function AICallDemo({
   customer = "Rahul Sharma",
-  issue = "Washing machine isn't draining.",
-  reply = "Sure, I can help you schedule a technician.",
+  issue = "I’d like a walkthrough of your product.",
+  reply = "Sure, I can help you book a product walkthrough.",
   phone = "+91 98XX XXX XXX",
 }: {
   customer?: string;
@@ -29,12 +29,12 @@ export function AICallDemo({
 
   return (
     <Card>
-      <CardHead chip="AI CALL AGENT" status="LIVE · 01:42" title={<span className="font-mono">{phone}</span>} />
+      <CardHead chip="AI CALL AGENT" status="EXAMPLE · 01:42" title={<span className="font-mono">{phone}</span>} />
 
       <MetricGrid
         items={[
           { k: "CUSTOMER", v: customer },
-          { k: "SERVICE", v: "Appliance Repair" },
+          { k: "CONTEXT", v: "Product enquiry" },
         ]}
       />
 
@@ -67,7 +67,7 @@ export function AICallDemo({
         cols={3}
         items={[
           { k: "TODAY", v: "4:30 PM" },
-          { k: "TECHNICIAN", v: "Arjun Kumar" },
+          { k: "HOST", v: "Product team" },
           { k: "STATUS", v: "BOOKED" },
         ]}
       />

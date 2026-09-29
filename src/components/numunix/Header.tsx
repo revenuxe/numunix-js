@@ -3,11 +3,11 @@ import { Menu, X, Grip } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV: [string, string][] = [
-  ["PRODUCT", "/features"],
-  ["SOLUTIONS", "/features"],
-  ["PRICING", "/#cta"],
-  ["RESOURCES", "/features"],
-  ["COMPANY", "/#cta"],
+  ["SERVICES", "/features"],
+  ["PRODUCTS", "/#products"],
+  ["PROCESS", "/#process"],
+  ["TECHNOLOGY", "/#technology"],
+  ["CONTACT", "/contact"],
 ];
 
 function Logo() {
@@ -67,25 +67,25 @@ export function Header() {
             </nav>
 
             <a
-              href="#top"
+              href="/contact"
               className="label-mono rounded-xl bg-[#dbe6f8] px-5 py-3 text-[#102a63] transition-all hover:-translate-y-0.5 hover:bg-white"
             >
-              LOG IN
+              LET’S TALK
             </a>
             <a
-              href="#cta"
+              href="/contact"
               className="label-mono rounded-xl bg-[#1e4ed8] px-5 py-3 text-white transition-all hover:-translate-y-0.5 hover:bg-[#2563eb] hover:shadow-[0_12px_34px_-12px_rgba(59,130,246,0.9)]"
             >
-              GET STARTED
+              START PROJECT
             </a>
           </div>
 
           <div className="flex items-center gap-2 lg:hidden">
             <a
-              href="#cta"
+              href="/contact"
               className="label-mono rounded-lg bg-[#1e4ed8] px-3.5 py-2.5 text-white"
             >
-              GET STARTED
+              START PROJECT
             </a>
             <button
               aria-label="Menu"
@@ -111,8 +111,8 @@ export function Header() {
                 {n}
               </a>
             ))}
-            <a href="#top" className="label-mono block pt-4 text-white/80">
-              LOG IN
+            <a href="/contact" className="label-mono block pt-4 text-white/80">
+              LET’S TALK
             </a>
           </div>
         </div>

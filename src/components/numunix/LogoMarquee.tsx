@@ -1,11 +1,11 @@
 const NAMES = [
-  "APPLIANCE PRO",
-  "SERVICEHUB",
-  "FIXRIGHT",
-  "TECHCARE",
-  "HOMEFIX",
-  "REPAIRFLOW",
-  "SERVICE ONE",
+  "WEBSITES",
+  "WEB APPLICATIONS",
+  "MOBILE APPS",
+  "SAAS PLATFORMS",
+  "CUSTOM SOFTWARE",
+  "AI & AUTOMATION",
+  "UI/UX DESIGN",
 ];
 
 export function LogoMarquee() {
@@ -13,7 +13,7 @@ export function LogoMarquee() {
   return (
     <section className="relative overflow-hidden border-t border-white/10 bg-[#05070c] py-12">
       <div className="shell">
-        <div className="label-mono text-[#8fb4e8]">BUILT FOR SERVICE TEAMS</div>
+        <div className="label-mono text-[#8fb4e8]">WHAT WE BUILD</div>
       </div>
       <div className="relative mt-10 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
         <div
@@ -29,11 +29,6 @@ export function LogoMarquee() {
             </span>
           ))}
         </div>
-      </div>
-      <div className="shell mt-8">
-        <p className="label-mono text-white/25">
-          CATEGORY PLACEHOLDERS — ILLUSTRATIVE SERVICE BUSINESS TYPES, NOT CUSTOMERS
-        </p>
       </div>
     </section>
   );

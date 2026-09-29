@@ -5,36 +5,9 @@ import Footer from "./Footer";
 import NumunixRibbonScene from "./NumunixRibbonScene";
 import ContactBand from "./ContactBand";
 import { Label, Heading, Accent, Btn, Reveal } from "./primitives";
-import { AICallDemo } from "./AICallDemo";
-import {
-  BookingDemo,
-  TechnicianDispatch,
-  ServiceOperations,
-  InvoiceDemo,
-  VoiceAgentPanel,
-} from "./demos";
-import { WorkflowVisualization } from "./WorkflowVisualization";
-import { FEATURES, type Feature, type DemoKey } from "@/content/features";
+import ServiceDemo from "./ServiceDemo";
+import { FEATURES, type Feature } from "@/content/features";
 import { FEATURE_EXTRAS, DEFAULT_EXTRA, CONTACT } from "@/content/site";
-
-function Demo({ k }: { k: DemoKey }) {
-  switch (k) {
-    case "call":
-      return <AICallDemo />;
-    case "booking":
-      return <BookingDemo />;
-    case "dispatch":
-      return <TechnicianDispatch />;
-    case "jobs":
-      return <ServiceOperations />;
-    case "invoice":
-      return <InvoiceDemo />;
-    case "voice":
-      return <VoiceAgentPanel />;
-    case "flow":
-      return <WorkflowVisualization />;
-  }
-}
 
 function headline(title: string, accent: string) {
   const i = title.indexOf(accent);
@@ -78,10 +51,10 @@ export function FeaturePage({ feature }: { feature: Feature }) {
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Btn as="a" href="/contact">
-                  GET STARTED
+                  START YOUR PROJECT
                 </Btn>
-                <Btn as="a" href={CONTACT.phoneHref} variant="ghostDark">
-                  CALL {CONTACT.phone}
+                <Btn as="a" href={CONTACT.emailHref} variant="ghostDark">
+                  EMAIL US
                 </Btn>
               </div>
             </Reveal>
@@ -109,14 +82,14 @@ export function FeaturePage({ feature }: { feature: Feature }) {
         <section className="section-pad bg-[#f1f5f9]">
           <div className="shell">
             <Reveal>
-              <Label tone="light">LIVE INTERFACE</Label>
+              <Label tone="light">PRODUCT EXAMPLE</Label>
             </Reveal>
             <div className="mt-8 grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-20">
               <Reveal delay={60}>
                 <Heading tone="light">
-                  This is how it works
+                  A look at what
                   <br />
-                  <Accent>inside Numunix.</Accent>
+                  <Accent>we can build.</Accent>
                 </Heading>
                 <ul className="mt-8 space-y-4">
                   {feature.outcomes.map((o) => (
@@ -131,7 +104,7 @@ export function FeaturePage({ feature }: { feature: Feature }) {
                 </ul>
               </Reveal>
               <Reveal delay={140}>
-                <Demo k={feature.demo} />
+                <ServiceDemo slug={feature.slug} />
               </Reveal>
             </div>
           </div>
@@ -143,13 +116,13 @@ export function FeaturePage({ feature }: { feature: Feature }) {
             <Reveal>
               <Label>THE DIFFERENCE</Label>
               <Heading className="mt-6 max-w-[17ch]">
-                What changes the day <Accent>you switch this on.</Accent>
+                A clearer path from <Accent>problem to product.</Accent>
               </Heading>
             </Reveal>
             <div className="mt-12 grid gap-5 lg:grid-cols-2">
               <Reveal>
                 <div className="h-full rounded-[24px] border border-white/[0.07] bg-white/[0.02] p-7 lg:p-10">
-                  <span className="label-mono text-white/40">WITHOUT NUMUNIX</span>
+                  <span className="label-mono text-white/40">THE CHALLENGE</span>
                   <ul className="mt-7 space-y-5">
                     {extra.pains.map((p) => (
                       <li key={p} className="flex gap-4 text-[16.5px] leading-relaxed text-white/45">
@@ -164,7 +137,7 @@ export function FeaturePage({ feature }: { feature: Feature }) {
               </Reveal>
               <Reveal delay={100}>
                 <div className="h-full rounded-[24px] border border-[#3b82f6]/30 bg-[#0b1b38]/60 p-7 lg:p-10">
-                  <span className="label-mono text-[#8fb4e8]">WITH NUMUNIX</span>
+                  <span className="label-mono text-[#8fb4e8]">OUR APPROACH</span>
                   <ul className="mt-7 space-y-5">
                     {extra.gains.map((g) => (
                       <li key={g} className="flex gap-4 text-[16.5px] leading-relaxed text-white/80">
@@ -187,7 +160,7 @@ export function FeaturePage({ feature }: { feature: Feature }) {
             <Reveal>
               <Label tone="light">CAPABILITIES</Label>
               <Heading tone="light" className="mt-6 max-w-[18ch]">
-                Built around how service teams actually work.
+                Built around your users and business goals.
               </Heading>
             </Reveal>
             <div className="mt-12 grid gap-px overflow-hidden rounded-[24px] border border-[#dbe5f2] bg-[#dbe5f2] sm:grid-cols-2">
@@ -242,9 +215,9 @@ export function FeaturePage({ feature }: { feature: Feature }) {
         <section className="section-pad bg-[#f7f9fc]">
           <div className="shell grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
             <Reveal>
-              <Label tone="light">WHAT'S INCLUDED</Label>
+              <Label tone="light">PROJECT DELIVERY</Label>
               <Heading tone="light" className="mt-6 max-w-[14ch]">
-                Everything comes <Accent>in the box.</Accent>
+                A clear scope, <Accent>from start to handoff.</Accent>
               </Heading>
               <ul className="mt-8 space-y-4">
                 {extra.included.map((x) => (
@@ -300,9 +273,9 @@ export function FeaturePage({ feature }: { feature: Feature }) {
         </section>
 
         <ContactBand
-          title={`Want to see ${feature.name} on your own operation?`}
-          accent="on your own operation?"
-          body="Share how your team runs today and we will walk you through the exact setup on a short call."
+          title={`Let’s talk about ${feature.name.toLowerCase()}.`}
+          accent={`${feature.name.toLowerCase()}.`}
+          body="Share your idea, requirements, and goals. We will help you define the right scope and approach."
         />
 
         {/* RELATED — light */}
@@ -341,16 +314,15 @@ export function FeaturePage({ feature }: { feature: Feature }) {
           </div>
           <div className="shell relative text-center">
             <Heading size="xl" className="mx-auto max-w-[18ch]">
-              Your service business.{" "}
-              <Accent>Automated from lead to invoice.</Accent>
+              Have an idea?{" "}
+              <Accent>Let’s turn it into software.</Accent>
             </Heading>
             <p className="mx-auto mt-7 max-w-[54ch] text-[17px] leading-relaxed text-white/55 lg:text-[19px]">
-              Let Numunix handle the repetitive operational work while your team
-              focuses on customers, technicians and growth.
+              Design, development, integrations, deployment, and ongoing improvements — with one team focused on your product.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Btn as="a" href="/contact">
-                GET STARTED
+                START YOUR PROJECT
               </Btn>
               <Btn as="a" href={CONTACT.emailHref} variant="ghostDark">
                 EMAIL US

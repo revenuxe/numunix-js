@@ -1,8 +1,8 @@
 import { Check, X, ArrowRight } from "lucide-react";
 import { Page, PageHero, StatStrip, Section, SectionHead, ClosingCTA } from "./PageShell";
 import { Reveal, Label, Heading, Accent } from "./primitives";
-import { AICallDemo } from "./AICallDemo";
-import { ServiceOperations, InvoiceDemo } from "./demos";
+import ServiceDemo from "./ServiceDemo";
+
 import ContactBand from "./ContactBand";
 import { SOLUTIONS, type Solution } from "@/content/solutions";
 import { FEATURES } from "@/content/features";
@@ -18,7 +18,7 @@ export function SolutionPage({ solution }: { solution: Solution }) {
         title={solution.title}
         accent={solution.accentWord}
         body={solution.intro}
-        secondary={{ label: "EXPLORE FEATURES", href: "/features" }}
+        secondary={{ label: "EXPLORE SERVICES", href: "/features" }}
       />
       <StatStrip stats={solution.stats} />
 
@@ -26,14 +26,14 @@ export function SolutionPage({ solution }: { solution: Solution }) {
         <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-20">
           <div>
             <SectionHead
-              label="LIVE INTERFACE"
-              title="How the day actually runs."
-              accent="actually runs."
-              body="The same Numunix workflow, shaped around this kind of service operation."
+              label="PRODUCT EXAMPLE"
+              title="From idea to working product."
+              accent="working product."
+              body="An illustrative interface showing how connected digital experiences can support your business."
             />
           </div>
           <Reveal delay={120}>
-            <AICallDemo />
+            <ServiceDemo slug={solution.slug} />
           </Reveal>
         </div>
       </Section>
@@ -43,8 +43,8 @@ export function SolutionPage({ solution }: { solution: Solution }) {
           <SectionHead
             label="THE DIFFERENCE"
             tone="dark"
-            title="What changes when Numunix runs it."
-            accent="when Numunix runs it."
+            title="A product built around your business."
+            accent="your business."
           />
           <div className="mt-12 grid gap-5 lg:grid-cols-2">
             <Reveal>
@@ -82,7 +82,7 @@ export function SolutionPage({ solution }: { solution: Solution }) {
       </section>
 
       <Section bg="#eef3f8">
-        <SectionHead label="WORKFLOW" title="From first call to final invoice." accent="final invoice." />
+        <SectionHead label="WORKFLOW" title="From discovery to launch and growth." accent="launch and growth." />
         <div className="mt-12 grid gap-px overflow-hidden rounded-[24px] border border-[#dbe5f2] bg-[#dbe5f2] sm:grid-cols-2 lg:grid-cols-4">
           {solution.workflow.map((s, i) => (
             <Reveal key={s.step} delay={i * 60}>
@@ -101,16 +101,16 @@ export function SolutionPage({ solution }: { solution: Solution }) {
       <Section bg="#f7f9fc">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <ServiceOperations />
+            <ServiceDemo slug="custom-software" href="/features/custom-software" />
           </Reveal>
           <Reveal delay={100}>
-            <InvoiceDemo />
+            <ServiceDemo slug="saas-development" href="/features/saas-development" />
           </Reveal>
         </div>
       </Section>
 
       <Section bg="#eef3f8">
-        <SectionHead label="FEATURES USED" title="Everything working together." accent="working together." />
+        <SectionHead label="RELATED SERVICES" title="Everything working together." accent="working together." />
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {features.map((f, i) => (
             <Reveal key={f.slug} delay={i * 50}>
@@ -152,17 +152,17 @@ export function SolutionPage({ solution }: { solution: Solution }) {
       </Section>
 
       <ContactBand
-        title={`See Numunix running a ${solution.name.toLowerCase()} operation.`}
-        accent="operation."
+        title={`Let’s plan your ${solution.name.toLowerCase()} project.`}
+        accent="project."
       />
 
       <Section bg="#eef3f8">
-        <Label tone="light">OTHER INDUSTRIES</Label>
+        <Label tone="light">MORE SOLUTIONS</Label>
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {others.map((o) => (
             <a
               key={o.slug}
-              href={`/solutions/${o.slug}`}
+              href={`/features/${o.slug}`}
               className="group rounded-[20px] border border-[#dbe5f2] bg-white p-7 transition-all duration-250 hover:-translate-y-1 hover:border-[#3b82f6]/40 hover:shadow-[0_24px_60px_-34px_rgba(16,42,99,0.45)]"
             >
               <span className="label-mono text-[#1747b8]">{o.label}</span>
@@ -176,8 +176,8 @@ export function SolutionPage({ solution }: { solution: Solution }) {
       </Section>
 
       <ClosingCTA
-        title={`${solution.name}, running on Numunix.`}
-        accent="running on Numunix."
+        title={`${solution.name}, built around you.`}
+        accent="built around you."
       />
       <div className="hidden">
         <Heading tone="light">

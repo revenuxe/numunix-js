@@ -77,11 +77,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Numunix — AI-Powered Operations for Service Businesses" },
+      { title: "Numunix — Software, Websites, Apps & Digital Products" },
       {
         name: "description",
         content:
-          "Numunix automates service operations from lead to invoice with AI agents, booking, dispatch and billing.",
+          "Numunix designs and develops websites, web applications, mobile apps, SaaS platforms, AI solutions, and custom software for modern businesses.",
       },
       { name: "author", content: "Numunix" },
       { property: "og:type", content: "website" },

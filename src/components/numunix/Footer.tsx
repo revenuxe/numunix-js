@@ -1,41 +1,75 @@
 import { Linkedin, Instagram, Youtube } from "lucide-react";
 
 const FEATURE_LINKS: Record<string, string> = {
-  "AI Agents": "/features/ai-call-agents",
-  "Scheduling": "/features/automated-booking",
-  "Technician Management": "/features/technician-dispatch",
-  "Service Jobs": "/features/service-jobs",
-  "Invoicing": "/features/invoicing-billing",
-  "Automation": "/features/business-automation",
-  "Lead Management": "/features/ai-call-agents",
+  "Web Development": "/features/web-development",
+  "Mobile Apps": "/features/mobile-app-development",
+  "Custom Software": "/features/custom-software",
+  "SaaS Development": "/features/saas-development",
+  "AI & Automation": "/features/ai-automation",
+  "UI/UX Design": "/features/ui-ux-design",
+  "Cloud & Integrations": "/features/cloud-integrations",
+  "Business Websites": "/features/web-development",
+  "Web Applications": "/features/web-applications",
+  "Mobile Applications": "/features/mobile-app-development",
+  "SaaS Platforms": "/features/saas-development",
+  "Marketplaces": "/features/marketplaces",
+  "Business Software": "/features/custom-software",
+  "Our Approach": "/#approach",
+  "Our Process": "/#process",
+  "Technology": "/#technology",
+  "Contact": "/contact",
+  "Start a Project": "/contact",
+  "All Services": "/features",
+  "Integrations": "/features/cloud-integrations",
+  "Maintenance": "/features/maintenance-support",
+  "Security": "/#security",
+  "Support": "/contact"
 };
 
 const COLS: [string, string[]][] = [
   [
-    "PRODUCT",
+    "SERVICES",
     [
-      "AI Agents",
-      "Lead Management",
-      "Scheduling",
-      "Technician Management",
-      "Service Jobs",
-      "Invoicing",
-      "Automation",
-    ],
+      "Web Development",
+      "Mobile Apps",
+      "Custom Software",
+      "SaaS Development",
+      "AI & Automation",
+      "UI/UX Design",
+      "Cloud & Integrations"
+    ]
   ],
   [
-    "SOLUTIONS",
+    "PRODUCTS",
     [
-      "Appliance Repair",
-      "AC & HVAC",
-      "Electronics",
-      "Mobile & Laptop",
-      "Automotive",
-      "Home Services",
-    ],
+      "Business Websites",
+      "Web Applications",
+      "Mobile Applications",
+      "SaaS Platforms",
+      "Marketplaces",
+      "Business Software"
+    ]
   ],
-  ["COMPANY", ["About", "Pricing", "Blog", "Contact", "Careers"]],
-  ["RESOURCES", ["Documentation", "Help Center", "API", "Security", "Status"]],
+  [
+    "COMPANY",
+    [
+      "Our Approach",
+      "Our Process",
+      "Technology",
+      "Contact",
+      "Start a Project"
+    ]
+  ],
+  [
+    "EXPLORE",
+    [
+      "All Services",
+      "Integrations",
+      "Maintenance",
+      "Security",
+      "Support"
+    ]
+  ]
 ];
 
 export function Footer() {
@@ -55,7 +89,7 @@ export function Footer() {
             </span>
           </div>
           <p className="mt-5 max-w-[34ch] text-[15px] leading-relaxed text-white/50">
-            AI-powered operations for modern service businesses.
+            Software, websites, apps, and digital products built for real-world growth.
           </p>
           <div className="mt-8 flex gap-3">
             {[Linkedin, Instagram, Youtube].map((Icon, i) => (

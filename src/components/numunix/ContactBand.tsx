@@ -5,7 +5,7 @@ import { Label, Heading, Accent, Btn, Reveal } from "./primitives";
 export function ContactBand({
   title = "Talk to the team behind Numunix.",
   accent = "behind Numunix.",
-  body = "Tell us how your service operation runs today and we will show you exactly what Numunix automates first.",
+  body = "Tell us about your idea, users, and business goals. We will help define the right product, scope, and technical approach.",
 }: {
   title?: string;
   accent?: string;
@@ -25,7 +25,7 @@ export function ContactBand({
 
   return (
     <section className="section-pad bg-[#f7f9fc]">
-      <div className="shell grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-20">
+      <div className="shell grid grid-cols-1 gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-20">
         <Reveal>
           <Label tone="light">GET IN TOUCH</Label>
           <Heading tone="light" className="mt-6 max-w-[16ch]">
@@ -35,11 +35,11 @@ export function ContactBand({
             {body}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Btn as="a" href={CONTACT.phoneHref}>
-              CALL {CONTACT.phone}
+            <Btn as="a" href={CONTACT.emailHref}>
+              EMAIL US
             </Btn>
             <Btn as="a" href="/contact" variant="ghostLight">
-              BOOK A DEMO
+              LET’S TALK
             </Btn>
           </div>
         </Reveal>

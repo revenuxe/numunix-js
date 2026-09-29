@@ -1,3 +1,5 @@
+import { PRODUCT_SERVICES } from "./product-services";
+
 export const CONTACT = {
   phone: "+91 98862 85028",
   phoneHref: "tel:+919886285028",
@@ -13,176 +15,281 @@ type Extra = {
   useCases: { industry: string; body: string }[];
 };
 
-const BASE_INCLUDED = [
-  "Unlimited customer and service records",
-  "Role-based access for owners, dispatchers and technicians",
-  "Mobile-ready technician view",
-  "WhatsApp and SMS notifications",
-  "Exportable reports and audit trail",
-];
-
 export const FEATURE_EXTRAS: Record<string, Extra> = {
-  "ai-call-agents": {
+  ...Object.fromEntries(PRODUCT_SERVICES.map((service) => [service.slug, {
+    pains: service.slug === "e-commerce"
+      ? ["Shoppers lose their way before checkout", "Orders and stock live in disconnected systems", "The store cannot support your next stage of growth"]
+      : service.slug === "marketplaces"
+        ? ["Buyers struggle to find the right provider", "Seller onboarding requires manual coordination", "Your team lacks a clear view of platform activity"]
+        : ["Everyday tasks rely on spreadsheets and workarounds", "Users switch between disconnected tools", "Permissions and data flows are difficult to manage"],
+    gains: service.outcomes,
+    included: ["Requirements and release scope", "User flows and interface design", "Development and integration planning", "Validation and deployment handoff", "Options for maintenance and improvements"],
+    useCases: service.capabilities.slice(0, 3).map((item) => ({ industry: item.title.toUpperCase(), body: item.body })),
+  }])),
+  "web-development": {
     pains: [
-      "Calls ring out during jobs, lunch hours and after 7 PM",
-      "Customer details are scribbled on paper and lost",
-      "Enquiries go to whoever calls back first — usually a competitor",
+      "Your website no longer reflects your business",
+      "Slow or confusing journeys lose potential customers",
+      "Your team needs functionality a template cannot provide",
     ],
     gains: [
-      "Every call is answered on the first ring, all week",
-      "Issue, address and appliance land straight on the job card",
-      "Bookings are confirmed while the customer is still on the line",
+      "A clear, responsive experience across screen sizes",
+      "A website or application shaped around your goals",
+      "A maintainable foundation for future features",
     ],
-    included: BASE_INCLUDED,
+    included: [
+      "Discovery and requirements defined with your team",
+      "Design and development scoped to your project",
+      "Validation of agreed user journeys",
+      "Deployment and handoff planning",
+      "Options for ongoing improvements and support",
+    ],
     useCases: [
-      { industry: "APPLIANCE REPAIR", body: "Peak-season call spikes handled without extra front-desk staff." },
-      { industry: "AC & HVAC", body: "Summer enquiry rushes captured and slotted into the same-day queue." },
-      { industry: "SERVICE CENTRES", body: "Walk-in and phone enquiries logged under one customer record." },
+      {
+        industry: "BUSINESS WEBSITES",
+        body: "Company sites, landing pages, and content-driven experiences.",
+      },
+      {
+        industry: "WEB APPLICATIONS",
+        body: "Customer portals, dashboards, and booking systems.",
+      },
+      {
+        industry: "MARKETPLACES",
+        body: "Multi-vendor experiences with accounts, search, and transactions.",
+      },
     ],
   },
-  "automated-booking": {
+  "mobile-app-development": {
     pains: [
-      "Slots are double-booked across WhatsApp, calls and notebooks",
-      "Travel time between jobs is never accounted for",
-      "Customers get no confirmation and forget the visit",
+      "Users struggle to complete tasks on mobile",
+      "Disconnected tools interrupt the customer journey",
+      "An app idea needs a practical development plan",
     ],
     gains: [
-      "One live calendar across every technician and location",
-      "Slots offered only when travel and shift time actually allow",
-      "Automatic confirmation and reminder before every visit",
+      "A consistent experience for iOS and Android users",
+      "Core tasks designed for convenient mobile use",
+      "An app foundation that can evolve with your roadmap",
     ],
-    included: BASE_INCLUDED,
+    included: [
+      "Discovery and requirements defined with your team",
+      "Design and development scoped to your project",
+      "Validation of agreed user journeys",
+      "Deployment and handoff planning",
+      "Options for ongoing improvements and support",
+    ],
     useCases: [
-      { industry: "HOME SERVICES", body: "Recurring visits scheduled in one pass instead of one call at a time." },
-      { industry: "MOBILE & LAPTOP", body: "Pickup and drop slots booked alongside in-store repairs." },
-      { industry: "AUTOMOTIVE", body: "Bay capacity respected so no slot is promised twice." },
+      {
+        industry: "CONSUMER APPS",
+        body: "Useful everyday experiences with clear onboarding.",
+      },
+      {
+        industry: "BUSINESS APPS",
+        body: "Connected tools for teams working away from a desk.",
+      },
+      {
+        industry: "MARKETPLACES",
+        body: "Mobile experiences linking customers and providers.",
+      },
     ],
   },
-  "technician-dispatch": {
+  "custom-software": {
     pains: [
-      "Jobs are assigned by whoever picks up the phone first",
-      "Technicians cross the city for jobs near someone else",
-      "Skill mismatches force a second visit",
+      "Your business process is split across spreadsheets and chats",
+      "Off-the-shelf tools force awkward workarounds",
+      "Teams cannot find a reliable view of their work",
     ],
     gains: [
-      "Distance, skill, workload and ETA weighed on every assignment",
-      "Fewer wasted kilometres per technician per day",
-      "First-visit fix rate rises because the right person shows up",
+      "Tools that reflect your processes and responsibilities",
+      "Less duplicate entry across connected systems",
+      "A clearer view of the information your team needs",
     ],
-    included: BASE_INCLUDED,
+    included: [
+      "Discovery and requirements defined with your team",
+      "Design and development scoped to your project",
+      "Validation of agreed user journeys",
+      "Deployment and handoff planning",
+      "Options for ongoing improvements and support",
+    ],
     useCases: [
-      { industry: "AC & HVAC", body: "Specialist HVAC jobs routed only to certified technicians." },
-      { industry: "MULTI-LOCATION", body: "Work balanced across branches instead of overloading one team." },
-      { industry: "ELECTRONICS", body: "Board-level repairs sent to the bench, field faults to the road team." },
+      {
+        industry: "INTERNAL TOOLS",
+        body: "Approvals, reporting, and team workflows.",
+      },
+      {
+        industry: "BUSINESS SYSTEMS",
+        body: "CRM, inventory, HR, and quotation platforms.",
+      },
+      {
+        industry: "CUSTOMER PORTALS",
+        body: "Shared records and self-service experiences.",
+      },
     ],
   },
-  "service-jobs": {
+  "saas-development": {
     pains: [
-      "No single place shows what is running right now",
-      "Job history lives in chat threads and photos on phones",
-      "Completion notes arrive hours after the technician leaves",
+      "The product idea is too broad for a first release",
+      "Billing, roles, and onboarding are disconnected",
+      "Early architecture makes future changes difficult",
     ],
     gains: [
-      "One live board for every job, status and technician",
-      "Complete service history per customer and per machine",
-      "Field updates, parts and photos captured at the site",
+      "A focused first release with clear priorities",
+      "A connected product experience from signup to daily use",
+      "A foundation for iteration as your customer base grows",
     ],
-    included: BASE_INCLUDED,
+    included: [
+      "Discovery and requirements defined with your team",
+      "Design and development scoped to your project",
+      "Validation of agreed user journeys",
+      "Deployment and handoff planning",
+      "Options for ongoing improvements and support",
+    ],
     useCases: [
-      { industry: "APPLIANCE REPAIR", body: "Warranty and paid jobs tracked side by side with full history." },
-      { industry: "SERVICE CENTRES", body: "Bench queue and field queue managed from the same board." },
-      { industry: "HOME SERVICES", body: "Multi-technician jobs coordinated on a single record." },
+      {
+        industry: "B2B SOFTWARE",
+        body: "Tools that help businesses manage work and collaboration.",
+      },
+      {
+        industry: "VERTICAL SAAS",
+        body: "Products designed for a specific industry or workflow.",
+      },
+      {
+        industry: "SUBSCRIPTION PRODUCTS",
+        body: "Recurring-value products with accounts and billing.",
+      },
     ],
   },
-  "invoicing-billing": {
+  "ai-automation": {
     pains: [
-      "Invoices are typed out in the evening, days after the job",
-      "Parts and labour get missed, so revenue leaks quietly",
-      "Chasing payment means chasing people on WhatsApp",
+      "Repetitive tasks consume time across the team",
+      "Useful knowledge is difficult to search and access",
+      "AI experiments are disconnected from real workflows",
     ],
     gains: [
-      "Invoice generated the moment the job is marked complete",
-      "Labour, parts and tax calculated from the job record itself",
-      "Payment status tracked and reminders sent automatically",
+      "AI features designed for a concrete business use case",
+      "Connected workflows with clear human handoff points",
+      "A practical approach to evaluating output quality",
     ],
-    included: BASE_INCLUDED,
+    included: [
+      "Discovery and requirements defined with your team",
+      "Design and development scoped to your project",
+      "Validation of agreed user journeys",
+      "Deployment and handoff planning",
+      "Options for ongoing improvements and support",
+    ],
     useCases: [
-      { industry: "APPLIANCE REPAIR", body: "On-site invoice shared on WhatsApp before the technician leaves." },
-      { industry: "AUTOMOTIVE", body: "Estimate to final bill with parts and labour split clearly." },
-      { industry: "AMC ACCOUNTS", body: "Contract visits billed against the agreement, not one-off rates." },
+      {
+        industry: "AI PRODUCTS",
+        body: "Assistants and intelligent features inside your application.",
+      },
+      {
+        industry: "BUSINESS WORKFLOWS",
+        body: "Data processing, routing, and connected automation.",
+      },
+      {
+        industry: "CUSTOMER EXPERIENCES",
+        body: "Chat and voice interfaces with defined boundaries.",
+      },
     ],
   },
-  "business-automation": {
+  "ui-ux-design": {
     pains: [
-      "The same follow-up messages are typed every single day",
-      "Steps get skipped whenever the team is busy",
-      "Nobody knows where a job stalled until the customer calls",
+      "Users struggle to find the next step",
+      "Screens look disconnected across the product",
+      "Development starts before the experience is defined",
     ],
     gains: [
-      "Repetitive operational steps run on their own, every time",
-      "Consistent follow-up regardless of how busy the day is",
-      "Stalled jobs surface before the customer has to chase",
+      "Clearer journeys through complex product tasks",
+      "Consistent interfaces across screens and states",
+      "Design decisions connected to user and business needs",
     ],
-    included: BASE_INCLUDED,
+    included: [
+      "Discovery and requirements defined with your team",
+      "Design and development scoped to your project",
+      "Validation of agreed user journeys",
+      "Deployment and handoff planning",
+      "Options for ongoing improvements and support",
+    ],
     useCases: [
-      { industry: "ALL SERVICE TEAMS", body: "Lead to invoice sequences run without manual chasing." },
-      { industry: "MULTI-LOCATION", body: "The same process enforced at every branch." },
-      { industry: "GROWING TEAMS", body: "New staff follow the workflow instead of learning tribal habits." },
+      {
+        industry: "NEW PRODUCTS",
+        body: "Explore and shape the experience before development.",
+      },
+      {
+        industry: "REDESIGNS",
+        body: "Improve existing interfaces and user journeys.",
+      },
+      {
+        industry: "DESIGN SYSTEMS",
+        body: "Reusable patterns for a consistent product experience.",
+      },
     ],
   },
-  "amc-renewals": {
+  "cloud-integrations": {
     pains: [
-      "Contract end dates live in a spreadsheet nobody opens",
-      "Renewals are remembered only after they lapse",
-      "Covered visits get billed as one-off jobs by mistake",
+      "Manual handoffs keep business tools disconnected",
+      "Deployments depend on undocumented steps",
+      "Infrastructure needs are unclear before launch",
     ],
     gains: [
-      "Every contract tracked with visits used and visits remaining",
-      "Renewal reminders raised well before expiry",
-      "Recurring revenue protected instead of quietly lost",
+      "Connected systems with defined data flows",
+      "A repeatable path from development to deployment",
+      "Operational visibility as the product grows",
     ],
-    included: BASE_INCLUDED,
+    included: [
+      "Discovery and requirements defined with your team",
+      "Design and development scoped to your project",
+      "Validation of agreed user journeys",
+      "Deployment and handoff planning",
+      "Options for ongoing improvements and support",
+    ],
     useCases: [
-      { industry: "AC & HVAC", body: "Seasonal maintenance contracts scheduled ahead of peak months." },
-      { industry: "SERVICE CENTRES", body: "Corporate AMC accounts tracked per site and per machine." },
-      { industry: "HOME SERVICES", body: "Annual plans renewed with a single confirmation message." },
+      {
+        industry: "PRODUCT LAUNCHES",
+        body: "Prepare applications and environments for release.",
+      },
+      {
+        industry: "CONNECTED BUSINESS",
+        body: "Integrate CRMs, payments, and internal systems.",
+      },
+      {
+        industry: "PLATFORM GROWTH",
+        body: "Review infrastructure and bottlenecks as usage changes.",
+      },
     ],
   },
-  "whatsapp-communication": {
+  "maintenance-support": {
     pains: [
-      "Customer conversations are scattered across personal phones",
-      "Nobody can see what was promised to whom",
-      "Updates stop the moment the team gets busy",
+      "Issues accumulate after the initial release",
+      "Performance suffers as product usage grows",
+      "New features lack a clear implementation plan",
     ],
     gains: [
-      "Every conversation attached to the customer and the job",
-      "Confirmations, ETAs, invoices and feedback sent automatically",
-      "One shared history when staff change or hand over",
+      "A clear process for product improvements",
+      "Technical work prioritized around business needs",
+      "Continuity beyond the initial launch",
     ],
-    included: BASE_INCLUDED,
+    included: [
+      "Discovery and requirements defined with your team",
+      "Design and development scoped to your project",
+      "Validation of agreed user journeys",
+      "Deployment and handoff planning",
+      "Options for ongoing improvements and support",
+    ],
     useCases: [
-      { industry: "APPLIANCE REPAIR", body: "Booking, ETA and invoice delivered in one thread." },
-      { industry: "MOBILE & LAPTOP", body: "Repair status updates sent without a single manual message." },
-      { industry: "HOME SERVICES", body: "Feedback requests sent right after the visit closes." },
+      {
+        industry: "EXISTING PRODUCTS",
+        body: "Maintain and improve an application already in use.",
+      },
+      {
+        industry: "GROWING PLATFORMS",
+        body: "Prioritize optimization as requirements change.",
+      },
+      {
+        industry: "LONG-TERM ROADMAPS",
+        body: "Plan and deliver ongoing product enhancements.",
+      },
     ],
   },
 };
 
-export const DEFAULT_EXTRA: Extra = {
-  pains: [
-    "Work is coordinated across calls, chats and notebooks",
-    "Details fall through the gaps when the day gets busy",
-    "Nobody has one clear view of the operation",
-  ],
-  gains: [
-    "One connected record from the first call to payment",
-    "Automatic follow-through on every operational step",
-    "A live view of leads, jobs, technicians and revenue",
-  ],
-  included: BASE_INCLUDED,
-  useCases: [
-    { industry: "SERVICE TEAMS", body: "Built for repair and field-service operations of every size." },
-    { industry: "MULTI-LOCATION", body: "One process across branches and technician teams." },
-    { industry: "GROWING TEAMS", body: "Scales without adding back-office headcount." },
-  ],
-};
+export const DEFAULT_EXTRA: Extra = FEATURE_EXTRAS["custom-software"]!;

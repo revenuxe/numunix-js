@@ -2,37 +2,34 @@ import { Label, Heading, Accent, Reveal } from "./primitives";
 import { NODE_VIZ } from "./nodeviz";
 
 const NODES: [string, string, string][] = [
-  ["LEAD", "12", "NEW"],
-  ["AI CALL", "8", "QUALIFIED"],
-  ["BOOKING", "5", "CONFIRMED"],
-  ["TECHNICIAN", "7", "AVAILABLE"],
-  ["SERVICE JOB", "14", "ACTIVE"],
-  ["INVOICE", "₹48,250", "RAISED"],
-  ["PAYMENT", "₹36,800", "COLLECTED"],
-  ["AMC RENEWAL", "9", "DUE"],
+  ["DISCOVER", "Idea", "BUSINESS"],
+  ["DEFINE", "Scope", "PRODUCT"],
+  ["DESIGN", "UX", "EXPERIENCE"],
+  ["DEVELOP", "Code", "ENGINEERING"],
+  ["CONNECT", "APIs", "INTEGRATIONS"],
+  ["VALIDATE", "QA", "QUALITY"],
+  ["LAUNCH", "Cloud", "DEPLOYMENT"],
+  ["IMPROVE", "Grow", "ITERATION"],
 ];
 
 export function PlatformIntro() {
   return (
-    <section className="section-pad bg-[#f1f5f9]">
+    <section id="approach" className="section-pad bg-[#f1f5f9]">
       <div className="shell">
         <Reveal>
-          <Label tone="light">THE NUMUNIX PLATFORM</Label>
+          <Label tone="light">OUR APPROACH</Label>
         </Reveal>
         <div className="mt-10 grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20">
           <Reveal delay={60}>
             <Heading tone="light">
-              Everything your
+              From idea
               <br />
-              service business needs,
-              <br />
-              <Accent>working together.</Accent>
+              <Accent>to launch.</Accent>
             </Heading>
           </Reveal>
           <Reveal delay={140}>
             <p className="max-w-[44ch] text-[18px] leading-relaxed text-[#5d76a3] lg:pt-6 lg:text-[20px]">
-              One intelligent platform for leads, customers, technicians, jobs,
-              invoices and everything in between.
+              One team for design, development, and everything it takes to launch.
             </p>
           </Reveal>
         </div>
@@ -51,15 +48,15 @@ export function WorkflowVisualization() {
       {/* head */}
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#e6ecf5] px-5 py-5 sm:px-8">
         <div className="flex items-baseline gap-4">
-          <span className="label-mono text-[#1747b8]">NUMUNIX OPERATIONS</span>
-          <span className="label-mono hidden text-[#a8b7cc] sm:inline">/ LEAD → RENEWAL</span>
+          <span className="label-mono text-[#1747b8]">IDEA TO PRODUCT</span>
+          <span className="label-mono hidden text-[#a8b7cc] sm:inline">/ BUSINESS → GROWTH</span>
         </div>
         <span className="label-mono flex items-center gap-2 text-[#8190aa]">
           <span
             className="h-1.5 w-1.5 rounded-full bg-[#2563eb]"
             style={{ animation: "nx-pulse-dot 2.4s ease-in-out infinite" }}
           />
-          SYNCED 12s AGO
+          CONNECTED AT EVERY STEP
         </span>
       </div>
 

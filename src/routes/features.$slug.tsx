@@ -10,8 +10,8 @@ export const Route = createFileRoute("/features/$slug")({
   },
   head: ({ params, loaderData }) => {
     const f = loaderData?.feature;
-    const title = f?.metaTitle ?? "Feature — Numunix";
-    const desc = f?.metaDescription ?? "Numunix feature.";
+    const title = f?.metaTitle ?? "Service — Numunix";
+    const desc = f?.metaDescription ?? "Numunix digital product development services.";
     return {
       meta: [
         { title },
@@ -19,10 +19,10 @@ export const Route = createFileRoute("/features/$slug")({
         { property: "og:title", content: title },
         { property: "og:description", content: desc },
         { property: "og:type", content: "article" },
-        { property: "og:url", content: `/features/${params.slug}` },
+        { property: "og:url", content: `/features/${f?.slug ?? params.slug}` },
         { name: "twitter:card", content: "summary_large_image" },
       ],
-      links: [{ rel: "canonical", href: `/features/${params.slug}` }],
+      links: [{ rel: "canonical", href: `/features/${f?.slug ?? params.slug}` }],
       scripts: [
         {
           type: "application/ld+json",
@@ -30,12 +30,12 @@ export const Route = createFileRoute("/features/$slug")({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Features", item: "/features" },
+              { "@type": "ListItem", position: 1, name: "Services", item: "/features" },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: f?.name ?? params.slug,
-                item: `/features/${params.slug}`,
+                item: `/features/${f?.slug ?? params.slug}`,
               },
             ],
           }),

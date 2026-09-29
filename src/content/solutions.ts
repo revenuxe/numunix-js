@@ -14,276 +14,427 @@ export type Solution = {
   faq: { q: string; a: string }[];
 };
 
-const s = (x: Solution) => x;
-
 export const SOLUTIONS: Solution[] = [
-  s({
-    slug: "appliance-repair",
-    label: "APPLIANCE REPAIR",
-    name: "Appliance Repair",
-    title: "Appliance repair operations that run themselves.",
-    accentWord: "run themselves.",
+  {
+    slug: "web-development",
+    label: "WEB DEVELOPMENT",
+    name: "Web Development",
+    title: "Websites and web apps built for real-world growth.",
+    accentWord: "real-world growth.",
     intro:
-      "Washing machines, refrigerators, ovens and chimneys — Numunix answers the call, captures the appliance and fault, books the visit and bills the job before the technician leaves the door.",
-    metaTitle: "Appliance Repair Software with AI Call Agents | Numunix",
+      "Modern, responsive, high-performance websites and web applications built for speed, usability, and scalability — from company websites to portals and complex platforms.",
+    metaTitle: "Web Development | Numunix",
     metaDescription:
-      "Numunix runs appliance repair businesses end to end: AI call answering, booking, technician dispatch, job tracking, invoicing and AMC renewals.",
+      "Modern, responsive, high-performance websites and web applications built for speed, usability, and scalability — from company websites to portals and complex platforms.",
     stats: [
-      ["CALLS ANSWERED", "24/7"],
-      ["BOOKING TIME", "< 2 min"],
-      ["REPEAT VISITS", "Fewer"],
-      ["INVOICE DELAY", "None"],
+      ["FRONTEND", "React"],
+      ["FRAMEWORK", "Next.js"],
+      ["LANGUAGE", "TypeScript"],
+      ["EXPERIENCE", "Responsive"],
     ],
     challenges: [
-      "Peak-season calls ring out while technicians are on site",
-      "Appliance brand, model and fault are rarely captured properly",
-      "Warranty and paid jobs get mixed up in the same notebook",
+      "Your website no longer reflects your business",
+      "Slow or confusing journeys lose potential customers",
+      "Your team needs functionality a template cannot provide",
     ],
     wins: [
-      "Every enquiry answered and qualified on the first ring",
-      "Appliance, fault and address land straight on the job card",
-      "Warranty, paid and AMC work tracked separately and billed correctly",
+      "A clear, responsive experience across screen sizes",
+      "A website or application shaped around your goals",
+      "A maintainable foundation for future features",
     ],
     workflow: [
-      { step: "01", title: "Call captured", body: "The AI agent answers, identifies the customer and records the appliance and fault." },
-      { step: "02", title: "Visit booked", body: "A slot is offered from live technician availability and confirmed on WhatsApp." },
-      { step: "03", title: "Job completed", body: "Parts, labour and notes are captured at the customer's home." },
-      { step: "04", title: "Billed and followed up", body: "The invoice goes out instantly and feedback is requested automatically." },
+      {
+        step: "01",
+        title: "Discover",
+        body: "Understand your users, business problem, and requirements.",
+      },
+      {
+        step: "02",
+        title: "Design",
+        body: "Define the scope, experience, and technical approach.",
+      },
+      {
+        step: "03",
+        title: "Build and validate",
+        body: "Develop the agreed solution and check the key user journeys.",
+      },
+      {
+        step: "04",
+        title: "Launch and improve",
+        body: "Prepare for release and plan ongoing improvements.",
+      },
     ],
     faq: [
-      { q: "Can we track parts used per repair?", a: "Yes — parts and labour are recorded on the job and flow into the invoice." },
-      { q: "Does it handle multiple technicians?", a: "Yes, with availability, skill and workload considered on every assignment." },
+      {
+        q: "Can you redesign an existing website?",
+        a: "Yes. We can review the current content, user journeys, and technical setup, then scope a redesign or a focused improvement.",
+      },
+      {
+        q: "Can the website connect to our existing tools?",
+        a: "We can plan integrations with your CRM, payment provider, analytics, and other services based on their available APIs.",
+      },
     ],
-  }),
-  s({
-    slug: "ac-hvac",
-    label: "AC & HVAC",
-    name: "AC & HVAC",
-    title: "Handle the summer rush without adding staff.",
-    accentWord: "without adding staff.",
+  },
+  {
+    slug: "mobile-app-development",
+    label: "MOBILE DEVELOPMENT",
+    name: "Mobile App Development",
+    title: "Mobile apps designed around real users.",
+    accentWord: "real users.",
     intro:
-      "Installations, servicing and seasonal maintenance contracts — Numunix keeps the enquiry flood, the technician schedule and the AMC calendar under control through peak months.",
-    metaTitle: "AC & HVAC Service Management Software | Numunix",
+      "iOS and Android applications designed around your business goals and the way people use their phones. We build intuitive, connected experiences for consumer and business products.",
+    metaTitle: "Mobile App Development | Numunix",
     metaDescription:
-      "Numunix helps AC and HVAC businesses answer peak-season calls, schedule installations and servicing, dispatch certified technicians and renew AMC contracts on time.",
+      "iOS and Android applications designed around your business goals and the way people use their phones. We build intuitive, connected experiences for consumer and business products.",
     stats: [
-      ["PEAK CALLS", "All answered"],
-      ["SAME-DAY SLOTS", "Auto-offered"],
-      ["AMC TRACKING", "Built in"],
-      ["ROUTE WASTE", "Reduced"],
+      ["PLATFORMS", "iOS"],
+      ["PLATFORMS", "Android"],
+      ["FRAMEWORK", "React Native"],
+      ["APPROACH", "Mobile-first"],
     ],
     challenges: [
-      "Enquiry volume triples for three months and then collapses",
-      "Certified HVAC jobs get assigned to general technicians",
-      "Annual maintenance contracts lapse without anyone noticing",
+      "Users struggle to complete tasks on mobile",
+      "Disconnected tools interrupt the customer journey",
+      "An app idea needs a practical development plan",
     ],
     wins: [
-      "Seasonal spikes absorbed without hiring temporary front desk staff",
-      "Specialist jobs routed only to qualified technicians",
-      "AMC visits scheduled ahead of peak and renewals raised before expiry",
+      "A consistent experience for iOS and Android users",
+      "Core tasks designed for convenient mobile use",
+      "An app foundation that can evolve with your roadmap",
     ],
     workflow: [
-      { step: "01", title: "Enquiry qualified", body: "Installation, service or breakdown identified on the call itself." },
-      { step: "02", title: "Right skill matched", body: "Only certified HVAC technicians are recommended for specialist work." },
-      { step: "03", title: "Route balanced", body: "Distance, workload and ETA are weighed before the job is assigned." },
-      { step: "04", title: "Contract protected", body: "AMC visits are tracked and renewals raised well before expiry." },
+      {
+        step: "01",
+        title: "Discover",
+        body: "Understand your users, business problem, and requirements.",
+      },
+      {
+        step: "02",
+        title: "Design",
+        body: "Define the scope, experience, and technical approach.",
+      },
+      {
+        step: "03",
+        title: "Build and validate",
+        body: "Develop the agreed solution and check the key user journeys.",
+      },
+      {
+        step: "04",
+        title: "Launch and improve",
+        body: "Prepare for release and plan ongoing improvements.",
+      },
     ],
     faq: [
-      { q: "Can installation and service jobs use different flows?", a: "Yes — each service type can carry its own duration, checklist and pricing." },
-      { q: "Do we get seasonal reporting?", a: "Yes, with month-on-month job, revenue and conversion views." },
+      {
+        q: "Do you develop for both iOS and Android?",
+        a: "Yes. We use a cross-platform approach where it fits, and assess platform-specific requirements during discovery.",
+      },
+      {
+        q: "Can an app use our existing backend?",
+        a: "Yes. We review the API, authentication, data model, and mobile requirements before planning the integration.",
+      },
     ],
-  }),
-  s({
-    slug: "electronics-repair",
-    label: "ELECTRONICS REPAIR",
-    name: "Electronics Repair",
-    title: "Bench work and field work on one board.",
-    accentWord: "on one board.",
+  },
+  {
+    slug: "custom-software",
+    label: "CUSTOM SOFTWARE",
+    name: "Custom Software",
+    title: "Custom software designed around your business.",
+    accentWord: "your business.",
     intro:
-      "Board-level repairs, display replacements and component service — Numunix tracks every unit from intake to collection, with the full service history attached to the customer.",
-    metaTitle: "Electronics Repair Shop Management Software | Numunix",
+      "Business software built around your exact workflows, requirements, and operational needs. Replace disconnected steps with tools that support the way your team works.",
+    metaTitle: "Custom Software | Numunix",
     metaDescription:
-      "Numunix tracks electronics repair jobs from intake to collection — bench queue, field jobs, parts, status updates, invoicing and customer history in one system.",
+      "Business software built around your exact workflows, requirements, and operational needs. Replace disconnected steps with tools that support the way your team works.",
     stats: [
-      ["UNITS TRACKED", "Every one"],
-      ["STATUS UPDATES", "Automatic"],
-      ["HISTORY", "Per device"],
-      ["BILLING", "Instant"],
-    ],
-    challenges: [
-      "Units sit on the bench with no clear owner or status",
-      "Customers call repeatedly to ask what is happening",
-      "Parts cost is forgotten by the time the bill is written",
-    ],
-    wins: [
-      "One queue showing every unit, stage and technician",
-      "Status updates sent automatically at each stage",
-      "Parts and labour captured on the job and billed accurately",
-    ],
-    workflow: [
-      { step: "01", title: "Intake logged", body: "Device, fault and accessories recorded against the customer." },
-      { step: "02", title: "Assigned to bench", body: "The job lands with the technician who handles that category." },
-      { step: "03", title: "Progress shared", body: "Diagnosis, estimate approval and completion go out automatically." },
-      { step: "04", title: "Collected and billed", body: "Invoice raised on handover with the full repair history stored." },
-    ],
-    faq: [
-      { q: "Can we send estimates before repair?", a: "Yes — estimates can be shared and approved before work starts." },
-      { q: "Is past service history visible?", a: "Yes, per customer and per device." },
-    ],
-  }),
-  s({
-    slug: "mobile-laptop-repair",
-    label: "MOBILE & LAPTOP",
-    name: "Mobile & Laptop Repair",
-    title: "Walk-in and doorstep repair, one system.",
-    accentWord: "one system.",
-    intro:
-      "Counter jobs, pickups and doorstep visits all move through the same workflow — with status messages, estimates and invoices sent without a single manual WhatsApp.",
-    metaTitle: "Mobile & Laptop Repair Management Software | Numunix",
-    metaDescription:
-      "Numunix manages mobile and laptop repair businesses: walk-ins, pickup and drop, repair status updates, estimates, invoicing and customer history.",
-    stats: [
-      ["WALK-INS", "Logged"],
-      ["PICKUPS", "Scheduled"],
-      ["UPDATES", "Automatic"],
-      ["PAYMENTS", "Tracked"],
-    ],
-    challenges: [
-      "Counter jobs are written in a register and never followed up",
-      "Pickup and drop slots clash with in-store repairs",
-      "Customers keep calling for a status nobody can see",
-    ],
-    wins: [
-      "Every job — counter, pickup or doorstep — on one live board",
-      "Pickup slots booked against real technician availability",
-      "Status, estimate and invoice delivered on WhatsApp automatically",
-    ],
-    workflow: [
-      { step: "01", title: "Job created", body: "Device, issue and customer captured at the counter or on the call." },
-      { step: "02", title: "Slot or bench", body: "Doorstep visits are scheduled; store jobs join the bench queue." },
-      { step: "03", title: "Estimate approved", body: "The quote goes out and approval is recorded on the job." },
-      { step: "04", title: "Handover", body: "Invoice sent, payment tracked and feedback requested." },
-    ],
-    faq: [
-      { q: "Can we manage more than one store?", a: "Yes — multi-location operations are supported with per-branch views." },
-      { q: "Can customers be reminded to collect?", a: "Yes, automatic reminders can be triggered on ready-for-collection." },
-    ],
-  }),
-  s({
-    slug: "automotive",
-    label: "AUTOMOTIVE",
-    name: "Automotive Service",
-    title: "Bay capacity, jobs and billing in sync.",
-    accentWord: "in sync.",
-    intro:
-      "Garages, roadside assistance and mobile mechanics — Numunix books only what your bays and mechanics can actually deliver, then turns the job card into an itemised invoice.",
-    metaTitle: "Garage & Automotive Service Software | Numunix",
-    metaDescription:
-      "Numunix runs automotive service operations: booking against real bay capacity, mechanic assignment, job cards, estimates, parts, invoicing and service reminders.",
-    stats: [
-      ["BAY CLASHES", "Prevented"],
-      ["JOB CARDS", "Digital"],
-      ["ESTIMATES", "Approved fast"],
-      ["REMINDERS", "Automatic"],
-    ],
-    challenges: [
-      "Slots are promised twice because capacity is not visible",
-      "Job cards live on paper and get lost before billing",
-      "Service reminders are never sent, so customers drift away",
-    ],
-    wins: [
-      "Bookings respect bay and mechanic capacity in real time",
-      "Digital job cards with parts, labour and approvals",
-      "Periodic service reminders sent on their own",
-    ],
-    workflow: [
-      { step: "01", title: "Booking taken", body: "The AI agent captures vehicle, issue and preferred time." },
-      { step: "02", title: "Bay assigned", body: "Work is slotted where capacity and skill actually exist." },
-      { step: "03", title: "Work approved", body: "Estimate shared, approval recorded, parts added to the card." },
-      { step: "04", title: "Billed and recalled", body: "Invoice issued and the next service reminder scheduled." },
-    ],
-    faq: [
-      { q: "Can we store vehicle history?", a: "Yes — every visit is kept against the vehicle and the owner." },
-      { q: "Does it work for roadside teams?", a: "Yes, mobile mechanics are dispatched by distance and availability." },
-    ],
-  }),
-  s({
-    slug: "home-services",
-    label: "HOME SERVICES",
-    name: "Home Services",
-    title: "Plumbing, electrical and handyman work, organised.",
-    accentWord: "organised.",
-    intro:
-      "Multi-technician teams covering a city need more than a chat group. Numunix takes the booking, sends the right person, tracks the visit and collects the payment.",
-    metaTitle: "Home Services Business Management Software | Numunix",
-    metaDescription:
-      "Numunix organises plumbing, electrical and handyman teams: automated booking, technician dispatch, job tracking, invoicing, follow-ups and recurring plans.",
-    stats: [
-      ["JOBS/DAY", "More per tech"],
-      ["TRAVEL", "Shorter routes"],
-      ["FOLLOW-UP", "Automatic"],
-      ["PLANS", "Renewed"],
-    ],
-    challenges: [
-      "Jobs are handed out on a WhatsApp group with no record",
-      "Technicians criss-cross the city all day",
-      "Recurring plans are renewed only if someone remembers",
-    ],
-    wins: [
-      "Every job assigned with distance, skill and workload considered",
-      "Shorter routes and more completed visits per technician",
-      "Annual plans tracked and renewed with one confirmation",
-    ],
-    workflow: [
-      { step: "01", title: "Request captured", body: "Service type, address and urgency recorded on the call." },
-      { step: "02", title: "Technician sent", body: "The nearest qualified, available technician is recommended." },
-      { step: "03", title: "Visit tracked", body: "Status, notes and photos are captured on site." },
-      { step: "04", title: "Closed out", body: "Invoice, payment and feedback handled automatically." },
-    ],
-    faq: [
-      { q: "Can one job need two technicians?", a: "Yes — multi-technician jobs are coordinated on a single record." },
-      { q: "Do you support subscription plans?", a: "Yes, recurring plans and their visits are tracked and renewed." },
-    ],
-  }),
-  s({
-    slug: "service-centers",
-    label: "SERVICE CENTERS",
-    name: "Service Centers",
-    title: "Multi-location service operations under one roof.",
-    accentWord: "under one roof.",
-    intro:
-      "Authorised and multi-branch service operations get one process, one customer record and one reporting view — across every location and every technician team.",
-    metaTitle: "Multi-Location Service Center Management | Numunix",
-    metaDescription:
-      "Numunix gives multi-location service centers one workflow: centralised call handling, branch-level dispatch, job tracking, billing, AMC contracts and reporting.",
-    stats: [
-      ["LOCATIONS", "Unlimited"],
-      ["PROCESS", "Identical"],
-      ["REPORTING", "Consolidated"],
+      ["BACKEND", "Node.js"],
+      ["INTEGRATION", "REST APIs"],
+      ["DATA", "SQL / NoSQL"],
       ["ACCESS", "Role-based"],
     ],
     challenges: [
-      "Every branch runs its own process and its own spreadsheet",
-      "Head office cannot see load or revenue until month end",
-      "Corporate AMC accounts span sites and machines with no tracking",
+      "Your business process is split across spreadsheets and chats",
+      "Off-the-shelf tools force awkward workarounds",
+      "Teams cannot find a reliable view of their work",
     ],
     wins: [
-      "One workflow enforced across branches and teams",
-      "Live consolidated view of jobs, technicians and revenue",
-      "Contracts tracked per site, per machine and per visit",
+      "Tools that reflect your processes and responsibilities",
+      "Less duplicate entry across connected systems",
+      "A clearer view of the information your team needs",
     ],
     workflow: [
-      { step: "01", title: "Centralised intake", body: "Calls and enquiries land in one queue regardless of branch." },
-      { step: "02", title: "Routed to branch", body: "Work is assigned to the right location and technician team." },
-      { step: "03", title: "Executed locally", body: "Branch teams work the same job board and job card." },
-      { step: "04", title: "Reported centrally", body: "Head office sees load, SLA and revenue across locations." },
+      {
+        step: "01",
+        title: "Discover",
+        body: "Understand your users, business problem, and requirements.",
+      },
+      {
+        step: "02",
+        title: "Design",
+        body: "Define the scope, experience, and technical approach.",
+      },
+      {
+        step: "03",
+        title: "Build and validate",
+        body: "Develop the agreed solution and check the key user journeys.",
+      },
+      {
+        step: "04",
+        title: "Launch and improve",
+        body: "Prepare for release and plan ongoing improvements.",
+      },
     ],
     faq: [
-      { q: "Can branch managers see only their data?", a: "Yes — role-based access controls what each person can view." },
-      { q: "Is reporting per branch available?", a: "Yes, per branch and consolidated." },
+      {
+        q: "Can you work with our current workflows?",
+        a: "Yes. Discovery starts with your processes, users, and constraints so the software is designed around the business.",
+      },
+      {
+        q: "Can you migrate data from existing systems?",
+        a: "We can scope migration after reviewing the source data, export options, quality, and access requirements.",
+      },
     ],
-  }),
+  },
+  {
+    slug: "saas-development",
+    label: "SAAS DEVELOPMENT",
+    name: "SaaS Development",
+    title: "From your first MVP to a scalable SaaS platform.",
+    accentWord: "scalable SaaS platform.",
+    intro:
+      "We design and build SaaS platforms from architecture to launch. Validate the core product, support your first users, and create a technical foundation for growth.",
+    metaTitle: "SaaS Development | Numunix",
+    metaDescription:
+      "We design and build SaaS platforms from architecture to launch. Validate the core product, support your first users, and create a technical foundation for growth.",
+    stats: [
+      ["FIRST RELEASE", "MVP"],
+      ["PRODUCT", "B2B / B2C"],
+      ["BILLING", "Subscriptions"],
+      ["HOSTING", "Cloud"],
+    ],
+    challenges: [
+      "The product idea is too broad for a first release",
+      "Billing, roles, and onboarding are disconnected",
+      "Early architecture makes future changes difficult",
+    ],
+    wins: [
+      "A focused first release with clear priorities",
+      "A connected product experience from signup to daily use",
+      "A foundation for iteration as your customer base grows",
+    ],
+    workflow: [
+      {
+        step: "01",
+        title: "Discover",
+        body: "Understand your users, business problem, and requirements.",
+      },
+      {
+        step: "02",
+        title: "Design",
+        body: "Define the scope, experience, and technical approach.",
+      },
+      {
+        step: "03",
+        title: "Build and validate",
+        body: "Develop the agreed solution and check the key user journeys.",
+      },
+      {
+        step: "04",
+        title: "Launch and improve",
+        body: "Prepare for release and plan ongoing improvements.",
+      },
+    ],
+    faq: [
+      {
+        q: "Can you start with an MVP?",
+        a: "Yes. We define the core use case and prioritize features so the first release can test the product with real users.",
+      },
+      {
+        q: "Do you support the product after launch?",
+        a: "We can scope ongoing maintenance, performance improvements, and new features around your product roadmap.",
+      },
+    ],
+  },
+  {
+    slug: "ai-automation",
+    label: "AI & AUTOMATION",
+    name: "AI & Automation",
+    title: "Practical AI built into your product and workflows.",
+    accentWord: "product and workflows.",
+    intro:
+      "AI-powered applications, intelligent workflows, integrations, chatbots, and automation systems built around real business problems and the people who use them.",
+    metaTitle: "AI & Automation | Numunix",
+    metaDescription:
+      "AI-powered applications, intelligent workflows, integrations, chatbots, and automation systems built around real business problems and the people who use them.",
+    stats: [
+      ["APPLICATIONS", "LLMs"],
+      ["INTERACTION", "Agents"],
+      ["KNOWLEDGE", "Search"],
+      ["WORKFLOWS", "Automation"],
+    ],
+    challenges: [
+      "Repetitive tasks consume time across the team",
+      "Useful knowledge is difficult to search and access",
+      "AI experiments are disconnected from real workflows",
+    ],
+    wins: [
+      "AI features designed for a concrete business use case",
+      "Connected workflows with clear human handoff points",
+      "A practical approach to evaluating output quality",
+    ],
+    workflow: [
+      {
+        step: "01",
+        title: "Discover",
+        body: "Understand your users, business problem, and requirements.",
+      },
+      {
+        step: "02",
+        title: "Design",
+        body: "Define the scope, experience, and technical approach.",
+      },
+      {
+        step: "03",
+        title: "Build and validate",
+        body: "Develop the agreed solution and check the key user journeys.",
+      },
+      {
+        step: "04",
+        title: "Launch and improve",
+        body: "Prepare for release and plan ongoing improvements.",
+      },
+    ],
+    faq: [
+      {
+        q: "How do you choose the AI approach?",
+        a: "We start with the task, data, quality expectations, and operating constraints, then select an appropriate model and integration approach.",
+      },
+      {
+        q: "Can people review or take over an automated task?",
+        a: "Yes. We can design review steps, approvals, and handoffs around the level of control the workflow requires.",
+      },
+    ],
+  },
+  {
+    slug: "ui-ux-design",
+    label: "UI/UX DESIGN",
+    name: "UI/UX Design",
+    title: "Make complex products simple to use.",
+    accentWord: "simple to use.",
+    intro:
+      "Clean, intuitive interfaces designed around usability, clarity, and conversion. We connect business goals with complete user journeys, from the first screen to the final task.",
+    metaTitle: "UI/UX Design | Numunix",
+    metaDescription:
+      "Clean, intuitive interfaces designed around usability, clarity, and conversion. We connect business goals with complete user journeys, from the first screen to the final task.",
+    stats: [
+      ["DISCOVERY", "Research"],
+      ["STRUCTURE", "User flows"],
+      ["EXPLORATION", "Wireframes"],
+      ["DELIVERY", "Interfaces"],
+    ],
+    challenges: [
+      "Users struggle to find the next step",
+      "Screens look disconnected across the product",
+      "Development starts before the experience is defined",
+    ],
+    wins: [
+      "Clearer journeys through complex product tasks",
+      "Consistent interfaces across screens and states",
+      "Design decisions connected to user and business needs",
+    ],
+    workflow: [
+      {
+        step: "01",
+        title: "Discover",
+        body: "Understand your users, business problem, and requirements.",
+      },
+      {
+        step: "02",
+        title: "Design",
+        body: "Define the scope, experience, and technical approach.",
+      },
+      {
+        step: "03",
+        title: "Build and validate",
+        body: "Develop the agreed solution and check the key user journeys.",
+      },
+      {
+        step: "04",
+        title: "Launch and improve",
+        body: "Prepare for release and plan ongoing improvements.",
+      },
+    ],
+    faq: [
+      {
+        q: "Can you design before development begins?",
+        a: "Yes. We can scope discovery, user flows, wireframes, and interface design as the first phase of your project.",
+      },
+      {
+        q: "Can you work with an existing brand?",
+        a: "Yes. We can use your current brand and design system while improving the product experience.",
+      },
+    ],
+  },
+  {
+    slug: "cloud-integrations",
+    label: "CLOUD & INTEGRATIONS",
+    name: "Cloud & Integrations",
+    title: "Connect your product. Prepare it for production.",
+    accentWord: "production.",
+    intro:
+      "Deployment, infrastructure, databases, storage, and integrations that support your product. Connect payment gateways, CRMs, AI models, third-party services, and internal systems.",
+    metaTitle: "Cloud & Integrations | Numunix",
+    metaDescription:
+      "Deployment, infrastructure, databases, storage, and integrations that support your product. Connect payment gateways, CRMs, AI models, third-party services, and internal systems.",
+    stats: [
+      ["INFRASTRUCTURE", "AWS"],
+      ["DEPLOYMENT", "Vercel"],
+      ["DELIVERY", "CI/CD"],
+      ["CONNECTIONS", "APIs"],
+    ],
+    challenges: [
+      "Manual handoffs keep business tools disconnected",
+      "Deployments depend on undocumented steps",
+      "Infrastructure needs are unclear before launch",
+    ],
+    wins: [
+      "Connected systems with defined data flows",
+      "A repeatable path from development to deployment",
+      "Operational visibility as the product grows",
+    ],
+    workflow: [
+      {
+        step: "01",
+        title: "Discover",
+        body: "Understand your users, business problem, and requirements.",
+      },
+      {
+        step: "02",
+        title: "Design",
+        body: "Define the scope, experience, and technical approach.",
+      },
+      {
+        step: "03",
+        title: "Build and validate",
+        body: "Develop the agreed solution and check the key user journeys.",
+      },
+      {
+        step: "04",
+        title: "Launch and improve",
+        body: "Prepare for release and plan ongoing improvements.",
+      },
+    ],
+    faq: [
+      {
+        q: "Can you use our existing cloud account?",
+        a: "Yes. We can review the current environment and plan work around your infrastructure, access, and deployment requirements.",
+      },
+      {
+        q: "Which integrations can you build?",
+        a: "We assess the available APIs, authentication, data formats, and provider limits for each service before defining the integration.",
+      },
+    ],
+  },
 ];
 
-export const solutionBySlug = (slug: string) =>
-  SOLUTIONS.find((x) => x.slug === slug);
+export const solutionBySlug = (slug: string) => SOLUTIONS.find((s) => s.slug === slug);

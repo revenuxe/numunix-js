@@ -20,9 +20,9 @@ import {
 } from "@/components/numunix/LightSections";
 import Footer from "@/components/numunix/Footer";
 
-const TITLE = "Numunix — AI-Powered Operations for Service Businesses";
+const TITLE = "Numunix — Software, Websites, Apps & Digital Products";
 const DESC =
-  "Numunix automates repair and field-service operations from lead to invoice: AI call agents, booking, technician dispatch, jobs, invoicing and follow-ups.";
+  "We design and develop software, websites, apps, and digital products built for real-world growth. Explore web, mobile, SaaS, custom software, AI, and UI/UX services.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
