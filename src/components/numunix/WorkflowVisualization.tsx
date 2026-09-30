@@ -61,13 +61,13 @@ export function WorkflowVisualization() {
       </div>
 
       {/* flow rail */}
-      <div className="relative">
+      <div className="relative bg-[#f0f4fa]">
         <div className="pointer-events-none absolute inset-x-0 top-1/2 hidden h-px bg-[linear-gradient(90deg,transparent,#cddcf2,transparent)] xl:block" />
-        <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8">
+        <div className="grid grid-cols-2 gap-4 p-5 sm:gap-5 sm:p-6 md:grid-cols-4 xl:grid-cols-8">
           {NODES.map(([n, v, u], i) => (
             <div
               key={n}
-              className="group relative flex flex-col justify-between overflow-hidden border-r border-b border-[#e6ecf5] px-4 py-5 transition-colors duration-300 hover:bg-[#f5f8fd] sm:px-6 sm:py-6"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[#e1eaf5] bg-white px-4 py-5 transition-all duration-300 hover:border-[#b8ccec] hover:bg-[#f5f8fd] hover:shadow-[0_4px_20px_-10px_rgba(30,78,216,0.15)] sm:px-5 sm:py-6"
             >
               <span className="pointer-events-none absolute inset-x-0 -top-px h-px scale-x-0 bg-gradient-to-r from-transparent via-[#2563eb] to-transparent transition-transform duration-500 group-hover:scale-x-100" />
 

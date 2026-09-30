@@ -1,25 +1,15 @@
 import { useEffect, useState } from "react";
 import { Menu, X, Grip } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { BrandLogo } from "./BrandLogo";
 
 const NAV: [string, string][] = [
   ["SERVICES", "/features"],
   ["PRODUCTS", "/#products"],
-  ["PROCESS", "/#process"],
-  ["TECHNOLOGY", "/#technology"],
+  ["PROCESS", "/process"],
+  ["TECHNOLOGY", "/technology"],
   ["CONTACT", "/contact"],
 ];
-
-function Logo() {
-  return (
-    <a
-      href="/"
-      className="text-[1.15rem] font-medium tracking-[-0.02em] text-white"
-    >
-      NUMUNIX
-    </a>
-  );
-}
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -37,11 +27,11 @@ export function Header() {
       <div
         className={cn(
           "transition-colors duration-300",
-          scrolled ? "bg-[#05070c]/70 backdrop-blur-xl" : "bg-transparent",
+          scrolled ? "bg-[#05070c]" : "bg-transparent",
         )}
       >
         <div className="shell flex items-center justify-between py-4">
-          <Logo />
+          <BrandLogo variant="header" className="w-[112px] min-[375px]:w-[140px] sm:w-[180px]" />
 
           <div className="hidden items-center gap-3 lg:flex">
             <nav
@@ -66,12 +56,6 @@ export function Header() {
               </span>
             </nav>
 
-            <a
-              href="/contact"
-              className="label-mono rounded-xl bg-[#dbe6f8] px-5 py-3 text-[#102a63] transition-all hover:-translate-y-0.5 hover:bg-white"
-            >
-              LET’S TALK
-            </a>
             <a
               href="/contact"
               className="label-mono rounded-xl bg-[#1e4ed8] px-5 py-3 text-white transition-all hover:-translate-y-0.5 hover:bg-[#2563eb] hover:shadow-[0_12px_34px_-12px_rgba(59,130,246,0.9)]"
@@ -111,9 +95,6 @@ export function Header() {
                 {n}
               </a>
             ))}
-            <a href="/contact" className="label-mono block pt-4 text-white/80">
-              LET’S TALK
-            </a>
           </div>
         </div>
       )}

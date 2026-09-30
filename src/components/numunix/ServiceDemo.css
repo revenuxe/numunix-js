@@ -661,9 +661,11 @@
   place-items: center;
   width: 43px;
   height: 43px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #153c8d, #477de7);
-  color: white;
+  flex-shrink: 0;
+  border: 1px solid #d5e1f3;
+  border-radius: 10px;
+  background: #f3f7fd;
+  color: #2455a4;
 }
 .sd-ai-core strong {
   display: block;

@@ -34,7 +34,7 @@ export function AIAgentsSection() {
                 EXPLORE AI
               </Btn>
               <Btn as="a" href="/contact" variant="ghostDark">
-                LET’S TALK
+                CONTACT
               </Btn>
             </div>
           </Reveal>
@@ -232,8 +232,8 @@ export function FinalCTA() {
             <Btn as="a" href="/contact">
               START YOUR PROJECT
             </Btn>
-            <Btn as="a" href="/contact" variant="ghostDark">
-              LET’S TALK
+            <Btn as="a" href="/features" variant="ghostDark">
+              EXPLORE SERVICES
             </Btn>
           </div>
         </Reveal>

@@ -4,6 +4,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import NumunixRibbonScene from "./NumunixRibbonScene";
 import ContactBand from "./ContactBand";
+import { StatStrip } from "./PageShell";
 import { Label, Heading, Accent, Btn, Reveal } from "./primitives";
 import ServiceDemo from "./ServiceDemo";
 import { FEATURES, type Feature } from "@/content/features";
@@ -49,12 +50,13 @@ export function FeaturePage({ feature }: { feature: Feature }) {
               <p className="max-w-[46ch] text-[17px] leading-relaxed text-white/60 lg:text-[19px]">
                 {feature.intro}
               </p>
-              <div className="mt-6 flex flex-wrap gap-3">
+              <div className="hero-actions mt-6 flex flex-wrap gap-3">
                 <Btn as="a" href="/contact">
                   START YOUR PROJECT
                 </Btn>
-                <Btn as="a" href={CONTACT.emailHref} variant="ghostDark">
-                  EMAIL US
+                <Btn as="a" href={CONTACT.whatsappHref} variant="ghostDark">
+                  <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden="true"><path fillRule="evenodd" clipRule="evenodd" d="M3.50002 12C3.50002 7.30558 7.3056 3.5 12 3.5C16.6944 3.5 20.5 7.30558 20.5 12C20.5 16.6944 16.6944 20.5 12 20.5C10.3278 20.5 8.77127 20.0182 7.45798 19.1861C7.21357 19.0313 6.91408 18.9899 6.63684 19.0726L3.75769 19.9319L4.84173 17.3953C4.96986 17.0955 4.94379 16.7521 4.77187 16.4751C3.9657 15.176 3.50002 13.6439 3.50002 12ZM12 1.5C6.20103 1.5 1.50002 6.20101 1.50002 12C1.50002 13.8381 1.97316 15.5683 2.80465 17.0727L1.08047 21.107C0.928048 21.4637 0.99561 21.8763 1.25382 22.1657C1.51203 22.4552 1.91432 22.5692 2.28599 22.4582L6.78541 21.1155C8.32245 21.9965 10.1037 22.5 12 22.5C17.799 22.5 22.5 17.799 22.5 12C22.5 6.20101 17.799 1.5 12 1.5ZM14.2925 14.1824L12.9783 15.1081C12.3628 14.7575 11.6823 14.2681 10.9997 13.5855C10.2901 12.8759 9.76402 12.1433 9.37612 11.4713L10.2113 10.7624C10.5697 10.4582 10.6678 9.94533 10.447 9.53028L9.38284 7.53028C9.23954 7.26097 8.98116 7.0718 8.68115 7.01654C8.38113 6.96129 8.07231 7.046 7.84247 7.24659L7.52696 7.52195C6.76823 8.18414 6.3195 9.2723 6.69141 10.3741C7.07698 11.5163 7.89983 13.314 9.58552 14.9997C11.3991 16.8133 13.2413 17.5275 14.3186 17.8049C15.1866 18.0283 16.008 17.7288 16.5868 17.2572L17.1783 16.7752C17.4313 16.5691 17.5678 16.2524 17.544 15.9269C17.5201 15.6014 17.3389 15.308 17.0585 15.1409L15.3802 14.1409C15.0412 13.939 14.6152 13.9552 14.2925 14.1824Z" fill="currentColor"/></svg>
+                  WHATSAPP NOW
                 </Btn>
               </div>
             </Reveal>
@@ -62,21 +64,7 @@ export function FeaturePage({ feature }: { feature: Feature }) {
         </section>
 
         {/* STATS strip */}
-        <section className="border-y border-white/[0.07] bg-[#07111f]">
-          <div className="shell grid grid-cols-2 lg:grid-cols-4">
-            {feature.stats.map(([k, v], i) => (
-              <div
-                key={k}
-                className={`border-white/[0.07] px-1 py-7 lg:py-9 ${i % 2 === 0 ? "border-r" : ""} ${i < 2 ? "border-b lg:border-b-0" : ""} lg:border-r lg:last:border-r-0`}
-              >
-                <div className="font-mono text-[26px] leading-none font-light text-white lg:text-[32px]">
-                  {v}
-                </div>
-                <div className="label-mono mt-2.5 text-[#8fb4e8]">{k}</div>
-              </div>
-            ))}
-          </div>
-        </section>
+        <StatStrip stats={feature.stats} />
 
         {/* LIVE DEMO — light */}
         <section className="section-pad bg-[#f1f5f9]">
@@ -324,8 +312,9 @@ export function FeaturePage({ feature }: { feature: Feature }) {
               <Btn as="a" href="/contact">
                 START YOUR PROJECT
               </Btn>
-              <Btn as="a" href={CONTACT.emailHref} variant="ghostDark">
-                EMAIL US
+              <Btn as="a" href={CONTACT.whatsappHref} variant="ghostDark">
+                <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden="true"><path fillRule="evenodd" clipRule="evenodd" d="M3.50002 12C3.50002 7.30558 7.3056 3.5 12 3.5C16.6944 3.5 20.5 7.30558 20.5 12C20.5 16.6944 16.6944 20.5 12 20.5C10.3278 20.5 8.77127 20.0182 7.45798 19.1861C7.21357 19.0313 6.91408 18.9899 6.63684 19.0726L3.75769 19.9319L4.84173 17.3953C4.96986 17.0955 4.94379 16.7521 4.77187 16.4751C3.9657 15.176 3.50002 13.6439 3.50002 12ZM12 1.5C6.20103 1.5 1.50002 6.20101 1.50002 12C1.50002 13.8381 1.97316 15.5683 2.80465 17.0727L1.08047 21.107C0.928048 21.4637 0.99561 21.8763 1.25382 22.1657C1.51203 22.4552 1.91432 22.5692 2.28599 22.4582L6.78541 21.1155C8.32245 21.9965 10.1037 22.5 12 22.5C17.799 22.5 22.5 17.799 22.5 12C22.5 6.20101 17.799 1.5 12 1.5ZM14.2925 14.1824L12.9783 15.1081C12.3628 14.7575 11.6823 14.2681 10.9997 13.5855C10.2901 12.8759 9.76402 12.1433 9.37612 11.4713L10.2113 10.7624C10.5697 10.4582 10.6678 9.94533 10.447 9.53028L9.38284 7.53028C9.23954 7.26097 8.98116 7.0718 8.68115 7.01654C8.38113 6.96129 8.07231 7.046 7.84247 7.24659L7.52696 7.52195C6.76823 8.18414 6.3195 9.2723 6.69141 10.3741C7.07698 11.5163 7.89983 13.314 9.58552 14.9997C11.3991 16.8133 13.2413 17.5275 14.3186 17.8049C15.1866 18.0283 16.008 17.7288 16.5868 17.2572L17.1783 16.7752C17.4313 16.5691 17.5678 16.2524 17.544 15.9269C17.5201 15.6014 17.3389 15.308 17.0585 15.1409L15.3802 14.1409C15.0412 13.939 14.6152 13.9552 14.2925 14.1824Z" fill="currentColor"/></svg>
+                WHATSAPP NOW
               </Btn>
             </div>
           </div>

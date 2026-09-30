@@ -5,6 +5,7 @@ import {
   CheckCheck,
   ChevronRight,
   Code2,
+  Cpu,
   CreditCard,
   Database,
   Globe,
@@ -17,7 +18,6 @@ import {
   ShieldCheck,
   ShoppingBag,
   Smartphone,
-  Sparkles,
   Workflow,
 } from "lucide-react";
 import "./ServiceDemo.css";
@@ -338,7 +338,7 @@ function AIScene({ phase }: { phase: number }) {
       <div className="sd-connector" />
       <div className={`sd-ai-core ${phase >= 1 ? "is-active" : ""}`}>
         <div className="sd-ai-icon">
-          <Sparkles size={24} />
+          <Cpu size={22} strokeWidth={1.5} aria-hidden="true" />
         </div>
         <div>
           <small>YOUR AI ASSISTANT</small>

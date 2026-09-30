@@ -10,11 +10,12 @@ import {
   Btn,
   Reveal,
 } from "@/components/numunix/primitives";
-import { CONTACT } from "@/content/site";
+import { CONTACT, SITE_URL } from "@/content/site";
+import { ContactFormSection } from "@/components/numunix/ContactFormSection";
 
 const TITLE = "Contact Numunix — Start Your Digital Product Project";
 const DESC =
-  "Contact Numunix to discuss web development, mobile apps, SaaS, custom software, AI, and design. Call +91 98862 85028 or email Numunix@gmail.com.";
+  "Contact Numunix to discuss web development, mobile apps, SaaS, custom software, AI, and design. Call +91 98862 85028 or email numunix@gmail.com.";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -24,9 +25,10 @@ export const Route = createFileRoute("/contact")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_URL}/contact` },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/contact` }],
   }),
   component: ContactPage,
 });
@@ -63,15 +65,17 @@ function ContactPage() {
                 Share your idea and goals. We’ll help shape the next step.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Btn as="a" href={CONTACT.emailHref}>
-                  EMAIL US
+                <Btn as="a" href="#enquiry">
+                  START YOUR ENQUIRY
                 </Btn>
               </div>
             </Reveal>
           </div>
         </section>
 
-        <section className="section-pad bg-[#f1f5f9]">
+        <ContactFormSection />
+
+        <section className="section-pad border-t border-[#dbe5f2] bg-[#f7f9fc]">
           <div className="shell grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
             <Reveal>
               <Label tone="light">DIRECT LINES</Label>
@@ -83,7 +87,7 @@ function ContactPage() {
                   [Phone, "PHONE", CONTACT.phone, CONTACT.phoneHref],
                   [Mail, "EMAIL", CONTACT.email, CONTACT.emailHref],
                   [Clock, "HOURS", CONTACT.hours, ""],
-                  [MapPin, "SERVING", "Startups, businesses & organizations", ""],
+                  [MapPin, "ADDRESS", CONTACT.address, ""],
                 ].map(([Icon, k, v, href]: any) => (
                   <a
                     key={k}

@@ -63,7 +63,7 @@ export function PageHero({
           <p className="max-w-[46ch] text-[17px] leading-relaxed text-white/60 lg:text-[19px]">
             {body}
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="hero-actions mt-6 flex flex-wrap gap-3">
             <Btn as="a" href={primary.href}>
               {primary.label}
             </Btn>
@@ -86,12 +86,12 @@ export function StatStrip({ stats }: { stats: [string, string][] }) {
         {stats.map(([k, v], i) => (
           <div
             key={k}
-            className={`border-white/[0.07] px-1 py-7 lg:py-9 ${i % 2 === 0 ? "border-r" : ""} ${i < 2 ? "border-b lg:border-b-0" : ""} lg:border-r lg:last:border-r-0`}
+            className={`min-w-0 border-white/[0.07] px-3 py-5 sm:px-5 sm:py-7 lg:py-8 ${i % 2 === 0 ? "border-r" : ""} ${i < 2 ? "border-b lg:border-b-0" : ""} lg:border-r lg:last:border-r-0`}
           >
-            <div className="font-mono text-[26px] leading-none font-light text-white lg:text-[32px]">
+            <div className="font-mono text-[clamp(0.9375rem,3.8vw,1.125rem)] leading-snug font-light tracking-tight text-white [overflow-wrap:anywhere] sm:text-[22px] lg:text-[24px]">
               {v}
             </div>
-            <div className="label-mono mt-2.5 text-[#8fb4e8]">{k}</div>
+            <div className="mt-2 font-mono text-[9px] leading-relaxed tracking-[0.12em] text-[#8fb4e8] uppercase [overflow-wrap:anywhere] sm:text-[10px] lg:text-[11px]">{k}</div>
           </div>
         ))}
       </div>

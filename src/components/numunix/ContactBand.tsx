@@ -39,7 +39,7 @@ export function ContactBand({
               EMAIL US
             </Btn>
             <Btn as="a" href="/contact" variant="ghostLight">
-              LET’S TALK
+              CONTACT
             </Btn>
           </div>
         </Reveal>

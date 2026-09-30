@@ -1,11 +1,23 @@
 import { PRODUCT_SERVICES } from "./product-services";
 
+/** Canonical base URL — no trailing slash */
+export const SITE_URL = "https://numunix.com";
+
+/** Default OG image used for social sharing when a page has no custom image */
+export const OG_IMAGE = `${SITE_URL}/og-default.jpg`;
+
 export const CONTACT = {
   phone: "+91 98862 85028",
   phoneHref: "tel:+919886285028",
-  email: "Numunix@gmail.com",
-  emailHref: "mailto:Numunix@gmail.com",
+  email: "numunix@gmail.com",
+  emailHref: "mailto:numunix@gmail.com",
+  whatsappHref: "https://wa.me/919886285028?text=Hi%20Numunix%2C%20I%27d%20like%20to%20discuss%20a%20project.",
   hours: "Mon – Sat · 9:00 AM – 8:00 PM IST",
+  address: "11, 4th Cross, 2nd Main Rd, Shampura, Bengaluru, Karnataka 560045",
+  addressLocality: "Bengaluru",
+  addressRegion: "Karnataka",
+  postalCode: "560045",
+  addressCountry: "IN",
 };
 
 type Extra = {

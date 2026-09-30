@@ -5,6 +5,7 @@ import Footer from "@/components/numunix/Footer";
 import NumunixRibbonScene from "@/components/numunix/NumunixRibbonScene";
 import { Label, Heading, Accent, Reveal, Btn } from "@/components/numunix/primitives";
 import { FEATURES } from "@/content/features";
+import { SITE_URL } from "@/content/site";
 
 const TITLE = "Digital Product Design & Development Services | Numunix";
 const DESC =
@@ -18,10 +19,10 @@ export const Route = createFileRoute("/features/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/features" },
+      { property: "og:url", content: `${SITE_URL}/features` },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/features" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/features` }],
   }),
   component: FeaturesIndex,
 });

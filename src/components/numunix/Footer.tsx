@@ -1,4 +1,6 @@
 import { Linkedin, Instagram, Youtube } from "lucide-react";
+import { BrandLogo } from "./BrandLogo";
+import { CONTACT } from "@/content/site";
 
 const FEATURE_LINKS: Record<string, string> = {
   "Web Development": "/features/web-development",
@@ -14,16 +16,17 @@ const FEATURE_LINKS: Record<string, string> = {
   "SaaS Platforms": "/features/saas-development",
   "Marketplaces": "/features/marketplaces",
   "Business Software": "/features/custom-software",
-  "Our Approach": "/#approach",
-  "Our Process": "/#process",
-  "Technology": "/#technology",
+  "Our Approach": "/approach",
+  "Our Process": "/process",
+  "Technology": "/technology",
   "Contact": "/contact",
-  "Start a Project": "/contact",
   "All Services": "/features",
   "Integrations": "/features/cloud-integrations",
   "Maintenance": "/features/maintenance-support",
-  "Security": "/#security",
-  "Support": "/contact"
+  "Security": "/security",
+  "Support": "/support",
+  "Privacy Policy": "/privacy",
+  "Terms": "/terms"
 };
 
 const COLS: [string, string[]][] = [
@@ -56,8 +59,7 @@ const COLS: [string, string[]][] = [
       "Our Approach",
       "Our Process",
       "Technology",
-      "Contact",
-      "Start a Project"
+      "Contact"
     ]
   ],
   [
@@ -77,19 +79,12 @@ export function Footer() {
     <footer className="border-t border-white/8 bg-[#05070c] pt-20 pb-10">
       <div className="shell grid gap-14 lg:grid-cols-[1.1fr_2.4fr]">
         <div>
-          <div className="flex items-center gap-2.5">
-            <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden>
-              <rect x="2" y="4" width="16" height="3" rx="1.5" fill="#3b82f6" />
-              <rect x="2" y="11.5" width="11" height="3" rx="1.5" fill="#1e4ed8" />
-              <rect x="2" y="19" width="19" height="3" rx="1.5" fill="#38bdf8" />
-              <circle cx="22" cy="12.9" r="2.1" fill="#3b82f6" />
-            </svg>
-            <span className="text-[1.05rem] font-medium tracking-[-0.02em] text-white">
-              NUMUNIX
-            </span>
-          </div>
+          <BrandLogo className="w-[200px] sm:w-[220px]" />
           <p className="mt-5 max-w-[34ch] text-[15px] leading-relaxed text-white/50">
             Software, websites, apps, and digital products built for real-world growth.
+          </p>
+          <p className="mt-3 max-w-[34ch] text-[13px] leading-relaxed text-white/35">
+            {CONTACT.address}
           </p>
           <div className="mt-8 flex gap-3">
             {[Linkedin, Instagram, Youtube].map((Icon, i) => (
@@ -141,7 +136,7 @@ export function Footer() {
           {["Privacy Policy", "Terms", "Security"].map((l) => (
             <a
               key={l}
-              href="#top"
+              href={FEATURE_LINKS[l]}
               className="text-[14px] text-white/45 transition-colors hover:text-white"
             >
               {l}

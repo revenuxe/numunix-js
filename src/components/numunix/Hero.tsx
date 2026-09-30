@@ -28,12 +28,12 @@ export function Hero() {
               <p className="max-w-[40ch] text-[17px] leading-relaxed text-white/70 lg:text-[18px]">
                 Websites, apps, and custom software built around your business.
               </p>
-              <div className="mt-6 flex flex-wrap gap-3 lg:mt-8">
+              <div className="hero-actions mt-6 flex flex-wrap gap-3 lg:mt-8">
                 <Btn as="a" href="/contact">
                   START YOUR PROJECT
                 </Btn>
-                <Btn as="a" href="/contact" variant="ghostDark">
-                  LET’S TALK
+                <Btn as="a" href="/features" variant="ghostDark">
+                  EXPLORE SERVICES
                 </Btn>
               </div>
             </div>

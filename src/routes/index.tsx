@@ -19,6 +19,8 @@ import {
   BlogCards,
 } from "@/components/numunix/LightSections";
 import Footer from "@/components/numunix/Footer";
+import { ContactFormSection } from "@/components/numunix/ContactFormSection";
+import { SITE_URL, OG_IMAGE, CONTACT } from "@/content/site";
 
 const TITLE = "Numunix — Software, Websites, Apps & Digital Products";
 const DESC =
@@ -32,7 +34,38 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL },
       { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: SITE_URL }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Numunix",
+          url: SITE_URL,
+          logo: `${SITE_URL}/numunix-logo.webp`,
+          image: OG_IMAGE,
+          description: DESC,
+          contactPoint: {
+            "@type": "ContactPoint",
+            email: CONTACT.email,
+            telephone: CONTACT.phone,
+            contactType: "sales",
+            availableLanguage: "English",
+          },
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "11, 4th Cross, 2nd Main Rd, Shampura",
+            addressLocality: CONTACT.addressLocality,
+            addressRegion: CONTACT.addressRegion,
+            postalCode: CONTACT.postalCode,
+            addressCountry: CONTACT.addressCountry,
+          },
+        }),
+      },
     ],
   }),
   component: Index,
@@ -57,6 +90,7 @@ function Index() {
         <AnalyticsDemo />
         <BlogCards />
         <FinalCTA />
+        <ContactFormSection />
       </main>
       <Footer />
     </div>
