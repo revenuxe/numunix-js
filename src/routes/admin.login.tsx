@@ -50,7 +50,7 @@ function AdminLogin() {
   return (
     <main className="min-h-svh bg-[#f5f7fb] lg:grid lg:grid-cols-[1fr_1fr]">
       <aside className="relative overflow-hidden bg-[#08152d] p-6 text-white sm:p-10 lg:flex lg:min-h-svh lg:flex-col lg:justify-between lg:p-14">
-        <BrandLogo variant="header" className="relative z-10 w-40" />
+        <BrandLogo className="relative z-10 w-40" />
         <div className="relative z-10 hidden max-w-lg py-20 lg:block">
           <div className="mb-8 grid h-14 w-14 place-items-center rounded-2xl border border-white/15 bg-white/5">
             <PanelsTopLeft size={25} strokeWidth={1.4} />

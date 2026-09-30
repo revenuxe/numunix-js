@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "@tanstack/react-router";
 import { Menu, X, Grip } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BrandLogo } from "./BrandLogo";
@@ -14,16 +15,81 @@ const NAV: [string, string][] = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const pathname = useLocation({ select: (location) => location.pathname });
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
+    setOpen(false);
+    setHidden(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    let lastY = Math.max(0, window.scrollY);
+    let travel = 0;
+    let direction = 0;
+    let frame = 0;
+    let heroBottom = window.innerHeight;
+    const hero = document.querySelector("main section");
+    const measure = () => {
+      heroBottom = hero
+        ? hero.getBoundingClientRect().bottom + window.scrollY
+        : window.innerHeight;
+    };
+    const update = () => {
+      frame = 0;
+      // Clamp overscroll so mobile bounce cannot reverse the header unexpectedly.
+      const maxY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      const y = Math.min(maxY, Math.max(0, window.scrollY));
+      const delta = y - lastY;
+      lastY = y;
+      setScrolled(y > 24);
+      if (y < heroBottom || open || headerRef.current?.contains(document.activeElement)) {
+        setHidden(false);
+        travel = 0;
+        direction = 0;
+        return;
+      }
+      if (delta === 0) return;
+      const nextDirection = Math.sign(delta);
+      travel = nextDirection === direction ? travel + Math.abs(delta) : Math.abs(delta);
+      direction = nextDirection;
+      // Require deliberate movement, with a quicker reveal than hide.
+      if (travel >= (direction > 0 ? 24 : 12)) {
+        setHidden(direction > 0);
+        travel = 0;
+      }
+    };
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+    const onResize = () => {
+      measure();
+      onScroll();
+    };
+    measure();
+    update();
+    const observer = new ResizeObserver(onResize);
+    if (hero) observer.observe(hero);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+      observer.disconnect();
+      window.cancelAnimationFrame(frame);
+    };
+  }, [open, pathname]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header
+      ref={headerRef}
+      onFocusCapture={() => setHidden(false)}
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+        hidden && !open ? "-translate-y-full pointer-events-none" : "translate-y-0",
+      )}
+    >
       <div
         className={cn(
           "transition-colors duration-300",
@@ -73,6 +139,8 @@ export function Header() {
             </a>
             <button
               aria-label="Menu"
+              aria-expanded={open}
+              aria-controls="mobile-navigation"
               onClick={() => setOpen((v) => !v)}
               className="grid h-10 w-10 place-items-center rounded-lg border border-white/10 bg-white/5 text-white"
             >
@@ -83,7 +151,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="lg:hidden">
+        <div id="mobile-navigation" className="lg:hidden">
           <div className="mx-6 rounded-2xl border border-white/10 bg-[#07111f]/95 p-4 backdrop-blur-xl">
             {NAV.map(([n, href]) => (
               <a

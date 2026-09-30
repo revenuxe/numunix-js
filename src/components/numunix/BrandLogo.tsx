@@ -10,8 +10,8 @@ export function BrandLogo({ className, variant = "full" }: { className?: string;
       <img
         src={variant === "header" ? "/numunix-logo-header.webp" : "/numunix-logo.webp"}
         alt="Numunix"
-        width={variant === "header" ? 1680 : 2000}
-        height={variant === "header" ? 208 : 325}
+        width={variant === "header" ? 1571 : 1728}
+        height={variant === "header" ? 285 : 345}
         className="block h-auto w-full"
       />
     </a>

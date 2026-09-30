@@ -322,7 +322,7 @@ function AdminDashboard() {
     <div className="min-h-svh bg-[#f5f7fb] text-slate-900">
       {/* ── Sidebar ───────────────────────────────────────── */}
       <aside className="fixed inset-y-0 left-0 hidden w-[232px] flex-col bg-[#0b1730] p-6 text-white xl:flex">
-        <BrandLogo variant="header" className="mt-3 w-36" />
+        <BrandLogo className="mt-3 w-36" />
         <p className="mb-3 mt-14 text-[10px] font-medium tracking-[0.18em] text-slate-500">
           WORKSPACE
         </p>
