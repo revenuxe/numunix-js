@@ -13,7 +13,7 @@ import {
 import { CONTACT, SITE_URL } from "@/content/site";
 import { ContactFormSection } from "@/components/numunix/ContactFormSection";
 
-const TITLE = "Contact Numunix — Start Your Digital Product Project";
+const TITLE = "Contact Numunix | Start Your Digital Product Project";
 const DESC =
   "Contact Numunix to discuss web development, mobile apps, SaaS, custom software, AI, and design. Call +91 98862 85028 or email numunix@gmail.com.";
 

@@ -22,7 +22,7 @@ import Footer from "@/components/numunix/Footer";
 import { ContactFormSection } from "@/components/numunix/ContactFormSection";
 import { SITE_URL, OG_IMAGE, CONTACT } from "@/content/site";
 
-const TITLE = "Numunix — Software, Websites, Apps & Digital Products";
+const TITLE = "Numunix | Software, Websites, Apps & Digital Products";
 const DESC =
   "We design and develop software, websites, apps, and digital products built for real-world growth. Explore web, mobile, SaaS, custom software, AI, and UI/UX services.";
 

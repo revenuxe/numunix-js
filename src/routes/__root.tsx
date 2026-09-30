@@ -78,7 +78,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Numunix — Software, Websites, Apps & Digital Products" },
+      { title: "Numunix | Software, Websites, Apps & Digital Products" },
       {
         name: "description",
         content:

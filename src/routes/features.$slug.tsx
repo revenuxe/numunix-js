@@ -11,7 +11,7 @@ export const Route = createFileRoute("/features/$slug")({
   },
   head: ({ params, loaderData }) => {
     const f = loaderData?.feature;
-    const title = f?.metaTitle ?? "Service — Numunix";
+    const title = f?.metaTitle ?? "Service | Numunix";
     const desc = f?.metaDescription ?? "Numunix digital product development services.";
     const pageUrl = `${SITE_URL}/features/${f?.slug ?? params.slug}`;
     return {
