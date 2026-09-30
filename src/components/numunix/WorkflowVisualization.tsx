@@ -27,20 +27,19 @@ export function PlatformIntro() {
             </p>
           </Reveal>
         </div>
-
-        <Reveal delay={120}>
-          <WorkflowVisualization />
-        </Reveal>
       </div>
+      <Reveal delay={120}>
+        <WorkflowVisualization />
+      </Reveal>
     </section>
   );
 }
 
 export function WorkflowVisualization() {
   return (
-    <div className="mt-12 overflow-hidden rounded-[28px] border border-[#dbe5f2] bg-white lg:mt-20 shadow-[0_50px_130px_-70px_rgba(16,42,99,0.45)]">
+    <div className="mt-12 w-full lg:mt-20">
       {/* head */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#e6ecf5] px-5 py-5 sm:px-8">
+      <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-5 lg:px-12">
         <div className="flex items-baseline gap-4">
           <span className="label-mono text-[#1747b8]">IDEA TO PRODUCT</span>
           <span className="label-mono hidden text-[#a8b7cc] sm:inline">/ BUSINESS → GROWTH</span>
@@ -55,9 +54,8 @@ export function WorkflowVisualization() {
       </div>
 
       {/* flow rail */}
-      <div className="relative bg-[#f0f4fa]">
-        <div className="pointer-events-none absolute inset-x-0 top-1/2 hidden h-px bg-[linear-gradient(90deg,transparent,#cddcf2,transparent)] xl:block" />
-        <div className="grid grid-cols-2 gap-4 p-5 sm:gap-5 sm:p-6 md:grid-cols-4 xl:grid-cols-8">
+      <div>
+        <div className="grid grid-cols-2 gap-4 px-6 py-5 sm:gap-5 md:grid-cols-4 xl:grid-cols-8 lg:px-12">
           {NODES.map(({ phase: n, name: v, category: u, slug }, i) => (
             <Link
               key={slug}
@@ -97,26 +95,6 @@ export function WorkflowVisualization() {
             </Link>
           ))}
         </div>
-      </div>
-
-      {/* pulse line */}
-      <div className="border-t border-[#e6ecf5] px-5 py-5 sm:px-8">
-        <svg viewBox="0 0 1200 24" className="h-auto w-full">
-          <line x1="0" y1="12" x2="1200" y2="12" stroke="#e1e9f5" strokeWidth="1" />
-          <line
-            x1="0"
-            y1="12"
-            x2="1200"
-            y2="12"
-            stroke="#2563eb"
-            strokeWidth="1.5"
-            strokeDasharray="10 26"
-            style={{ animation: "nx-dash 5s linear infinite" }}
-          />
-          {NODES.map((_, i) => (
-            <circle key={i} cx={75 + i * 150} cy={12} r="3.5" fill="#1747b8" opacity={0.85} />
-          ))}
-        </svg>
       </div>
     </div>
   );
