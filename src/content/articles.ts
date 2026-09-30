@@ -314,6 +314,168 @@ export const ARTICLES: Article[] = [
 <p><strong>The web rewards builders who stay curious and ship relentlessly.</strong> These trends are your roadmap. Start building.</p>`
       }
     ]
+  },
+  {
+    slug: "complete-checklist-ecommerce-website-development",
+    title: "The Complete Checklist for E-Commerce Website Development",
+    metaTitle: "The Complete Checklist for E-Commerce Website Development | Numunix",
+    metaDescription:
+      "A comprehensive, actionable checklist for building a high-converting e-commerce website — covering planning, design, tech stack, payments, SEO, security, and post-launch optimization.",
+    excerpt:
+      "Building an online store is more than adding products and a checkout button. This end-to-end checklist covers every phase — so nothing slips through the cracks.",
+    author: "Numunix Team",
+    publishedAt: "2026-10-01",
+    readTime: "16 min read",
+    category: "E-Commerce",
+    tags: ["E-Commerce", "Web Development", "SEO", "Payments", "Checklist"],
+    content: [
+      {
+        heading: "Introduction: Why Most E-Commerce Projects Miss the Mark",
+        body: `<p>Launching an e-commerce website seems straightforward — until you're knee-deep in payment gateway configurations, shipping zone logic, tax compliance, and a checkout flow that loses 70% of its users.</p>
+<p>The truth is, successful online stores aren't built by accident. They're the result of <strong>deliberate planning across dozens of interconnected decisions</strong> — from the technology stack and hosting infrastructure to product photography standards and post-purchase email sequences.</p>
+<p>This checklist is designed to be your single reference throughout the entire project lifecycle. Whether you're building your first Shopify store or engineering a custom multi-vendor marketplace, every item here earns its place because skipping it costs real revenue.</p>
+<p>We've organised it into <strong>10 phases</strong>, each with specific, actionable items you can check off as you go.</p>`
+      },
+      {
+        heading: "Phase 1: Strategy and Planning",
+        body: `<p>Before writing a single line of code or choosing a platform, get the business fundamentals locked down.</p>
+<ul>
+<li><strong>Define your business model</strong> — B2C, B2B, D2C, marketplace, subscription, or hybrid? Each model has different technical requirements for pricing, user roles, and fulfilment.</li>
+<li><strong>Identify your target audience</strong> — Demographics, buying behaviour, preferred devices, and price sensitivity. These decisions shape every design and UX choice that follows.</li>
+<li><strong>Competitive analysis</strong> — Study 5–10 competitors. Document what works (navigation, product pages, checkout) and what doesn't. Note features your audience expects as table stakes.</li>
+<li><strong>Define your product catalogue scope</strong> — Number of SKUs at launch, product variants (size, colour, material), digital vs. physical goods, and whether you need inventory management.</li>
+<li><strong>Set measurable goals</strong> — Monthly revenue target, average order value (AOV), conversion rate benchmark, and customer acquisition cost (CAC). Without numbers, you can't optimise.</li>
+<li><strong>Budget and timeline</strong> — Allocate budget across design, development, content, marketing, and ongoing maintenance. Set realistic milestones with buffer for the unexpected.</li>
+</ul>`
+      },
+      {
+        heading: "Phase 2: Platform and Technology Stack",
+        body: `<p>The platform decision is the highest-leverage technical choice you'll make. It determines your ceiling for customisation, performance, and scalability.</p>
+<ul>
+<li><strong>Hosted platforms</strong> — Shopify, BigCommerce, and Squarespace Commerce offer speed to market, built-in hosting, and managed security. Best for teams that want to focus on products and marketing, not infrastructure.</li>
+<li><strong>Headless commerce</strong> — Shopify Hydrogen, Medusa, Saleor, or commercetools provide a backend API while you build a fully custom frontend. Best for brands that need unique experiences and have development resources.</li>
+<li><strong>Custom-built</strong> — A bespoke solution using frameworks like Next.js, Remix, or Nuxt with a custom backend. Maximum flexibility, highest development investment. Best for complex business logic that no off-the-shelf platform handles.</li>
+<li><strong>Database selection</strong> — PostgreSQL for relational product data, Redis for session management and caching, and optionally Elasticsearch or Meilisearch for fast product search and filtering.</li>
+<li><strong>Hosting and CDN</strong> — Vercel, AWS, or Cloudflare for global edge delivery. Ensure your product images and static assets are served from a CDN with aggressive caching.</li>
+<li><strong>Version control and CI/CD</strong> — Git-based workflow with automated testing, staging environments, and one-click deployments. Never push directly to production.</li>
+</ul>`
+      },
+      {
+        heading: "Phase 3: UX Design and User Interface",
+        body: `<p>In e-commerce, design isn't decoration — it's the difference between a sale and an abandoned cart.</p>
+<ul>
+<li><strong>Mobile-first design</strong> — Over 70% of e-commerce traffic is mobile. Design for phones first, then adapt to tablets and desktops. Touch targets, thumb-friendly navigation, and fast load times are non-negotiable.</li>
+<li><strong>Clear visual hierarchy</strong> — Product images dominate. Price and CTA buttons are immediately visible. Reviews and trust signals are positioned to reduce purchase anxiety.</li>
+<li><strong>Consistent navigation</strong> — Mega menus for large catalogues, breadcrumbs on every product and category page, sticky header with persistent cart access, and a functional search bar.</li>
+<li><strong>Product page template</strong> — High-resolution images with zoom, size/variant selectors, stock availability, delivery estimate, clear pricing (including any discounts), customer reviews, and related products.</li>
+<li><strong>Cart experience</strong> — Slide-out mini-cart for quick additions without leaving the page. Show line items, quantities, subtotal, and a clear path to checkout. Allow editing quantities and removing items inline.</li>
+<li><strong>Trust signals throughout</strong> — SSL badge, payment method logos, return policy summary, customer review counts, and security certifications visible at key decision points.</li>
+<li><strong>Accessibility</strong> — All interactive elements keyboard-navigable, images with alt text, sufficient colour contrast, and screen reader-compatible forms. WCAG 2.1 AA minimum.</li>
+</ul>`
+      },
+      {
+        heading: "Phase 4: Product Management and Catalogue",
+        body: `<p>Your product catalogue is the core of your store. Get the data structure right from the start, because restructuring later is painful.</p>
+<ul>
+<li><strong>Product data schema</strong> — Define fields: title, description, price, compare-at price, SKU, barcode, weight, dimensions, images (multiple), variants, tags, and categories. Plan for custom attributes specific to your industry.</li>
+<li><strong>Category and taxonomy structure</strong> — Create a logical, SEO-friendly hierarchy. Keep it shallow (3 levels max) and use clear, customer-facing language. Avoid internal jargon.</li>
+<li><strong>Product descriptions</strong> — Write unique, benefit-focused copy for every product. Include specifications, materials, dimensions, and care instructions. Avoid manufacturer-provided copy that duplicates across the web.</li>
+<li><strong>Product photography</strong> — Consistent lighting, background, and aspect ratio across all products. Include lifestyle images, detail shots, and scale references. Compress images (WebP or AVIF) without visible quality loss.</li>
+<li><strong>Variant management</strong> — Size, colour, material, and any other dimensions. Each variant needs its own SKU, price (if different), inventory count, and potentially its own image.</li>
+<li><strong>Inventory tracking</strong> — Real-time stock levels synced across all sales channels. Low-stock alerts, out-of-stock handling (hide, show with "notify me"), and backorder logic.</li>
+<li><strong>Bulk import/export</strong> — CSV or API-based tools for managing large catalogues. Test your import process with a subset before running it on the full catalogue.</li>
+</ul>`
+      },
+      {
+        heading: "Phase 5: Checkout and Conversion Optimisation",
+        body: `<p>Checkout is where revenue is won or lost. The average cart abandonment rate is <strong>70%</strong>. Every friction point you remove directly increases revenue.</p>
+<ul>
+<li><strong>Guest checkout</strong> — Never force account creation before purchase. Offer it as an optional step after payment. Requiring registration is the #1 reason for cart abandonment after unexpected costs.</li>
+<li><strong>Minimal form fields</strong> — Name, email, shipping address, payment. Auto-detect country and city from postcode. Use a single address field with autocomplete (Google Places API) instead of multiple fields.</li>
+<li><strong>Progress indicator</strong> — Show users where they are in the checkout process (Cart → Shipping → Payment → Confirmation). Reduce anxiety about how many steps remain.</li>
+<li><strong>Shipping options</strong> — Display all available options with prices and estimated delivery dates upfront. Offer free shipping thresholds to increase AOV. Never surprise users with shipping costs at the final step.</li>
+<li><strong>Order summary</strong> — Persistent sidebar (desktop) or expandable section (mobile) showing line items, quantities, discounts, shipping, tax, and total. Let users edit without going back.</li>
+<li><strong>Coupon and discount codes</strong> — Single input field, clear error messages for invalid codes, and immediate price update when applied. Consider auto-applying available promotions.</li>
+<li><strong>Abandoned cart recovery</strong> — Automated email sequence (1 hour, 24 hours, 72 hours) with the cart contents, a direct link back, and optionally a time-limited discount on the third email.</li>
+</ul>`
+      },
+      {
+        heading: "Phase 6: Payment Processing",
+        body: `<p>Payment processing needs to be secure, fast, and flexible enough to serve your market.</p>
+<ul>
+<li><strong>Payment gateway selection</strong> — Stripe, Razorpay, PayPal, or Adyen depending on your geography and transaction volume. Evaluate fees, payout speed, currency support, and chargeback handling.</li>
+<li><strong>Multiple payment methods</strong> — Credit/debit cards, UPI, digital wallets (Apple Pay, Google Pay), net banking, and buy-now-pay-later (BNPL) options. The more methods you offer, the fewer customers you lose.</li>
+<li><strong>PCI compliance</strong> — Use hosted payment fields (Stripe Elements, Razorpay Checkout) that handle card data entirely on the provider's servers. Your application never touches raw card numbers.</li>
+<li><strong>Currency and tax handling</strong> — Multi-currency display if you sell internationally. Automatic tax calculation based on customer location (use services like TaxJar or Avalara for US sales tax complexity).</li>
+<li><strong>Subscription and recurring billing</strong> — If you sell subscriptions, implement proper billing cycle management, proration, upgrade/downgrade flows, and failed payment retry logic.</li>
+<li><strong>Refund and dispute workflow</strong> — Build admin tools for one-click refunds, partial refunds, and chargeback response. Document your refund policy clearly and link it from checkout.</li>
+<li><strong>Payment failure handling</strong> — Clear error messages, retry options, and fallback payment methods. Log failures for analysis — a high failure rate on specific card types may indicate a gateway configuration issue.</li>
+</ul>`
+      },
+      {
+        heading: "Phase 7: SEO and Content Strategy",
+        body: `<p>Organic search is often the largest and most cost-effective traffic source for e-commerce. SEO must be built into the architecture, not bolted on after launch.</p>
+<ul>
+<li><strong>URL structure</strong> — Clean, descriptive URLs: <code>/shoes/running/nike-air-zoom</code> not <code>/product?id=38291</code>. Include the primary keyword. Avoid unnecessary parameters and session IDs.</li>
+<li><strong>Title tags and meta descriptions</strong> — Unique, keyword-rich title tags for every product, category, and content page. Meta descriptions that include a value proposition and call to action.</li>
+<li><strong>Structured data (Schema.org)</strong> — Implement Product, Offer, AggregateRating, BreadcrumbList, and FAQPage schemas. These enable rich snippets (star ratings, price, availability) in Google search results.</li>
+<li><strong>Canonical tags</strong> — Prevent duplicate content from product variants, sorted/filtered pages, and pagination. Every page should have a self-referencing canonical or point to the primary version.</li>
+<li><strong>Internal linking</strong> — Related products, "customers also bought," category breadcrumbs, and blog-to-product links. Strong internal linking distributes authority and helps users discover more products.</li>
+<li><strong>Image SEO</strong> — Descriptive file names (<code>nike-air-zoom-running-shoe-black.webp</code>), alt text on every image, and compressed file sizes. Use lazy loading for below-the-fold images.</li>
+<li><strong>Content marketing</strong> — Buying guides, comparison articles, how-to content, and FAQ pages that target informational keywords and funnel readers toward products.</li>
+<li><strong>XML sitemap</strong> — Auto-generated, including all product, category, and content pages. Submit to Google Search Console and Bing Webmaster Tools. Exclude noindex pages.</li>
+</ul>`
+      },
+      {
+        heading: "Phase 8: Security and Compliance",
+        body: `<p>An e-commerce site handles personal data and financial transactions. Security failures don't just cost money — they destroy trust permanently.</p>
+<ul>
+<li><strong>SSL/TLS everywhere</strong> — HTTPS on every page, not just checkout. Use HSTS headers to prevent downgrade attacks. Most hosting platforms handle this automatically, but verify it.</li>
+<li><strong>Authentication security</strong> — Bcrypt or Argon2 password hashing, rate limiting on login attempts, account lockout after repeated failures, and optional two-factor authentication for customer accounts.</li>
+<li><strong>Data protection compliance</strong> — GDPR (EU), CCPA (California), DPDP (India), or equivalent for your market. Cookie consent banners, privacy policy, data access/deletion requests, and explicit marketing opt-in.</li>
+<li><strong>Input validation and sanitisation</strong> — Server-side validation on every form. Protect against SQL injection, XSS, and CSRF attacks. Use parameterised queries and CSRF tokens.</li>
+<li><strong>Admin access controls</strong> — Role-based permissions (owner, admin, editor, customer service). Audit logs for all admin actions (price changes, order edits, refunds). Two-factor authentication for admin accounts.</li>
+<li><strong>Backup and disaster recovery</strong> — Automated daily database backups, stored in a separate region. Test your restore process quarterly. Document your recovery time objective (RTO) and recovery point objective (RPO).</li>
+<li><strong>Dependency security</strong> — Automated vulnerability scanning (npm audit, Snyk, Dependabot). Review and update dependencies monthly. Pin exact versions in production.</li>
+</ul>`
+      },
+      {
+        heading: "Phase 9: Launch Preparation",
+        body: `<p>The week before launch is when preparation meets reality. Use this pre-launch checklist to catch issues before your customers do.</p>
+<ul>
+<li><strong>End-to-end testing</strong> — Complete the full purchase flow on every supported device and browser. Place real test orders through every payment method. Verify confirmation emails, order status pages, and admin notifications.</li>
+<li><strong>Performance testing</strong> — Run Lighthouse audits. Target: 90+ performance score. Test with throttled connections (3G, slow 4G). Verify LCP < 2.5s, INP < 200ms, and CLS < 0.1 on key pages.</li>
+<li><strong>Load testing</strong> — Simulate expected peak traffic (Black Friday, product launch) with tools like k6 or Artillery. Identify and fix bottlenecks before they become real outages.</li>
+<li><strong>SEO pre-launch audit</strong> — Verify all title tags, meta descriptions, structured data, canonical tags, robots.txt, and XML sitemap. Check for broken links and missing alt text.</li>
+<li><strong>Analytics and tracking</strong> — Google Analytics 4 (or Plausible/Fathom), conversion tracking, enhanced e-commerce events (view_item, add_to_cart, begin_checkout, purchase), and Facebook/Google Ads pixels if applicable.</li>
+<li><strong>Legal pages</strong> — Privacy policy, terms of service, return/refund policy, shipping policy, and cookie policy. Have them reviewed by a legal professional for your jurisdiction.</li>
+<li><strong>Email infrastructure</strong> — Transactional emails tested: order confirmation, shipping notification, delivery confirmation, refund confirmation, password reset, and account creation. Check spam scores.</li>
+<li><strong>301 redirects</strong> — If migrating from an existing site, map every old URL to its new equivalent. A single missed redirect can tank your organic traffic overnight.</li>
+</ul>`
+      },
+      {
+        heading: "Phase 10: Post-Launch Optimisation",
+        body: `<p>Launch day is the starting line, not the finish line. The most successful e-commerce businesses continuously test, measure, and improve.</p>
+<ul>
+<li><strong>Monitor real-user metrics</strong> — Core Web Vitals in the field (Chrome UX Report), server response times, error rates, and uptime. Set up alerts for anomalies.</li>
+<li><strong>Conversion rate optimisation (CRO)</strong> — A/B test headlines, product images, CTA button text, checkout layouts, and pricing display. Even a 0.5% improvement in conversion rate compounds significantly over time.</li>
+<li><strong>Customer feedback loops</strong> — Post-purchase surveys, on-site feedback widgets, and customer support ticket analysis. The best product roadmap ideas come from real customer pain points.</li>
+<li><strong>Search and navigation analysis</strong> — Review internal site search queries to discover what customers look for but can't find. Analyse category page bounce rates to identify navigation gaps.</li>
+<li><strong>Email marketing automation</strong> — Welcome series for new customers, win-back campaigns for lapsed buyers, product recommendation emails based on purchase history, and review request sequences.</li>
+<li><strong>Inventory and supply chain</strong> — Track sell-through rates, identify slow-moving stock, automate reorder points, and plan for seasonal demand spikes.</li>
+<li><strong>Regular security audits</strong> — Quarterly penetration testing, monthly dependency updates, and annual PCI compliance review. Security isn't a one-time task.</li>
+<li><strong>Performance regression testing</strong> — Integrate Lighthouse CI or SpeedCurve into your deployment pipeline. Catch performance regressions before they reach production.</li>
+</ul>
+<p><strong>The principle:</strong> An e-commerce site is a living product. The teams that treat it as "done" after launch are the ones that watch their conversion rates decline quarter over quarter.</p>`
+      },
+      {
+        heading: "Conclusion: Ship with Confidence",
+        body: `<p>Building an e-commerce website is a complex, multi-disciplinary project. But complexity doesn't have to mean chaos — not when you have a system.</p>
+<p>This checklist won't eliminate every surprise, but it will ensure you've covered the decisions that matter most: the ones that affect whether a visitor becomes a customer, and whether a customer comes back.</p>
+<p><strong>The stores that win aren't the ones with the fanciest features.</strong> They're the ones that get the fundamentals right — fast pages, clear product information, frictionless checkout, and trustworthy security — and then optimise relentlessly from there.</p>
+<p>Print this checklist. Share it with your team. Check off every item. And when you launch, you'll know that nothing critical was left to chance.</p>`
+      }
+    ]
   }
 ];
 
