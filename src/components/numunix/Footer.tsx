@@ -26,7 +26,8 @@ const FEATURE_LINKS: Record<string, string> = {
   "Security": "/security",
   "Support": "/support",
   "Privacy Policy": "/privacy",
-  "Terms": "/terms"
+  "Terms": "/terms",
+  "Articles": "/articles"
 };
 
 const COLS: [string, string[]][] = [
@@ -59,6 +60,7 @@ const COLS: [string, string[]][] = [
       "Our Approach",
       "Our Process",
       "Technology",
+      "Articles",
       "Contact"
     ]
   ],

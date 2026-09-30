@@ -22,6 +22,8 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as ApproachSlugRouteImport } from './routes/approach_.$slug'
+import { Route as ArticlesIndexRouteImport } from './routes/articles.index'
+import { Route as ArticlesSlugRouteImport } from './routes/articles.$slug'
 import { Route as FeaturesIndexRouteImport } from './routes/features.index'
 import { Route as FeaturesSlugRouteImport } from './routes/features.$slug'
 
@@ -90,6 +92,16 @@ const ApproachSlugRoute = ApproachSlugRouteImport.update({
   path: '/approach/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArticlesIndexRoute = ArticlesIndexRouteImport.update({
+  id: '/articles/',
+  path: '/articles/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArticlesSlugRoute = ArticlesSlugRouteImport.update({
+  id: '/articles/$slug',
+  path: '/articles/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FeaturesIndexRoute = FeaturesIndexRouteImport.update({
   id: '/features/',
   path: '/features/',
@@ -114,8 +126,10 @@ export interface FileRoutesByFullPath {
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
   '/approach/$slug': typeof ApproachSlugRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
   '/features/$slug': typeof FeaturesSlugRoute
   '/admin/': typeof AdminIndexRoute
+  '/articles/': typeof ArticlesIndexRoute
   '/features/': typeof FeaturesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -131,8 +145,10 @@ export interface FileRoutesByTo {
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
   '/approach/$slug': typeof ApproachSlugRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
   '/features/$slug': typeof FeaturesSlugRoute
   '/admin': typeof AdminIndexRoute
+  '/articles': typeof ArticlesIndexRoute
   '/features': typeof FeaturesIndexRoute
 }
 export interface FileRoutesById {
@@ -149,8 +165,10 @@ export interface FileRoutesById {
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
   '/approach_/$slug': typeof ApproachSlugRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
   '/features/$slug': typeof FeaturesSlugRoute
   '/admin/': typeof AdminIndexRoute
+  '/articles/': typeof ArticlesIndexRoute
   '/features/': typeof FeaturesIndexRoute
 }
 export interface FileRouteTypes {
@@ -168,8 +186,10 @@ export interface FileRouteTypes {
     | '/admin/dashboard'
     | '/admin/login'
     | '/approach/$slug'
+    | '/articles/$slug'
     | '/features/$slug'
     | '/admin/'
+    | '/articles/'
     | '/features/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -185,8 +205,10 @@ export interface FileRouteTypes {
     | '/admin/dashboard'
     | '/admin/login'
     | '/approach/$slug'
+    | '/articles/$slug'
     | '/features/$slug'
     | '/admin'
+    | '/articles'
     | '/features'
   id:
     | '__root__'
@@ -202,8 +224,10 @@ export interface FileRouteTypes {
     | '/admin/dashboard'
     | '/admin/login'
     | '/approach_/$slug'
+    | '/articles/$slug'
     | '/features/$slug'
     | '/admin/'
+    | '/articles/'
     | '/features/'
   fileRoutesById: FileRoutesById
 }
@@ -220,8 +244,10 @@ export interface RootRouteChildren {
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminLoginRoute: typeof AdminLoginRoute
   ApproachSlugRoute: typeof ApproachSlugRoute
+  ArticlesSlugRoute: typeof ArticlesSlugRoute
   FeaturesSlugRoute: typeof FeaturesSlugRoute
   AdminIndexRoute: typeof AdminIndexRoute
+  ArticlesIndexRoute: typeof ArticlesIndexRoute
   FeaturesIndexRoute: typeof FeaturesIndexRoute
 }
 
@@ -318,6 +344,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApproachSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/articles/': {
+      id: '/articles/'
+      path: '/articles'
+      fullPath: '/articles/'
+      preLoaderRoute: typeof ArticlesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/articles/$slug': {
+      id: '/articles/$slug'
+      path: '/articles/$slug'
+      fullPath: '/articles/$slug'
+      preLoaderRoute: typeof ArticlesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/features/': {
       id: '/features/'
       path: '/features'
@@ -348,8 +388,10 @@ const rootRouteChildren: RootRouteChildren = {
   AdminDashboardRoute: AdminDashboardRoute,
   AdminLoginRoute: AdminLoginRoute,
   ApproachSlugRoute: ApproachSlugRoute,
+  ArticlesSlugRoute: ArticlesSlugRoute,
   FeaturesSlugRoute: FeaturesSlugRoute,
   AdminIndexRoute: AdminIndexRoute,
+  ArticlesIndexRoute: ArticlesIndexRoute,
   FeaturesIndexRoute: FeaturesIndexRoute,
 }
 export const routeTree = rootRouteImport
