@@ -271,3 +271,8 @@
   padding: 0.15em 0.4em;
   border-radius: 4px;
 }
+
+@keyframes nx-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.05); }
+}

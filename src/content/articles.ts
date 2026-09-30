@@ -9,6 +9,7 @@ export type Article = {
   readTime: string;
   category: string;
   tags: string[];
+  highlights?: { value: string; label: string }[];
   content: ArticleSection[];
 };
 
@@ -28,9 +29,15 @@ export const ARTICLES: Article[] = [
       "Great design is invisible. Bad design is everywhere. Learn the principles that separate high-converting websites from digital dead-ends.",
     author: "Numunix Team",
     publishedAt: "2026-10-01",
-    readTime: "12 min read",
+    readTime: "18 min read",
     category: "Design",
     tags: ["UI/UX", "Web Design", "Accessibility", "Conversion", "Mobile-First"],
+    highlights: [
+      { value: "50ms", label: "Time to form a first impression" },
+      { value: "88%", label: "Users won't return after bad UX" },
+      { value: "4.5:1", label: "WCAG AA contrast ratio" },
+      { value: "7+", label: "Steps in a design audit" },
+    ],
     content: [
       {
         heading: "Introduction: Why Design Is a Business Decision",
@@ -169,6 +176,85 @@ export const ARTICLES: Article[] = [
 <p>Launch is the beginning, not the end. Set up analytics to track your defined user goals. Run A/B tests on CTAs, headlines, and layouts. Schedule quarterly design reviews to catch drift and stagnation.</p>`
       },
       {
+        heading: "Design Tools and Technology",
+        body: `<p>The right tools don't make you a better designer — but they do remove friction and let you focus on the decisions that matter.</p>
+<h3>Design and Prototyping</h3>
+<ul>
+<li><strong>Figma</strong> — The industry standard for collaborative interface design. Real-time multiplayer editing, component libraries, auto-layout, and developer handoff built in.</li>
+<li><strong>Framer</strong> — For high-fidelity interactive prototypes that feel like the real product. Especially strong for marketing sites and motion design.</li>
+<li><strong>Storybook</strong> — A component workshop for developers. Build, document, and test UI components in isolation before assembling them into pages.</li>
+</ul>
+<h3>Design-to-Code</h3>
+<ul>
+<li><strong>Figma Dev Mode</strong> — Inspect designs, grab CSS values, and export assets directly. Pair with design tokens for maximum accuracy.</li>
+<li><strong>AI code generation</strong> — Tools that convert Figma frames to React or HTML/CSS code. Useful for scaffolding, but always requires human review and refinement.</li>
+<li><strong>Design tokens</strong> — JSON or CSS custom properties that define your design system's colours, spacing, and typography. Change a token, and every component updates automatically.</li>
+</ul>
+<h3>Testing and Validation</h3>
+<ul>
+<li><strong>Maze</strong> — Unmoderated usability testing with heatmaps, click maps, and mission success rates.</li>
+<li><strong>Hotjar / Microsoft Clarity</strong> — Session recordings and heatmaps on live sites. See exactly where users click, scroll, and abandon.</li>
+<li><strong>axe DevTools</strong> — Automated accessibility testing that catches WCAG violations directly in your browser's developer tools.</li>
+</ul>`
+      },
+      {
+        heading: "Building a Design System from Scratch",
+        body: `<p>A design system is the single source of truth for how your product looks and behaves. Here's how to build one that actually gets adopted.</p>
+<h3>Start with Tokens, Not Components</h3>
+<p>Define your foundational variables first:</p>
+<ul>
+<li><strong>Colour palette</strong> — Primary, secondary, neutral (5–6 shades), and semantic (success, warning, error, info) colours. Define them as CSS custom properties or JSON tokens.</li>
+<li><strong>Typography scale</strong> — A set of font sizes (e.g., 12, 14, 16, 20, 24, 32, 40, 56px) with corresponding line heights and letter spacing. Limit yourself to 2 typefaces maximum.</li>
+<li><strong>Spacing scale</strong> — Base unit of 4px or 8px. Derive all margins, padding, and gaps from this scale: 4, 8, 12, 16, 24, 32, 48, 64, 96px.</li>
+<li><strong>Border radii</strong> — Small (4px), medium (8px), large (12px), xl (16px), full (9999px). Consistency in border radius is one of the easiest ways to make an interface feel polished.</li>
+<li><strong>Shadows</strong> — 3–4 elevation tiers from subtle (cards) to dramatic (modals and dropdowns).</li>
+</ul>
+<h3>Then Build Core Components</h3>
+<p>Start with the components you'll use on every page:</p>
+<ul>
+<li>Buttons (primary, secondary, ghost, destructive) with hover, focus, disabled, and loading states</li>
+<li>Form inputs (text, textarea, select, checkbox, radio) with validation states</li>
+<li>Cards, modals, and drawers</li>
+<li>Navigation (header, sidebar, breadcrumbs, tabs)</li>
+<li>Typography components (headings, body text, captions, labels)</li>
+</ul>
+<h3>Document Everything</h3>
+<p>A design system without documentation is just a folder of components nobody knows how to use. For each component, document: when to use it, when not to use it, available props/variants, and code examples.</p>`
+      },
+      {
+        heading: "Performance and Design: The Hidden Connection",
+        body: `<p>Performance is a design decision. A beautiful page that takes 5 seconds to load is a page most users will never see.</p>
+<h3>How Design Choices Affect Performance</h3>
+<ul>
+<li><strong>Image formats</strong> — Use WebP or AVIF instead of PNG/JPEG. A typical hero image drops from 800KB to under 200KB with no visible quality loss.</li>
+<li><strong>Font loading</strong> — Limit custom fonts to 2 families and 3–4 weights. Use <code>font-display: swap</code> to prevent invisible text during loading. Subset fonts to include only the characters you need.</li>
+<li><strong>Animation performance</strong> — Animate only <code>transform</code> and <code>opacity</code> — these run on the GPU compositor and won't trigger layout recalculations. Avoid animating width, height, margin, or padding.</li>
+<li><strong>Layout stability</strong> — Set explicit width and height attributes on images and videos. Reserve space for dynamic content like ads or embeds. Every unexpected layout shift erodes user trust.</li>
+</ul>
+<h3>Performance Budgets</h3>
+<p>Set concrete limits and enforce them:</p>
+<ul>
+<li><strong>Total page weight</strong> — Under 1.5MB for initial load (including images)</li>
+<li><strong>JavaScript bundle</strong> — Under 200KB gzipped for the critical path</li>
+<li><strong>Largest Contentful Paint</strong> — Under 2.5 seconds on a 4G connection</li>
+<li><strong>Time to Interactive</strong> — Under 3.5 seconds</li>
+</ul>
+<p>Integrate Lighthouse CI into your deployment pipeline. If a commit exceeds the budget, the build fails — just like a failing test.</p>`
+      },
+      {
+        heading: "Common Design Mistakes to Avoid",
+        body: `<p>Knowing what <em>not</em> to do is just as valuable as knowing best practices. These are the mistakes we see most often in production websites.</p>
+<ul>
+<li><strong>Inconsistent spacing</strong> — The #1 sign of amateur design. If your padding is 16px in one card and 22px in another, the entire page feels "off." Use your spacing scale religiously.</li>
+<li><strong>Too many fonts and colours</strong> — More than 2 typefaces and 5–6 colours creates visual chaos. Constraints breed creativity. Limit your palette and let whitespace do the talking.</li>
+<li><strong>Ignoring empty states</strong> — What does the page look like when there's no data? No search results? No notifications? Empty states are an opportunity to guide the user, not a throwaway screen.</li>
+<li><strong>Inaccessible colour contrast</strong> — Light grey text on a white background might look "clean" but fails users with any degree of visual impairment. Check every text/background pairing against WCAG standards.</li>
+<li><strong>Overusing modals</strong> — Modals interrupt the user's flow. Use them for confirmations and critical actions, not for content that could live on the page itself.</li>
+<li><strong>No loading states</strong> — When a user clicks a button and nothing happens for 2 seconds, they'll click again — and again. Always provide immediate feedback: a spinner, a skeleton screen, or a progress indicator.</li>
+<li><strong>Designing for yourself, not your users</strong> — You are not your user. Test with real people. Watch them struggle. Then fix what they struggle with, not what you personally find annoying.</li>
+</ul>`
+      },
+      {
         heading: "Conclusion: Design Is How It Works",
         body: `<p>Steve Jobs famously said, "Design is not just what it looks like and feels like. Design is how it works." That idea remains the single best compass for anyone building digital products.</p>
 <p>The principles in this guide aren't abstract theory — they're the difference between a website that converts and one that simply exists. Visual hierarchy directs attention. Consistent spacing builds trust. Intuitive flows reduce friction. Accessibility expands your audience. And a structured design workflow keeps all of it from falling apart under real-world deadlines.</p>
@@ -186,9 +272,15 @@ export const ARTICLES: Article[] = [
       "The web moves fast. These 10 trends are redefining how teams build, ship, and scale digital products — and ignoring them is a competitive risk.",
     author: "Numunix Team",
     publishedAt: "2026-10-01",
-    readTime: "14 min read",
+    readTime: "18 min read",
     category: "Development",
     tags: ["Web Development", "AI", "Edge Computing", "Performance", "Trends"],
+    highlights: [
+      { value: "10", label: "Trends covered" },
+      { value: "60%+", label: "Global traffic from mobile" },
+      { value: "2–3x", label: "Faster shipping with AI tooling" },
+      { value: "<50ms", label: "Edge function response time" },
+    ],
     content: [
       {
         heading: "Introduction: The Web Never Sits Still",
@@ -325,9 +417,15 @@ export const ARTICLES: Article[] = [
       "Building an online store is more than adding products and a checkout button. This end-to-end checklist covers every phase — so nothing slips through the cracks.",
     author: "Numunix Team",
     publishedAt: "2026-10-01",
-    readTime: "16 min read",
+    readTime: "20 min read",
     category: "E-Commerce",
     tags: ["E-Commerce", "Web Development", "SEO", "Payments", "Checklist"],
+    highlights: [
+      { value: "70%", label: "Average cart abandonment rate" },
+      { value: "10", label: "Phases in the checklist" },
+      { value: "7%", label: "Conversion lift per 1s speed gain" },
+      { value: "$0", label: "Cost of getting it right the first time" },
+    ],
     content: [
       {
         heading: "Introduction: Why Most E-Commerce Projects Miss the Mark",
