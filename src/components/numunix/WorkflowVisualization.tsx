@@ -1,16 +1,10 @@
 import { Label, Heading, Accent, Reveal } from "./primitives";
 import { NODE_VIZ } from "./nodeviz";
+import { Link } from "@tanstack/react-router";
+import { ArrowUpRight } from "lucide-react";
+import { WORKFLOW_STAGES } from "@/content/workflow";
 
-const NODES: [string, string, string][] = [
-  ["DISCOVER", "Idea", "BUSINESS"],
-  ["DEFINE", "Scope", "PRODUCT"],
-  ["DESIGN", "UX", "EXPERIENCE"],
-  ["DEVELOP", "Code", "ENGINEERING"],
-  ["CONNECT", "APIs", "INTEGRATIONS"],
-  ["VALIDATE", "QA", "QUALITY"],
-  ["LAUNCH", "Cloud", "DEPLOYMENT"],
-  ["IMPROVE", "Grow", "ITERATION"],
-];
+const NODES = WORKFLOW_STAGES;
 
 export function PlatformIntro() {
   return (
@@ -64,17 +58,18 @@ export function WorkflowVisualization() {
       <div className="relative bg-[#f0f4fa]">
         <div className="pointer-events-none absolute inset-x-0 top-1/2 hidden h-px bg-[linear-gradient(90deg,transparent,#cddcf2,transparent)] xl:block" />
         <div className="grid grid-cols-2 gap-4 p-5 sm:gap-5 sm:p-6 md:grid-cols-4 xl:grid-cols-8">
-          {NODES.map(([n, v, u], i) => (
-            <div
-              key={n}
-              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[#e1eaf5] bg-white px-4 py-5 transition-all duration-300 hover:border-[#b8ccec] hover:bg-[#f5f8fd] hover:shadow-[0_4px_20px_-10px_rgba(30,78,216,0.15)] sm:px-5 sm:py-6"
+          {NODES.map(({ phase: n, name: v, category: u, slug }, i) => (
+            <Link
+              key={slug}
+              to="/approach/$slug"
+              params={{ slug }}
+              aria-label={`${n}: ${v} — explore ${u.toLowerCase()}`}
+              className="group relative flex min-w-0 flex-col justify-between overflow-hidden rounded-2xl border border-[#e1eaf5] bg-white px-4 py-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#b8ccec] hover:bg-[#f5f8fd] hover:shadow-[0_4px_20px_-10px_rgba(30,78,216,0.15)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] motion-reduce:transform-none motion-reduce:transition-none sm:px-5 sm:py-6"
             >
               <span className="pointer-events-none absolute inset-x-0 -top-px h-px scale-x-0 bg-gradient-to-r from-transparent via-[#2563eb] to-transparent transition-transform duration-500 group-hover:scale-x-100" />
 
               <div className="flex items-center gap-2">
-                <span className="label-mono text-[#b3c2d6]">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+                <span className="label-mono text-[#b3c2d6]">{String(i + 1).padStart(2, "0")}</span>
                 <span className="text-[12px] tracking-[0.04em] text-[#5d76a3] sm:text-[12.5px] xl:text-[11px]">
                   {n}
                 </span>
@@ -93,7 +88,13 @@ export function WorkflowVisualization() {
                   return <V />;
                 })()}
               </div>
-            </div>
+              <span
+                aria-hidden="true"
+                className="absolute right-2 top-2 text-[#2563eb] transition-colors group-hover:text-[#1747b8] group-focus-visible:text-[#1747b8]"
+              >
+                <ArrowUpRight size={16} />
+              </span>
+            </Link>
           ))}
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { Linkedin, Instagram, Youtube } from "lucide-react";
+import { Linkedin, Instagram } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
 import { CONTACT } from "@/content/site";
 
@@ -87,22 +87,23 @@ export function Footer() {
             {CONTACT.address}
           </p>
           <div className="mt-8 flex gap-3">
-            {[Linkedin, Instagram, Youtube].map((Icon, i) => (
-              <a
-                key={i}
-                href="#top"
-                aria-label="Social link"
-                className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 text-white/60 transition-colors hover:border-[#3b82f6]/50 hover:text-white"
-              >
-                <Icon size={15} />
-              </a>
-            ))}
             <a
-              href="#top"
-              aria-label="X"
-              className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 text-[13px] text-white/60 transition-colors hover:border-[#3b82f6]/50 hover:text-white"
+              href="https://www.linkedin.com/company/numunix/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 text-white/60 transition-colors hover:border-[#3b82f6]/50 hover:text-white"
             >
-              X
+              <Linkedin size={15} />
+            </a>
+            <a
+              href="https://www.instagram.com/numunix"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 text-white/60 transition-colors hover:border-[#3b82f6]/50 hover:text-white"
+            >
+              <Instagram size={15} />
             </a>
           </div>
         </div>

@@ -1,7 +1,9 @@
 import { useRef } from "react";
+import { Link } from "@tanstack/react-router";
 import { Label, Heading, Accent, Reveal } from "./primitives";
 import {
   ArrowRight,
+  ArrowUpRight,
   AppWindow,
   Cpu,
   Smartphone,
@@ -12,15 +14,15 @@ import {
 } from "lucide-react";
 
 const STEPS = [
-  ["01", "DISCOVER", "Understand your idea, users, business model, and requirements."],
-  ["02", "DEFINE", "Shape the product scope, priorities, and technical approach."],
-  ["03", "DESIGN", "Turn your concept into user flows, wireframes, and interfaces."],
-  ["04", "DEVELOP", "Turn approved designs into functional, scalable software."],
-  ["05", "INTEGRATE", "Connect APIs, databases, payments, AI, and business systems."],
-  ["06", "VALIDATE", "Check usability, functionality, performance, and security."],
-  ["07", "LAUNCH", "Deploy your product with modern cloud infrastructure."],
-  ["08", "GROW", "Improve, maintain, optimize, and add features as your needs evolve."],
-];
+  ["01", "DISCOVER", "Understand your idea, users, business model, and requirements.", "idea"],
+  ["02", "DEFINE", "Shape the product scope, priorities, and technical approach.", "scope"],
+  ["03", "DESIGN", "Turn your concept into user flows, wireframes, and interfaces.", "ux"],
+  ["04", "DEVELOP", "Turn approved designs into functional, scalable software.", "code"],
+  ["05", "INTEGRATE", "Connect APIs, databases, payments, AI, and business systems.", "apis"],
+  ["06", "VALIDATE", "Check usability, functionality, performance, and security.", "qa"],
+  ["07", "LAUNCH", "Deploy your product with modern cloud infrastructure.", "cloud"],
+  ["08", "GROW", "Improve, maintain, optimize, and add features as your needs evolve.", "grow"],
+] as const;
 
 export function AutomationWorkflow() {
   return (
@@ -36,22 +38,29 @@ export function AutomationWorkflow() {
         </Reveal>
 
         <div className="mt-20 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {STEPS.map(([n, t, d], i) => (
+          {STEPS.map(([n, t, d, slug], i) => (
             <Reveal key={n} delay={i * 50}>
-              <div className="group relative h-full rounded-2xl border border-[#e2e9f3] bg-white p-7 transition-all duration-250 hover:-translate-y-1 hover:border-[#3b82f6]/45 hover:shadow-[0_24px_60px_-40px_rgba(16,42,99,0.6)]">
+              <Link
+                to="/approach/$slug"
+                params={{ slug }}
+                aria-label={`Explore ${t.toLowerCase()}: ${d}`}
+                className="group relative block h-full rounded-2xl border border-[#e2e9f3] bg-white p-7 transition-all duration-250 hover:-translate-y-1 hover:border-[#3b82f6]/45 hover:shadow-[0_24px_60px_-40px_rgba(16,42,99,0.6)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#2563eb] motion-reduce:transform-none motion-reduce:transition-none"
+              >
                 <span className="label-mono text-[#9db4d6]">{n}</span>
                 <h3 className="mt-10 text-[19px] font-light tracking-[-0.01em] text-[#08152e]">
                   {t}
                 </h3>
                 <p className="mt-3 text-[14px] leading-relaxed text-[#5d76a3]">{d}</p>
-                <ArrowRight
+                <ArrowUpRight
                   size={16}
-                  className="hover-arrow mt-8 text-[#1e4ed8] opacity-60"
+                  aria-hidden="true"
+                  className="absolute top-7 right-7 text-[#1e4ed8]"
                 />
+                <span aria-hidden="true" className="mt-8 block font-mono text-[10px] tracking-[0.12em] text-[#1e4ed8]">EXPLORE {t}</span>
                 {i < STEPS.length - 1 && (
                   <span className="pointer-events-none absolute top-1/2 -right-2.5 hidden h-px w-5 bg-[#cfdcee] lg:block" />
                 )}
-              </div>
+              </Link>
             </Reveal>
           ))}
         </div>

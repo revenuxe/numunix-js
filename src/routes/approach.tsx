@@ -36,6 +36,35 @@ function ApproachRoute() {
           <WorkflowVisualization />
         </Reveal>
       </Section>
+
+      {/* Platform by Revenuxe */}
+      <Section bg="#07111f">
+        <Reveal delay={60}>
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="label-mono text-white/40">PLATFORM</span>
+            <h2 className="mt-4 text-[clamp(28px,4vw,42px)] font-light leading-[1.15] tracking-[-0.025em] text-white">
+              A platform by{" "}
+              <span className="bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] bg-clip-text text-transparent">
+                Revenuxe
+              </span>
+            </h2>
+            <p className="mx-auto mt-5 max-w-[48ch] text-[17px] leading-relaxed text-white/50">
+              Numunix is proudly built and operated by Revenuxe — a company
+              dedicated to creating digital platforms that drive real business
+              growth.
+            </p>
+            <a
+              href="https://www.revenuxe.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-7 py-3 text-[15px] text-white/80 transition-all hover:border-[#3b82f6]/50 hover:bg-white/[0.07] hover:text-white"
+            >
+              Visit Revenuxe
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </Reveal>
+      </Section>
     </CompanyPage>
   );
 }
