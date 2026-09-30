@@ -349,8 +349,23 @@ function ArticlePage() {
             <div className="mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-[280px_1fr]">
               {/* Sidebar: Table of Contents (sticky on desktop) */}
               <aside className="hidden lg:block">
-                <div className="sticky top-28">
+                <div className="sticky top-28 space-y-6">
                   <TableOfContents headings={article.content.map((s) => s.heading)} />
+                  {/* Sidebar CTA */}
+                  <Reveal delay={200}>
+                    <Link
+                      to="/contact"
+                      className="group block rounded-2xl border border-[#dbe5f2] bg-gradient-to-br from-[#eef4ff] to-white p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#3b82f6]/30 hover:shadow-[0_16px_40px_-16px_rgba(16,42,99,0.2)]"
+                    >
+                      <span className="label-mono text-[#1747b8]">NEED HELP?</span>
+                      <p className="mt-2 text-[14px] leading-relaxed text-[#3d5585]">
+                        Let's discuss your project and bring these ideas to life.
+                      </p>
+                      <span className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-medium text-[#1e4ed8] transition-all group-hover:gap-2.5">
+                        Get in touch <ChevronRight size={13} />
+                      </span>
+                    </Link>
+                  </Reveal>
                 </div>
               </aside>
 
@@ -362,42 +377,86 @@ function ArticlePage() {
                 </div>
 
                 {article.content.map((section, i) => (
-                  <Reveal key={section.heading} delay={i * 30}>
-                    <article id={`section-${i}`} className="article-section mb-16 scroll-mt-28 last:mb-0">
-                      {/* Section number badge */}
-                      <div className="mb-4 flex items-center gap-3">
-                        <span className="grid h-8 w-8 place-items-center rounded-lg bg-[#1e4ed8]/10 text-[13px] font-semibold text-[#1e4ed8]">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <div className="h-px flex-1 bg-gradient-to-r from-[#dbe5f2] to-transparent" />
-                      </div>
-                      <h2 className="mb-6 text-[26px] font-light tracking-[-0.02em] text-[#102a63] lg:text-[32px]">
-                        {section.heading}
-                      </h2>
-                      <div
-                        className="article-body text-[17px] leading-[1.8] text-[#3d5585]"
-                        dangerouslySetInnerHTML={{ __html: section.body }}
-                      />
+                  <div key={section.heading}>
+                    <Reveal delay={i * 30}>
+                      <article id={`section-${i}`} className="article-section mb-16 scroll-mt-28">
+                        {/* Section number badge */}
+                        <div className="mb-4 flex items-center gap-3">
+                          <span className="grid h-8 w-8 place-items-center rounded-lg bg-[#1e4ed8]/10 text-[13px] font-semibold text-[#1e4ed8]">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                          <div className="h-px flex-1 bg-gradient-to-r from-[#dbe5f2] to-transparent" />
+                        </div>
+                        <h2 className="mb-6 text-[26px] font-light tracking-[-0.02em] text-[#102a63] lg:text-[32px]">
+                          {section.heading}
+                        </h2>
+                        <div
+                          className="article-body text-[17px] leading-[1.8] text-[#3d5585]"
+                          dangerouslySetInnerHTML={{ __html: section.body }}
+                        />
 
-                      {/* Inline callouts for specific sections */}
-                      {section.heading.toLowerCase().includes("introduction") && (
-                        <Callout
-                          icon="💡"
-                          title="Why this matters"
-                          body="Every section in this article includes actionable takeaways you can apply to your next project — not just theory."
-                          tone="blue"
-                        />
-                      )}
-                      {section.heading.toLowerCase().includes("conclusion") && (
-                        <Callout
-                          icon="🚀"
-                          title="Ready to build?"
-                          body="If you're planning a project and want to apply these principles with a team that lives them — get in touch."
-                          tone="green"
-                        />
-                      )}
-                    </article>
-                  </Reveal>
+                        {/* Inline callouts for specific sections */}
+                        {section.heading.toLowerCase().includes("introduction") && (
+                          <Callout
+                            icon="💡"
+                            title="Why this matters"
+                            body="Every section in this article includes actionable takeaways you can apply to your next project — not just theory."
+                            tone="blue"
+                          />
+                        )}
+                        {section.heading.toLowerCase().includes("conclusion") && (
+                          <div className="mt-8 rounded-2xl border border-[#10b981]/20 bg-[#ecfdf5] p-6">
+                            <div className="flex items-start gap-3">
+                              <span className="text-2xl text-[#059669]">🚀</span>
+                              <div>
+                                <div className="text-[16px] font-semibold text-[#065f46]">Ready to build?</div>
+                                <div className="mt-1.5 text-[15px] leading-relaxed text-[#064e3b]">
+                                  If you're planning a project and want to apply these principles with a team that lives them — let's talk.
+                                </div>
+                                <Link
+                                  to="/contact"
+                                  className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#059669] px-5 py-2.5 text-[13px] font-medium tracking-wide text-white transition-all hover:-translate-y-0.5 hover:bg-[#047857] hover:shadow-[0_10px_30px_-8px_rgba(5,150,105,0.5)]"
+                                >
+                                  START A CONVERSATION
+                                  <ChevronRight size={14} />
+                                </Link>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </article>
+                    </Reveal>
+
+                    {/* Mid-article CTA banner — after every 3rd section (but not the last) */}
+                    {(i + 1) % 3 === 0 && i < article.content.length - 1 && (
+                      <Reveal delay={20}>
+                        <div className="relative mb-16 overflow-hidden rounded-[22px] border border-[#1e4ed8]/15 bg-gradient-to-r from-[#0b1b38] to-[#102a63] p-7 lg:p-9">
+                          {/* Decorative elements */}
+                          <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-[#3b82f6]/10 blur-[40px]" />
+                          <div className="absolute bottom-0 left-0 h-24 w-24 rounded-full bg-[#1e4ed8]/10 blur-[30px]" />
+
+                          <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                            <div>
+                              <span className="label-mono text-[#60a5fa]">WORK WITH US</span>
+                              <h3 className="mt-2 text-[20px] font-light tracking-[-0.01em] text-white lg:text-[22px]">
+                                Applying this to a real project?
+                              </h3>
+                              <p className="mt-1.5 max-w-[44ch] text-[15px] text-white/50">
+                                We help teams turn ideas like these into shipped products. Let's talk about yours.
+                              </p>
+                            </div>
+                            <Link
+                              to="/contact"
+                              className="label-mono inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-[#102a63] transition-all duration-250 hover:-translate-y-0.5 hover:shadow-[0_12px_38px_-10px_rgba(255,255,255,0.3)]"
+                            >
+                              GET IN TOUCH
+                              <ChevronRight size={14} />
+                            </Link>
+                          </div>
+                        </div>
+                      </Reveal>
+                    )}
+                  </div>
                 ))}
 
                 {/* CTA card at end of article */}
@@ -418,12 +477,51 @@ function ArticlePage() {
                         className="label-mono inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[#1e4ed8] px-6 py-3.5 text-white transition-all duration-250 hover:-translate-y-0.5 hover:bg-[#2563eb] hover:shadow-[0_12px_38px_-10px_rgba(59,130,246,0.75)]"
                       >
                         START A PROJECT
+                        <ChevronRight size={14} />
                       </Link>
                     </div>
                   </div>
                 </Reveal>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Full-width CTA section */}
+        <section className="relative overflow-hidden bg-gradient-to-br from-[#0b1b38] via-[#102a63] to-[#0b1b38] py-20 lg:py-28">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(59,130,246,0.08),transparent)]" />
+          <div className="absolute top-0 left-[20%] h-64 w-64 rounded-full bg-[#3b82f6]/[0.06] blur-[80px] animate-[nx-float_8s_ease-in-out_infinite]" />
+          <div className="absolute bottom-0 right-[20%] h-48 w-48 rounded-full bg-[#1e4ed8]/[0.08] blur-[60px] animate-[nx-float_10s_ease-in-out_3s_infinite]" />
+
+          <div className="shell relative text-center">
+            <Reveal>
+              <span className="label-mono text-[#60a5fa]">READY TO START?</span>
+              <h2
+                style={{ lineHeight: 1.1 }}
+                className="mx-auto mt-5 max-w-[18ch] text-[clamp(2rem,4.5vw,4rem)] font-light tracking-[-0.025em] text-white"
+              >
+                Turn insights into a{" "}
+                <span className="text-[#3b82f6]">real product.</span>
+              </h2>
+              <p className="mx-auto mt-5 max-w-[52ch] text-[17px] leading-relaxed text-white/50">
+                Whether it's a website, mobile app, SaaS platform, or custom software — our team designs and develops digital products that grow your business.
+              </p>
+              <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+                <Link
+                  to="/contact"
+                  className="label-mono inline-flex items-center justify-center gap-2 rounded-xl bg-[#1e4ed8] px-8 py-4 text-white transition-all duration-250 hover:-translate-y-0.5 hover:bg-[#2563eb] hover:shadow-[0_16px_48px_-10px_rgba(59,130,246,0.7)]"
+                >
+                  START A PROJECT
+                  <ChevronRight size={14} />
+                </Link>
+                <Link
+                  to="/features"
+                  className="label-mono inline-flex items-center justify-center gap-2 rounded-xl border border-white/12 bg-white/[0.04] px-8 py-4 text-white/90 transition-all duration-250 hover:-translate-y-0.5 hover:border-[#3b82f6]/50 hover:bg-white/[0.08]"
+                >
+                  EXPLORE SERVICES
+                </Link>
+              </div>
+            </Reveal>
           </div>
         </section>
 
