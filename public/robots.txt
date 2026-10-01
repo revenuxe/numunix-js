@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://numunix.com/sitemap.xml
+Sitemap: https://www.numunix.com/sitemap.xml

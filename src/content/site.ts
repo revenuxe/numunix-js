@@ -1,7 +1,7 @@
 import { PRODUCT_SERVICES } from "./product-services";
 
 /** Canonical base URL — no trailing slash */
-export const SITE_URL = "https://numunix.com";
+export const SITE_URL = "https://www.numunix.com";
 
 /** Default OG image used for social sharing when a page has no custom image */
 export const OG_IMAGE = `${SITE_URL}/og-default.jpg`;
