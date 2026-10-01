@@ -40,9 +40,9 @@ export const Route = createFileRoute("/articles/$slug")({
         { name: "twitter:card", content: "summary_large_image" },
         ...(a
           ? [
-              { property: "article:published_time", content: a.publishedAt },
-              { property: "article:author", content: a.author },
-            ]
+            { property: "article:published_time", content: a.publishedAt },
+            { property: "article:author", content: a.author },
+          ]
           : []),
       ],
       links: [{ rel: "canonical", href: pageUrl }],
@@ -70,28 +70,28 @@ export const Route = createFileRoute("/articles/$slug")({
         },
         ...(a
           ? [
-              {
-                type: "application/ld+json",
-                children: JSON.stringify({
-                  "@context": "https://schema.org",
-                  "@type": "Article",
-                  headline: a.title,
-                  description: desc,
-                  url: pageUrl,
-                  datePublished: a.publishedAt,
-                  author: {
-                    "@type": "Organization",
-                    name: a.author,
-                    url: SITE_URL,
-                  },
-                  publisher: {
-                    "@type": "Organization",
-                    name: "Numunix",
-                    url: SITE_URL,
-                  },
-                }),
-              },
-            ]
+            {
+              type: "application/ld+json",
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Article",
+                headline: a.title,
+                description: desc,
+                url: pageUrl,
+                datePublished: a.publishedAt,
+                author: {
+                  "@type": "Organization",
+                  name: a.author,
+                  url: SITE_URL,
+                },
+                publisher: {
+                  "@type": "Organization",
+                  name: "Numunix",
+                  url: SITE_URL,
+                },
+              }),
+            },
+          ]
           : []),
       ],
     };
@@ -177,11 +177,10 @@ function TableOfContents({ headings }: { headings: string[] }) {
                 setActive(i);
                 document.getElementById(`section-${i}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
-              className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-[14px] transition-all duration-200 ${
-                active === i
+              className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-[14px] transition-all duration-200 ${active === i
                   ? "bg-[#eef4ff] text-[#1e4ed8]"
                   : "text-[#5d76a3] hover:bg-[#f1f5f9] hover:text-[#102a63]"
-              }`}
+                }`}
             >
               <ChevronRight size={12} className={active === i ? "text-[#3b82f6]" : "text-[#5d76a3]/50"} />
               <span className="line-clamp-1">{h}</span>
@@ -205,9 +204,8 @@ function BackToTop() {
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Back to top"
-      className={`fixed bottom-8 right-8 z-50 grid h-12 w-12 place-items-center rounded-full border border-white/10 bg-[#1e4ed8] text-white shadow-[0_8px_30px_-6px_rgba(30,78,216,0.5)] transition-all duration-300 hover:bg-[#2563eb] ${
-        show ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none"
-      }`}
+      className={`fixed bottom-8 right-8 z-50 grid h-12 w-12 place-items-center rounded-full border border-white/10 bg-[#1e4ed8] text-white shadow-[0_8px_30px_-6px_rgba(30,78,216,0.5)] transition-all duration-300 hover:bg-[#2563eb] ${show ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none"
+        }`}
     >
       <ArrowUp size={18} />
     </button>
@@ -219,7 +217,7 @@ function ShareButton({ title, url }: { title: string; url: string }) {
   const [copied, setCopied] = useState(false);
   const handleShare = async () => {
     if (navigator.share) {
-      try { await navigator.share({ title, url }); } catch {}
+      try { await navigator.share({ title, url }); } catch { }
     } else {
       await navigator.clipboard.writeText(url);
       setCopied(true);
