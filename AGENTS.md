@@ -12,3 +12,4 @@
 ## Website content and navigation
 - Do not add phone-number or click-to-call buttons to heroes or CTA sections, including future pages. Use project, service, or email actions instead.
 - Product and service cards must link to their relevant detail page, not the generic services directory. Preserve the existing visual design.
+- Keep illustrative service scenarios and scoping guidance in a shared content module, separate from delivery claims; this lets detail pages be specific without implying real client results.
