@@ -9,6 +9,7 @@ import { Label, Heading, Accent, Btn, Reveal } from "./primitives";
 import ServiceDemo from "./ServiceDemo";
 import { FEATURES, type Feature } from "@/content/features";
 import { FEATURE_EXTRAS, DEFAULT_EXTRA, CONTACT } from "@/content/site";
+import { SERVICE_EDITORIAL } from "@/content/service-editorial";
 
 function headline(title: string, accent: string) {
   const i = title.indexOf(accent);
@@ -25,6 +26,7 @@ function headline(title: string, accent: string) {
 export function FeaturePage({ feature }: { feature: Feature }) {
   const related = FEATURES.filter((f) => f.slug !== feature.slug).slice(0, 3);
   const extra = FEATURE_EXTRAS[feature.slug] ?? DEFAULT_EXTRA;
+  const editorial = SERVICE_EDITORIAL[feature.slug];
 
   return (
     <div className="bg-[#05070c]">
@@ -97,6 +99,33 @@ export function FeaturePage({ feature }: { feature: Feature }) {
             </div>
           </div>
         </section>
+
+        {editorial && (
+          <>
+            <section className="section-pad bg-paper">
+              <div className="shell grid gap-9 lg:grid-cols-[0.75fr_1.25fr] lg:gap-24">
+                <Reveal><Label tone="light">IN PRACTICE / {feature.label}</Label></Reveal>
+                <Reveal delay={80}>
+                  <Heading tone="light" className="max-w-[20ch]">{editorial.moment}</Heading>
+                  <p className="mt-8 max-w-[56ch] border-l-2 border-primary pl-6 text-[18px] leading-relaxed text-muted-foreground lg:text-[21px]">{editorial.scenario}</p>
+                  <p className="mt-5 label-mono text-muted-foreground">ILLUSTRATIVE SCENARIO — NOT A CLIENT CASE STUDY</p>
+                </Reveal>
+              </div>
+            </section>
+            <section className="section-pad bg-ink-800">
+              <div className="shell">
+                <Reveal><Label>THE EXPERIENCE</Label><Heading className="mt-6 max-w-[19ch]">One complete journey. <Accent>No disconnected steps.</Accent></Heading></Reveal>
+                <div className="mt-12 grid border-t border-foreground/15 lg:grid-cols-3">
+                  {editorial.journey.map(([step, body], i) => (
+                    <Reveal key={step} delay={i * 70} className="border-b border-foreground/15 lg:border-b-0 lg:border-r lg:last:border-r-0">
+                      <div className="py-8 lg:px-8 lg:first:pl-0"><span className="label-mono text-cyan">{step}</span><p className="mt-6 max-w-[34ch] text-[19px] leading-snug text-primary-foreground/85">{body}</p></div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </section>
+          </>
+        )}
 
         {/* BEFORE / AFTER — dark split */}
         <section className="section-pad bg-[#07111f]">
@@ -236,6 +265,29 @@ export function FeaturePage({ feature }: { feature: Feature }) {
             </Reveal>
           </div>
         </section>
+
+        {editorial && (
+          <section className="section-pad bg-mist-2">
+            <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
+              <Reveal>
+                <Label tone="light">BEFORE THE BUILD</Label>
+                <Heading tone="light" className="mt-6 max-w-[14ch]">The decisions that shape the product.</Heading>
+                <p className="mt-6 max-w-[45ch] text-[17px] leading-relaxed text-muted-foreground">{editorial.firstRelease}</p>
+              </Reveal>
+              <div className="border-t border-border">
+                {editorial.decisions.map(([question, answer], i) => (
+                  <Reveal key={question} delay={i * 60}>
+                    <div className="grid gap-3 border-b border-border py-7 sm:grid-cols-[2rem_0.8fr_1.2fr] sm:gap-6">
+                      <span className="label-mono text-primary">0{i + 1}</span>
+                      <h3 className="text-[20px] font-light text-navytext">{question}</h3>
+                      <p className="text-[16px] leading-relaxed text-muted-foreground">{answer}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* QUESTIONS — light */}
         <section className="section-pad bg-[#eef3f8]">
