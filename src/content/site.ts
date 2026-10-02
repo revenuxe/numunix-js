@@ -9,8 +9,8 @@ export const OG_IMAGE = `${SITE_URL}/og-default.jpg`;
 export const CONTACT = {
   phone: "+91 98862 85028",
   phoneHref: "tel:+919886285028",
-  email: "numunix@gmail.com",
-  emailHref: "mailto:numunix@gmail.com",
+  email: "hello@numunix.com",
+  emailHref: "mailto:hello@numunix.com",
   whatsappHref: "https://wa.me/919886285028?text=Hi%20Numunix%2C%20I%27d%20like%20to%20discuss%20a%20project.",
   hours: "Mon – Sat · 9:00 AM – 8:00 PM IST",
   address: "11, 4th Cross, 2nd Main Rd, Shampura, Bengaluru, Karnataka 560045",

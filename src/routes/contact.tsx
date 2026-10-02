@@ -15,7 +15,7 @@ import { ContactFormSection } from "@/components/numunix/ContactFormSection";
 
 const TITLE = "Contact Numunix | Start Your Digital Product Project";
 const DESC =
-  "Contact Numunix to discuss web development, mobile apps, SaaS, custom software, AI, and design. Call +91 98862 85028 or email numunix@gmail.com.";
+  "Contact Numunix to discuss web development, mobile apps, SaaS, custom software, AI, and design. Call +91 98862 85028 or email hello@numunix.com.";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({

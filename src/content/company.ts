@@ -255,7 +255,7 @@ export const SUPPORT: CompanyPageData = {
       tone: "dark",
       bg: "#07111f",
       items: [
-        ["Email first", "Write to numunix@gmail.com with the product, what’s happening, and how urgent it is."],
+        ["Email first", "Write to hello@numunix.com with the product, what’s happening, and how urgent it is."],
         ["Include context", "Links, screenshots, environments, and recent changes help us diagnose faster."],
         ["Existing customers", "If we built the product, mention the project so we can pick up the right history."],
         ["New to Numunix", "We can still review an existing system and propose a maintenance or improvement plan."],
@@ -285,7 +285,7 @@ export const PRIVACY: LegalPageData = {
       heading: "Who we are",
       paragraphs: [
         "Numunix designs and develops websites, mobile apps, SaaS products, custom software, and related digital services. This website and the contact channels listed on it are operated by Numunix.",
-        "If you have questions about this policy, email numunix@gmail.com.",
+        "If you have questions about this policy, email hello@numunix.com.",
       ],
     },
     {
@@ -381,7 +381,7 @@ export const TERMS: LegalPageData = {
     {
       heading: "Contact",
       paragraphs: [
-        "Questions about these terms: numunix@gmail.com.",
+        "Questions about these terms: hello@numunix.com.",
       ],
     },
   ],
