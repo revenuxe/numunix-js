@@ -28,7 +28,7 @@ export function CompanyPage({
       />
       <StatStrip stats={page.stats} />
       {children}
-      {page.sections.map((section) => {
+      {page.sections.map((section, sectionIndex) => {
         const tone = section.tone ?? "light";
         const bg = section.bg ?? (tone === "dark" ? "#07111f" : "#f1f5f9");
         return (
@@ -40,26 +40,23 @@ export function CompanyPage({
               {...(section.body !== undefined ? { body: section.body } : {})}
               tone={tone}
             />
-            <div className="mt-12 grid gap-5 sm:grid-cols-2">
+            <div className={`mt-12 border-t ${tone === "dark" ? "border-white/15" : "border-border"}`}>
               {section.items.map(([title, body], i) => (
                 <Reveal key={title} delay={i * 40}>
                   <div
-                    className={`h-full rounded-[22px] border p-7 lg:p-8 ${
-                      tone === "dark"
-                        ? "border-white/[0.07] bg-white/[0.02]"
-                        : "border-[#dbe5f2] bg-white"
-                    }`}
+                    className={`grid gap-4 border-b py-7 sm:grid-cols-[3rem_0.7fr_1.3fr] sm:gap-8 lg:py-9 ${tone === "dark" ? "border-white/15" : "border-border"}`}
                   >
+                    <span className={`label-mono ${tone === "dark" ? "text-cyan" : "text-primary"}`}>{String(sectionIndex + 1).padStart(2, "0")}.{String(i + 1).padStart(2, "0")}</span>
                     <h3
-                      className={`text-[19px] font-light tracking-[-0.01em] ${
-                        tone === "dark" ? "text-white" : "text-[#102a63]"
+                      className={`text-[21px] font-light ${
+                        tone === "dark" ? "text-primary-foreground" : "text-navytext"
                       }`}
                     >
                       {title}
                     </h3>
                     <p
-                      className={`mt-3 text-[16px] leading-relaxed ${
-                        tone === "dark" ? "text-white/55" : "text-[#5d76a3]"
+                      className={`max-w-[65ch] text-[16px] leading-relaxed ${
+                        tone === "dark" ? "text-primary-foreground/60" : "text-muted-foreground"
                       }`}
                     >
                       {body}

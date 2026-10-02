@@ -1,0 +1,3 @@
+- [ ] Expand service detail pages with specific, useful editorial content and less repetitive layouts.
+- [ ] Improve services directory and other informational landing pages with clearer content and navigation.
+- [ ] Verify desktop/mobile presentation and resolve preview errors.
