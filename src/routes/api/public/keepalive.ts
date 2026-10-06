@@ -24,7 +24,8 @@ export const Route = createFileRoute("/api/public/keepalive")({
         }
 
         const supabaseUrl = process.env["SUPABASE_URL"];
-        const supabaseKey = process.env["SUPABASE_PUBLISHABLE_KEY"];
+        // Server-only service key: authorized regardless of table permissions.
+        const supabaseKey = process.env["SUPABASE_SERVICE_ROLE_KEY"];
         if (!supabaseUrl || !supabaseKey) {
           return Response.json({ ok: false, error: "supabase_not_configured" }, { status: 500 });
         }
