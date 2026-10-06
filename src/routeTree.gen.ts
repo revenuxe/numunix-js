@@ -27,6 +27,7 @@ import { Route as ArticlesIndexRouteImport } from './routes/articles.index'
 import { Route as ArticlesSlugRouteImport } from './routes/articles.$slug'
 import { Route as FeaturesIndexRouteImport } from './routes/features.index'
 import { Route as FeaturesSlugRouteImport } from './routes/features.$slug'
+import { Route as ApiPublicKeepaliveRouteImport } from './routes/api/public/keepalive'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -118,6 +119,11 @@ const FeaturesSlugRoute = FeaturesSlugRouteImport.update({
   path: '/features/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicKeepaliveRoute = ApiPublicKeepaliveRouteImport.update({
+  id: '/api/public/keepalive',
+  path: '/api/public/keepalive',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -138,6 +144,7 @@ export interface FileRoutesByFullPath {
   '/admin/': typeof AdminIndexRoute
   '/articles/': typeof ArticlesIndexRoute
   '/features/': typeof FeaturesIndexRoute
+  '/api/public/keepalive': typeof ApiPublicKeepaliveRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -158,6 +165,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminIndexRoute
   '/articles': typeof ArticlesIndexRoute
   '/features': typeof FeaturesIndexRoute
+  '/api/public/keepalive': typeof ApiPublicKeepaliveRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -179,6 +187,7 @@ export interface FileRoutesById {
   '/admin/': typeof AdminIndexRoute
   '/articles/': typeof ArticlesIndexRoute
   '/features/': typeof FeaturesIndexRoute
+  '/api/public/keepalive': typeof ApiPublicKeepaliveRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -201,6 +210,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/articles/'
     | '/features/'
+    | '/api/public/keepalive'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -221,6 +231,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/articles'
     | '/features'
+    | '/api/public/keepalive'
   id:
     | '__root__'
     | '/'
@@ -241,6 +252,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/articles/'
     | '/features/'
+    | '/api/public/keepalive'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -262,6 +274,7 @@ export interface RootRouteChildren {
   AdminIndexRoute: typeof AdminIndexRoute
   ArticlesIndexRoute: typeof ArticlesIndexRoute
   FeaturesIndexRoute: typeof FeaturesIndexRoute
+  ApiPublicKeepaliveRoute: typeof ApiPublicKeepaliveRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -392,6 +405,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeaturesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/keepalive': {
+      id: '/api/public/keepalive'
+      path: '/api/public/keepalive'
+      fullPath: '/api/public/keepalive'
+      preLoaderRoute: typeof ApiPublicKeepaliveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -414,6 +434,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminIndexRoute: AdminIndexRoute,
   ArticlesIndexRoute: ArticlesIndexRoute,
   FeaturesIndexRoute: FeaturesIndexRoute,
+  ApiPublicKeepaliveRoute: ApiPublicKeepaliveRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
