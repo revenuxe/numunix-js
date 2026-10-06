@@ -8,8 +8,11 @@ export const Route = createFileRoute("/api/public/keepalive")({
   server: {
     handlers: {
       GET: async ({ request }) => {
-        const secret = process.env["LOVABLE_CRON_SECRET"];
-        if (!secret) {
+        // Accept the managed cron secret or a user-set KEEPALIVE_KEY.
+        const secrets = [process.env["LOVABLE_CRON_SECRET"], process.env["KEEPALIVE_KEY"]].filter(
+          (s): s is string => Boolean(s),
+        );
+        if (secrets.length === 0) {
           return Response.json({ ok: false, error: "not_configured" }, { status: 500 });
         }
 
