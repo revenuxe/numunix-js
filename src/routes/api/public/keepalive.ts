@@ -22,7 +22,7 @@ export const Route = createFileRoute("/api/public/keepalive")({
           ? auth.slice(7)
           : url.searchParams.get("key");
 
-        if (!provided || provided !== secret) {
+        if (!provided || !secrets.includes(provided)) {
           return Response.json({ ok: false, error: "unauthorized" }, { status: 401 });
         }
 
