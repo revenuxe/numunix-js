@@ -37,8 +37,9 @@ export const Route = createFileRoute("/api/public/keepalive")({
             {
               method: "HEAD",
               headers: {
+                // New-style Supabase keys are opaque, not JWTs — send apikey
+                // only, never Authorization: Bearer <key>.
                 apikey: supabaseKey,
-                Authorization: `Bearer ${supabaseKey}`,
                 Prefer: "count=exact",
               },
             },
