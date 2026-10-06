@@ -37,6 +37,7 @@ export function ContactForm() {
       await submitEnquiry({ ...values, source: parsed.data.source });
       form.reset();
       setStatus("success");
+      window.location.assign("/thank-you");
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : "Please try again later.");
       setStatus("error");

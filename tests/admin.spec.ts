@@ -157,5 +157,52 @@ test("desktop table supports search and public contact submission", async ({ pag
     .getByRole("combobox", { name: "Service *", exact: true })
     .selectOption({ label: "SaaS Development" });
   await page.getByRole("button", { name: "Submit enquiry" }).click();
+  await expect(page).toHaveURL(/\/thank-you$/);
   await expect(page.getByRole("status")).toContainText("Your enquiry has been received");
+});
+
+test("home enquiry reaches a mobile-friendly thank-you page", async ({ page }, testInfo) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  await mockSupabase(page);
+  await page.goto("/");
+  await page.getByLabel("Name *", { exact: true }).fill("Test Visitor");
+  await page.getByLabel("Phone number *").fill("+91 98765 43210");
+  await page
+    .getByRole("combobox", { name: "Service *", exact: true })
+    .selectOption({ label: "SaaS Development" });
+  await page.getByRole("button", { name: "Submit enquiry" }).click();
+  await expect(page).toHaveURL(/\/thank-you$/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Great things start");
+  await page.screenshot({ path: testInfo.outputPath("thank-you-mobile.png"), fullPage: true });
+  await expect(page.getByRole("link", { name: "Email our team" })).toHaveAttribute(
+    "href",
+    "mailto:hello@numunix.com",
+  );
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
+    true,
+  );
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.screenshot({ path: testInfo.outputPath("thank-you-desktop.png"), fullPage: true });
+});
+
+test("failed enquiries stay on the form and do not show confirmation", async ({ page }) => {
+  await mockSupabase(page);
+  await page.route("**/rest/v1/contact_enquiries", (route) =>
+    route.fulfill({
+      status: route.request().method() === "OPTIONS" ? 204 : 500,
+      body:
+        route.request().method() === "OPTIONS" ? "" : JSON.stringify({ message: "Save failed" }),
+      headers: { "access-control-allow-origin": "*", "access-control-allow-headers": "*" },
+    }),
+  );
+  await page.goto("/contact");
+  await page.getByLabel("Name *", { exact: true }).fill("Test Visitor");
+  await page.getByLabel("Phone number *").fill("+91 98765 43210");
+  await page
+    .getByRole("combobox", { name: "Service *", exact: true })
+    .selectOption({ label: "SaaS Development" });
+  await page.getByRole("button", { name: "Submit enquiry" }).click();
+  await expect(page.getByRole("alert")).toContainText("could not be saved");
+  await expect(page).toHaveURL(/\/contact$/);
+  await expect(page.getByLabel("Name *", { exact: true })).toHaveValue("Test Visitor");
 });

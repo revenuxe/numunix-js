@@ -18,6 +18,7 @@ import { Route as SecurityRouteImport } from './routes/security'
 import { Route as SupportRouteImport } from './routes/support'
 import { Route as TechnologyRouteImport } from './routes/technology'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as ThankYouRouteImport } from './routes/thank-you'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
@@ -72,6 +73,11 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ThankYouRoute = ThankYouRouteImport.update({
+  id: '/thank-you',
+  path: '/thank-you',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/admin/',
   path: '/admin/',
@@ -123,6 +129,7 @@ export interface FileRoutesByFullPath {
   '/support': typeof SupportRoute
   '/technology': typeof TechnologyRoute
   '/terms': typeof TermsRoute
+  '/thank-you': typeof ThankYouRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
   '/approach/$slug': typeof ApproachSlugRoute
@@ -142,6 +149,7 @@ export interface FileRoutesByTo {
   '/support': typeof SupportRoute
   '/technology': typeof TechnologyRoute
   '/terms': typeof TermsRoute
+  '/thank-you': typeof ThankYouRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
   '/approach/$slug': typeof ApproachSlugRoute
@@ -162,6 +170,7 @@ export interface FileRoutesById {
   '/support': typeof SupportRoute
   '/technology': typeof TechnologyRoute
   '/terms': typeof TermsRoute
+  '/thank-you': typeof ThankYouRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
   '/approach_/$slug': typeof ApproachSlugRoute
@@ -183,6 +192,7 @@ export interface FileRouteTypes {
     | '/support'
     | '/technology'
     | '/terms'
+    | '/thank-you'
     | '/admin/dashboard'
     | '/admin/login'
     | '/approach/$slug'
@@ -202,6 +212,7 @@ export interface FileRouteTypes {
     | '/support'
     | '/technology'
     | '/terms'
+    | '/thank-you'
     | '/admin/dashboard'
     | '/admin/login'
     | '/approach/$slug'
@@ -221,6 +232,7 @@ export interface FileRouteTypes {
     | '/support'
     | '/technology'
     | '/terms'
+    | '/thank-you'
     | '/admin/dashboard'
     | '/admin/login'
     | '/approach_/$slug'
@@ -241,6 +253,7 @@ export interface RootRouteChildren {
   SupportRoute: typeof SupportRoute
   TechnologyRoute: typeof TechnologyRoute
   TermsRoute: typeof TermsRoute
+  ThankYouRoute: typeof ThankYouRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminLoginRoute: typeof AdminLoginRoute
   ApproachSlugRoute: typeof ApproachSlugRoute
@@ -316,6 +329,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/thank-you': {
+      id: '/thank-you'
+      path: '/thank-you'
+      fullPath: '/thank-you'
+      preLoaderRoute: typeof ThankYouRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/': {
       id: '/admin/'
       path: '/admin'
@@ -385,6 +405,7 @@ const rootRouteChildren: RootRouteChildren = {
   SupportRoute: SupportRoute,
   TechnologyRoute: TechnologyRoute,
   TermsRoute: TermsRoute,
+  ThankYouRoute: ThankYouRoute,
   AdminDashboardRoute: AdminDashboardRoute,
   AdminLoginRoute: AdminLoginRoute,
   ApproachSlugRoute: ApproachSlugRoute,
