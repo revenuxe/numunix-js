@@ -13,10 +13,10 @@ export const CONTACT = {
   emailHref: "mailto:hello@numunix.com",
   whatsappHref: "https://wa.me/919886285028?text=Hi%20Numunix%2C%20I%27d%20like%20to%20discuss%20a%20project.",
   hours: "Mon – Sat · 9:00 AM – 8:00 PM IST",
-  address: "11, 4th Cross, 2nd Main Rd, Shampura, Bengaluru, Karnataka 560045",
+  address: "Shop No 1, 1st Floor, 10/1, 10th Cross, LR Bande C L Ramaiah Layout, RT Nagar Post, Bengaluru, Karnataka 560032",
   addressLocality: "Bengaluru",
   addressRegion: "Karnataka",
-  postalCode: "560045",
+  postalCode: "560032",
   addressCountry: "IN",
 };
 

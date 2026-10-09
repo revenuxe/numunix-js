@@ -58,7 +58,7 @@ export const Route = createFileRoute("/")({
           },
           address: {
             "@type": "PostalAddress",
-            streetAddress: "11, 4th Cross, 2nd Main Rd, Shampura",
+            streetAddress: "Shop No 1, 1st Floor, 10/1, 10th Cross, LR Bande C L Ramaiah Layout, RT Nagar Post",
             addressLocality: CONTACT.addressLocality,
             addressRegion: CONTACT.addressRegion,
             postalCode: CONTACT.postalCode,
