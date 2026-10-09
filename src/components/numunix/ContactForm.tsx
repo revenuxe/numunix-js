@@ -9,7 +9,7 @@ const fieldClass =
   "mt-2 block min-h-12 w-full min-w-0 rounded-xl border border-[#dbe5f2] bg-[#f8fafc] px-4 py-3 text-base font-normal text-[#102a63] outline-none transition focus:border-[#2563eb] focus:ring-3 focus:ring-[#2563eb]/10 placeholder:text-[#8190aa]";
 const labelClass = "block min-w-0 text-sm font-medium text-[#102a63]";
 
-export function ContactForm() {
+export function ContactForm({ initialDescription = "" }: { initialDescription?: string } = {}) {
   const submitting = useRef(false);
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => setHydrated(true), []);
@@ -144,6 +144,7 @@ export function ContactForm() {
             className={`${fieldClass} min-h-32 resize-y`}
             id="contact-description"
             name="description"
+            defaultValue={initialDescription}
             rows={4}
             maxLength={1500}
             placeholder="What would you like to build or improve? Share your idea, goals, or any questions."

@@ -127,4 +127,45 @@
   <url><loc>https://www.numunix.com/approach/qa</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.numunix.com/approach/cloud</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.numunix.com/approach/grow</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <!-- Industry landing pages -->
+  <url>
+    <loc>https://www.numunix.com/industries/banking-financial-services</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.numunix.com/industries/insurance</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.numunix.com/industries/automotive-mobility</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.numunix.com/industries/retail-e-commerce</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.numunix.com/industries/edtech</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.numunix.com/industries/saas-enterprise-tech</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.numunix.com/industries/travel-hospitality</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.numunix.com/industries/government-psu</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

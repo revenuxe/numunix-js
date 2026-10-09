@@ -4,6 +4,7 @@ import Hero from "@/components/numunix/Hero";
 import LogoMarquee from "@/components/numunix/LogoMarquee";
 import PlatformIntro from "@/components/numunix/WorkflowVisualization";
 import FeatureScroller from "@/components/numunix/FeatureScroller";
+import IndustriesSection from "@/components/numunix/IndustriesSection";
 import {
   AIAgentsSection,
   DispatchSection,
@@ -85,6 +86,7 @@ function Index() {
         <DispatchSection />
         <IndustryCarousel />
         <FeatureDirectory />
+        <IndustriesSection />
         <SecuritySection />
         <BuiltWithNumunix />
         <AnalyticsDemo />

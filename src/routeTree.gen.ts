@@ -27,6 +27,7 @@ import { Route as ArticlesIndexRouteImport } from './routes/articles.index'
 import { Route as ArticlesSlugRouteImport } from './routes/articles.$slug'
 import { Route as FeaturesIndexRouteImport } from './routes/features.index'
 import { Route as FeaturesSlugRouteImport } from './routes/features.$slug'
+import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
 import { Route as ApiPublicKeepaliveRouteImport } from './routes/api/public/keepalive'
 
 const IndexRoute = IndexRouteImport.update({
@@ -119,6 +120,11 @@ const FeaturesSlugRoute = FeaturesSlugRouteImport.update({
   path: '/features/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IndustriesSlugRoute = IndustriesSlugRouteImport.update({
+  id: '/industries/$slug',
+  path: '/industries/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicKeepaliveRoute = ApiPublicKeepaliveRouteImport.update({
   id: '/api/public/keepalive',
   path: '/api/public/keepalive',
@@ -141,6 +147,7 @@ export interface FileRoutesByFullPath {
   '/approach/$slug': typeof ApproachSlugRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/features/$slug': typeof FeaturesSlugRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/articles/': typeof ArticlesIndexRoute
   '/features/': typeof FeaturesIndexRoute
@@ -162,6 +169,7 @@ export interface FileRoutesByTo {
   '/approach/$slug': typeof ApproachSlugRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/features/$slug': typeof FeaturesSlugRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
   '/admin': typeof AdminIndexRoute
   '/articles': typeof ArticlesIndexRoute
   '/features': typeof FeaturesIndexRoute
@@ -184,6 +192,7 @@ export interface FileRoutesById {
   '/approach_/$slug': typeof ApproachSlugRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/features/$slug': typeof FeaturesSlugRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/articles/': typeof ArticlesIndexRoute
   '/features/': typeof FeaturesIndexRoute
@@ -207,6 +216,7 @@ export interface FileRouteTypes {
     | '/approach/$slug'
     | '/articles/$slug'
     | '/features/$slug'
+    | '/industries/$slug'
     | '/admin/'
     | '/articles/'
     | '/features/'
@@ -228,6 +238,7 @@ export interface FileRouteTypes {
     | '/approach/$slug'
     | '/articles/$slug'
     | '/features/$slug'
+    | '/industries/$slug'
     | '/admin'
     | '/articles'
     | '/features'
@@ -249,6 +260,7 @@ export interface FileRouteTypes {
     | '/approach_/$slug'
     | '/articles/$slug'
     | '/features/$slug'
+    | '/industries/$slug'
     | '/admin/'
     | '/articles/'
     | '/features/'
@@ -271,6 +283,7 @@ export interface RootRouteChildren {
   ApproachSlugRoute: typeof ApproachSlugRoute
   ArticlesSlugRoute: typeof ArticlesSlugRoute
   FeaturesSlugRoute: typeof FeaturesSlugRoute
+  IndustriesSlugRoute: typeof IndustriesSlugRoute
   AdminIndexRoute: typeof AdminIndexRoute
   ArticlesIndexRoute: typeof ArticlesIndexRoute
   FeaturesIndexRoute: typeof FeaturesIndexRoute
@@ -405,6 +418,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeaturesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/industries/$slug': {
+      id: '/industries/$slug'
+      path: '/industries/$slug'
+      fullPath: '/industries/$slug'
+      preLoaderRoute: typeof IndustriesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/keepalive': {
       id: '/api/public/keepalive'
       path: '/api/public/keepalive'
@@ -431,6 +451,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApproachSlugRoute: ApproachSlugRoute,
   ArticlesSlugRoute: ArticlesSlugRoute,
   FeaturesSlugRoute: FeaturesSlugRoute,
+  IndustriesSlugRoute: IndustriesSlugRoute,
   AdminIndexRoute: AdminIndexRoute,
   ArticlesIndexRoute: ArticlesIndexRoute,
   FeaturesIndexRoute: FeaturesIndexRoute,

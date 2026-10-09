@@ -45,9 +45,7 @@ export function Heading({
       style={{ lineHeight: 1.04 }}
       className={cn(
         "font-light tracking-[-0.03em]",
-        size === "xl"
-          ? "text-[clamp(2.4rem,6.4vw,6.6rem)]"
-          : "text-[clamp(2rem,4.6vw,4.9rem)]",
+        size === "xl" ? "text-[clamp(2.4rem,6.4vw,6.6rem)]" : "text-[clamp(2rem,4.6vw,4.9rem)]",
         tone === "dark" ? "text-white" : "text-[#102a63]",
         className,
       )}
@@ -96,13 +94,15 @@ export function Reveal({
   children,
   delay = 0,
   className,
+  ssrVisible = false,
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
+  ssrVisible?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [shown, setShown] = useState(false);
+  const [shown, setShown] = useState(ssrVisible);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -110,6 +110,8 @@ export function Reveal({
       setShown(true);
       return;
     }
+    // Content remains visible without JavaScript; animate below-fold content after hydration.
+    if (ssrVisible && el.getBoundingClientRect().top >= window.innerHeight) setShown(false);
     const io = new IntersectionObserver(
       ([e]) => {
         if (e?.isIntersecting) {
@@ -121,7 +123,7 @@ export function Reveal({
     );
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [ssrVisible]);
   return (
     <div
       ref={ref}
@@ -137,7 +139,13 @@ export function Reveal({
   );
 }
 
-export function Waveform({ bars = 28, tone = "light" }: { bars?: number; tone?: "light" | "dark" }) {
+export function Waveform({
+  bars = 28,
+  tone = "light",
+}: {
+  bars?: number;
+  tone?: "light" | "dark";
+}) {
   return (
     <div className="flex h-8 items-center gap-[3px]">
       {Array.from({ length: bars }).map((_, i) => (
@@ -170,7 +178,5 @@ export function Pill({
     grey: "bg-[#eef1f6] text-[#5d76a3]",
     amber: "bg-[#fdf1e0] text-[#9a6412]",
   }[tone];
-  return (
-    <span className={cn("label-mono rounded-md px-2.5 py-1", map)}>{children}</span>
-  );
+  return <span className={cn("label-mono rounded-md px-2.5 py-1", map)}>{children}</span>;
 }
