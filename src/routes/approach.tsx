@@ -43,10 +43,11 @@ function ApproachRoute() {
           <div className="mx-auto max-w-2xl text-center">
             <span className="label-mono text-white/40">PLATFORM</span>
             <h2 className="mt-4 text-[clamp(28px,4vw,42px)] font-light leading-[1.15] tracking-[-0.025em] text-white">
-              A platform by{" "}
+              A{" "}
               <span className="bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] bg-clip-text text-transparent">
                 Revenuxe
               </span>
+              {" "}Venture
             </h2>
             <p className="mx-auto mt-5 max-w-[48ch] text-[17px] leading-relaxed text-white/50">
               Numunix is proudly built and operated by Revenuxe — a company
