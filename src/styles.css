@@ -187,6 +187,16 @@
   }
 }
 
+/* Entrance motion never controls visibility, including before hydration. */
+@keyframes nx-content-enter {
+  from { transform: translateY(20px); }
+  to { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { animation: none !important; }
+}
+
 @keyframes nx-rise {
   from {
     opacity: 0;

@@ -56,36 +56,8 @@ const ITEMS: Item[] = [
 ];
 
 function SlideIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [shown, setShown] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setShown(true); return; }
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries[0]?.isIntersecting) {
-          setShown(true);
-          io.disconnect();
-        }
-      },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.12 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
   return (
-    <div
-      ref={ref}
-      style={{
-        opacity: shown ? 1 : 0,
-        transform: shown ? "translateX(0)" : "translateX(28%)",
-        transitionDelay: `${delay}ms`,
-      }}
-      className="transition-all duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform"
-    >
+    <div data-reveal style={{ animation: `nx-content-enter 700ms cubic-bezier(.2,.7,.3,1) ${delay}ms` }}>
       {children}
     </div>
   );

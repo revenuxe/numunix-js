@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 export function Label({
@@ -94,45 +94,17 @@ export function Reveal({
   children,
   delay = 0,
   className,
-  ssrVisible = false,
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
   ssrVisible?: boolean;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [shown, setShown] = useState(ssrVisible);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setShown(true);
-      return;
-    }
-    // Content remains visible without JavaScript; animate below-fold content after hydration.
-    if (ssrVisible && el.getBoundingClientRect().top >= window.innerHeight) setShown(false);
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e?.isIntersecting) {
-          setShown(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.12 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [ssrVisible]);
   return (
     <div
-      ref={ref}
       className={className}
-      style={{
-        opacity: shown ? 1 : 0,
-        transform: shown ? "none" : "translateY(20px)",
-        transition: `opacity 700ms ease ${delay}ms, transform 700ms cubic-bezier(.2,.7,.3,1) ${delay}ms`,
-      }}
+      data-reveal
+      style={{ animation: `nx-content-enter 700ms cubic-bezier(.2,.7,.3,1) ${delay}ms` }}
     >
       {children}
     </div>
