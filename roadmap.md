@@ -1,3 +1,4 @@
 - [ ] Expand service detail pages with specific, useful editorial content and less repetitive layouts.
 - [ ] Improve services directory and other informational landing pages with clearer content and navigation.
 - [ ] Verify desktop/mobile presentation and resolve preview errors.
+- [ ] Publish-ready Bangalore top-10 article: verify company sources, write detailed comparisons and project guidance, add enquiry CTA, and check article navigation.

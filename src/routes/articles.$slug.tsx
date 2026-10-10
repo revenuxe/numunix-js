@@ -13,9 +13,11 @@ import {
 } from "lucide-react";
 import Header from "@/components/numunix/Header";
 import Footer from "@/components/numunix/Footer";
-import { Label, Reveal } from "@/components/numunix/primitives";
+import { Label, Reveal, Btn } from "@/components/numunix/primitives";
 import { articleBySlug, ARTICLES } from "@/content/articles";
-import { SITE_URL } from "@/content/site";
+import bangaloreCover from "@/assets/bangalore-software-guide.jpg";
+
+const SITE_URL = "https://numunix-flow-engine.lovable.app";
 
 export const Route = createFileRoute("/articles/$slug")({
   loader: ({ params }) => {
@@ -41,6 +43,7 @@ export const Route = createFileRoute("/articles/$slug")({
         ...(a
           ? [
             { property: "article:published_time", content: a.publishedAt },
+            ...(a.updatedAt ? [{ property: "article:modified_time", content: a.updatedAt }] : []),
             { property: "article:author", content: a.author },
           ]
           : []),
@@ -79,6 +82,7 @@ export const Route = createFileRoute("/articles/$slug")({
                 description: desc,
                 url: pageUrl,
                 datePublished: a.publishedAt,
+                dateModified: a.updatedAt ?? a.publishedAt,
                 author: {
                   "@type": "Organization",
                   name: a.author,
@@ -238,11 +242,12 @@ function ShareButton({ title, url }: { title: string; url: string }) {
 function ArticlePage() {
   const { article } = Route.useLoaderData();
   const contentRef = useRef<HTMLDivElement>(null);
+  const isBangaloreGuide = article.slug === "top-software-companies-in-bangalore";
 
   // Find related articles (exclude current)
   const related = ARTICLES.filter((a) => a.slug !== article.slug).slice(0, 2);
 
-  const formattedDate = new Date(article.publishedAt).toLocaleDateString(
+  const formattedDate = new Date(article.updatedAt ?? article.publishedAt).toLocaleDateString(
     "en-US",
     { year: "numeric", month: "long", day: "numeric" }
   );
@@ -301,6 +306,7 @@ function ArticlePage() {
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Calendar size={14} />
+                  {article.updatedAt ? "Updated " : ""}
                   {formattedDate}
                 </span>
                 <span className="flex items-center gap-1.5">
@@ -324,6 +330,19 @@ function ArticlePage() {
                   </span>
                 ))}
               </div>
+              {isBangaloreGuide && (
+                <figure className="mt-10">
+                  <img
+                    src={bangaloreCover}
+                    alt="Architectural illustration inspired by Bengaluru’s Vidhana Soudha and technology districts"
+                    width={1536}
+                    height={768}
+                    fetchPriority="high"
+                    className="aspect-[2/1] w-full object-cover"
+                  />
+                  <figcaption className="mt-3 text-xs text-primary-foreground/60">Bengaluru — architectural illustration, not a documentary photograph.</figcaption>
+                </figure>
+              )}
             </Reveal>
           </div>
         </section>
@@ -426,8 +445,16 @@ function ArticlePage() {
                     </Reveal>
 
                     {/* Mid-article CTA banner — after every 3rd section (but not the last) */}
-                    {(i + 1) % 3 === 0 && i < article.content.length - 1 && (
+                    {(article.cta ? i === article.cta.afterSection : (i + 1) % 3 === 0) && i < article.content.length - 1 && (
                       <Reveal delay={20}>
+                        {article.cta ? (
+                          <div className="mb-16 border-y border-border py-8">
+                            <Label tone="light">YOUR PROJECT, YOUR PRIORITIES</Label>
+                            <h3 className="mt-4 text-2xl font-light text-navytext">{article.cta.title}</h3>
+                            <p className="mt-3 max-w-[60ch] text-base leading-relaxed text-foreground/75">{article.cta.body}</p>
+                            <Btn as="a" href="/contact" className="mt-5">{article.cta.label}<ChevronRight size={14} /></Btn>
+                          </div>
+                        ) : (
                         <div className="relative mb-16 overflow-hidden rounded-[22px] border border-[#1e4ed8]/15 bg-gradient-to-r from-[#0b1b38] to-[#102a63] p-7 lg:p-9">
                           {/* Decorative elements */}
                           <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-[#3b82f6]/10 blur-[40px]" />
@@ -452,6 +479,7 @@ function ArticlePage() {
                             </Link>
                           </div>
                         </div>
+                        )}
                       </Reveal>
                     )}
                   </div>
@@ -464,10 +492,10 @@ function ArticlePage() {
                       <div>
                         <span className="label-mono text-[#1747b8]">LIKED THIS ARTICLE?</span>
                         <h3 className="mt-3 text-[24px] font-light tracking-[-0.02em] text-[#102a63]">
-                          Let's build something together.
+                          {article.cta ? "Ready to define your first release?" : "Let's build something together."}
                         </h3>
                         <p className="mt-2 max-w-[42ch] text-[15px] text-[#5d76a3]">
-                          We design and develop software, websites, and digital products built for real-world growth.
+                          {article.cta ? "Tell us who the product serves, the workflow you want to improve, and the integrations it needs. Discuss scope, delivery priorities, and next steps with Numunix." : "We design and develop software, websites, and digital products built for real-world growth."}
                         </p>
                       </div>
                       <Link

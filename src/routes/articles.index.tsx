@@ -5,7 +5,7 @@ import Footer from "@/components/numunix/Footer";
 import NumunixRibbonScene from "@/components/numunix/NumunixRibbonScene";
 import { Label, Heading, Accent, Reveal, Btn } from "@/components/numunix/primitives";
 import { ARTICLES } from "@/content/articles";
-import { SITE_URL } from "@/content/site";
+const SITE_URL = "https://numunix-flow-engine.lovable.app";
 
 const TITLE = "Articles & Insights | Numunix";
 const DESC =
