@@ -273,6 +273,45 @@
 .article-body em {
   font-style: italic;
 }
+.article-body a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+.article-body a:hover {
+  text-decoration-thickness: 2px;
+}
+.article-body .comparison-scroll {
+  overflow-x: auto;
+  margin-bottom: 1.5em;
+  border-block: 1px solid var(--border);
+}
+.article-body table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.article-body th,
+.article-body td {
+  padding: 1rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+.article-body th {
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  font-weight: 600;
+}
+.article-body caption {
+  padding: 0.75rem;
+  text-align: left;
+  color: var(--navytext);
+  font-weight: 600;
+}
 .article-body code {
   font-family: var(--font-mono);
   font-size: 0.875em;
