@@ -1,5 +1,8 @@
 # Roadmap
 
+- [ ] Fix the faint header over light homepage sections and verify scrolling and category-menu behavior.
+- [x] Prevent initial heading overflow by fitting before display and after fonts load; verified visible loading frames on three pages and desktop resizing.
+
 - [x] Strengthened repair page metadata, Service/CollectionPage/Breadcrumb/Organization schemas and crawler guidance; removed retired software modules and artwork. Verified 49 public pages, unique titles, canonicals, repair-only content, service booking and legacy redirects; 25 tests passed.
 - [ ] Connect Google Search Console and verify the published site; connection was declined, so Google indexing reports and sitemap submission remain unverified.
 

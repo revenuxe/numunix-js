@@ -19,7 +19,7 @@
 - Product and service cards must link to their relevant detail page, not the generic services directory. Preserve the existing visual design.
 - Keep illustrative service scenarios and scoping guidance in a shared content module, separate from delivery claims; this lets detail pages be specific without implying real client results.
 - Keep long researched article entries in dedicated content modules consumed by the shared article catalogue, so editorial updates retain existing article URLs and navigation.
-- Shared Hero headings use two explicit no-wrap lines and measured container fitting, so headings stay complete across screen sizes without changing article titles.
+- Shared Hero headings use two explicit no-wrap lines and pre-paint measured container fitting; reveal only the fitted heading after fonts settle to prevent initial overflow without changing article titles.
 - A root category-selection context persists explicit selections in browser storage; homepage routes retain their own content and metadata, while interior shared navigation and repair options follow the saved selection without rewriting detail-page subjects.
 - Legacy development service and article URLs permanently redirect to the repair directory or related repair guides; audience pages use a shared repair-specific template instead of the retired software industry template.
 - Public navigation uses repair-specific canonical paths (/services, /repair-assessment, /repair-process, /repair-diagnostics, /repair-aftercare, /repair-safety, /repair-guides and /who-we-serve); old paths and development-era stage slugs remain redirect-only to preserve bookmarks and search links.
