@@ -11,6 +11,16 @@ import {
   Tv,
   Gamepad2,
   HardDrive,
+  ShieldCheck,
+  AirVent,
+  Zap,
+  Tablet,
+  Microwave,
+  BatteryCharging,
+  Droplets,
+  Fan,
+  Truck,
+  type LucideIcon,
 } from "lucide-react";
 
 const STEPS = [
@@ -152,35 +162,40 @@ export function IndustryCarousel() {
   );
 }
 
-const LEFT = [
-  "Mobile Repair",
-  "Laptop Repair",
-  "Tablet Repair",
-  "CCTV Installation",
-  "CCTV Maintenance",
-  "TV & Audio Repair",
-  "Washing Machine Repair",
-  "Microwave & Chimney Repair",
+const LEFT: [LucideIcon, string][] = [
+  [Smartphone, "Mobile Repair"],
+  [Laptop, "Laptop Repair"],
+  [Tablet, "Tablet & iPad Repair"],
+  [Cctv, "CCTV Installation"],
+  [ShieldCheck, "CCTV Maintenance"],
+  [Tv, "TV & Audio Repair"],
+  [WashingMachine, "Washing Machine Repair"],
+  [Microwave, "Microwave & Chimney Repair"],
 ];
-const RIGHT = [
-  "Screen & Battery Replacement",
-  "Water Damage Treatment",
-  "Board-Level Repair",
-  "Data Recovery",
-  "Software & OS Issues",
-  "Networking & Wi-Fi Setup",
-  "Annual Maintenance (AMC)",
-  "Doorstep Service",
+const RIGHT: [LucideIcon, string][] = [
+  [Zap, "Electrician Services"],
+  [AirVent, "AC Service & Repair"],
+  [BatteryCharging, "Inverter & UPS Repair"],
+  [Droplets, "Water Purifier Service"],
+  [Fan, "Fan & Lighting Work"],
+  [HardDrive, "Data Recovery"],
+  [Gamepad2, "Console Repair"],
+  [Truck, "Doorstep Service"],
 ];
 
-function Row({ label }: { label: string }) {
+function Row({ icon: Icon, label }: { icon: LucideIcon; label: string }) {
   return (
     <a
       href="/features"
       className="group flex items-center justify-between gap-6 border-b border-[#dde5f0] px-5 py-6 transition-all duration-250 hover:rounded-2xl hover:border-transparent hover:bg-white hover:shadow-[0_18px_44px_-30px_rgba(16,42,99,0.6)] hover:ring-1 hover:ring-[#3b82f6]/35"
     >
-      <span className="text-[clamp(1.15rem,2vw,1.6rem)] font-light tracking-[-0.02em] text-[#102a63]">
-        {label}
+      <span className="flex items-center gap-4">
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-[#dbe5f2] bg-[#f4f8fd] text-[#1e4ed8] transition-colors duration-250 group-hover:border-[#3b82f6]/45 group-hover:bg-[#eaf2fe]">
+          <Icon size={20} strokeWidth={1.6} aria-hidden="true" />
+        </span>
+        <span className="text-[clamp(1.05rem,1.8vw,1.45rem)] font-light tracking-[-0.02em] text-[#102a63]">
+          {label}
+        </span>
       </span>
       <ArrowRight size={18} className="hover-arrow shrink-0 text-[#1e4ed8]" />
     </a>
@@ -196,13 +211,13 @@ export function FeatureDirectory() {
         </Reveal>
         <div className="grid gap-x-10 md:grid-cols-2">
           <div>
-            {LEFT.map((l) => (
-              <Row key={l} label={l} />
+            {LEFT.map(([icon, l]) => (
+              <Row key={l} icon={icon} label={l} />
             ))}
           </div>
           <div>
-            {RIGHT.map((l) => (
-              <Row key={l} label={l} />
+            {RIGHT.map(([icon, l]) => (
+              <Row key={l} icon={icon} label={l} />
             ))}
           </div>
         </div>
