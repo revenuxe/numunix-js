@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
+import { Button } from "@/components/ui/button";
 
 export type RepairCategory = "electronics" | "appliances";
 
@@ -34,22 +35,23 @@ export function CategoryToggle({ className = "" }: { className?: string }) {
     <div
       role="tablist"
       aria-label="Service category"
-      className={`flex items-center gap-0.5 rounded-xl border border-white/10 bg-white/5 p-1 ${className}`}
+      className={`flex items-center gap-0.5 rounded-xl border border-primary-foreground/10 bg-primary-foreground/5 p-1 ${className}`}
     >
       {OPTIONS.map((o) => (
-        <button
+        <Button
+          variant="ghost"
           key={o.value}
           role="tab"
           aria-selected={ctx.category === o.value}
           onClick={() => ctx.setCategory(o.value)}
-          className={`label-mono rounded-lg px-2.5 py-1.5 transition-all duration-250 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3b82f6] min-[375px]:px-3 ${
+          className={`label-mono h-auto rounded-lg px-2.5 py-1.5 transition-all duration-250 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring min-[375px]:px-3 ${
             ctx.category === o.value
-              ? "bg-[#1e4ed8] text-white shadow-[0_6px_16px_-8px_rgba(30,78,216,0.9)]"
-              : "text-white/60 hover:text-white"
+              ? "bg-primary text-primary-foreground hover:bg-primary"
+              : "text-primary-foreground/60 hover:bg-primary-foreground/10 hover:text-primary-foreground"
           }`}
         >
           {o.label}
-        </button>
+        </Button>
       ))}
     </div>
   );
