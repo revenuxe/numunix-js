@@ -17,6 +17,10 @@ export const Route = createFileRoute("/thank-you")({
   head: () => ({
     meta: [
       { title: "Thank you | Numunix" },
+      { property: "og:title", content: "Thank you | Numunix" },
+      { property: "og:description", content: "Your enquiry has been received. Here is what happens next with Numunix." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       {
         name: "description",
         content: "Your enquiry has been received. Here is what happens next with Numunix.",

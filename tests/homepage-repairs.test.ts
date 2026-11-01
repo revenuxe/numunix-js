@@ -1,8 +1,20 @@
 import { describe, expect, test } from "bun:test";
 import { REPAIR_SERVICES } from "../src/content/homepage-repairs";
 import { REPAIR_HOME_PATHS, repairHomepageHead } from "../src/content/repair-homepage-meta";
+import { REPAIR_PAGES, repairServiceHref } from "../src/content/repair-services";
 
 describe("homepage repair category rules", () => {
+  test("every repair-panel service has its own page in the correct category", () => {
+    expect(REPAIR_PAGES.filter(service => service.category === "electronics").map(service => service.slug)).toEqual(["mobile-repair", "laptop-repair", "cctv-service", "tv-audio-repair", "tablet-repair", "data-recovery", "console-repair", "doorstep-repair"]);
+    expect(REPAIR_PAGES.filter(service => service.category === "appliances").map(service => service.slug)).toEqual(["washing-machine-repair", "ac-repair", "refrigerator-repair", "microwave-repair", "water-purifier-service", "inverter-ups-repair", "fan-light-repair", "electrical-service"]);
+    expect(new Set(REPAIR_PAGES.map(service => service.slug)).size).toBe(16);
+  });
+  test("homepage device services resolve to their individual repair pages", () => {
+    expect(repairServiceHref("electronics", "phone")).toBe("/repairs/mobile-repair");
+    expect(repairServiceHref("electronics", "laptop")).toBe("/repairs/laptop-repair");
+    expect(repairServiceHref("appliances", "washer")).toBe("/repairs/washing-machine-repair");
+    expect(repairServiceHref("appliances", "ac")).toBe("/repairs/ac-repair");
+  });
   test("Electronics includes mobile and laptop repairs", () => {
     const kinds = REPAIR_SERVICES.electronics.map(service => service.kind);
     expect(kinds).toContain("phone");
