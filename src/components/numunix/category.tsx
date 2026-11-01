@@ -1,15 +1,39 @@
-import { createContext, useContext, type ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { REPAIR_HOME_PATHS } from "@/content/repair-homepage-meta";
+import { CATEGORY_STORAGE_KEY, selectedRepairCategory } from "@/content/category-selection";
 
 export type RepairCategory = "electronics" | "appliances";
 
 const CategoryContext = createContext<{
   category: RepairCategory;
 } | null>(null);
+const SelectionContext = createContext<{category: RepairCategory; select: (category: RepairCategory) => void} | null>(null);
+
+export function CategorySelectionProvider({ children }: { children: ReactNode }) {
+  const [category, setCategory] = useState<RepairCategory>("electronics");
+  const pathname = useLocation({ select: location => location.pathname });
+  const navigate = useNavigate();
+  const select = (value: RepairCategory) => {
+    setCategory(value);
+    try { localStorage.setItem(CATEGORY_STORAGE_KEY, value); } catch { /* Storage may be unavailable. */ }
+  };
+  useEffect(() => {
+    let saved: RepairCategory = category;
+    try { saved = selectedRepairCategory(localStorage.getItem(CATEGORY_STORAGE_KEY)); } catch { /* Keep the current category. */ }
+    if (pathname === "/appliances") select("appliances");
+    else {
+      setCategory(saved);
+      if (pathname === "/" && saved === "appliances") void navigate({ to: "/appliances", replace: true });
+    }
+  }, [pathname, navigate]);
+  return <SelectionContext.Provider value={{category, select}}>{children}</SelectionContext.Provider>;
+}
+
+export function useCategorySelection() { return useContext(SelectionContext); }
 
 export function CategoryProvider({ children, category }: { children: ReactNode; category: RepairCategory }) {
   return (
@@ -21,7 +45,9 @@ export function CategoryProvider({ children, category }: { children: ReactNode; 
 
 /** Returns null when the page has no provider (interior pages stay unchanged). */
 export function useCategory() {
-  return useContext(CategoryContext);
+  const local = useContext(CategoryContext);
+  const selection = useContext(SelectionContext);
+  return local ?? selection;
 }
 
 const OPTIONS: { value: RepairCategory; label: string }[] = [
@@ -32,6 +58,7 @@ const OPTIONS: { value: RepairCategory; label: string }[] = [
 /** Compact category selector for the homepage header. */
 export function CategoryToggle({ className = "" }: { className?: string }) {
   const ctx = useCategory();
+  const selection = useCategorySelection();
   if (!ctx) return null;
   return (
     <DropdownMenu modal={false}>
@@ -43,7 +70,7 @@ export function CategoryToggle({ className = "" }: { className?: string }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" sideOffset={8} onCloseAutoFocus={event => event.preventDefault()} className="z-[70] min-w-[160px] border-primary-foreground/15 bg-ink-800 text-primary-foreground motion-reduce:animate-none">
         {OPTIONS.map(option => <DropdownMenuItem key={option.value} asChild className="px-3 py-3 font-mono text-[11px] tracking-normal focus:bg-primary focus:text-primary-foreground">
-          <Link to={REPAIR_HOME_PATHS[option.value]} aria-current={ctx.category === option.value ? "page" : undefined}>
+          <Link to={REPAIR_HOME_PATHS[option.value]} onClick={() => selection?.select(option.value)} aria-current={ctx.category === option.value ? "page" : undefined}>
             {option.label}
             {ctx.category === option.value && <Check className="ml-auto size-3" />}
           </Link>

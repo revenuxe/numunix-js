@@ -1,5 +1,5 @@
 import NumunixRibbonScene from "./NumunixRibbonScene";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { Btn, Label, Reveal } from "./primitives";
 
 type HeroProps = {
@@ -27,6 +27,36 @@ export function Hero({
   eyebrow,
   breadcrumb,
 }: HeroProps = {}) {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const words = headline.trim().split(/\s+/);
+  let splitAt = 1;
+  for (let i = 1; i < words.length; i++) {
+    if (Math.abs(words.slice(0, i).join(" ").length - words.slice(i).join(" ").length) <
+        Math.abs(words.slice(0, splitAt).join(" ").length - words.slice(splitAt).join(" ").length)) splitAt = i;
+  }
+  const firstLine = accent || words.length < 2 ? headline : words.slice(0, splitAt).join(" ");
+  const secondLine = accent || (words.length > 1 ? words.slice(splitAt).join(" ") : "");
+
+  useEffect(() => {
+    const heading = headingRef.current;
+    if (!heading) return;
+    const fit = () => {
+      heading.style.removeProperty("font-size");
+      const baseSize = parseFloat(getComputedStyle(heading).fontSize);
+      const widestLine = Math.max(...Array.from(heading.children, line => line.getBoundingClientRect().width));
+      if (widestLine > heading.clientWidth) {
+        heading.style.fontSize = `${baseSize * heading.clientWidth / widestLine}px`;
+      }
+    };
+    fit();
+    window.addEventListener("resize", fit);
+    const observer = new ResizeObserver(fit);
+    if (heading.parentElement) observer.observe(heading.parentElement);
+    let active = true;
+    document.fonts.ready.then(() => { if (active) fit(); });
+    return () => { active = false; observer.disconnect(); window.removeEventListener("resize", fit); };
+  }, [firstLine, secondLine]);
+
   return (
     <section
       id="top"
@@ -42,12 +72,12 @@ export function Hero({
       )}
 
       <div className="shell relative flex min-h-[calc(88svh+48px)] flex-col justify-end pt-46 pb-6 lg:min-h-[100vh] lg:pt-40 lg:pb-24">
-        <div className="grid items-end gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:gap-20">
-          <Reveal>
+        <div className="grid min-w-0 items-end gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)] lg:gap-20">
+          <Reveal className="min-w-0">
             {eyebrow && <Label className="mb-7">{eyebrow}</Label>}
-            <h1 className="font-light leading-[0.98] tracking-normal text-primary-foreground text-[40px] sm:text-[56px] lg:text-[80px] xl:text-[96px]">
-              {headline}
-              {accent && <><br /><span className="text-electric">{accent}</span></>}
+            <h1 ref={headingRef} className="font-light leading-[1.08] tracking-normal text-primary-foreground text-[40px] sm:text-[56px] lg:text-[80px] xl:text-[96px]">
+              <span className="inline-block whitespace-nowrap">{firstLine}</span>
+              {secondLine && <><br /><span className={`inline-block whitespace-nowrap${accent ? " text-electric" : ""}`}>{secondLine}</span></>}
             </h1>
           </Reveal>
 

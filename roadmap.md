@@ -1,5 +1,8 @@
 # Roadmap
 
+- [x] Refresh repair H1s and keep shared public-page headings on two complete lines; verified phone and desktop rendering and existing repair tests.
+- [x] Keep selected Electronics or Appliances category across navigation until explicitly changed; replaced interior-page header action with Call Now and a phone icon. Verified selection, interior footer, home return, reload, explicit category switch and eight tests.
+
 - [x] Created sixteen Electronics and Appliances repair pages, linked service cards and footer links, and matched public content-page openings to the homepage ribbon design. Verified all pages, mobile card-to-enquiry flow, metadata and six tests.
 
 - [x] Stabilize the category dropdown and provide separately addressable Electronics and Appliances homepages with category-specific metadata and content; verified navigation, reloads, full labels, metadata and no header movement at 394px and 1280px.

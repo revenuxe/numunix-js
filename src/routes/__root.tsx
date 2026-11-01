@@ -12,6 +12,7 @@ import type { ErrorComponentProps } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { CategorySelectionProvider } from "@/components/numunix/category";
 
 function NotFoundComponent() {
   return (
@@ -123,7 +124,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <CategorySelectionProvider><Outlet /></CategorySelectionProvider>
     </QueryClientProvider>
   );
 }
