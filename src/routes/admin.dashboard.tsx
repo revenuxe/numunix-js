@@ -73,7 +73,7 @@ function StatusBadge({ status }: { status: LeadStatus }) {
 
 function LeadAvatar({ name }: { name: string }) {
   return (
-    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#eef3fc] text-xs font-semibold text-[#42649c]">
+    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-accent text-xs font-semibold text-primary">
       {name
         .split(/\s+/)
         .slice(0, 2)
@@ -263,17 +263,17 @@ function AdminDashboard() {
 
   if (access !== "ready")
     return (
-      <main className="flex min-h-svh items-center justify-center bg-[#f5f7fb] px-5">
-        <div className="w-full max-w-sm rounded-3xl border border-slate-200 bg-white p-8 text-center">
-          <ShieldCheck className="mx-auto text-blue-600" size={30} strokeWidth={1.5} />
-          <h1 className="mt-5 text-xl font-semibold text-slate-900">
+      <main className="admin-workspace flex min-h-svh items-center justify-center bg-secondary px-5">
+        <div className="w-full max-w-sm rounded-lg border border-border bg-card p-8 text-center">
+          <ShieldCheck className="mx-auto text-primary" size={30} strokeWidth={1.5} />
+          <h1 className="mt-5 text-xl font-semibold text-foreground">
             {access === "loading" || access === "signed-out"
               ? "Opening your workspace…"
               : access === "forbidden"
                 ? "Admin access required"
                 : "Workspace unavailable"}
           </h1>
-          <p role="status" className="mt-3 text-sm leading-relaxed text-slate-500">
+          <p role="status" className="mt-3 text-sm leading-relaxed text-muted-foreground">
             {access === "forbidden"
               ? "This account is not on the admin access list. Ask the workspace owner to grant access."
               : access === "error"
@@ -286,12 +286,12 @@ function AdminDashboard() {
             <div className="mt-6 flex flex-col gap-3">
               <a
                 href="/admin/login"
-                className="rounded-xl bg-blue-600 px-4 py-3 text-sm text-white"
+                className="rounded-md bg-primary px-4 py-3 text-sm text-primary-foreground"
               >
                 Back to sign in
               </a>
               {session && (
-                <Button onClick={signOut} className="min-h-11 text-sm text-slate-500">
+                <Button onClick={signOut} className="min-h-11 text-sm text-muted-foreground">
                   Sign out
                 </Button>
               )}
@@ -303,17 +303,17 @@ function AdminDashboard() {
 
   const actionButtons = (lead: Lead) => (
     <div className="flex items-center justify-end gap-1">
-      <Button
+      <Button variant="ghost"
         onClick={() => setSelected(lead)}
         aria-label={`View ${lead.name}`}
-        className="grid h-11 w-11 place-items-center rounded-xl text-slate-500 transition hover:bg-blue-50 hover:text-blue-600"
+        className="grid h-11 w-11 place-items-center rounded-md text-muted-foreground transition hover:bg-accent hover:text-primary"
       >
         <Eye size={18} strokeWidth={1.6} />
       </Button>
-      <Button
+      <Button variant="ghost"
         onClick={() => requestDelete(lead)}
         aria-label={`Delete ${lead.name}`}
-        className="grid h-11 w-11 place-items-center rounded-xl text-slate-400 transition hover:bg-red-50 hover:text-red-600"
+        className="grid h-11 w-11 place-items-center rounded-md text-muted-foreground transition hover:bg-destructive/10 hover:text-destructive"
       >
         <Trash2 size={17} strokeWidth={1.6} />
       </Button>
@@ -326,21 +326,21 @@ function AdminDashboard() {
   ];
 
   return (
-    <div className="min-h-svh bg-[#f5f7fb] text-slate-900">
+    <div className="admin-workspace min-h-svh bg-secondary text-foreground">
       {/* ── Sidebar ───────────────────────────────────────── */}
-      <aside className="fixed inset-y-0 left-0 hidden w-[232px] flex-col bg-[#0b1730] p-6 text-white xl:flex">
+      <aside className="fixed inset-y-0 left-0 hidden w-[232px] flex-col bg-ink-900 p-6 text-primary-foreground xl:flex">
         <BrandLogo className="mt-3 w-36" />
-        <p className="mb-3 mt-14 text-[10px] font-medium tracking-[0.18em] text-slate-500">
+        <p className="mb-3 mt-14 text-[10px] font-medium tracking-normal text-muted-foreground">
           WORKSPACE
         </p>
         {tabs.map((t) => (
-          <Button
+          <Button variant="ghost"
             key={t.key}
             onClick={() => setTab(t.key)}
-            className={`mt-1 flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition-colors ${
+            className={`mt-1 flex items-center gap-3 rounded-md px-4 py-3 text-sm transition-colors ${
               tab === t.key
-                ? "border border-white/5 bg-white/8 text-white"
-                : "text-slate-400 hover:bg-white/5 hover:text-white"
+                ? "border border-primary-foreground/5 bg-card/8 text-primary-foreground"
+                : "text-muted-foreground hover:bg-card/5 hover:text-primary-foreground"
             }`}
           >
             <t.icon size={17} strokeWidth={1.6} />
@@ -349,23 +349,23 @@ function AdminDashboard() {
         ))}
         <a
           href="/"
-          className="mt-3 flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-400 hover:bg-white/5 hover:text-white"
+          className="mt-3 flex items-center gap-3 rounded-md px-4 py-3 text-sm text-muted-foreground hover:bg-card/5 hover:text-primary-foreground"
         >
           <ArrowUpRight size={17} />
           View website
         </a>
-        <div className="mt-auto rounded-2xl border border-white/8 bg-white/[0.03] p-4">
-          <span className="flex items-center gap-2 text-xs text-slate-300">
+        <div className="mt-auto rounded-lg border border-primary-foreground/8 bg-card/[0.03] p-4">
+          <span className="flex items-center gap-2 text-xs text-muted-foreground">
             <ShieldCheck size={15} /> Private workspace
           </span>
-          <p className="mt-2 text-xs leading-relaxed text-slate-500">
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
             A little follow-up goes a long way.
           </p>
         </div>
-        <Button
+        <Button variant="ghost"
           onClick={signOut}
           disabled={signingOut}
-          className="mt-5 flex min-h-11 items-center gap-3 px-3 text-sm text-slate-400 hover:text-white"
+          className="mt-5 flex min-h-11 items-center gap-3 px-3 text-sm text-muted-foreground hover:text-primary-foreground"
         >
           <LogOut size={16} />
           {signingOut ? "Signing out…" : "Sign out"}
@@ -375,32 +375,32 @@ function AdminDashboard() {
       {/* ── Main area ─────────────────────────────────────── */}
       <div className="xl:pl-[232px]">
         {/* Top bar */}
-        <header className="sticky top-0 z-30 flex min-h-18 items-center justify-between gap-3 border-b border-slate-200/80 bg-white/95 px-4 py-4 backdrop-blur-sm sm:px-8">
+        <header className="sticky top-0 z-30 flex min-h-18 items-center justify-between gap-3 border-b border-border/80 bg-card/95 px-4 py-4 backdrop-blur-sm sm:px-8">
           <div className="flex min-w-0 items-center gap-3">
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-blue-600 text-white xl:hidden">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-primary text-primary-foreground xl:hidden">
               <LayoutDashboard size={18} />
             </span>
-            <span className="text-sm font-medium text-slate-600">Repair lead desk</span>
-            <span className="hidden text-xs text-slate-300 sm:inline">/</span>
-            <span className="hidden text-xs text-slate-400 sm:inline">
+            <span className="text-sm font-medium text-muted-foreground">Repair lead desk</span>
+            <span className="hidden text-xs text-muted-foreground sm:inline">/</span>
+            <span className="hidden text-xs text-muted-foreground sm:inline">
               {tab === "overview" ? "Overview" : "Leads"}
             </span>
           </div>
           <div className="flex min-w-0 items-center gap-3">
             <div className="hidden min-w-0 text-right sm:block">
-              <p className="max-w-52 truncate text-xs font-medium text-slate-700">
+              <p className="max-w-52 truncate text-xs font-medium text-foreground">
                 {session?.user.email}
               </p>
-              <p className="mt-0.5 text-[10px] text-slate-400">Administrator</p>
+              <p className="mt-0.5 text-[10px] text-muted-foreground">Administrator</p>
             </div>
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-blue-100 bg-blue-50 text-xs font-semibold text-blue-600">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border bg-accent text-xs font-semibold text-primary">
               {session?.user.email?.slice(0, 2).toUpperCase()}
             </span>
-            <Button
+            <Button variant="ghost"
               onClick={signOut}
               disabled={signingOut}
               aria-label="Sign out"
-              className="grid h-11 w-11 place-items-center rounded-xl text-slate-500 hover:bg-slate-100 xl:hidden"
+              className="grid h-11 w-11 place-items-center rounded-md text-muted-foreground hover:bg-secondary xl:hidden"
             >
               <LogOut size={17} />
             </Button>
@@ -408,15 +408,15 @@ function AdminDashboard() {
         </header>
 
         {/* Mobile tab bar */}
-        <div className="flex border-b border-slate-200/80 bg-white xl:hidden">
+        <div className="flex border-b border-border/80 bg-card xl:hidden">
           {tabs.map((t) => (
-            <Button
+            <Button variant="ghost"
               key={t.key}
               onClick={() => setTab(t.key)}
               className={`flex flex-1 items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 tab === t.key
-                  ? "border-b-2 border-blue-600 text-blue-600"
-                  : "text-slate-400 hover:text-slate-600"
+                  ? "border-b-2 border-primary text-primary"
+                  : "text-muted-foreground hover:text-muted-foreground"
               }`}
             >
               <t.icon size={16} />
@@ -430,10 +430,10 @@ function AdminDashboard() {
           {notice && (
             <div
               role="status"
-              className="mb-5 flex items-center justify-between gap-3 rounded-xl border border-blue-100 bg-blue-50 px-4 py-2 text-sm text-blue-700"
+              className="mb-5 flex items-center justify-between gap-3 rounded-md border border-border bg-accent px-4 py-2 text-sm text-primary"
             >
               {notice}
-              <Button
+              <Button variant="ghost"
                 aria-label="Dismiss notification"
                 className="grid h-9 w-9 place-items-center"
                 onClick={() => setNotice("")}
@@ -451,21 +451,21 @@ function AdminDashboard() {
               {/* Header */}
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-[10px] font-semibold tracking-[0.18em] text-blue-600">
+                  <p className="text-[10px] font-semibold tracking-normal text-primary">
                     REPAIR ENQUIRIES AT A GLANCE
                   </p>
-                  <h1 className="mt-2 text-[28px] font-semibold tracking-tight sm:text-3xl">
-                    Every repair. One desk.
+                  <h1 className="mt-2 text-2xl font-semibold tracking-normal sm:text-3xl">
+                    Repair overview
                   </h1>
-                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-slate-500">
-                    Review faults, arrange assessments and follow up on electronics and appliance repairs.
+                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                    Electronics & appliances
                   </p>
                 </div>
-                <Button
+                <Button variant="ghost"
                   onClick={() => setRefresh((value) => value + 1)}
                   disabled={loading}
                   aria-label="Refresh leads"
-                  className="flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50"
+                  className="flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-md border border-border bg-card px-3 text-sm text-muted-foreground hover:bg-secondary disabled:opacity-50"
                 >
                   <RefreshCw size={15} className={loading ? "animate-spin" : ""} />
                   <span className="hidden sm:inline">Refresh</span>
@@ -473,104 +473,96 @@ function AdminDashboard() {
               </div>
 
               {/* Metric cards */}
-              <div className="mt-7 grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-5">
+              <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
                 {[
                   {
                     key: "all" as const,
                     label: "Repair requests",
                     caption: "All repair enquiries",
                     icon: Users,
-                    gradient: "from-blue-500 to-blue-600",
-                    bgLight: "bg-blue-50",
-                    textAccent: "text-blue-600",
+                    bgLight: "bg-accent",
+                    textAccent: "text-primary",
                   },
                   {
                     key: "new" as const,
                     label: "New enquiries",
                     caption: "Ready for a first reply",
                     icon: Inbox,
-                    gradient: "from-amber-500 to-orange-500",
-                    bgLight: "bg-amber-50",
-                    textAccent: "text-amber-600",
+                    bgLight: "bg-accent",
+                    textAccent: "text-primary",
                   },
                   {
                     key: "qualified" as const,
                     label: "Assessment arranged",
                     caption: "Awaiting assessment",
                     icon: SlidersHorizontal,
-                    gradient: "from-violet-500 to-purple-600",
-                    bgLight: "bg-violet-50",
-                    textAccent: "text-violet-600",
+                    bgLight: "bg-accent",
+                    textAccent: "text-primary",
                   },
                   {
                     key: "won" as const,
                     label: "Repair booked",
                     caption: "Customer approved booking",
                     icon: Check,
-                    gradient: "from-emerald-500 to-green-600",
-                    bgLight: "bg-emerald-50",
-                    textAccent: "text-emerald-600",
+                    bgLight: "bg-accent",
+                    textAccent: "text-primary",
                   },
-                ].map(({ key, label, caption, icon: Icon, gradient, bgLight, textAccent }) => (
+                ].map(({ key, label, caption, icon: Icon, bgLight, textAccent }) => (
                   <div
                     key={key}
-                    className="group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-5 transition-all hover:border-slate-300 hover:shadow-sm"
+                    className="group relative overflow-hidden rounded-lg border border-border/80 bg-card p-4 transition-all hover:border-primary/30 hover:shadow-sm"
                   >
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-xs font-medium text-slate-500">{label}</span>
+                      <span className="text-xs font-medium text-muted-foreground">{label}</span>
                       <span
-                        className={`grid h-9 w-9 place-items-center rounded-xl ${bgLight} ${textAccent}`}
+                        className={`grid h-9 w-9 place-items-center rounded-md ${bgLight} ${textAccent}`}
                       >
                         <Icon size={16} strokeWidth={1.8} />
                       </span>
                     </div>
-                    <p className="mt-3 text-4xl font-bold tracking-tight text-slate-900">
+                    <p className="mt-3 text-3xl font-semibold tracking-normal text-foreground">
                       {countsError ? "—" : counts[key]}
                     </p>
-                    <p className="mt-2 text-[11px] text-slate-400">{caption}</p>
-                    {/* Subtle gradient accent bar at bottom */}
-                    <div
-                      className={`absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r ${gradient} opacity-0 transition-opacity group-hover:opacity-100`}
-                    />
+                    <p className="mt-2 text-[11px] text-muted-foreground">{caption}</p>
                   </div>
                 ))}
               </div>
 
               {/* Quick stats row */}
-              <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3 lg:gap-5">
-                <div className="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white p-5">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-600">
+              <div className="mt-4 grid grid-cols-3 gap-2 lg:gap-4">
+                <div className="flex flex-col items-start gap-2 rounded-lg border border-border bg-card p-3 sm:flex-row sm:items-center sm:gap-3 sm:p-4">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-accent text-primary">
                     <TrendingUp size={18} strokeWidth={1.8} />
                   </span>
                   <div>
-                    <p className="text-2xl font-bold tracking-tight text-slate-900">
+                    <p className="text-2xl font-semibold tracking-normal text-foreground">
                       {countsError ? "—" : `${conversionRate}%`}
                     </p>
-                    <p className="text-[11px] text-slate-400">Booking rate</p>
+                    <p className="text-[11px] text-muted-foreground">Booking rate</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white p-5">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-blue-50 text-blue-600">
+                <div className="flex flex-col items-start gap-2 rounded-lg border border-border bg-card p-3 sm:flex-row sm:items-center sm:gap-3 sm:p-4">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-accent text-primary">
                     <Zap size={18} strokeWidth={1.8} />
                   </span>
                   <div>
-                    <p className="text-2xl font-bold tracking-tight text-slate-900">
+                    <p className="text-2xl font-semibold tracking-normal text-foreground">
                       {countsError
                         ? "—"
                         : counts.all - counts.new - counts.qualified - counts.won}
                     </p>
-                    <p className="text-[11px] text-slate-400">Contacted / closed</p>
+                    <p className="text-[11px] text-muted-foreground">Contacted / closed</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white p-5">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-amber-50 text-amber-600">
+                <div className="flex flex-col items-start gap-2 rounded-lg border border-border bg-card p-3 sm:flex-row sm:items-center sm:gap-3 sm:p-4">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-accent text-primary">
                     <Clock size={18} strokeWidth={1.8} />
                   </span>
                   <div>
-                    <p className="text-2xl font-bold tracking-tight text-slate-900">
+                    <p className="text-2xl font-semibold tracking-normal text-foreground">
                       {countsError ? "—" : counts.new}
                     </p>
-                    <p className="text-[11px] text-slate-400">Awaiting first reply</p>
+                    <p className="text-[11px] text-muted-foreground">Awaiting first reply</p>
                   </div>
                 </div>
               </div>
@@ -578,12 +570,12 @@ function AdminDashboard() {
               {/* Recent leads + Quick actions */}
               <div className="mt-5 grid gap-5 lg:grid-cols-[2fr_1fr]">
                 {/* Recent leads */}
-                <section className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white">
-                  <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
-                    <h2 className="text-sm font-semibold text-slate-900">Recent enquiries</h2>
-                    <Button
+                <section className="overflow-hidden rounded-lg border border-border/80 bg-card">
+                  <div className="flex items-center justify-between border-b border-border px-5 py-4">
+                    <h2 className="text-sm font-semibold text-foreground">Recent enquiries</h2>
+                    <Button variant="ghost"
                       onClick={() => setTab("leads")}
-                      className="flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-700"
+                      className="flex items-center gap-1 text-xs font-medium text-primary hover:text-primary"
                     >
                       View all <ArrowUpRight size={13} />
                     </Button>
@@ -591,34 +583,34 @@ function AdminDashboard() {
                   {loading ? (
                     <div className="space-y-3 p-5">
                       {[0, 1, 2, 3].map((v) => (
-                        <div key={v} className="h-14 animate-pulse rounded-xl bg-slate-50" />
+                        <div key={v} className="h-14 animate-pulse rounded-md bg-secondary" />
                       ))}
                     </div>
                   ) : recentLeads.length === 0 ? (
                     <div className="px-5 py-12 text-center">
-                      <Inbox size={28} className="mx-auto text-slate-300" strokeWidth={1.4} />
-                      <p className="mt-3 text-sm text-slate-400">No enquiries yet</p>
+                      <Inbox size={28} className="mx-auto text-muted-foreground" strokeWidth={1.4} />
+                      <p className="mt-3 text-sm text-muted-foreground">No enquiries yet</p>
                     </div>
                   ) : (
-                    <div className="divide-y divide-slate-50">
+                    <div className="divide-y divide-border">
                       {recentLeads.map((lead) => (
-                        <Button
+                        <Button variant="ghost"
                           key={lead.id}
                           onClick={() => setSelected(lead)}
-                          className="flex w-full items-center gap-3 px-5 py-3.5 text-left transition-colors hover:bg-slate-50/50"
+                          className="h-auto min-h-20 w-full justify-start whitespace-normal rounded-none px-4 py-4 text-left transition-colors hover:bg-secondary"
                         >
                           <LeadAvatar name={lead.name} />
                           <div className="min-w-0 flex-1">
                             <div className="flex items-center justify-between gap-2">
-                              <p className="truncate text-sm font-medium text-slate-800">
+                              <p className="truncate text-sm font-medium text-foreground">
                                 {lead.name}
                               </p>
-                              <span className="shrink-0 text-[11px] text-slate-400">
+                              <span className="shrink-0 text-[11px] text-muted-foreground">
                                 {relativeTime(lead.created_at)}
                               </span>
                             </div>
-                            <div className="mt-1 flex items-center gap-2">
-                              <span className="truncate text-xs text-slate-400">
+                            <div className="mt-1 flex flex-wrap items-center gap-2">
+                              <span className="truncate text-xs text-muted-foreground">
                                 {lead.service}
                               </span>
                               <StatusBadge status={lead.status} />
@@ -631,24 +623,24 @@ function AdminDashboard() {
                 </section>
 
                 {/* Repair request stages */}
-                <section className="rounded-2xl border border-slate-200/80 bg-white p-5">
-                  <h2 className="text-sm font-semibold text-slate-900">Repair request stages</h2>
+                <section className="rounded-lg border border-border/80 bg-card p-5">
+                  <h2 className="text-sm font-semibold text-foreground">Repair request stages</h2>
                   <div className="mt-5 space-y-4">
                     {(
                       [
                         {
                           status: "new" as const,
-                          color: "bg-blue-500",
+                          color: "bg-accent0",
                           label: "New",
                         },
                         {
                           status: "qualified" as const,
-                          color: "bg-violet-500",
+                          color: "bg-accent0",
                           label: "Assessment arranged",
                         },
                         {
                           status: "won" as const,
-                          color: "bg-emerald-500",
+                          color: "bg-accent0",
                           label: "Repair booked",
                         },
                       ] as const
@@ -657,12 +649,12 @@ function AdminDashboard() {
                       return (
                         <div key={status}>
                           <div className="flex items-center justify-between text-xs">
-                            <span className="font-medium text-slate-600">{label}</span>
-                            <span className="text-slate-400">
+                            <span className="font-medium text-muted-foreground">{label}</span>
+                            <span className="text-muted-foreground">
                               {counts[status]} · {Math.round(pct)}%
                             </span>
                           </div>
-                          <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-100">
+                          <div className="mt-2 h-2 overflow-hidden rounded-full bg-secondary">
                             <div
                               className={`h-full rounded-full ${color} transition-all duration-500`}
                               style={{ width: `${pct}%` }}
@@ -672,18 +664,10 @@ function AdminDashboard() {
                       );
                     })}
                   </div>
-                  <div className="mt-6 rounded-xl border border-slate-100 bg-slate-50/50 p-4">
-                    <p className="text-[10px] font-semibold tracking-[0.15em] text-slate-400">
-                      PRO TIP
-                    </p>
-                    <p className="mt-2 text-xs leading-relaxed text-slate-500">
-                      Review the model, fault, location and preferred timing before arranging an assessment.
-                    </p>
-                  </div>
                 </section>
               </div>
 
-              <p className="mt-7 text-center text-[11px] text-slate-400">
+              <p className="mt-7 text-center text-[11px] text-muted-foreground">
                 Numunix workspace · Electronics and appliance repair enquiries.
               </p>
             </div>
@@ -697,18 +681,18 @@ function AdminDashboard() {
               {/* Header */}
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-[10px] font-semibold tracking-[0.18em] text-blue-600">
+                  <p className="text-[10px] font-semibold tracking-normal text-primary">
                     REPAIR LEAD MANAGEMENT
                   </p>
-                  <h1 className="mt-2 text-[28px] font-semibold tracking-tight sm:text-3xl">
+                  <h1 className="mt-2 text-2xl font-semibold tracking-normal sm:text-3xl">
                     All repair enquiries
                   </h1>
                 </div>
-                <Button
+                <Button variant="ghost"
                   onClick={() => setRefresh((value) => value + 1)}
                   disabled={loading}
                   aria-label="Refresh leads"
-                  className="flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50"
+                  className="flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-md border border-border bg-card px-3 text-sm text-muted-foreground hover:bg-secondary disabled:opacity-50"
                 >
                   <RefreshCw size={15} className={loading ? "animate-spin" : ""} />
                   <span className="hidden sm:inline">Refresh</span>
@@ -725,31 +709,31 @@ function AdminDashboard() {
                     { key: "won" as const, label: "Repair booked", icon: Check },
                   ] as const
                 ).map(({ key, label, icon: Icon }) => (
-                  <Button
+                  <Button variant="ghost"
                     key={key}
                     onClick={() => {
                       setFilter(key);
                       setPage(0);
                     }}
                     aria-pressed={filter === key}
-                    className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left transition ${
+                    className={`h-auto min-h-16 justify-start whitespace-normal gap-2 rounded-md border px-3 py-3 text-left transition ${
                       filter === key
-                        ? "border-blue-300 bg-blue-50/50 shadow-[0_2px_12px_-8px_rgba(37,99,235,0.3)]"
-                        : "border-slate-200/80 bg-white hover:border-blue-200"
+                        ? "border-primary bg-accent/50 shadow-none"
+                        : "border-border/80 bg-card hover:border-primary/30"
                     }`}
                   >
                     <Icon
                       size={16}
                       strokeWidth={1.6}
-                      className={filter === key ? "text-blue-600" : "text-slate-400"}
+                      className={filter === key ? "text-primary" : "text-muted-foreground"}
                     />
                     <div>
                       <span
-                        className={`text-lg font-bold ${filter === key ? "text-blue-600" : "text-slate-900"}`}
+                        className={`text-lg font-bold ${filter === key ? "text-primary" : "text-foreground"}`}
                       >
                         {countsError ? "—" : counts[key]}
                       </span>
-                      <span className="ml-2 text-xs text-slate-400">{label}</span>
+                      <span className="block text-xs text-muted-foreground">{label}</span>
                     </div>
                   </Button>
                 ))}
@@ -758,26 +742,26 @@ function AdminDashboard() {
               {/* Leads table section */}
               <section
                 aria-label="Lead enquiries"
-                className="mt-5 overflow-hidden rounded-[20px] border border-slate-200/80 bg-white"
+                className="mt-5 overflow-hidden rounded-lg border border-border/80 bg-card"
               >
                 {/* Search and filter bar */}
-                <div className="border-b border-slate-100 p-4 sm:p-5">
+                <div className="border-b border-border p-4 sm:p-5">
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <h2 className="text-base font-semibold">
                       Enquiries{" "}
-                      <span className="ml-2 rounded-md bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-500">
+                      <span className="ml-2 rounded-md bg-secondary px-2 py-0.5 text-xs font-medium text-muted-foreground">
                         {loading ? "…" : total}
                       </span>
                     </h2>
                     <label className="relative w-full sm:w-72">
-                      <Search size={16} className="absolute left-3.5 top-3.5 text-slate-400" />
+                      <Search size={16} className="absolute left-3.5 top-3.5 text-muted-foreground" />
                       <span className="sr-only">Search leads</span>
                       <input
                         value={search}
                         onChange={(event) => setSearch(event.target.value)}
                         placeholder="Search name, phone, service…"
                         maxLength={100}
-                        className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50/50 pl-10 pr-3 text-base outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 sm:text-sm"
+                        className="h-11 w-full rounded-md border border-border bg-secondary/50 pl-10 pr-3 text-base outline-none focus:border-primary focus:ring-2 focus:ring-ring/20 sm:text-sm"
                       />
                     </label>
                   </div>
@@ -788,20 +772,20 @@ function AdminDashboard() {
                   <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
                     <div aria-label="Filter by status" className="flex flex-wrap gap-1">
                       {(["all", ...LEAD_STATUSES] as const).map((value) => (
-                        <Button
+                        <Button variant="ghost"
                           key={value}
                           aria-pressed={filter === value}
                           onClick={() => {
                             setFilter(value);
                             setPage(0);
                           }}
-                          className={`min-h-10 rounded-lg px-3 text-xs font-medium transition ${filter === value ? "bg-[#edf3ff] text-blue-700" : "text-slate-500 hover:bg-slate-50"}`}
+                          className={`min-h-10 rounded-lg px-3 text-xs font-medium transition ${filter === value ? "bg-accent text-primary" : "text-muted-foreground hover:bg-secondary"}`}
                         >
                           {value === "all" ? "All leads" : STATUS_LABELS[value]}
                         </Button>
                       ))}
                     </div>
-                    <label className="flex min-h-10 items-center gap-2 text-xs text-slate-400">
+                    <label className="flex min-h-10 items-center gap-2 text-xs text-muted-foreground">
                       <span>Sort:</span>
                       <select
                         aria-label="Sort leads"
@@ -810,7 +794,7 @@ function AdminDashboard() {
                           setSort(event.target.value);
                           setPage(0);
                         }}
-                        className="min-h-10 rounded-lg bg-white pr-2 text-xs font-medium text-slate-600 outline-blue-500"
+                        className="min-h-10 rounded-lg bg-card pr-2 text-xs font-medium text-muted-foreground outline-ring"
                       >
                         <option value="newest">Newest first</option>
                         <option value="oldest">Oldest first</option>
@@ -824,22 +808,22 @@ function AdminDashboard() {
                   <div role="status" className="space-y-3 p-5">
                     <span className="sr-only">Loading leads</span>
                     {[0, 1, 2, 3].map((value) => (
-                      <div key={value} className="h-16 animate-pulse rounded-xl bg-slate-50" />
+                      <div key={value} className="h-16 animate-pulse rounded-md bg-secondary" />
                     ))}
                   </div>
                 ) : error ? (
                   <div role="alert" className="p-8 text-center">
-                    <p className="text-sm text-red-600">{error}</p>
-                    <Button
+                    <p className="text-sm text-destructive">{error}</p>
+                    <Button variant="ghost"
                       onClick={() => setRefresh((value) => value + 1)}
-                      className="mt-4 min-h-11 rounded-xl bg-blue-600 px-5 text-sm text-white"
+                      className="mt-4 min-h-11 rounded-md bg-primary px-5 text-sm text-primary-foreground"
                     >
                       Try again
                     </Button>
                   </div>
                 ) : leads.length === 0 ? (
                   <div className="px-5 py-16 text-center">
-                    <span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-slate-50 text-slate-400">
+                    <span className="mx-auto grid h-14 w-14 place-items-center rounded-lg bg-secondary text-muted-foreground">
                       <Inbox size={25} strokeWidth={1.4} />
                     </span>
                     <h3 className="mt-4 text-base font-semibold">
@@ -847,13 +831,13 @@ function AdminDashboard() {
                         ? "No matching leads"
                         : "No repair requests yet"}
                     </h3>
-                    <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-slate-500">
+                    <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
                       {query || filter !== "all" || categoryFilter !== "all" || serviceFilter !== "all"
                         ? "Try another search or clear your filters."
                         : "Enquiries from your homepage and contact form will appear here."}
                     </p>
                     {(query || filter !== "all" || categoryFilter !== "all" || serviceFilter !== "all") && (
-                      <Button
+                      <Button variant="ghost"
                         onClick={() => {
                           setSearch("");
                           setQuery("");
@@ -862,7 +846,7 @@ function AdminDashboard() {
                           setServiceFilter("all");
                           setPage(0);
                         }}
-                        className="mt-4 min-h-11 text-sm font-medium text-blue-600"
+                        className="mt-4 min-h-11 text-sm font-medium text-primary"
                       >
                         Clear filters
                       </Button>
@@ -871,7 +855,7 @@ function AdminDashboard() {
                 ) : (
                   <>
                     {/* Mobile cards */}
-                    <div className="divide-y divide-slate-100 md:hidden">
+                    <div className="divide-y divide-border md:hidden">
                       {leads.map((lead) => (
                         <article key={lead.id} className="p-4">
                           <div className="flex items-start gap-3">
@@ -882,18 +866,18 @@ function AdminDashboard() {
                                   <h3 className="break-words text-sm font-semibold">
                                     {lead.name}
                                   </h3>
-                                  <p className="mt-1 break-words text-xs text-slate-500">
+                                  <p className="mt-1 break-words text-xs text-muted-foreground">
                                     {lead.service}
                                     <span className="mt-1 block text-muted-foreground">{repairLeadCategory(lead) === "appliances" ? "Appliances" : repairLeadCategory(lead) === "electronics" ? "Electronics" : "Other enquiry"} · {lead.timeline}</span>
                                   </p>
                                 </div>
                                 <StatusBadge status={lead.status} />
                               </div>
-                              <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500">
+                              <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
                                 {lead.phone && (
                                   <a
                                     href={`tel:${lead.phone.replace(/[^\d+]/g, "")}`}
-                                    className="inline-flex items-center gap-1 hover:text-blue-600"
+                                    className="inline-flex items-center gap-1 hover:text-primary"
                                   >
                                     <Phone size={12} /> {lead.phone}
                                   </a>
@@ -901,7 +885,7 @@ function AdminDashboard() {
                                 {lead.email && (
                                   <a
                                     href={`mailto:${lead.email}`}
-                                    className="inline-flex items-center gap-1 hover:text-blue-600"
+                                    className="inline-flex items-center gap-1 hover:text-primary"
                                   >
                                     <Mail size={12} />{" "}
                                     <span className="max-w-[160px] truncate">{lead.email}</span>
@@ -909,7 +893,7 @@ function AdminDashboard() {
                                 )}
                               </div>
                               <div className="mt-2 flex items-center justify-between">
-                                <span className="inline-flex items-center gap-1 text-[11px] text-slate-400">
+                                <span className="inline-flex items-center gap-1 text-[11px] text-muted-foreground">
                                   <Calendar size={11} /> {formatDate(lead.created_at)}
                                 </span>
                                 {actionButtons(lead)}
@@ -923,7 +907,7 @@ function AdminDashboard() {
                     {/* Desktop table */}
                     <div className="hidden overflow-x-auto md:block">
                       <table className="w-full text-left text-sm">
-                        <thead className="border-b border-slate-100 bg-slate-50/60 text-[10px] uppercase tracking-wider text-slate-400">
+                        <thead className="border-b border-border bg-secondary/60 text-[10px] uppercase tracking-normal text-muted-foreground">
                           <tr>
                             {["Customer", "Contact", "Repair service", "Status", "Received", "Actions"].map(
                               (heading) => (
@@ -938,11 +922,11 @@ function AdminDashboard() {
                             )}
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-100">
+                        <tbody className="divide-y divide-border">
                           {leads.map((lead) => (
                             <tr
                               key={lead.id}
-                              className="group transition-colors hover:bg-slate-50/50"
+                              className="group transition-colors hover:bg-secondary/50"
                             >
                               <td className="px-5 py-4">
                                 <div className="flex items-center gap-3">
@@ -958,11 +942,11 @@ function AdminDashboard() {
                                 </div>
                               </td>
                               <td className="px-5 py-4">
-                                <div className="space-y-1 text-xs text-slate-500">
+                                <div className="space-y-1 text-xs text-muted-foreground">
                                   {lead.phone && (
                                     <a
                                       href={`tel:${lead.phone.replace(/[^\d+]/g, "")}`}
-                                      className="flex items-center gap-1.5 hover:text-blue-600"
+                                      className="flex items-center gap-1.5 hover:text-primary"
                                     >
                                       <Phone size={12} className="shrink-0" /> {lead.phone}
                                     </a>
@@ -970,7 +954,7 @@ function AdminDashboard() {
                                   {lead.email && (
                                     <a
                                       href={`mailto:${lead.email}`}
-                                      className="flex items-center gap-1.5 hover:text-blue-600"
+                                      className="flex items-center gap-1.5 hover:text-primary"
                                     >
                                       <Mail size={12} className="shrink-0" />
                                       <span className="max-w-36 truncate">{lead.email}</span>
@@ -978,17 +962,17 @@ function AdminDashboard() {
                                   )}
                                 </div>
                               </td>
-                              <td className="max-w-52 px-5 py-4 text-xs text-slate-500">
+                              <td className="max-w-52 px-5 py-4 text-xs text-muted-foreground">
                                 {lead.service}<span className="mt-1 block text-muted-foreground">{lead.timeline}</span>
                               </td>
                               <td className="px-5 py-4">
                                 <StatusBadge status={lead.status} />
                               </td>
                               <td className="whitespace-nowrap px-5 py-4">
-                                <div className="text-xs text-slate-600">
+                                <div className="text-xs text-muted-foreground">
                                   {formatDate(lead.created_at)}
                                 </div>
-                                <div className="mt-0.5 text-[11px] text-slate-400">
+                                <div className="mt-0.5 text-[11px] text-muted-foreground">
                                   {formatTime(lead.created_at)}
                                 </div>
                               </td>
@@ -1002,8 +986,8 @@ function AdminDashboard() {
                 )}
 
                 {/* Pagination */}
-                <div className="flex items-center justify-between gap-3 border-t border-slate-100 px-4 py-3 sm:px-5">
-                  <p className="text-[11px] text-slate-400">
+                <div className="flex items-center justify-between gap-3 border-t border-border px-4 py-3 sm:px-5">
+                  <p className="text-[11px] text-muted-foreground">
                     {loading
                       ? "Loading…"
                       : error
@@ -1011,20 +995,20 @@ function AdminDashboard() {
                         : `${total ? page * PAGE_SIZE + 1 : 0}–${Math.min((page + 1) * PAGE_SIZE, total)} of ${total} leads`}
                   </p>
                   <div className="flex items-center gap-2">
-                    <Button
+                    <Button variant="ghost"
                       aria-label="Previous page"
                       disabled={page === 0 || loading}
                       onClick={() => setPage((value) => value - 1)}
-                      className="grid h-10 w-10 place-items-center rounded-lg border border-slate-200 text-slate-500 disabled:opacity-30"
+                      className="grid h-10 w-10 place-items-center rounded-lg border border-border text-muted-foreground disabled:opacity-30"
                     >
                       <ChevronLeft size={16} />
                     </Button>
-                    <span className="px-1 text-xs text-slate-500">{page + 1}</span>
-                    <Button
+                    <span className="px-1 text-xs text-muted-foreground">{page + 1}</span>
+                    <Button variant="ghost"
                       aria-label="Next page"
                       disabled={(page + 1) * PAGE_SIZE >= total || loading}
                       onClick={() => setPage((value) => value + 1)}
-                      className="grid h-10 w-10 place-items-center rounded-lg border border-slate-200 text-slate-500 disabled:opacity-30"
+                      className="grid h-10 w-10 place-items-center rounded-lg border border-border text-muted-foreground disabled:opacity-30"
                     >
                       <ChevronRight size={16} />
                     </Button>
@@ -1032,7 +1016,7 @@ function AdminDashboard() {
                 </div>
               </section>
 
-              <p className="mt-5 text-center text-[11px] text-slate-400">
+              <p className="mt-5 text-center text-[11px] text-muted-foreground">
                 Numunix workspace · Electronics and appliance repair enquiries.
               </p>
             </div>
@@ -1062,28 +1046,28 @@ function AdminDashboard() {
           if (!open && !deleting) setDeleteLead(null);
         }}
       >
-        <AlertDialogContent className="w-[calc(100%-32px)] max-w-sm rounded-[24px] border-slate-200 bg-white p-6 sm:rounded-[24px]">
-          <span className="grid h-12 w-12 place-items-center rounded-2xl bg-red-50 text-red-500">
+        <AlertDialogContent className="admin-workspace w-[calc(100%_-_32px)] max-w-sm rounded-lg border-border bg-card p-6 sm:rounded-lg">
+          <span className="grid h-12 w-12 place-items-center rounded-lg bg-destructive/10 text-destructive">
             <Trash2 size={22} strokeWidth={1.5} />
           </span>
-          <AlertDialogTitle className="text-lg text-slate-900">Delete this lead?</AlertDialogTitle>
-          <AlertDialogDescription className="break-words text-sm leading-relaxed text-slate-500">
+          <AlertDialogTitle className="text-lg text-foreground">Delete this lead?</AlertDialogTitle>
+          <AlertDialogDescription className="break-words text-sm leading-relaxed text-muted-foreground">
             This permanently removes {deleteLead?.name}'s enquiry and internal notes. This action
             cannot be undone.
           </AlertDialogDescription>
           {deleteError && (
-            <p role="alert" className="text-sm text-red-600">
+            <p role="alert" className="text-sm text-destructive">
               {deleteError}
             </p>
           )}
           <div className="mt-2 grid grid-cols-2 gap-3">
-            <AlertDialogCancel disabled={deleting} className="m-0 min-h-11 rounded-xl">
+            <AlertDialogCancel disabled={deleting} className="m-0 min-h-11 rounded-md">
               Keep lead
             </AlertDialogCancel>
-            <Button
+            <Button variant="destructive"
               onClick={confirmDelete}
               disabled={deleting}
-              className="min-h-11 rounded-xl bg-red-600 px-4 text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50"
+              className="min-h-11 rounded-md bg-destructive px-4 text-sm font-medium text-primary-foreground hover:bg-destructive disabled:opacity-50"
             >
               {deleting ? "Deleting…" : "Delete lead"}
             </Button>

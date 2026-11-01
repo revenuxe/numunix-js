@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Refresh admin dashboard colors, typography, buttons and phone layout without changing lead handling.
+
 - [x] Fixed booking source and timing rejection; added stored unique service-prefixed references and thank-you receipts, plus reference in admin details. Verified Mobile and Washing Machine submissions, database records, confirmation reload and removed test rows. Owner email remains off until a sending domain is verified.
 
 - [x] Fixed faint header contrast with a stable dark strip, clearer navigation and menu controls; verified 51 scrolling frames, category switching, mobile menu and desktop/phone screenshots without overflow or errors.

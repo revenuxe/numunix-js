@@ -371,3 +371,21 @@
 /* Shared homepage treatment for all public page openings. */
 .hero-shade-side { background: linear-gradient(90deg, var(--ink-900) 0%, color-mix(in srgb, var(--ink-900) 94%, transparent) 34%, color-mix(in srgb, var(--ink-900) 45%, transparent) 58%, transparent 82%); }
 .hero-shade-top { background: linear-gradient(180deg, color-mix(in srgb, var(--ink-900) 90%, transparent) 0%, transparent 40%); }
+
+/* Private repair workspace: readable neutral surfaces and restrained blue accents. */
+.admin-workspace {
+  --background: oklch(1 0 0);
+  --card: oklch(1 0 0);
+  --foreground: oklch(0.23 0.018 260);
+  --muted-foreground: oklch(0.47 0.023 260);
+  --secondary: oklch(0.975 0.005 260);
+  --accent: oklch(0.95 0.024 260);
+  --border: oklch(0.9 0.012 260);
+  --input: var(--border);
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+}
+.admin-workspace :is(h1,h2,h3,p,span,button,select,input,textarea) { letter-spacing: 0; }
+.admin-workspace button { box-shadow: none; }
+.admin-workspace aside button { justify-content: flex-start; }
+.admin-workspace input:focus-visible, .admin-workspace select:focus-visible, .admin-workspace textarea:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }

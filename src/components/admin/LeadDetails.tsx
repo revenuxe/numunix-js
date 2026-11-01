@@ -69,19 +69,19 @@ export function LeadDetails({
       }}
     >
       <DialogContent
-        className="max-h-[88dvh] w-[calc(100%-24px)] max-w-xl gap-0 overflow-y-auto rounded-[24px] border-slate-200 bg-white p-0 text-slate-900 sm:rounded-[24px]"
+        className="admin-workspace max-h-[88dvh] w-[calc(100%_-_24px)] max-w-xl gap-0 overflow-y-auto rounded-lg border-border bg-card p-0 text-foreground sm:rounded-lg"
         onEscapeKeyDown={(event) => {
           if (pending) event.preventDefault();
         }}
       >
-        <div className="border-b border-slate-100 px-5 pb-5 pt-7 sm:px-7">
+        <div className="border-b border-border px-5 pb-5 pt-7 sm:px-7">
           <div className="mb-4 flex items-center gap-3">
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-blue-50 text-sm font-semibold text-blue-600">
+            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-accent text-sm font-semibold text-primary">
               {initials}
             </span>
             <div className="min-w-0 pr-6">
-              <DialogTitle className="break-words text-xl tracking-tight">{lead.name}</DialogTitle>
-              <DialogDescription className="mt-1 text-xs text-slate-500">
+              <DialogTitle className="break-words text-xl tracking-normal">{lead.name}</DialogTitle>
+              <DialogDescription className="mt-1 text-xs text-muted-foreground">
                 Received {date}
               </DialogDescription>
             </div>
@@ -90,7 +90,7 @@ export function LeadDetails({
             <Button asChild size="sm"><a href={repairLeadWhatsApp(lead.phone)} target="_blank" rel="noopener noreferrer"><WhatsAppIcon className="size-4" />WhatsApp customer</a></Button>
             <a
               href={`tel:${lead.phone.replace(/[^+\d]/g, "")}`}
-              className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-50"
+              className="inline-flex min-h-10 items-center gap-2 rounded-md border border-border px-3 py-2 text-xs font-medium text-muted-foreground hover:bg-secondary"
             >
               <Phone size={14} />
               {lead.phone}
@@ -98,7 +98,7 @@ export function LeadDetails({
             {lead.email && (
               <a
                 href={`mailto:${lead.email}`}
-                className="inline-flex min-h-10 min-w-0 items-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-50"
+                className="inline-flex min-h-10 min-w-0 items-center gap-2 rounded-md border border-border px-3 py-2 text-xs font-medium text-muted-foreground hover:bg-secondary"
               >
                 <Mail size={14} className="shrink-0" />
                 <span className="break-all">{lead.email}</span>
@@ -116,28 +116,28 @@ export function LeadDetails({
               ["Enquiry page", lead.source],
             ].map(([label, value]) => (
               <div key={label} className="min-w-0">
-                <dt className="text-xs text-slate-400">{label}</dt>
-                <dd className="mt-1 break-words font-medium text-slate-700 [overflow-wrap:anywhere]">
+                <dt className="text-xs text-muted-foreground">{label}</dt>
+                <dd className="mt-1 break-words font-medium text-foreground [overflow-wrap:anywhere]">
                   {value}
                 </dd>
               </div>
             ))}
           </dl>
-          <div className="mt-5 rounded-2xl border border-slate-100 bg-slate-50 p-4">
-            <h3 className="text-xs font-medium text-slate-500">FAULT & EQUIPMENT DETAILS</h3>
-            <p className="mt-2 whitespace-pre-wrap break-words text-sm leading-relaxed text-slate-700 [overflow-wrap:anywhere]">
+          <div className="mt-5 rounded-lg border border-border bg-secondary p-4">
+            <h3 className="text-xs font-medium text-muted-foreground">FAULT & EQUIPMENT DETAILS</h3>
+            <p className="mt-2 whitespace-pre-wrap break-words text-sm leading-relaxed text-foreground [overflow-wrap:anywhere]">
               {lead.description || "No additional details shared."}
             </p>
           </div>
           <form onSubmit={save} className="mt-6">
             <fieldset disabled={pending} className="space-y-4">
-              <label htmlFor="lead-status" className="block text-sm font-medium text-slate-700">
+              <label htmlFor="lead-status" className="block text-sm font-medium text-foreground">
                 Repair request status
                 <select
                   id="lead-status"
                   value={status}
                   onChange={(event) => setStatus(event.target.value as LeadStatus)}
-                  className="mt-2 h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-base outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                  className="mt-2 h-11 w-full rounded-md border border-border bg-card px-3 text-base outline-none focus:border-primary focus:ring-2 focus:ring-ring/20"
                 >
                   {LEAD_STATUSES.map((value) => (
                     <option key={value} value={value}>
@@ -146,7 +146,7 @@ export function LeadDetails({
                   ))}
                 </select>
               </label>
-              <label htmlFor="lead-notes" className="block text-sm font-medium text-slate-700">
+              <label htmlFor="lead-notes" className="block text-sm font-medium text-foreground">
                 Repair notes
                 <textarea
                   id="lead-notes"
@@ -155,31 +155,31 @@ export function LeadDetails({
                   rows={3}
                   maxLength={5000}
                   placeholder="Model, visit location, assessment findings, estimate and next follow-up…"
-                  className="mt-2 w-full resize-y rounded-xl border border-slate-200 bg-white p-3 text-base font-normal outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                  className="mt-2 w-full resize-y rounded-md border border-border bg-card p-3 text-base font-normal outline-none focus:border-primary focus:ring-2 focus:ring-ring/20"
                 />
-                <span className="mt-1 block text-xs font-normal text-slate-400">
+                <span className="mt-1 block text-xs font-normal text-muted-foreground">
                   Visible only to your admin team.
                 </span>
               </label>
             </fieldset>
             {error && (
-              <p role="alert" className="mt-3 rounded-xl bg-red-50 p-3 text-sm text-red-700">
+              <p role="alert" className="mt-3 rounded-md bg-destructive/10 p-3 text-sm text-destructive">
                 {error}
               </p>
             )}
-            <div className="mt-5 flex gap-3 border-t border-slate-100 pt-5">
-              <Button
+            <div className="mt-5 flex gap-3 border-t border-border pt-5">
+              <Button variant="ghost"
                 type="button"
                 disabled={pending}
                 onClick={() => onDelete(lead)}
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-red-100 px-3 text-sm text-red-600 hover:bg-red-50 disabled:opacity-50"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-destructive/20 px-3 text-sm text-destructive hover:bg-destructive/10 disabled:opacity-50"
               >
                 <Trash2 size={16} />
                 <span>Delete</span>
               </Button>
               <Button
                 disabled={pending}
-                className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+                className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary disabled:opacity-50"
               >
                 <Save size={16} />
                 {pending ? "Saving…" : "Save changes"}

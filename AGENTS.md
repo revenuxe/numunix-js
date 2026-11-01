@@ -10,6 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Website content and navigation
+- Scope the private dashboard theme to admin-workspace and explicitly choose button variants, keeping public styles and lead permissions unchanged.
 - Render the supplied WhatsApp symbol as an inline SVG with semantic foreground color, so booking actions do not depend on a separate image request.
 - Public content is repair-specific; shared repair catalogues drive service and audience views, with the saved category selecting repair options while detail pages retain their own subjects.
 - Electronics at / and Appliances at /appliances share the homepage layout but derive category context and leaf metadata from their route; use a non-modal navigation dropdown to avoid scroll-lock header shifts.
