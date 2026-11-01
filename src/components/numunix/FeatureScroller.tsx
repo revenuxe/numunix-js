@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Label } from "./primitives";
-import ServiceDemo from "./ServiceDemo";
+import ServiceDemo, { type RepairStory } from "./ServiceDemo";
 
 type Item = {
   nav: string;
@@ -8,50 +8,57 @@ type Item = {
   title: string;
   body: string;
   slug: string;
+  preset: RepairStory;
 };
 
 const ITEMS: Item[] = [
   {
-    nav: "AI & AUTOMATION",
-    href: "/features/ai-automation",
-    title: "Intelligence built into your product.",
-    body: "Connect AI to your knowledge and tools, so it can understand requests and help complete the next step.",
-    slug: "ai-automation",
+    nav: "MOBILE REPAIR",
+    href: "/features",
+    title: "Cracked, dead, or drowned — fixed.",
+    body: "Screen replacements, batteries, charging ports, cameras, and water-damage recovery for every major brand — with live status from check-in to handover.",
+    slug: "mobile-repair",
+    preset: "repair-mobile",
   },
   {
-    nav: "WEB DEVELOPMENT",
-    href: "/features/web-development",
-    title: "Fast websites. Capable web applications.",
-    body: "From the first impression to the smallest screen, every page is designed to be clear, responsive, and easy to use.",
-    slug: "web-development",
+    nav: "LAPTOP & COMPUTER REPAIR",
+    href: "/features",
+    title: "Board-level repair, not just replacement.",
+    body: "From no-display and overheating to keyboards, hinges, and upgrades — our bench repairs what other service centres simply replace.",
+    slug: "laptop-repair",
+    preset: "repair-board",
   },
   {
-    nav: "MOBILE APP DEVELOPMENT",
-    href: "/features/mobile-app-development",
-    title: "Your product, wherever your users are.",
-    body: "Thoughtful iOS and Android experiences that make everyday tasks feel simple and connected.",
-    slug: "mobile-app-development",
+    nav: "CCTV & SECURITY SYSTEMS",
+    href: "/features",
+    title: "Cameras that stay online.",
+    body: "Installation, DVR/NVR setup, camera repair, and preventive maintenance for homes, shops, and offices.",
+    slug: "cctv-security",
+    preset: "repair-cctv",
   },
   {
-    nav: "CUSTOM SOFTWARE",
-    href: "/features/custom-software",
-    title: "Software that fits the way you work.",
-    body: "Bring requests, approvals, and business data into software that follows your process.",
-    slug: "custom-software",
+    nav: "HOME APPLIANCE REPAIR",
+    href: "/features",
+    title: "Everyday machines, back to work.",
+    body: "Washing machines, microwaves, chimneys, and more — doorstep diagnosis, itemised estimates, and repairs on schedule.",
+    slug: "appliance-repair",
+    preset: "repair-web",
   },
   {
-    nav: "SAAS DEVELOPMENT",
-    href: "/features/saas-development",
-    title: "From MVP to a scalable platform.",
-    body: "Turn a focused idea into a connected product, with onboarding, workspaces, subscriptions, and room to grow.",
-    slug: "saas-development",
+    nav: "TV & AUDIO REPAIR",
+    href: "/features",
+    title: "Picture and sound, restored.",
+    body: "Panel and backlight work, board repair, and speaker service for every brand and size.",
+    slug: "tv-audio-repair",
+    preset: "repair-tv",
   },
   {
-    nav: "UI/UX DESIGN",
-    href: "/features/ui-ux-design",
-    title: "Make complex products simple to use.",
-    body: "Move from user flows to wireframes to polished interfaces, with every interaction designed around a clear purpose.",
-    slug: "ui-ux-design",
+    nav: "DATA RECOVERY",
+    href: "/features",
+    title: "When the data matters more than the device.",
+    body: "Photos, files, and contacts recovered from failed drives, phones, and memory cards — assessed before anything is powered on.",
+    slug: "data-recovery",
+    preset: "repair-data",
   },
 ];
 
@@ -75,7 +82,7 @@ function MobileStage() {
                 {String(i + 1).padStart(2, "0")} / {String(ITEMS.length).padStart(2, "0")}
               </span>
             </div>
-            <div className="mt-4"><ServiceDemo slug={it.slug} href={it.href} /></div>
+            <div className="mt-4"><ServiceDemo slug={it.slug} preset={it.preset} href={it.href} /></div>
           </SlideIn>
 
           <SlideIn delay={120}>
@@ -133,7 +140,7 @@ export function FeatureScroller() {
           {/* LEFT — sticky index */}
           <div>
             <div className="lg:sticky lg:top-32">
-              <Label tone="light">OUR SERVICES & TECHNOLOGY</Label>
+              <Label tone="light">OUR REPAIR SERVICES</Label>
               <div className="mt-8 hidden lg:block">
                 {ITEMS.map((it, i) => (
                   <button
@@ -170,7 +177,7 @@ export function FeatureScroller() {
                   refs.current[i] = el;
                 }}
               >
-                <ServiceDemo slug={it.slug} href={it.href} />
+                <ServiceDemo slug={it.slug} preset={it.preset} href={it.href} />
                 <h3 className="mt-10 max-w-[620px] text-[clamp(1.35rem,1.9vw,1.75rem)] font-normal leading-[1.28] tracking-[-0.02em] text-[#0b1b38]">
                   {it.title}
                 </h3>
