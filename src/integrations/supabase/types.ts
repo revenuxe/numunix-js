@@ -31,6 +31,7 @@ export type Database = {
       }
       contact_enquiries: {
         Row: {
+          booking_reference: string | null
           created_at: string
           description: string | null
           email: string | null
@@ -45,6 +46,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          booking_reference?: string | null
           created_at?: string
           description?: string | null
           email?: string | null
@@ -59,6 +61,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          booking_reference?: string | null
           created_at?: string
           description?: string | null
           email?: string | null
