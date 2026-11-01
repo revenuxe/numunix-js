@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Refresh admin dashboard colors, typography, buttons and phone layout without changing lead handling.
+- [x] Refreshed admin dashboard colors, typography, button variants, compact phone metrics and lead dialogs. Verified phone/desktop layouts and note saving with mocked enquiries; four lead tests passed. Real-account checks remain blocked by external unmanaged authentication; existing JS browser tests cannot launch their missing browser binary.
 
 - [x] Fixed booking source and timing rejection; added stored unique service-prefixed references and thank-you receipts, plus reference in admin details. Verified Mobile and Washing Machine submissions, database records, confirmation reload and removed test rows. Owner email remains off until a sending domain is verified.
 
