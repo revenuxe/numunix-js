@@ -85,6 +85,7 @@ function Index() {
           intro="Mobile, laptop, CCTV, and appliance repairs — with clear estimates, tested parts, and a service warranty on every job."
           primaryLabel="BOOK A REPAIR"
           secondaryLabel="WHAT WE REPAIR"
+          showCategoryToggle
         />
         <LogoMarquee />
         <PlatformIntro />
