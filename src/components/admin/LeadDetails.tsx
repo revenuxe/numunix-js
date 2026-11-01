@@ -109,6 +109,7 @@ export function LeadDetails({
         <div className="px-5 py-5 sm:px-7">
           <dl className="grid grid-cols-2 gap-x-5 gap-y-4 text-sm">
             {[
+              ["Booking reference", lead.booking_reference ?? "Legacy request"],
               ["Repair service", lead.service],
               ["Preferred visit", lead.timeline],
               ["Category", repairLeadCategory(lead) === "appliances" ? "Appliances" : repairLeadCategory(lead) === "electronics" ? "Electronics" : "Other enquiry"],

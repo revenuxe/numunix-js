@@ -1,0 +1,8 @@
+ALTER TABLE public.contact_enquiries DROP CONSTRAINT contact_enquiries_source_check;
+ALTER TABLE public.contact_enquiries ADD CONSTRAINT contact_enquiries_source_check CHECK (char_length(source) <= 250 AND source LIKE '/%' AND source NOT LIKE '//%' AND source NOT LIKE '%?%' AND source NOT LIKE '%#%');
+ALTER TABLE public.contact_enquiries DROP CONSTRAINT contact_enquiries_timeline_check;
+ALTER TABLE public.contact_enquiries ADD CONSTRAINT contact_enquiries_timeline_check CHECK (timeline IN ('Flexible','As soon as possible','Today if available','Within a week','Schedule a visit','Within a month','In 1–3 months','Just exploring'));
+ALTER TABLE public.contact_enquiries ADD COLUMN booking_reference text GENERATED ALWAYS AS (
+'NU-' || CASE service WHEN 'Mobile Repair' THEN 'MOB' WHEN 'Laptop Repair' THEN 'LAP' WHEN 'CCTV Installation & Repair' THEN 'CCTV' WHEN 'TV & Audio Repair' THEN 'TVA' WHEN 'Tablet Repair' THEN 'TAB' WHEN 'Data Recovery' THEN 'DATA' WHEN 'Gaming Console Repair' THEN 'GAME' WHEN 'Doorstep Repair' THEN 'HOME' WHEN 'Washing Machine Repair' THEN 'WM' WHEN 'AC Service & Repair' THEN 'AC' WHEN 'Refrigerator Repair' THEN 'FRG' WHEN 'Microwave Repair' THEN 'MW' WHEN 'Water Purifier Service' THEN 'WP' WHEN 'Inverter & UPS Repair' THEN 'UPS' WHEN 'Fan & Lighting Repair' THEN 'FAN' WHEN 'Electrical Service' THEN 'ELEC' ELSE left(upper(regexp_replace(service, '[^A-Za-z]', '', 'g')), 4) END || '-' || upper(replace(id::text, '-', ''))
+) STORED;
+ALTER TABLE public.contact_enquiries ADD CONSTRAINT contact_enquiries_booking_reference_key UNIQUE (booking_reference);

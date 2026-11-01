@@ -12,8 +12,13 @@ import Header from "@/components/numunix/Header";
 import Footer from "@/components/numunix/Footer";
 import Hero from "@/components/numunix/Hero";
 import { CONTACT } from "@/content/site";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { Copy } from "lucide-react";
 
 export const Route = createFileRoute("/thank-you")({
+  validateSearch: z.object({ booking: z.string().regex(/^NU-[A-Z]{1,4}-[A-F0-9]{32}$/).optional().catch(undefined), service: z.string().max(100).optional().catch(undefined) }),
   head: () => ({
     meta: [
       { title: "Repair Enquiry Received | Numunix" },
@@ -54,13 +59,15 @@ const steps = [
 ];
 
 function ThankYouPage() {
+  const { booking, service } = Route.useSearch();
+  const [copied, setCopied] = useState(false);
   const actionClass =
     "inline-flex min-h-12 items-center justify-center gap-3 rounded-xl px-6 py-3.5 text-sm font-medium transition focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400";
   return (
     <div className="bg-[#05070c]">
       <Header />
       <main id="main-content">
-        <Hero headline="Repair request received." accent="We’ll review the details." intro="Thank you for reaching out. Your enquiry has been received and our team will review the details you shared." primaryLabel="BACK TO HOME" primaryHref="/" secondaryLabel="EXPLORE SERVICES" secondaryHref="/services" />
+        <Hero headline={booking ? "Repair request received." : "Your next repair."} accent={booking ? "Thank you for booking." : "Starts with a request."} intro={booking ? `Your ${service ?? "repair"} request has been saved. Keep your booking reference for follow-up. A visit is confirmed only after our team agrees the details with you.` : "Send a repair enquiry to receive a booking reference. Our team can discuss assessment and service options."} primaryLabel="BACK TO HOME" primaryHref="/" secondaryLabel="EXPLORE SERVICES" secondaryHref="/services" breadcrumb={booking ? <div className="max-w-xl border-l-2 border-primary pl-4 text-primary-foreground"><p className="font-mono text-xs">BOOKING REFERENCE</p><div className="mt-2 flex min-w-0 items-start gap-3"><p className="min-w-0 break-all font-mono text-sm sm:text-base">{booking}</p><Button variant="ghost" size="icon" aria-label={copied ? "Booking reference copied" : "Copy booking reference"} className="shrink-0 text-primary-foreground hover:bg-primary hover:text-primary-foreground" onClick={async () => { try { await navigator.clipboard.writeText(booking); setCopied(true); } catch { setCopied(false); } }}>{copied ? <Check size={16} /> : <Copy size={16} />}</Button></div><p className="mt-2 text-sm text-primary-foreground/75">{service}</p></div> : undefined} />
 
         <section className="bg-[#f5f8fc] px-5 py-14 sm:px-8 sm:py-20">
           <div className="mx-auto max-w-[1200px]">
