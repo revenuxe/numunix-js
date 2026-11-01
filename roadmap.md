@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Replaced software-development content across public directories, company pages, articles, policies, navigation and metadata with repair content. Verified all 49 sitemap pages, legacy redirects, category-specific audience and service views, service-to-enquiry flow, mobile/desktop rendering and 12 tests.
+
 - [x] Refresh repair H1s and keep shared public-page headings on two complete lines; verified phone and desktop rendering and existing repair tests.
 - [x] Keep selected Electronics or Appliances category across navigation until explicitly changed; replaced interior-page header action with Call Now and a phone icon. Verified selection, interior footer, home return, reload, explicit category switch and eight tests.
 
@@ -13,6 +15,6 @@
 - [x] Security update: @tanstack/react-start@1.168.60, @tanstack/react-router@1.170.41, @tanstack/router-plugin@1.168.42 applied; build OK.
 - [ ] Supabase: user asked to connect project "numunix company" — app is already connected to external Supabase ref azfqsiwkfyqkqdurrgjv; user must verify the ref in their Supabase dashboard; switching is only possible via Integrations settings, not chat.
 - [ ] Supabase keep-alive: user still needs the cron-job.org scheduler (every 2 days) on https://numunix-flow-engine.lovable.app/api/public/keepalive?key=YOUR_KEY.
-- [ ] Interior pages (features, services, articles, industries, approach, header/footer links) still show the web-development concept; awaiting user go-ahead to rebrand them too.
+- [x] Rebranded existing interior pages to repairs; retired development-service pages redirect to the repair directory and old articles redirect to repair guides.
 - [ ] From earlier: About/Pricing/Blog/Careers pages await content and user scope; Security/Privacy/Terms exist. Dedicated repair detail pages are now available.
-- [ ] Bangalore top-10 article: final publication checks were interrupted by credits.
+- [x] Retired the Bangalore software-company article as part of the approved repair-only rebrand; its address redirects to the Bangalore repair-service selection guide.

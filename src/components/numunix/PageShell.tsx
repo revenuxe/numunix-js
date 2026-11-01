@@ -28,7 +28,7 @@ export function PageHero({
   title,
   accent,
   body,
-  primary = { label: "START YOUR PROJECT", href: "/contact" },
+  primary = { label: "REQUEST ASSESSMENT", href: "/contact" },
   secondary,
 }: {
   label: string;
@@ -113,9 +113,9 @@ export function SectionHead({
 }
 
 export function ClosingCTA({
-  title = "Have an idea? Let’s turn it into software.",
-  accent = "Let’s turn it into software.",
-  body = "Websites, mobile apps, SaaS, custom software, and AI, designed and developed around your business.",
+  title = "Something not working? Let’s take a look.",
+  accent = "Let’s take a look.",
+  body = "Share the model, symptoms and location. Discuss repair feasibility and review the estimate before approving work.",
 }: {
   title?: string;
   accent?: string;
@@ -138,7 +138,7 @@ export function ClosingCTA({
         </p>
         <div className="mt-9 flex flex-wrap justify-center gap-3">
           <Btn as="a" href="/contact">
-            START YOUR PROJECT
+            REQUEST ASSESSMENT
           </Btn>
           <Btn as="a" href="/features" variant="ghostDark">
             EXPLORE SERVICES

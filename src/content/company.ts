@@ -34,355 +34,407 @@ export type LegalPageData = {
 };
 
 export const APPROACH: CompanyPageData = {
-  slug: "approach",
-  label: "OUR APPROACH",
-  title: "From idea to a product your team can use.",
-  accent: "your team can use.",
-  intro:
-    "One team for discovery, design, development, and launch, so your website, app, or software stays connected from the first conversation to the first release.",
-  metaTitle: "Our Approach | Numunix",
-  metaDescription:
-    "See how Numunix takes digital products from idea to launch with one team for discovery, design, development, and ongoing improvement.",
-  stats: [
-    ["START", "Discovery"],
-    ["SHAPE", "Design"],
-    ["BUILD", "Engineering"],
-    ["SHIP", "Launch"],
+  "slug": "approach",
+  "label": "OUR APPROACH",
+  "title": "Repair starts here. Understand the fault.",
+  "accent": "Understand the fault.",
+  "intro": "A useful repair begins with the model, symptoms and history. Review diagnosis, repair feasibility and the estimate before deciding how to proceed.",
+  "metaTitle": "Our Approach | Numunix Repairs",
+  "metaDescription": "A useful repair begins with the model, symptoms and history. Review diagnosis, repair feasibility and the estimate before deciding how to proceed.",
+  "stats": [
+    [
+      "FIRST",
+      "Symptoms"
+    ],
+    [
+      "THEN",
+      "Assessment"
+    ],
+    [
+      "BEFORE WORK",
+      "Approval"
+    ],
+    [
+      "HANDOVER",
+      "Checks"
+    ]
   ],
-  sections: [
+  "sections": [
     {
-      label: "HOW WE WORK",
-      title: "A practical path, not a generic template.",
-      accent: "not a generic template.",
-      body: "We begin with the business problem, then choose the product shape, experience, and technology that can actually be delivered.",
-      items: [
-        ["Business first", "Scope follows your users, operations, and commercial goals, not a pre-set stack."],
-        ["One connected team", "Design, engineering, and delivery stay on the same plan so handoffs do not stall the work."],
-        ["Clear decisions", "You see the options, trade-offs, and next step before we commit to a build phase."],
-        ["Built to continue", "The first release is designed so maintenance, integrations, and new features have a path."],
-      ],
-    },
-    {
-      label: "WHAT YOU GET",
-      title: "Alignment before we write production software.",
-      accent: "production software.",
-      tone: "dark",
-      bg: "#07111f",
-      items: [
-        ["Shared understanding", "A documented view of users, requirements, and what success looks like."],
-        ["A defined first release", "Priorities that fit the timeline, so the product can ship and then grow."],
-        ["A technical approach", "Architecture and integrations chosen for the problem you actually have."],
-        ["A working rhythm", "Reviews, validation, and launch planning baked into the engagement."],
-      ],
-    },
+      "label": "HOW WE WORK",
+      "title": "Care without guesswork.",
+      "items": [
+        [
+          "Model-specific assessment",
+          "A phone charging fault, a warm fridge and a leaking washer need different checks. Share the exact model and when the symptom appears."
+        ],
+        [
+          "Your decision matters",
+          "Ask what the estimate includes, which parts are proposed and whether further testing is needed before committing."
+        ],
+        [
+          "Practical repair options",
+          "Discuss repair versus replacement, parts compatibility and whether work belongs on site or in the workshop."
+        ],
+        [
+          "Clear handover",
+          "Review the functions tested, any remaining limitations and the aftercare terms for the agreed work."
+        ]
+      ]
+    }
   ],
-  ctaTitle: "Ready to shape the next product?",
-  ctaAccent: "the next product?",
-  ctaBody: "Tell us the idea, the users, and the outcome you need. We will help define the right first step.",
+  "ctaTitle": "Something not working? Let\u2019s take a look.",
+  "ctaAccent": "Let\u2019s take a look.",
+  "ctaBody": "Tell us the model, symptoms and location. Confirm the assessment and estimate before approving repairs."
 };
 
 export const PROCESS: CompanyPageData = {
-  slug: "process",
-  label: "OUR PROCESS",
-  title: "From the business problem to product growth.",
-  accent: "product growth.",
-  intro:
-    "Eight connected stages take a product from discovery to launch and improvement, with a clear owner, deliverable, and decision at each step.",
-  metaTitle: "Our Process | Numunix",
-  metaDescription:
-    "Numunix product process: discover, define, design, develop, integrate, validate, launch, and grow websites, apps, and software.",
-  stats: [
-    ["STAGES", "08"],
-    ["FOCUS", "Delivery"],
-    ["REVIEWS", "Ongoing"],
-    ["AFTER LAUNCH", "Iterate"],
+  "slug": "process",
+  "label": "REPAIR PROCESS",
+  "title": "From fault to finish. One clear journey.",
+  "accent": "One clear journey.",
+  "intro": "Describe the problem, arrange assessment, review the estimate and approve the work. Testing and handover complete the repair conversation.",
+  "metaTitle": "Repair Process | Numunix Repairs",
+  "metaDescription": "Describe the problem, arrange assessment, review the estimate and approve the work. Testing and handover complete the repair conversation.",
+  "stats": [
+    [
+      "INTAKE",
+      "Model & fault"
+    ],
+    [
+      "DIAGNOSIS",
+      "Cause & scope"
+    ],
+    [
+      "WORK",
+      "Approved repairs"
+    ],
+    [
+      "FINISH",
+      "Test & handover"
+    ]
   ],
-  sections: [
+  "sections": [
     {
-      label: "THE STAGES",
-      title: "Each step has a purpose and an output.",
-      accent: "an output.",
-      items: [
-        ["01 Discover", "Understand the idea, users, business model, constraints, and what already exists."],
-        ["02 Define", "Shape scope, priorities, success criteria, and the technical approach."],
-        ["03 Design", "Turn the concept into user flows, structure, and interfaces the team can build from."],
-        ["04 Develop", "Implement the agreed product with maintainable, scalable software."],
-        ["05 Integrate", "Connect APIs, data, payments, AI, and the business systems you already use."],
-        ["06 Validate", "Check usability, functionality, performance, and security before release."],
-        ["07 Launch", "Deploy with a planned rollout, environments, and operational basics in place."],
-        ["08 Grow", "Maintain, optimize, and add features as usage and the roadmap evolve."],
-      ],
-    },
-    {
-      label: "WORKING TOGETHER",
-      title: "You stay involved without owning every technical detail.",
-      accent: "every technical detail.",
-      tone: "dark",
-      bg: "#07111f",
-      items: [
-        ["Kickoff clarity", "We need goals, audience, examples, and any current product or content you already have."],
-        ["Regular checkpoints", "Reviews happen at definition, design, and pre-launch, not only at the end."],
-        ["Decisions in writing", "Scope changes and priorities are captured so the build stays aligned."],
-        ["Handoff that lasts", "Documentation, credentials, and next-step options are part of launch, not an afterthought."],
-      ],
-    },
+      "label": "REPAIR STAGES",
+      "title": "Every step has a purpose.",
+      "items": [
+        [
+          "01 Describe",
+          "Share the model, symptoms, fault history and location. Avoid repeated use if there is leakage, overheating or exposed wiring."
+        ],
+        [
+          "02 Assess",
+          "Inspect the relevant power, mechanical, display, cooling or connection paths. A symptom alone is not a final diagnosis."
+        ],
+        [
+          "03 Estimate",
+          "Confirm inspection charges, labour, parts, exclusions and expected timing."
+        ],
+        [
+          "04 Approve",
+          "Give permission for the agreed scope. Additional faults or parts should be discussed before extending the work."
+        ],
+        [
+          "05 Repair",
+          "The agreed repair or service is completed using compatible parts where needed."
+        ],
+        [
+          "06 Test",
+          "Review the affected functions, such as charging, recording, cooling, drainage or display output."
+        ],
+        [
+          "07 Handover",
+          "Confirm accessories, completed work, limitations and any applicable repair terms."
+        ],
+        [
+          "08 Aftercare",
+          "Keep the service record and report recurring symptoms with the original reference."
+        ]
+      ]
+    }
   ],
+  "ctaTitle": "Something not working? Let\u2019s take a look.",
+  "ctaAccent": "Let\u2019s take a look.",
+  "ctaBody": "Tell us the model, symptoms and location. Confirm the assessment and estimate before approving repairs."
 };
 
 export const TECHNOLOGY: CompanyPageData = {
-  slug: "technology",
-  label: "TECHNOLOGY",
-  title: "Modern stacks chosen for the product, not the trend.",
-  accent: "not the trend.",
-  intro:
-    "We use proven web, mobile, cloud, and AI tools, selected for maintainability, integrations, and the kind of product you need to run.",
-  metaTitle: "Technology | Numunix",
-  metaDescription:
-    "Numunix technology for web, mobile, SaaS, custom software, cloud, integrations, and AI, chosen around your product requirements.",
-  stats: [
-    ["WEB", "React"],
-    ["LANGUAGE", "TypeScript"],
-    ["MOBILE", "Cross-platform"],
-    ["CLOUD", "Production-ready"],
+  "slug": "technology",
+  "label": "DIAGNOSTICS & TOOLS",
+  "title": "The right checks. Not trial and error.",
+  "accent": "Not trial and error.",
+  "intro": "Different devices need different assessment methods. Our service guidance explains the power, signal, mechanical and functional checks to discuss with your technician.",
+  "metaTitle": "Diagnostics & Tools | Numunix Repairs",
+  "metaDescription": "Different devices need different assessment methods. Our service guidance explains the power, signal, mechanical and functional checks to discuss with your technician.",
+  "stats": [
+    [
+      "ELECTRONICS",
+      "Power & signal"
+    ],
+    [
+      "APPLIANCES",
+      "Cycle & cooling"
+    ],
+    [
+      "PARTS",
+      "Compatibility"
+    ],
+    [
+      "FINISH",
+      "Function checks"
+    ]
   ],
-  sections: [
+  "sections": [
     {
-      label: "WHAT WE BUILD WITH",
-      title: "Capable foundations for products that need to last.",
-      accent: "need to last.",
-      items: [
-        ["Web platforms", "React, TypeScript, and modern frameworks for websites, portals, and web applications."],
-        ["Mobile products", "Cross-platform apps designed for everyday tasks on iOS and Android."],
-        ["APIs and data", "Services, databases, and integrations that keep business tools connected."],
-        ["Cloud and delivery", "Environments, deployment, and operational setup so a product can actually ship."],
-        ["AI where it fits", "Assistants and automation tied to a real workflow, not a disconnected demo."],
-        ["Design systems", "Reusable interface patterns so the product stays consistent as it grows."],
-      ],
-    },
-    {
-      label: "HOW WE CHOOSE",
-      title: "The stack follows the problem.",
-      accent: "the problem.",
-      tone: "dark",
-      bg: "#07111f",
-      items: [
-        ["Fit over fashion", "We recommend tools your team can operate and extend after launch."],
-        ["Integration first", "CRM, payments, analytics, and internal systems are planned into the architecture."],
-        ["Security-conscious defaults", "Authentication, roles, and data handling are part of the technical plan."],
-        ["Room to grow", "The first version should not block the second, we design for iteration."],
-      ],
-    },
+      "label": "ASSESSMENT AREAS",
+      "title": "Look beyond the symptom.",
+      "items": [
+        [
+          "Power and charging",
+          "Phone ports, laptop adapters, backup batteries and appliance controls need model-specific power checks."
+        ],
+        [
+          "Display and audio",
+          "Screen, backlight, touch, input and speaker checks help distinguish a panel fault from a connection or board issue."
+        ],
+        [
+          "Cooling and airflow",
+          "AC and refrigerator assessments consider airflow, temperature behaviour, seals and the cooling system."
+        ],
+        [
+          "Water and movement",
+          "Washer and purifier assessments consider supply, hoses, drainage, pumps and moving parts."
+        ],
+        [
+          "CCTV signal and recording",
+          "Camera power, cables, storage and recorder settings all affect the picture and saved footage."
+        ],
+        [
+          "Final function checks",
+          "Confirm what was tested and under which conditions before taking the device back into daily use."
+        ]
+      ]
+    }
   ],
-  ctaBody: "Share the product you have in mind. We will recommend an approach that matches the requirements.",
+  "ctaTitle": "Something not working? Let\u2019s take a look.",
+  "ctaAccent": "Let\u2019s take a look.",
+  "ctaBody": "Tell us the model, symptoms and location. Confirm the assessment and estimate before approving repairs."
 };
 
 export const SECURITY: CompanyPageData = {
-  slug: "security",
-  label: "SECURITY",
-  title: "Secure, reliable software built for business use.",
-  accent: "built for business use.",
-  intro:
-    "Security is part of how we design products, authentication, permissions, data handling, and operational visibility, not a checklist added at the end.",
-  metaTitle: "Security | Numunix",
-  metaDescription:
-    "How Numunix approaches product security: authentication, role-based access, data handling, logging, and maintainable systems.",
-  stats: [
-    ["ACCESS", "Role-based"],
-    ["DATA", "Handled with care"],
-    ["OPS", "Observable"],
-    ["GROWTH", "Maintainable"],
+  "slug": "security",
+  "label": "DEVICE & DATA CARE",
+  "title": "Care for your device. Respect for your data.",
+  "accent": "Respect for your data.",
+  "intro": "Before repair, discuss data access, backup, safe handling and the checks the device needs. Access should be limited to what is necessary for the agreed assessment.",
+  "metaTitle": "Device & Data Care | Numunix Repairs",
+  "metaDescription": "Before repair, discuss data access, backup, safe handling and the checks the device needs. Access should be limited to what is necessary for the agreed assessment.",
+  "stats": [
+    [
+      "DATA",
+      "Backup first"
+    ],
+    [
+      "ACCESS",
+      "Discuss scope"
+    ],
+    [
+      "SAFETY",
+      "Stop unsafe use"
+    ],
+    [
+      "RECORDS",
+      "Keep details"
+    ]
   ],
-  sections: [
+  "sections": [
     {
-      label: "IN THE PRODUCT",
-      title: "Protections designed around real users.",
-      accent: "real users.",
-      items: [
-        ["Authentication", "Sign-in and session handling planned for the product’s actual users and devices."],
-        ["Role-based access", "Permissions that match responsibilities, so people see what they should."],
-        ["Data handling", "Collection, storage, and sharing scoped to what the product needs to do."],
-        ["Auditability", "Logging and monitoring that help your team understand activity and issues."],
-      ],
-    },
-    {
-      label: "IN DELIVERY",
-      title: "Reliability is part of the same conversation.",
-      accent: "the same conversation.",
-      tone: "dark",
-      bg: "#07111f",
-      items: [
-        ["Architecture with intent", "We plan how data moves, who can change it, and where it lives."],
-        ["Validation before launch", "Security, performance, and core journeys are checked as part of release."],
-        ["Shared responsibility", "You own accounts, policies, and infrastructure choices; we build to those constraints."],
-        ["Ongoing care", "Updates, reviews, and improvements can continue after the first release."],
-      ],
-    },
+      "label": "BEFORE HANDOVER",
+      "title": "Protect what matters.",
+      "items": [
+        [
+          "Back up accessible files",
+          "Save important photos and documents before handing over a device that still works. Data recovery is a separate assessment, not a guaranteed outcome."
+        ],
+        [
+          "Limit account access",
+          "Do not send passwords, payment details or one-time codes in an enquiry. Discuss a temporary test account or supervised access where appropriate."
+        ],
+        [
+          "Remove personal accessories",
+          "Remove SIM and memory cards if they are not needed for diagnosis. Record any accessories handed over."
+        ],
+        [
+          "Recognise unsafe symptoms",
+          "Stop using items with smoke, burning smells, battery swelling, exposed wiring or water near electrical connections. Do not open the casing yourself."
+        ]
+      ]
+    }
   ],
+  "ctaTitle": "Something not working? Let\u2019s take a look.",
+  "ctaAccent": "Let\u2019s take a look.",
+  "ctaBody": "Tell us the model, symptoms and location. Confirm the assessment and estimate before approving repairs."
 };
 
 export const SUPPORT: CompanyPageData = {
-  slug: "support",
-  label: "SUPPORT",
-  title: "Help after launch, when the product is in real use.",
-  accent: "in real use.",
-  intro:
-    "Support is for existing products as much as new ones, issues, improvements, security updates, and the next set of features once customers are already using the software.",
-  metaTitle: "Support | Numunix",
-  metaDescription:
-    "Get Numunix support for maintenance, issues, optimizations, and new features on websites, apps, and custom software.",
-  stats: [
-    ["CHANNEL", "Email"],
-    ["HOURS", "Mon–Sat"],
-    ["FOCUS", "Live products"],
-    ["NEXT STEP", "Scoped work"],
+  "slug": "support",
+  "label": "REPAIR SUPPORT",
+  "title": "After the repair. Keep care close.",
+  "accent": "Keep care close.",
+  "intro": "Questions about completed work, recurring symptoms or routine maintenance? Share the service details, current fault and device model so the next step can be reviewed.",
+  "metaTitle": "Repair Support | Numunix Repairs",
+  "metaDescription": "Questions about completed work, recurring symptoms or routine maintenance? Share the service details, current fault and device model so the next step can be reviewed.",
+  "stats": [
+    [
+      "CONTACT",
+      "Service reference"
+    ],
+    [
+      "DETAILS",
+      "Model & symptoms"
+    ],
+    [
+      "TERMS",
+      "Confirm coverage"
+    ],
+    [
+      "NEXT STEP",
+      "Review scope"
+    ]
   ],
-  sections: [
+  "sections": [
     {
-      label: "WHAT WE HELP WITH",
-      title: "Keep the product healthy and moving.",
-      accent: "and moving.",
-      items: [
-        ["Issues and defects", "Investigate problems that appear after release and plan a fix."],
-        ["Performance and reliability", "Address slow journeys, fragile integrations, and operational gaps."],
-        ["Improvements", "Add features or refine flows once you know how people actually use the product."],
-        ["Security updates", "Plan patches and dependency work as part of ongoing care."],
-      ],
-    },
-    {
-      label: "HOW TO REACH US",
-      title: "A short brief is enough to start.",
-      accent: "enough to start.",
-      tone: "dark",
-      bg: "#07111f",
-      items: [
-        ["Email first", "Write to hello@numunix.com with the product, what’s happening, and how urgent it is."],
-        ["Include context", "Links, screenshots, environments, and recent changes help us diagnose faster."],
-        ["Existing customers", "If we built the product, mention the project so we can pick up the right history."],
-        ["New to Numunix", "We can still review an existing system and propose a maintenance or improvement plan."],
-      ],
-    },
+      "label": "GETTING HELP",
+      "title": "Useful details, better follow-up.",
+      "items": [
+        [
+          "Completed repair questions",
+          "Explain which function is affected and whether the symptom matches the original issue. Include the service reference if available."
+        ],
+        [
+          "Repair terms",
+          "Warranty or follow-up coverage depends on the agreed work and parts. Confirm duration, exclusions and any inspection charges in your service record."
+        ],
+        [
+          "New or recurring faults",
+          "A new symptom may need a fresh assessment. Avoid repeatedly operating a device with leaks, overheating or electrical damage."
+        ],
+        [
+          "Maintenance planning",
+          "List the devices, usage and location. Discuss suitable preventive checks and what any maintenance arrangement includes."
+        ]
+      ]
+    }
   ],
-  ctaTitle: "Need help with a live product?",
-  ctaAccent: "a live product?",
-  ctaBody: "Email the issue or the improvement you want. We will come back with questions and a practical next step.",
+  "ctaTitle": "Something not working? Let\u2019s take a look.",
+  "ctaAccent": "Let\u2019s take a look.",
+  "ctaBody": "Tell us the model, symptoms and location. Confirm the assessment and estimate before approving repairs."
 };
 
 export const COMPANY_PAGES = [APPROACH, PROCESS, TECHNOLOGY, SECURITY, SUPPORT] as const;
 
 export const PRIVACY: LegalPageData = {
-  slug: "privacy",
-  label: "PRIVACY POLICY",
-  title: "How we handle information you share with us.",
-  accent: "you share with us.",
-  intro:
-    "This policy explains what Numunix collects when you use this website or contact us, why we use it, and how you can reach us with questions.",
-  metaTitle: "Privacy Policy | Numunix",
-  metaDescription:
-    "Numunix privacy policy: what information we collect through the website and project enquiries, how we use it, and how to contact us.",
-  updated: "29 September 2026",
-  sections: [
+  "slug": "privacy",
+  "label": "PRIVACY",
+  "title": "Your information. Handled with care.",
+  "accent": "Handled with care.",
+  "intro": "How we use repair enquiries, service details and contact information shared through Numunix.",
+  "metaTitle": "Privacy | Numunix Repairs",
+  "metaDescription": "How we use repair enquiries, service details and contact information shared through Numunix.",
+  "updated": "1 November 2026",
+  "sections": [
     {
-      heading: "Who we are",
-      paragraphs: [
-        "Numunix designs and develops websites, mobile apps, SaaS products, custom software, and related digital services. This website and the contact channels listed on it are operated by Numunix.",
-        "If you have questions about this policy, email hello@numunix.com.",
-      ],
+      "heading": "Who we are",
+      "paragraphs": [
+        "Numunix provides electronics and appliance repair services. This policy covers enquiries and service-related information shared through our website and contact channels."
+      ]
     },
     {
-      heading: "Information we collect",
-      paragraphs: [
-        "When you contact us, you may provide your name, email address, organisation, project details, and any files or links you choose to share.",
-        "This website may collect standard technical information such as browser type, device, pages viewed, and approximate location derived from IP address. That information is used to operate, secure, and improve the site.",
-        "We do not require an account to browse the public pages of this website.",
-      ],
+      "heading": "Information you share",
+      "paragraphs": [
+        "Enquiries may include your name, contact details, location, device model, symptoms and service history. Do not submit passwords, payment credentials or one-time codes through the enquiry form."
+      ]
     },
     {
-      heading: "How we use information",
-      paragraphs: [
-        "We use enquiry details to respond, scope work, prepare proposals, and deliver services you ask for.",
-        "We may use aggregated, non-identifying analytics to understand how the site is used.",
-        "We do not sell your personal information.",
-      ],
+      "heading": "Why we use it",
+      "paragraphs": [
+        "We use these details to respond, assess service scope, arrange visits and keep relevant service records. Standard technical information may help operate and protect the website."
+      ]
     },
     {
-      heading: "Sharing",
-      paragraphs: [
-        "We share information with service providers who help us operate email, hosting, analytics, or project delivery, and only as needed for those purposes.",
-        "We may disclose information if required by law or to protect the rights, safety, and security of Numunix, our clients, or the public.",
-      ],
+      "heading": "Device data",
+      "paragraphs": [
+        "A repair enquiry does not grant unrestricted access to device data. Discuss any access needed for diagnosis separately, and back up accessible files before handover."
+      ]
     },
     {
-      heading: "Retention",
-      paragraphs: [
-        "We keep enquiry and project records for as long as needed to provide the service, meet legal obligations, and resolve disputes. You can ask us to update or delete information we hold, subject to those obligations.",
-      ],
+      "heading": "Sharing and retention",
+      "paragraphs": [
+        "Service providers may process information needed to operate contact channels or deliver the requested service. Records are kept as needed for service, legal obligations and dispute resolution. We do not sell personal information."
+      ]
     },
     {
-      heading: "Your choices",
-      paragraphs: [
-        "You can email us to request access, correction, or deletion of personal information we hold about you.",
-        "You can choose not to send optional project files. If you do send them, treat them as business correspondence.",
-      ],
-    },
-    {
-      heading: "Changes",
-      paragraphs: [
-        "We may update this policy as our services or legal requirements change. The date at the top of this page shows when it was last revised.",
-      ],
-    },
-  ],
+      "heading": "Your choices",
+      "paragraphs": [
+        "Contact hello@numunix.com to ask about access, correction or deletion, subject to applicable record-keeping obligations."
+      ]
+    }
+  ]
 };
 
 export const TERMS: LegalPageData = {
-  slug: "terms",
-  label: "TERMS",
-  title: "Terms for using this website and working with us.",
-  accent: "working with us.",
-  intro:
-    "These terms cover use of the Numunix website. Project work is governed by a written proposal, statement of work, or contract once we agree scope together.",
-  metaTitle: "Terms | Numunix",
-  metaDescription:
-    "Terms of use for the Numunix website and how project engagements are agreed after an enquiry.",
-  updated: "29 September 2026",
-  sections: [
+  "slug": "terms",
+  "label": "TERMS",
+  "title": "Clear terms. Informed repairs.",
+  "accent": "Informed repairs.",
+  "intro": "General website information does not replace the assessment, estimate and service terms agreed for your repair.",
+  "metaTitle": "Terms | Numunix Repairs",
+  "metaDescription": "General website information does not replace the assessment, estimate and service terms agreed for your repair.",
+  "updated": "1 November 2026",
+  "sections": [
     {
-      heading: "Using this website",
-      paragraphs: [
-        "This site is provided for information about Numunix services. Content may change without notice and is not a binding offer until we confirm work in writing.",
-        "You may not misuse the site, attempt to disrupt it, or copy substantial content for commercial use without permission.",
-      ],
+      "heading": "Website information",
+      "paragraphs": [
+        "Service descriptions explain common assessment areas. They are not a guarantee that every model or fault can be repaired. Availability and scope are confirmed before booking."
+      ]
     },
     {
-      heading: "Enquiries are not a contract",
-      paragraphs: [
-        "Sending a message, email, or project brief does not create an engagement. We will discuss fit, scope, timeline, and commercial terms before work starts.",
-        "Any estimate shared in conversation is indicative until it is included in an agreed proposal.",
-      ],
+      "heading": "Estimates and approval",
+      "paragraphs": [
+        "Confirm any visit or inspection charge, labour, parts, exclusions and expected timing. Work and additional scope require your approval. An enquiry alone does not confirm a booking."
+      ]
     },
     {
-      heading: "Project work",
-      paragraphs: [
-        "Deliverables, timelines, fees, intellectual property, confidentiality, and support after launch are defined in the documents we sign with you.",
-        "You are responsible for providing timely access, decisions, content, and approvals that the work depends on.",
-      ],
+      "heading": "Repair and replacement",
+      "paragraphs": [
+        "Parts availability and fault condition affect feasibility. Ask about compatible parts and alternatives when repair may not be practical."
+      ]
     },
     {
-      heading: "Intellectual property",
-      paragraphs: [
-        "The design, text, and software of this website belong to Numunix or its licensors. Client project IP is handled in the project agreement.",
-      ],
+      "heading": "Data and access",
+      "paragraphs": [
+        "Back up accessible data and disclose relevant device damage. Discuss access needed for testing rather than sending credentials through the enquiry form. Recovery outcomes cannot be guaranteed."
+      ]
     },
     {
-      heading: "Limitation",
-      paragraphs: [
-        "The website is provided as-is. To the extent permitted by law, Numunix is not liable for losses arising from use of this site or reliance on general marketing descriptions of services.",
-      ],
+      "heading": "Testing and aftercare",
+      "paragraphs": [
+        "Confirm the functions tested and any remaining limitations at handover. Warranty, follow-up coverage, exclusions and charges depend on the terms agreed for the specific work."
+      ]
     },
     {
-      heading: "Contact",
-      paragraphs: [
-        "Questions about these terms: hello@numunix.com.",
-      ],
+      "heading": "Website use",
+      "paragraphs": [
+        "Do not misuse or disrupt this website. Site text and visual assets belong to Numunix or their licensors. General guidance is not a substitute for professional electrical inspection."
+      ]
     },
-  ],
+    {
+      "heading": "Contact",
+      "paragraphs": [
+        "Questions about service terms can be sent to hello@numunix.com."
+      ]
+    }
+  ]
 };
+

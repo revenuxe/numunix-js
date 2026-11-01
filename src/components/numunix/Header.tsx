@@ -9,9 +9,9 @@ import { CategoryToggle, useCategory } from "./category";
 
 const NAV: [string, string][] = [
   ["SERVICES", "/features"],
-  ["PRODUCTS", "/#products"],
+  ["OUR APPROACH", "/approach"],
   ["PROCESS", "/process"],
-  ["TECHNOLOGY", "/technology"],
+  ["REPAIR GUIDES", "/articles"],
   ["CONTACT", "/contact"],
 ];
 

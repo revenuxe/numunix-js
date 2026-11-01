@@ -1,50 +1,19 @@
-import { createFileRoute, notFound } from "@tanstack/react-router";
-import IndustryPage from "@/components/numunix/IndustryPage";
-import { industryLandingBySlug } from "@/content/industry-landings";
-import { industrySeo, serializeIndustrySchema } from "@/content/industry-seo";
-import { OG_IMAGE } from "@/content/site";
-
+import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
+import { RepairAudiencePage } from "@/components/numunix/RepairAudiencePage";
+import { LEGACY_AUDIENCE_PATHS, REPAIR_AUDIENCE_PATHS, repairAudience } from "@/content/repair-audiences";
+import { SITE_URL } from "@/content/site";
 export const Route = createFileRoute("/industries/$slug")({
-  loader: ({ params }) => {
-    const page = industryLandingBySlug(params.slug);
-    if (!page || !industrySeo(params.slug)) throw notFound();
-    return { page };
-  },
-  head: ({ params }) => {
-    const seo = industrySeo(params.slug);
-    if (!seo)
-      return {
-        meta: [
-          { title: "Industry not found | Numunix" },
-          { name: "robots", content: "noindex, follow" },
-        ],
-      };
-    return {
-      meta: [
-        { title: seo.title },
-        { name: "description", content: seo.description },
-        { property: "og:title", content: seo.title },
-        { property: "og:description", content: seo.description },
-        { property: "og:type", content: "website" },
-        { property: "og:url", content: seo.url },
-        { property: "og:site_name", content: "Numunix" },
-        { property: "og:locale", content: "en_US" },
-        { property: "og:image", content: OG_IMAGE },
-        { property: "og:image:alt", content: "Numunix: software, apps, and digital products" },
-        { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: seo.title },
-        { name: "twitter:description", content: seo.description },
-        { name: "twitter:image", content: OG_IMAGE },
-        { name: "twitter:image:alt", content: "Numunix: software, apps, and digital products" },
-      ],
-      links: [{ rel: "canonical", href: seo.url }],
-      scripts: [{ type: "application/ld+json", children: serializeIndustrySchema(seo.graph) }],
-    };
-  },
-  component: Page,
+ beforeLoad: ({params}) => {
+  const replacement=LEGACY_AUDIENCE_PATHS[params.slug];
+  if (replacement) throw redirect({to:"/industries/$slug",params:{slug:replacement},statusCode:301});
+  if (!REPAIR_AUDIENCE_PATHS.includes(params.slug)) throw notFound();
+ },
+ head: ({params}) => {
+  const audience=repairAudience(params.slug,"electronics");
+  const title=`Repair Care for ${audience?.name ?? "Shared Spaces"} | Numunix`;
+  const description=`Electronics and appliance repair for ${audience?.name.toLowerCase() ?? "shared spaces"}. Plan equipment assessment, service access, clear estimates and function testing.`;
+  const url=`${SITE_URL}/industries/${params.slug}`;
+  return {meta:[{title},{name:"description",content:description},{property:"og:title",content:title},{property:"og:description",content:description},{property:"og:type",content:"website"},{property:"og:url",content:url},{name:"twitter:card",content:"summary_large_image"}],links:[{rel:"canonical",href:url}]};
+ },
+ component: () => <RepairAudiencePage slug={Route.useParams().slug} />,
 });
-
-function Page() {
-  const { page } = Route.useLoaderData();
-  return <IndustryPage page={page} />;
-}

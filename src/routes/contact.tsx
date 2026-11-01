@@ -14,9 +14,9 @@ import {
 import { CONTACT, SITE_URL } from "@/content/site";
 import { ContactFormSection } from "@/components/numunix/ContactFormSection";
 
-const TITLE = "Contact Numunix | Start Your Digital Product Project";
+const TITLE = "Contact Numunix | Request Electronics & Appliance Repair";
 const DESC =
-  "Contact Numunix to discuss web development, mobile apps, SaaS, custom software, AI, and design. Call +91 98865 79923 or email hello@numunix.com.";
+  "Contact Numunix for electronics and appliance repair enquiries. Share the model, fault and location to discuss assessment and service options.";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -35,10 +35,10 @@ export const Route = createFileRoute("/contact")({
 });
 
 const REASONS: [string, string][] = [
-  ["NEW PROJECT", "Discuss your website, mobile app, SaaS, or software idea."],
-  ["PROJECT SCOPE", "Define requirements, priorities, timeline, and budget."],
-  ["MODERNIZATION", "Improve an existing product, migrate data, or connect systems."],
-  ["ONGOING SUPPORT", "Maintenance, optimization, security updates, and new features."],
+  ["DEVICE REPAIR", "Phone, laptop, tablet, TV and console faults."],
+  ["APPLIANCE CARE", "Washer, AC, refrigerator and kitchen-appliance assessment."],
+  ["CCTV SERVICE", "Camera signal, recording, installation and remote-view checks."],
+  ["AFTERCARE", "Completed work, recurring symptoms and maintenance."],
 ];
 
 function ContactPage() {
@@ -46,7 +46,7 @@ function ContactPage() {
     <div className="bg-[#05070c]">
       <Header />
       <main>
-        <Hero headline="Let’s talk about" accent="your next product." intro="Share your idea and goals. We’ll help shape the next step." primaryLabel="START YOUR ENQUIRY" primaryHref="#enquiry" secondaryLabel="EXPLORE SERVICES" secondaryHref="/features" />
+        <Hero headline="Tell us the fault." accent="Let’s take a look." intro="Share the model, symptoms and location. We’ll help clarify the assessment and repair options." primaryLabel="START YOUR ENQUIRY" primaryHref="#enquiry" secondaryLabel="EXPLORE SERVICES" secondaryHref="/features" />
 
         <ContactFormSection />
 
@@ -99,7 +99,7 @@ function ContactPage() {
                 ))}
               </div>
               <p className="mt-8 text-[16px] leading-relaxed text-[#5d76a3]">
-                Send a short note with your idea, business goals, key requirements, and target timeline. Share any existing designs or product links that help explain your project.
+                Send the model, fault history and location. Mention any error codes or recent damage, but do not send passwords or one-time codes.
               </p>
             </Reveal>
           </div>
@@ -111,7 +111,7 @@ function ContactPage() {
           </div>
           <div className="shell relative text-center">
             <Heading size="xl" className="mx-auto max-w-[17ch]">
-              Your next product starts with <Accent>a conversation.</Accent>
+              Your next repair starts with <Accent>a conversation.</Accent>
             </Heading>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Btn as="a" href={CONTACT.emailHref}>

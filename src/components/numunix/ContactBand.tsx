@@ -5,7 +5,7 @@ import { Label, Heading, Accent, Btn, Reveal } from "./primitives";
 export function ContactBand({
   title = "Talk to the team behind Numunix.",
   accent = "behind Numunix.",
-  body = "Tell us about your idea, users, and business goals. We will help define the right product, scope, and technical approach.",
+  body = "Tell us the model, symptoms and location. We will help clarify the assessment, repair options and next step.",
 }: {
   title?: string;
   accent?: string;

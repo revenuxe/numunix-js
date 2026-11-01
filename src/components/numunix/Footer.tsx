@@ -5,88 +5,16 @@ import { REPAIR_PAGES } from "@/content/repair-services";
 import { useCategory } from "./category";
 import { REPAIR_SERVICES, HOMEPAGE_REPAIR } from "@/content/homepage-repairs";
 
-const FEATURE_LINKS: Record<string, string> = {
-  "Web Development": "/features/web-development",
-  "Mobile Apps": "/features/mobile-app-development",
-  "Custom Software": "/features/custom-software",
-  "SaaS Development": "/features/saas-development",
-  "AI & Automation": "/features/ai-automation",
-  "UI/UX Design": "/features/ui-ux-design",
-  "Cloud & Integrations": "/features/cloud-integrations",
-  "Business Websites": "/features/web-development",
-  "Web Applications": "/features/web-applications",
-  "Mobile Applications": "/features/mobile-app-development",
-  "SaaS Platforms": "/features/saas-development",
-  "Marketplaces": "/features/marketplaces",
-  "Business Software": "/features/custom-software",
-  "Our Approach": "/approach",
-  "Our Process": "/process",
-  "Technology": "/technology",
-  "Contact": "/contact",
-  "All Services": "/features",
-  "Integrations": "/features/cloud-integrations",
-  "Maintenance": "/features/maintenance-support",
-  "Security": "/security",
-  "Support": "/support",
-  "Privacy Policy": "/privacy",
-  "Terms": "/terms",
-  "Articles": "/articles"
-};
-
-const COLS: [string, string[]][] = [
-  [
-    "SERVICES",
-    [
-      "Web Development",
-      "Mobile Apps",
-      "Custom Software",
-      "SaaS Development",
-      "AI & Automation",
-      "UI/UX Design",
-      "Cloud & Integrations"
-    ]
-  ],
-  [
-    "PRODUCTS",
-    [
-      "Business Websites",
-      "Web Applications",
-      "Mobile Applications",
-      "SaaS Platforms",
-      "Marketplaces",
-      "Business Software"
-    ]
-  ],
-  [
-    "COMPANY",
-    [
-      "Our Approach",
-      "Our Process",
-      "Technology",
-      "Articles",
-      "Contact"
-    ]
-  ],
-  [
-    "EXPLORE",
-    [
-      "All Services",
-      "Integrations",
-      "Maintenance",
-      "Security",
-      "Support"
-    ]
-  ]
-];
+const FEATURE_LINKS: Record<string,string> = {"Our Approach":"/approach","Our Process":"/process","Diagnostics & Tools":"/technology","Contact":"/contact","Support":"/support","Privacy Policy":"/privacy","Terms":"/terms","Security":"/security","Repair Guides":"/articles"};
 
 export function Footer() {
-  const category = useCategory()?.category;
-  const columns: [string, string[]][] = category ? [
+  const category = useCategory()?.category ?? "electronics";
+  const columns: [string, string[]][] = [
     ["REPAIR SERVICES", REPAIR_PAGES.filter(service => service.category === category).map(service => service.name)],
     ["REPAIR CARE", ["Fault Assessment", "Repair Estimates", "Function Testing", "Maintenance Visits"]],
-    ["NUMUNIX", ["Electronics", "Appliances", "Contact"]],
+    ["NUMUNIX", ["Electronics", "Appliances", "Our Approach", "Our Process", "Diagnostics & Tools", "Repair Guides", "Contact"]],
     ["INFORMATION", ["Support", "Privacy Policy", "Terms"]],
-  ] : COLS;
+  ];
   const repairLink = (label: string) => label === "Electronics" ? "/" : label === "Appliances" ? "/appliances" : (REPAIR_PAGES.find(service => service.category === category && service.name === label) ? `/repairs/${REPAIR_PAGES.find(service => service.category === category && service.name === label)?.slug}` : FEATURE_LINKS[label] ?? "#enquiry");
   return (
     <footer className="border-t border-white/8 bg-[#05070c] pt-20 pb-10">
@@ -94,7 +22,7 @@ export function Footer() {
         <div>
           <BrandLogo className="w-[200px] sm:w-[220px]" />
           <p className="mt-5 max-w-[34ch] text-[15px] leading-relaxed text-white/50">
-            {category ? HOMEPAGE_REPAIR[category].audienceIntro : "Software, websites, apps, and digital products built for real-world growth."}
+            {HOMEPAGE_REPAIR[category].audienceIntro}
           </p>
           <p className="mt-3 max-w-[34ch] text-[13px] leading-relaxed text-white/35">
             {CONTACT.address}

@@ -10,7 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Website content and navigation
-- Homepage category-specific content lives in a shared repair catalogue; repair sections consume the header selector's shared category context, while interior-page visuals remain independent to preserve their existing content.
+- Public content is repair-specific; shared repair catalogues drive service and audience views, with the saved category selecting repair options while detail pages retain their own subjects.
 - Electronics at / and Appliances at /appliances share the homepage layout but derive category context and leaf metadata from their route; use a non-modal navigation dropdown to avoid scroll-lock header shifts.
 - Individual repair pages use /repairs/$slug and a shared repair catalogue for destinations, diagnostics, preparation and enquiry defaults; public content-page heroes use the shared homepage Hero to keep their ribbon design consistent.
 - Homepage device illustrations use a shared browser-safe SVG repair visual with global semantic tokens and reduced-motion support, so service and audience panels stay consistent without changing their layout.
@@ -21,3 +21,4 @@
 - Keep long researched article entries in dedicated content modules consumed by the shared article catalogue, so editorial updates retain existing article URLs and navigation.
 - Shared Hero headings use two explicit no-wrap lines and measured container fitting, so headings stay complete across screen sizes without changing article titles.
 - A root category-selection context persists explicit selections in browser storage; homepage routes retain their own content and metadata, while interior shared navigation and repair options follow the saved selection without rewriting detail-page subjects.
+- Legacy development service and article URLs permanently redirect to the repair directory or related repair guides; audience pages use a shared repair-specific template instead of the retired software industry template.

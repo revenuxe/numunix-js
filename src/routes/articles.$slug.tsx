@@ -1,4 +1,4 @@
-import { createFileRoute, notFound, Link } from "@tanstack/react-router";
+import { createFileRoute, notFound, Link, redirect } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
 import {
   ArrowLeft,
@@ -16,11 +16,15 @@ import Footer from "@/components/numunix/Footer";
 import Hero from "@/components/numunix/Hero";
 import { Label, Reveal, Btn } from "@/components/numunix/primitives";
 import { articleBySlug, ARTICLES } from "@/content/articles";
-import bangaloreCover from "@/assets/bangalore-software-guide.jpg";
+import { LEGACY_ARTICLE_PATHS } from "@/content/repair-legacy";
 
 const SITE_URL = "https://numunix-flow-engine.lovable.app";
 
 export const Route = createFileRoute("/articles/$slug")({
+  beforeLoad: ({ params }) => {
+    const replacement = LEGACY_ARTICLE_PATHS[params.slug];
+    if (replacement) throw redirect({to:"/articles/$slug",params:{slug:replacement},statusCode:301});
+  },
   loader: ({ params }) => {
     const article = articleBySlug(params.slug);
     if (!article) throw notFound();
@@ -243,7 +247,7 @@ function ShareButton({ title, url }: { title: string; url: string }) {
 function ArticlePage() {
   const { article } = Route.useLoaderData();
   const contentRef = useRef<HTMLDivElement>(null);
-  const isBangaloreGuide = article.slug === "top-software-companies-in-bangalore";
+
 
   // Find related articles (exclude current)
   const related = ARTICLES.filter((a) => a.slug !== article.slug).slice(0, 2);
@@ -297,19 +301,7 @@ function ArticlePage() {
                   </span>
                 ))}
               </div>
-              {isBangaloreGuide && (
-                <figure className="mt-10">
-                  <img
-                    src={bangaloreCover}
-                    alt="Architectural illustration inspired by Bengaluru’s Vidhana Soudha and technology districts"
-                    width={1536}
-                    height={768}
-                    fetchPriority="high"
-                    className="aspect-[2/1] w-full object-cover"
-                  />
-                  <figcaption className="mt-3 text-xs text-primary-foreground/60">Bengaluru, architectural illustration, not a documentary photograph.</figcaption>
-                </figure>
-              )}
+
           </div>
         </section>
 
@@ -342,7 +334,7 @@ function ArticlePage() {
                     >
                       <span className="label-mono text-[#1747b8]">NEED HELP?</span>
                       <p className="mt-2 text-[14px] leading-relaxed text-[#3d5585]">
-                        Let's discuss your project and bring these ideas to life.
+                        Tell us the model and symptoms to discuss a repair assessment.
                       </p>
                       <span className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-medium text-[#1e4ed8] transition-all group-hover:gap-2.5">
                         Get in touch <ChevronRight size={13} />
@@ -383,7 +375,7 @@ function ArticlePage() {
                           <Callout
                             icon="💡"
                             title="Why this matters"
-                            body="Every section in this article includes actionable takeaways you can apply to your next project, not just theory."
+                            body="Use this guidance to prepare useful questions, not to open or repair electrical equipment yourself."
                             tone="blue"
                           />
                         )}
@@ -392,9 +384,9 @@ function ArticlePage() {
                             <div className="flex items-start gap-3">
                               <span className="text-2xl text-[#059669]">🚀</span>
                               <div>
-                                <div className="text-[16px] font-semibold text-[#065f46]">Ready to build?</div>
+                                <div className="text-[16px] font-semibold text-[#065f46]">Need a repair assessment?</div>
                                 <div className="mt-1.5 text-[15px] leading-relaxed text-[#064e3b]">
-                                  If you're planning a project and want to apply these principles with a team that lives them, let's talk.
+                                  Share the model, symptoms and location to discuss an appropriate next step.
                                 </div>
                                 <Link
                                   to="/contact"
@@ -415,7 +407,7 @@ function ArticlePage() {
                       <Reveal delay={20}>
                         {article.cta ? (
                           <div className="mb-16 border-y border-border py-8">
-                            <Label tone="light">YOUR PROJECT, YOUR PRIORITIES</Label>
+                            <Label tone="light">YOUR REPAIR, YOUR DECISION</Label>
                             <h3 className="mt-4 text-2xl font-light text-navytext">{article.cta.title}</h3>
                             <p className="mt-3 max-w-[60ch] text-base leading-relaxed text-foreground/75">{article.cta.body}</p>
                             <Btn as="a" href="/contact" className="mt-5">{article.cta.label}<ChevronRight size={14} /></Btn>
@@ -430,10 +422,10 @@ function ArticlePage() {
                             <div>
                               <span className="label-mono text-[#60a5fa]">WORK WITH US</span>
                               <h3 className="mt-2 text-[20px] font-light tracking-[-0.01em] text-white lg:text-[22px]">
-                                Applying this to a real project?
+                                Not sure what needs repairing?
                               </h3>
                               <p className="mt-1.5 max-w-[44ch] text-[15px] text-white/50">
-                                We help teams turn ideas like these into shipped products. Let's talk about yours.
+                                Discuss the symptoms, assessment and repair options before approving work.
                               </p>
                             </div>
                             <Link
@@ -458,17 +450,17 @@ function ArticlePage() {
                       <div>
                         <span className="label-mono text-[#1747b8]">LIKED THIS ARTICLE?</span>
                         <h3 className="mt-3 text-[24px] font-light tracking-[-0.02em] text-[#102a63]">
-                          {article.cta ? "Ready to define your first release?" : "Let's build something together."}
+                          Ready to understand the fault?
                         </h3>
                         <p className="mt-2 max-w-[42ch] text-[15px] text-[#5d76a3]">
-                          {article.cta ? "Tell us who the product serves, the workflow you want to improve, and the integrations it needs. Discuss scope, delivery priorities, and next steps with Numunix." : "We design and develop software, websites, and digital products built for real-world growth."}
+                          Share your device or appliance model, symptoms and location. Confirm the assessment and estimate before approving work.
                         </p>
                       </div>
                       <Link
                         to="/contact"
                         className="label-mono inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[#1e4ed8] px-6 py-3.5 text-white transition-all duration-250 hover:-translate-y-0.5 hover:bg-[#2563eb] hover:shadow-[0_12px_38px_-10px_rgba(59,130,246,0.75)]"
                       >
-                        START A PROJECT
+                        REQUEST ASSESSMENT
                         <ChevronRight size={14} />
                       </Link>
                     </div>
@@ -492,18 +484,18 @@ function ArticlePage() {
                 style={{ lineHeight: 1.1 }}
                 className="mx-auto mt-5 max-w-[18ch] text-[clamp(2rem,4.5vw,4rem)] font-light tracking-[-0.025em] text-white"
               >
-                Turn insights into a{" "}
-                <span className="text-[#3b82f6]">real product.</span>
+                Make an informed{" "}
+                <span className="text-[#3b82f6]">repair decision.</span>
               </h2>
               <p className="mx-auto mt-5 max-w-[52ch] text-[17px] leading-relaxed text-white/50">
-                Whether it's a website, mobile app, SaaS platform, or custom software, our team designs and develops digital products that grow your business.
+                From phones and laptops to washers and cooling appliances, discuss the fault and the checks needed before choosing a repair.
               </p>
               <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
                 <Link
                   to="/contact"
                   className="label-mono inline-flex items-center justify-center gap-2 rounded-xl bg-[#1e4ed8] px-8 py-4 text-white transition-all duration-250 hover:-translate-y-0.5 hover:bg-[#2563eb] hover:shadow-[0_16px_48px_-10px_rgba(59,130,246,0.7)]"
                 >
-                  START A PROJECT
+                  REQUEST ASSESSMENT
                   <ChevronRight size={14} />
                 </Link>
                 <Link

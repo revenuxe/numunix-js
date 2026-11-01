@@ -16,10 +16,10 @@ type HeroProps = {
 };
 
 export function Hero({
-  headline = "Your next idea.",
-  accent = "Built for growth.",
-  intro = "Websites, apps, and custom software built around your business.",
-  primaryLabel = "START YOUR PROJECT",
+  headline = "Repair starts here.",
+  accent = "Care for every day.",
+  intro = "Electronics and appliance repair with model-specific assessment, clear estimates and function checks.",
+  primaryLabel = "REQUEST ASSESSMENT",
   primaryHref = "/contact",
   secondaryLabel = "EXPLORE SERVICES",
   secondaryHref = "/features",
