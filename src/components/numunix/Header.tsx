@@ -3,6 +3,7 @@ import { useLocation } from "@tanstack/react-router";
 import { Menu, X, Grip } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BrandLogo } from "./BrandLogo";
+import { CategoryToggle, useCategory } from "./category";
 
 const NAV: [string, string][] = [
   ["SERVICES", "/features"],
@@ -13,6 +14,7 @@ const NAV: [string, string][] = [
 ];
 
 export function Header() {
+  const categoryContext = useCategory();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -122,21 +124,21 @@ export function Header() {
               </span>
             </nav>
 
-            <a
+            {categoryContext ? <CategoryToggle /> : <a
               href="/contact"
               className="label-mono rounded-xl bg-[#1e4ed8] px-5 py-3 text-white transition-all hover:-translate-y-0.5 hover:bg-[#2563eb] hover:shadow-[0_12px_34px_-12px_rgba(59,130,246,0.9)]"
             >
               START PROJECT
-            </a>
+            </a>}
           </div>
 
           <div className="flex items-center gap-2 lg:hidden">
-            <a
+            {categoryContext ? <CategoryToggle /> : <a
               href="/contact"
               className="label-mono rounded-lg bg-[#1e4ed8] px-3.5 py-2.5 text-white"
             >
               START PROJECT
-            </a>
+            </a>}
             <button
               aria-label="Menu"
               aria-expanded={open}
