@@ -8,6 +8,8 @@ import Hero from "./Hero";
 import { DeviceVisual } from "./RepairVisual";
 import { ContactForm } from "./ContactForm";
 import { Label, Heading, Accent, Reveal } from "./primitives";
+import { WhatsAppIcon } from "./WhatsAppIcon";
+import { CONTACT } from "@/content/site";
 
 export function RepairServicePage({ service }: { service: RepairService }) {
  const related = REPAIR_PAGES.filter(item => item.category === service.category && item.slug !== service.slug).slice(0, 3);
@@ -15,7 +17,7 @@ export function RepairServicePage({ service }: { service: RepairService }) {
   <div className="bg-ink-900">
    <Header />
    <main>
-    <Hero headline={service.headline} accent={service.accent} intro={service.intro} primaryLabel="BOOK A REPAIR" primaryHref="#enquiry" secondaryLabel="REPAIR DETAILS" secondaryHref="#assessment" />
+    <Hero headline={service.headline} accent={service.accent} intro={service.intro} primaryLabel="BOOK A REPAIR" primaryHref="#enquiry" secondaryLabel="BOOK ON WHATSAPP" secondaryIcon={<WhatsAppIcon />} secondaryHref={`${CONTACT.whatsappHref.split("?")[0]}?text=${encodeURIComponent(`Hi Numunix, I’d like to book ${service.name.toLowerCase()}. Model: Symptoms: Location: `)}`} />
     <section id="assessment" className="section-pad scroll-mt-24 bg-paper">
      <div className="shell grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
       <Reveal ssrVisible><Label tone="light">{service.name.toUpperCase()}</Label><Heading tone="light" className="mt-6">Start with the fault.<br /><Accent>Not a guess.</Accent></Heading><p className="mt-6 max-w-[52ch] text-base leading-relaxed text-mutedtext">A symptom can have more than one cause. Share what happened, how often it happens and any previous repairs. The assessment helps define which work is useful and which parts, if any, need replacing.</p></Reveal>
