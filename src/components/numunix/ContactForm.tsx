@@ -1,6 +1,9 @@
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { enquiriesConfigured, submitEnquiry } from "@/lib/enquiries";
+import { supabaseConfigured as enquiriesConfigured } from "@/lib/supabase";
+import { createRepairBooking } from "@/lib/bookings.functions";
+import { useServerFn } from "@tanstack/react-start";
+import { useNavigate } from "@tanstack/react-router";
 import { enquirySchema } from "@/lib/enquiry-schema";
 import { useCategory } from "./category";
 import { REPAIR_SERVICES } from "@/content/homepage-repairs";
@@ -13,6 +16,8 @@ const fieldClass =
 const labelClass = "block min-w-0 text-sm font-medium text-[#102a63]";
 
 export function ContactForm({ initialDescription = "", initialService = "" }: { initialDescription?: string; initialService?: string } = {}) {
+  const submitBooking = useServerFn(createRepairBooking);
+  const navigate = useNavigate();
   const ctx = useCategory();
   const baseOptions = REPAIR_PAGES.filter(item => item.category === (ctx?.category ?? "electronics"));
   const serviceOptions = initialService && !baseOptions.some(item => item.name === initialService) ? [{slug: "requested-repair", name: initialService}, ...baseOptions] : baseOptions;
@@ -40,10 +45,10 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
     submitting.current = true;
     setStatus("pending");
     try {
-      await submitEnquiry({ ...values, source: parsed.data.source });
+      const receipt = await submitBooking({ data: { ...values, source: parsed.data.source } });
       form.reset();
       setStatus("success");
-      window.location.assign("/thank-you");
+      await navigate({ to: "/thank-you", search: { booking: receipt.reference, service: receipt.service } });
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : "Please try again later.");
       setStatus("error");
