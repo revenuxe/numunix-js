@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Connect the illustrated repair cards to named service pages; replace development-era public addresses and menu names with repair-specific destinations, retain permanent redirects, and verify card-to-page navigation and metadata.
+- [x] Connected illustrated repair cards to named service pages; replaced development-era addresses and menu names with repair destinations and kept permanent redirects. Verified washing-machine card navigation, saved Appliances selection, twelve legacy redirects and all 49 public pages on phone and desktop with unique titles, self-referencing metadata and no overflow or page errors.
 
 - [x] Replaced software-development content across public directories, company pages, articles, policies, navigation and metadata with repair content. Verified all 49 sitemap pages, legacy redirects, category-specific audience and service views, service-to-enquiry flow, mobile/desktop rendering and 12 tests.
 
