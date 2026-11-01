@@ -4,7 +4,7 @@ import { enquiriesConfigured, submitEnquiry } from "@/lib/enquiries";
 import { enquirySchema } from "@/lib/enquiry-schema";
 import { useCategory } from "./category";
 import { REPAIR_SERVICES } from "@/content/homepage-repairs";
-import { FEATURES } from "@/content/features";
+import { REPAIR_PAGES } from "@/content/repair-services";
 import { CONTACT } from "@/content/site";
 
 const fieldClass =
@@ -13,7 +13,7 @@ const labelClass = "block min-w-0 text-sm font-medium text-[#102a63]";
 
 export function ContactForm({ initialDescription = "", initialService = "" }: { initialDescription?: string; initialService?: string } = {}) {
   const ctx = useCategory();
-  const baseOptions = ctx ? REPAIR_SERVICES[ctx.category].map(item => ({ slug: item.kind, name: item.nav })) : FEATURES;
+  const baseOptions = REPAIR_PAGES.filter(item => item.category === (ctx?.category ?? "electronics"));
   const serviceOptions = initialService && !baseOptions.some(item => item.name === initialService) ? [{slug: "requested-repair", name: initialService}, ...baseOptions] : baseOptions;
   const submitting = useRef(false);
   const [hydrated, setHydrated] = useState(false);
@@ -62,7 +62,7 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
       className="rounded-[24px] border border-[#dbe5f2] bg-white p-5 shadow-[0_24px_70px_-45px_rgba(16,42,99,0.25)] sm:p-8"
     >
       <h2 className="text-2xl font-medium tracking-tight text-[#102a63]">
-        {ctx ? "Tell us what needs repairing." : "Tell us what you have in mind."}
+        Tell us what needs repairing.
       </h2>
       <p className="mt-2 text-sm leading-relaxed text-[#5d76a3]">
         A few details are enough to start. Fields marked * are required.
@@ -112,7 +112,7 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
           Service *
           <select
             className={fieldClass}
-            key={ctx?.category ?? "software"}
+            key={ctx?.category ?? "electronics"}
             id="contact-service"
             name="service"
             defaultValue={initialService}
@@ -130,7 +130,7 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
           </select>
         </label>
         <label className={labelClass} htmlFor="contact-timeline">
-          When would you like to start?
+          Preferred service timing
           <select
             className={fieldClass}
             id="contact-timeline"
@@ -145,7 +145,7 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
           </select>
         </label>
         <label className={`${labelClass} sm:col-span-2`} htmlFor="contact-description">
-          {ctx ? "Fault description" : "Project description"} <span className="font-normal text-[#5d76a3]">(optional)</span>
+          Fault description <span className="font-normal text-[#5d76a3]">(optional)</span>
           <textarea
             className={`${fieldClass} min-h-32 resize-y`}
             id="contact-description"
@@ -153,13 +153,13 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
             defaultValue={initialDescription}
             rows={4}
             maxLength={1500}
-            placeholder={ctx ? "Share the model, symptoms and any damage or error codes." : "What would you like to build or improve? Share your idea, goals, or any questions."}
+            placeholder="Share the model, symptoms, location and any damage or error codes."
           />
         </label>
       </fieldset>
       <p id="contact-delivery" className="mt-5 text-sm leading-relaxed text-[#5d76a3]">
         {enquiriesConfigured ? (
-          (ctx ? "Share your details and our team will follow up about your repair." : "Share your details and our team will follow up about your project.")
+          "Share your details and our team will follow up about your repair."
         ) : (
           <>
             Online enquiries will be available soon. For now,{" "}
@@ -169,7 +169,7 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
             >
               email our team
             </a>{" "}
-            {ctx ? "to discuss your repair." : "to discuss your project."}
+            to discuss your repair.
           </>
         )}
       </p>
