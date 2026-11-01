@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Strengthen page-specific repair metadata, structured data, crawl discovery and legacy cleanup; verify public pages and available Search Console integration.
+
 - [x] Verified eight distinct navigation destinations, category-specific service links, Appliances return via logo and root homepage, and explicit Electronics selection across reloads.
 
 - [x] Added category-prefixed service addresses, updated all card links and metadata, retained old service redirects, and verified 49 pages and 18 tests.
