@@ -107,7 +107,7 @@ export function WorkflowVisualization({
               </div>
 
               <div className="mt-5">
-                <div className="font-mono text-[22px] leading-none font-light tracking-[-0.02em] text-[#08152e] sm:text-[26px]">
+                <div className="truncate font-mono text-[22px] leading-none font-light tracking-[-0.02em] text-[#08152e] sm:text-[26px] xl:text-[21px]">
                   {v}
                 </div>
                 <div className="label-mono mt-2 truncate text-[#1747b8]">{u}</div>
