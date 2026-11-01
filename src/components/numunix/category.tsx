@@ -1,17 +1,19 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { createContext, useContext, type ReactNode } from "react";
+import { Link } from "@tanstack/react-router";
+import { Check, ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { REPAIR_HOME_PATHS } from "@/content/repair-homepage-meta";
 
 export type RepairCategory = "electronics" | "appliances";
 
 const CategoryContext = createContext<{
   category: RepairCategory;
-  setCategory: (c: RepairCategory) => void;
 } | null>(null);
 
-export function CategoryProvider({ children }: { children: ReactNode }) {
-  const [category, setCategory] = useState<RepairCategory>("electronics");
+export function CategoryProvider({ children, category }: { children: ReactNode; category: RepairCategory }) {
   return (
-    <CategoryContext.Provider value={{ category, setCategory }}>
+    <CategoryContext.Provider value={{ category }}>
       {children}
     </CategoryContext.Provider>
   );
@@ -32,15 +34,21 @@ export function CategoryToggle({ className = "" }: { className?: string }) {
   const ctx = useCategory();
   if (!ctx) return null;
   return (
-    <Select value={ctx.category} onValueChange={(value) => {
-      if (value === "electronics" || value === "appliances") ctx.setCategory(value);
-    }}>
-      <SelectTrigger aria-label="Repair category" className={`h-8 w-[124px] shrink-0 gap-1.5 rounded-md border-primary/60 bg-primary px-2.5 py-1 font-mono text-[10px] tracking-normal text-primary-foreground shadow-none transition-colors hover:bg-primary/90 focus:ring-ring [&>svg]:size-3 [&>svg]:opacity-80 sm:h-9 sm:w-[132px] ${className}`}>
-        <SelectValue>{OPTIONS.find(option => option.value === ctx.category)?.label}</SelectValue>
-      </SelectTrigger>
-      <SelectContent className="z-[70] border-primary-foreground/15 bg-ink-800 text-primary-foreground">
-        {OPTIONS.map(option => <SelectItem key={option.value} value={option.value} className="py-3 font-mono text-[11px] tracking-normal focus:bg-primary focus:text-primary-foreground">{option.label}</SelectItem>)}
-      </SelectContent>
-    </Select>
+    <DropdownMenu modal={false}>
+      <DropdownMenuTrigger asChild>
+        <Button aria-label="Repair category" size="sm" className={`h-8 w-[124px] shrink-0 justify-between gap-1.5 border border-primary/60 px-2.5 font-mono text-[10px] tracking-normal shadow-none [&>svg]:size-3 sm:h-9 sm:w-[132px] ${className}`}>
+          {OPTIONS.find(option => option.value === ctx.category)?.label}
+          <ChevronDown className="opacity-80" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" sideOffset={8} onCloseAutoFocus={event => event.preventDefault()} className="z-[70] min-w-[160px] border-primary-foreground/15 bg-ink-800 text-primary-foreground motion-reduce:animate-none">
+        {OPTIONS.map(option => <DropdownMenuItem key={option.value} asChild className="px-3 py-3 font-mono text-[11px] tracking-normal focus:bg-primary focus:text-primary-foreground">
+          <Link to={REPAIR_HOME_PATHS[option.value]} aria-current={ctx.category === option.value ? "page" : undefined}>
+            {option.label}
+            {ctx.category === option.value && <Check className="ml-auto size-3" />}
+          </Link>
+        </DropdownMenuItem>)}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

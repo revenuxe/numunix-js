@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppliancesRouteImport } from './routes/appliances'
 import { Route as ApproachRouteImport } from './routes/approach'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -33,6 +34,11 @@ import { Route as ApiPublicKeepaliveRouteImport } from './routes/api/public/keep
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppliancesRoute = AppliancesRouteImport.update({
+  id: '/appliances',
+  path: '/appliances',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApproachRoute = ApproachRouteImport.update({
@@ -133,6 +139,7 @@ const ApiPublicKeepaliveRoute = ApiPublicKeepaliveRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/appliances': typeof AppliancesRoute
   '/approach': typeof ApproachRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
@@ -155,6 +162,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/appliances': typeof AppliancesRoute
   '/approach': typeof ApproachRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
@@ -178,6 +186,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/appliances': typeof AppliancesRoute
   '/approach': typeof ApproachRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
@@ -202,6 +211,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/appliances'
     | '/approach'
     | '/contact'
     | '/privacy'
@@ -224,6 +234,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/appliances'
     | '/approach'
     | '/contact'
     | '/privacy'
@@ -246,6 +257,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/appliances'
     | '/approach'
     | '/contact'
     | '/privacy'
@@ -269,6 +281,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppliancesRoute: typeof AppliancesRoute
   ApproachRoute: typeof ApproachRoute
   ContactRoute: typeof ContactRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -297,6 +310,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/appliances': {
+      id: '/appliances'
+      path: '/appliances'
+      fullPath: '/appliances'
+      preLoaderRoute: typeof AppliancesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/approach': {
@@ -437,6 +457,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppliancesRoute: AppliancesRoute,
   ApproachRoute: ApproachRoute,
   ContactRoute: ContactRoute,
   PrivacyRoute: PrivacyRoute,

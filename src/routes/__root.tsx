@@ -12,7 +12,6 @@ import type { ErrorComponentProps } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { SITE_URL, OG_IMAGE } from "../content/site";
 
 function NotFoundComponent() {
   return (
@@ -79,20 +78,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Numunix | Software, Websites, Apps & Digital Products" },
-      {
-        name: "description",
-        content:
-          "Numunix designs and develops websites, web applications, mobile apps, SaaS platforms, AI solutions, and custom software for modern businesses.",
-      },
       { name: "author", content: "Numunix" },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Numunix" },
-      { property: "og:image", content: OG_IMAGE },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: OG_IMAGE },
     ],
     links: [
       {
