@@ -35,8 +35,8 @@ export function CategoryToggle({ className = "" }: { className?: string }) {
     <Select value={ctx.category} onValueChange={(value) => {
       if (value === "electronics" || value === "appliances") ctx.setCategory(value);
     }}>
-      <SelectTrigger aria-label="Repair category" className={`h-11 w-[142px] shrink-0 gap-2 rounded-lg border-primary/60 bg-primary px-3 font-mono text-[11px] tracking-normal text-primary-foreground shadow-none focus:ring-ring sm:w-[158px] ${className}`}>
-        <SelectValue />
+      <SelectTrigger aria-label="Repair category" className={`h-8 w-[124px] shrink-0 gap-1.5 rounded-md border-primary/60 bg-primary px-2.5 py-1 font-mono text-[10px] tracking-normal text-primary-foreground shadow-none transition-colors hover:bg-primary/90 focus:ring-ring [&>svg]:size-3 [&>svg]:opacity-80 sm:h-9 sm:w-[132px] ${className}`}>
+        <SelectValue>{OPTIONS.find(option => option.value === ctx.category)?.label}</SelectValue>
       </SelectTrigger>
       <SelectContent className="z-[70] border-primary-foreground/15 bg-ink-800 text-primary-foreground">
         {OPTIONS.map(option => <SelectItem key={option.value} value={option.value} className="py-3 font-mono text-[11px] tracking-normal focus:bg-primary focus:text-primary-foreground">{option.label}</SelectItem>)}
