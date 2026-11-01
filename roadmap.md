@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Stabilize the category dropdown and provide separately addressable Electronics and Appliances homepages with category-specific metadata and content.
+
 - [x] Curate homepage audience visuals for actual repairs and make the hero Appliances selector switch the full homepage content and repair scenes; verified both categories and switching back on desktop and 375px.
 
 - [x] Homepage re-theme to Electronics Repairs (mobile, laptop, CCTV, appliances) — content, icons, visuals only; UI/cards untouched. Verified at 1280px and 394px.
