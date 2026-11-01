@@ -98,26 +98,24 @@ export function Header() {
     >
       <div
         className={cn(
-          "transition-colors duration-300",
-          scrolled ? "bg-[#05070c]" : "bg-transparent",
+          "border-b bg-ink-900",
+          scrolled ? "border-primary-foreground/15" : "border-primary-foreground/5",
         )}
       >
-        <div className="shell flex items-center justify-between py-4">
+        <div className="shell grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 py-4 lg:flex lg:justify-between">
           <BrandLogo variant="header" className="w-[112px] min-[375px]:w-[140px] sm:w-[180px]" />
 
           <div className="hidden items-center gap-3 lg:flex">
             <nav
               className={cn(
-                "flex items-center gap-1 rounded-2xl border border-white/8 px-3 py-2 transition-all duration-300",
-                scrolled ? "bg-[#07111f]/85" : "bg-[#07111f]/55",
+                "flex items-center gap-1 rounded-lg border border-primary-foreground/15 bg-ink-800 px-3 py-2",
               )}
-              style={{ backdropFilter: "blur(18px) saturate(140%)" }}
             >
               {NAV.map(([n, href]) => (
                 <a
                   key={n}
                   href={href}
-                  className="label-mono rounded-xl px-3.5 py-2 text-white/75 transition-colors hover:bg-white/6 hover:text-white"
+                  className="label-mono rounded-md px-3.5 py-2 text-primary-foreground/90 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground"
                 >
                   {n}
                 </a>
@@ -131,30 +129,32 @@ export function Header() {
             {headerAction}
           </div>
 
-          <div className="flex items-center gap-2 lg:hidden">
+          <div className="flex shrink-0 items-center gap-2 lg:hidden">
             {headerAction}
-            <button
+            <Button
               aria-label="Menu"
               aria-expanded={open}
               aria-controls="mobile-navigation"
               onClick={() => setOpen((v) => !v)}
-              className="grid h-10 w-10 place-items-center rounded-lg border border-white/10 bg-white/5 text-white"
+              variant="ghost"
+              size="icon"
+              className="h-10 w-10 shrink-0 rounded-lg border border-primary-foreground/20 bg-ink-800 text-primary-foreground hover:bg-primary hover:text-primary-foreground"
             >
               {open ? <X size={17} /> : <Menu size={17} />}
-            </button>
+            </Button>
           </div>
         </div>
       </div>
 
       {open && (
         <div id="mobile-navigation" className="lg:hidden">
-          <div className="mx-6 rounded-2xl border border-white/10 bg-[#07111f]/95 p-4 backdrop-blur-xl">
+          <div className="mx-6 rounded-lg border border-primary-foreground/20 bg-ink-800 p-4">
             {NAV.map(([n, href]) => (
               <a
                 key={n}
                 href={href}
                 onClick={() => setOpen(false)}
-                className="label-mono block border-b border-white/6 py-4 text-white/80 last:border-0"
+                className="label-mono block border-b border-primary-foreground/10 py-4 text-primary-foreground/90 last:border-0"
               >
                 {n}
               </a>

@@ -1,5 +1,5 @@
 import NumunixRibbonScene from "./NumunixRibbonScene";
-import { useEffect, useRef, type ReactNode } from "react";
+import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { Btn, Label, Reveal } from "./primitives";
 
 type HeroProps = {
@@ -36,26 +36,30 @@ export function Hero({
   }
   const firstLine = accent || words.length < 2 ? headline : words.slice(0, splitAt).join(" ");
   const secondLine = accent || (words.length > 1 ? words.slice(splitAt).join(" ") : "");
+  const headingKey = `${firstLine}\n${secondLine}`;
+  const [fittedHeading, setFittedHeading] = useState<string | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const heading = headingRef.current;
     if (!heading) return;
+    let active = true;
     const fit = () => {
+      if (!active) return;
       heading.style.removeProperty("font-size");
       const baseSize = parseFloat(getComputedStyle(heading).fontSize);
       const widestLine = Math.max(...Array.from(heading.children, line => line.getBoundingClientRect().width));
       if (widestLine > heading.clientWidth) {
-        heading.style.fontSize = `${baseSize * heading.clientWidth / widestLine}px`;
+        heading.style.fontSize = `${Math.floor(baseSize * (heading.clientWidth - 1) / widestLine * 100) / 100}px`;
       }
+      if (document.fonts.status === "loaded") setFittedHeading(headingKey);
     };
     fit();
     window.addEventListener("resize", fit);
     const observer = new ResizeObserver(fit);
     if (heading.parentElement) observer.observe(heading.parentElement);
-    let active = true;
     document.fonts.ready.then(() => { if (active) fit(); });
     return () => { active = false; observer.disconnect(); window.removeEventListener("resize", fit); };
-  }, [firstLine, secondLine]);
+  }, [headingKey]);
 
   return (
     <section
@@ -75,7 +79,7 @@ export function Hero({
         <div className="grid min-w-0 items-end gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)] lg:gap-20">
           <Reveal className="min-w-0">
             {eyebrow && <Label className="mb-7">{eyebrow}</Label>}
-            <h1 ref={headingRef} className="font-light leading-[1.08] tracking-normal text-primary-foreground text-[40px] sm:text-[56px] lg:text-[80px] xl:text-[96px]">
+            <h1 ref={headingRef} className={`${fittedHeading === headingKey ? "visible" : "invisible"} font-light leading-[1.08] tracking-normal text-primary-foreground text-[40px] sm:text-[56px] lg:text-[80px] xl:text-[96px]`}>
               <span className="inline-block whitespace-nowrap">{firstLine}</span>
               {secondLine && <><br /><span className={`inline-block whitespace-nowrap${accent ? " text-electric" : ""}`}>{secondLine}</span></>}
             </h1>
