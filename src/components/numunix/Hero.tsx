@@ -13,7 +13,6 @@ type HeroProps = {
   secondaryIcon?: ReactNode;
   eyebrow?: string;
   breadcrumb?: ReactNode;
-  variant?: "homepage" | "industry";
 };
 
 export function Hero({

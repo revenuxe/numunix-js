@@ -45,7 +45,7 @@ export function AIAgentsSection() {
           </Reveal>
         </div>
         <Reveal delay={140}>
-          <ServiceDemo slug="ai-automation" preset="repair-ai" href="/features" />
+          <ServiceDemo slug="ai-automation" preset="repair-ai" href={category === "appliances" ? "/repairs/washing-machine-repair" : "/repairs/mobile-repair"} />
         </Reveal>
       </div>
     </section>
@@ -89,7 +89,7 @@ export function DispatchSection() {
           </Reveal>
         </div>
         <Reveal delay={140}>
-          <ServiceDemo slug="cloud-integrations" preset="repair-warranty" href="/features" />
+          <ServiceDemo slug="cloud-integrations" preset="repair-warranty" href={category === "appliances" ? "/appliances#enquiry" : "/repairs/doorstep-repair"} />
         </Reveal>
       </div>
     </section>
