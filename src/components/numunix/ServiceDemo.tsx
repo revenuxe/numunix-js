@@ -157,6 +157,113 @@ const BY_SLUG: Record<string, Story> = {
   marketplaces: "marketplace",
 };
 
+// ============ Repair presets — homepage electronics-repair concept ============
+// Same stage structures and styles; only the story, copy, and icons change.
+
+export type RepairStory =
+  | "repair-mobile"
+  | "repair-board"
+  | "repair-cctv"
+  | "repair-web"
+  | "repair-tv"
+  | "repair-data"
+  | "repair-ai"
+  | "repair-warranty";
+
+const REPAIR_STORIES: Record<
+  RepairStory,
+  { eyebrow: string; title: string; steps: string[]; captions: string[] }
+> = {
+  "repair-mobile": {
+    eyebrow: "IN MOTION / SERVICE CONCEPT",
+    title: "Every repair, tracked end to end.",
+    steps: ["Booked", "Diagnosed", "Repaired", "Ready"],
+    captions: [
+      "Book your repair in a minute — walk in or request a doorstep pickup.",
+      "Technicians diagnose the fault and share a clear, itemised estimate.",
+      "The repair is completed on the bench with tested, quality parts.",
+      "Collect your device, or get it delivered — with a service warranty.",
+    ],
+  },
+  "repair-board": {
+    eyebrow: "IN MOTION / SERVICE CONCEPT",
+    title: "A repair bench you can see into.",
+    steps: ["Booked", "Diagnosed", "Repaired", "Ready"],
+    captions: [
+      "Every incoming device becomes a repair job with a clear status.",
+      "Diagnosis and the approved estimate are recorded on the job card.",
+      "Technicians log parts and progress as the job moves across the bench.",
+      "Quality check, pickup, and warranty are recorded before handover.",
+    ],
+  },
+  "repair-cctv": {
+    eyebrow: "IN MOTION / SERVICE CONCEPT",
+    title: "CCTV that’s installed to actually work.",
+    steps: ["Surveyed", "Installed", "Verified", "Secured"],
+    captions: [
+      "We survey the site and plan camera positions with you.",
+      "Cameras, wiring, and the recorder are installed neatly.",
+      "Every camera is checked for coverage, night vision, and recording.",
+      "You get remote view on your phone, plus a maintenance schedule.",
+    ],
+  },
+  "repair-web": {
+    eyebrow: "IN MOTION / SERVICE CONCEPT",
+    title: "A service desk for every machine at home.",
+    steps: ["Booked", "Assigned", "Repaired", "Delivered"],
+    captions: [
+      "Book a technician for the appliance that stopped working.",
+      "We assign the right specialist and confirm a visit slot.",
+      "The fault is fixed with tested parts, on the itemised estimate.",
+      "The machine is tested with you before the job is closed.",
+    ],
+  },
+  "repair-tv": {
+    eyebrow: "IN MOTION / SERVICE CONCEPT",
+    title: "TVs and audio, back to their best.",
+    steps: ["Received", "Assessed", "Repaired", "Delivered"],
+    captions: [
+      "Bring the TV or audio system in, or book a home pickup.",
+      "We assess the panel, backlight, board, or speakers and share an estimate.",
+      "The faulty module is repaired or replaced with tested parts.",
+      "Picture and sound are checked with you before delivery.",
+    ],
+  },
+  "repair-data": {
+    eyebrow: "IN MOTION / SERVICE CONCEPT",
+    title: "When the data matters more than the device.",
+    steps: ["Received", "Assessed", "Recovered", "Handed over"],
+    captions: [
+      "Bring the drive, phone, or memory card that stopped working.",
+      "We assess it without powering it on and tell you what’s possible.",
+      "Recoverable photos, files, and contacts are restored to a new drive.",
+      "You verify everything before we hand it back.",
+    ],
+  },
+  "repair-ai": {
+    eyebrow: "IN MOTION / SERVICE CONCEPT",
+    title: "Describe the fault. AI does the rest.",
+    steps: ["Received", "Diagnosed", "Checked", "Booked"],
+    captions: [
+      "Describe the problem in your own words — on chat or WhatsApp.",
+      "The assistant recognises the device and the likely fault.",
+      "It checks your warranty, parts stock, and the next free bench slot.",
+      "You get a diagnosis, an estimate, and a booked slot — without waiting.",
+    ],
+  },
+  "repair-warranty": {
+    eyebrow: "IN MOTION / SERVICE CONCEPT",
+    title: "AMC plans that keep devices covered.",
+    steps: ["Register", "Activate", "Schedule", "Covered"],
+    captions: [
+      "Register the devices your home or business depends on.",
+      "Activate a maintenance plan that matches how you use them.",
+      "Preventive checks and priority repairs are scheduled for you.",
+      "Something breaks? One call — the plan takes care of the rest.",
+    ],
+  },
+};
+
 function Browser({
   children,
   address = "your-product.app",
