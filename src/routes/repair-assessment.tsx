@@ -7,7 +7,7 @@ import { APPROACH } from "@/content/company";
 import { repairPageHead } from "@/content/repair-seo";
 
 export const Route = createFileRoute("/repair-assessment")({
-  head: () => repairPageHead({ title: APPROACH.metaTitle, description: APPROACH.metaDescription, path: "/repair-assessment", breadcrumbs: [{ name: APPROACH.metaTitle.split(" | ")[0], path: "/repair-assessment" }] }),
+  head: () => repairPageHead({ title: APPROACH.metaTitle, description: APPROACH.metaDescription, path: "/repair-assessment", breadcrumbs: [{ name: APPROACH.metaTitle.split(" | ").at(0) ?? "Repair information", path: "/repair-assessment" }] }),
   component: ApproachRoute,
 });
 
