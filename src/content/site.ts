@@ -3,9 +3,6 @@ import { REPAIR_PAGES } from "./repair-services";
 /** Canonical base URL — no trailing slash */
 export const SITE_URL = "https://numunix-flow-engine.lovable.app";
 
-/** Default OG image used for social sharing when a page has no custom image */
-export const OG_IMAGE = `${SITE_URL}/og-default.jpg`;
-
 export const CONTACT = {
   phone: "+91 98865 79923",
   phoneHref: "tel:+919886579923",

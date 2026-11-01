@@ -2,6 +2,7 @@ import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 import { RepairAudiencePage } from "@/components/numunix/RepairAudiencePage";
 import { LEGACY_AUDIENCE_PATHS, REPAIR_AUDIENCE_PATHS, repairAudience } from "@/content/repair-audiences";
 import { SITE_URL } from "@/content/site";
+import { repairPageHead } from "@/content/repair-seo";
 export const Route = createFileRoute("/who-we-serve/$slug")({
  beforeLoad: ({params}) => {
   const replacement=LEGACY_AUDIENCE_PATHS[params.slug];
@@ -13,7 +14,7 @@ export const Route = createFileRoute("/who-we-serve/$slug")({
   const title=`Repair Care for ${audience?.name ?? "Shared Spaces"} | Numunix`;
   const description=`Electronics and appliance repair for ${audience?.name.toLowerCase() ?? "shared spaces"}. Plan equipment assessment, service access, clear estimates and function testing.`;
   const url=`${SITE_URL}/who-we-serve/${params.slug}`;
-  return {meta:[{title},{name:"description",content:description},{property:"og:title",content:title},{property:"og:description",content:description},{property:"og:type",content:"website"},{property:"og:url",content:url},{name:"twitter:card",content:"summary_large_image"}],links:[{rel:"canonical",href:url}]};
+  return repairPageHead({ title, description, path: `/who-we-serve/${params.slug}`, breadcrumbs: [{ name: audience?.name ?? "Repair care", path: `/who-we-serve/${params.slug}` }] });
  },
  component: () => <RepairAudiencePage slug={Route.useParams().slug} />,
 });

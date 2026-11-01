@@ -12,6 +12,7 @@ import type { ErrorComponentProps } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { repairSiteSchema } from "@/content/repair-seo";
 import { CategorySelectionProvider } from "@/components/numunix/category";
 
 function NotFoundComponent() {
@@ -84,6 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "Numunix" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(repairSiteSchema()) }],
     links: [
       {
         rel: "stylesheet",

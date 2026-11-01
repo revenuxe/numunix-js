@@ -17,6 +17,7 @@ import Hero from "@/components/numunix/Hero";
 import { Label, Reveal, Btn } from "@/components/numunix/primitives";
 import { articleBySlug, ARTICLES } from "@/content/articles";
 import { LEGACY_ARTICLE_PATHS } from "@/content/repair-legacy";
+import { REPAIR_ORGANIZATION_ID, REPAIR_WEBSITE_ID } from "@/content/repair-seo";
 
 const SITE_URL = "https://numunix-flow-engine.lovable.app";
 
@@ -45,6 +46,9 @@ export const Route = createFileRoute("/repair-guides/$slug")({
         { property: "og:type", content: "article" },
         { property: "og:url", content: pageUrl },
         { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: desc },
+        { property: "og:locale", content: "en_IN" },
         ...(a
           ? [
             { property: "article:published_time", content: a.publishedAt },
@@ -86,6 +90,9 @@ export const Route = createFileRoute("/repair-guides/$slug")({
                 headline: a.title,
                 description: desc,
                 url: pageUrl,
+                mainEntityOfPage: pageUrl,
+                inLanguage: "en-IN",
+                isPartOf: { "@id": REPAIR_WEBSITE_ID },
                 datePublished: a.publishedAt,
                 dateModified: a.updatedAt ?? a.publishedAt,
                 author: {
@@ -95,6 +102,7 @@ export const Route = createFileRoute("/repair-guides/$slug")({
                 },
                 publisher: {
                   "@type": "Organization",
+                  "@id": REPAIR_ORGANIZATION_ID,
                   name: "Numunix",
                   url: SITE_URL,
                 },
