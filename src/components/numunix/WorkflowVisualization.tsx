@@ -164,9 +164,9 @@ export function WorkflowVisualization({
               </div>
               <span
                 aria-hidden="true"
-                className="absolute right-2 top-2 text-[#2563eb] transition-colors group-hover:text-[#1747b8] group-focus-visible:text-[#1747b8]"
+                className="absolute right-2 top-2 grid h-6 w-6 place-items-center rounded-full border border-transparent text-[#2563eb] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:border-[#2563eb] group-hover:bg-[#2563eb] group-hover:text-white group-focus-visible:border-[#2563eb] group-focus-visible:bg-[#2563eb] group-focus-visible:text-white"
               >
-                <ArrowUpRight size={16} />
+                <ArrowUpRight size={14} />
               </span>
             </Link>
           ))}
