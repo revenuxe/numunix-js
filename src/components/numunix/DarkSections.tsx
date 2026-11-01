@@ -127,7 +127,7 @@ export function SecuritySection() {
           </Reveal>
         </div>
         <div className="grid gap-10 sm:grid-cols-2">
-          {(category === "appliances" ? [[ShieldCheck, "SAFETY FIRST", "Power isolation and model-specific checks before appliance work begins."], [Users, "HOME CARE", "Careful handling around fittings, floors and your appliance connections."], [Activity, "FUNCTION TESTS", "Cooling, drainage, heating or water flow checked for the repaired fault."], [FileSearch, "CLEAR ESTIMATES", "Review labour, parts and aftercare terms before approving work."]] as typeof SECURITY : SECURITY).map(([Icon, t, d], i) => (
+          {(category === "appliances" ? [[ShieldCheck, "SAFETY FIRST", "Power isolation and model-specific checks before appliance work begins."], [Users, "HOME CARE", "Careful handling around fittings, floors and your appliance connections."], [Activity, "FUNCTION TESTS", "Cooling, drainage, heating or water flow checked for the repaired fault."], [FileSearch, "CLEAR ESTIMATES", "Review labour, parts and aftercare terms before approving work."]] as const : SECURITY).map(([Icon, t, d], i) => (
             <Reveal key={t} delay={60 + i * 60}>
               <div>
                 <div className="flex items-center gap-2.5">

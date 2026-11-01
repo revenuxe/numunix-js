@@ -2,6 +2,8 @@ import { ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { enquiriesConfigured, submitEnquiry } from "@/lib/enquiries";
 import { enquirySchema } from "@/lib/enquiry-schema";
+import { useCategory } from "./category";
+import { REPAIR_SERVICES } from "@/content/homepage-repairs";
 import { FEATURES } from "@/content/features";
 import { CONTACT } from "@/content/site";
 
@@ -10,6 +12,8 @@ const fieldClass =
 const labelClass = "block min-w-0 text-sm font-medium text-[#102a63]";
 
 export function ContactForm({ initialDescription = "" }: { initialDescription?: string } = {}) {
+  const ctx = useCategory();
+  const serviceOptions = ctx ? REPAIR_SERVICES[ctx.category].map(item => ({ slug: item.kind, name: item.nav })) : FEATURES;
   const submitting = useRef(false);
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => setHydrated(true), []);
@@ -57,7 +61,7 @@ export function ContactForm({ initialDescription = "" }: { initialDescription?: 
       className="rounded-[24px] border border-[#dbe5f2] bg-white p-5 shadow-[0_24px_70px_-45px_rgba(16,42,99,0.25)] sm:p-8"
     >
       <h2 className="text-2xl font-medium tracking-tight text-[#102a63]">
-        Tell us what you have in mind.
+        {ctx ? "Tell us what needs repairing." : "Tell us what you have in mind."}
       </h2>
       <p className="mt-2 text-sm leading-relaxed text-[#5d76a3]">
         A few details are enough to start. Fields marked * are required.
@@ -107,6 +111,7 @@ export function ContactForm({ initialDescription = "" }: { initialDescription?: 
           Service *
           <select
             className={fieldClass}
+            key={ctx?.category ?? "software"}
             id="contact-service"
             name="service"
             defaultValue=""
@@ -115,7 +120,7 @@ export function ContactForm({ initialDescription = "" }: { initialDescription?: 
             <option value="" disabled>
               Select a service
             </option>
-            {FEATURES.map((feature) => (
+            {serviceOptions.map((feature) => (
               <option key={feature.slug} value={feature.name}>
                 {feature.name}
               </option>
@@ -139,7 +144,7 @@ export function ContactForm({ initialDescription = "" }: { initialDescription?: 
           </select>
         </label>
         <label className={`${labelClass} sm:col-span-2`} htmlFor="contact-description">
-          Project description <span className="font-normal text-[#5d76a3]">(optional)</span>
+          {ctx ? "Fault description" : "Project description"} <span className="font-normal text-[#5d76a3]">(optional)</span>
           <textarea
             className={`${fieldClass} min-h-32 resize-y`}
             id="contact-description"
@@ -147,13 +152,13 @@ export function ContactForm({ initialDescription = "" }: { initialDescription?: 
             defaultValue={initialDescription}
             rows={4}
             maxLength={1500}
-            placeholder="What would you like to build or improve? Share your idea, goals, or any questions."
+            placeholder={ctx ? "Share the model, symptoms and any damage or error codes." : "What would you like to build or improve? Share your idea, goals, or any questions."}
           />
         </label>
       </fieldset>
       <p id="contact-delivery" className="mt-5 text-sm leading-relaxed text-[#5d76a3]">
         {enquiriesConfigured ? (
-          "Share your details and our team will follow up about your project."
+          (ctx ? "Share your details and our team will follow up about your repair." : "Share your details and our team will follow up about your project.")
         ) : (
           <>
             Online enquiries will be available soon. For now,{" "}
@@ -163,7 +168,7 @@ export function ContactForm({ initialDescription = "" }: { initialDescription?: 
             >
               email our team
             </a>{" "}
-            to discuss your project.
+            {ctx ? "to discuss your repair." : "to discuss your project."}
           </>
         )}
       </p>

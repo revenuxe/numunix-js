@@ -37,6 +37,7 @@ export function DeviceVisual({ kind, repaired = true }: { kind: DeviceKind; repa
 
 export default function RepairVisual({ category, service = 0, phase = 3 }: { category: RepairCategory; service?: number; phase?: number }) {
   const item = REPAIR_SERVICES[category][service] ?? REPAIR_SERVICES[category][0];
+  if (!item) return null;
   return <div className="repair-visual">
     <div className="repair-visual-top"><span><Wrench size={14} /> {item.name} · diagnostic bench</span><span className="repair-status">{phase >= 3 ? "TESTED" : "ASSESSING"}</span></div>
     <DeviceVisual kind={item.kind} repaired={phase >= 2} />

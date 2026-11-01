@@ -1292,9 +1292,9 @@ export default function ServiceDemo({
   const isDiagnostic = preset === "repair-ai";
   const config = isHomepageRepair ? {
     eyebrow: "REPAIR JOURNEY / ILLUSTRATIVE",
-    title: isWarranty ? (category === "appliances" ? "Maintenance for everyday appliances." : "Maintenance for everyday devices.") : isDiagnostic ? "Symptoms first. Diagnosis next." : service.title,
+    title: isWarranty ? (category === "appliances" ? "Maintenance for everyday appliances." : "Maintenance for everyday devices.") : isDiagnostic ? "Symptoms first. Diagnosis next." : (service?.title ?? originalConfig.title),
     steps: isWarranty ? ["Register", "Inspect", "Service", "Review"] : ["Inspect", "Estimate", "Repair", "Test"],
-    captions: isWarranty ? ["List the items you want assessed for maintenance.", `Discuss checks for ${HOMEPAGE_REPAIR[category].maintenance.toLowerCase()}.`, "Confirm visit frequency and covered work before selecting a plan.", "Keep a record of service visits and recommended follow-up."] : [service.body, "Review the fault assessment and estimate before approving work.", "The agreed repair is carried out and the affected functions are checked.", "Review the test results and any aftercare or warranty terms at handover."],
+    captions: isWarranty ? ["List the items you want assessed for maintenance.", `Discuss checks for ${HOMEPAGE_REPAIR[category].maintenance.toLowerCase()}.`, "Confirm visit frequency and covered work before selecting a plan.", "Keep a record of service visits and recommended follow-up."] : [service?.body ?? "Describe the fault for assessment.", "Review the fault assessment and estimate before approving work.", "The agreed repair is carried out and the affected functions are checked.", "Review the test results and any aftercare or warranty terms at handover."],
   } : originalConfig;
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
