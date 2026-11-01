@@ -89,7 +89,7 @@ export function WorkflowVisualization({
       {/* flow rail */}
       <div>
         <div className="grid grid-cols-2 gap-4 px-6 py-5 sm:gap-5 md:grid-cols-4 xl:grid-cols-8 lg:px-12">
-          {nodes.map(({ phase: n, name: v, category: u, slug }, i) => (
+          {nodes.map(({ phase: n, name: v, category: u, slug, icon: Icon }, i) => (
             <Link
               key={slug}
               to="/approach/$slug"
@@ -114,10 +114,16 @@ export function WorkflowVisualization({
               </div>
 
               <div className="mt-4 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
-                {(() => {
-                  const V = NODE_VIZ[i]!;
-                  return <V />;
-                })()}
+                {Icon ? (
+                  <span className="grid h-9 w-9 place-items-center rounded-lg border border-[#dbe5f2] bg-[#f4f8fd] text-[#1e4ed8] transition-colors duration-300 group-hover:border-[#3b82f6]/45 group-hover:bg-[#eaf2fe]">
+                    <Icon size={18} strokeWidth={1.6} aria-hidden="true" />
+                  </span>
+                ) : (
+                  (() => {
+                    const V = NODE_VIZ[i]!;
+                    return <V />;
+                  })()
+                )}
               </div>
               <span
                 aria-hidden="true"
