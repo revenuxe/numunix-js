@@ -150,8 +150,8 @@ export function VizPayment() {
         <span className="h-full" style={{ width: "10%", background: CYAN, opacity: 0.6 }} />
       </div>
       <div className="label-mono flex justify-between text-[9px] text-[#8190aa]">
-        <span>BUILD</span>
-        <span>RELEASE</span>
+        <span>PAID</span>
+        <span>DUE</span>
       </div>
     </div>
   );

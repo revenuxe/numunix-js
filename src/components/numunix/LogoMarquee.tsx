@@ -1,11 +1,12 @@
 const NAMES = [
-  "WEBSITES",
-  "WEB APPLICATIONS",
-  "MOBILE APPS",
-  "SAAS PLATFORMS",
-  "CUSTOM SOFTWARE",
-  "AI & AUTOMATION",
-  "UI/UX DESIGN",
+  "MOBILE REPAIR",
+  "LAPTOP REPAIR",
+  "CCTV & SECURITY",
+  "TABLET REPAIR",
+  "HOME APPLIANCES",
+  "TV & AUDIO",
+  "DATA RECOVERY",
+  "GAMING CONSOLES",
 ];
 
 export function LogoMarquee() {
@@ -13,7 +14,7 @@ export function LogoMarquee() {
   return (
     <section className="relative overflow-hidden border-t border-white/10 bg-[#05070c] py-12">
       <div className="shell">
-        <div className="label-mono text-[#8fb4e8]">WHAT WE BUILD</div>
+        <div className="label-mono text-[#8fb4e8]">WHAT WE REPAIR</div>
       </div>
       <div className="relative mt-10 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
         <div
