@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Fix booking submission rejection and show a unique service-prefixed booking reference on the thank-you page; verify stored request and confirmation.
+
 - [x] Fixed faint header contrast with a stable dark strip, clearer navigation and menu controls; verified 51 scrolling frames, category switching, mobile menu and desktop/phone screenshots without overflow or errors.
 - [x] Prevent initial heading overflow by fitting before display and after fonts load; verified visible loading frames on three pages and desktop resizing.
 
