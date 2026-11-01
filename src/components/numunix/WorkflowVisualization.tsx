@@ -144,7 +144,7 @@ export function WorkflowVisualization({
       {/* flow rail */}
       <div>
         <div className="grid grid-cols-2 gap-4 px-6 py-5 sm:gap-5 md:grid-cols-4 xl:grid-cols-8 lg:px-12">
-          {nodes.map(({ phase: n, name: v, category: u, slug, icon: Icon }, i) => (
+          {activeNodes.map(({ phase: n, name: v, category: u, slug, icon: Icon }, i) => (
             <Link
               key={slug}
               to="/approach/$slug"
