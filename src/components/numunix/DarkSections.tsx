@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useCategory } from "./category";
+import { HOMEPAGE_REPAIR, REPAIR_SERVICES } from "@/content/homepage-repairs";
 import NumunixRibbonScene from "./NumunixRibbonScene";
 import { Label, Heading, Accent, Btn, Reveal } from "./primitives";
 import ServiceDemo from "./ServiceDemo";
 import { ShieldCheck, Users, Activity, FileSearch } from "lucide-react";
 
 export function AIAgentsSection() {
+  const category = useCategory()?.category ?? "electronics";
+  const content = HOMEPAGE_REPAIR[category];
   return (
     <section className="grain relative overflow-hidden bg-[#05070c] py-14 sm:py-20 lg:py-[104px]">
       <div className="pointer-events-none absolute inset-0 opacity-90">
@@ -14,18 +18,18 @@ export function AIAgentsSection() {
       <div className="shell relative grid gap-14 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-20">
         <div>
           <Reveal>
-            <Label>AI DIAGNOSTICS</Label>
+            <Label>FAULT DIAGNOSIS</Label>
           </Reveal>
           <Reveal delay={60}>
             <Heading className="mt-8">
-              Your device problem,
+              {content.diagnostic}
               <br />
-              quickly <Accent>understood.</Accent>
+              <Accent>{content.diagnosticAccent}</Accent>
             </Heading>
           </Reveal>
           <Reveal delay={120}>
             <p className="mt-8 max-w-[50ch] text-[18px] leading-relaxed text-white/60 lg:text-[20px]">
-              Describe what's wrong in plain words — on chat or WhatsApp. Our AI assistant recognises the device, points to the likely fault, and books the right bench slot with a clear estimate.
+              {content.diagnosticBody}
             </p>
           </Reveal>
           <Reveal delay={180}>
@@ -48,6 +52,8 @@ export function AIAgentsSection() {
 }
 
 export function DispatchSection() {
+  const category = useCategory()?.category ?? "electronics";
+  const content = HOMEPAGE_REPAIR[category];
   return (
     <section className="relative overflow-hidden bg-[#07111f] py-14 sm:py-20 lg:py-[104px]">
       <div className="shell grid gap-14 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-20">
@@ -57,19 +63,19 @@ export function DispatchSection() {
           </Reveal>
           <Reveal delay={60}>
             <Heading className="mt-8">
-              One plan. Every device <Accent>covered.</Accent>
+              One plan. {category === "appliances" ? "Your appliances" : "Your devices"} <Accent>cared for.</Accent>
             </Heading>
           </Reveal>
           <Reveal delay={120}>
             <p className="mt-8 max-w-[46ch] text-[18px] leading-relaxed text-white/60">
-              Annual maintenance plans for homes, shops, and offices — scheduled preventive visits, priority repair slots, and honest advice about what is actually worth fixing.
+              {category === "appliances" ? "Plan preventive checks for ACs, washing machines, refrigerators and purifiers. Discuss visit schedules, exclusions and parts costs before choosing your maintenance cover." : "Plan preventive care for laptops, CCTV and everyday electronics. Discuss visit schedules, exclusions and parts costs before choosing your maintenance cover."}
             </p>
           </Reveal>
           <Reveal delay={160}>
             <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-white/10 pt-8">
               {[
                 ["PLANS", "Home · Shop · Office"],
-                ["COVERED", "Phones · Laptops · CCTV · Appliances"],
+                ["ITEMS", content.maintenance],
                 ["VISITS", "Scheduled preventive checks"],
                 ["SUPPORT", "Priority slots · Doorstep service"],
               ].map(([k, v]) => (
@@ -97,6 +103,8 @@ const SECURITY = [
 ] as const;
 
 export function SecuritySection() {
+  const category = useCategory()?.category ?? "electronics";
+  const content = HOMEPAGE_REPAIR[category];
   return (
     <section id="security" className="grain relative overflow-hidden bg-[#05070c] py-14 sm:py-20 lg:py-[104px]">
       <div className="pointer-events-none absolute inset-0">
@@ -119,7 +127,7 @@ export function SecuritySection() {
           </Reveal>
         </div>
         <div className="grid gap-10 sm:grid-cols-2">
-          {SECURITY.map(([Icon, t, d], i) => (
+          {(category === "appliances" ? [[ShieldCheck, "SAFETY FIRST", "Power isolation and model-specific checks before appliance work begins."], [Users, "HOME CARE", "Careful handling around fittings, floors and your appliance connections."], [Activity, "FUNCTION TESTS", "Cooling, drainage, heating or water flow checked for the repaired fault."], [FileSearch, "CLEAR ESTIMATES", "Review labour, parts and aftercare terms before approving work."]] as typeof SECURITY : SECURITY).map(([Icon, t, d], i) => (
             <Reveal key={t} delay={60 + i * 60}>
               <div>
                 <div className="flex items-center gap-2.5">
@@ -147,6 +155,10 @@ const BUILT_CARDS = [
 ];
 
 export function BuiltWithNumunix() {
+  const category = useCategory()?.category ?? "electronics";
+  const services = REPAIR_SERVICES[category].slice(0, 4);
+  const tabs = services.map(item => item.name.toUpperCase());
+  const cards = services.map(item => [item.nav, item.body, "/features"]);
   const [tab, setTab] = useState(0);
   return (
     <section className="grain relative overflow-hidden bg-[#07111f] py-14 sm:py-20 lg:py-[104px]">
@@ -159,13 +171,13 @@ export function BuiltWithNumunix() {
         </Reveal>
         <Reveal delay={80}>
           <div className="mt-10 flex justify-center">
-            <div className="flex gap-1 rounded-2xl border border-white/10 bg-white/[0.06] p-1 backdrop-blur-xl">
-              {BUILT_TABS.map((t, i) => (
+            <div className="flex flex-wrap justify-center gap-1 rounded-2xl border border-white/10 bg-white/[0.06] p-1 backdrop-blur-xl">
+              {tabs.map((t, i) => (
                 <button
                   key={t}
                   onClick={() => setTab(i)}
                   aria-pressed={tab === i}
-                  className={`label-mono rounded-xl px-5 py-3 transition-colors ${
+                  className={`label-mono rounded-xl px-3 py-3 sm:px-5 transition-colors ${
                     tab === i ? "bg-white text-[#102a63]" : "text-white/65 hover:text-white"
                   }`}
                 >
@@ -177,7 +189,7 @@ export function BuiltWithNumunix() {
         </Reveal>
 
         <div className="mt-16 grid gap-5 md:grid-cols-2">
-          {[...BUILT_CARDS.slice(tab), ...BUILT_CARDS.slice(0, tab)].map(([t, d, href], i) => (
+          {[...cards.slice(tab), ...cards.slice(0, tab)].map(([t, d, href], i) => (
             <Reveal key={t} delay={60 + i * 60}>
               <a href={href} className="group block h-full rounded-[22px] bg-gradient-to-b from-white to-[#eef3f8] p-8 transition-all duration-250 hover:-translate-y-1 hover:shadow-[0_30px_70px_-40px_rgba(0,0,0,0.8)]">
                 <div className="grid h-12 w-12 place-items-center rounded-xl bg-[#dbe6f8]">
@@ -204,6 +216,8 @@ export function BuiltWithNumunix() {
 }
 
 export function FinalCTA() {
+  const category = useCategory()?.category ?? "electronics";
+  const content = HOMEPAGE_REPAIR[category];
   return (
     <section
       id="cta"
@@ -216,7 +230,7 @@ export function FinalCTA() {
       <div className="shell relative">
         <Reveal>
           <Heading size="xl" className="max-w-[16ch]">
-            Device not working?{" "}
+            {content.cta}{" "}
             <Accent>
               Let’s bring it back.
             </Accent>
@@ -224,7 +238,7 @@ export function FinalCTA() {
         </Reveal>
         <Reveal delay={100}>
           <p className="mt-10 max-w-[54ch] text-[18px] leading-relaxed text-white/60 lg:text-[20px]">
-            A cracked phone screen, a laptop that won’t start, CCTV that dropped offline, or an appliance that stopped mid-cycle — walk in or book a doorstep visit, and get a clear estimate before we start.
+            {content.ctaBody}
           </p>
         </Reveal>
         <Reveal delay={160}>
