@@ -151,24 +151,11 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
         </label>
       </fieldset>
       <p id="contact-delivery" className="mt-5 text-sm leading-relaxed text-[#5d76a3]">
-        {enquiriesConfigured ? (
-          "Share your details and our team will follow up about your repair."
-        ) : (
-          <>
-            Online enquiries will be available soon. For now,{" "}
-            <a
-              href={CONTACT.emailHref}
-              className="font-medium text-[#1e4ed8] underline underline-offset-2"
-            >
-              email our team
-            </a>{" "}
-            to discuss your repair.
-          </>
-        )}
+        Share your details and our team will follow up about your repair.
       </p>
       <Button
         type="submit"
-        disabled={!hydrated || !enquiriesConfigured || status === "pending"}
+        disabled={!hydrated || status === "pending"}
         aria-describedby="contact-delivery"
         className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-xl bg-[#1e4ed8] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#2563eb] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#2563eb] disabled:cursor-not-allowed disabled:opacity-50"
       >
