@@ -115,37 +115,13 @@ export function WorkflowVisualization({
           <span className="label-mono shrink-0 text-[#1747b8]">{label}</span>
           <span className="label-mono hidden text-[#a8b7cc] sm:inline">{sub}</span>
         </div>
-        {tabs ? (
-          <div
-            role="tablist"
-            aria-label="Service category"
-            className="flex shrink-0 items-center gap-1 rounded-full border border-[#dbe5f2] bg-white p-1"
-          >
-            {tabs.map((t, i) => (
-              <button
-                key={t.label}
-                role="tab"
-                aria-selected={tab === i}
-                onClick={() => setTab(i)}
-                className={`label-mono rounded-full px-3 py-1.5 transition-all duration-250 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] sm:px-4 sm:py-2 ${
-                  tab === i
-                    ? "bg-[#1747b8] text-white shadow-[0_6px_16px_-8px_rgba(23,71,184,0.7)]"
-                    : "text-[#5d76a3] hover:text-[#1747b8]"
-                }`}
-              >
-                {t.label}
-              </button>
-            ))}
-          </div>
-        ) : (
-          <span className="label-mono flex items-center gap-2 text-[#8190aa]">
-            <span
-              className="h-1.5 w-1.5 rounded-full bg-[#2563eb]"
-              style={{ animation: "nx-pulse-dot 2.4s ease-in-out infinite" }}
-            />
-            CONNECTED AT EVERY STEP
-          </span>
-        )}
+        <span className="label-mono flex shrink-0 items-center gap-2 text-[#8190aa]">
+          <span
+            className="h-1.5 w-1.5 rounded-full bg-[#2563eb]"
+            style={{ animation: "nx-pulse-dot 2.4s ease-in-out infinite" }}
+          />
+          {tabs ? (tab === 0 ? "ELECTRONICS" : "APPLIANCES") : "CONNECTED AT EVERY STEP"}
+        </span>
       </div>
 
       {/* flow rail */}
