@@ -1,6 +1,8 @@
 import { Linkedin, Instagram, Facebook } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
 import { CONTACT } from "@/content/site";
+import { useCategory } from "./category";
+import { REPAIR_SERVICES, HOMEPAGE_REPAIR } from "@/content/homepage-repairs";
 
 const FEATURE_LINKS: Record<string, string> = {
   "Web Development": "/features/web-development",
@@ -77,13 +79,21 @@ const COLS: [string, string[]][] = [
 ];
 
 export function Footer() {
+  const category = useCategory()?.category;
+  const columns: [string, string[]][] = category ? [
+    ["REPAIR SERVICES", REPAIR_SERVICES[category].map(service => service.name)],
+    ["REPAIR CARE", ["Fault Assessment", "Repair Estimates", "Function Testing", "Maintenance Visits"]],
+    ["NUMUNIX", ["Electronics", "Appliances", "Contact"]],
+    ["INFORMATION", ["Support", "Privacy Policy", "Terms"]],
+  ] : COLS;
+  const repairLink = (label: string) => label === "Electronics" ? "/" : label === "Appliances" ? "/appliances" : FEATURE_LINKS[label] ?? "#enquiry";
   return (
     <footer className="border-t border-white/8 bg-[#05070c] pt-20 pb-10">
       <div className="shell grid gap-14 lg:grid-cols-[1.1fr_2.4fr]">
         <div>
           <BrandLogo className="w-[200px] sm:w-[220px]" />
           <p className="mt-5 max-w-[34ch] text-[15px] leading-relaxed text-white/50">
-            Software, websites, apps, and digital products built for real-world growth.
+            {category ? HOMEPAGE_REPAIR[category].audienceIntro : "Software, websites, apps, and digital products built for real-world growth."}
           </p>
           <p className="mt-3 max-w-[34ch] text-[13px] leading-relaxed text-white/35">
             {CONTACT.address}
@@ -120,14 +130,14 @@ export function Footer() {
         </div>
 
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {COLS.map(([title, items]) => (
+          {columns.map(([title, items]) => (
             <div key={title}>
               <div className="label-mono text-white/40">{title}</div>
               <ul className="mt-5 space-y-3">
                 {items.map((i) => (
                   <li key={i}>
                     <a
-                      href={FEATURE_LINKS[i] ?? "/features"}
+                      href={category ? repairLink(i) : FEATURE_LINKS[i] ?? "/features"}
                       className="text-[15px] text-white/65 transition-colors hover:text-white"
                     >
                       {i}
