@@ -86,7 +86,7 @@ export function Footer() {
     ["NUMUNIX", ["Electronics", "Appliances", "Contact"]],
     ["INFORMATION", ["Support", "Privacy Policy", "Terms"]],
   ] : COLS;
-  const repairLink = (label: string) => label === "Electronics" ? "/" : label === "Appliances" ? "/appliances" : FEATURE_LINKS[label] ?? "#contact-form";
+  const repairLink = (label: string) => label === "Electronics" ? "/" : label === "Appliances" ? "/appliances" : FEATURE_LINKS[label] ?? "#enquiry";
   return (
     <footer className="border-t border-white/8 bg-[#05070c] pt-20 pb-10">
       <div className="shell grid gap-14 lg:grid-cols-[1.1fr_2.4fr]">
