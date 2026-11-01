@@ -12,6 +12,7 @@ import {
   Reveal,
 } from "@/components/numunix/primitives";
 import { CONTACT, SITE_URL } from "@/content/site";
+import { repairPageHead } from "@/content/repair-seo";
 import { ContactFormSection } from "@/components/numunix/ContactFormSection";
 
 const TITLE = "Contact Numunix | Request Electronics & Appliance Repair";
@@ -19,18 +20,7 @@ const DESC =
   "Contact Numunix for electronics and appliance repair enquiries. Share the model, fault and location to discuss assessment and service options.";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESC },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESC },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: `${SITE_URL}/contact` },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/contact` }],
-  }),
+  head: () => repairPageHead({ title: TITLE, description: DESC, path: "/contact", type: "ContactPage", breadcrumbs: [{ name: "Repair enquiries", path: "/contact" }] }),
   component: ContactPage,
 });
 

@@ -6,25 +6,14 @@ import Hero from "@/components/numunix/Hero";
 import NumunixRibbonScene from "@/components/numunix/NumunixRibbonScene";
 import { Label, Heading, Accent, Reveal, Btn } from "@/components/numunix/primitives";
 import { ARTICLES } from "@/content/articles";
-const SITE_URL = "https://numunix-flow-engine.lovable.app";
+import { repairPageHead, repairItemList } from "@/content/repair-seo";
 
 const TITLE = "Electronics & Appliance Repair Guides | Numunix";
 const DESC =
   "Practical guides for phones, laptops and appliances. Learn what to prepare, how to review repair estimates and what to check at handover.";
 
 export const Route = createFileRoute("/repair-guides/")(  {
-  head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESC },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESC },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: `${SITE_URL}/repair-guides` },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/repair-guides` }],
-  }),
+  head: () => repairPageHead({ title: TITLE, description: DESC, path: "/repair-guides", type: "CollectionPage", breadcrumbs: [{ name: "Repair guides", path: "/repair-guides" }], entities: [repairItemList(ARTICLES.map(article => ({ name: article.title, path: `/repair-guides/${article.slug}` })))] }),
   component: ArticlesIndex,
 });
 

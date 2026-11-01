@@ -4,21 +4,10 @@ import { Section, SectionHead } from "@/components/numunix/PageShell";
 import { WorkflowVisualization } from "@/components/numunix/WorkflowVisualization";
 import { Reveal } from "@/components/numunix/primitives";
 import { APPROACH } from "@/content/company";
-import { SITE_URL } from "@/content/site";
+import { repairPageHead } from "@/content/repair-seo";
 
 export const Route = createFileRoute("/repair-assessment")({
-  head: () => ({
-    meta: [
-      { title: APPROACH.metaTitle },
-      { name: "description", content: APPROACH.metaDescription },
-      { property: "og:title", content: APPROACH.metaTitle },
-      { property: "og:description", content: APPROACH.metaDescription },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: `${SITE_URL}/repair-assessment` },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/repair-assessment` }],
-  }),
+  head: () => repairPageHead({ title: APPROACH.metaTitle, description: APPROACH.metaDescription, path: "/repair-assessment", breadcrumbs: [{ name: APPROACH.metaTitle.split(" | ")[0], path: "/repair-assessment" }] }),
   component: ApproachRoute,
 });
 
