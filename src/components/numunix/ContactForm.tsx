@@ -1,6 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { supabaseConfigured as enquiriesConfigured } from "@/lib/supabase";
 import { createRepairBooking } from "@/lib/bookings.functions";
 import { useServerFn } from "@tanstack/react-start";
 import { useNavigate } from "@tanstack/react-router";
@@ -29,7 +28,7 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (submitting.current || !enquiriesConfigured) return;
+    if (submitting.current) return;
     const form = event.currentTarget;
     const data = new FormData(form);
     const values = Object.fromEntries(data.entries());
