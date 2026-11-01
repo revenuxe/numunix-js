@@ -5,15 +5,15 @@ import { REPAIR_PAGES } from "@/content/repair-services";
 import { useCategory } from "./category";
 import { REPAIR_SERVICES, HOMEPAGE_REPAIR } from "@/content/homepage-repairs";
 
-const FEATURE_LINKS: Record<string,string> = {"Our Approach":"/approach","Our Process":"/process","Diagnostics & Tools":"/technology","Contact":"/contact","Support":"/support","Privacy Policy":"/privacy","Terms":"/terms","Security":"/security","Repair Guides":"/articles"};
+const FEATURE_LINKS: Record<string,string> = {"Fault Assessment":"/repair-assessment","Repair Process":"/repair-process","Diagnostics & Tools":"/repair-diagnostics","Contact":"/contact","Repair Aftercare":"/repair-aftercare","Privacy Policy":"/privacy","Terms":"/terms","Device & Data Care":"/repair-safety","Repair Guides":"/repair-guides","Repair Estimates":"/repair-process/repair-estimate","Function Testing":"/repair-process/function-testing","Maintenance Visits":"/repair-aftercare"};
 
 export function Footer() {
   const category = useCategory()?.category ?? "electronics";
   const columns: [string, string[]][] = [
     ["REPAIR SERVICES", REPAIR_PAGES.filter(service => service.category === category).map(service => service.name)],
     ["REPAIR CARE", ["Fault Assessment", "Repair Estimates", "Function Testing", "Maintenance Visits"]],
-    ["NUMUNIX", ["Electronics", "Appliances", "Our Approach", "Our Process", "Diagnostics & Tools", "Repair Guides", "Contact"]],
-    ["INFORMATION", ["Support", "Privacy Policy", "Terms"]],
+    ["NUMUNIX", ["Electronics", "Appliances", "Fault Assessment", "Repair Process", "Diagnostics & Tools", "Repair Guides", "Contact"]],
+    ["INFORMATION", ["Repair Aftercare", "Privacy Policy", "Terms"]],
   ];
   const repairLink = (label: string) => label === "Electronics" ? "/" : label === "Appliances" ? "/appliances" : (REPAIR_PAGES.find(service => service.category === category && service.name === label) ? `/repairs/${REPAIR_PAGES.find(service => service.category === category && service.name === label)?.slug}` : FEATURE_LINKS[label] ?? "#enquiry");
   return (
@@ -66,7 +66,7 @@ export function Footer() {
                 {items.map((i) => (
                   <li key={i}>
                     <a
-                      href={category ? repairLink(i) : FEATURE_LINKS[i] ?? "/features"}
+                      href={category ? repairLink(i) : FEATURE_LINKS[i] ?? "/services"}
                       className="text-[15px] text-white/65 transition-colors hover:text-white"
                     >
                       {i}
@@ -84,7 +84,7 @@ export function Footer() {
           © 2026 NUMUNIX. ALL RIGHTS RESERVED.
         </span>
         <div className="flex flex-wrap gap-6">
-          {["Privacy Policy", "Terms", "Security"].map((l) => (
+          {["Privacy Policy", "Terms", "Device & Data Care"].map((l) => (
             <a
               key={l}
               href={FEATURE_LINKS[l]}

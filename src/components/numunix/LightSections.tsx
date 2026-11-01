@@ -28,19 +28,19 @@ import {
 } from "lucide-react";
 
 const STEPS = [
-  ["01", "BOOK", "Tell us the device and the fault, walk in, call, or book online.", "idea"],
-  ["02", "DIAGNOSE", "Technicians test the device and pinpoint the actual fault, not a guess.", "scope"],
-  ["03", "ESTIMATE", "A clear, itemised quote before any work starts. You approve it.", "ux"],
-  ["04", "REPAIR", "Skilled hands fix the fault using tested, quality spare parts.", "code"],
-  ["05", "PARTS", "Confirm compatible replacement parts for the agreed repair.", "apis"],
-  ["06", "TEST", "Every function is checked before the device leaves the bench.", "qa"],
-  ["07", "DELIVER", "Pick up in-store or choose doorstep delivery, on schedule.", "cloud"],
-  ["08", "AFTERCARE", "Confirm the warranty terms and maintenance options for your repair.", "grow"],
+  ["01", "BOOK", "Tell us the device and the fault, walk in, call, or book online.", "fault-intake"],
+  ["02", "DIAGNOSE", "Technicians test the device and pinpoint the actual fault, not a guess.", "fault-diagnosis"],
+  ["03", "ESTIMATE", "A clear, itemised quote before any work starts. You approve it.", "repair-estimate"],
+  ["04", "APPROVE", "Confirm the estimate and agreed work before repair begins.", "repair-approval"],
+  ["05", "REPAIR", "Complete the approved repair with compatible parts where needed.", "repair-work"],
+  ["06", "TEST", "Every function is checked before the device leaves the bench.", "function-testing"],
+  ["07", "DELIVER", "Pick up in-store or choose doorstep delivery, on schedule.", "repair-handover"],
+  ["08", "AFTERCARE", "Confirm the warranty terms and maintenance options for your repair.", "repair-aftercare"],
 ] as const;
 
 export function AutomationWorkflow() {
   const category = useCategory()?.category ?? "electronics";
-  const steps = category === "appliances" ? STEPS.map((step, i) => [step[0], step[1], ["Share the appliance model, symptoms and where it is installed.", "A specialist checks the fault and installation conditions.", "Review labour, parts and any visit charges before approving work.", "The approved repair is completed with suitable parts.", "Replacement parts are matched to the appliance model.", "Check a cycle, cooling, heating or water flow after the repair.", "Review the work and receive the service record.", "Confirm aftercare advice and the warranty terms for your repair."][i] ?? step[2], step[3]]) : STEPS;
+  const steps = category === "appliances" ? STEPS.map((step, i) => [step[0], step[1], ["Share the appliance model, symptoms and where it is installed.", "A specialist checks the fault and installation conditions.", "Review labour, parts and any visit charges before approving work.", "Approve the estimate and agreed work before repair begins.", "The approved repair is completed with suitable parts.", "Check a cycle, cooling, heating or water flow after the repair.", "Review the work and receive the service record.", "Confirm aftercare advice and the warranty terms for your repair."][i] ?? step[2], step[3]]) : STEPS;
   return (
     <section id="process" className="section-pad bg-[#f7f9fc]">
       <div className="shell">
@@ -57,7 +57,7 @@ export function AutomationWorkflow() {
           {steps.map(([n, t, d, slug], i) => (
             <Reveal key={n} delay={i * 50}>
               <Link
-                to="/approach/$slug"
+                to="/repair-process/$slug"
                 params={{ slug }}
                 aria-label={`Explore ${t.toLowerCase()}: ${d}`}
                 className="group relative block h-full rounded-2xl border border-[#e2e9f3] bg-white p-7 transition-all duration-250 hover:-translate-y-1 hover:border-[#3b82f6]/45 hover:shadow-[0_24px_60px_-40px_rgba(16,42,99,0.6)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#2563eb] motion-reduce:transform-none motion-reduce:transition-none"
@@ -86,13 +86,13 @@ export function AutomationWorkflow() {
 }
 
 const INDUSTRIES = [
-  [Smartphone, "MOBILE PHONES", "Screens, batteries, charging ports, cameras, and water damage, every major brand.", "/features"],
-  [Laptop, "LAPTOPS & COMPUTERS", "Board-level repair, displays, keyboards, upgrades, and tune-ups.", "/features"],
-  [Cctv, "CCTV & SECURITY", "Installation, DVR/NVR setup, camera repair, and preventive maintenance.", "/features"],
-  [WashingMachine, "HOME APPLIANCES", "Washing machines, microwaves, chimneys, and small appliances.", "/features"],
-  [Tv, "TV & AUDIO", "Panels, backlights, boards, speakers, and soundbar service.", "/features"],
-  [Gamepad2, "TABLETS & CONSOLES", "Tablet screens and batteries, console HDMI ports, and board repairs.", "/features"],
-  [HardDrive, "DATA RECOVERY", "Photos, files, and contacts recovered from failed drives and phones.", "/features"],
+  [Smartphone, "MOBILE PHONES", "Screens, batteries, charging ports, cameras, and water damage, every major brand.", "/services"],
+  [Laptop, "LAPTOPS & COMPUTERS", "Board-level repair, displays, keyboards, upgrades, and tune-ups.", "/services"],
+  [Cctv, "CCTV & SECURITY", "Installation, DVR/NVR setup, camera repair, and preventive maintenance.", "/services"],
+  [WashingMachine, "HOME APPLIANCES", "Washing machines, microwaves, chimneys, and small appliances.", "/services"],
+  [Tv, "TV & AUDIO", "Panels, backlights, boards, speakers, and soundbar service.", "/services"],
+  [Gamepad2, "TABLETS & CONSOLES", "Tablet screens and batteries, console HDMI ports, and board repairs.", "/services"],
+  [HardDrive, "DATA RECOVERY", "Photos, files, and contacts recovered from failed drives and phones.", "/services"],
 ] as const;
 
 export function IndustryCarousel() {
@@ -303,15 +303,15 @@ export function AnalyticsDemo() {
 }
 
 const POSTS = [
-  ["FIXED RIGHT", "DIAGNOSTICS FIRST", "We find the real fault before replacing any part.", "/features"],
-  ["PARTS THAT FIT", "CLEAR TERMS", "Discuss compatible parts, function checks and the terms for your repair.", "/technology"],
-  ["ONE WORKSHOP", "END TO END", "Booking, repair, quality check, and doorstep delivery, one team.", "/features"],
+  ["FIXED RIGHT", "DIAGNOSTICS FIRST", "We find the real fault before replacing any part.", "/services"],
+  ["PARTS THAT FIT", "CLEAR TERMS", "Discuss compatible parts, function checks and the terms for your repair.", "/repair-diagnostics"],
+  ["ONE WORKSHOP", "END TO END", "Booking, repair, quality check, and doorstep delivery, one team.", "/services"],
 ];
 
 export function BlogCards() {
   const category = useCategory()?.category ?? "electronics";
   const services = REPAIR_SERVICES[category];
-  const posts = category === "appliances" ? [["DIAGNOSE FIRST", "APPLIANCE CARE", "Cooling, drainage and power faults checked before replacing parts.", "/features"], ["CLEAR SCOPE", "YOUR APPROVAL", "Review the visit, parts and labour estimate before work begins.", "/features"], ["TESTED AT HOME", "AFTERCARE", "Check the repaired function and understand the next care steps.", "/features"]] : POSTS;
+  const posts = category === "appliances" ? [["DIAGNOSE FIRST", "APPLIANCE CARE", "Cooling, drainage and power faults checked before replacing parts.", "/services"], ["CLEAR SCOPE", "YOUR APPROVAL", "Review the visit, parts and labour estimate before work begins.", "/services"], ["TESTED AT HOME", "AFTERCARE", "Check the repaired function and understand the next care steps.", "/services"]] : POSTS;
   return (
     <section className="section-pad bg-[#eef3f8]">
       <div className="shell">

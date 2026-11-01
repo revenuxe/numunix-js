@@ -16,8 +16,8 @@ import { CONTACT } from "@/content/site";
 export const Route = createFileRoute("/thank-you")({
   head: () => ({
     meta: [
-      { title: "Thank you | Numunix" },
-      { property: "og:title", content: "Thank you | Numunix" },
+      { title: "Repair Enquiry Received | Numunix" },
+      { property: "og:title", content: "Repair Enquiry Received | Numunix" },
       { property: "og:description", content: "Your enquiry has been received. Here is what happens next with Numunix." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -49,7 +49,7 @@ const steps = [
     number: "03",
     icon: Sparkles,
     title: "We shape the next step",
-    description: "Together, we can clarify the scope, priorities, and a practical way forward.",
+    description: "We can discuss the fault assessment, repair options and estimate before work begins.",
   },
 ];
 
@@ -60,7 +60,7 @@ function ThankYouPage() {
     <div className="bg-[#05070c]">
       <Header />
       <main id="main-content">
-        <Hero headline="Great things start with" accent="a hello." intro="Thank you for reaching out. Your enquiry has been received and our team will review the details you shared." primaryLabel="BACK TO HOME" primaryHref="/" secondaryLabel="EXPLORE SERVICES" secondaryHref="/features" />
+        <Hero headline="Repair request received." accent="We’ll review the details." intro="Thank you for reaching out. Your enquiry has been received and our team will review the details you shared." primaryLabel="BACK TO HOME" primaryHref="/" secondaryLabel="EXPLORE SERVICES" secondaryHref="/services" />
 
         <section className="bg-[#f5f8fc] px-5 py-14 sm:px-8 sm:py-20">
           <div className="mx-auto max-w-[1200px]">

@@ -34,12 +34,12 @@ export type LegalPageData = {
 };
 
 export const APPROACH: CompanyPageData = {
-  "slug": "approach",
-  "label": "OUR APPROACH",
+  "slug": "repair-assessment",
+  "label": "FAULT ASSESSMENT",
   "title": "Repair starts here. Understand the fault.",
   "accent": "Understand the fault.",
   "intro": "A useful repair begins with the model, symptoms and history. Review diagnosis, repair feasibility and the estimate before deciding how to proceed.",
-  "metaTitle": "Our Approach | Numunix Repairs",
+  "metaTitle": "Electronics & Appliance Fault Assessment | Numunix Repairs",
   "metaDescription": "A useful repair begins with the model, symptoms and history. Review diagnosis, repair feasibility and the estimate before deciding how to proceed.",
   "stats": [
     [
@@ -89,7 +89,7 @@ export const APPROACH: CompanyPageData = {
 };
 
 export const PROCESS: CompanyPageData = {
-  "slug": "process",
+  "slug": "repair-process",
   "label": "REPAIR PROCESS",
   "title": "From fault to finish. One clear journey.",
   "accent": "One clear journey.",
@@ -160,12 +160,12 @@ export const PROCESS: CompanyPageData = {
 };
 
 export const TECHNOLOGY: CompanyPageData = {
-  "slug": "technology",
+  "slug": "repair-diagnostics",
   "label": "DIAGNOSTICS & TOOLS",
   "title": "The right checks. Not trial and error.",
   "accent": "Not trial and error.",
   "intro": "Different devices need different assessment methods. Our service guidance explains the power, signal, mechanical and functional checks to discuss with your technician.",
-  "metaTitle": "Diagnostics & Tools | Numunix Repairs",
+  "metaTitle": "Electronics & Appliance Repair Diagnostics | Numunix",
   "metaDescription": "Different devices need different assessment methods. Our service guidance explains the power, signal, mechanical and functional checks to discuss with your technician.",
   "stats": [
     [
@@ -223,7 +223,7 @@ export const TECHNOLOGY: CompanyPageData = {
 };
 
 export const SECURITY: CompanyPageData = {
-  "slug": "security",
+  "slug": "repair-safety",
   "label": "DEVICE & DATA CARE",
   "title": "Care for your device. Respect for your data.",
   "accent": "Respect for your data.",
@@ -278,12 +278,12 @@ export const SECURITY: CompanyPageData = {
 };
 
 export const SUPPORT: CompanyPageData = {
-  "slug": "support",
-  "label": "REPAIR SUPPORT",
+  "slug": "repair-aftercare",
+  "label": "REPAIR AFTERCARE",
   "title": "After the repair. Keep care close.",
   "accent": "Keep care close.",
   "intro": "Questions about completed work, recurring symptoms or routine maintenance? Share the service details, current fault and device model so the next step can be reviewed.",
-  "metaTitle": "Repair Support | Numunix Repairs",
+  "metaTitle": "Repair Aftercare & Maintenance | Numunix",
   "metaDescription": "Questions about completed work, recurring symptoms or routine maintenance? Share the service details, current fault and device model so the next step can be reviewed.",
   "stats": [
     [

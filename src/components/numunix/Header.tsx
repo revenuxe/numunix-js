@@ -8,10 +8,10 @@ import { BrandLogo } from "./BrandLogo";
 import { CategoryToggle, useCategory } from "./category";
 
 const NAV: [string, string][] = [
-  ["SERVICES", "/features"],
-  ["OUR APPROACH", "/approach"],
-  ["PROCESS", "/process"],
-  ["REPAIR GUIDES", "/articles"],
+  ["REPAIR SERVICES", "/services"],
+  ["FAULT ASSESSMENT", "/repair-assessment"],
+  ["REPAIR PROCESS", "/repair-process"],
+  ["REPAIR GUIDES", "/repair-guides"],
   ["CONTACT", "/contact"],
 ];
 

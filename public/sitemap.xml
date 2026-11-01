@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://numunix-flow-engine.lovable.app/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
   <url><loc>https://numunix-flow-engine.lovable.app/appliances</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/features</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/services</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://numunix-flow-engine.lovable.app/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/approach</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/process</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/technology</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/security</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/support</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-assessment</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-process</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-diagnostics</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-safety</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-aftercare</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://numunix-flow-engine.lovable.app/privacy</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://numunix-flow-engine.lovable.app/terms</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/articles</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-guides</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://numunix-flow-engine.lovable.app/repairs/mobile-repair</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://numunix-flow-engine.lovable.app/repairs/laptop-repair</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://numunix-flow-engine.lovable.app/repairs/cctv-service</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -28,25 +28,25 @@
   <url><loc>https://numunix-flow-engine.lovable.app/repairs/inverter-ups-repair</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://numunix-flow-engine.lovable.app/repairs/fan-light-repair</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://numunix-flow-engine.lovable.app/repairs/electrical-service</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/articles/mobile-repair-before-you-book</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/articles/laptop-faults-repair-or-replace</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/articles/appliance-repair-visit-checklist</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/articles/choosing-a-repair-service-in-bangalore</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/articles/understanding-repair-estimates</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/approach/idea</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/approach/scope</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/approach/ux</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/approach/code</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/approach/apis</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/approach/qa</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/approach/cloud</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/approach/grow</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/industries/homes</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/industries/offices</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/industries/retail</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/industries/education</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/industries/hospitality</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/industries/clinics</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/industries/warehouses</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://numunix-flow-engine.lovable.app/industries/communities</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-guides/mobile-repair-before-you-book</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-guides/laptop-faults-repair-or-replace</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-guides/appliance-repair-visit-checklist</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-guides/choosing-a-repair-service-in-bangalore</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-guides/understanding-repair-estimates</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-process/fault-intake</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-process/fault-diagnosis</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-process/repair-estimate</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-process/repair-approval</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-process/repair-work</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-process/function-testing</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-process/repair-handover</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repair-process/repair-aftercare</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/who-we-serve/homes</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/who-we-serve/offices</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/who-we-serve/retail</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/who-we-serve/education</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/who-we-serve/hospitality</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/who-we-serve/clinics</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/who-we-serve/warehouses</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/who-we-serve/communities</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

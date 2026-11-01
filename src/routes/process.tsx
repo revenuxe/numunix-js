@@ -1,20 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { CompanyPage } from "@/components/numunix/CompanyPage";
-import { PROCESS } from "@/content/company";
-import { SITE_URL } from "@/content/site";
-
+import { createFileRoute, redirect } from "@tanstack/react-router";
 export const Route = createFileRoute("/process")({
-  head: () => ({
-    meta: [
-      { title: PROCESS.metaTitle },
-      { name: "description", content: PROCESS.metaDescription },
-      { property: "og:title", content: PROCESS.metaTitle },
-      { property: "og:description", content: PROCESS.metaDescription },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: `${SITE_URL}/process` },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/process` }],
-  }),
-  component: () => <CompanyPage page={PROCESS} />,
+  beforeLoad: () => { throw redirect({ to: "/repair-process", statusCode: 301 }); },
+  head: () => ({ meta: [{ name: "robots", content: "noindex, follow" }] }),
 });

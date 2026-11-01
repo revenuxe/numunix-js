@@ -38,14 +38,14 @@ export function AIAgentsSection() {
               <Btn as="a" href="/contact">
                 BOOK A REPAIR
               </Btn>
-              <Btn as="a" href="/features" variant="ghostDark">
+              <Btn as="a" href="/services" variant="ghostDark">
                 WHAT WE REPAIR
               </Btn>
             </div>
           </Reveal>
         </div>
         <Reveal delay={140}>
-          <ServiceDemo slug="ai-automation" preset="repair-ai" href={category === "appliances" ? "/repairs/washing-machine-repair" : "/repairs/mobile-repair"} />
+          <ServiceDemo slug={category === "appliances" ? "washing-machine-repair" : "mobile-repair"} preset="repair-ai" href={category === "appliances" ? "/repairs/washing-machine-repair" : "/repairs/mobile-repair"} />
         </Reveal>
       </div>
     </section>
@@ -89,7 +89,7 @@ export function DispatchSection() {
           </Reveal>
         </div>
         <Reveal delay={140}>
-          <ServiceDemo slug="cloud-integrations" preset="repair-warranty" href={category === "appliances" ? "/appliances#enquiry" : "/repairs/doorstep-repair"} />
+          <ServiceDemo slug="repair-aftercare" preset="repair-warranty" href="/repair-aftercare" />
         </Reveal>
       </div>
     </section>
@@ -149,10 +149,10 @@ export function SecuritySection() {
 
 const BUILT_TABS = ["PHONES", "LAPTOPS", "CCTV", "APPLIANCES"];
 const BUILT_CARDS = [
-  ["MOBILE & TABLET REPAIRS", "Screens, batteries, charging ports, cameras, and water damage, fixed fast, with tested parts.", "/features"],
-  ["LAPTOP & COMPUTER REPAIRS", "Board-level repair, displays, keyboards, and upgrades for every major brand.", "/features"],
-  ["CCTV & SECURITY SYSTEMS", "Installation, DVR/NVR setup, camera repair, and maintenance for homes and businesses.", "/features"],
-  ["APPLIANCES & AMC PLANS", "Washing machines, microwaves, chimneys, and annual maintenance for every device you own.", "/features"],
+  ["MOBILE & TABLET REPAIRS", "Screens, batteries, charging ports, cameras, and water damage, fixed fast, with tested parts.", "/services"],
+  ["LAPTOP & COMPUTER REPAIRS", "Board-level repair, displays, keyboards, and upgrades for every major brand.", "/services"],
+  ["CCTV & SECURITY SYSTEMS", "Installation, DVR/NVR setup, camera repair, and maintenance for homes and businesses.", "/services"],
+  ["APPLIANCES & AMC PLANS", "Washing machines, microwaves, chimneys, and annual maintenance for every device you own.", "/services"],
 ];
 
 export function BuiltWithNumunix() {
@@ -247,7 +247,7 @@ export function FinalCTA() {
             <Btn as="a" href="/contact">
               BOOK A REPAIR
             </Btn>
-            <Btn as="a" href="/features" variant="ghostDark">
+            <Btn as="a" href="/services" variant="ghostDark">
               WHAT WE REPAIR
             </Btn>
           </div>

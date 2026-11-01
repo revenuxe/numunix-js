@@ -14,7 +14,7 @@ export type WorkflowStage = {
 
 export const WORKFLOW_STAGES: WorkflowStage[] = [
   {
-    "slug": "idea",
+    "slug": "fault-intake",
     "phase": "INTAKE",
     "name": "Describe",
     "category": "REPAIR CARE",
@@ -62,7 +62,7 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     ]
   },
   {
-    "slug": "scope",
+    "slug": "fault-diagnosis",
     "phase": "ASSESS",
     "name": "Assess",
     "category": "REPAIR CARE",
@@ -110,7 +110,7 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     ]
   },
   {
-    "slug": "ux",
+    "slug": "repair-estimate",
     "phase": "ESTIMATE",
     "name": "Estimate",
     "category": "REPAIR CARE",
@@ -158,7 +158,7 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     ]
   },
   {
-    "slug": "code",
+    "slug": "repair-approval",
     "phase": "APPROVE",
     "name": "Approve",
     "category": "REPAIR CARE",
@@ -206,7 +206,7 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     ]
   },
   {
-    "slug": "apis",
+    "slug": "repair-work",
     "phase": "REPAIR",
     "name": "Repair",
     "category": "REPAIR CARE",
@@ -254,7 +254,7 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     ]
   },
   {
-    "slug": "qa",
+    "slug": "function-testing",
     "phase": "TEST",
     "name": "Test",
     "category": "REPAIR CARE",
@@ -302,7 +302,7 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     ]
   },
   {
-    "slug": "cloud",
+    "slug": "repair-handover",
     "phase": "HANDOVER",
     "name": "Handover",
     "category": "REPAIR CARE",
@@ -350,7 +350,7 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     ]
   },
   {
-    "slug": "grow",
+    "slug": "repair-aftercare",
     "phase": "AFTERCARE",
     "name": "Aftercare",
     "category": "REPAIR CARE",
