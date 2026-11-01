@@ -243,7 +243,7 @@ export function VoiceAgentPanel() {
         <div className="mt-5 space-y-3">
           <Quote tone="dark">“Can I book a walkthrough of your product?”</Quote>
           <Quote tone="dark">
-            “Of course — there’s a slot today at 4:30 PM. Shall I book it?”
+            “Of course, there’s a slot today at 4:30 PM. Shall I book it?”
           </Quote>
         </div>
       </CardBody>

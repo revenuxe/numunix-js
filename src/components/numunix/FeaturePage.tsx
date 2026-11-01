@@ -108,7 +108,7 @@ export function FeaturePage({ feature }: { feature: Feature }) {
                 <Reveal delay={80}>
                   <Heading tone="light" className="max-w-[20ch]">{editorial.moment}</Heading>
                   <p className="mt-8 max-w-[56ch] border-l-2 border-primary pl-6 text-[18px] leading-relaxed text-muted-foreground lg:text-[21px]">{editorial.scenario}</p>
-                  <p className="mt-5 label-mono text-muted-foreground">ILLUSTRATIVE SCENARIO — NOT A CLIENT CASE STUDY</p>
+                  <p className="mt-5 label-mono text-muted-foreground">ILLUSTRATIVE SCENARIO, NOT A CLIENT CASE STUDY</p>
                 </Reveal>
               </div>
             </section>
@@ -358,7 +358,7 @@ export function FeaturePage({ feature }: { feature: Feature }) {
               <Accent>Let’s turn it into software.</Accent>
             </Heading>
             <p className="mx-auto mt-7 max-w-[54ch] text-[17px] leading-relaxed text-white/55 lg:text-[19px]">
-              Design, development, integrations, deployment, and ongoing improvements — with one team focused on your product.
+              Design, development, integrations, deployment, and ongoing improvements, with one team focused on your product.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Btn as="a" href="/contact">

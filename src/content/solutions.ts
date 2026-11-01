@@ -22,10 +22,10 @@ export const SOLUTIONS: Solution[] = [
     title: "Websites and web apps built for real-world growth.",
     accentWord: "real-world growth.",
     intro:
-      "Modern, responsive, high-performance websites and web applications built for speed, usability, and scalability — from company websites to portals and complex platforms.",
+      "Modern, responsive, high-performance websites and web applications built for speed, usability, and scalability, from company websites to portals and complex platforms.",
     metaTitle: "Web Development | Numunix",
     metaDescription:
-      "Modern, responsive, high-performance websites and web applications built for speed, usability, and scalability — from company websites to portals and complex platforms.",
+      "Modern, responsive, high-performance websites and web applications built for speed, usability, and scalability, from company websites to portals and complex platforms.",
     stats: [
       ["FRONTEND", "React"],
       ["FRAMEWORK", "Next.js"],

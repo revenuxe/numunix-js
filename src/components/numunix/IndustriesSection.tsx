@@ -11,7 +11,7 @@ const AUDIENCES = [
     label: "HOMES",
     name: "Homes & individuals",
     description:
-      "Phones, laptops, TVs, and appliances — picked up, repaired, and returned working, with a warranty on every job.",
+      "Phones, laptops, TVs, and appliances, picked up, repaired, and returned working, with a warranty on every job.",
   },
   {
     label: "OFFICES",

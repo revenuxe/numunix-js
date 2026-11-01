@@ -44,7 +44,7 @@ export default function IndustryPage({ page }: { page: IndustryLanding }) {
                 <Accent>A connected experience.</Accent>
               </Heading>
               <p className="mt-6 max-w-[42ch] text-base leading-relaxed text-[#5d76a3]">
-                {industry.description} — brought into focus through a thoughtful product experience.
+                {industry.description}, brought into focus through a thoughtful product experience.
               </p>
             </Reveal>
             <Reveal ssrVisible delay={120}>

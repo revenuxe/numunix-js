@@ -50,7 +50,7 @@ function ApproachRoute() {
               {" "}Venture
             </h2>
             <p className="mx-auto mt-5 max-w-[48ch] text-[17px] leading-relaxed text-white/50">
-              Numunix is proudly built and operated by Revenuxe — a company
+              Numunix is proudly built and operated by Revenuxe, a company
               dedicated to creating digital platforms that drive real business
               growth.
             </p>

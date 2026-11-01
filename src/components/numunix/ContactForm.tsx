@@ -125,7 +125,7 @@ export function ContactForm({ initialDescription = "" }: { initialDescription?: 
                 {feature.name}
               </option>
             ))}
-            <option value="Help me decide">Not sure yet — help me decide</option>
+            <option value="Help me decide">Not sure yet, help me decide</option>
           </select>
         </label>
         <label className={labelClass} htmlFor="contact-timeline">
