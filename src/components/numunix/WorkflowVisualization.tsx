@@ -1,49 +1,60 @@
 import { Label, Heading, Accent, Reveal } from "./primitives";
 import { NODE_VIZ } from "./nodeviz";
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
+import {
+  ArrowUpRight,
+  Smartphone,
+  Laptop,
+  Cctv,
+  Tv,
+  WashingMachine,
+  AirVent,
+  Zap,
+  Truck,
+  type LucideIcon,
+} from "lucide-react";
 import { WORKFLOW_STAGES } from "@/content/workflow";
 
 const NODES = WORKFLOW_STAGES;
 
-// Homepage panel shows the same eight stages, relabelled for electronics repair.
+// Homepage panel shows the repair services we cover, each with its own icon.
 const REPAIR_NODES = [
-  { slug: "idea", phase: "INTAKE", name: "Walk-in", category: "BOOKED" },
-  { slug: "scope", phase: "DIAGNOSE", name: "Fault", category: "IDENTIFIED" },
-  { slug: "ux", phase: "ESTIMATE", name: "Quote", category: "APPROVED" },
-  { slug: "code", phase: "REPAIR", name: "Bench", category: "IN REPAIR" },
-  { slug: "apis", phase: "PARTS", name: "Spares", category: "SOURCED" },
-  { slug: "qa", phase: "TESTING", name: "QC", category: "PASSED" },
-  { slug: "cloud", phase: "HANDOVER", name: "Ready", category: "DELIVERED" },
-  { slug: "grow", phase: "WARRANTY", name: "90 days", category: "COVERED" },
+  { slug: "idea", phase: "MOBILE", name: "Repair", category: "SCREENS · BATTERIES", icon: Smartphone },
+  { slug: "scope", phase: "LAPTOP", name: "Repair", category: "BOARDS · UPGRADES", icon: Laptop },
+  { slug: "ux", phase: "CCTV", name: "Install", category: "SETUP · MAINTENANCE", icon: Cctv },
+  { slug: "code", phase: "TV & AUDIO", name: "Repair", category: "PANELS · SOUND", icon: Tv },
+  { slug: "apis", phase: "WASHING", name: "Machine", category: "DRUMS · MOTORS", icon: WashingMachine },
+  { slug: "qa", phase: "AC", name: "Service", category: "GAS · COOLING", icon: AirVent },
+  { slug: "cloud", phase: "ELECTRICIAN", name: "Work", category: "WIRING · FITTINGS", icon: Zap },
+  { slug: "grow", phase: "DOORSTEP", name: "Service", category: "WE COME TO YOU", icon: Truck },
 ];
 
-type PanelNodes = { slug: string; phase: string; name: string; category: string }[];
+type PanelNodes = { slug: string; phase: string; name: string; category: string; icon?: LucideIcon }[];
 
 export function PlatformIntro() {
   return (
     <section id="approach" className="section-pad bg-[#f1f5f9]">
       <div className="shell">
         <Reveal>
-          <Label tone="light">HOW A REPAIR WORKS</Label>
+          <Label tone="light">WHAT WE FIX</Label>
         </Reveal>
         <div className="mt-10 grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20">
           <Reveal delay={60}>
             <Heading tone="light">
-              From walk-in
+              Every device,
               <br />
-              <Accent>to working again.</Accent>
+              <Accent>one workshop.</Accent>
             </Heading>
           </Reveal>
           <Reveal delay={140}>
             <p className="max-w-[44ch] text-[18px] leading-relaxed text-[#5d76a3] lg:pt-6 lg:text-[20px]">
-              One workshop for diagnostics, repair, and everything it takes to get your device back.
+              Mobiles, laptops, CCTV, home appliances, and electrical work — repaired by certified technicians, at our bench or your doorstep.
             </p>
           </Reveal>
         </div>
       </div>
       <Reveal delay={120}>
-        <WorkflowVisualization nodes={REPAIR_NODES} label="DEVICE INTAKE TO HANDOVER" sub="/ BROKEN → FIXED" />
+        <WorkflowVisualization nodes={REPAIR_NODES} label="REPAIR SERVICES" sub="/ MOBILE → ELECTRICAL" />
       </Reveal>
     </section>
   );
@@ -78,7 +89,7 @@ export function WorkflowVisualization({
       {/* flow rail */}
       <div>
         <div className="grid grid-cols-2 gap-4 px-6 py-5 sm:gap-5 md:grid-cols-4 xl:grid-cols-8 lg:px-12">
-          {nodes.map(({ phase: n, name: v, category: u, slug }, i) => (
+          {nodes.map(({ phase: n, name: v, category: u, slug, icon: Icon }, i) => (
             <Link
               key={slug}
               to="/approach/$slug"
@@ -103,10 +114,16 @@ export function WorkflowVisualization({
               </div>
 
               <div className="mt-4 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
-                {(() => {
-                  const V = NODE_VIZ[i]!;
-                  return <V />;
-                })()}
+                {Icon ? (
+                  <span className="grid h-9 w-9 place-items-center rounded-lg border border-[#dbe5f2] bg-[#f4f8fd] text-[#1e4ed8] transition-colors duration-300 group-hover:border-[#3b82f6]/45 group-hover:bg-[#eaf2fe]">
+                    <Icon size={18} strokeWidth={1.6} aria-hidden="true" />
+                  </span>
+                ) : (
+                  (() => {
+                    const V = NODE_VIZ[i]!;
+                    return <V />;
+                  })()
+                )}
               </div>
               <span
                 aria-hidden="true"
