@@ -82,7 +82,20 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      submit_repair_booking: {
+        Args: {
+          p_description: string
+          p_name: string
+          p_phone: string
+          p_service: string
+          p_source: string
+          p_timeline: string
+        }
+        Returns: {
+          reference: string
+          service: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never

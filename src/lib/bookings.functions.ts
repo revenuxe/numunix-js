@@ -1,18 +1,33 @@
 import { createServerFn } from "@tanstack/react-start";
 import { enquirySchema } from "./enquiry-schema";
+import { createClient } from "@supabase/supabase-js";
+import type { Database } from "@/integrations/supabase/types";
 
 export const createRepairBooking = createServerFn({ method: "POST" })
   .inputValidator((values: unknown) => enquirySchema.parse(values))
   .handler(async ({ data }) => {
     // Public write-only form: validate first and return only this new row's receipt.
     try {
-      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-      const { data: booking, error } = await supabaseAdmin.from("contact_enquiries")
-        .insert(data).select("booking_reference, service").single();
-      if (error || !booking?.booking_reference) {
+      const url = process.env['SUPABASE_URL'] || process.env['VITE_SUPABASE_URL'];
+      const key = process.env['SUPABASE_PUBLISHABLE_KEY'] || process.env['VITE_SUPABASE_PUBLISHABLE_KEY'];
+      if (!url || !key) throw new Error("Booking configuration unavailable");
+      const client = createClient<Database>(url, key, {
+        auth: { persistSession: false, autoRefreshToken: false },
+        global: { fetch: (input, init) => {
+          const headers = new Headers(init?.headers);
+          if (key.startsWith('sb_') && headers.get('Authorization') === `Bearer ${key}`) headers.delete('Authorization');
+          headers.set('apikey', key);
+          return fetch(input, { ...init, headers });
+        } },
+      });
+      const { data: booking, error } = await client.rpc('submit_repair_booking', {
+        p_name: data.name, p_phone: data.phone, p_service: data.service,
+        p_timeline: data.timeline, p_description: data.description ?? '', p_source: data.source,
+      }).single();
+      if (error || !booking?.reference) {
         throw new Error("Booking storage unavailable");
       }
-      return { reference: booking.booking_reference, service: booking.service };
+      return { reference: booking.reference, service: booking.service };
     } catch {
       // Never send integration configuration or raw provider errors to visitors.
       console.error("Repair booking could not be stored");

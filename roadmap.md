@@ -1,5 +1,8 @@
 # Roadmap
 
+- [x] Switched bookings to publishable-key-only RPC. Verified actual Mobile/Washer receipts, stored New status with blank internal notes and blocked anonymous customer reads. Public execution warnings are intentional for this narrow write-only RPC. Vercel redeploy remains user action.
+- [ ] Remove latest test bookings 077ef692-7ca0-4774-869c-7f8bc32baef7 and db8c24f3-08c4-4026-b9b3-97d768891ba9; prior cleanup permission was declined.
+
 - [x] Restored secure Supabase runtime bindings and verified real Mobile and Washing Machine bookings, saved references and confirmation reloads. Environment files are ignored and not tracked; booking errors no longer expose integration details. Publish required for live settings.
 - [ ] Remove the two November 1 runtime-verification booking entries. Cleanup was declined; IDs: bc88d4da-25fc-4fd3-b4b4-f586d5543ee1 and 481d1321-2e33-43ae-aa96-61ae727aab6e.
 
