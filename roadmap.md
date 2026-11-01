@@ -1,6 +1,8 @@
 # Roadmap
 
-- [ ] Use /electronic/repairs/mobile-repair and matching category-prefixed service addresses; update card links, search metadata and sitemap, and redirect previous service addresses.
+- [x] Added category-prefixed service addresses, updated all card links and metadata, retained old service redirects, and verified 49 pages and 18 tests.
+- [ ] Replace the repair hero’s Repair Details action with Book on WhatsApp using the uploaded icon in white.
+- [ ] Remove email from public enquiry forms and curate the admin lead dashboard, filters and detail fields for repair requests.
 
 - [x] Connected illustrated repair cards to named service pages; replaced development-era addresses and menu names with repair destinations and kept permanent redirects. Verified washing-machine card navigation, saved Appliances selection, twelve legacy redirects and all 49 public pages on phone and desktop with unique titles, self-referencing metadata and no overflow or page errors.
 
