@@ -1,5 +1,8 @@
 # Roadmap
 
+- [x] Restored secure Supabase runtime bindings and verified real Mobile and Washing Machine bookings, saved references and confirmation reloads. Environment files are ignored and not tracked; booking errors no longer expose integration details. Publish required for live settings.
+- [ ] Remove the two November 1 runtime-verification booking entries. Cleanup was declined; IDs: bc88d4da-25fc-4fd3-b4b4-f586d5543ee1 and 481d1321-2e33-43ae-aa96-61ae727aab6e.
+
 - [x] Refreshed admin dashboard colors, typography, button variants, compact phone metrics and lead dialogs. Verified phone/desktop layouts and note saving with mocked enquiries; four lead tests passed. Real-account checks remain blocked by external unmanaged authentication; existing JS browser tests cannot launch their missing browser binary.
 
 - [x] Fixed booking source and timing rejection; added stored unique service-prefixed references and thank-you receipts, plus reference in admin details. Verified Mobile and Washing Machine submissions, database records, confirmation reload and removed test rows. Owner email remains off until a sending domain is verified.
