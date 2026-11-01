@@ -4,11 +4,13 @@ import {
   Check,
   CheckCheck,
   ChevronRight,
+  Cctv,
   Code2,
   Cpu,
   CreditCard,
   Database,
   Globe,
+  HardDrive,
   Layers,
   LayoutDashboard,
   LockKeyhole,
@@ -18,7 +20,9 @@ import {
   ShieldCheck,
   ShoppingBag,
   Smartphone,
+  Tv,
   Workflow,
+  Wrench,
 } from "lucide-react";
 import "./ServiceDemo.css";
 
@@ -33,7 +37,10 @@ type Story =
   | "support"
   | "commerce"
   | "marketplace";
-const STORIES: Record<Story, { title: string; steps: string[]; captions: string[] }> = {
+const STORIES: Record<
+  Story,
+  { eyebrow?: string; title: string; steps: string[]; captions: string[] }
+> = {
   web: {
     title: "A website, ready for the world.",
     steps: ["Structure", "Build", "Adapt", "Launch"],
