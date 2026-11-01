@@ -49,11 +49,12 @@ export function Hero({
       }
     };
     fit();
+    window.addEventListener("resize", fit);
     const observer = new ResizeObserver(fit);
     if (heading.parentElement) observer.observe(heading.parentElement);
     let active = true;
     document.fonts.ready.then(() => { if (active) fit(); });
-    return () => { active = false; observer.disconnect(); };
+    return () => { active = false; observer.disconnect(); window.removeEventListener("resize", fit); };
   }, [firstLine, secondLine]);
 
   return (
