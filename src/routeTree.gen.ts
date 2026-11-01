@@ -40,6 +40,7 @@ import { Route as RepairProcessSlugRouteImport } from './routes/repair-process_.
 import { Route as RepairsSlugRouteImport } from './routes/repairs.$slug'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as WhoWeServeSlugRouteImport } from './routes/who-we-serve.$slug'
+import { Route as CategoryRepairsSlugRouteImport } from './routes/$category.repairs.$slug'
 import { Route as ApiPublicKeepaliveRouteImport } from './routes/api/public/keepalive'
 
 const IndexRoute = IndexRouteImport.update({
@@ -197,6 +198,11 @@ const WhoWeServeSlugRoute = WhoWeServeSlugRouteImport.update({
   path: '/who-we-serve/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CategoryRepairsSlugRoute = CategoryRepairsSlugRouteImport.update({
+  id: '/$category/repairs/$slug',
+  path: '/$category/repairs/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicKeepaliveRoute = ApiPublicKeepaliveRouteImport.update({
   id: '/api/public/keepalive',
   path: '/api/public/keepalive',
@@ -235,6 +241,7 @@ export interface FileRoutesByFullPath {
   '/features/': typeof FeaturesIndexRoute
   '/repair-guides/': typeof RepairGuidesIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/$category/repairs/$slug': typeof CategoryRepairsSlugRoute
   '/api/public/keepalive': typeof ApiPublicKeepaliveRoute
 }
 export interface FileRoutesByTo {
@@ -269,6 +276,7 @@ export interface FileRoutesByTo {
   '/features': typeof FeaturesIndexRoute
   '/repair-guides': typeof RepairGuidesIndexRoute
   '/services': typeof ServicesIndexRoute
+  '/$category/repairs/$slug': typeof CategoryRepairsSlugRoute
   '/api/public/keepalive': typeof ApiPublicKeepaliveRoute
 }
 export interface FileRoutesById {
@@ -304,6 +312,7 @@ export interface FileRoutesById {
   '/features/': typeof FeaturesIndexRoute
   '/repair-guides/': typeof RepairGuidesIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/$category/repairs/$slug': typeof CategoryRepairsSlugRoute
   '/api/public/keepalive': typeof ApiPublicKeepaliveRoute
 }
 export interface FileRouteTypes {
@@ -340,6 +349,7 @@ export interface FileRouteTypes {
     | '/features/'
     | '/repair-guides/'
     | '/services/'
+    | '/$category/repairs/$slug'
     | '/api/public/keepalive'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -374,6 +384,7 @@ export interface FileRouteTypes {
     | '/features'
     | '/repair-guides'
     | '/services'
+    | '/$category/repairs/$slug'
     | '/api/public/keepalive'
   id:
     | '__root__'
@@ -408,6 +419,7 @@ export interface FileRouteTypes {
     | '/features/'
     | '/repair-guides/'
     | '/services/'
+    | '/$category/repairs/$slug'
     | '/api/public/keepalive'
   fileRoutesById: FileRoutesById
 }
@@ -443,6 +455,7 @@ export interface RootRouteChildren {
   FeaturesIndexRoute: typeof FeaturesIndexRoute
   RepairGuidesIndexRoute: typeof RepairGuidesIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
+  CategoryRepairsSlugRoute: typeof CategoryRepairsSlugRoute
   ApiPublicKeepaliveRoute: typeof ApiPublicKeepaliveRoute
 }
 
@@ -665,6 +678,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WhoWeServeSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$category/repairs/$slug': {
+      id: '/$category/repairs/$slug'
+      path: '/$category/repairs/$slug'
+      fullPath: '/$category/repairs/$slug'
+      preLoaderRoute: typeof CategoryRepairsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/keepalive': {
       id: '/api/public/keepalive'
       path: '/api/public/keepalive'
@@ -707,6 +727,7 @@ const rootRouteChildren: RootRouteChildren = {
   FeaturesIndexRoute: FeaturesIndexRoute,
   RepairGuidesIndexRoute: RepairGuidesIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
+  CategoryRepairsSlugRoute: CategoryRepairsSlugRoute,
   ApiPublicKeepaliveRoute: ApiPublicKeepaliveRoute,
 }
 export const routeTree = rootRouteImport
