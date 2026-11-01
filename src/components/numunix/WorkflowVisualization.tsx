@@ -29,7 +29,7 @@ const REPAIR_NODES = [
   { slug: "grow", phase: "DOORSTEP", name: "Service", category: "WE COME TO YOU", icon: Truck },
 ];
 
-type PanelNodes = { slug: string; phase: string; name: string; category: string }[];
+type PanelNodes = { slug: string; phase: string; name: string; category: string; icon?: LucideIcon }[];
 
 export function PlatformIntro() {
   return (
