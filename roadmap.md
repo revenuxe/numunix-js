@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Fix booking submission rejection and show a unique service-prefixed booking reference on the thank-you page; verify stored request and confirmation.
+- [x] Fixed booking source and timing rejection; added stored unique service-prefixed references and thank-you receipts, plus reference in admin details. Verified Mobile and Washing Machine submissions, database records, confirmation reload and removed test rows. Owner email remains off until a sending domain is verified.
 
 - [x] Fixed faint header contrast with a stable dark strip, clearer navigation and menu controls; verified 51 scrolling frames, category switching, mobile menu and desktop/phone screenshots without overflow or errors.
 - [x] Prevent initial heading overflow by fitting before display and after fonts load; verified visible loading frames on three pages and desktop resizing.

@@ -13,3 +13,10 @@ test("mobile and washer leads are classified into their repair categories", () =
 test("local customer numbers open an Indian WhatsApp chat", () => {
   expect(repairLeadWhatsApp("98765 43210")).toBe("https://wa.me/919876543210");
 });
+test("booking forms accept each repair visit option and appliance page sources", () => {
+  for (const timeline of ["Today if available", "Within a week", "Schedule a visit"]) {
+    const result = enquirySchema.parse({name:"Repair Test",phone:"9876543210",service:"Washing Machine Repair",timeline,description:"Drain fault",source:"/appliances/repairs/washing-machine-repair"});
+    expect(result.timeline).toBe(timeline);
+    expect(result.source).toBe("/appliances/repairs/washing-machine-repair");
+  }
+});
