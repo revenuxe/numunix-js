@@ -103,16 +103,16 @@ export function WorkflowVisualization({
   return (
     <div className="mt-12 w-full lg:mt-20">
       {/* head */}
-      <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-5 lg:px-12">
-        <div className="flex items-baseline gap-4">
-          <span className="label-mono text-[#1747b8]">{label}</span>
+      <div className="flex flex-nowrap items-center justify-between gap-3 px-6 py-5 lg:px-12">
+        <div className="flex min-w-0 items-baseline gap-4">
+          <span className="label-mono truncate text-[#1747b8]">{label}</span>
           <span className="label-mono hidden text-[#a8b7cc] sm:inline">{sub}</span>
         </div>
         {tabs ? (
           <div
             role="tablist"
             aria-label="Service category"
-            className="flex items-center gap-1 rounded-full border border-[#dbe5f2] bg-white p-1"
+            className="flex shrink-0 items-center gap-1 rounded-full border border-[#dbe5f2] bg-white p-1"
           >
             {tabs.map((t, i) => (
               <button
@@ -120,7 +120,7 @@ export function WorkflowVisualization({
                 role="tab"
                 aria-selected={tab === i}
                 onClick={() => setTab(i)}
-                className={`label-mono rounded-full px-4 py-2 transition-all duration-250 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] ${
+                className={`label-mono rounded-full px-3 py-1.5 transition-all duration-250 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] sm:px-4 sm:py-2 ${
                   tab === i
                     ? "bg-[#1747b8] text-white shadow-[0_6px_16px_-8px_rgba(23,71,184,0.7)]"
                     : "text-[#5d76a3] hover:text-[#1747b8]"
