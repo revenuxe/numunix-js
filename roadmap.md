@@ -1,6 +1,7 @@
 # Roadmap
 
-- [ ] Strengthen page-specific repair metadata, structured data, crawl discovery and legacy cleanup; verify public pages and available Search Console integration.
+- [x] Strengthened repair page metadata, Service/CollectionPage/Breadcrumb/Organization schemas and crawler guidance; removed retired software modules and artwork. Verified 49 public pages, unique titles, canonicals, repair-only content, service booking and legacy redirects; 25 tests passed.
+- [ ] Connect Google Search Console and verify the published site; waiting for Google account authorization and any required publication of the verification tag.
 
 - [x] Verified eight distinct navigation destinations, category-specific service links, Appliances return via logo and root homepage, and explicit Electronics selection across reloads.
 
