@@ -81,7 +81,7 @@ export function PlatformIntro() {
         </div>
       </div>
       <Reveal delay={120}>
-        <WorkflowVisualization tabs={REPAIR_TABS} label="REPAIR SERVICES" sub="/ MOBILE → ELECTRICAL" />
+        <WorkflowVisualization tabs={REPAIR_TABS} label="OUR REPAIR" sub="/ MOBILE → ELECTRICAL" />
       </Reveal>
     </section>
   );
@@ -105,7 +105,7 @@ export function WorkflowVisualization({
       {/* head */}
       <div className="flex flex-nowrap items-center justify-between gap-3 px-6 py-5 lg:px-12">
         <div className="flex min-w-0 items-baseline gap-4">
-          <span className="label-mono truncate text-[#1747b8]">{label}</span>
+          <span className="label-mono shrink-0 text-[#1747b8]">{label}</span>
           <span className="label-mono hidden text-[#a8b7cc] sm:inline">{sub}</span>
         </div>
         {tabs ? (
@@ -162,7 +162,7 @@ export function WorkflowVisualization({
               </div>
 
               <div className="mt-5">
-                <div className="font-mono text-[22px] leading-[1.05] font-light tracking-[-0.02em] break-words text-[#08152e] sm:text-[26px] xl:text-[14px]">
+                <div className="font-mono text-[19px] leading-[1.05] font-light tracking-[-0.02em] whitespace-nowrap text-[#08152e] sm:text-[24px] xl:text-[14px]">
                   {v}
                 </div>
                 <div className="label-mono mt-2 truncate text-[#1747b8]">{u}</div>
