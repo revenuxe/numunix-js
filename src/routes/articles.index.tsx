@@ -8,9 +8,9 @@ import { Label, Heading, Accent, Reveal, Btn } from "@/components/numunix/primit
 import { ARTICLES } from "@/content/articles";
 const SITE_URL = "https://numunix-flow-engine.lovable.app";
 
-const TITLE = "Articles & Insights | Numunix";
+const TITLE = "Electronics & Appliance Repair Guides | Numunix";
 const DESC =
-  "In-depth articles on UI/UX design, web development, software engineering, and digital product strategy from the Numunix team.";
+  "Practical guides for phones, laptops and appliances. Learn what to prepare, how to review repair estimates and what to check at handover.";
 
 export const Route = createFileRoute("/articles/")(  {
   head: () => ({
@@ -34,14 +34,14 @@ function ArticlesIndex() {
       <Header />
       <main>
         {/* Hero */}
-        <Hero headline="Insights for" accent="builders." intro="Deep dives into design, development, and digital product strategy from our team." primaryLabel="BROWSE ARTICLES" primaryHref="#list" secondaryLabel="START A PROJECT" secondaryHref="/contact" />
+        <Hero headline="Repair guidance." accent="Informed decisions." intro="Practical advice for device faults, appliance visits, repair estimates and aftercare. Know what to ask before work begins." primaryLabel="BROWSE ARTICLES" primaryHref="#list" secondaryLabel="REQUEST ASSESSMENT" secondaryHref="/contact" />
 
         {/* Article listing */}
         <section id="list" className="section-pad bg-[#f1f5f9]">
           <div className="shell">
             <Label tone="light">LATEST</Label>
             <Heading tone="light" className="mt-6 max-w-[18ch]">
-              Read, learn, <Accent>build better.</Accent>
+              Read, understand, <Accent>repair wisely.</Accent>
             </Heading>
             <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-1">
               {ARTICLES.map((article, i) => (

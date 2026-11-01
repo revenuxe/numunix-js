@@ -35,8 +35,8 @@ const steps = [
   {
     number: "01",
     icon: CheckCheck,
-    title: "We review your idea",
-    description: "Our team will read your enquiry and get familiar with your goals.",
+    title: "We review your repair request",
+    description: "Our team will read your enquiry and review the model and symptoms.",
   },
   {
     number: "02",
@@ -72,7 +72,7 @@ function ThankYouPage() {
                 </h2>
               </div>
               <p className="max-w-[32ch] text-sm leading-relaxed text-[#5d76a3]">
-                A thoughtful conversation comes before a project plan.
+                A clear assessment comes before repair approval.
               </p>
             </div>
             <ol className="mt-8 grid gap-4 lg:grid-cols-3">
@@ -100,7 +100,7 @@ function ThankYouPage() {
                   Something else on your mind?
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-[#5d76a3]">
-                  Send us any extra details or questions about your project.
+                  Send us any extra details or questions about your repair.
                 </p>
               </div>
               <a

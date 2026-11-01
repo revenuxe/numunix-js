@@ -93,8 +93,8 @@ export function PlatformIntro() {
 export function WorkflowVisualization({
   nodes = NODES,
   tabs,
-  label = "IDEA TO PRODUCT",
-  sub = "/ BUSINESS → GROWTH",
+  label = "REPAIR PROCESS",
+  sub = "/ INTAKE → AFTERCARE",
 }: {
   nodes?: PanelNodes;
   tabs?: { label: string; nodes: PanelNodes }[];

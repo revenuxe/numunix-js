@@ -12,9 +12,9 @@ export const Route = createFileRoute("/approach_/$slug")({
   head: ({ loaderData, params }) => {
     const stage = loaderData?.stage;
     const title = stage
-      ? `${stage.name}: ${stage.phase.toLowerCase()} your product | Numunix`
-      : "Product approach | Numunix";
-    const description = stage?.intro ?? "Explore the Numunix product development approach.";
+      ? `${stage.name}: Repair Process | Numunix`
+      : "Repair Approach | Numunix";
+    const description = stage?.intro ?? "Explore the Numunix repair assessment and service process.";
     const url = `${SITE_URL}/approach/${params.slug}`;
     return {
       meta: [
@@ -26,6 +26,7 @@ export const Route = createFileRoute("/approach_/$slug")({
         { property: "og:type", content: "website" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: description },
+        { name: "twitter:card", content: "summary_large_image" },
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [

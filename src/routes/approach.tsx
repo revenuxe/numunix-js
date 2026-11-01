@@ -27,10 +27,10 @@ function ApproachRoute() {
     <CompanyPage page={APPROACH}>
       <Section bg="#f7f9fc">
         <SectionHead
-          label="IDEA TO PRODUCT"
+          label="FAULT TO FINISH"
           title="Connected at every step."
           accent="every step."
-          body="Discovery through launch stays on one map, so design, engineering, and delivery do not drift apart."
+          body="Describe, assess, estimate, approve, repair, test, hand over and review aftercare. Each step keeps the repair scope clear."
         />
         <Reveal delay={80}>
           <WorkflowVisualization />
@@ -41,7 +41,7 @@ function ApproachRoute() {
       <Section bg="#07111f">
         <Reveal delay={60}>
           <div className="mx-auto max-w-2xl text-center">
-            <span className="label-mono text-white/40">PLATFORM</span>
+            <span className="label-mono text-white/40">REPAIR CARE</span>
             <h2 className="mt-4 text-[clamp(28px,4vw,42px)] font-light leading-[1.15] tracking-[-0.025em] text-white">
               A{" "}
               <span className="bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] bg-clip-text text-transparent">
@@ -50,9 +50,7 @@ function ApproachRoute() {
               {" "}Venture
             </h2>
             <p className="mx-auto mt-5 max-w-[48ch] text-[17px] leading-relaxed text-white/50">
-              Numunix is proudly built and operated by Revenuxe, a company
-              dedicated to creating digital platforms that drive real business
-              growth.
+              Electronics and appliance care built around useful assessment, informed approvals and careful handover.
             </p>
             <a
               href="https://www.revenuxe.com"

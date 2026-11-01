@@ -9,13 +9,13 @@ import { NODE_VIZ } from "./nodeviz";
 export function WorkflowStagePage({ stage }: { stage: WorkflowStage }) {
   const index = WORKFLOW_STAGES.findIndex((item) => item.slug === stage.slug);
   const next = WORKFLOW_STAGES[index + 1];
-  const Visual = NODE_VIZ[index]!;
+  const Visual = NODE_VIZ[index];
 
   return (
     <Page>
       <WorkflowHero stage={stage} index={index} />
 
-      <nav aria-label="Product development stages" className="border-y border-[#dbe5f2] bg-white">
+      <nav aria-label="Repair stages" className="border-y border-[#dbe5f2] bg-white">
         <div className="shell flex flex-wrap gap-x-5 gap-y-3 py-5">
           {WORKFLOW_STAGES.map((item, i) => (
             <Link
@@ -55,11 +55,11 @@ export function WorkflowStagePage({ stage }: { stage: WorkflowStage }) {
               </div>
               <div className="label-mono mt-3 text-[#2563eb]">{stage.category}</div>
               <div aria-hidden="true" className="my-10 max-w-[260px] origin-left scale-110">
-                <Visual />
+                {Visual && <Visual />}
               </div>
               <div className="flex items-center gap-2 border-t border-[#e6ecf5] pt-5 text-sm text-[#5d76a3]">
                 <Check size={16} className="text-[#2563eb]" />
-                One connected product journey
+                One connected repair journey
               </div>
             </div>
           </Reveal>
@@ -154,16 +154,16 @@ export function WorkflowStagePage({ stage }: { stage: WorkflowStage }) {
               to="/contact"
               className="inline-flex items-center gap-3 rounded-xl bg-[#1e4ed8] px-6 py-4 text-white"
             >
-              Plan your next iteration
+              Discuss your aftercare
               <ArrowUpRight size={20} />
             </Link>
           )}
         </div>
       </Section>
       <ClosingCTA
-        title={`Let's move your ${stage.name === "Grow" ? "product" : stage.name.toLowerCase()} forward.`}
-        accent="forward."
-        body={`Tell us where you are today. We'll help define the right next step for ${stage.category.toLowerCase()}, with a scope shaped around your product.`}
+        title="Your repair. A clear next step."
+        accent="A clear next step."
+        body="Share the model, symptoms and service history. Review the assessment and estimate before approving work."
       />
     </Page>
   );
