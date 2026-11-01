@@ -23,11 +23,11 @@ export const STATUS_LABELS: Record<LeadStatus, string> = {
   closed: "Closed",
 };
 export const STATUS_CLASSES: Record<LeadStatus, string> = {
-  new: "bg-blue-50 text-blue-700 border-blue-100",
-  contacted: "bg-amber-50 text-amber-700 border-amber-100",
+  new: "bg-accent text-primary border-border",
+  contacted: "bg-secondary text-foreground border-border",
   qualified: "bg-accent text-primary border-border",
-  won: "bg-emerald-50 text-emerald-700 border-emerald-100",
-  closed: "bg-slate-100 text-slate-600 border-slate-200",
+  won: "bg-primary text-primary-foreground border-primary",
+  closed: "bg-secondary text-muted-foreground border-border",
 };
 
 export function escapeLeadSearch(value: string) {
