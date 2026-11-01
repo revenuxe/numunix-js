@@ -11,6 +11,16 @@ import {
   Tv,
   Gamepad2,
   HardDrive,
+  ShieldCheck,
+  AirVent,
+  Zap,
+  Tablet,
+  Microwave,
+  BatteryCharging,
+  Droplets,
+  Fan,
+  Truck,
+  type LucideIcon,
 } from "lucide-react";
 
 const STEPS = [
