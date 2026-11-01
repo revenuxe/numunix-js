@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { Label, Heading, Accent, Reveal } from "./primitives";
 import { useCategory } from "./category";
+import { REPAIR_PAGES, repairServiceHref } from "@/content/repair-services";
 import { REPAIR_SERVICES } from "@/content/homepage-repairs";
 import { DeviceVisual } from "./RepairVisual";
 import {
@@ -133,7 +134,7 @@ export function IndustryCarousel() {
       >
         {services.map(({ icon: Icon, nav: t, body: d, kind }) => (
           <a
-            href="/features"
+            href={repairServiceHref(category, kind)}
             key={t}
             className="group w-[300px] shrink-0 snap-start rounded-[24px] border border-[#dfe7f1] bg-white p-7 transition-all duration-250 hover:-translate-y-1.5 hover:border-[#3b82f6]/45 hover:shadow-[0_30px_70px_-45px_rgba(16,42,99,0.6)] sm:w-[380px]"
           >
@@ -152,31 +153,13 @@ export function IndustryCarousel() {
   );
 }
 
-const ELECTRONICS_ROWS: [LucideIcon, string][] = [
-  [Smartphone, "Mobile Repair"],
-  [Laptop, "Laptop Repair"],
-  [Tablet, "Tablet & iPad Repair"],
-  [Cctv, "CCTV Installation"],
-  [ShieldCheck, "CCTV Maintenance"],
-  [Tv, "TV & Audio Repair"],
-  [HardDrive, "Data Recovery"],
-  [Gamepad2, "Console Repair"],
-];
-const APPLIANCE_ROWS: [LucideIcon, string][] = [
-  [WashingMachine, "Washing Machine Repair"],
-  [Microwave, "Microwave & Chimney Repair"],
-  [AirVent, "AC Service & Repair"],
-  [BatteryCharging, "Inverter & UPS Repair"],
-  [Droplets, "Water Purifier Service"],
-  [Fan, "Fan & Lighting Work"],
-  [Zap, "Electrician Services"],
-  [Truck, "Doorstep Service"],
-];
+const ELECTRONICS_ROWS = REPAIR_PAGES.filter(service => service.category === "electronics").map(service => [REPAIR_SERVICES.electronics.find(item => item.kind === service.kind)?.icon ?? Smartphone, service.name, `/repairs/${service.slug}`] as const);
+const APPLIANCE_ROWS = REPAIR_PAGES.filter(service => service.category === "appliances").map(service => [REPAIR_SERVICES.appliances.find(item => item.kind === service.kind)?.icon ?? Zap, service.name, `/repairs/${service.slug}`] as const);
 
-function Row({ icon: Icon, label }: { icon: LucideIcon; label: string }) {
+function Row({ icon: Icon, label, href }: { icon: LucideIcon; label: string; href: string }) {
   return (
     <a
-      href="/features"
+      href={href}
       className="group flex items-center justify-between gap-6 border-b border-[#dde5f0] px-5 py-6 transition-all duration-250 hover:rounded-2xl hover:border-transparent hover:bg-white hover:shadow-[0_18px_44px_-30px_rgba(16,42,99,0.6)] hover:ring-1 hover:ring-[#3b82f6]/35"
     >
       <span className="flex items-center gap-4">
@@ -210,13 +193,13 @@ export function FeatureDirectory() {
         </Reveal>
         <div className="grid gap-x-10 md:grid-cols-2">
           <div>
-            {left.map(([icon, l]) => (
-              <Row key={l} icon={icon} label={l} />
+            {left.map(([icon, l, href]) => (
+              <Row key={l} icon={icon} label={l} href={href} />
             ))}
           </div>
           <div>
-            {right.map(([icon, l]) => (
-              <Row key={l} icon={icon} label={l} />
+            {right.map(([icon, l, href]) => (
+              <Row key={l} icon={icon} label={l} href={href} />
             ))}
           </div>
         </div>

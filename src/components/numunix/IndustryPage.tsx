@@ -14,13 +14,13 @@ import { CONTACT } from "@/content/site";
 
 export default function IndustryPage({ page }: { page: IndustryLanding }) {
   const index = industries.findIndex((item) => item.slug === page.slug);
-  const industry = industries[index]!;
+  const industry = industries[index];
+  if (!industry) return null;
   return (
     <div className="bg-[#05070c]">
       <Header />
       <main>
         <Hero
-          variant="industry"
           headline={page.headline}
           accent={page.accent}
           intro={page.intro}

@@ -12,6 +12,7 @@
 ## Website content and navigation
 - Homepage category-specific content lives in a shared repair catalogue; repair sections consume the header selector's shared category context, while interior-page visuals remain independent to preserve their existing content.
 - Electronics at / and Appliances at /appliances share the homepage layout but derive category context and leaf metadata from their route; use a non-modal navigation dropdown to avoid scroll-lock header shifts.
+- Individual repair pages use /repairs/$slug and a shared repair catalogue for destinations, diagnostics, preparation and enquiry defaults; public content-page heroes use the shared homepage Hero to keep their ribbon design consistent.
 - Homepage device illustrations use a shared browser-safe SVG repair visual with global semantic tokens and reduced-motion support, so service and audience panels stay consistent without changing their layout.
 - Who We Serve illustrations place shared device drawings within audience-specific room scenes, keeping audience imagery distinct from diagnostic-bench service panels.
 - Do not add phone-number or click-to-call buttons to heroes or CTA sections, including future pages. Use project, service, or email actions instead.

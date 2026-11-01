@@ -367,3 +367,7 @@
   0%, 100% { transform: translateY(0) scale(1); }
   50% { transform: translateY(-20px) scale(1.05); }
 }
+
+/* Shared homepage treatment for all public page openings. */
+.hero-shade-side { background: linear-gradient(90deg, var(--ink-900) 0%, color-mix(in srgb, var(--ink-900) 94%, transparent) 34%, color-mix(in srgb, var(--ink-900) 45%, transparent) 58%, transparent 82%); }
+.hero-shade-top { background: linear-gradient(180deg, color-mix(in srgb, var(--ink-900) 90%, transparent) 0%, transparent 40%); }

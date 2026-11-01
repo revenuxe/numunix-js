@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import Header from "@/components/numunix/Header";
 import Footer from "@/components/numunix/Footer";
+import Hero from "@/components/numunix/Hero";
 import NumunixRibbonScene from "@/components/numunix/NumunixRibbonScene";
 import { Label, Heading, Accent, Reveal, Btn } from "@/components/numunix/primitives";
 import { FEATURES } from "@/content/features";
@@ -33,32 +34,7 @@ function FeaturesIndex() {
     <div className="bg-[#05070c]">
       <Header />
       <main>
-        <section className="relative flex min-h-[62svh] items-end overflow-hidden bg-[#05070c] pt-28 pb-14 lg:min-h-[70vh] lg:pt-40 lg:pb-24">
-          <div className="absolute inset-0">
-            <NumunixRibbonScene />
-          </div>
-          <div className="shell relative grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end lg:gap-20">
-            <Reveal>
-              <Label>SERVICES</Label>
-              <h1
-                style={{ lineHeight: 1.04 }}
-                className="mt-6 max-w-[16ch] font-light tracking-[-0.03em] text-white text-[clamp(2.4rem,6vw,5.6rem)]"
-              >
-                From the first idea to <Accent>the product people use.</Accent>
-              </h1>
-            </Reveal>
-            <Reveal delay={120}>
-              <p className="max-w-[46ch] text-[17px] leading-relaxed text-white/60 lg:text-[19px]">
-                Websites, applications, AI and connected systems. Explore what each service does, what it takes to build well, and where to begin.
-              </p>
-              <div className="mt-6">
-                <Btn as="a" href="#list">
-                  BROWSE SERVICES
-                </Btn>
-              </div>
-            </Reveal>
-          </div>
-        </section>
+        <Hero headline="From the first idea to" accent="the product people use." intro="Websites, applications, AI and connected systems. Explore what each service does, what it takes to build well, and where to begin." primaryLabel="BROWSE SERVICES" primaryHref="#list" secondaryLabel="START A PROJECT" secondaryHref="/contact" />
 
         <section className="border-b border-border bg-paper py-10 lg:py-14">
           <div className="shell grid gap-6 lg:grid-cols-[0.4fr_1.6fr] lg:gap-16">

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useCategory } from "./category";
+import { repairServiceHref } from "@/content/repair-services";
 import { HOMEPAGE_REPAIR, REPAIR_SERVICES } from "@/content/homepage-repairs";
 import NumunixRibbonScene from "./NumunixRibbonScene";
 import { Label, Heading, Accent, Btn, Reveal } from "./primitives";
@@ -44,7 +45,7 @@ export function AIAgentsSection() {
           </Reveal>
         </div>
         <Reveal delay={140}>
-          <ServiceDemo slug="ai-automation" preset="repair-ai" href="/features" />
+          <ServiceDemo slug="ai-automation" preset="repair-ai" href={category === "appliances" ? "/repairs/washing-machine-repair" : "/repairs/mobile-repair"} />
         </Reveal>
       </div>
     </section>
@@ -88,7 +89,7 @@ export function DispatchSection() {
           </Reveal>
         </div>
         <Reveal delay={140}>
-          <ServiceDemo slug="cloud-integrations" preset="repair-warranty" href="/features" />
+          <ServiceDemo slug="cloud-integrations" preset="repair-warranty" href={category === "appliances" ? "/appliances#enquiry" : "/repairs/doorstep-repair"} />
         </Reveal>
       </div>
     </section>
@@ -158,7 +159,7 @@ export function BuiltWithNumunix() {
   const category = useCategory()?.category ?? "electronics";
   const services = REPAIR_SERVICES[category].slice(0, 4);
   const tabs = services.map(item => item.name.toUpperCase());
-  const cards = services.map(item => [item.nav, item.body, "/features"]);
+  const cards = services.map(item => [item.nav, item.body, repairServiceHref(category, item.kind)]);
   const [tab, setTab] = useState(0);
   return (
     <section className="grain relative overflow-hidden bg-[#07111f] py-14 sm:py-20 lg:py-[104px]">

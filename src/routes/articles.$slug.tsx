@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/numunix/Header";
 import Footer from "@/components/numunix/Footer";
+import Hero from "@/components/numunix/Hero";
 import { Label, Reveal, Btn } from "@/components/numunix/primitives";
 import { articleBySlug, ARTICLES } from "@/content/articles";
 import bangaloreCover from "@/assets/bangalore-software-guide.jpg";
@@ -263,42 +264,8 @@ function ArticlePage() {
       <Header />
       <main>
         {/* Hero */}
-        <section className="relative overflow-hidden bg-[#05070c] pt-32 pb-16 lg:pt-44 lg:pb-24">
-          {/* Animated gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628] via-[#05070c] to-[#05070c]" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(59,130,246,0.12),transparent)]" />
-          {/* Floating orbs */}
-          <div className="absolute top-20 left-[10%] h-72 w-72 rounded-full bg-[#3b82f6]/[0.04] blur-[80px] animate-[nx-float_8s_ease-in-out_infinite]" />
-          <div className="absolute bottom-10 right-[15%] h-56 w-56 rounded-full bg-[#1e4ed8]/[0.06] blur-[60px] animate-[nx-float_10s_ease-in-out_2s_infinite]" />
-
-          <div className="shell relative">
-            <Reveal>
-              <div className="flex items-center justify-between">
-                <Link
-                  to="/articles"
-                  className="inline-flex items-center gap-2 text-[14px] text-white/50 transition-colors hover:text-white"
-                >
-                  <ArrowLeft size={14} />
-                  Back to Articles
-                </Link>
-                <ShareButton title={article.title} url={pageUrl} />
-              </div>
-
-              <div className="mt-10">
-                <Label>{article.category.toUpperCase()}</Label>
-              </div>
-
-              <h1
-                style={{ lineHeight: 1.08 }}
-                className="mt-6 max-w-[22ch] text-[clamp(2rem,5vw,4.2rem)] font-light tracking-[-0.025em] text-white"
-              >
-                {article.title}
-              </h1>
-
-              <p className="mt-6 max-w-[60ch] text-[18px] leading-relaxed text-white/45">
-                {article.excerpt}
-              </p>
-
+        <Hero headline={article.title} accent="" intro={article.excerpt} primaryLabel="READ ARTICLE" primaryHref="#article-content" secondaryLabel="ALL ARTICLES" secondaryHref="/articles" breadcrumb={<div className="flex items-center justify-between gap-4"><Link to="/articles" className="text-sm text-primary-foreground/65">Back to Articles</Link><ShareButton title={article.title} url={pageUrl} /></div>} />
+        <section className="bg-ink-900 pb-12 text-primary-foreground"><div className="shell">
               <div className="mt-8 flex flex-wrap items-center gap-5 text-[14px] text-white/50">
                 <span className="flex items-center gap-1.5">
                   <User size={14} />
@@ -343,7 +310,6 @@ function ArticlePage() {
                   <figcaption className="mt-3 text-xs text-primary-foreground/60">Bengaluru, architectural illustration, not a documentary photograph.</figcaption>
                 </figure>
               )}
-            </Reveal>
           </div>
         </section>
 
@@ -361,7 +327,7 @@ function ArticlePage() {
         )}
 
         {/* Article content with sidebar */}
-        <section className="bg-[#f8fafb] py-16 lg:py-24" ref={contentRef}>
+        <section id="article-content" className="bg-[#f8fafb] py-16 lg:py-24" ref={contentRef}>
           <div className="shell">
             <div className="mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-[280px_1fr]">
               {/* Sidebar: Table of Contents (sticky on desktop) */}

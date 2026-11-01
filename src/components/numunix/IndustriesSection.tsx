@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Label, Reveal } from "./primitives";
 import AudienceRepairScene from "./AudienceRepairScene";
 import { useCategory } from "./category";
+import { repairServiceHref } from "@/content/repair-services";
 import { HOMEPAGE_REPAIR, REPAIR_SERVICES } from "@/content/homepage-repairs";
 import { ArrowUpRight } from "lucide-react";
 
@@ -157,7 +158,7 @@ export default function IndustriesSection() {
                       </span>
                     </div>
                     <a
-                      href="/features"
+                      href={repairServiceHref(category, REPAIR_SERVICES[category][audience.service]?.kind ?? "phone")}
                       aria-label={`Explore ${audience.name}`}
                       className="block rounded-[24px] transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#2459e0] motion-reduce:transform-none"
                     >
@@ -177,7 +178,7 @@ export default function IndustriesSection() {
                       {audience.description}
                     </p>
                     <a
-                      href="/features"
+                      href={repairServiceHref(category, REPAIR_SERVICES[category][audience.service]?.kind ?? "phone")}
                       className="mt-5 inline-flex items-center gap-2 text-sm text-[#1e4ed8]"
                     >
                       Explore {audience.name} <ArrowUpRight size={16} />

@@ -13,6 +13,24 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- Individual repair services -->
+  <url><loc>https://numunix-flow-engine.lovable.app/repairs/mobile-repair</loc><priority>0.9</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repairs/laptop-repair</loc><priority>0.9</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repairs/cctv-service</loc><priority>0.9</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repairs/tv-audio-repair</loc><priority>0.9</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repairs/tablet-repair</loc><priority>0.9</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repairs/data-recovery</loc><priority>0.9</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repairs/console-repair</loc><priority>0.9</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repairs/doorstep-repair</loc><priority>0.9</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repairs/washing-machine-repair</loc><priority>0.9</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repairs/ac-repair</loc><priority>0.9</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repairs/refrigerator-repair</loc><priority>0.9</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repairs/microwave-repair</loc><priority>0.9</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repairs/water-purifier-service</loc><priority>0.9</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repairs/inverter-ups-repair</loc><priority>0.9</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repairs/fan-light-repair</loc><priority>0.9</priority></url>
+  <url><loc>https://numunix-flow-engine.lovable.app/repairs/electrical-service</loc><priority>0.9</priority></url>
+
   <!-- Services directory -->
   <url>
     <loc>https://www.numunix.com/features</loc>
