@@ -3,7 +3,6 @@ import { useLocation } from "@tanstack/react-router";
 import { Menu, X, Grip } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BrandLogo } from "./BrandLogo";
-import { CategoryToggle } from "./category";
 
 const NAV: [string, string][] = [
   ["SERVICES", "/features"],
@@ -123,7 +122,6 @@ export function Header() {
               </span>
             </nav>
 
-            <CategoryToggle />
             <a
               href="/contact"
               className="label-mono rounded-xl bg-[#1e4ed8] px-5 py-3 text-white transition-all hover:-translate-y-0.5 hover:bg-[#2563eb] hover:shadow-[0_12px_34px_-12px_rgba(59,130,246,0.9)]"
@@ -155,9 +153,6 @@ export function Header() {
       {open && (
         <div id="mobile-navigation" className="lg:hidden">
           <div className="mx-6 rounded-2xl border border-white/10 bg-[#07111f]/95 p-4 backdrop-blur-xl">
-            <div className="border-b border-white/6 pb-4">
-              <CategoryToggle className="w-full justify-center" />
-            </div>
             {NAV.map(([n, href]) => (
               <a
                 key={n}

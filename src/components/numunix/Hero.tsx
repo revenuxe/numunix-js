@@ -1,6 +1,7 @@
 import NumunixRibbonScene from "./NumunixRibbonScene";
 import type { ReactNode } from "react";
 import { Btn, Label, Reveal } from "./primitives";
+import { CategoryToggle } from "./category";
 
 type HeroProps = {
   headline?: string;
@@ -14,6 +15,7 @@ type HeroProps = {
   eyebrow?: string;
   breadcrumb?: ReactNode;
   variant?: "homepage" | "industry";
+  showCategoryToggle?: boolean;
 };
 
 export function Hero({
@@ -28,6 +30,7 @@ export function Hero({
   eyebrow,
   breadcrumb,
   variant = "homepage",
+  showCategoryToggle = false,
 }: HeroProps = {}) {
   if (variant === "industry") {
     return (
@@ -81,6 +84,7 @@ export function Hero({
       <div className="shell relative flex min-h-[calc(88svh+48px)] flex-col justify-end pt-46 pb-6 lg:min-h-[100vh] lg:pt-40 lg:pb-24">
         <div className="grid items-end gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:gap-20">
           <Reveal>
+            {showCategoryToggle && <CategoryToggle className="mb-7 w-fit" />}
             {eyebrow && <Label className="mb-7">{eyebrow}</Label>}
             <h1 className="font-light leading-[0.98] tracking-[-0.035em] text-white text-[clamp(2.5rem,7.4vw,6.8rem)]">
               {headline}
