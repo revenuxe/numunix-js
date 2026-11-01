@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { Label, Heading, Accent, Reveal } from "./primitives";
+import { useCategory } from "./category";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -162,24 +163,24 @@ export function IndustryCarousel() {
   );
 }
 
-const LEFT: [LucideIcon, string][] = [
+const ELECTRONICS_ROWS: [LucideIcon, string][] = [
   [Smartphone, "Mobile Repair"],
   [Laptop, "Laptop Repair"],
   [Tablet, "Tablet & iPad Repair"],
   [Cctv, "CCTV Installation"],
   [ShieldCheck, "CCTV Maintenance"],
   [Tv, "TV & Audio Repair"],
+  [HardDrive, "Data Recovery"],
+  [Gamepad2, "Console Repair"],
+];
+const APPLIANCE_ROWS: [LucideIcon, string][] = [
   [WashingMachine, "Washing Machine Repair"],
   [Microwave, "Microwave & Chimney Repair"],
-];
-const RIGHT: [LucideIcon, string][] = [
-  [Zap, "Electrician Services"],
   [AirVent, "AC Service & Repair"],
   [BatteryCharging, "Inverter & UPS Repair"],
   [Droplets, "Water Purifier Service"],
   [Fan, "Fan & Lighting Work"],
-  [HardDrive, "Data Recovery"],
-  [Gamepad2, "Console Repair"],
+  [Zap, "Electrician Services"],
   [Truck, "Doorstep Service"],
 ];
 
@@ -203,6 +204,15 @@ function Row({ icon: Icon, label }: { icon: LucideIcon; label: string }) {
 }
 
 export function FeatureDirectory() {
+  const ctx = useCategory();
+  const rows = !ctx
+    ? [...ELECTRONICS_ROWS, ...APPLIANCE_ROWS]
+    : ctx.category === "electronics"
+      ? ELECTRONICS_ROWS
+      : APPLIANCE_ROWS;
+  const half = Math.ceil(rows.length / 2);
+  const left = rows.slice(0, half);
+  const right = rows.slice(half);
   return (
     <section className="section-pad bg-[#eef3f8]">
       <div className="shell grid gap-12 lg:grid-cols-[0.35fr_1.65fr] lg:gap-20">
@@ -211,12 +221,12 @@ export function FeatureDirectory() {
         </Reveal>
         <div className="grid gap-x-10 md:grid-cols-2">
           <div>
-            {LEFT.map(([icon, l]) => (
+            {left.map(([icon, l]) => (
               <Row key={l} icon={icon} label={l} />
             ))}
           </div>
           <div>
-            {RIGHT.map(([icon, l]) => (
+            {right.map(([icon, l]) => (
               <Row key={l} icon={icon} label={l} />
             ))}
           </div>

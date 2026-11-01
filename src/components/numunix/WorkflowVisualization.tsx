@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Label, Heading, Accent, Reveal } from "./primitives";
+import { useCategory } from "./category";
 import { NODE_VIZ } from "./nodeviz";
 import { Link } from "@tanstack/react-router";
 import {
@@ -98,7 +99,13 @@ export function WorkflowVisualization({
   label?: string;
   sub?: string;
 }) {
-  const [tab, setTab] = useState(0);
+  const [localTab, setLocalTab] = useState(0);
+  const ctx = useCategory();
+  // On the homepage the header toggle drives the panel; elsewhere local state.
+  const tab = ctx ? (ctx.category === "electronics" ? 0 : 1) : localTab;
+  const setTab = ctx
+    ? (i: number) => ctx.setCategory(i === 0 ? "electronics" : "appliances")
+    : setLocalTab;
   const activeNodes = tabs ? tabs[tab]!.nodes : nodes;
   return (
     <div className="mt-12 w-full lg:mt-20">
