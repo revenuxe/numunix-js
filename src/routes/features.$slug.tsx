@@ -8,86 +8,13 @@ export const Route = createFileRoute("/features/$slug")({
     if (LEGACY_SERVICE_SLUGS.includes(params.slug)) throw redirect({ to: "/features", statusCode: 301 });
     throw notFound();
   },
-  head: ({ params, loaderData }) => {
-    const f = loaderData?.feature;
-    const title = f?.metaTitle ?? "Service | Numunix";
-    const desc = f?.metaDescription ?? "Numunix digital product development services.";
-    const pageUrl = `${SITE_URL}/features/${f?.slug ?? params.slug}`;
-    return {
-      meta: [
-        { title },
-        { name: "description", content: desc },
-        { property: "og:title", content: title },
-        { property: "og:description", content: desc },
-        { property: "og:type", content: "article" },
-        { property: "og:url", content: pageUrl },
-        { name: "twitter:card", content: "summary_large_image" },
-      ],
-      links: [{ rel: "canonical", href: pageUrl }],
-      scripts: [
-        {
-          type: "application/ld+json",
-          children: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Services", item: `${SITE_URL}/features` },
-              {
-                "@type": "ListItem",
-                position: 2,
-                name: f?.name ?? params.slug,
-                item: pageUrl,
-              },
-            ],
-          }),
-        },
-        // Service schema — helps Google understand what this page offers
-        ...(f
-          ? [
-              {
-                type: "application/ld+json",
-                children: JSON.stringify({
-                  "@context": "https://schema.org",
-                  "@type": "Service",
-                  name: f.name,
-                  description: desc,
-                  url: pageUrl,
-                  provider: {
-                    "@type": "Organization",
-                    name: "Numunix",
-                    url: SITE_URL,
-                  },
-                }),
-              },
-            ]
-          : []),
-        // FAQPage schema — enables rich FAQ snippets in Google SERPs
-        ...(f?.faq?.length
-          ? [
-              {
-                type: "application/ld+json",
-                children: JSON.stringify({
-                  "@context": "https://schema.org",
-                  "@type": "FAQPage",
-                  mainEntity: f.faq.map((item) => ({
-                    "@type": "Question",
-                    name: item.q,
-                    acceptedAnswer: {
-                      "@type": "Answer",
-                      text: item.a,
-                    },
-                  })),
-                }),
-              },
-            ]
-          : []),
-      ],
-    };
-  },
-  component: Page,
+  head: () => ({ meta: [
+    {title: "Repair Services | Numunix"},
+    {name: "description", content: "Explore Electronics and Appliances repair services from Numunix."},
+    {property: "og:title", content: "Repair Services | Numunix"},
+    {property: "og:description", content: "Find the right repair assessment for your device or appliance."},
+    {property: "og:type", content: "website"},
+    {name: "twitter:card", content: "summary_large_image"},
+    {name: "robots", content: "noindex, follow"},
+  ]}),
 });
-
-function Page() {
-  const { feature } = Route.useLoaderData();
-  return <FeaturePage feature={feature} />;
-}
