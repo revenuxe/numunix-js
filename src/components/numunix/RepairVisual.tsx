@@ -9,8 +9,16 @@ export function DeviceVisual({ kind, repaired = true }: { kind: DeviceKind; repa
       {screen ? <>
         <rect x={kind === "phone" ? 133 : 74} y="24" width={kind === "phone" ? 94 : 212} height="155" rx={kind === "phone" || kind === "tablet" ? 14 : 5} className="repair-shell" />
         <rect x={kind === "phone" ? 141 : 83} y="35" width={kind === "phone" ? 78 : 194} height="130" rx="4" className="repair-screen" />
-        <path d="m156 54 24 30-20 22 33 18-15 26" className="repair-fault" />
-        <path d="m156 101 17 17 34-36" className="repair-check" />
+        {kind === "phone" || kind === "tablet" ? <>
+          <rect x={kind === "phone" ? 150 : 101} y="48" width={kind === "phone" ? 60 : 158} height="38" rx="5" className="repair-screen-panel" />
+          <path d={kind === "phone" ? "M151 101h38m-38 10h52" : "M102 101h89m-89 11h148"} className="repair-interface-line" />
+          {[0, 1, 2].map(i => <rect key={i} x={(kind === "phone" ? 151 : 103) + i * (kind === "phone" ? 19 : 52)} y="133" width={kind === "phone" ? 13 : 40} height="17" rx="3" className="repair-screen-panel" />)}
+        </> : <>
+          <rect x="96" y="48" width="168" height="10" rx="3" className="repair-screen-panel" />
+          <rect x="96" y="69" width="42" height="80" rx="3" className="repair-screen-panel" />
+          <path d="M152 79h94m-94 13h61m-61 13h83" className="repair-interface-line" />
+          <path d="M153 143v-18m18 18v-29m18 29v-21m18 21v-36m18 36v-27m18 27v-42" className="repair-interface-line" />
+        </>}
         {kind === "laptop" ? <path d="M74 179H286L314 198H46Z" className="repair-shell" /> : kind === "tv" ? <path d="M170 179v18h-40m40 0h60m-40-18v18" className="repair-outline" /> : <circle cx="180" cy="173" r="2" className="repair-detail" />}
       </> : kind === "washer" ? <>
         <rect x="108" y="24" width="144" height="178" rx="8" className="repair-shell" />
@@ -25,7 +33,19 @@ export function DeviceVisual({ kind, repaired = true }: { kind: DeviceKind; repa
       </> : kind === "microwave" ? <>
         <rect x="63" y="66" width="234" height="126" rx="8" className="repair-shell" /><rect x="77" y="79" width="156" height="95" rx="4" className="repair-screen" /><circle cx="264" cy="132" r="13" className="repair-outline" /><path d="M249 91h29M112 153h82m-65-15q-8-12 0-24m28 24q-8-12 0-24" className="repair-outline" />
       </> : kind === "cctv" ? <>
-        <path d="m133 117-30 52h-43m43 0v28" className="repair-outline" /><path d="m96 64 128-15 47 54-120 30Z" className="repair-shell" /><ellipse cx="244" cy="87" rx="23" ry="31" transform="rotate(-35 244 87)" className="repair-screen" /><circle cx="243" cy="87" r="12" className="repair-outline" /><path d="m284 96 32 28m-38-13 24 36" className="repair-outline repair-air" />
+        <rect x="61" y="106" width="12" height="69" rx="3" className="repair-shell" />
+        <path d="M73 140h35l35-37" className="repair-camera-mount" />
+        <circle cx="141" cy="103" r="8" className="repair-shell" />
+        <g transform="rotate(12 190 83)">
+          <rect x="104" y="52" width="155" height="62" rx="12" className="repair-shell" />
+          <path d="M99 49h157q13 0 15 13H102Z" className="repair-screen" />
+          <ellipse cx="255" cy="83" rx="18" ry="31" className="repair-screen" />
+          <ellipse cx="255" cy="83" rx="10" ry="17" className="repair-camera-lens" />
+          <ellipse cx="255" cy="83" rx="4" ry="7" className="repair-detail" />
+          <path d="M115 100h95" className="repair-interface-line" />
+          {[0, 1, 2].map(i => <circle key={i} cx="255" cy={61 + i * 22} r="1.7" className="repair-detail" />)}
+        </g>
+        <path d="M66 175v20m209-66 34 14m-37-33 41-1" className="repair-interface-line" />
       </> : <>
         <rect x="103" y="39" width="154" height="158" rx="10" className="repair-shell" /><rect x="120" y="57" width="120" height="31" rx="4" className="repair-screen" />
         {kind === "drive" ? <><circle cx="180" cy="136" r="36" className="repair-outline" /><circle cx="180" cy="136" r="9" className="repair-outline" /><path d="m180 136 50-27" className="repair-outline" /></> : kind === "purifier" ? <><path d="M145 104v44m35-44v44m35-44v44M169 166h22v12h-8" className="repair-outline" /><path d="M183 188q-9 13 0 13t0-13" className="repair-screen" /></> : <><path d="m189 105-26 37h22l-9 34 29-44h-24Z" className="repair-screen" /><path d="M129 185v12m102-12v12" className="repair-outline" /></>}

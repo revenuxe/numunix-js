@@ -105,10 +105,10 @@
 .repair-outline { fill: none; stroke: var(--blue); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
 .repair-ground { fill: var(--border); }
 .repair-detail { fill: var(--blue); }
-.repair-fault { fill: none; stroke: var(--navytext); stroke-width: 2; transition: opacity 600ms; }
-.repair-check { fill: none; stroke: var(--blue); stroke-width: 5; stroke-linecap: round; opacity: 0; transition: opacity 600ms; }
-.is-repaired .repair-fault { opacity: 0; }
-.is-repaired .repair-check { opacity: 1; }
+.repair-screen-panel { fill: color-mix(in srgb, var(--blue) 12%, var(--card)); stroke: color-mix(in srgb, var(--blue) 28%, var(--card)); stroke-width: 1; }
+.repair-interface-line { fill: none; stroke: var(--blue); stroke-width: 2; stroke-linecap: round; opacity: .55; }
+.repair-camera-mount { fill: none; stroke: var(--navytext); stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; }
+.repair-camera-lens { fill: var(--navy); stroke: var(--blue); stroke-width: 2; }
 .repair-drum { transform-origin: 180px 127px; animation: repair-spin 8s linear infinite; }
 .repair-air { animation: repair-flow 2.8s ease-in-out infinite; }
 .repair-checks { display: grid; border-top: 1px solid var(--border); }
