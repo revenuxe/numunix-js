@@ -4,24 +4,24 @@ import { Label, Heading, Accent, Reveal } from "./primitives";
 import {
   ArrowRight,
   ArrowUpRight,
-  AppWindow,
-  Cpu,
   Smartphone,
-  ShoppingBag,
-  PanelsTopLeft,
-  Building2,
-  Globe,
+  Laptop,
+  Cctv,
+  WashingMachine,
+  Tv,
+  Gamepad2,
+  HardDrive,
 } from "lucide-react";
 
 const STEPS = [
-  ["01", "DISCOVER", "Understand your idea, users, business model, and requirements.", "idea"],
-  ["02", "DEFINE", "Shape the product scope, priorities, and technical approach.", "scope"],
-  ["03", "DESIGN", "Turn your concept into user flows, wireframes, and interfaces.", "ux"],
-  ["04", "DEVELOP", "Turn approved designs into functional, scalable software.", "code"],
-  ["05", "INTEGRATE", "Connect APIs, databases, payments, AI, and business systems.", "apis"],
-  ["06", "VALIDATE", "Check usability, functionality, performance, and security.", "qa"],
-  ["07", "LAUNCH", "Deploy your product with modern cloud infrastructure.", "cloud"],
-  ["08", "GROW", "Improve, maintain, optimize, and add features as your needs evolve.", "grow"],
+  ["01", "BOOK", "Tell us the device and the fault — walk in, call, or book online.", "idea"],
+  ["02", "DIAGNOSE", "Technicians test the device and pinpoint the actual fault, not a guess.", "scope"],
+  ["03", "ESTIMATE", "A clear, itemised quote before any work starts. You approve it.", "ux"],
+  ["04", "REPAIR", "Skilled hands fix the fault using tested, quality spare parts.", "code"],
+  ["05", "PARTS", "Genuine-grade spares sourced and logged against your job card.", "apis"],
+  ["06", "TEST", "Every function is checked before the device leaves the bench.", "qa"],
+  ["07", "DELIVER", "Pick up in-store or choose doorstep delivery, on schedule.", "cloud"],
+  ["08", "WARRANTY", "A 90-day service warranty and AMC support after every job.", "grow"],
 ] as const;
 
 export function AutomationWorkflow() {
@@ -29,11 +29,11 @@ export function AutomationWorkflow() {
     <section id="process" className="section-pad bg-[#f7f9fc]">
       <div className="shell">
         <Reveal>
-          <Label tone="light">OUR PROCESS</Label>
+          <Label tone="light">HOW WE REPAIR</Label>
         </Reveal>
         <Reveal delay={60}>
           <Heading tone="light" className="mt-8 max-w-[18ch]">
-            From the business problem to <Accent>product growth.</Accent>
+            From the first fault to a device that <Accent>works like new.</Accent>
           </Heading>
         </Reveal>
 
@@ -70,13 +70,13 @@ export function AutomationWorkflow() {
 }
 
 const INDUSTRIES = [
-  [Globe, "BUSINESS WEBSITES", "Corporate websites, landing pages, and service platforms.", "/features/web-development"],
-  [AppWindow, "WEB APPLICATIONS", "Dashboards, portals, booking systems, and internal tools.", "/features/web-applications"],
-  [Cpu, "SAAS PLATFORMS", "B2B software, subscription products, and vertical SaaS.", "/features/saas-development"],
-  [Smartphone, "MOBILE APPLICATIONS", "Consumer apps, business apps, and utility applications.", "/features/mobile-app-development"],
-  [ShoppingBag, "MARKETPLACES", "Platforms connecting customers, businesses, and providers.", "/features/marketplaces"],
-  [PanelsTopLeft, "BUSINESS SOFTWARE", "CRM, ERP, inventory, HR, and custom management systems.", "/features/custom-software"],
-  [Building2, "AI PRODUCTS", "AI assistants, intelligent SaaS, and automation tools.", "/features/ai-automation"],
+  [Smartphone, "MOBILE PHONES", "Screens, batteries, charging ports, cameras, and water damage — every major brand.", "/features"],
+  [Laptop, "LAPTOPS & COMPUTERS", "Board-level repair, displays, keyboards, upgrades, and tune-ups.", "/features"],
+  [Cctv, "CCTV & SECURITY", "Installation, DVR/NVR setup, camera repair, and preventive maintenance.", "/features"],
+  [WashingMachine, "HOME APPLIANCES", "Washing machines, microwaves, chimneys, and small appliances.", "/features"],
+  [Tv, "TV & AUDIO", "Panels, backlights, boards, speakers, and soundbar service.", "/features"],
+  [Gamepad2, "TABLETS & CONSOLES", "Tablet screens and batteries, console HDMI ports, and board repairs.", "/features"],
+  [HardDrive, "DATA RECOVERY", "Photos, files, and contacts recovered from failed drives and phones.", "/features"],
 ] as const;
 
 export function IndustryCarousel() {
@@ -90,7 +90,7 @@ export function IndustryCarousel() {
         <div className="grid items-end gap-8 lg:grid-cols-[1fr_auto]">
           <Reveal>
             <Heading tone="light" className="max-w-[14ch]">
-              Digital products for <Accent>real business needs.</Accent>
+              We repair the devices <Accent>you rely on.</Accent>
             </Heading>
           </Reveal>
           <Reveal delay={80}>
@@ -153,49 +153,30 @@ export function IndustryCarousel() {
 }
 
 const LEFT = [
-  "Web Development",
-  "Web Applications",
-  "Mobile App Development",
-  "SaaS Development",
-  "Custom Software",
-  "E-commerce",
-  "AI & Automation",
-  "UI/UX Design"
+  "Mobile Repair",
+  "Laptop Repair",
+  "Tablet Repair",
+  "CCTV Installation",
+  "CCTV Maintenance",
+  "TV & Audio Repair",
+  "Washing Machine Repair",
+  "Microwave & Chimney Repair",
 ];
 const RIGHT = [
-  "API & Integrations",
-  "Cloud Deployment",
-  "Database Architecture",
-  "Authentication",
-  "Business Systems",
-  "Analytics Dashboards",
-  "Performance Optimization",
-  "Maintenance & Support"
+  "Screen & Battery Replacement",
+  "Water Damage Treatment",
+  "Board-Level Repair",
+  "Data Recovery",
+  "Software & OS Issues",
+  "Networking & Wi-Fi Setup",
+  "Annual Maintenance (AMC)",
+  "Doorstep Service",
 ];
-
-const ROW_LINKS: Record<string,string> = {
-  "Web Development": "/features/web-development",
-  "Web Applications": "/features/web-applications",
-  "Mobile App Development": "/features/mobile-app-development",
-  "SaaS Development": "/features/saas-development",
-  "Custom Software": "/features/custom-software",
-  "E-commerce": "/features/e-commerce",
-  "AI & Automation": "/features/ai-automation",
-  "UI/UX Design": "/features/ui-ux-design",
-  "API & Integrations": "/features/cloud-integrations",
-  "Cloud Deployment": "/features/cloud-integrations",
-  "Database Architecture": "/features/custom-software",
-  "Authentication": "/features/cloud-integrations",
-  "Business Systems": "/features/custom-software",
-  "Analytics Dashboards": "/features/custom-software",
-  "Performance Optimization": "/features/maintenance-support",
-  "Maintenance & Support": "/features/maintenance-support"
-};
 
 function Row({ label }: { label: string }) {
   return (
     <a
-      href={ROW_LINKS[label] ?? "/features"}
+      href="/features"
       className="group flex items-center justify-between gap-6 border-b border-[#dde5f0] px-5 py-6 transition-all duration-250 hover:rounded-2xl hover:border-transparent hover:bg-white hover:shadow-[0_18px_44px_-30px_rgba(16,42,99,0.6)] hover:ring-1 hover:ring-[#3b82f6]/35"
     >
       <span className="text-[clamp(1.15rem,2vw,1.6rem)] font-light tracking-[-0.02em] text-[#102a63]">
@@ -211,7 +192,7 @@ export function FeatureDirectory() {
     <section className="section-pad bg-[#eef3f8]">
       <div className="shell grid gap-12 lg:grid-cols-[0.35fr_1.65fr] lg:gap-20">
         <Reveal>
-          <Label tone="light">WHAT WE BUILD</Label>
+          <Label tone="light">WHAT WE FIX</Label>
         </Reveal>
         <div className="grid gap-x-10 md:grid-cols-2">
           <div>
@@ -231,17 +212,17 @@ export function FeatureDirectory() {
 }
 
 const METRICS = [
-  ["ACTIVE USERS", "128"],
-  ["ONBOARDING", "94%"],
-  ["ACTIVATION", "72%"],
-  ["NEW ACCOUNTS", "34"],
+  ["DEVICES REPAIRED", "128"],
+  ["FIRST-VISIT FIXES", "94%"],
+  ["PARTS IN STOCK", "72%"],
+  ["JOBS TODAY", "34"],
   ["REVENUE", "₹8.42L"],
 ];
 const TOP = [
-  ["Web", 34],
-  ["iOS", 27],
-  ["Android", 21],
-  ["Other", 18],
+  ["Mobile", 34],
+  ["Laptop", 27],
+  ["CCTV", 21],
+  ["Appliances", 18],
 ] as const;
 
 export function AnalyticsDemo() {
@@ -253,11 +234,11 @@ export function AnalyticsDemo() {
     <section id="analytics" className="section-pad bg-[#f7f9fc]">
       <div className="shell">
         <Reveal>
-          <Label tone="light">CUSTOM ANALYTICS · SAMPLE DASHBOARD</Label>
+          <Label tone="light">REPAIR DESK · SAMPLE DASHBOARD</Label>
         </Reveal>
         <Reveal delay={60}>
           <Heading tone="light" className="mt-8 max-w-[18ch]">
-            Build a clearer view of your <Accent>business.</Accent>
+            See every repair, <Accent>clearly.</Accent>
           </Heading>
         </Reveal>
 
@@ -276,7 +257,7 @@ export function AnalyticsDemo() {
 
             <div className="mt-6 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
               <div className="rounded-2xl border border-[#e6ecf4] p-6">
-                <div className="label-mono text-[#8190aa]">ACTIVE USERS · SAMPLE 12 WEEKS</div>
+                <div className="label-mono text-[#8190aa]">REPAIRS COMPLETED · SAMPLE 12 WEEKS</div>
                 <svg viewBox="0 0 640 130" className="mt-6 h-auto w-full">
                   {[30, 60, 90].map((y) => (
                     <line key={y} x1="0" y1={y} x2="640" y2={y} stroke="#eef1f6" />
@@ -296,7 +277,7 @@ export function AnalyticsDemo() {
                 </svg>
               </div>
               <div className="rounded-2xl border border-[#e6ecf4] p-6">
-                <div className="label-mono text-[#8190aa]">USERS BY CHANNEL</div>
+                <div className="label-mono text-[#8190aa]">JOBS BY DEVICE</div>
                 <div className="mt-6 space-y-4">
                   {TOP.map(([k, v]) => (
                     <div key={k}>
@@ -323,9 +304,9 @@ export function AnalyticsDemo() {
 }
 
 const POSTS = [
-  ["BUSINESS FIRST", "PRODUCT STRATEGY", "Start with the problem. Then choose the technology.", "/features/ui-ux-design"],
-  ["BUILT TO GROW", "ENGINEERING", "Architecture for performance, scale, and maintainability.", "/features/cloud-integrations"],
-  ["ONE TEAM", "END TO END", "Design, development, launch, and continuous improvement.", "/features/custom-software"],
+  ["FIXED RIGHT", "DIAGNOSTICS FIRST", "We find the real fault before replacing any part.", "/features"],
+  ["QUALITY PARTS", "TESTED & WARRANTIED", "Every spare is verified, and every job carries a service warranty.", "/features"],
+  ["ONE WORKSHOP", "END TO END", "Booking, repair, quality check, and doorstep delivery — one team.", "/features"],
 ];
 
 export function BlogCards() {
@@ -333,7 +314,7 @@ export function BlogCards() {
     <section className="section-pad bg-[#eef3f8]">
       <div className="shell">
         <Reveal>
-          <Heading tone="light">Why build with Numunix</Heading>
+          <Heading tone="light">Why repair with Numunix</Heading>
         </Reveal>
         <div className="mt-16 grid gap-6 md:grid-cols-3">
           {POSTS.map(([d, c, t, href], i) => (

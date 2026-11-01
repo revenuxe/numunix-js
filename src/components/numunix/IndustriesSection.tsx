@@ -1,9 +1,59 @@
-﻿import { useEffect, useRef, useState } from "react";
-import { industries } from "@/content/industries";
-import { Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { Label, Reveal } from "./primitives";
 import IndustryScene from "./IndustryScene";
+import { ArrowUpRight } from "lucide-react";
+
+// Homepage audiences — who brings devices in for repair.
+const AUDIENCES = [
+  {
+    label: "HOMES",
+    name: "Homes & individuals",
+    description:
+      "Phones, laptops, TVs, and appliances — picked up, repaired, and returned working, with a warranty on every job.",
+  },
+  {
+    label: "OFFICES",
+    name: "Offices & workspaces",
+    description:
+      "Work laptops, networking, and CCTV kept healthy with priority repair slots and annual maintenance cover.",
+  },
+  {
+    label: "RETAIL",
+    name: "Retail & showrooms",
+    description:
+      "Billing machines, displays, and security cameras maintained so the counter never stops moving.",
+  },
+  {
+    label: "EDUCATION",
+    name: "Schools & colleges",
+    description:
+      "Computer labs, projectors, and campus CCTV serviced on a fixed schedule, term after term.",
+  },
+  {
+    label: "HOSPITALITY",
+    name: "Hotels & restaurants",
+    description:
+      "Kitchen equipment, TVs, and surveillance kept ready for every guest, every service.",
+  },
+  {
+    label: "HEALTHCARE",
+    name: "Clinics & labs",
+    description:
+      "Front-desk systems, displays, and CCTV maintained with careful, quiet, scheduled service.",
+  },
+  {
+    label: "INDUSTRY",
+    name: "Factories & warehouses",
+    description:
+      "CCTV coverage, displays, and communication devices repaired with minimal downtime.",
+  },
+  {
+    label: "COMMUNITIES",
+    name: "Apartments & communities",
+    description:
+      "Gate cameras, intercoms, and common-area devices kept working under one maintenance plan.",
+  },
+];
 
 export default function IndustriesSection() {
   const [active, setActive] = useState(0);
@@ -42,22 +92,21 @@ export default function IndustriesSection() {
   return (
     <section
       id="industries"
-      aria-label="Industries we serve"
+      aria-label="Who we serve"
       className="bg-[#f7f9fc] py-16 sm:py-20 lg:py-[104px]"
     >
       <div className="shell">
         <div className="grid gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:gap-24">
           <div>
             <div className="lg:sticky lg:top-32">
-              <Label tone="light">INDUSTRIES WE SERVE</Label>
+              <Label tone="light">WHO WE SERVE</Label>
               <p className="mt-6 max-w-[42ch] text-[15px] leading-[1.65] text-[#5d76a3]">
-                Deep domain knowledge across regulated and high-growth sectors — built over a decade
-                of enterprise delivery.
+                From one phone to a showroom of devices — we keep homes, shops, and offices running.
               </p>
               <div className="mt-8 hidden lg:block">
-                {industries.map((industry, index) => (
+                {AUDIENCES.map((audience, index) => (
                   <button
-                    key={industry.label}
+                    key={audience.label}
                     type="button"
                     aria-controls={`industry-panel-${index}`}
                     aria-current={active === index ? "true" : undefined}
@@ -74,7 +123,7 @@ export default function IndustriesSection() {
                     <span
                       className={`block py-[6px] text-[clamp(1.6rem,2.5vw,2.45rem)] font-light leading-[1.22] tracking-[-0.035em] uppercase transition-colors duration-500 ${active === index ? "text-[#0b1b38]" : "text-[#c2cfe2]"}`}
                     >
-                      {industry.label}
+                      {audience.label}
                     </span>
                   </button>
                 ))}
@@ -83,10 +132,10 @@ export default function IndustriesSection() {
           </div>
 
           <div className="min-w-0 space-y-24 lg:space-y-[170px]">
-            {industries.map((industry, index) => {
+            {AUDIENCES.map((audience, index) => {
               return (
                 <div
-                  key={industry.name}
+                  key={audience.name}
                   id={`industry-panel-${index}`}
                   ref={(el) => {
                     refs.current[index] = el;
@@ -94,32 +143,30 @@ export default function IndustriesSection() {
                 >
                   <Reveal>
                     <div className="mb-4 flex items-center justify-between gap-4 lg:hidden">
-                      <span className="label-mono text-[#1747b8]">{industry.label}</span>
+                      <span className="label-mono text-[#1747b8]">{audience.label}</span>
                       <span className="label-mono text-[#8190aa]">
                         {String(index + 1).padStart(2, "0")} / 08
                       </span>
                     </div>
-                    <Link
-                      to="/industries/$slug"
-                      params={{ slug: industry.slug }}
-                      aria-label={`Explore ${industry.name}`}
+                    <a
+                      href="/features"
+                      aria-label={`Explore ${audience.name}`}
                       className="block rounded-[24px] transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#2459e0] motion-reduce:transform-none"
                     >
                       <IndustryScene index={index} />
-                    </Link>
+                    </a>
                     <h3 className="mt-8 max-w-[620px] text-[1.3rem] font-normal leading-[1.28] tracking-[-0.02em] text-[#0b1b38] lg:mt-10 lg:text-[clamp(1.35rem,1.9vw,1.75rem)]">
-                      {industry.name}
+                      {audience.name}
                     </h3>
                     <p className="mt-3 max-w-[560px] text-[15px] leading-[1.65] text-[#5d76a3] lg:mt-4 lg:text-[17px]">
-                      {industry.description}
+                      {audience.description}
                     </p>
-                    <Link
-                      to="/industries/$slug"
-                      params={{ slug: industry.slug }}
+                    <a
+                      href="/features"
                       className="mt-5 inline-flex items-center gap-2 text-sm text-[#1e4ed8]"
                     >
-                      Explore {industry.name} <ArrowUpRight size={16} />
-                    </Link>
+                      Explore {audience.name} <ArrowUpRight size={16} />
+                    </a>
                   </Reveal>
                 </div>
               );
