@@ -32,10 +32,10 @@ const STEPS = [
   ["02", "DIAGNOSE", "Technicians test the device and pinpoint the actual fault, not a guess.", "scope"],
   ["03", "ESTIMATE", "A clear, itemised quote before any work starts. You approve it.", "ux"],
   ["04", "REPAIR", "Skilled hands fix the fault using tested, quality spare parts.", "code"],
-  ["05", "PARTS", "Genuine-grade spares sourced and logged against your job card.", "apis"],
+  ["05", "PARTS", "Confirm compatible replacement parts for the agreed repair.", "apis"],
   ["06", "TEST", "Every function is checked before the device leaves the bench.", "qa"],
   ["07", "DELIVER", "Pick up in-store or choose doorstep delivery, on schedule.", "cloud"],
-  ["08", "WARRANTY", "A 90-day service warranty and AMC support after every job.", "grow"],
+  ["08", "AFTERCARE", "Confirm the warranty terms and maintenance options for your repair.", "grow"],
 ] as const;
 
 export function AutomationWorkflow() {
@@ -304,7 +304,7 @@ export function AnalyticsDemo() {
 
 const POSTS = [
   ["FIXED RIGHT", "DIAGNOSTICS FIRST", "We find the real fault before replacing any part.", "/features"],
-  ["QUALITY PARTS", "TESTED & WARRANTIED", "Every spare is verified, and every job carries a service warranty.", "/features"],
+  ["PARTS THAT FIT", "CLEAR TERMS", "Discuss compatible parts, function checks and the terms for your repair.", "/technology"],
   ["ONE WORKSHOP", "END TO END", "Booking, repair, quality check, and doorstep delivery, one team.", "/features"],
 ];
 
