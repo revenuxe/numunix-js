@@ -14,435 +14,388 @@ export type WorkflowStage = {
 
 export const WORKFLOW_STAGES: WorkflowStage[] = [
   {
-    slug: "idea",
-    phase: "DISCOVER",
-    name: "Idea",
-    category: "BUSINESS",
-    title: "A strong product starts with a clear idea.",
-    accent: "a clear idea.",
-    intro:
-      "Turn an early thought into a product direction. We work with you to understand the problem, the people experiencing it, and the business behind the solution.",
-    outcome:
-      "A shared understanding of what is worth building, who it serves, and which assumptions need evidence before you invest further.",
-    deliverables: [
+    "slug": "idea",
+    "phase": "INTAKE",
+    "name": "Describe",
+    "category": "REPAIR CARE",
+    "title": "Your fault. A clear starting point.",
+    "accent": "A clear starting point.",
+    "intro": "Share the model, symptoms and service location. Describe what still works and when the fault appears.",
+    "outcome": "A useful symptom record helps identify the assessment needed.",
+    "deliverables": [
       [
-        "Product opportunity brief",
-        "The problem, target audience, and value proposition captured in one practical brief.",
+        "Model and symptom record",
+        "Record the exact equipment, symptoms and relevant damage history."
       ],
       [
-        "User and stakeholder map",
-        "The people who use, buy, and operate the product, with their needs and constraints.",
+        "Agreed scope",
+        "Confirm what this stage includes and any further checks or charges."
       ],
       [
-        "Assumptions to validate",
-        "A prioritized list of business and product questions to investigate early.",
-      ],
-      [
-        "Success criteria",
-        "Agreed signals that help you judge whether the product is solving the right problem.",
-      ],
+        "Useful service details",
+        "Keep the assessment, approvals and completed checks together."
+      ]
     ],
-    steps: [
+    "steps": [
       [
-        "Start with the problem",
-        "Bring your idea, existing workflow, or customer feedback. We map the friction and the opportunity.",
+        "Share the context",
+        "Explain the fault and any change since the previous conversation."
       ],
       [
-        "Explore the context",
-        "Review users, alternatives, and business constraints to separate evidence from assumptions.",
+        "Review the options",
+        "Share the model, symptoms and service location. Describe what still works and when the fault appears."
       ],
       [
-        "Choose a direction",
-        "Agree on a focused product hypothesis and the next questions to answer in scoping.",
-      ],
+        "Confirm the next step",
+        "A useful symptom record helps identify the assessment needed."
+      ]
     ],
-    faq: [
+    "faq": [
       [
-        "Do I need a finished business plan?",
-        "No. A problem you understand or an idea you want to explore is enough to start. We help organize the missing pieces.",
+        "Is every fault repairable?",
+        "No. Condition, parts availability and the assessed fault affect feasibility. Discuss alternatives before approving costly work."
       ],
       [
-        "Can you help with an existing product?",
-        "Yes. Discovery can focus on a new audience, a difficult workflow, or a feature whose value is still uncertain.",
-      ],
-    ],
+        "Are prices and timing fixed?",
+        "No. Confirm charges, availability and expected timing for the model and agreed scope after assessment."
+      ]
+    ]
   },
   {
-    slug: "scope",
-    phase: "DEFINE",
-    name: "Scope",
-    category: "PRODUCT",
-    title: "The right features. A clearer path forward.",
-    accent: "A clearer path forward.",
-    intro:
-      "Give your idea a buildable plan. We define the first release, connect requirements to user needs, and make dependencies visible before development begins.",
-    outcome:
-      "A prioritized release scope that gives design and engineering a common target, with clear boundaries and acceptance criteria.",
-    deliverables: [
+    "slug": "scope",
+    "phase": "ASSESS",
+    "name": "Assess",
+    "category": "REPAIR CARE",
+    "title": "Look closer. Find the cause.",
+    "accent": "Find the cause.",
+    "intro": "Arrange model-specific checks rather than selecting a replacement part from a symptom alone.",
+    "outcome": "The likely cause, further checks and repair feasibility are explained.",
+    "deliverables": [
       [
-        "Release roadmap",
-        "A practical sequence for the first release and the improvements that can follow.",
+        "Model and symptom record",
+        "Record the exact equipment, symptoms and relevant damage history."
       ],
       [
-        "Prioritized backlog",
-        "Features organized around user value, dependencies, and delivery constraints.",
+        "Agreed scope",
+        "Confirm what this stage includes and any further checks or charges."
       ],
       [
-        "Acceptance criteria",
-        "Concrete descriptions of how important workflows should behave when complete.",
-      ],
-      [
-        "Delivery assumptions",
-        "Integration needs, responsibilities, exclusions, and open questions documented for planning.",
-      ],
+        "Useful service details",
+        "Keep the assessment, approvals and completed checks together."
+      ]
     ],
-    steps: [
+    "steps": [
       [
-        "Map the essential journeys",
-        "Identify what users must be able to accomplish and what your team needs to operate the product.",
+        "Share the context",
+        "Explain the fault and any change since the previous conversation."
       ],
       [
-        "Make the tradeoffs",
-        "Choose first-release priorities against budget, complexity, and the value of learning early.",
+        "Review the options",
+        "Arrange model-specific checks rather than selecting a replacement part from a symptom alone."
       ],
       [
-        "Agree on the release",
-        "Review the scope together and establish how new requests will be evaluated.",
-      ],
+        "Confirm the next step",
+        "The likely cause, further checks and repair feasibility are explained."
+      ]
     ],
-    faq: [
+    "faq": [
       [
-        "Can we start with an MVP?",
-        "Yes. We can define a first release around a small set of valuable user journeys and keep later ideas in a separate backlog.",
+        "Is every fault repairable?",
+        "No. Condition, parts availability and the assessed fault affect feasibility. Discuss alternatives before approving costly work."
       ],
       [
-        "What happens if requirements change?",
-        "We assess the effect on design, effort, and timing, then agree on the scope change before implementing it.",
-      ],
-    ],
+        "Are prices and timing fixed?",
+        "No. Confirm charges, availability and expected timing for the model and agreed scope after assessment."
+      ]
+    ]
   },
   {
-    slug: "ux",
-    phase: "DESIGN",
-    name: "UX",
-    category: "EXPERIENCE",
-    title: "Make every interaction feel considered.",
-    accent: "feel considered.",
-    intro:
-      "Shape an experience people can understand and use. We connect user journeys, interface design, and responsive behavior into a product that feels consistent from the first screen.",
-    outcome:
-      "A reviewable interface direction and connected user flows that give your team clarity before the screens become software.",
-    deliverables: [
+    "slug": "ux",
+    "phase": "ESTIMATE",
+    "name": "Estimate",
+    "category": "REPAIR CARE",
+    "title": "Clear costs. Informed choices.",
+    "accent": "Informed choices.",
+    "intro": "Review inspection charges, labour, parts and exclusions before agreeing to repairs.",
+    "outcome": "An estimate separates essential work from optional service.",
+    "deliverables": [
       [
-        "User flows",
-        "Clear paths through onboarding, core tasks, and the moments that need extra guidance.",
+        "Model and symptom record",
+        "Record the exact equipment, symptoms and relevant damage history."
       ],
       [
-        "Wireframes and prototypes",
-        "Layouts and interactive concepts that make decisions easier to discuss and test.",
+        "Agreed scope",
+        "Confirm what this stage includes and any further checks or charges."
       ],
       [
-        "Responsive interface design",
-        "Screen designs with a consistent visual language across mobile and desktop.",
-      ],
-      [
-        "Component and state guidance",
-        "Reusable patterns, including loading, empty, error, and success states for implementation.",
-      ],
+        "Useful service details",
+        "Keep the assessment, approvals and completed checks together."
+      ]
     ],
-    steps: [
+    "steps": [
       [
-        "Organize the experience",
-        "Map information and navigation around the tasks people come to complete.",
+        "Share the context",
+        "Explain the fault and any change since the previous conversation."
       ],
       [
-        "Prototype the key moments",
-        "Explore the important screens and review how the journey works as a whole.",
+        "Review the options",
+        "Review inspection charges, labour, parts and exclusions before agreeing to repairs."
       ],
       [
-        "Refine for delivery",
-        "Resolve feedback, consider accessibility, and prepare design guidance for engineering.",
-      ],
+        "Confirm the next step",
+        "An estimate separates essential work from optional service."
+      ]
     ],
-    faq: [
+    "faq": [
       [
-        "Can you use our existing brand?",
-        "Yes. We can work within your brand guidelines and existing component system, extending them where the product needs it.",
+        "Is every fault repairable?",
+        "No. Condition, parts availability and the assessed fault affect feasibility. Discuss alternatives before approving costly work."
       ],
       [
-        "Is user testing included?",
-        "We agree on the validation approach during scoping. Prototype reviews, usability sessions, and participant recruitment can be planned to suit the project.",
-      ],
-    ],
+        "Are prices and timing fixed?",
+        "No. Confirm charges, availability and expected timing for the model and agreed scope after assessment."
+      ]
+    ]
   },
   {
-    slug: "code",
-    phase: "DEVELOP",
-    name: "Code",
-    category: "ENGINEERING",
-    title: "Build the foundation for what comes next.",
-    accent: "what comes next.",
-    intro:
-      "Bring the product to life with maintainable engineering. We build the interface, application logic, and data foundations around your agreed workflows and business requirements.",
-    outcome:
-      "Working software delivered in reviewable increments, with a codebase your team can operate and continue to develop.",
-    deliverables: [
+    "slug": "code",
+    "phase": "APPROVE",
+    "name": "Approve",
+    "category": "REPAIR CARE",
+    "title": "Your device. Your decision.",
+    "accent": "Your decision.",
+    "intro": "Agree the repair scope before work begins. Further faults or changes need a separate conversation.",
+    "outcome": "The approved work and any limitations are understood.",
+    "deliverables": [
       [
-        "Product implementation",
-        "Responsive interfaces and application behavior aligned with the agreed designs and scope.",
+        "Model and symptom record",
+        "Record the exact equipment, symptoms and relevant damage history."
       ],
       [
-        "Application and data structure",
-        "Clear models, permissions, and service boundaries suited to the product.",
+        "Agreed scope",
+        "Confirm what this stage includes and any further checks or charges."
       ],
       [
-        "Meaningful automated checks",
-        "Tests for important behavior and integration points, chosen around project risk.",
-      ],
-      [
-        "Technical handoff",
-        "Repository access and setup documentation, with deployment requirements and known limitations.",
-      ],
+        "Useful service details",
+        "Keep the assessment, approvals and completed checks together."
+      ]
     ],
-    steps: [
+    "steps": [
       [
-        "Set the foundations",
-        "Choose the architecture and establish development environments, conventions, and review practices.",
+        "Share the context",
+        "Explain the fault and any change since the previous conversation."
       ],
       [
-        "Build in increments",
-        "Deliver connected workflows in manageable pieces so you can review real progress.",
+        "Review the options",
+        "Agree the repair scope before work begins. Further faults or changes need a separate conversation."
       ],
       [
-        "Prepare for validation",
-        "Resolve implementation issues and bring the release together for end-to-end checking.",
-      ],
+        "Confirm the next step",
+        "The approved work and any limitations are understood."
+      ]
     ],
-    faq: [
+    "faq": [
       [
-        "Can you work with our existing codebase?",
-        "Yes. We first review its structure, dependencies, and constraints, then agree on a practical implementation approach.",
+        "Is every fault repairable?",
+        "No. Condition, parts availability and the assessed fault affect feasibility. Discuss alternatives before approving costly work."
       ],
       [
-        "Will we have access to the code?",
-        "Repository access, ownership, and handoff arrangements are defined in the project agreement so responsibilities are clear before work starts.",
-      ],
-    ],
+        "Are prices and timing fixed?",
+        "No. Confirm charges, availability and expected timing for the model and agreed scope after assessment."
+      ]
+    ]
   },
   {
-    slug: "apis",
-    phase: "CONNECT",
-    name: "APIs",
-    category: "INTEGRATIONS",
-    title: "Your tools, working together.",
-    accent: "working together.",
-    intro:
-      "Connect your product to the services your business relies on. From payments and messaging to internal systems, we design integrations around reliable data flow and clear failure handling.",
-    outcome:
-      "Connected workflows with defined data ownership, visible errors, and less manual movement between systems.",
-    deliverables: [
+    "slug": "apis",
+    "phase": "REPAIR",
+    "name": "Repair",
+    "category": "REPAIR CARE",
+    "title": "The agreed work. Carefully scoped.",
+    "accent": "Carefully scoped.",
+    "intro": "Repair or service focuses on the assessed fault, compatible parts and the work you approved.",
+    "outcome": "The agreed repair is completed or revised options are discussed.",
+    "deliverables": [
       [
-        "Integration map",
-        "The systems, events, and data exchanged, with a clear owner for each connection.",
+        "Model and symptom record",
+        "Record the exact equipment, symptoms and relevant damage history."
       ],
       [
-        "API and webhook connections",
-        "Scoped integrations with authentication, validation, and environment configuration.",
+        "Agreed scope",
+        "Confirm what this stage includes and any further checks or charges."
       ],
       [
-        "Failure and retry handling",
-        "Appropriate safeguards for duplicate events, unavailable services, and partial failures.",
-      ],
-      [
-        "Operational guidance",
-        "Configuration notes and troubleshooting guidance for the team maintaining the connections.",
-      ],
+        "Useful service details",
+        "Keep the assessment, approvals and completed checks together."
+      ]
     ],
-    steps: [
+    "steps": [
       [
-        "Map the exchange",
-        "Define what moves between systems, when it moves, and which system is the source of truth.",
+        "Share the context",
+        "Explain the fault and any change since the previous conversation."
       ],
       [
-        "Build the connection",
-        "Implement against available documentation and test environments, keeping credentials out of client code.",
+        "Review the options",
+        "Repair or service focuses on the assessed fault, compatible parts and the work you approved."
       ],
       [
-        "Verify real scenarios",
-        "Check successful requests, rejected input, repeated events, and third-party outages where feasible.",
-      ],
+        "Confirm the next step",
+        "The agreed repair is completed or revised options are discussed."
+      ]
     ],
-    faq: [
+    "faq": [
       [
-        "Which services can you connect?",
-        "We assess any service with a suitable API, webhook, or supported data exchange method. Feasibility depends on provider access and capabilities.",
+        "Is every fault repairable?",
+        "No. Condition, parts availability and the assessed fault affect feasibility. Discuss alternatives before approving costly work."
       ],
       [
-        "Are third-party fees included?",
-        "Provider subscriptions and usage charges are separate unless specifically included in the project agreement. We identify these dependencies during scoping.",
-      ],
-    ],
+        "Are prices and timing fixed?",
+        "No. Confirm charges, availability and expected timing for the model and agreed scope after assessment."
+      ]
+    ]
   },
   {
-    slug: "qa",
-    phase: "VALIDATE",
-    name: "QA",
-    category: "QUALITY",
-    title: "Move toward launch with confidence.",
-    accent: "with confidence.",
-    intro:
-      "Check the journeys that matter before customers depend on them. We validate product behavior against the agreed scope and make release risks visible while there is time to act.",
-    outcome:
-      "An evidence-based view of release readiness, with tracked defects, verified fixes, and explicit decisions about remaining limitations.",
-    deliverables: [
+    "slug": "qa",
+    "phase": "TEST",
+    "name": "Test",
+    "category": "REPAIR CARE",
+    "title": "Check the function. Review the result.",
+    "accent": "Review the result.",
+    "intro": "Review charging, display, recording, cooling, drainage or other relevant functions after work.",
+    "outcome": "Completed checks and any remaining limitations are recorded.",
+    "deliverables": [
       [
-        "Risk-based test plan",
-        "Coverage focused on critical workflows, permissions, integrations, and likely failure points.",
+        "Model and symptom record",
+        "Record the exact equipment, symptoms and relevant damage history."
       ],
       [
-        "Browser and device checks",
-        "Responsive and compatibility checks across the browser and device set agreed for the project.",
+        "Agreed scope",
+        "Confirm what this stage includes and any further checks or charges."
       ],
       [
-        "Defect tracking",
-        "Reproducible issues with clear priorities, expected behavior, and verification status.",
-      ],
-      [
-        "Release readiness review",
-        "A record of checks completed, outstanding issues, and the agreed launch decision.",
-      ],
+        "Useful service details",
+        "Keep the assessment, approvals and completed checks together."
+      ]
     ],
-    steps: [
+    "steps": [
       [
-        "Define what must work",
-        "Turn requirements and important user journeys into a focused validation plan.",
+        "Share the context",
+        "Explain the fault and any change since the previous conversation."
       ],
       [
-        "Exercise the product",
-        "Check typical use, edge cases, and failures, combining manual and automated checks where useful.",
+        "Review the options",
+        "Review charging, display, recording, cooling, drainage or other relevant functions after work."
       ],
-      ["Close the loop", "Retest fixes and review remaining risks with your team before release."],
+      [
+        "Confirm the next step",
+        "Completed checks and any remaining limitations are recorded."
+      ]
     ],
-    faq: [
+    "faq": [
       [
-        "Does QA guarantee there will be no bugs?",
-        "No test process can guarantee that. We reduce release risk through agreed coverage, clear reporting, and verification of important behavior.",
+        "Is every fault repairable?",
+        "No. Condition, parts availability and the assessed fault affect feasibility. Discuss alternatives before approving costly work."
       ],
       [
-        "Can you test a product built by another team?",
-        "Yes. We need access to the application, its expected behavior, and appropriate test accounts to define a useful review.",
-      ],
-    ],
+        "Are prices and timing fixed?",
+        "No. Confirm charges, availability and expected timing for the model and agreed scope after assessment."
+      ]
+    ]
   },
   {
-    slug: "cloud",
-    phase: "LAUNCH",
-    name: "Cloud",
-    category: "DEPLOYMENT",
-    title: "From ready to live, with a plan.",
-    accent: "with a plan.",
-    intro:
-      "Make launch a deliberate step. We prepare hosting, configuration, and release procedures so your product reaches production with a clear operating and recovery plan.",
-    outcome:
-      "A deployed product with documented environment configuration, release checks, and an agreed path for responding when something needs attention.",
-    deliverables: [
+    "slug": "cloud",
+    "phase": "HANDOVER",
+    "name": "Handover",
+    "category": "REPAIR CARE",
+    "title": "Ready to return. Clear on care.",
+    "accent": "Clear on care.",
+    "intro": "Review completed work, returned accessories and applicable repair terms before daily use.",
+    "outcome": "You have the service details needed for future questions.",
+    "deliverables": [
       [
-        "Hosting and environment setup",
-        "Production and supporting environments configured for the agreed platform and workload.",
+        "Model and symptom record",
+        "Record the exact equipment, symptoms and relevant damage history."
       ],
       [
-        "Release workflow",
-        "A repeatable deployment process with configuration and migration steps documented.",
+        "Agreed scope",
+        "Confirm what this stage includes and any further checks or charges."
       ],
       [
-        "Monitoring and recovery plan",
-        "Agreed visibility into application health, plus backup and rollback procedures where supported.",
-      ],
-      [
-        "Launch handoff",
-        "Access, domain configuration, operating notes, and responsibilities reviewed with your team.",
-      ],
+        "Useful service details",
+        "Keep the assessment, approvals and completed checks together."
+      ]
     ],
-    steps: [
+    "steps": [
       [
-        "Prepare the environment",
-        "Confirm hosting needs, access, domain settings, and production configuration.",
+        "Share the context",
+        "Explain the fault and any change since the previous conversation."
       ],
       [
-        "Rehearse the release",
-        "Validate the build and deployment steps in a suitable environment, including any data changes.",
+        "Review the options",
+        "Review completed work, returned accessories and applicable repair terms before daily use."
       ],
       [
-        "Launch and verify",
-        "Deploy the agreed release, check core journeys, and hand over the operating information.",
-      ],
+        "Confirm the next step",
+        "You have the service details needed for future questions."
+      ]
     ],
-    faq: [
+    "faq": [
       [
-        "Can you deploy to our cloud account?",
-        "Yes. We can work in your account with suitable access, subject to the platform and scope agreed for the project.",
+        "Is every fault repairable?",
+        "No. Condition, parts availability and the assessed fault affect feasibility. Discuss alternatives before approving costly work."
       ],
       [
-        "Is ongoing hosting support included?",
-        "Launch support, monitoring responsibilities, and ongoing maintenance are agreed separately in the project scope. Cloud provider charges depend on usage and plan.",
-      ],
-    ],
+        "Are prices and timing fixed?",
+        "No. Confirm charges, availability and expected timing for the model and agreed scope after assessment."
+      ]
+    ]
   },
   {
-    slug: "grow",
-    phase: "IMPROVE",
-    name: "Grow",
-    category: "ITERATION",
-    title: "Let real usage shape the next release.",
-    accent: "the next release.",
-    intro:
-      "Keep improving after launch. We help turn customer feedback, product signals, and operational needs into focused changes that make the product more useful over time.",
-    outcome:
-      "A living improvement backlog tied to observable user needs, with a repeatable way to choose, deliver, and evaluate the next change.",
-    deliverables: [
+    "slug": "grow",
+    "phase": "AFTERCARE",
+    "name": "Aftercare",
+    "category": "REPAIR CARE",
+    "title": "Keep the record. Keep care close.",
+    "accent": "Keep care close.",
+    "intro": "Report recurring symptoms with the model and service reference. Discuss preventive care where useful.",
+    "outcome": "A follow-up request starts with clear history rather than repeated guesses.",
+    "deliverables": [
       [
-        "Product health review",
-        "A review of available usage signals, feedback, and recurring support or operational issues.",
+        "Model and symptom record",
+        "Record the exact equipment, symptoms and relevant damage history."
       ],
       [
-        "Improvement backlog",
-        "Prioritized opportunities spanning user experience, performance, and product capabilities.",
+        "Agreed scope",
+        "Confirm what this stage includes and any further checks or charges."
       ],
       [
-        "Focused release iterations",
-        "Scoped updates with acceptance criteria and validation before deployment.",
-      ],
-      [
-        "Learning and roadmap review",
-        "A review of what changed and what the evidence suggests doing next.",
-      ],
+        "Useful service details",
+        "Keep the assessment, approvals and completed checks together."
+      ]
     ],
-    steps: [
+    "steps": [
       [
-        "Listen and measure",
-        "Review available analytics and customer feedback, checking the quality of the evidence.",
+        "Share the context",
+        "Explain the fault and any change since the previous conversation."
       ],
       [
-        "Choose a useful change",
-        "Prioritize improvements by likely value, effort, and the cost of leaving the problem unresolved.",
+        "Review the options",
+        "Report recurring symptoms with the model and service reference. Discuss preventive care where useful."
       ],
       [
-        "Ship and learn",
-        "Validate the release and compare results with the intended outcome to guide the next iteration.",
-      ],
+        "Confirm the next step",
+        "A follow-up request starts with clear history rather than repeated guesses."
+      ]
     ],
-    faq: [
+    "faq": [
       [
-        "Can we start with a small improvement?",
-        "Yes. A specific workflow, performance issue, or recurring customer request can be a useful starting point.",
+        "Is every fault repairable?",
+        "No. Condition, parts availability and the assessed fault affect feasibility. Discuss alternatives before approving costly work."
       ],
       [
-        "Do you guarantee growth results?",
-        "No. Outcomes depend on your market, distribution, and product as well as implementation. We agree on measurable goals and evaluate changes against available evidence.",
-      ],
-    ],
-  },
+        "Are prices and timing fixed?",
+        "No. Confirm charges, availability and expected timing for the model and agreed scope after assessment."
+      ]
+    ]
+  }
 ];
-
-export const workflowBySlug = (slug: string) =>
-  WORKFLOW_STAGES.find((stage) => stage.slug === slug);
+export const workflowBySlug = (slug: string) => WORKFLOW_STAGES.find(stage => stage.slug === slug);
