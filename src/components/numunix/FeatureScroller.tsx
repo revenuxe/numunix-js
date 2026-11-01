@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Label } from "./primitives";
 import ServiceDemo, { type RepairStory } from "./ServiceDemo";
 import { useCategory } from "./category";
+import { repairServiceHref } from "@/content/repair-services";
 import { REPAIR_SERVICES } from "@/content/homepage-repairs";
 
 type Item = {
@@ -102,7 +103,7 @@ function MobileStage({ items }: { items: Item[] }) {
 
 export function FeatureScroller() {
   const category = useCategory()?.category ?? "electronics";
-  const items: Item[] = REPAIR_SERVICES[category].map((service, i) => ({ nav: service.nav, href: "/features", title: service.title, body: service.body, slug: `${category}-repair-${i}`, preset: ITEMS[i]?.preset ?? "repair-web" }));
+  const items: Item[] = REPAIR_SERVICES[category].map((service, i) => ({ nav: service.nav, href: repairServiceHref(category, service.kind), title: service.title, body: service.body, slug: `${category}-repair-${i}`, preset: ITEMS[i]?.preset ?? "repair-web" }));
   const [active, setActive] = useState(0);
   const refs = useRef<(HTMLDivElement | null)[]>([]);
 

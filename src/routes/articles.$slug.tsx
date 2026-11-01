@@ -327,7 +327,7 @@ function ArticlePage() {
         )}
 
         {/* Article content with sidebar */}
-        <section className="bg-[#f8fafb] py-16 lg:py-24" ref={contentRef}>
+        <section id="article-content" className="bg-[#f8fafb] py-16 lg:py-24" ref={contentRef}>
           <div className="shell">
             <div className="mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-[280px_1fr]">
               {/* Sidebar: Table of Contents (sticky on desktop) */}
