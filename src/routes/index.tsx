@@ -23,9 +23,9 @@ import Footer from "@/components/numunix/Footer";
 import { ContactFormSection } from "@/components/numunix/ContactFormSection";
 import { SITE_URL, OG_IMAGE, CONTACT } from "@/content/site";
 
-const TITLE = "Numunix | Software, Websites, Apps & Digital Products";
+const TITLE = "Numunix | Mobile, Laptop, CCTV & Electronics Repair in Bangalore";
 const DESC =
-  "We design and develop software, websites, apps, and digital products built for real-world growth. Explore web, mobile, SaaS, custom software, AI, and UI/UX services.";
+  "Expert repair for mobiles, laptops, CCTV, TVs, tablets, and home appliances. Walk in or book a doorstep visit — clear estimates, tested parts, and a service warranty on every job.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -77,7 +77,13 @@ function Index() {
     <div className="bg-[#05070c]">
       <Header />
       <main>
-        <Hero />
+        <Hero
+          headline="Every device,"
+          accent="expertly repaired."
+          intro="Mobile, laptop, CCTV, and appliance repairs — with clear estimates, tested parts, and a service warranty on every job."
+          primaryLabel="BOOK A REPAIR"
+          secondaryLabel="WHAT WE REPAIR"
+        />
         <LogoMarquee />
         <PlatformIntro />
         <FeatureScroller />
