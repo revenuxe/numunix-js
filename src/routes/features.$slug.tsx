@@ -1,13 +1,12 @@
-import { createFileRoute, notFound } from "@tanstack/react-router";
-import FeaturePage from "@/components/numunix/FeaturePage";
-import { featureBySlug } from "@/content/features";
-import { SITE_URL } from "@/content/site";
+import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
+import { LEGACY_SERVICE_SLUGS } from "@/content/repair-legacy";
+import { REPAIR_PAGES } from "@/content/repair-services";
 
 export const Route = createFileRoute("/features/$slug")({
-  loader: ({ params }) => {
-    const feature = featureBySlug(params.slug);
-    if (!feature) throw notFound();
-    return { feature };
+  beforeLoad: ({ params }) => {
+    if (REPAIR_PAGES.some(service => service.slug === params.slug)) throw redirect({ to: "/repairs/$slug", params: {slug: params.slug}, statusCode: 301 });
+    if (LEGACY_SERVICE_SLUGS.includes(params.slug)) throw redirect({ to: "/features", statusCode: 301 });
+    throw notFound();
   },
   head: ({ params, loaderData }) => {
     const f = loaderData?.feature;
