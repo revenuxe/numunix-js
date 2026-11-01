@@ -119,6 +119,18 @@
 .repair-audience-stage { padding: 30px; background: var(--mist-2); border-block: 1px solid var(--border); }
 .repair-audience-stage .repair-visual { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; box-shadow: var(--repair-shadow); }
 .repair-audience-footer { padding: 18px 28px; display: flex; gap: 16px; justify-content: space-between; font-family: var(--font-mono); font-size: 9px; color: var(--mutedtext); }
+.audience-repair-scene { color: var(--navytext); }
+.audience-room { position: relative; aspect-ratio: 8 / 5; margin-top: 18px; overflow: hidden; }
+.audience-room-backdrop { position: absolute; inset: 0; width: 100%; height: 100%; }
+.audience-room-line { fill: none; stroke: color-mix(in srgb, var(--blue) 35%, var(--card)); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.audience-room-furniture { fill: var(--accent); stroke: color-mix(in srgb, var(--blue) 30%, var(--card)); stroke-width: 1.5; }
+.audience-room-window { fill: var(--card); stroke: color-mix(in srgb, var(--blue) 35%, var(--card)); stroke-width: 1.5; }
+.audience-room-device { position: absolute; width: 59%; right: 1%; bottom: 10%; }
+.audience-room-1 .audience-room-device, .audience-room-5 .audience-room-device { bottom: 24%; }
+.audience-room-2 .audience-room-device, .audience-room-7 .audience-room-device { bottom: 32%; }
+.audience-room-device .repair-ground, .audience-room-device .repair-bench { display: none; }
+.audience-service-summary { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 11px; }
+.audience-service-summary > span:last-child { color: var(--mutedtext); font-size: 10px; }
 @keyframes repair-spin { to { transform: rotate(360deg); } }
 @keyframes repair-flow { 50% { opacity: .35; transform: translateY(5px); } }
 @media (width < 640px) { .repair-audience-heading { padding: 20px; } .repair-audience-heading h4 { font-size: 19px; } .repair-audience-stage { padding: 18px; } .repair-audience-stage .repair-visual { padding: 14px; } .repair-audience-footer { padding: 16px 20px; } .repair-visual-top { font-size: 9px; } }

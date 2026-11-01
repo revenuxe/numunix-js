@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Label, Reveal } from "./primitives";
-import RepairVisual from "./RepairVisual";
+import AudienceRepairScene from "./AudienceRepairScene";
 import { useCategory } from "./category";
 import { HOMEPAGE_REPAIR, REPAIR_SERVICES } from "@/content/homepage-repairs";
 import { ArrowUpRight } from "lucide-react";
@@ -166,7 +166,7 @@ export default function IndustriesSection() {
                           <div><span className="label-mono text-blue">{audience.label} / {category.toUpperCase()} CARE</span><h4>{REPAIR_SERVICES[category][audience.service]?.title}</h4></div>
                           <span className="text-mutedtext text-[28px] font-light">{String(index + 1).padStart(2, "0")}</span>
                         </div>
-                        <div className="repair-audience-stage"><RepairVisual key={`${category}-${index}`} category={category} service={audience.service} /></div>
+                        <div className="repair-audience-stage"><AudienceRepairScene key={`${category}-${index}`} category={category} index={index} service={audience.service} /></div>
                         <div className="repair-audience-footer"><span>ASSESS · REPAIR · TEST</span><span>Illustrative repair</span></div>
                       </div>
                     </a>
