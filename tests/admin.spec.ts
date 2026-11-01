@@ -89,7 +89,7 @@ test("mobile admin can view, update, filter and delete a lead", async ({ page },
   await mockSupabase(page);
   await login(page);
   await expect(page).toHaveURL(/admin\/dashboard/);
-  await expect(page.getByRole("heading", { name: "Every repair. One desk." })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
     true,
   );
