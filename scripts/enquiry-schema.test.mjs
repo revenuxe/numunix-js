@@ -16,7 +16,7 @@ const valid = {
   name: " Test Visitor ",
   phone: "+91 98765 43210",
   email: "",
-  service: "Web Development",
+  service: "Mobile Repair",
   timeline: "Flexible",
   description: "",
   source: "/contact",
@@ -35,10 +35,16 @@ test("invalid contact details and oversized descriptions are rejected", () => {
     { email: "not-an-email" },
     { service: "" },
     { description: "x".repeat(1501) },
-    { source: "/unknown" },
+    { source: "https://example.com" },
   ]) {
     assert.equal(enquirySchema.safeParse({ ...valid, ...invalid }).success, false);
   }
+});
+test("repair requests can omit email and keep their originating service page", () => {
+  const { email, ...withoutEmail } = valid;
+  const result = enquirySchema.parse({ ...withoutEmail, source: "/electronic/repairs/mobile-repair" });
+  assert.equal(result.email, null);
+  assert.equal(result.source, "/electronic/repairs/mobile-repair");
 });
 test("both page sources and international phone formatting are accepted", () => {
   for (const source of ["/", "/contact"]) {
