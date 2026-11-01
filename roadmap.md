@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Create individual Electronics and Appliances repair pages, link repair cards to them, and match public page openings to the homepage ribbon design.
+
 - [x] Stabilize the category dropdown and provide separately addressable Electronics and Appliances homepages with category-specific metadata and content; verified navigation, reloads, full labels, metadata and no header movement at 394px and 1280px.
 
 - [x] Curate homepage audience visuals for actual repairs and make the hero Appliances selector switch the full homepage content and repair scenes; verified both categories and switching back on desktop and 375px.
