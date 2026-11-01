@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Label, Heading, Accent, Reveal } from "./primitives";
 import { NODE_VIZ } from "./nodeviz";
 import { Link } from "@tanstack/react-router";
@@ -7,26 +8,52 @@ import {
   Laptop,
   Cctv,
   Tv,
+  Tablet,
+  HardDrive,
+  Gamepad2,
+  Truck,
   WashingMachine,
   AirVent,
+  Refrigerator,
+  Microwave,
+  Droplets,
+  BatteryCharging,
+  Fan,
   Zap,
-  Truck,
   type LucideIcon,
 } from "lucide-react";
 import { WORKFLOW_STAGES } from "@/content/workflow";
 
 const NODES = WORKFLOW_STAGES;
 
-// Homepage panel shows the repair services we cover, each with its own icon.
-const REPAIR_NODES = [
+type RepairNode = { slug: string; phase: string; name: string; category: string; icon: LucideIcon };
+
+// Homepage panel shows the repair services we cover, switchable by category.
+const ELECTRONICS_NODES: RepairNode[] = [
   { slug: "idea", phase: "REPAIR", name: "Mobile", category: "SCREENS · BATTERIES", icon: Smartphone },
   { slug: "scope", phase: "REPAIR", name: "Laptop", category: "BOARDS · UPGRADES", icon: Laptop },
   { slug: "ux", phase: "INSTALL", name: "CCTV", category: "SETUP · MAINTENANCE", icon: Cctv },
   { slug: "code", phase: "REPAIR", name: "TV & Audio", category: "PANELS · SOUND", icon: Tv },
-  { slug: "apis", phase: "REPAIR", name: "Washing", category: "DRUMS · MOTORS", icon: WashingMachine },
-  { slug: "qa", phase: "SERVICE", name: "AC", category: "GAS · COOLING", icon: AirVent },
-  { slug: "cloud", phase: "WORK", name: "Electrical", category: "WIRING · FITTINGS", icon: Zap },
+  { slug: "apis", phase: "REPAIR", name: "Tablet", category: "IPAD · ANDROID", icon: Tablet },
+  { slug: "qa", phase: "RECOVERY", name: "Data", category: "DRIVES · PHONES", icon: HardDrive },
+  { slug: "cloud", phase: "REPAIR", name: "Console", category: "PS · XBOX", icon: Gamepad2 },
   { slug: "grow", phase: "SERVICE", name: "Doorstep", category: "WE COME TO YOU", icon: Truck },
+];
+
+const APPLIANCE_NODES: RepairNode[] = [
+  { slug: "idea", phase: "REPAIR", name: "Washing", category: "DRUMS · MOTORS", icon: WashingMachine },
+  { slug: "scope", phase: "SERVICE", name: "AC", category: "GAS · COOLING", icon: AirVent },
+  { slug: "ux", phase: "REPAIR", name: "Fridge", category: "COOLING · GAS", icon: Refrigerator },
+  { slug: "code", phase: "REPAIR", name: "Microwave", category: "OVENS · CHIMNEY", icon: Microwave },
+  { slug: "apis", phase: "SERVICE", name: "Purifier", category: "RO · FILTERS", icon: Droplets },
+  { slug: "qa", phase: "REPAIR", name: "Inverter", category: "UPS · BATTERIES", icon: BatteryCharging },
+  { slug: "cloud", phase: "WORK", name: "Fan & Light", category: "FITTING · REPAIR", icon: Fan },
+  { slug: "grow", phase: "WORK", name: "Electrical", category: "WIRING · FITTINGS", icon: Zap },
+];
+
+const REPAIR_TABS = [
+  { label: "Electronics", nodes: ELECTRONICS_NODES },
+  { label: "Appliances", nodes: APPLIANCE_NODES },
 ];
 
 type PanelNodes = { slug: string; phase: string; name: string; category: string; icon?: LucideIcon }[];
@@ -54,7 +81,7 @@ export function PlatformIntro() {
         </div>
       </div>
       <Reveal delay={120}>
-        <WorkflowVisualization nodes={REPAIR_NODES} label="REPAIR SERVICES" sub="/ MOBILE → ELECTRICAL" />
+        <WorkflowVisualization tabs={REPAIR_TABS} label="REPAIR SERVICES" sub="/ MOBILE → ELECTRICAL" />
       </Reveal>
     </section>
   );
@@ -62,13 +89,17 @@ export function PlatformIntro() {
 
 export function WorkflowVisualization({
   nodes = NODES,
+  tabs,
   label = "IDEA TO PRODUCT",
   sub = "/ BUSINESS → GROWTH",
 }: {
   nodes?: PanelNodes;
+  tabs?: { label: string; nodes: PanelNodes }[];
   label?: string;
   sub?: string;
 }) {
+  const [tab, setTab] = useState(0);
+  const activeNodes = tabs ? tabs[tab]!.nodes : nodes;
   return (
     <div className="mt-12 w-full lg:mt-20">
       {/* head */}
@@ -77,21 +108,45 @@ export function WorkflowVisualization({
           <span className="label-mono text-[#1747b8]">{label}</span>
           <span className="label-mono hidden text-[#a8b7cc] sm:inline">{sub}</span>
         </div>
-        <span className="label-mono flex items-center gap-2 text-[#8190aa]">
-          <span
-            className="h-1.5 w-1.5 rounded-full bg-[#2563eb]"
-            style={{ animation: "nx-pulse-dot 2.4s ease-in-out infinite" }}
-          />
-          CONNECTED AT EVERY STEP
-        </span>
+        {tabs ? (
+          <div
+            role="tablist"
+            aria-label="Service category"
+            className="flex items-center gap-1 rounded-full border border-[#dbe5f2] bg-white p-1"
+          >
+            {tabs.map((t, i) => (
+              <button
+                key={t.label}
+                role="tab"
+                aria-selected={tab === i}
+                onClick={() => setTab(i)}
+                className={`label-mono rounded-full px-4 py-2 transition-all duration-250 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] ${
+                  tab === i
+                    ? "bg-[#1747b8] text-white shadow-[0_6px_16px_-8px_rgba(23,71,184,0.7)]"
+                    : "text-[#5d76a3] hover:text-[#1747b8]"
+                }`}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+        ) : (
+          <span className="label-mono flex items-center gap-2 text-[#8190aa]">
+            <span
+              className="h-1.5 w-1.5 rounded-full bg-[#2563eb]"
+              style={{ animation: "nx-pulse-dot 2.4s ease-in-out infinite" }}
+            />
+            CONNECTED AT EVERY STEP
+          </span>
+        )}
       </div>
 
       {/* flow rail */}
       <div>
         <div className="grid grid-cols-2 gap-4 px-6 py-5 sm:gap-5 md:grid-cols-4 xl:grid-cols-8 lg:px-12">
-          {nodes.map(({ phase: n, name: v, category: u, slug, icon: Icon }, i) => (
+          {activeNodes.map(({ phase: n, name: v, category: u, slug, icon: Icon }, i) => (
             <Link
-              key={slug}
+              key={`${tab}-${slug}`}
               to="/approach/$slug"
               params={{ slug }}
               aria-label={`${n}: ${v} — explore ${u.toLowerCase()}`}
