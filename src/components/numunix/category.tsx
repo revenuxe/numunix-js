@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export type RepairCategory = "electronics" | "appliances";
 
@@ -27,32 +27,20 @@ const OPTIONS: { value: RepairCategory; label: string }[] = [
   { value: "appliances", label: "APPLIANCES" },
 ];
 
-/** Dark-header pill toggle; renders nothing on pages without a CategoryProvider. */
+/** Compact category selector for the homepage header. */
 export function CategoryToggle({ className = "" }: { className?: string }) {
   const ctx = useCategory();
   if (!ctx) return null;
   return (
-    <div
-      role="tablist"
-      aria-label="Service category"
-      className={`flex items-center gap-0.5 rounded-xl border border-primary-foreground/10 bg-primary-foreground/5 p-1 ${className}`}
-    >
-      {OPTIONS.map((o) => (
-        <Button
-          variant="ghost"
-          key={o.value}
-          role="tab"
-          aria-selected={ctx.category === o.value}
-          onClick={() => ctx.setCategory(o.value)}
-          className={`label-mono h-auto rounded-lg px-2.5 py-1.5 transition-all duration-250 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring min-[375px]:px-3 ${
-            ctx.category === o.value
-              ? "bg-primary text-primary-foreground hover:bg-primary"
-              : "text-primary-foreground/60 hover:bg-primary-foreground/10 hover:text-primary-foreground"
-          }`}
-        >
-          {o.label}
-        </Button>
-      ))}
-    </div>
+    <Select value={ctx.category} onValueChange={(value) => {
+      if (value === "electronics" || value === "appliances") ctx.setCategory(value);
+    }}>
+      <SelectTrigger aria-label="Repair category" className={`h-11 w-[142px] shrink-0 gap-2 rounded-lg border-primary/60 bg-primary px-3 font-mono text-[11px] tracking-normal text-primary-foreground shadow-none focus:ring-ring sm:w-[158px] ${className}`}>
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent className="z-[70] border-primary-foreground/15 bg-ink-800 text-primary-foreground">
+        {OPTIONS.map(option => <SelectItem key={option.value} value={option.value} className="py-3 font-mono text-[11px] tracking-normal focus:bg-primary focus:text-primary-foreground">{option.label}</SelectItem>)}
+      </SelectContent>
+    </Select>
   );
 }

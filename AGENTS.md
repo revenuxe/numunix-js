@@ -10,7 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Website content and navigation
-- Homepage category-specific content lives in a shared repair catalogue; repair sections consume the hero's category context, while interior-page visuals remain independent to preserve their existing content.
+- Homepage category-specific content lives in a shared repair catalogue; repair sections consume the header selector's shared category context, while interior-page visuals remain independent to preserve their existing content.
 - Homepage device illustrations use a shared browser-safe SVG repair visual with global semantic tokens and reduced-motion support, so service and audience panels stay consistent without changing their layout.
 - Who We Serve illustrations place shared device drawings within audience-specific room scenes, keeping audience imagery distinct from diagnostic-bench service panels.
 - Do not add phone-number or click-to-call buttons to heroes or CTA sections, including future pages. Use project, service, or email actions instead.

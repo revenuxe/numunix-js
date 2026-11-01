@@ -95,7 +95,6 @@ function HomepageContent() {
           intro={content.intro}
           primaryLabel="BOOK A REPAIR"
           secondaryLabel="WHAT WE REPAIR"
-          showCategoryToggle
         />
         <LogoMarquee />
         <PlatformIntro />
