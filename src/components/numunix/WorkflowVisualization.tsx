@@ -131,9 +131,10 @@ export function WorkflowVisualization({
               to={tabs ? "/$category/repairs/$slug" : "/repair-process/$slug"}
               params={{ category: tab === 0 ? "electronic" : "appliances", slug: tabs ? (REPAIR_PAGES.filter(service => service.category === (tab === 0 ? "electronics" : "appliances"))[i]?.slug ?? slug) : slug }}
               aria-label={`${n}: ${v}, explore ${u.toLowerCase()}`}
-              className="group relative flex min-w-0 flex-col justify-between overflow-hidden rounded-2xl border border-[#e1eaf5] bg-white px-4 py-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#b8ccec] hover:bg-[#f5f8fd] hover:shadow-[0_4px_20px_-10px_rgba(30,78,216,0.15)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] motion-reduce:transform-none motion-reduce:transition-none sm:px-5 sm:py-6"
+              className="group relative flex min-w-0 cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-[#e1eaf5] bg-white px-4 py-5 shadow-[0_1px_2px_rgba(8,21,46,0.05)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#7ea8e8] hover:bg-[#f5f8fd] hover:shadow-[0_18px_40px_-16px_rgba(30,78,216,0.35)] active:translate-y-0 active:scale-[0.98] active:shadow-[0_6px_16px_-10px_rgba(30,78,216,0.3)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] motion-reduce:transform-none motion-reduce:transition-none sm:px-5 sm:py-6"
             >
               <span className="pointer-events-none absolute inset-x-0 -top-px h-px scale-x-0 bg-gradient-to-r from-transparent via-[#2563eb] to-transparent transition-transform duration-500 group-hover:scale-x-100" />
+              <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_0%,rgba(37,99,235,0.08),transparent_60%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
               <div className="flex items-center gap-2">
                 <span className="label-mono text-[#b3c2d6]">{String(i + 1).padStart(2, "0")}</span>
@@ -151,7 +152,7 @@ export function WorkflowVisualization({
 
               <div className="mt-4 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
                 {Icon ? (
-                  <span className="grid h-9 w-9 place-items-center rounded-lg border border-[#dbe5f2] bg-[#f4f8fd] text-[#1e4ed8] transition-colors duration-300 group-hover:border-[#3b82f6]/45 group-hover:bg-[#eaf2fe]">
+                  <span className="grid h-9 w-9 place-items-center rounded-lg border border-[#dbe5f2] bg-[#f4f8fd] text-[#1e4ed8] transition-all duration-300 group-hover:scale-110 group-hover:border-[#2563eb] group-hover:bg-[#2563eb] group-hover:text-white group-hover:shadow-[0_6px_14px_-6px_rgba(37,99,235,0.6)]">
                     <Icon size={18} strokeWidth={1.6} aria-hidden="true" />
                   </span>
                 ) : (
@@ -163,9 +164,9 @@ export function WorkflowVisualization({
               </div>
               <span
                 aria-hidden="true"
-                className="absolute right-2 top-2 text-[#2563eb] transition-colors group-hover:text-[#1747b8] group-focus-visible:text-[#1747b8]"
+                className="absolute right-2 top-2 grid h-6 w-6 place-items-center rounded-full border border-transparent text-[#2563eb] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:border-[#2563eb] group-hover:bg-[#2563eb] group-hover:text-white group-focus-visible:border-[#2563eb] group-focus-visible:bg-[#2563eb] group-focus-visible:text-white"
               >
-                <ArrowUpRight size={16} />
+                <ArrowUpRight size={14} />
               </span>
             </Link>
           ))}
