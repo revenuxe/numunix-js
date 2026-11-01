@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Label, Heading, Accent, Reveal } from "./primitives";
 import { useCategory } from "./category";
 import { NODE_VIZ } from "./nodeviz";
