@@ -10,6 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Website content and navigation
+- Render the supplied WhatsApp symbol as an inline SVG with semantic foreground color, so booking actions do not depend on a separate image request.
 - Public content is repair-specific; shared repair catalogues drive service and audience views, with the saved category selecting repair options while detail pages retain their own subjects.
 - Electronics at / and Appliances at /appliances share the homepage layout but derive category context and leaf metadata from their route; use a non-modal navigation dropdown to avoid scroll-lock header shifts.
 - Individual repair pages use /$category/repairs/$slug with category-aware catalogue helpers and redirect-only legacy /repairs/$slug paths and a shared repair catalogue for destinations, diagnostics, preparation and enquiry defaults; public content-page heroes use the shared homepage Hero to keep their ribbon design consistent.
