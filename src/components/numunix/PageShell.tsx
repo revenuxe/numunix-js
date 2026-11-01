@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import NumunixRibbonScene from "./NumunixRibbonScene";
+import Hero from "./Hero";
 import { Label, Heading, Accent, Btn, Reveal } from "./primitives";
 
 export function accented(title: string, accent?: string) {
@@ -29,7 +30,6 @@ export function PageHero({
   body,
   primary = { label: "START YOUR PROJECT", href: "/contact" },
   secondary,
-  compact = false,
 }: {
   label: string;
   title: string;
@@ -40,42 +40,7 @@ export function PageHero({
   compact?: boolean;
 }) {
   return (
-    <section
-      className={`relative flex items-end overflow-hidden bg-[#05070c] pt-28 pb-14 lg:pt-40 lg:pb-24 ${
-        compact ? "min-h-[54svh] lg:min-h-[58vh]" : "min-h-[70svh] lg:min-h-[78vh]"
-      }`}
-    >
-      <div className="absolute inset-0">
-        <NumunixRibbonScene />
-      </div>
-      <div className="grain pointer-events-none absolute inset-0 opacity-[0.5]" />
-      <div className="shell relative grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end lg:gap-20">
-        <Reveal>
-          <Label>{label}</Label>
-          <h1
-            style={{ lineHeight: 1.04 }}
-            className="mt-6 max-w-[16ch] font-light tracking-[-0.03em] text-white text-[clamp(2.4rem,6vw,5.6rem)]"
-          >
-            {accented(title, accent)}
-          </h1>
-        </Reveal>
-        <Reveal delay={120}>
-          <p className="max-w-[46ch] text-[17px] leading-relaxed text-white/60 lg:text-[19px]">
-            {body}
-          </p>
-          <div className="hero-actions mt-6 flex flex-wrap gap-3">
-            <Btn as="a" href={primary.href}>
-              {primary.label}
-            </Btn>
-            {secondary && (
-              <Btn as="a" href={secondary.href} variant="ghostDark">
-                {secondary.label}
-              </Btn>
-            )}
-          </div>
-        </Reveal>
-      </div>
-    </section>
+    <Hero headline={accent && title.includes(accent) ? title.replace(accent, "").trim() : title} accent={accent ?? ""} intro={body} eyebrow={label} primaryLabel={primary.label} primaryHref={primary.href} secondaryLabel={secondary?.label ?? "EXPLORE SERVICES"} secondaryHref={secondary?.href ?? "/features"} />
   );
 }
 

@@ -60,7 +60,8 @@ const HERO_CONTENT: Record<string, HeroContent> = {
 };
 
 export function WorkflowHero({ stage, index }: { stage: WorkflowStage; index: number }) {
-  const content = HERO_CONTENT[stage.slug]!;
+  const content = HERO_CONTENT[stage.slug];
+  if (!content) return null;
   return (
     <PageHero
       label={`${String(index + 1).padStart(2, "0")} / ${stage.phase} / ${stage.category}`}

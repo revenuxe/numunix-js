@@ -11,9 +11,10 @@ const fieldClass =
   "mt-2 block min-h-12 w-full min-w-0 rounded-xl border border-[#dbe5f2] bg-[#f8fafc] px-4 py-3 text-base font-normal text-[#102a63] outline-none transition focus:border-[#2563eb] focus:ring-3 focus:ring-[#2563eb]/10 placeholder:text-[#8190aa]";
 const labelClass = "block min-w-0 text-sm font-medium text-[#102a63]";
 
-export function ContactForm({ initialDescription = "" }: { initialDescription?: string } = {}) {
+export function ContactForm({ initialDescription = "", initialService = "" }: { initialDescription?: string; initialService?: string } = {}) {
   const ctx = useCategory();
-  const serviceOptions = ctx ? REPAIR_SERVICES[ctx.category].map(item => ({ slug: item.kind, name: item.nav })) : FEATURES;
+  const baseOptions = ctx ? REPAIR_SERVICES[ctx.category].map(item => ({ slug: item.kind, name: item.nav })) : FEATURES;
+  const serviceOptions = initialService && !baseOptions.some(item => item.name === initialService) ? [{slug: "requested-repair", name: initialService}, ...baseOptions] : baseOptions;
   const submitting = useRef(false);
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => setHydrated(true), []);
@@ -114,7 +115,7 @@ export function ContactForm({ initialDescription = "" }: { initialDescription?: 
             key={ctx?.category ?? "software"}
             id="contact-service"
             name="service"
-            defaultValue=""
+            defaultValue={initialService}
             required
           >
             <option value="" disabled>

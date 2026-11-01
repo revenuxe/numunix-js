@@ -6,7 +6,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Hero from "./Hero";
 import { CategoryProvider } from "./category";
-import { RepairVisual } from "./RepairVisual";
+import { DeviceVisual } from "./RepairVisual";
 import { ContactForm } from "./ContactForm";
 import { Label, Heading, Accent, Reveal } from "./primitives";
 
@@ -20,7 +20,7 @@ export function RepairServicePage({ service }: { service: RepairService }) {
     <section id="assessment" className="section-pad scroll-mt-24 bg-paper">
      <div className="shell grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
       <Reveal ssrVisible><Label tone="light">{service.name.toUpperCase()}</Label><Heading tone="light" className="mt-6">Start with the fault.<br /><Accent>Not a guess.</Accent></Heading><p className="mt-6 max-w-[52ch] text-base leading-relaxed text-mutedtext">A symptom can have more than one cause. Share what happened, how often it happens and any previous repairs. The assessment helps define which work is useful and which parts, if any, need replacing.</p></Reveal>
-      <Reveal ssrVisible><RepairVisual kind={service.kind} name={service.name} checks={service.checks} phase={3} /></Reveal>
+      <Reveal ssrVisible><div className="repair-visual"><div className="repair-visual-top"><span>{service.name} / assessment</span><span className="repair-status">ILLUSTRATIVE</span></div><DeviceVisual kind={service.kind} /><div className="repair-checks">{service.checks.map(check => <div key={check}><span>{check}</span><Check size={14} /></div>)}</div></div></Reveal>
      </div>
      <div className="shell mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{service.faults.map((fault,i) => <article key={fault} className="rounded-lg border border-border bg-card p-6"><span className="font-mono text-xs text-primary">0{i+1} / COMMON FAULT</span><h3 className="mt-5 text-lg leading-snug text-navytext">{fault}</h3></article>)}</div>
     </section>
