@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Curate homepage audience visuals for actual repairs and make the hero Appliances selector switch the full homepage content and repair scenes.
+
 - [x] Homepage re-theme to Electronics Repairs (mobile, laptop, CCTV, appliances) — content, icons, visuals only; UI/cards untouched. Verified at 1280px and 394px.
 - [x] Security update: @tanstack/react-start@1.168.60, @tanstack/react-router@1.170.41, @tanstack/router-plugin@1.168.42 applied; build OK.
 - [ ] Supabase: user asked to connect project "numunix company" — app is already connected to external Supabase ref azfqsiwkfyqkqdurrgjv; user must verify the ref in their Supabase dashboard; switching is only possible via Integrations settings, not chat.
