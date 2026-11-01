@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "@tanstack/react-router";
-import { Menu, X, Grip } from "lucide-react";
+import { Menu, X, Grip, Phone } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { CONTACT } from "@/content/site";
 import { cn } from "@/lib/utils";
 import { BrandLogo } from "./BrandLogo";
 import { CategoryToggle, useCategory } from "./category";
@@ -20,6 +22,8 @@ export function Header() {
   const [hidden, setHidden] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const pathname = useLocation({ select: (location) => location.pathname });
+  const isHomepage = pathname === "/" || pathname === "/appliances";
+  const headerAction = isHomepage && categoryContext ? <CategoryToggle /> : <Button asChild size="sm" className="h-8 gap-2 px-3 font-mono text-[10px] tracking-normal shadow-none sm:h-9"><a href={CONTACT.phoneHref}><Phone className="size-3.5" />CALL NOW</a></Button>;
 
   useEffect(() => {
     setOpen(false);
@@ -124,21 +128,11 @@ export function Header() {
               </span>
             </nav>
 
-            {categoryContext ? <CategoryToggle /> : <a
-              href="/contact"
-              className="label-mono rounded-xl bg-[#1e4ed8] px-5 py-3 text-white transition-all hover:-translate-y-0.5 hover:bg-[#2563eb] hover:shadow-[0_12px_34px_-12px_rgba(59,130,246,0.9)]"
-            >
-              START PROJECT
-            </a>}
+            {headerAction}
           </div>
 
           <div className="flex items-center gap-2 lg:hidden">
-            {categoryContext ? <CategoryToggle /> : <a
-              href="/contact"
-              className="label-mono rounded-lg bg-[#1e4ed8] px-3.5 py-2.5 text-white"
-            >
-              START PROJECT
-            </a>}
+            {headerAction}
             <button
               aria-label="Menu"
               aria-expanded={open}

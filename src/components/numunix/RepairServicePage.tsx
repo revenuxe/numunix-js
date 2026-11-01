@@ -5,14 +5,13 @@ import { REPAIR_PAGES, type RepairService } from "@/content/repair-services";
 import Header from "./Header";
 import Footer from "./Footer";
 import Hero from "./Hero";
-import { CategoryProvider } from "./category";
 import { DeviceVisual } from "./RepairVisual";
 import { ContactForm } from "./ContactForm";
 import { Label, Heading, Accent, Reveal } from "./primitives";
 
 export function RepairServicePage({ service }: { service: RepairService }) {
  const related = REPAIR_PAGES.filter(item => item.category === service.category && item.slug !== service.slug).slice(0, 3);
- return <CategoryProvider category={service.category}>
+ return <>
   <div className="bg-ink-900">
    <Header />
    <main>
@@ -41,5 +40,5 @@ export function RepairServicePage({ service }: { service: RepairService }) {
    </main>
    <Footer />
   </div>
- </CategoryProvider>;
+ </>;
 }
