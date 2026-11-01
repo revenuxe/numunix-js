@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Switch booking submission to publishable-key-only access and verify receipts and private customer data.
+
 - [x] Restored secure Supabase runtime bindings and verified real Mobile and Washing Machine bookings, saved references and confirmation reloads. Environment files are ignored and not tracked; booking errors no longer expose integration details. Publish required for live settings.
 - [ ] Remove the two November 1 runtime-verification booking entries. Cleanup was declined; IDs: bc88d4da-25fc-4fd3-b4b4-f586d5543ee1 and 481d1321-2e33-43ae-aa96-61ae727aab6e.
 
