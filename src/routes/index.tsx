@@ -22,6 +22,7 @@ import {
 import Footer from "@/components/numunix/Footer";
 import { ContactFormSection } from "@/components/numunix/ContactFormSection";
 import { SITE_URL, OG_IMAGE, CONTACT } from "@/content/site";
+import { CategoryProvider } from "@/components/numunix/category";
 
 const TITLE = "Numunix | Mobile, Laptop, CCTV & Electronics Repair in Bangalore";
 const DESC =
@@ -74,6 +75,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
+    <CategoryProvider>
     <div className="bg-[#05070c]">
       <Header />
       <main>
@@ -102,5 +104,6 @@ function Index() {
       </main>
       <Footer />
     </div>
+    </CategoryProvider>
   );
 }
