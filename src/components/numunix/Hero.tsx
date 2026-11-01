@@ -71,8 +71,8 @@ export function Hero({
       )}
 
       <div className="shell relative flex min-h-[calc(88svh+48px)] flex-col justify-end pt-46 pb-6 lg:min-h-[100vh] lg:pt-40 lg:pb-24">
-        <div className="grid items-end gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:gap-20">
-          <Reveal>
+        <div className="grid min-w-0 items-end gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)] lg:gap-20">
+          <Reveal className="min-w-0">
             {eyebrow && <Label className="mb-7">{eyebrow}</Label>}
             <h1 ref={headingRef} className="font-light leading-[1.08] tracking-normal text-primary-foreground text-[40px] sm:text-[56px] lg:text-[80px] xl:text-[96px]">
               <span className="inline-block whitespace-nowrap">{firstLine}</span>
