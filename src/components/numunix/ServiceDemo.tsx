@@ -1268,9 +1268,17 @@ function CommerceScene({ phase, marketplace = false }: { phase: number; marketpl
   );
 }
 
-export default function ServiceDemo({ slug, href }: { slug: string; href?: string }) {
-  const story = BY_SLUG[slug] ?? "software";
-  const config = STORIES[story];
+export default function ServiceDemo({
+  slug,
+  href,
+  preset,
+}: {
+  slug: string;
+  href?: string;
+  preset?: RepairStory;
+}) {
+  const story: Story = preset ? "software" : (BY_SLUG[slug] ?? "software");
+  const config = preset ? REPAIR_STORIES[preset] : STORIES[story];
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [reduced, setReduced] = useState(false);
@@ -1299,6 +1307,10 @@ export default function ServiceDemo({ slug, href }: { slug: string; href?: strin
     return () => window.clearTimeout(timer);
   }, [visible, reduced, phase]);
   let scene: ReactNode;
+  if (preset) {
+    const RepairScene = REPAIR_SCENES[preset];
+    scene = <RepairScene phase={phase} />;
+  } else
   switch (story) {
     case "web":
       scene = <WebScene phase={phase} />;
@@ -1349,7 +1361,7 @@ export default function ServiceDemo({ slug, href }: { slug: string; href?: strin
     <div ref={ref} className="service-demo" data-service={slug} data-phase={phase}>
       <div className="sd-heading">
         <div>
-          <span className="sd-eyebrow">IN MOTION / PRODUCT CONCEPT</span>
+          <span className="sd-eyebrow">{config.eyebrow ?? "IN MOTION / PRODUCT CONCEPT"}</span>
           <h3>{config.title}</h3>
         </div>
         <button
