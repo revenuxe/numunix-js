@@ -5,14 +5,15 @@ import Footer from "@/components/numunix/Footer";
 import Hero from "@/components/numunix/Hero";
 import { Label, Heading, Accent, Reveal } from "@/components/numunix/primitives";
 import { useCategory } from "@/components/numunix/category";
-import { REPAIR_PAGES, repairCategoryPath } from "@/content/repair-services";
+import { REPAIR_PAGES, repairCategoryPath, repairPageHref } from "@/content/repair-services";
+import { repairPageHead, repairItemList } from "@/content/repair-seo";
 import { REPAIR_SERVICES } from "@/content/homepage-repairs";
 import { SITE_URL } from "@/content/site";
 
 const TITLE = "Electronics & Appliance Repair Services in Bangalore | Numunix";
 const DESC = "Explore mobile, laptop, CCTV, TV, washing machine, AC, refrigerator and electrical repair services. Review common faults, assessment checks and visit preparation.";
 export const Route = createFileRoute("/services/")({
- head: () => ({meta: [{title:TITLE},{name:"description",content:DESC},{property:"og:title",content:TITLE},{property:"og:description",content:DESC},{property:"og:type",content:"website"},{property:"og:url",content:`${SITE_URL}/services`},{name:"twitter:card",content:"summary_large_image"}],links:[{rel:"canonical",href:`${SITE_URL}/services`}]}),
+ head: () => repairPageHead({ title: TITLE, description: DESC, path: "/services", type: "CollectionPage", breadcrumbs: [{ name: "Repair services", path: "/services" }], entities: [repairItemList(REPAIR_PAGES.map(service => ({ name: service.name, path: repairPageHref(service) })))] }),
  component: FeaturesIndex,
 });
 function FeaturesIndex() {
@@ -24,6 +25,6 @@ function FeaturesIndex() {
   <section id="list" className="section-pad scroll-mt-24 bg-mist"><div className="shell"><Label tone="light">{category.toUpperCase()} / SERVICES</Label><Heading tone="light" className="mt-6">The right checks.<br /><Accent>The right next step.</Accent></Heading><div className="mt-12 divide-y divide-border border-y border-border">{services.map((service,i) => {
    const summary = REPAIR_SERVICES[category].find(item => item.kind === service.kind);
    return <Reveal key={service.slug} delay={i*40}><Link to="/$category/repairs/$slug" params={{category:repairCategoryPath(service.category),slug:service.slug}} className="group grid gap-3 py-7 transition-colors hover:bg-paper sm:grid-cols-[2rem_0.85fr_1.15fr_1.5rem] sm:items-start sm:gap-6 sm:px-4"><span className="label-mono text-primary">{String(i+1).padStart(2,"0")}</span><h2 className="text-[22px] font-light text-navytext lg:text-[26px]">{service.name}</h2><p className="text-base leading-relaxed text-muted-foreground">{summary?.body ?? `${service.faults.slice(0,2).join("; ")}. Share the model and symptoms to confirm the assessment scope.`}</p><ArrowRight size={18} className="hover-arrow text-primary" /></Link></Reveal>;
-  })}</div></div></section>
+  })}</div><nav aria-label="Other repair category" className="mt-10 border-t border-border pt-6"><h2 className="text-xl text-navytext">{category === "electronics" ? "Appliance repair services" : "Electronics repair services"}</h2><div className="mt-4 flex flex-wrap gap-x-6 gap-y-3">{REPAIR_PAGES.filter(service => service.category !== category).map(service => <Link key={service.slug} to="/$category/repairs/$slug" params={{category:repairCategoryPath(service.category),slug:service.slug}} className="text-sm text-primary underline underline-offset-4">{service.name}</Link>)}</div></nav></div></section>
  </main><Footer /></div>;
 }

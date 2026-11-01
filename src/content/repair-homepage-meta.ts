@@ -1,4 +1,6 @@
 import { REPAIR_SERVICES, type RepairCategory } from "./homepage-repairs";
+import { REPAIR_PAGES, repairPageHref } from "./repair-services";
+import { repairPageHead, repairItemList, repairServiceSchema } from "./repair-seo";
 
 export const REPAIR_SITE_URL = "https://numunix-flow-engine.lovable.app";
 export const REPAIR_HOME_PATHS = { electronics: "/", appliances: "/appliances" } as const;
@@ -16,30 +18,11 @@ const PAGE_META = {
 
 export function repairHomepageHead(category: RepairCategory) {
   const { title, description } = PAGE_META[category];
-  const url = `${REPAIR_SITE_URL}${REPAIR_HOME_PATHS[category]}`;
-  return {
-    meta: [
-      { title },
-      { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: url },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: title },
-      { name: "twitter:description", content: description },
-    ],
-    links: [{ rel: "canonical", href: url }],
-    scripts: [{
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "CollectionPage",
-        name: title,
-        description,
-        url,
-        about: REPAIR_SERVICES[category].map(service => ({ "@type": "Service", name: service.nav, serviceType: service.nav })),
-      }),
-    }],
-  };
+  const services = REPAIR_PAGES.filter(service => service.category === category);
+  const head = repairPageHead({ title, description, path: REPAIR_HOME_PATHS[category], type: "CollectionPage", entities: [repairItemList(services.map(service => ({ name: service.name, path: repairPageHref(service) }))), ...services.map(service => repairServiceSchema(service, repairPageHref(service)))] });
+  // Keep category-scoped subjects explicit for consumers of homepage metadata.
+  const graph = JSON.parse(head.scripts[0].children);
+  graph["@graph"][0].about = REPAIR_SERVICES[category].map(service => ({ "@type": "Service", name: service.nav, serviceType: service.nav }));
+  head.scripts[0].children = JSON.stringify(graph);
+  return head;
 }
