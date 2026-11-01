@@ -211,13 +211,13 @@ export function FeatureDirectory() {
         </Reveal>
         <div className="grid gap-x-10 md:grid-cols-2">
           <div>
-            {LEFT.map((l) => (
-              <Row key={l} label={l} />
+            {LEFT.map(([icon, l]) => (
+              <Row key={l} icon={icon} label={l} />
             ))}
           </div>
           <div>
-            {RIGHT.map((l) => (
-              <Row key={l} label={l} />
+            {RIGHT.map(([icon, l]) => (
+              <Row key={l} icon={icon} label={l} />
             ))}
           </div>
         </div>
