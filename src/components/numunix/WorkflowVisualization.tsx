@@ -1,4 +1,5 @@
 import { Label, Heading, Accent, Reveal } from "./primitives";
+import { HOMEPAGE_REPAIR } from "@/content/homepage-repairs";
 import { useCategory } from "./category";
 import { NODE_VIZ } from "./nodeviz";
 import { Link } from "@tanstack/react-router";
@@ -59,6 +60,7 @@ const REPAIR_TABS = [
 type PanelNodes = { slug: string; phase: string; name: string; category: string; icon?: LucideIcon }[];
 
 export function PlatformIntro() {
+  const category = useCategory()?.category ?? "electronics";
   return (
     <section id="approach" className="section-pad bg-[#f1f5f9]">
       <div className="shell">
@@ -68,20 +70,20 @@ export function PlatformIntro() {
         <div className="mt-10 grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20">
           <Reveal delay={60}>
             <Heading tone="light">
-              Every device,
+              {category === "appliances" ? "Every appliance," : "Every device,"}
               <br />
               <Accent>one workshop.</Accent>
             </Heading>
           </Reveal>
           <Reveal delay={140}>
             <p className="max-w-[44ch] text-[18px] leading-relaxed text-[#5d76a3] lg:pt-6 lg:text-[20px]">
-              Mobiles, laptops, CCTV, home appliances, and electrical work — repaired by certified technicians, at our bench or your doorstep.
+              {HOMEPAGE_REPAIR[category].overview}
             </p>
           </Reveal>
         </div>
       </div>
       <Reveal delay={120}>
-        <WorkflowVisualization tabs={REPAIR_TABS} label="OUR REPAIR" sub="/ MOBILE → ELECTRICAL" />
+        <WorkflowVisualization tabs={REPAIR_TABS} label="OUR REPAIR" sub={category === "appliances" ? "/ WASHING → ELECTRICAL" : "/ MOBILE → CCTV"} />
       </Reveal>
     </section>
   );
@@ -101,7 +103,7 @@ export function WorkflowVisualization({
   const ctx = useCategory();
   // The header toggle drives the panel on the homepage.
   const tab = ctx?.category === "appliances" ? 1 : 0;
-  const activeNodes = tabs ? tabs[tab]!.nodes : nodes;
+  const activeNodes = tabs ? (tabs[tab]?.nodes ?? nodes) : nodes;
   return (
     <div className="mt-12 w-full lg:mt-20">
       {/* head */}
@@ -153,8 +155,8 @@ export function WorkflowVisualization({
                   </span>
                 ) : (
                   (() => {
-                    const V = NODE_VIZ[i]!;
-                    return <V />;
+                    const V = NODE_VIZ[i];
+                    return V ? <V /> : null;
                   })()
                 )}
               </div>

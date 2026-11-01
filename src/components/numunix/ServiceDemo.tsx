@@ -25,6 +25,9 @@ import {
   Wrench,
 } from "lucide-react";
 import "./ServiceDemo.css";
+import { useCategory } from "./category";
+import RepairVisual from "./RepairVisual";
+import { REPAIR_SERVICES, HOMEPAGE_REPAIR } from "@/content/homepage-repairs";
 
 type Story =
   | "web"
@@ -1277,8 +1280,22 @@ export default function ServiceDemo({
   href?: string;
   preset?: RepairStory;
 }) {
+  const categoryContext = useCategory();
+  const category = categoryContext?.category ?? "electronics";
+  const serviceMatch = slug.match(/(?:electronics|appliances)-repair-(\d+)/);
+  const serviceIndex = serviceMatch ? Number(serviceMatch[1]) : 0;
+  const service = REPAIR_SERVICES[category][serviceIndex] ?? REPAIR_SERVICES[category][0];
   const story: Story = preset ? "software" : (BY_SLUG[slug] ?? "software");
-  const config = preset ? REPAIR_STORIES[preset] : STORIES[story];
+  const originalConfig = preset ? REPAIR_STORIES[preset] : STORIES[story];
+  const isHomepageRepair = Boolean(preset && categoryContext);
+  const isWarranty = preset === "repair-warranty";
+  const isDiagnostic = preset === "repair-ai";
+  const config = isHomepageRepair ? {
+    eyebrow: "REPAIR JOURNEY / ILLUSTRATIVE",
+    title: isWarranty ? (category === "appliances" ? "Maintenance for everyday appliances." : "Maintenance for everyday devices.") : isDiagnostic ? "Symptoms first. Diagnosis next." : service.title,
+    steps: isWarranty ? ["Register", "Inspect", "Service", "Review"] : ["Inspect", "Estimate", "Repair", "Test"],
+    captions: isWarranty ? ["List the items you want assessed for maintenance.", `Discuss checks for ${HOMEPAGE_REPAIR[category].maintenance.toLowerCase()}.`, "Confirm visit frequency and covered work before selecting a plan.", "Keep a record of service visits and recommended follow-up."] : [service.body, "Review the fault assessment and estimate before approving work.", "The agreed repair is carried out and the affected functions are checked.", "Review the test results and any aftercare or warranty terms at handover."],
+  } : originalConfig;
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [reduced, setReduced] = useState(false);
@@ -1307,7 +1324,9 @@ export default function ServiceDemo({
     return () => window.clearTimeout(timer);
   }, [visible, reduced, phase]);
   let scene: ReactNode;
-  if (preset) {
+  if (isHomepageRepair) {
+    scene = <RepairVisual category={category} service={serviceIndex} phase={phase} />;
+  } else if (preset) {
     const RepairScene = REPAIR_SCENES[preset];
     scene = <RepairScene phase={phase} />;
   } else
