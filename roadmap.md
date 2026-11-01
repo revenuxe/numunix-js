@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Curate homepage audience visuals for actual repairs and make the hero Appliances selector switch the full homepage content and repair scenes.
+- [x] Curate homepage audience visuals for actual repairs and make the hero Appliances selector switch the full homepage content and repair scenes; verified both categories and switching back on desktop and 375px.
 
 - [x] Homepage re-theme to Electronics Repairs (mobile, laptop, CCTV, appliances) — content, icons, visuals only; UI/cards untouched. Verified at 1280px and 394px.
 - [x] Security update: @tanstack/react-start@1.168.60, @tanstack/react-router@1.170.41, @tanstack/router-plugin@1.168.42 applied; build OK.

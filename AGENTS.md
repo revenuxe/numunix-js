@@ -10,6 +10,8 @@
 <!-- LOVABLE:END -->
 
 ## Website content and navigation
+- Homepage category-specific content lives in a shared repair catalogue; repair sections consume the hero's category context, while interior-page visuals remain independent to preserve their existing content.
+- Homepage device illustrations use a shared browser-safe SVG repair visual with global semantic tokens and reduced-motion support, so service and audience panels stay consistent without changing their layout.
 - Do not add phone-number or click-to-call buttons to heroes or CTA sections, including future pages. Use project, service, or email actions instead.
 - Product and service cards must link to their relevant detail page, not the generic services directory. Preserve the existing visual design.
 - Keep illustrative service scenarios and scoping guidance in a shared content module, separate from delivery claims; this lets detail pages be specific without implying real client results.
