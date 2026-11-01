@@ -35,14 +35,14 @@ export function WorkflowStagePage({ stage }: { stage: WorkflowStage }) {
       </nav>
 
       <Section>
-        <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-24">
+        <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] items-center gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-24">
           <SectionHead
             label="THE OUTCOME"
             title="Clarity you can build on."
             accent="build on."
             body={stage.outcome}
           />
-          <Reveal delay={100}>
+          <Reveal delay={100} className="min-w-0">
             <div className="relative overflow-hidden rounded-[28px] border border-[#dbe5f2] bg-white p-8 shadow-[0_30px_80px_-50px_rgba(16,42,99,0.3)] sm:p-10">
               <div className="flex items-center justify-between">
                 <Label tone="light">{stage.phase}</Label>
@@ -50,7 +50,7 @@ export function WorkflowStagePage({ stage }: { stage: WorkflowStage }) {
                   {String(index + 1).padStart(2, "0")} / 08
                 </span>
               </div>
-              <div className="mt-8 font-mono text-6xl font-light tracking-tight text-[#102a63]">
+              <div className="mt-8 font-mono text-4xl font-light tracking-normal text-navytext sm:text-6xl">
                 {stage.name}
               </div>
               <div className="label-mono mt-3 text-[#2563eb]">{stage.category}</div>
