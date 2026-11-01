@@ -2,7 +2,7 @@ import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 import { LEGACY_SERVICE_SLUGS } from "@/content/repair-legacy";
 import { REPAIR_PAGES } from "@/content/repair-services";
 
-export const Route = createFileRoute("/services/$slug")({
+export const Route = createFileRoute("/features/$slug")({
   beforeLoad: ({ params }) => {
     if (REPAIR_PAGES.some(service => service.slug === params.slug)) throw redirect({ to: "/repairs/$slug", params: {slug: params.slug}, statusCode: 301 });
     if (LEGACY_SERVICE_SLUGS.includes(params.slug)) throw redirect({ to: "/services", statusCode: 301 });

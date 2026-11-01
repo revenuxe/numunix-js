@@ -22,3 +22,4 @@
 - Shared Hero headings use two explicit no-wrap lines and measured container fitting, so headings stay complete across screen sizes without changing article titles.
 - A root category-selection context persists explicit selections in browser storage; homepage routes retain their own content and metadata, while interior shared navigation and repair options follow the saved selection without rewriting detail-page subjects.
 - Legacy development service and article URLs permanently redirect to the repair directory or related repair guides; audience pages use a shared repair-specific template instead of the retired software industry template.
+- Public navigation uses repair-specific canonical paths (/services, /repair-assessment, /repair-process, /repair-diagnostics, /repair-aftercare, /repair-safety, /repair-guides and /who-we-serve); old paths and development-era stage slugs remain redirect-only to preserve bookmarks and search links.

@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { Link } from "@tanstack/react-router";
+import { REPAIR_PAGES } from "@/content/repair-services";
 import {
   ArrowRight,
   Check,
@@ -1285,6 +1287,7 @@ export default function ServiceDemo({
   const serviceMatch = slug.match(/(?:electronics|appliances)-repair-(\d+)/);
   const serviceIndex = serviceMatch ? Number(serviceMatch[1]) : 0;
   const service = REPAIR_SERVICES[category][serviceIndex] ?? REPAIR_SERVICES[category][0];
+  const linkedRepair = REPAIR_PAGES.find(item => href === `/repairs/${item.slug}`);
   const story: Story = preset ? "software" : (BY_SLUG[slug] ?? "software");
   const originalConfig = preset ? REPAIR_STORIES[preset] : STORIES[story];
   const isHomepageRepair = Boolean(preset && categoryContext);
@@ -1376,6 +1379,7 @@ export default function ServiceDemo({
       </div>
     </>
   );
+  const linkedVisual = <>{visual}<span className="sd-link-footer">{linkedRepair ? `Explore ${linkedRepair.name}` : isWarranty ? "Explore repair aftercare" : "Explore fault assessment"}<ArrowRight size={16} /></span></>;
   return (
     <div ref={ref} className="service-demo" data-service={slug} data-phase={phase}>
       <div className="sd-heading">
@@ -1394,22 +1398,10 @@ export default function ServiceDemo({
           <span>Replay</span>
         </button>
       </div>
-      {href ? (
-        <a
-          className="sd-scene-link"
-          href={href}
-          aria-label={`Explore ${slug.replaceAll("-", " ")}`}
-        >
-          {visual}
-          <span className="sd-link-footer">
-            Explore this service <ArrowRight size={16} />
-          </span>
-        </a>
-      ) : (
-        visual
-      )}
+      {linkedRepair ? <Link className="sd-scene-link" to="/repairs/$slug" params={{ slug: linkedRepair.slug }} aria-label={`Explore ${linkedRepair.name}`}>{linkedVisual}</Link>
+        : href ? <Link className="sd-scene-link" to={isWarranty ? "/repair-aftercare" : "/repair-assessment"}>{linkedVisual}</Link> : visual}
       <span className="sr-only">
-        {config.steps.join(" → ")}. {config.captions[3]} This is an illustrative product concept.
+        {config.steps.join(" → ")}. {config.captions[3]} This is an illustrative repair journey.
       </span>
     </div>
   );
