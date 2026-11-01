@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Connect the illustrated repair cards to named service pages; replace development-era public addresses and menu names with repair-specific destinations, retain permanent redirects, and verify card-to-page navigation and metadata.
+
 - [x] Replaced software-development content across public directories, company pages, articles, policies, navigation and metadata with repair content. Verified all 49 sitemap pages, legacy redirects, category-specific audience and service views, service-to-enquiry flow, mobile/desktop rendering and 12 tests.
 
 - [x] Refresh repair H1s and keep shared public-page headings on two complete lines; verified phone and desktop rendering and existing repair tests.
