@@ -22,7 +22,8 @@ import {
 import Footer from "@/components/numunix/Footer";
 import { ContactFormSection } from "@/components/numunix/ContactFormSection";
 import { SITE_URL, OG_IMAGE, CONTACT } from "@/content/site";
-import { CategoryProvider } from "@/components/numunix/category";
+import { HOMEPAGE_REPAIR } from "@/content/homepage-repairs";
+import { useCategory, CategoryProvider } from "@/components/numunix/category";
 
 const TITLE = "Numunix | Mobile, Laptop, CCTV & Electronics Repair in Bangalore";
 const DESC =
@@ -76,13 +77,22 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <CategoryProvider>
-    <div className="bg-[#05070c]">
+    <HomepageContent />
+    </CategoryProvider>
+  );
+}
+
+function HomepageContent() {
+  const category = useCategory()?.category ?? "electronics";
+  const content = HOMEPAGE_REPAIR[category];
+  return (
+    <div className="bg-ink-900" data-repair-category={category}>
       <Header />
       <main>
         <Hero
-          headline="Every device,"
-          accent="expertly repaired."
-          intro="Mobile, laptop, CCTV, and appliance repairs — with clear estimates, tested parts, and a service warranty on every job."
+          headline={content.headline}
+          accent={content.accent}
+          intro={content.intro}
           primaryLabel="BOOK A REPAIR"
           secondaryLabel="WHAT WE REPAIR"
           showCategoryToggle
@@ -105,6 +115,5 @@ function Index() {
       </main>
       <Footer />
     </div>
-    </CategoryProvider>
   );
 }

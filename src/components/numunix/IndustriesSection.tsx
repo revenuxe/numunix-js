@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Label, Reveal } from "./primitives";
-import IndustryScene from "./IndustryScene";
+import RepairVisual from "./RepairVisual";
+import { useCategory } from "./category";
+import { HOMEPAGE_REPAIR, REPAIR_SERVICES } from "@/content/homepage-repairs";
 import { ArrowUpRight } from "lucide-react";
 
 // Homepage audiences — who brings devices in for repair.
@@ -56,6 +58,12 @@ const AUDIENCES = [
 ];
 
 export default function IndustriesSection() {
+  const category = useCategory()?.category ?? "electronics";
+  const content = HOMEPAGE_REPAIR[category];
+  const audiences = AUDIENCES.map((audience, i) => {
+    const entry = content.audiences[i] ?? content.audiences[0];
+    return { ...audience, name: entry[0], description: entry[1], service: entry[2] };
+  });
   const [active, setActive] = useState(0);
   const refs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -101,10 +109,10 @@ export default function IndustriesSection() {
             <div className="lg:sticky lg:top-32">
               <Label tone="light">WHO WE SERVE</Label>
               <p className="mt-6 max-w-[42ch] text-[15px] leading-[1.65] text-[#5d76a3]">
-                From one phone to a showroom of devices — we keep homes, shops, and offices running.
+                {content.audienceIntro}
               </p>
               <div className="mt-8 hidden lg:block">
-                {AUDIENCES.map((audience, index) => (
+                {audiences.map((audience, index) => (
                   <button
                     key={audience.label}
                     type="button"
@@ -132,7 +140,7 @@ export default function IndustriesSection() {
           </div>
 
           <div className="min-w-0 space-y-24 lg:space-y-[170px]">
-            {AUDIENCES.map((audience, index) => {
+            {audiences.map((audience, index) => {
               return (
                 <div
                   key={audience.name}
@@ -153,7 +161,14 @@ export default function IndustriesSection() {
                       aria-label={`Explore ${audience.name}`}
                       className="block rounded-[24px] transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#2459e0] motion-reduce:transform-none"
                     >
-                      <IndustryScene index={index} />
+                      <div className="overflow-hidden rounded-[24px] border border-border bg-card text-card-foreground" data-audience-repair={category}>
+                        <div className="repair-audience-heading">
+                          <div><span className="label-mono text-blue">{audience.label} / {category.toUpperCase()} CARE</span><h4>{REPAIR_SERVICES[category][audience.service]?.title}</h4></div>
+                          <span className="text-mutedtext text-[28px] font-light">{String(index + 1).padStart(2, "0")}</span>
+                        </div>
+                        <div className="repair-audience-stage"><RepairVisual key={`${category}-${index}`} category={category} service={audience.service} /></div>
+                        <div className="repair-audience-footer"><span>ASSESS · REPAIR · TEST</span><span>Illustrative repair</span></div>
+                      </div>
                     </a>
                     <h3 className="mt-8 max-w-[620px] text-[1.3rem] font-normal leading-[1.28] tracking-[-0.02em] text-[#0b1b38] lg:mt-10 lg:text-[clamp(1.35rem,1.9vw,1.75rem)]">
                       {audience.name}

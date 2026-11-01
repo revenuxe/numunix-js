@@ -1,3 +1,5 @@
+import { useCategory } from "./category";
+import { REPAIR_SERVICES } from "@/content/homepage-repairs";
 const NAMES = [
   "MOBILE REPAIR",
   "LAPTOP REPAIR",
@@ -10,7 +12,9 @@ const NAMES = [
 ];
 
 export function LogoMarquee() {
-  const row = [...NAMES, ...NAMES];
+  const ctx = useCategory();
+  const names = ctx ? REPAIR_SERVICES[ctx.category].map(item => item.nav) : NAMES;
+  const row = [...names, ...names];
   return (
     <section className="relative overflow-hidden border-t border-white/10 bg-[#05070c] py-12">
       <div className="shell">

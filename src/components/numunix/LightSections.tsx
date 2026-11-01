@@ -2,6 +2,8 @@ import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { Label, Heading, Accent, Reveal } from "./primitives";
 import { useCategory } from "./category";
+import { REPAIR_SERVICES } from "@/content/homepage-repairs";
+import { DeviceVisual } from "./RepairVisual";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -36,6 +38,8 @@ const STEPS = [
 ] as const;
 
 export function AutomationWorkflow() {
+  const category = useCategory()?.category ?? "electronics";
+  const steps = category === "appliances" ? STEPS.map((step, i) => [step[0], step[1], ["Share the appliance model, symptoms and where it is installed.", "A specialist checks the fault and installation conditions.", "Review labour, parts and any visit charges before approving work.", "The approved repair is completed with suitable parts.", "Replacement parts are matched to the appliance model.", "Check a cycle, cooling, heating or water flow after the repair.", "Review the work and receive the service record.", "Confirm aftercare advice and the warranty terms for your repair."][i] ?? step[2], step[3]]) : STEPS;
   return (
     <section id="process" className="section-pad bg-[#f7f9fc]">
       <div className="shell">
@@ -44,12 +48,12 @@ export function AutomationWorkflow() {
         </Reveal>
         <Reveal delay={60}>
           <Heading tone="light" className="mt-8 max-w-[18ch]">
-            From the first fault to a device that <Accent>works like new.</Accent>
+            From the first fault to {category === "appliances" ? "an appliance" : "a device"} that <Accent>works again.</Accent>
           </Heading>
         </Reveal>
 
         <div className="mt-20 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {STEPS.map(([n, t, d, slug], i) => (
+          {steps.map(([n, t, d, slug], i) => (
             <Reveal key={n} delay={i * 50}>
               <Link
                 to="/approach/$slug"
@@ -91,6 +95,8 @@ const INDUSTRIES = [
 ] as const;
 
 export function IndustryCarousel() {
+  const category = useCategory()?.category ?? "electronics";
+  const services = REPAIR_SERVICES[category];
   const ref = useRef<HTMLDivElement>(null);
   const scroll = (dir: number) =>
     ref.current?.scrollBy({ left: dir * 420, behavior: "smooth" });
@@ -101,7 +107,7 @@ export function IndustryCarousel() {
         <div className="grid items-end gap-8 lg:grid-cols-[1fr_auto]">
           <Reveal>
             <Heading tone="light" className="max-w-[14ch]">
-              We repair the devices <Accent>you rely on.</Accent>
+              We repair the {category === "appliances" ? "appliances" : "devices"} <Accent>you rely on.</Accent>
             </Heading>
           </Reveal>
           <Reveal delay={80}>
@@ -125,31 +131,14 @@ export function IndustryCarousel() {
         ref={ref}
         className="mt-16 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-6 lg:px-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        {INDUSTRIES.map(([Icon, t, d, href]) => (
+        {services.map(({ icon: Icon, nav: t, body: d, kind }) => (
           <a
-            href={href}
+            href="/features"
             key={t}
             className="group w-[300px] shrink-0 snap-start rounded-[24px] border border-[#dfe7f1] bg-white p-7 transition-all duration-250 hover:-translate-y-1.5 hover:border-[#3b82f6]/45 hover:shadow-[0_30px_70px_-45px_rgba(16,42,99,0.6)] sm:w-[380px]"
           >
-            <div className="relative h-44 overflow-hidden rounded-2xl bg-[#0b1b38]">
-              <div className="absolute inset-0 bg-[radial-gradient(80%_80%_at_70%_20%,rgba(59,130,246,0.55),transparent_65%)]" />
-              <svg viewBox="0 0 380 176" className="absolute inset-0 h-full w-full">
-                {[0, 1, 2, 3].map((i) => (
-                  <path
-                    key={i}
-                    d={`M-20 ${150 - i * 26} C 110 ${90 - i * 20}, 240 ${170 - i * 30}, 400 ${60 - i * 22}`}
-                    stroke={i % 2 ? "#38bdf8" : "#3b82f6"}
-                    strokeOpacity={0.28 + i * 0.12}
-                    strokeWidth={1.6}
-                    fill="none"
-                  />
-                ))}
-              </svg>
-              <Icon
-                size={26}
-                className="absolute bottom-5 left-5 text-white"
-                strokeWidth={1.2}
-              />
+            <div className="relative flex h-44 items-center justify-center overflow-hidden rounded-2xl bg-mist">
+              <DeviceVisual kind={kind} />
             </div>
             <h3 className="mt-7 text-[20px] font-light tracking-[-0.02em] text-[#08152e]">
               {t}
@@ -251,6 +240,8 @@ const TOP = [
 ] as const;
 
 export function AnalyticsDemo() {
+  const category = useCategory()?.category ?? "electronics";
+  const top = category === "appliances" ? [["Washing Machine", 34], ["AC", 27], ["Refrigerator", 21], ["Purifier", 18]] as const : [["Mobile", 34], ["Laptop", 27], ["CCTV", 21], ["TV & Audio", 18]] as const;
   const pts = [18, 32, 26, 44, 38, 58, 50, 72, 64, 86, 78, 96];
   const path = pts
     .map((p, i) => `${i === 0 ? "M" : "L"}${(i / (pts.length - 1)) * 640},${120 - p}`)
@@ -263,7 +254,7 @@ export function AnalyticsDemo() {
         </Reveal>
         <Reveal delay={60}>
           <Heading tone="light" className="mt-8 max-w-[18ch]">
-            See every repair, <Accent>clearly.</Accent>
+            See every {category === "appliances" ? "appliance repair" : "device repair"}, <Accent>clearly.</Accent>
           </Heading>
         </Reveal>
 
@@ -304,7 +295,7 @@ export function AnalyticsDemo() {
               <div className="rounded-2xl border border-[#e6ecf4] p-6">
                 <div className="label-mono text-[#8190aa]">JOBS BY DEVICE</div>
                 <div className="mt-6 space-y-4">
-                  {TOP.map(([k, v]) => (
+                  {top.map(([k, v]) => (
                     <div key={k}>
                       <div className="flex justify-between text-[14px]">
                         <span className="text-[#102a63]">{k}</span>
@@ -335,6 +326,9 @@ const POSTS = [
 ];
 
 export function BlogCards() {
+  const category = useCategory()?.category ?? "electronics";
+  const services = REPAIR_SERVICES[category];
+  const posts = category === "appliances" ? [["DIAGNOSE FIRST", "APPLIANCE CARE", "Cooling, drainage and power faults checked before replacing parts.", "/features"], ["CLEAR SCOPE", "YOUR APPROVAL", "Review the visit, parts and labour estimate before work begins.", "/features"], ["TESTED AT HOME", "AFTERCARE", "Check the repaired function and understand the next care steps.", "/features"]] : POSTS;
   return (
     <section className="section-pad bg-[#eef3f8]">
       <div className="shell">
@@ -342,26 +336,14 @@ export function BlogCards() {
           <Heading tone="light">Why repair with Numunix</Heading>
         </Reveal>
         <div className="mt-16 grid gap-6 md:grid-cols-3">
-          {POSTS.map(([d, c, t, href], i) => (
+          {posts.map(([d, c, t, href], i) => (
             <Reveal key={t} delay={i * 70}>
               <a
                 href={href}
                 className="group block h-full overflow-hidden rounded-[22px] border border-[#dfe7f1] bg-white transition-all duration-250 hover:-translate-y-1.5 hover:border-[#3b82f6]/40 hover:shadow-[0_30px_70px_-45px_rgba(16,42,99,0.6)]"
               >
-                <div className="relative h-56 overflow-hidden bg-[#05070c]">
-                  <div className="absolute inset-0 bg-[radial-gradient(90%_90%_at_30%_10%,rgba(30,78,216,0.75),transparent_60%)]" />
-                  <svg viewBox="0 0 400 224" className="absolute inset-0 h-full w-full">
-                    {[0, 1, 2, 3, 4].map((k) => (
-                      <path
-                        key={k}
-                        d={`M${-40 + k * 30} 240 C ${120 + k * 20} ${150 - k * 18}, ${220 - k * 10} ${120 + k * 16}, ${460} ${-20 + k * 26}`}
-                        stroke={k % 2 ? "#60a5fa" : "#1e4ed8"}
-                        strokeOpacity={0.5}
-                        strokeWidth={10 - k}
-                        fill="none"
-                      />
-                    ))}
-                  </svg>
+                <div className="relative flex h-56 items-center justify-center overflow-hidden bg-mist">
+                  <DeviceVisual kind={services[i]?.kind ?? "phone"} />
                 </div>
                 <div className="p-7">
                   <div className="label-mono flex flex-wrap gap-3 text-[#8190aa]">

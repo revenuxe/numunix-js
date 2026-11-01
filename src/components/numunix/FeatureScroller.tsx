@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Label } from "./primitives";
 import ServiceDemo, { type RepairStory } from "./ServiceDemo";
+import { useCategory } from "./category";
+import { REPAIR_SERVICES } from "@/content/homepage-repairs";
 
 type Item = {
   nav: string;
@@ -70,16 +72,16 @@ function SlideIn({ children, delay = 0 }: { children: React.ReactNode; delay?: n
   );
 }
 
-function MobileStage() {
+function MobileStage({ items }: { items: Item[] }) {
   return (
     <div className="space-y-24 overflow-hidden lg:hidden">
-      {ITEMS.map((it, i) => (
+      {items.map((it, i) => (
         <div key={it.nav}>
           <SlideIn>
             <div className="flex items-center justify-between">
               <span className="label-mono text-[#1747b8]">{it.nav}</span>
               <span className="label-mono text-[#8190aa]">
-                {String(i + 1).padStart(2, "0")} / {String(ITEMS.length).padStart(2, "0")}
+                {String(i + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
               </span>
             </div>
             <div className="mt-4"><ServiceDemo slug={it.slug} preset={it.preset} href={it.href} /></div>
@@ -99,6 +101,8 @@ function MobileStage() {
 
 
 export function FeatureScroller() {
+  const category = useCategory()?.category ?? "electronics";
+  const items: Item[] = REPAIR_SERVICES[category].map((service, i) => ({ nav: service.nav, href: "/features", title: service.title, body: service.body, slug: `${category}-repair-${i}`, preset: ITEMS[i]?.preset ?? "repair-web" }));
   const [active, setActive] = useState(0);
   const refs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -142,7 +146,7 @@ export function FeatureScroller() {
             <div className="lg:sticky lg:top-32">
               <Label tone="light">OUR REPAIR SERVICES</Label>
               <div className="mt-8 hidden lg:block">
-                {ITEMS.map((it, i) => (
+                {items.map((it, i) => (
                   <button
                     key={it.nav}
                     onClick={() =>
@@ -164,12 +168,12 @@ export function FeatureScroller() {
           </div>
 
           {/* MOBILE — pinned stage, cards slide in from the right on scroll */}
-          <MobileStage />
+          <MobileStage items={items} />
 
 
           {/* DESKTOP — continuous panel stack */}
           <div className="hidden lg:block lg:space-y-[170px]">
-            {ITEMS.map((it, i) => (
+            {items.map((it, i) => (
               <div
                 key={it.nav}
                 data-i={i}
