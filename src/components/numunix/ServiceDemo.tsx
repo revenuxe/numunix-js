@@ -4,11 +4,13 @@ import {
   Check,
   CheckCheck,
   ChevronRight,
+  Cctv,
   Code2,
   Cpu,
   CreditCard,
   Database,
   Globe,
+  HardDrive,
   Layers,
   LayoutDashboard,
   LockKeyhole,
@@ -18,7 +20,9 @@ import {
   ShieldCheck,
   ShoppingBag,
   Smartphone,
+  Tv,
   Workflow,
+  Wrench,
 } from "lucide-react";
 import "./ServiceDemo.css";
 
@@ -33,7 +37,10 @@ type Story =
   | "support"
   | "commerce"
   | "marketplace";
-const STORIES: Record<Story, { title: string; steps: string[]; captions: string[] }> = {
+const STORIES: Record<
+  Story,
+  { eyebrow?: string; title: string; steps: string[]; captions: string[] }
+> = {
   web: {
     title: "A website, ready for the world.",
     steps: ["Structure", "Build", "Adapt", "Launch"],
@@ -148,6 +155,603 @@ const BY_SLUG: Record<string, Story> = {
   "maintenance-support": "support",
   "e-commerce": "commerce",
   marketplaces: "marketplace",
+};
+
+// ============ Repair presets — homepage electronics-repair concept ============
+// Same stage structures and styles; only the story, copy, and icons change.
+
+export type RepairStory =
+  | "repair-mobile"
+  | "repair-board"
+  | "repair-cctv"
+  | "repair-web"
+  | "repair-tv"
+  | "repair-data"
+  | "repair-ai"
+  | "repair-warranty";
+
+const REPAIR_STORIES: Record<
+  RepairStory,
+  { eyebrow: string; title: string; steps: string[]; captions: string[] }
+> = {
+  "repair-mobile": {
+    eyebrow: "IN MOTION / SERVICE CONCEPT",
+    title: "Every repair, tracked end to end.",
+    steps: ["Booked", "Diagnosed", "Repaired", "Ready"],
+    captions: [
+      "Book your repair in a minute — walk in or request a doorstep pickup.",
+      "Technicians diagnose the fault and share a clear, itemised estimate.",
+      "The repair is completed on the bench with tested, quality parts.",
+      "Collect your device, or get it delivered — with a service warranty.",
+    ],
+  },
+  "repair-board": {
+    eyebrow: "IN MOTION / SERVICE CONCEPT",
+    title: "A repair bench you can see into.",
+    steps: ["Booked", "Diagnosed", "Repaired", "Ready"],
+    captions: [
+      "Every incoming device becomes a repair job with a clear status.",
+      "Diagnosis and the approved estimate are recorded on the job card.",
+      "Technicians log parts and progress as the job moves across the bench.",
+      "Quality check, pickup, and warranty are recorded before handover.",
+    ],
+  },
+  "repair-cctv": {
+    eyebrow: "IN MOTION / SERVICE CONCEPT",
+    title: "CCTV that’s installed to actually work.",
+    steps: ["Surveyed", "Installed", "Verified", "Secured"],
+    captions: [
+      "We survey the site and plan camera positions with you.",
+      "Cameras, wiring, and the recorder are installed neatly.",
+      "Every camera is checked for coverage, night vision, and recording.",
+      "You get remote view on your phone, plus a maintenance schedule.",
+    ],
+  },
+  "repair-web": {
+    eyebrow: "IN MOTION / SERVICE CONCEPT",
+    title: "A service desk for every machine at home.",
+    steps: ["Booked", "Assigned", "Repaired", "Delivered"],
+    captions: [
+      "Book a technician for the appliance that stopped working.",
+      "We assign the right specialist and confirm a visit slot.",
+      "The fault is fixed with tested parts, on the itemised estimate.",
+      "The machine is tested with you before the job is closed.",
+    ],
+  },
+  "repair-tv": {
+    eyebrow: "IN MOTION / SERVICE CONCEPT",
+    title: "TVs and audio, back to their best.",
+    steps: ["Received", "Assessed", "Repaired", "Delivered"],
+    captions: [
+      "Bring the TV or audio system in, or book a home pickup.",
+      "We assess the panel, backlight, board, or speakers and share an estimate.",
+      "The faulty module is repaired or replaced with tested parts.",
+      "Picture and sound are checked with you before delivery.",
+    ],
+  },
+  "repair-data": {
+    eyebrow: "IN MOTION / SERVICE CONCEPT",
+    title: "When the data matters more than the device.",
+    steps: ["Received", "Assessed", "Recovered", "Handed over"],
+    captions: [
+      "Bring the drive, phone, or memory card that stopped working.",
+      "We assess it without powering it on and tell you what’s possible.",
+      "Recoverable photos, files, and contacts are restored to a new drive.",
+      "You verify everything before we hand it back.",
+    ],
+  },
+  "repair-ai": {
+    eyebrow: "IN MOTION / SERVICE CONCEPT",
+    title: "Describe the fault. AI does the rest.",
+    steps: ["Received", "Diagnosed", "Checked", "Booked"],
+    captions: [
+      "Describe the problem in your own words — on chat or WhatsApp.",
+      "The assistant recognises the device and the likely fault.",
+      "It checks your warranty, parts stock, and the next free bench slot.",
+      "You get a diagnosis, an estimate, and a booked slot — without waiting.",
+    ],
+  },
+  "repair-warranty": {
+    eyebrow: "IN MOTION / SERVICE CONCEPT",
+    title: "AMC plans that keep devices covered.",
+    steps: ["Register", "Activate", "Schedule", "Covered"],
+    captions: [
+      "Register the devices your home or business depends on.",
+      "Activate a maintenance plan that matches how you use them.",
+      "Preventive checks and priority repairs are scheduled for you.",
+      "Something breaks? One call — the plan takes care of the rest.",
+    ],
+  },
+};
+
+function MobileRepairScene({ phase }: { phase: number }) {
+  return (
+    <div className="sd-mobile">
+      <div className="sd-orbit sd-orbit-one" />
+      <div className="sd-orbit sd-orbit-two" />
+      <span className="sd-platform sd-platform-left">
+        <Smartphone size={18} />
+        Walk-in
+      </span>
+      <span className="sd-platform sd-platform-right">
+        <Smartphone size={18} />
+        Doorstep
+      </span>
+      <div className="sd-app-phone">
+        <div className="sd-phone-top">
+          <span>9:41</span>
+          <i />
+          <span>▰</span>
+        </div>
+        <div className="sd-app-body">
+          <div className="sd-app-greeting">
+            Hi Priya <span>A</span>
+          </div>
+          <h4>
+            Your repair,
+            <br />
+            <em>tracked live.</em>
+          </h4>
+          <div className="sd-app-banner">
+            <span>YOUR DEVICE</span>
+            <strong>
+              iPhone 12
+              <br />
+              Screen replacement.
+            </strong>
+            <Wrench size={27} />
+          </div>
+          <div className={`sd-app-task ${phase >= 1 ? "is-selected" : ""}`}>
+            <span className="sd-task-check">{phase >= 2 && <Check size={13} />}</span>
+            <div>
+              <b>Screen replacement</b>
+              <small>{phase >= 2 ? "Completed · quality checked" : "In progress · Bench 04"}</small>
+            </div>
+          </div>
+          <div className="sd-app-task">
+            <span className="sd-task-check" />
+            <div>
+              <b>Battery service</b>
+              <small>Booked · Tomorrow, 11:00 AM</small>
+            </div>
+          </div>
+          <div className="sd-app-bottom">
+            <LayoutDashboard size={16} />
+            <Search size={16} />
+            <Layers size={16} />
+          </div>
+        </div>
+      </div>
+      <div className={`sd-mobile-toast sd-appear ${phase >= 2 ? "is-shown" : ""}`}>
+        <span>
+          <CheckCheck size={17} />
+        </span>
+        <div>
+          <b>{phase === 3 ? "Ready for pickup" : "Repair completed"}</b>
+          <small>
+            {phase === 3 ? "90-day service warranty included." : "Quality checked on the bench."}
+          </small>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function RepairBoardScene({ phase }: { phase: number }) {
+  const lane = Math.min(phase, 2);
+  return (
+    <Browser address="bench.workspace">
+      <div className="sd-workspace-top">
+        <span>
+          <LayoutDashboard size={15} />
+          Repair bench
+        </span>
+        <Badge>Live job board</Badge>
+      </div>
+      <div className="sd-board">
+        <div className="sd-board-labels">
+          {["Booked", "In repair", "Ready for pickup"].map((s, i) => (
+            <span key={s}>
+              <i className={i <= lane ? "is-active" : ""} />
+              {s}
+            </span>
+          ))}
+        </div>
+        <div className="sd-board-lanes">
+          <i />
+          <i />
+          <i />
+        </div>
+        <div className="sd-moving-task" style={{ left: `calc(${lane} * (100% / 3) + 6px)` }}>
+          <span className="sd-task-category">REPAIR JOB</span>
+          <b>MacBook Air · no display</b>
+          <small>Liquid damage · Board-level</small>
+          <div>
+            <span className="sd-avatar">RK</span>
+            <span>{phase >= 2 ? "✓ Ready for pickup" : "Rahul K."}</span>
+          </div>
+        </div>
+        <div className="sd-board-ghost sd-ghost-one" />
+        <div className="sd-board-ghost sd-ghost-two" />
+      </div>
+      <div className="sd-audit">
+        <ShieldCheck size={16} />
+        <div>
+          <b>{phase === 3 ? "Job completed" : "Every job, accounted for"}</b>
+          <small>
+            {phase === 3
+              ? "Quality checked · Customer notified"
+              : "Estimates, parts, and a shared job history"}
+          </small>
+        </div>
+        <Check size={15} />
+      </div>
+    </Browser>
+  );
+}
+
+function RepairCctvScene({ phase }: { phase: number }) {
+  return (
+    <div className="sd-cloud">
+      <div className="sd-terminal">
+        <div>
+          <Cctv size={14} />
+          <span>cameras / site 07</span>
+          <span className="sd-status-dot" />
+        </div>
+        <p>
+          <span>$</span> sync cameras site-07
+        </p>
+        {["12 cameras online", "Recorder storage verified", "Live view is active"].map((s, i) => (
+          <p key={s} className={phase > i ? "is-shown" : ""}>
+            <Check size={12} />
+            {s}
+          </p>
+        ))}
+      </div>
+      <div className="sd-connector" />
+      <div className="sd-cloud-nodes">
+        {[
+          [Cctv, "Cameras"],
+          [Workflow, "Recorder"],
+          [Globe, "Remote view"],
+        ].map(([Icon, label], i) => {
+          const NodeIcon = Icon as typeof Globe;
+          return (
+            <div key={i} className={phase >= 2 ? "is-active" : ""}>
+              <NodeIcon size={22} />
+              <b>{String(label)}</b>
+              <small>{phase >= 2 ? "Streaming" : "Ready to connect"}</small>
+            </div>
+          );
+        })}
+      </div>
+      <div className={`sd-cloud-result sd-appear ${phase === 3 ? "is-shown" : ""}`}>
+        <Badge icon={<ShieldCheck size={13} />}>Site secured · Monitoring enabled</Badge>
+      </div>
+    </div>
+  );
+}
+
+function WebRepairScene({ phase }: { phase: number }) {
+  return (
+    <div className={`sd-web ${phase === 0 ? "sd-wireframe" : ""}`}>
+      <Browser address="your-home-service.in">
+        <div className="sd-site-nav">
+          <b>
+            NUMUNIX<span>®</span>
+          </b>
+          <span>Repairs &nbsp; Status &nbsp; AMC</span>
+          <i>Book a repair ↗</i>
+        </div>
+        <div className="sd-site-hero">
+          <div>
+            <span className="sd-eyebrow">REPAIRS FOR EVERYDAY MACHINES</span>
+            <h4>
+              Every appliance.
+              <br />
+              <em>Back to work.</em>
+            </h4>
+            <p>Doorstep diagnosis and repair for the machines your home runs on.</p>
+            <span className="sd-mini-button">
+              Book a technician <ArrowRight size={11} />
+            </span>
+          </div>
+          <div className="sd-sculpture">
+            <i />
+            <i />
+            <i />
+          </div>
+        </div>
+        <div className="sd-site-tiles">
+          <span>
+            01 <b>Washing machines</b>
+          </span>
+          <span>
+            02 <b>Microwaves & chimneys</b>
+          </span>
+          <span>
+            03 <b>AMC plans</b>
+          </span>
+        </div>
+      </Browser>
+      <div className={`sd-web-phone sd-appear ${phase >= 2 ? "is-shown" : ""}`}>
+        <div className="sd-phone-speaker" />
+        <b>NUMUNIX®</b>
+        <div className="sd-phone-art" />
+        <strong>
+          Technician
+          <br />
+          arriving today.
+        </strong>
+        <span className="sd-mini-button">Track ↗</span>
+      </div>
+      <div className={`sd-float sd-appear ${phase === 3 ? "is-shown" : ""}`}>
+        <Badge icon={<Globe size={12} />}>Doorstep visit booked</Badge>
+      </div>
+    </div>
+  );
+}
+
+function RepairTvScene({ phase }: { phase: number }) {
+  return (
+    <div className={`sd-design ${phase < 2 ? "sd-design-wire" : ""}`}>
+      <div className="sd-design-toolbar">
+        <span>
+          <Tv size={14} />
+          Repair bay
+        </span>
+        <span>UNIT / 01 → 02</span>
+      </div>
+      <div className="sd-design-canvas">
+        <div className="sd-design-screen">
+          <span className="sd-frame-label">01 / ASSESS</span>
+          <div className="sd-design-screen-top">
+            <b>YOUR TV</b>
+            <i />
+          </div>
+          <div className="sd-design-art">
+            <i />
+            <i />
+          </div>
+          <h4>
+            Picture and
+            <br />
+            sound, restored.
+          </h4>
+          <div className="sd-design-lines">
+            <i />
+            <i />
+          </div>
+          <span className="sd-mini-button">
+            View estimate <ArrowRight size={10} />
+          </span>
+          <div className={`sd-selection ${phase >= 2 ? "is-shown" : ""}`}>
+            <i />
+            <i />
+            <i />
+            <i />
+            <span>Panel / Backlight</span>
+          </div>
+        </div>
+        <div className={`sd-design-path ${phase >= 3 ? "is-active" : ""}`}>
+          <i />
+          <ArrowRight size={16} />
+        </div>
+        <div className={`sd-design-screen sd-design-second ${phase >= 1 ? "is-shown" : ""}`}>
+          <span className="sd-frame-label">02 / REPAIR</span>
+          <div className="sd-design-screen-top">
+            <b>ON THE BENCH</b>
+            <i />
+          </div>
+          <div className="sd-design-grid">
+            {[0, 1, 2, 3].map((i) => (
+              <div key={i}>
+                <i />
+                <span />
+              </div>
+            ))}
+          </div>
+          <Badge>Backlight replaced</Badge>
+        </div>
+        <MousePointer2 className={`sd-design-cursor ${phase >= 3 ? "is-active" : ""}`} size={23} />
+      </div>
+    </div>
+  );
+}
+
+function RepairDataScene({ phase }: { phase: number }) {
+  return (
+    <div className={`sd-design ${phase < 2 ? "sd-design-wire" : ""}`}>
+      <div className="sd-design-toolbar">
+        <span>
+          <HardDrive size={14} />
+          Recovery bay
+        </span>
+        <span>DRIVE / 01 → 02</span>
+      </div>
+      <div className="sd-design-canvas">
+        <div className="sd-design-screen">
+          <span className="sd-frame-label">01 / ASSESS</span>
+          <div className="sd-design-screen-top">
+            <b>YOUR DRIVE</b>
+            <i />
+          </div>
+          <div className="sd-design-art">
+            <i />
+            <i />
+          </div>
+          <h4>
+            Photos you
+            <br />
+            thought were gone.
+          </h4>
+          <div className="sd-design-lines">
+            <i />
+            <i />
+          </div>
+          <span className="sd-mini-button">
+            Preview files <ArrowRight size={10} />
+          </span>
+          <div className={`sd-selection ${phase >= 2 ? "is-shown" : ""}`}>
+            <i />
+            <i />
+            <i />
+            <i />
+            <span>Files / Preview</span>
+          </div>
+        </div>
+        <div className={`sd-design-path ${phase >= 3 ? "is-active" : ""}`}>
+          <i />
+          <ArrowRight size={16} />
+        </div>
+        <div className={`sd-design-screen sd-design-second ${phase >= 1 ? "is-shown" : ""}`}>
+          <span className="sd-frame-label">02 / RECOVER</span>
+          <div className="sd-design-screen-top">
+            <b>RECOVERED</b>
+            <i />
+          </div>
+          <div className="sd-design-grid">
+            {[0, 1, 2, 3].map((i) => (
+              <div key={i}>
+                <i />
+                <span />
+              </div>
+            ))}
+          </div>
+          <Badge>2,148 files restored</Badge>
+        </div>
+        <MousePointer2 className={`sd-design-cursor ${phase >= 3 ? "is-active" : ""}`} size={23} />
+      </div>
+    </div>
+  );
+}
+
+function AIRepairScene({ phase }: { phase: number }) {
+  return (
+    <div className="sd-ai">
+      <div className="sd-message">
+        <span className="sd-avatar">A</span>
+        <div>
+          <small>CUSTOMER MESSAGE</small>
+          <p>My laptop gets hot and shuts down after a few minutes.</p>
+        </div>
+      </div>
+      <div className="sd-connector" />
+      <div className={`sd-ai-core ${phase >= 1 ? "is-active" : ""}`}>
+        <div className="sd-ai-icon">
+          <Cpu size={22} strokeWidth={1.5} aria-hidden="true" />
+        </div>
+        <div>
+          <small>AI REPAIR ASSISTANT</small>
+          <strong>
+            {phase === 0
+              ? "A device issue comes in"
+              : phase === 1
+                ? "Identifies the likely fault"
+                : phase === 2
+                  ? "Checks parts and bench slots"
+                  : "Books the repair for you"}
+          </strong>
+        </div>
+        <span className="sd-status-dot" />
+      </div>
+      <div className="sd-connector" />
+      <div className="sd-tool-grid">
+        {[
+          [Database, "Check parts stock", "Display module available"],
+          [Workflow, "Book bench slot", "Tomorrow · 10:30 AM"],
+        ].map(([Icon, title, result], i) => {
+          const ToolIcon = Icon as typeof Database;
+          return (
+            <div key={i} className={phase >= 2 ? "is-active" : ""}>
+              <ToolIcon size={18} />
+              <b>{String(title)}</b>
+              <small>{phase >= 2 ? String(result) : "Connected to the workshop"}</small>
+              {phase >= 2 && <Check size={12} />}
+            </div>
+          );
+        })}
+      </div>
+      <div className={`sd-ai-result sd-appear ${phase === 3 ? "is-shown" : ""}`}>
+        <CheckCheck size={17} />
+        <p>
+          Overheating battery detected.
+          <br />
+          <b>Diagnostic visit booked.</b>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function RepairWarrantyScene({ phase }: { phase: number }) {
+  return (
+    <Browser address="your-amc-plan.in">
+      <div className="sd-saas-layout">
+        <aside>
+          <span className="sd-product-mark">
+            <Layers size={19} />
+          </span>
+          <LayoutDashboard size={16} />
+          <Layers size={16} />
+          <CreditCard size={16} />
+          <ShieldCheck size={16} />
+        </aside>
+        <div className="sd-saas-main">
+          <div className="sd-saas-heading">
+            <div>
+              <small>YOUR COVER PLAN</small>
+              <h4>Every device, covered.</h4>
+            </div>
+            <span className="sd-avatar">A</span>
+          </div>
+          <div className="sd-onboarding">
+            {["Devices registered", "Plan activated", "Service visits scheduled"].map((s, i) => (
+              <div className={phase >= i ? "is-done" : ""} key={s}>
+                <span>{phase >= i ? <Check size={12} /> : i + 1}</span>
+                {s}
+              </div>
+            ))}
+          </div>
+          <div className="sd-saas-bottom">
+            <div className={`sd-plan ${phase >= 2 ? "is-active" : ""}`}>
+              <span>ANNUAL MAINTENANCE</span>
+              <strong>One plan. Zero surprises.</strong>
+              <small>Phones · Laptops · CCTV · Appliances</small>
+              <Badge>{phase >= 2 ? "Plan active" : "Ready when you are"}</Badge>
+            </div>
+            <div className="sd-usage">
+              <span>SERVICE VISITS</span>
+              <div>
+                {[28, 45, 34, 64, 52, 82, 70, 96].map((h, i) => (
+                  <i
+                    key={i}
+                    style={{
+                      height: phase === 3 ? `${h}%` : "12%",
+                      transitionDelay: `${i * 45}ms`,
+                    }}
+                  />
+                ))}
+              </div>
+              <small>Illustrative plan</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Browser>
+  );
+}
+
+const REPAIR_SCENES: Record<RepairStory, (props: { phase: number }) => ReactNode> = {
+  "repair-mobile": MobileRepairScene,
+  "repair-board": RepairBoardScene,
+  "repair-cctv": RepairCctvScene,
+  "repair-web": WebRepairScene,
+  "repair-tv": RepairTvScene,
+  "repair-data": RepairDataScene,
+  "repair-ai": AIRepairScene,
+  "repair-warranty": RepairWarrantyScene,
 };
 
 function Browser({
@@ -664,9 +1268,17 @@ function CommerceScene({ phase, marketplace = false }: { phase: number; marketpl
   );
 }
 
-export default function ServiceDemo({ slug, href }: { slug: string; href?: string }) {
-  const story = BY_SLUG[slug] ?? "software";
-  const config = STORIES[story];
+export default function ServiceDemo({
+  slug,
+  href,
+  preset,
+}: {
+  slug: string;
+  href?: string;
+  preset?: RepairStory;
+}) {
+  const story: Story = preset ? "software" : (BY_SLUG[slug] ?? "software");
+  const config = preset ? REPAIR_STORIES[preset] : STORIES[story];
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [reduced, setReduced] = useState(false);
@@ -695,6 +1307,10 @@ export default function ServiceDemo({ slug, href }: { slug: string; href?: strin
     return () => window.clearTimeout(timer);
   }, [visible, reduced, phase]);
   let scene: ReactNode;
+  if (preset) {
+    const RepairScene = REPAIR_SCENES[preset];
+    scene = <RepairScene phase={phase} />;
+  } else
   switch (story) {
     case "web":
       scene = <WebScene phase={phase} />;
@@ -745,7 +1361,7 @@ export default function ServiceDemo({ slug, href }: { slug: string; href?: strin
     <div ref={ref} className="service-demo" data-service={slug} data-phase={phase}>
       <div className="sd-heading">
         <div>
-          <span className="sd-eyebrow">IN MOTION / PRODUCT CONCEPT</span>
+          <span className="sd-eyebrow">{config.eyebrow ?? "IN MOTION / PRODUCT CONCEPT"}</span>
           <h3>{config.title}</h3>
         </div>
         <button

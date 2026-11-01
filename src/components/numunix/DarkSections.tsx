@@ -14,33 +14,33 @@ export function AIAgentsSection() {
       <div className="shell relative grid gap-14 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-20">
         <div>
           <Reveal>
-            <Label>AI & AUTOMATION</Label>
+            <Label>AI DIAGNOSTICS</Label>
           </Reveal>
           <Reveal delay={60}>
             <Heading className="mt-8">
-              Your next product
+              Your device problem,
               <br />
-              can <Accent>work smarter.</Accent>
+              quickly <Accent>understood.</Accent>
             </Heading>
           </Reveal>
           <Reveal delay={120}>
             <p className="mt-8 max-w-[50ch] text-[18px] leading-relaxed text-white/60 lg:text-[20px]">
-              We build AI-powered applications, assistants, intelligent search, and workflow automation. Connect models to your data and tools to solve practical business problems.
+              Describe what's wrong in plain words — on chat or WhatsApp. Our AI assistant recognises the device, points to the likely fault, and books the right bench slot with a clear estimate.
             </p>
           </Reveal>
           <Reveal delay={180}>
             <div className="mt-10 flex flex-wrap gap-3">
-              <Btn as="a" href="/features/ai-automation">
-                EXPLORE AI
+              <Btn as="a" href="/contact">
+                BOOK A REPAIR
               </Btn>
-              <Btn as="a" href="/contact" variant="ghostDark">
-                CONTACT
+              <Btn as="a" href="/features" variant="ghostDark">
+                WHAT WE REPAIR
               </Btn>
             </div>
           </Reveal>
         </div>
         <Reveal delay={140}>
-          <ServiceDemo slug="ai-automation" href="/features/ai-automation" />
+          <ServiceDemo slug="ai-automation" preset="repair-ai" href="/features" />
         </Reveal>
       </div>
     </section>
@@ -53,25 +53,25 @@ export function DispatchSection() {
       <div className="shell grid gap-14 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-20">
         <div>
           <Reveal>
-            <Label>CLOUD & INTEGRATIONS</Label>
+            <Label>WARRANTY & AMC</Label>
           </Reveal>
           <Reveal delay={60}>
             <Heading className="mt-8">
-              Connect your product to the <Accent>right technology.</Accent>
+              One plan. Every device <Accent>covered.</Accent>
             </Heading>
           </Reveal>
           <Reveal delay={120}>
             <p className="mt-8 max-w-[46ch] text-[18px] leading-relaxed text-white/60">
-              APIs, databases, payments, authentication, and third-party services — connected around your product. We take your software from development to production with modern cloud infrastructure.
+              Annual maintenance plans for homes, shops, and offices — scheduled preventive visits, priority repair slots, and honest advice about what is actually worth fixing.
             </p>
           </Reveal>
           <Reveal delay={160}>
             <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-white/10 pt-8">
               {[
-                ["BACKEND", "Node.js · REST APIs"],
-                ["DATABASES", "PostgreSQL · Supabase"],
-                ["CLOUD", "AWS · Vercel"],
-                ["DELIVERY", "CI/CD · Monitoring"],
+                ["PLANS", "Home · Shop · Office"],
+                ["COVERED", "Phones · Laptops · CCTV · Appliances"],
+                ["VISITS", "Scheduled preventive checks"],
+                ["SUPPORT", "Priority slots · Doorstep service"],
               ].map(([k, v]) => (
                 <div key={k}>
                   <dt className="label-mono text-[#8fb4e8]">{k}</dt>
@@ -82,7 +82,7 @@ export function DispatchSection() {
           </Reveal>
         </div>
         <Reveal delay={140}>
-          <ServiceDemo slug="cloud-integrations" href="/features/cloud-integrations" />
+          <ServiceDemo slug="cloud-integrations" preset="repair-warranty" href="/features" />
         </Reveal>
       </div>
     </section>
@@ -90,10 +90,10 @@ export function DispatchSection() {
 }
 
 const SECURITY = [
-  [ShieldCheck, "DATA SECURITY", "Security-conscious architecture, authentication, and data handling."],
-  [Users, "ROLE-BASED ACCESS", "Permissions designed around your users and responsibilities."],
-  [Activity, "MAINTAINABLE SYSTEMS", "Code and infrastructure built for performance and future growth."],
-  [FileSearch, "AUDITABILITY", "Logging and monitoring that help your team understand the product."],
+  [ShieldCheck, "PRIVACY FIRST", "Your photos, files, and accounts stay yours — we ask before touching anything."],
+  [Users, "CAREFUL HANDLING", "Every device is checked in, logged, and tracked from counter to bench."],
+  [Activity, "TESTED PARTS", "Each replacement part is verified before it ever reaches your device."],
+  [FileSearch, "TRANSPARENT JOBS", "Itemised estimates, live status, and a warranty recorded on your job card."],
 ] as const;
 
 export function SecuritySection() {
@@ -110,11 +110,11 @@ export function SecuritySection() {
           </Reveal>
           <Reveal delay={60}>
             <Heading className="mt-8">
-              Secure,
+              Careful,
               <br />
-              <Accent>reliable</Accent> and
+              <Accent>honest</Accent> and
               <br />
-              built for business.
+              built to last.
             </Heading>
           </Reveal>
         </div>
@@ -138,12 +138,12 @@ export function SecuritySection() {
   );
 }
 
-const BUILT_TABS = ["WEB", "MOBILE", "SAAS", "AI"];
+const BUILT_TABS = ["PHONES", "LAPTOPS", "CCTV", "APPLIANCES"];
 const BUILT_CARDS = [
-  ["BUSINESS WEBSITES", "Responsive websites that combine design, performance, SEO, and technology.", "/features/web-development"],
-  ["MOBILE APPLICATIONS", "Consumer apps, marketplaces, and business tools for iOS and Android.", "/features/mobile-app-development"],
-  ["SAAS PLATFORMS", "Subscription products and B2B software, from MVP to production.", "/features/saas-development"],
-  ["AI PRODUCTS", "AI assistants and intelligent workflows connected to your business.", "/features/ai-automation"],
+  ["MOBILE & TABLET REPAIRS", "Screens, batteries, charging ports, cameras, and water damage — fixed fast, with tested parts.", "/features"],
+  ["LAPTOP & COMPUTER REPAIRS", "Board-level repair, displays, keyboards, and upgrades for every major brand.", "/features"],
+  ["CCTV & SECURITY SYSTEMS", "Installation, DVR/NVR setup, camera repair, and maintenance for homes and businesses.", "/features"],
+  ["APPLIANCES & AMC PLANS", "Washing machines, microwaves, chimneys, and annual maintenance for every device you own.", "/features"],
 ];
 
 export function BuiltWithNumunix() {
@@ -155,7 +155,7 @@ export function BuiltWithNumunix() {
       </div>
       <div className="shell relative">
         <Reveal>
-          <Heading className="text-center">What we can build together</Heading>
+          <Heading className="text-center">What we can fix for you</Heading>
         </Reveal>
         <Reveal delay={80}>
           <div className="mt-10 flex justify-center">
@@ -216,24 +216,24 @@ export function FinalCTA() {
       <div className="shell relative">
         <Reveal>
           <Heading size="xl" className="max-w-[16ch]">
-            Have an idea?{" "}
+            Device not working?{" "}
             <Accent>
-              Let’s turn it into software.
+              Let’s bring it back.
             </Accent>
           </Heading>
         </Reveal>
         <Reveal delay={100}>
           <p className="mt-10 max-w-[54ch] text-[18px] leading-relaxed text-white/60 lg:text-[20px]">
-            Whether you’re starting a SaaS product, building a mobile application, redesigning your website, or automating your business — let’s build it together.
+            A cracked phone screen, a laptop that won’t start, CCTV that dropped offline, or an appliance that stopped mid-cycle — walk in or book a doorstep visit, and get a clear estimate before we start.
           </p>
         </Reveal>
         <Reveal delay={160}>
           <div className="mt-12 flex flex-wrap gap-3">
             <Btn as="a" href="/contact">
-              START YOUR PROJECT
+              BOOK A REPAIR
             </Btn>
             <Btn as="a" href="/features" variant="ghostDark">
-              EXPLORE SERVICES
+              WHAT WE REPAIR
             </Btn>
           </div>
         </Reveal>
