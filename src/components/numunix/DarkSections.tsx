@@ -45,7 +45,7 @@ export function AIAgentsSection() {
           </Reveal>
         </div>
         <Reveal delay={140}>
-          <ServiceDemo slug={category === "appliances" ? "washing-machine-repair" : "mobile-repair"} preset="repair-ai" href={category === "appliances" ? "/repairs/washing-machine-repair" : "/repairs/mobile-repair"} />
+          <ServiceDemo slug={category === "appliances" ? "washing-machine-repair" : "mobile-repair"} preset="repair-ai" href={category === "appliances" ? "/appliances/repairs/washing-machine-repair" : "/electronic/repairs/mobile-repair"} />
         </Reveal>
       </div>
     </section>

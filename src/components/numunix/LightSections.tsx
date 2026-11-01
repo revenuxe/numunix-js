@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { Label, Heading, Accent, Reveal } from "./primitives";
 import { useCategory } from "./category";
-import { REPAIR_PAGES, repairServiceHref } from "@/content/repair-services";
+import { REPAIR_PAGES, repairServiceHref, repairPageHref } from "@/content/repair-services";
 import { REPAIR_SERVICES } from "@/content/homepage-repairs";
 import { DeviceVisual } from "./RepairVisual";
 import {
@@ -153,8 +153,8 @@ export function IndustryCarousel() {
   );
 }
 
-const ELECTRONICS_ROWS = REPAIR_PAGES.filter(service => service.category === "electronics").map(service => [REPAIR_SERVICES.electronics.find(item => item.kind === service.kind)?.icon ?? Smartphone, service.name, `/repairs/${service.slug}`] as const);
-const APPLIANCE_ROWS = REPAIR_PAGES.filter(service => service.category === "appliances").map(service => [REPAIR_SERVICES.appliances.find(item => item.kind === service.kind)?.icon ?? Zap, service.name, `/repairs/${service.slug}`] as const);
+const ELECTRONICS_ROWS = REPAIR_PAGES.filter(service => service.category === "electronics").map(service => [REPAIR_SERVICES.electronics.find(item => item.kind === service.kind)?.icon ?? Smartphone, service.name, repairPageHref(service)] as const);
+const APPLIANCE_ROWS = REPAIR_PAGES.filter(service => service.category === "appliances").map(service => [REPAIR_SERVICES.appliances.find(item => item.kind === service.kind)?.icon ?? Zap, service.name, repairPageHref(service)] as const);
 
 function Row({ icon: Icon, label, href }: { icon: LucideIcon; label: string; href: string }) {
   return (

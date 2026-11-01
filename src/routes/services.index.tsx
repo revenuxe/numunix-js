@@ -5,7 +5,7 @@ import Footer from "@/components/numunix/Footer";
 import Hero from "@/components/numunix/Hero";
 import { Label, Heading, Accent, Reveal } from "@/components/numunix/primitives";
 import { useCategory } from "@/components/numunix/category";
-import { REPAIR_PAGES } from "@/content/repair-services";
+import { REPAIR_PAGES, repairCategoryPath } from "@/content/repair-services";
 import { REPAIR_SERVICES } from "@/content/homepage-repairs";
 import { SITE_URL } from "@/content/site";
 
@@ -23,7 +23,7 @@ function FeaturesIndex() {
   <section className="border-b border-border bg-paper py-10 lg:py-14"><div className="shell grid gap-6 lg:grid-cols-[0.4fr_1.6fr] lg:gap-16"><Label tone="light">A CLEAR START</Label><div className="grid gap-7 sm:grid-cols-3 sm:gap-10">{[["01 / DESCRIBE","Share the model and symptoms."],["02 / ASSESS","Understand the fault and options."],["03 / APPROVE","Review the estimate before work."]].map(([label,title]) => <div key={label} className="border-t border-border pt-5"><span className="label-mono text-primary">{label}</span><p className="mt-3 text-[19px] text-navytext">{title}</p></div>)}</div></div></section>
   <section id="list" className="section-pad scroll-mt-24 bg-mist"><div className="shell"><Label tone="light">{category.toUpperCase()} / SERVICES</Label><Heading tone="light" className="mt-6">The right checks.<br /><Accent>The right next step.</Accent></Heading><div className="mt-12 divide-y divide-border border-y border-border">{services.map((service,i) => {
    const summary = REPAIR_SERVICES[category].find(item => item.kind === service.kind);
-   return <Reveal key={service.slug} delay={i*40}><Link to="/repairs/$slug" params={{slug:service.slug}} className="group grid gap-3 py-7 transition-colors hover:bg-paper sm:grid-cols-[2rem_0.85fr_1.15fr_1.5rem] sm:items-start sm:gap-6 sm:px-4"><span className="label-mono text-primary">{String(i+1).padStart(2,"0")}</span><h2 className="text-[22px] font-light text-navytext lg:text-[26px]">{service.name}</h2><p className="text-base leading-relaxed text-muted-foreground">{summary?.body ?? `${service.faults.slice(0,2).join("; ")}. Share the model and symptoms to confirm the assessment scope.`}</p><ArrowRight size={18} className="hover-arrow text-primary" /></Link></Reveal>;
+   return <Reveal key={service.slug} delay={i*40}><Link to="/$category/repairs/$slug" params={{category:repairCategoryPath(service.category),slug:service.slug}} className="group grid gap-3 py-7 transition-colors hover:bg-paper sm:grid-cols-[2rem_0.85fr_1.15fr_1.5rem] sm:items-start sm:gap-6 sm:px-4"><span className="label-mono text-primary">{String(i+1).padStart(2,"0")}</span><h2 className="text-[22px] font-light text-navytext lg:text-[26px]">{service.name}</h2><p className="text-base leading-relaxed text-muted-foreground">{summary?.body ?? `${service.faults.slice(0,2).join("; ")}. Share the model and symptoms to confirm the assessment scope.`}</p><ArrowRight size={18} className="hover-arrow text-primary" /></Link></Reveal>;
   })}</div></div></section>
  </main><Footer /></div>;
 }

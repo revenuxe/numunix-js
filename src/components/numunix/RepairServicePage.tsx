@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { REPAIR_PAGES, type RepairService } from "@/content/repair-services";
+import { REPAIR_PAGES, repairCategoryPath, type RepairService } from "@/content/repair-services";
 import Header from "./Header";
 import Footer from "./Footer";
 import Hero from "./Hero";
@@ -36,7 +36,7 @@ export function RepairServicePage({ service }: { service: RepairService }) {
      ["What if replacement is a better option?", "Ask about repair feasibility and the likely benefit. If the repair is not practical, discuss replacement options before spending on parts."],
     ].map(([q,a]) => <details key={q} className="group border-b border-border py-6"><summary className="flex cursor-pointer list-none justify-between gap-4 text-lg text-navytext">{q}<ChevronDown className="size-5 shrink-0 text-primary transition-transform group-open:rotate-180" /></summary><p className="mt-4 text-sm leading-relaxed text-mutedtext">{a}</p></details>)}</div></div></section>
     <section id="enquiry" className="section-pad scroll-mt-24 bg-paper"><div className="shell grid items-start gap-12 lg:grid-cols-2 lg:gap-20"><div><Label tone="light">REQUEST AN ASSESSMENT</Label><Heading tone="light" className="mt-6">Tell us the symptoms.<br /><Accent>Let’s take a look.</Accent></Heading><p className="mt-6 max-w-[46ch] text-base leading-relaxed text-mutedtext">Request {service.name.toLowerCase()} with the model, fault and preferred timing. Share enough detail to scope the next conversation.</p></div><ContactForm initialService={service.name} initialDescription={`Service: ${service.name}\nModel: \nSymptoms: `} /></div></section>
-    <section className="section-pad bg-mist"><div className="shell"><Label tone="light">RELATED REPAIRS</Label><div className="mt-8 grid gap-4 md:grid-cols-3">{related.map(item => <Button key={item.slug} asChild variant="outline" className="h-auto min-h-20 justify-between whitespace-normal bg-card p-6 text-left text-navytext"><Link to="/repairs/$slug" params={{slug:item.slug}}>{item.name}<ArrowUpRight className="shrink-0 text-primary" /></Link></Button>)}</div></div></section>
+    <section className="section-pad bg-mist"><div className="shell"><Label tone="light">RELATED REPAIRS</Label><div className="mt-8 grid gap-4 md:grid-cols-3">{related.map(item => <Button key={item.slug} asChild variant="outline" className="h-auto min-h-20 justify-between whitespace-normal bg-card p-6 text-left text-navytext"><Link to="/$category/repairs/$slug" params={{category:repairCategoryPath(item.category),slug:item.slug}}>{item.name}<ArrowUpRight className="shrink-0 text-primary" /></Link></Button>)}</div></div></section>
    </main>
    <Footer />
   </div>

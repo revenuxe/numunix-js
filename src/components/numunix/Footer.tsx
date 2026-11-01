@@ -1,7 +1,7 @@
 import { Linkedin, Instagram, Facebook } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
 import { CONTACT } from "@/content/site";
-import { REPAIR_PAGES } from "@/content/repair-services";
+import { REPAIR_PAGES, repairPageHref } from "@/content/repair-services";
 import { useCategory } from "./category";
 import { REPAIR_SERVICES, HOMEPAGE_REPAIR } from "@/content/homepage-repairs";
 
@@ -15,7 +15,12 @@ export function Footer() {
     ["NUMUNIX", ["Electronics", "Appliances", "Fault Assessment", "Repair Process", "Diagnostics & Tools", "Repair Guides", "Contact"]],
     ["INFORMATION", ["Repair Aftercare", "Privacy Policy", "Terms"]],
   ];
-  const repairLink = (label: string) => label === "Electronics" ? "/" : label === "Appliances" ? "/appliances" : (REPAIR_PAGES.find(service => service.category === category && service.name === label) ? `/repairs/${REPAIR_PAGES.find(service => service.category === category && service.name === label)?.slug}` : FEATURE_LINKS[label] ?? "#enquiry");
+  const repairLink = (label: string) => {
+    if (label === "Electronics") return "/";
+    if (label === "Appliances") return "/appliances";
+    const service = REPAIR_PAGES.find(item => item.category === category && item.name === label);
+    return service ? repairPageHref(service) : FEATURE_LINKS[label] ?? "#enquiry";
+  };
   return (
     <footer className="border-t border-white/8 bg-[#05070c] pt-20 pb-10">
       <div className="shell grid gap-14 lg:grid-cols-[1.1fr_2.4fr]">

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import { REPAIR_PAGES } from "@/content/repair-services";
+import { REPAIR_PAGES, repairPageHref, repairCategoryPath } from "@/content/repair-services";
 import {
   ArrowRight,
   Check,
@@ -1287,7 +1287,7 @@ export default function ServiceDemo({
   const serviceMatch = slug.match(/(?:electronics|appliances)-repair-(\d+)/);
   const serviceIndex = serviceMatch ? Number(serviceMatch[1]) : 0;
   const service = REPAIR_SERVICES[category][serviceIndex] ?? REPAIR_SERVICES[category][0];
-  const linkedRepair = REPAIR_PAGES.find(item => href === `/repairs/${item.slug}`);
+  const linkedRepair = REPAIR_PAGES.find(item => href === repairPageHref(item));
   const story: Story = preset ? "software" : (BY_SLUG[slug] ?? "software");
   const originalConfig = preset ? REPAIR_STORIES[preset] : STORIES[story];
   const isHomepageRepair = Boolean(preset && categoryContext);
@@ -1398,7 +1398,7 @@ export default function ServiceDemo({
           <span>Replay</span>
         </button>
       </div>
-      {linkedRepair ? <Link className="sd-scene-link" to="/repairs/$slug" params={{ slug: linkedRepair.slug }} aria-label={`Explore ${linkedRepair.name}`}>{linkedVisual}</Link>
+      {linkedRepair ? <Link className="sd-scene-link" to="/$category/repairs/$slug" params={{ category: repairCategoryPath(linkedRepair.category), slug: linkedRepair.slug }} aria-label={`Explore ${linkedRepair.name}`}>{linkedVisual}</Link>
         : href ? <Link className="sd-scene-link" to={isWarranty ? "/repair-aftercare" : "/repair-assessment"}>{linkedVisual}</Link> : visual}
       <span className="sr-only">
         {config.steps.join(" → ")}. {config.captions[3]} This is an illustrative repair journey.
