@@ -6,43 +6,65 @@ import { WORKFLOW_STAGES } from "@/content/workflow";
 
 const NODES = WORKFLOW_STAGES;
 
+// Homepage panel shows the same eight stages, relabelled for electronics repair.
+const REPAIR_NODES = [
+  { slug: "idea", phase: "INTAKE", name: "Walk-in", category: "BOOKED" },
+  { slug: "scope", phase: "DIAGNOSE", name: "Fault", category: "IDENTIFIED" },
+  { slug: "ux", phase: "ESTIMATE", name: "Quote", category: "APPROVED" },
+  { slug: "code", phase: "REPAIR", name: "Bench", category: "IN REPAIR" },
+  { slug: "apis", phase: "PARTS", name: "Spares", category: "SOURCED" },
+  { slug: "qa", phase: "TESTING", name: "QC", category: "PASSED" },
+  { slug: "cloud", phase: "HANDOVER", name: "Ready", category: "DELIVERED" },
+  { slug: "grow", phase: "WARRANTY", name: "90 days", category: "COVERED" },
+];
+
+type PanelNodes = { slug: string; phase: string; name: string; category: string }[];
+
 export function PlatformIntro() {
   return (
     <section id="approach" className="section-pad bg-[#f1f5f9]">
       <div className="shell">
         <Reveal>
-          <Label tone="light">OUR APPROACH</Label>
+          <Label tone="light">HOW A REPAIR WORKS</Label>
         </Reveal>
         <div className="mt-10 grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20">
           <Reveal delay={60}>
             <Heading tone="light">
-              From idea
+              From walk-in
               <br />
-              <Accent>to launch.</Accent>
+              <Accent>to working again.</Accent>
             </Heading>
           </Reveal>
           <Reveal delay={140}>
             <p className="max-w-[44ch] text-[18px] leading-relaxed text-[#5d76a3] lg:pt-6 lg:text-[20px]">
-              One team for design, development, and everything it takes to launch.
+              One workshop for diagnostics, repair, and everything it takes to get your device back.
             </p>
           </Reveal>
         </div>
       </div>
       <Reveal delay={120}>
-        <WorkflowVisualization />
+        <WorkflowVisualization nodes={REPAIR_NODES} label="DEVICE INTAKE TO HANDOVER" sub="/ BROKEN → FIXED" />
       </Reveal>
     </section>
   );
 }
 
-export function WorkflowVisualization() {
+export function WorkflowVisualization({
+  nodes = NODES,
+  label = "IDEA TO PRODUCT",
+  sub = "/ BUSINESS → GROWTH",
+}: {
+  nodes?: PanelNodes;
+  label?: string;
+  sub?: string;
+}) {
   return (
     <div className="mt-12 w-full lg:mt-20">
       {/* head */}
       <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-5 lg:px-12">
         <div className="flex items-baseline gap-4">
-          <span className="label-mono text-[#1747b8]">IDEA TO PRODUCT</span>
-          <span className="label-mono hidden text-[#a8b7cc] sm:inline">/ BUSINESS → GROWTH</span>
+          <span className="label-mono text-[#1747b8]">{label}</span>
+          <span className="label-mono hidden text-[#a8b7cc] sm:inline">{sub}</span>
         </div>
         <span className="label-mono flex items-center gap-2 text-[#8190aa]">
           <span
@@ -56,7 +78,7 @@ export function WorkflowVisualization() {
       {/* flow rail */}
       <div>
         <div className="grid grid-cols-2 gap-4 px-6 py-5 sm:gap-5 md:grid-cols-4 xl:grid-cols-8 lg:px-12">
-          {NODES.map(({ phase: n, name: v, category: u, slug }, i) => (
+          {nodes.map(({ phase: n, name: v, category: u, slug }, i) => (
             <Link
               key={slug}
               to="/approach/$slug"
