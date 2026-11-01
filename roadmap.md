@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Verify each menu and repair card opens its own destination and keep the selected category on every return home, including reloads.
+
 - [x] Added category-prefixed service addresses, updated all card links and metadata, retained old service redirects, and verified 49 pages and 18 tests.
 - [ ] Replace the repair hero’s Repair Details action with Book on WhatsApp using the uploaded icon in white.
 - [ ] Remove email from public enquiry forms and curate the admin lead dashboard, filters and detail fields for repair requests.

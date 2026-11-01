@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from "react";
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,21 +15,22 @@ const SelectionContext = createContext<{category: RepairCategory; select: (categ
 
 export function CategorySelectionProvider({ children }: { children: ReactNode }) {
   const [category, setCategory] = useState<RepairCategory>("electronics");
+  const [ready, setReady] = useState(false);
   const pathname = useLocation({ select: location => location.pathname });
   const navigate = useNavigate();
-  const select = (value: RepairCategory) => {
+  const select = useCallback((value: RepairCategory) => {
     setCategory(value);
     try { localStorage.setItem(CATEGORY_STORAGE_KEY, value); } catch { /* Storage may be unavailable. */ }
-  };
+  }, []);
   useEffect(() => {
-    let saved: RepairCategory = category;
-    try { saved = selectedRepairCategory(localStorage.getItem(CATEGORY_STORAGE_KEY)); } catch { /* Keep the current category. */ }
-    if (pathname === "/appliances") select("appliances");
-    else {
-      setCategory(saved);
-      if (pathname === "/" && saved === "appliances") void navigate({ to: "/appliances", replace: true });
-    }
-  }, [pathname, navigate]);
+    let saved: string | null = null;
+    try { saved = localStorage.getItem(CATEGORY_STORAGE_KEY); } catch { /* Keep selection in memory when storage is unavailable. */ }
+    select(saved ? selectedRepairCategory(saved) : window.location.pathname.startsWith("/appliances") ? "appliances" : "electronics");
+    setReady(true);
+  }, [select]);
+  useEffect(() => {
+    if (ready && pathname === "/" && category === "appliances") void navigate({ to: "/appliances", replace: true });
+  }, [ready, pathname, category, navigate]);
   return <SelectionContext.Provider value={{category, select}}>{children}</SelectionContext.Provider>;
 }
 
