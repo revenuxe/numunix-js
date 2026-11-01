@@ -15,7 +15,7 @@ import Header from "@/components/numunix/Header";
 import Footer from "@/components/numunix/Footer";
 import Hero from "@/components/numunix/Hero";
 import { Label, Reveal, Btn } from "@/components/numunix/primitives";
-import { articleBySlug, ARTICLES } from "@/content/repair-guides";
+import { articleBySlug, ARTICLES } from "@/content/articles";
 import { LEGACY_ARTICLE_PATHS } from "@/content/repair-legacy";
 
 const SITE_URL = "https://numunix-flow-engine.lovable.app";

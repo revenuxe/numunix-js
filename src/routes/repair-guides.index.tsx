@@ -5,7 +5,7 @@ import Footer from "@/components/numunix/Footer";
 import Hero from "@/components/numunix/Hero";
 import NumunixRibbonScene from "@/components/numunix/NumunixRibbonScene";
 import { Label, Heading, Accent, Reveal, Btn } from "@/components/numunix/primitives";
-import { ARTICLES } from "@/content/repair-guides";
+import { ARTICLES } from "@/content/articles";
 const SITE_URL = "https://numunix-flow-engine.lovable.app";
 
 const TITLE = "Electronics & Appliance Repair Guides | Numunix";
