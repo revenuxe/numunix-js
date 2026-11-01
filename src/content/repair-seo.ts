@@ -24,8 +24,8 @@ export function repairItemList(items: { name: string; path: string }[]): SchemaN
   return { "@type": "ItemList", numberOfItems: items.length, itemListElement: items.map((item, index) => ({ "@type": "ListItem", position: index + 1, name: item.name, url: `${SITE_URL}${item.path}` })) };
 }
 
-export function repairPageHead({ title, description, path, type = "WebPage", breadcrumbs = [], entities = [] }: {
-  title: string; description: string; path: string; type?: "WebPage" | "CollectionPage" | "ContactPage"; breadcrumbs?: Breadcrumb[]; entities?: SchemaNode[];
+export function repairPageHead({ title, description, path, type = "WebPage", breadcrumbs = [], entities = [], about = [] }: {
+  title: string; description: string; path: string; type?: "WebPage" | "CollectionPage" | "ContactPage"; breadcrumbs?: Breadcrumb[]; entities?: SchemaNode[]; about?: SchemaNode[];
 }) {
   const url = `${SITE_URL}${path}`;
   const trail = [{ name: "Numunix Repairs", path: "/" }, ...breadcrumbs];
@@ -41,7 +41,7 @@ export function repairPageHead({ title, description, path, type = "WebPage", bre
     scripts: [{ type: "application/ld+json", children: JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
-        { "@type": type, "@id": `${url}#webpage`, name: title, description, url, inLanguage: "en-IN", isPartOf: { "@id": REPAIR_WEBSITE_ID }, publisher: { "@id": REPAIR_ORGANIZATION_ID }, ...(entities.length ? { mainEntity: entities } : {}), ...(breadcrumbs.length ? { breadcrumb: { "@id": `${url}#breadcrumbs` } } : {}) },
+        { "@type": type, "@id": `${url}#webpage`, name: title, description, url, inLanguage: "en-IN", isPartOf: { "@id": REPAIR_WEBSITE_ID }, publisher: { "@id": REPAIR_ORGANIZATION_ID }, ...(entities.length ? { mainEntity: entities } : {}), ...(about.length ? { about } : {}), ...(breadcrumbs.length ? { breadcrumb: { "@id": `${url}#breadcrumbs` } } : {}) },
         ...(breadcrumbs.length ? [{ "@type": "BreadcrumbList", "@id": `${url}#breadcrumbs`, itemListElement: trail.map((item, index) => ({ "@type": "ListItem", position: index + 1, name: item.name, item: `${SITE_URL}${item.path}` })) }] : []),
       ],
     }) }],

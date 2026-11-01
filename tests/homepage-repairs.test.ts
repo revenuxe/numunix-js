@@ -43,7 +43,7 @@ describe("homepage repair category rules", () => {
     for (const category of ["electronics", "appliances"] as const) {
       const script = repairHomepageHead(category).scripts[0];
       const schema = JSON.parse(script?.children ?? "{}");
-      expect(schema.about.map((service: { name: string }) => service.name)).toEqual(REPAIR_SERVICES[category].map(service => service.nav));
+      expect(schema["@graph"][0].about.map((service: { name: string }) => service.name)).toEqual(REPAIR_SERVICES[category].map(service => service.nav));
     }
   });
 });

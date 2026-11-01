@@ -19,10 +19,5 @@ const PAGE_META = {
 export function repairHomepageHead(category: RepairCategory) {
   const { title, description } = PAGE_META[category];
   const services = REPAIR_PAGES.filter(service => service.category === category);
-  const head = repairPageHead({ title, description, path: REPAIR_HOME_PATHS[category], type: "CollectionPage", entities: [repairItemList(services.map(service => ({ name: service.name, path: repairPageHref(service) }))), ...services.map(service => repairServiceSchema(service, repairPageHref(service)))] });
-  // Keep category-scoped subjects explicit for consumers of homepage metadata.
-  const graph = JSON.parse(head.scripts[0].children);
-  graph["@graph"][0].about = REPAIR_SERVICES[category].map(service => ({ "@type": "Service", name: service.nav, serviceType: service.nav }));
-  head.scripts[0].children = JSON.stringify(graph);
-  return head;
+  return repairPageHead({ title, description, path: REPAIR_HOME_PATHS[category], type: "CollectionPage", about: REPAIR_SERVICES[category].map(service => ({ "@type": "Service", name: service.nav, serviceType: service.nav })), entities: [repairItemList(services.map(service => ({ name: service.name, path: repairPageHref(service) }))), ...services.map(service => repairServiceSchema(service, repairPageHref(service)))] });
 }
