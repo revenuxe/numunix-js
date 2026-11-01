@@ -22,7 +22,7 @@ export function Hero({
   primaryLabel = "REQUEST ASSESSMENT",
   primaryHref = "/contact",
   secondaryLabel = "EXPLORE SERVICES",
-  secondaryHref = "/features",
+  secondaryHref = "/services",
   secondaryIcon,
   eyebrow,
   breadcrumb,

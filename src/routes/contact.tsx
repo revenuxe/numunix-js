@@ -46,7 +46,7 @@ function ContactPage() {
     <div className="bg-[#05070c]">
       <Header />
       <main>
-        <Hero headline="Tell us the fault." accent="Let’s take a look." intro="Share the model, symptoms and location. We’ll help clarify the assessment and repair options." primaryLabel="START YOUR ENQUIRY" primaryHref="#enquiry" secondaryLabel="EXPLORE SERVICES" secondaryHref="/features" />
+        <Hero headline="Tell us the fault." accent="Let’s take a look." intro="Share the model, symptoms and location. We’ll help clarify the assessment and repair options." primaryLabel="START YOUR ENQUIRY" primaryHref="#enquiry" secondaryLabel="EXPLORE SERVICES" secondaryHref="/services" />
 
         <ContactFormSection />
 

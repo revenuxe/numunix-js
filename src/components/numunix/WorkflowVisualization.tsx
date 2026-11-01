@@ -32,25 +32,25 @@ type RepairNode = { slug: string; phase: string; name: string; category: string;
 
 // Homepage panel shows the repair services we cover, switchable by category.
 const ELECTRONICS_NODES: RepairNode[] = [
-  { slug: "idea", phase: "REPAIR", name: "Mobile", category: "SCREENS · BATTERIES", icon: Smartphone },
-  { slug: "scope", phase: "REPAIR", name: "Laptop", category: "BOARDS · UPGRADES", icon: Laptop },
-  { slug: "ux", phase: "INSTALL", name: "CCTV", category: "SETUP · MAINTENANCE", icon: Cctv },
-  { slug: "code", phase: "REPAIR", name: "TV & Audio", category: "PANELS · SOUND", icon: Tv },
-  { slug: "apis", phase: "REPAIR", name: "Tablet", category: "IPAD · ANDROID", icon: Tablet },
-  { slug: "qa", phase: "RECOVERY", name: "Data", category: "DRIVES · PHONES", icon: HardDrive },
-  { slug: "cloud", phase: "REPAIR", name: "Console", category: "PS · XBOX", icon: Gamepad2 },
-  { slug: "grow", phase: "SERVICE", name: "Doorstep", category: "WE COME TO YOU", icon: Truck },
+  { slug: "fault-intake", phase: "REPAIR", name: "Mobile", category: "SCREENS · BATTERIES", icon: Smartphone },
+  { slug: "fault-diagnosis", phase: "REPAIR", name: "Laptop", category: "BOARDS · UPGRADES", icon: Laptop },
+  { slug: "repair-estimate", phase: "INSTALL", name: "CCTV", category: "SETUP · MAINTENANCE", icon: Cctv },
+  { slug: "repair-approval", phase: "REPAIR", name: "TV & Audio", category: "PANELS · SOUND", icon: Tv },
+  { slug: "repair-work", phase: "REPAIR", name: "Tablet", category: "IPAD · ANDROID", icon: Tablet },
+  { slug: "function-testing", phase: "RECOVERY", name: "Data", category: "DRIVES · PHONES", icon: HardDrive },
+  { slug: "repair-handover", phase: "REPAIR", name: "Console", category: "PS · XBOX", icon: Gamepad2 },
+  { slug: "repair-aftercare", phase: "SERVICE", name: "Doorstep", category: "WE COME TO YOU", icon: Truck },
 ];
 
 const APPLIANCE_NODES: RepairNode[] = [
-  { slug: "idea", phase: "REPAIR", name: "Washing", category: "DRUMS · MOTORS", icon: WashingMachine },
-  { slug: "scope", phase: "SERVICE", name: "AC", category: "GAS · COOLING", icon: AirVent },
-  { slug: "ux", phase: "REPAIR", name: "Fridge", category: "COOLING · GAS", icon: Refrigerator },
-  { slug: "code", phase: "REPAIR", name: "Microwave", category: "OVENS · CHIMNEY", icon: Microwave },
-  { slug: "apis", phase: "SERVICE", name: "Purifier", category: "RO · FILTERS", icon: Droplets },
-  { slug: "qa", phase: "REPAIR", name: "Inverter", category: "UPS · BATTERIES", icon: BatteryCharging },
-  { slug: "cloud", phase: "WORK", name: "Fan & Light", category: "FITTING · REPAIR", icon: Fan },
-  { slug: "grow", phase: "WORK", name: "Electrical", category: "WIRING · FITTINGS", icon: Zap },
+  { slug: "fault-intake", phase: "REPAIR", name: "Washing", category: "DRUMS · MOTORS", icon: WashingMachine },
+  { slug: "fault-diagnosis", phase: "SERVICE", name: "AC", category: "GAS · COOLING", icon: AirVent },
+  { slug: "repair-estimate", phase: "REPAIR", name: "Fridge", category: "COOLING · GAS", icon: Refrigerator },
+  { slug: "repair-approval", phase: "REPAIR", name: "Microwave", category: "OVENS · CHIMNEY", icon: Microwave },
+  { slug: "repair-work", phase: "SERVICE", name: "Purifier", category: "RO · FILTERS", icon: Droplets },
+  { slug: "function-testing", phase: "REPAIR", name: "Inverter", category: "UPS · BATTERIES", icon: BatteryCharging },
+  { slug: "repair-handover", phase: "WORK", name: "Fan & Light", category: "FITTING · REPAIR", icon: Fan },
+  { slug: "repair-aftercare", phase: "WORK", name: "Electrical", category: "WIRING · FITTINGS", icon: Zap },
 ];
 
 const REPAIR_TABS = [
@@ -128,8 +128,8 @@ export function WorkflowVisualization({
           {activeNodes.map(({ phase: n, name: v, category: u, slug, icon: Icon }, i) => (
             <Link
               key={`${tab}-${slug}`}
-              to={tabs ? "/repairs/$slug" : "/approach/$slug"}
-              params={{ slug: tabs ? (REPAIR_PAGES.filter(service => service.category === (tab === 0 ? "electronics" : "appliances"))[i]?.slug ?? slug) : slug }}
+              to={tabs ? "/$category/repairs/$slug" : "/repair-process/$slug"}
+              params={{ category: tab === 0 ? "electronic" : "appliances", slug: tabs ? (REPAIR_PAGES.filter(service => service.category === (tab === 0 ? "electronics" : "appliances"))[i]?.slug ?? slug) : slug }}
               aria-label={`${n}: ${v}, explore ${u.toLowerCase()}`}
               className="group relative flex min-w-0 flex-col justify-between overflow-hidden rounded-2xl border border-[#e1eaf5] bg-white px-4 py-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#b8ccec] hover:bg-[#f5f8fd] hover:shadow-[0_4px_20px_-10px_rgba(30,78,216,0.15)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] motion-reduce:transform-none motion-reduce:transition-none sm:px-5 sm:py-6"
             >

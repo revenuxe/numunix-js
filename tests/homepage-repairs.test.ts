@@ -10,10 +10,10 @@ describe("homepage repair category rules", () => {
     expect(new Set(REPAIR_PAGES.map(service => service.slug)).size).toBe(16);
   });
   test("homepage device services resolve to their individual repair pages", () => {
-    expect(repairServiceHref("electronics", "phone")).toBe("/repairs/mobile-repair");
-    expect(repairServiceHref("electronics", "laptop")).toBe("/repairs/laptop-repair");
-    expect(repairServiceHref("appliances", "washer")).toBe("/repairs/washing-machine-repair");
-    expect(repairServiceHref("appliances", "ac")).toBe("/repairs/ac-repair");
+    expect(repairServiceHref("electronics", "phone")).toBe("/electronic/repairs/mobile-repair");
+    expect(repairServiceHref("electronics", "laptop")).toBe("/electronic/repairs/laptop-repair");
+    expect(repairServiceHref("appliances", "washer")).toBe("/appliances/repairs/washing-machine-repair");
+    expect(repairServiceHref("appliances", "ac")).toBe("/appliances/repairs/ac-repair");
   });
   test("Electronics includes mobile and laptop repairs", () => {
     const kinds = REPAIR_SERVICES.electronics.map(service => service.kind);

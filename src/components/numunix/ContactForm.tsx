@@ -6,6 +6,7 @@ import { useCategory } from "./category";
 import { REPAIR_SERVICES } from "@/content/homepage-repairs";
 import { REPAIR_PAGES } from "@/content/repair-services";
 import { CONTACT } from "@/content/site";
+import { Button } from "@/components/ui/button";
 
 const fieldClass =
   "mt-2 block min-h-12 w-full min-w-0 rounded-xl border border-[#dbe5f2] bg-[#f8fafc] px-4 py-3 text-base font-normal text-[#102a63] outline-none transition focus:border-[#2563eb] focus:ring-3 focus:ring-[#2563eb]/10 placeholder:text-[#8190aa]";
@@ -29,7 +30,7 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
     const values = Object.fromEntries(data.entries());
     const parsed = enquirySchema.safeParse({
       ...values,
-      source: window.location.pathname === "/" ? "/" : "/contact",
+      source: window.location.pathname,
     });
     if (!parsed.success) {
       setError(parsed.error.issues[0]?.message ?? "Please check your details.");
@@ -96,18 +97,6 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
             onInput={(e) => e.currentTarget.setCustomValidity("")}
           />
         </label>
-        <label className={`${labelClass} sm:col-span-2`} htmlFor="contact-email">
-          Email <span className="font-normal text-[#5d76a3]">(optional)</span>
-          <input
-            className={fieldClass}
-            id="contact-email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            placeholder="you@company.com"
-            maxLength={254}
-          />
-        </label>
         <label className={labelClass} htmlFor="contact-service">
           Service *
           <select
@@ -139,9 +128,9 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
           >
             <option>Flexible</option>
             <option>As soon as possible</option>
-            <option>Within a month</option>
-            <option>In 1–3 months</option>
-            <option>Just exploring</option>
+            <option>Today if available</option>
+            <option>Within a week</option>
+            <option>Schedule a visit</option>
           </select>
         </label>
         <label className={`${labelClass} sm:col-span-2`} htmlFor="contact-description">
@@ -173,7 +162,7 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
           </>
         )}
       </p>
-      <button
+      <Button
         type="submit"
         disabled={!hydrated || !enquiriesConfigured || status === "pending"}
         aria-describedby="contact-delivery"
@@ -181,7 +170,7 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
       >
         {status === "pending" ? "Sending enquiry…" : "Submit enquiry"}{" "}
         <ArrowUpRight size={18} aria-hidden="true" />
-      </button>
+      </Button>
       {status === "success" && (
         <p role="status" className="mt-4 rounded-xl bg-emerald-50 p-4 text-sm text-emerald-800">
           Thank you. Your enquiry has been received. Our team will contact you to discuss the next

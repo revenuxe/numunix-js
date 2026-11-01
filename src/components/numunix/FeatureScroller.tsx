@@ -17,7 +17,7 @@ type Item = {
 const ITEMS: Item[] = [
   {
     nav: "MOBILE REPAIR",
-    href: "/features",
+    href: "/services",
     title: "Cracked, dead, or drowned, fixed.",
     body: "Screen replacements, batteries, charging ports, cameras, and water-damage recovery for every major brand, with live status from check-in to handover.",
     slug: "mobile-repair",
@@ -25,7 +25,7 @@ const ITEMS: Item[] = [
   },
   {
     nav: "LAPTOP & COMPUTER REPAIR",
-    href: "/features",
+    href: "/services",
     title: "Board-level repair, not just replacement.",
     body: "From no-display and overheating to keyboards, hinges, and upgrades, our bench repairs what other service centres simply replace.",
     slug: "laptop-repair",
@@ -33,7 +33,7 @@ const ITEMS: Item[] = [
   },
   {
     nav: "CCTV & SECURITY SYSTEMS",
-    href: "/features",
+    href: "/services",
     title: "Cameras that stay online.",
     body: "Installation, DVR/NVR setup, camera repair, and preventive maintenance for homes, shops, and offices.",
     slug: "cctv-security",
@@ -41,7 +41,7 @@ const ITEMS: Item[] = [
   },
   {
     nav: "HOME APPLIANCE REPAIR",
-    href: "/features",
+    href: "/services",
     title: "Everyday machines, back to work.",
     body: "Washing machines, microwaves, chimneys, and more, doorstep diagnosis, itemised estimates, and repairs on schedule.",
     slug: "appliance-repair",
@@ -49,7 +49,7 @@ const ITEMS: Item[] = [
   },
   {
     nav: "TV & AUDIO REPAIR",
-    href: "/features",
+    href: "/services",
     title: "Picture and sound, restored.",
     body: "Panel and backlight work, board repair, and speaker service for every brand and size.",
     slug: "tv-audio-repair",
@@ -57,7 +57,7 @@ const ITEMS: Item[] = [
   },
   {
     nav: "DATA RECOVERY",
-    href: "/features",
+    href: "/services",
     title: "When the data matters more than the device.",
     body: "Photos, files, and contacts recovered from failed drives, phones, and memory cards, assessed before anything is powered on.",
     slug: "data-recovery",

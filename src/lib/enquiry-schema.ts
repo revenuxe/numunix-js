@@ -14,11 +14,15 @@ export const enquirySchema = z.object({
     }, "Please enter a phone number with 7–15 digits."),
   email: z
     .union([z.literal(""), z.string().trim().email("Please enter a valid email address.").max(254)])
+    .optional()
     .transform((value) => value || null),
   service: z.string().trim().min(1, "Please select a service.").max(100),
   timeline: z.enum([
     "Flexible",
     "As soon as possible",
+    "Today if available",
+    "Within a week",
+    "Schedule a visit",
     "Within a month",
     "In 1–3 months",
     "Just exploring",
@@ -28,5 +32,5 @@ export const enquirySchema = z.object({
     .trim()
     .max(1500)
     .transform((value) => value || null),
-  source: z.enum(["/", "/contact"]),
+  source: z.string().trim().max(250).refine(value => value.startsWith("/") && !value.startsWith("//") && !value.includes("?") && !value.includes("#"), "Please use a valid enquiry page."),
 });

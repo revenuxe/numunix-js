@@ -14,7 +14,7 @@ export type WorkflowStage = {
 
 export const WORKFLOW_STAGES: WorkflowStage[] = [
   {
-    "slug": "idea",
+    "slug": "fault-intake",
     "phase": "INTAKE",
     "name": "Describe",
     "category": "REPAIR CARE",
@@ -24,30 +24,30 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     "outcome": "A useful symptom record helps identify the assessment needed.",
     "deliverables": [
       [
-        "Model and symptom record",
-        "Record the exact equipment, symptoms and relevant damage history."
+        "Equipment and symptoms",
+        "Record the model, affected functions and fault history."
       ],
       [
-        "Agreed scope",
-        "Confirm what this stage includes and any further checks or charges."
+        "Visit details",
+        "Confirm location, access and contact details for assessment."
       ],
       [
-        "Useful service details",
-        "Keep the assessment, approvals and completed checks together."
+        "Initial next step",
+        "Discuss the checks needed and any known assessment charges."
       ]
     ],
     "steps": [
       [
-        "Share the context",
-        "Explain the fault and any change since the previous conversation."
+        "Describe the fault",
+        "Explain when it happens and what still works."
       ],
       [
-        "Review the options",
-        "Share the model, symptoms and service location. Describe what still works and when the fault appears."
+        "Share the model",
+        "Include the exact equipment and relevant damage history."
       ],
       [
-        "Confirm the next step",
-        "A useful symptom record helps identify the assessment needed."
+        "Arrange assessment",
+        "Discuss location, access and inspection charges."
       ]
     ],
     "faq": [
@@ -62,7 +62,7 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     ]
   },
   {
-    "slug": "scope",
+    "slug": "fault-diagnosis",
     "phase": "ASSESS",
     "name": "Assess",
     "category": "REPAIR CARE",
@@ -72,30 +72,30 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     "outcome": "The likely cause, further checks and repair feasibility are explained.",
     "deliverables": [
       [
-        "Model and symptom record",
-        "Record the exact equipment, symptoms and relevant damage history."
+        "Assessment findings",
+        "Record observed symptoms and the checks performed."
       ],
       [
-        "Agreed scope",
-        "Confirm what this stage includes and any further checks or charges."
+        "Likely cause",
+        "Explain uncertainties and any further checks needed."
       ],
       [
-        "Useful service details",
-        "Keep the assessment, approvals and completed checks together."
+        "Repair feasibility",
+        "Discuss condition, repair options and parts availability."
       ]
     ],
     "steps": [
       [
-        "Share the context",
-        "Explain the fault and any change since the previous conversation."
+        "Inspect the equipment",
+        "Use model-specific power, signal, cooling or mechanical checks."
       ],
       [
-        "Review the options",
-        "Arrange model-specific checks rather than selecting a replacement part from a symptom alone."
+        "Review the findings",
+        "Explain the likely cause rather than guessing a replacement part."
       ],
       [
-        "Confirm the next step",
-        "The likely cause, further checks and repair feasibility are explained."
+        "Discuss options",
+        "Consider repair feasibility before preparing an estimate."
       ]
     ],
     "faq": [
@@ -110,7 +110,7 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     ]
   },
   {
-    "slug": "ux",
+    "slug": "repair-estimate",
     "phase": "ESTIMATE",
     "name": "Estimate",
     "category": "REPAIR CARE",
@@ -120,30 +120,30 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     "outcome": "An estimate separates essential work from optional service.",
     "deliverables": [
       [
-        "Model and symptom record",
-        "Record the exact equipment, symptoms and relevant damage history."
+        "Itemised estimate",
+        "Separate inspection, labour and parts charges where available."
       ],
       [
-        "Agreed scope",
-        "Confirm what this stage includes and any further checks or charges."
+        "Included work",
+        "Describe proposed repairs and exclusions."
       ],
       [
-        "Useful service details",
-        "Keep the assessment, approvals and completed checks together."
+        "Timing notes",
+        "Discuss current availability and expected timing."
       ]
     ],
     "steps": [
       [
-        "Share the context",
-        "Explain the fault and any change since the previous conversation."
+        "Set out the repair",
+        "Link proposed work to the assessed fault."
       ],
       [
-        "Review the options",
-        "Review inspection charges, labour, parts and exclusions before agreeing to repairs."
+        "Review the costs",
+        "Explain parts, labour, inspection charges and exclusions."
       ],
       [
-        "Confirm the next step",
-        "An estimate separates essential work from optional service."
+        "Answer questions",
+        "Discuss optional work and repair versus replacement."
       ]
     ],
     "faq": [
@@ -158,7 +158,7 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     ]
   },
   {
-    "slug": "code",
+    "slug": "repair-approval",
     "phase": "APPROVE",
     "name": "Approve",
     "category": "REPAIR CARE",
@@ -168,30 +168,30 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     "outcome": "The approved work and any limitations are understood.",
     "deliverables": [
       [
-        "Model and symptom record",
-        "Record the exact equipment, symptoms and relevant damage history."
+        "Your decision",
+        "Record whether the proposed repair is approved or declined."
       ],
       [
-        "Agreed scope",
-        "Confirm what this stage includes and any further checks or charges."
+        "Approved work",
+        "Keep the agreed repair and estimate together."
       ],
       [
-        "Useful service details",
-        "Keep the assessment, approvals and completed checks together."
+        "Limitations",
+        "Note exclusions and uncertainties before work begins."
       ]
     ],
     "steps": [
       [
-        "Share the context",
-        "Explain the fault and any change since the previous conversation."
+        "Review the estimate",
+        "Confirm the proposed work and charges are understood."
       ],
       [
-        "Review the options",
-        "Agree the repair scope before work begins. Further faults or changes need a separate conversation."
+        "Give approval",
+        "Approve the agreed repair before work begins."
       ],
       [
-        "Confirm the next step",
-        "The approved work and any limitations are understood."
+        "Agree changes separately",
+        "Discuss new findings or costs before expanding the work."
       ]
     ],
     "faq": [
@@ -206,7 +206,7 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     ]
   },
   {
-    "slug": "apis",
+    "slug": "repair-work",
     "phase": "REPAIR",
     "name": "Repair",
     "category": "REPAIR CARE",
@@ -216,30 +216,30 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     "outcome": "The agreed repair is completed or revised options are discussed.",
     "deliverables": [
       [
-        "Model and symptom record",
-        "Record the exact equipment, symptoms and relevant damage history."
+        "Repair record",
+        "Summarise work performed against the approved repair."
       ],
       [
-        "Agreed scope",
-        "Confirm what this stage includes and any further checks or charges."
+        "Parts information",
+        "Note compatible parts used where relevant."
       ],
       [
-        "Useful service details",
-        "Keep the assessment, approvals and completed checks together."
+        "Changed findings",
+        "Record revised options when the original repair cannot proceed."
       ]
     ],
     "steps": [
       [
-        "Share the context",
-        "Explain the fault and any change since the previous conversation."
+        "Follow approved work",
+        "Repair the assessed fault with suitable parts where needed."
       ],
       [
-        "Review the options",
-        "Repair or service focuses on the assessed fault, compatible parts and the work you approved."
+        "Discuss unexpected faults",
+        "Review options before completing additional work."
       ],
       [
-        "Confirm the next step",
-        "The agreed repair is completed or revised options are discussed."
+        "Record the result",
+        "Explain completed work and anything that remains unresolved."
       ]
     ],
     "faq": [
@@ -254,7 +254,7 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     ]
   },
   {
-    "slug": "qa",
+    "slug": "function-testing",
     "phase": "TEST",
     "name": "Test",
     "category": "REPAIR CARE",
@@ -264,30 +264,30 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     "outcome": "Completed checks and any remaining limitations are recorded.",
     "deliverables": [
       [
-        "Model and symptom record",
-        "Record the exact equipment, symptoms and relevant damage history."
+        "Functions checked",
+        "List post-repair checks relevant to the fault."
       ],
       [
-        "Agreed scope",
-        "Confirm what this stage includes and any further checks or charges."
+        "Observed results",
+        "Record charging, cooling, drainage, display or other test results."
       ],
       [
-        "Useful service details",
-        "Keep the assessment, approvals and completed checks together."
+        "Remaining limitations",
+        "Explain unresolved symptoms and functions not verified."
       ]
     ],
     "steps": [
       [
-        "Share the context",
-        "Explain the fault and any change since the previous conversation."
+        "Choose relevant checks",
+        "Match testing to the reported fault and repair."
       ],
       [
-        "Review the options",
-        "Review charging, display, recording, cooling, drainage or other relevant functions after work."
+        "Test and record",
+        "Check the affected functions and note the result."
       ],
       [
-        "Confirm the next step",
-        "Completed checks and any remaining limitations are recorded."
+        "Explain limitations",
+        "Identify anything that could not be verified."
       ]
     ],
     "faq": [
@@ -302,7 +302,7 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     ]
   },
   {
-    "slug": "cloud",
+    "slug": "repair-handover",
     "phase": "HANDOVER",
     "name": "Handover",
     "category": "REPAIR CARE",
@@ -312,30 +312,30 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     "outcome": "You have the service details needed for future questions.",
     "deliverables": [
       [
-        "Model and symptom record",
-        "Record the exact equipment, symptoms and relevant damage history."
+        "Work summary",
+        "Review repairs and the function checks performed."
       ],
       [
-        "Agreed scope",
-        "Confirm what this stage includes and any further checks or charges."
+        "Returned accessories",
+        "Confirm equipment and accessories being returned."
       ],
       [
-        "Useful service details",
-        "Keep the assessment, approvals and completed checks together."
+        "Repair terms",
+        "Keep the service reference and applicable aftercare terms."
       ]
     ],
     "steps": [
       [
-        "Share the context",
-        "Explain the fault and any change since the previous conversation."
+        "Review completed work",
+        "Explain the repair and its test results."
       ],
       [
-        "Review the options",
-        "Review completed work, returned accessories and applicable repair terms before daily use."
+        "Confirm returned items",
+        "Check equipment and accessories against the service record."
       ],
       [
-        "Confirm the next step",
-        "You have the service details needed for future questions."
+        "Discuss care",
+        "Share applicable terms and maintenance advice."
       ]
     ],
     "faq": [
@@ -350,7 +350,7 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     ]
   },
   {
-    "slug": "grow",
+    "slug": "repair-aftercare",
     "phase": "AFTERCARE",
     "name": "Aftercare",
     "category": "REPAIR CARE",
@@ -360,30 +360,30 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     "outcome": "A follow-up request starts with clear history rather than repeated guesses.",
     "deliverables": [
       [
-        "Model and symptom record",
-        "Record the exact equipment, symptoms and relevant damage history."
+        "Service reference",
+        "Retain the repair record for future questions."
       ],
       [
-        "Agreed scope",
-        "Confirm what this stage includes and any further checks or charges."
+        "Recurring symptoms",
+        "Describe what changed and when a fault reappeared."
       ],
       [
-        "Useful service details",
-        "Keep the assessment, approvals and completed checks together."
+        "Follow-up guidance",
+        "Discuss the appropriate next assessment or maintenance step."
       ]
     ],
     "steps": [
       [
-        "Share the context",
-        "Explain the fault and any change since the previous conversation."
+        "Keep the record",
+        "Save your repair summary and service reference."
       ],
       [
-        "Review the options",
-        "Report recurring symptoms with the model and service reference. Discuss preventive care where useful."
+        "Report changes",
+        "Share the model and details of any recurring symptom."
       ],
       [
-        "Confirm the next step",
-        "A follow-up request starts with clear history rather than repeated guesses."
+        "Discuss next steps",
+        "Confirm follow-up assessment and applicable terms."
       ]
     ],
     "faq": [

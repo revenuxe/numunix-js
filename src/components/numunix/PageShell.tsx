@@ -40,7 +40,7 @@ export function PageHero({
   compact?: boolean;
 }) {
   return (
-    <Hero headline={accent && title.includes(accent) ? title.replace(accent, "").trim() : title} accent={accent ?? ""} intro={body} eyebrow={label} primaryLabel={primary.label} primaryHref={primary.href} secondaryLabel={secondary?.label ?? "EXPLORE SERVICES"} secondaryHref={secondary?.href ?? "/features"} />
+    <Hero headline={accent && title.includes(accent) ? title.replace(accent, "").trim() : title} accent={accent ?? ""} intro={body} eyebrow={label} primaryLabel={primary.label} primaryHref={primary.href} secondaryLabel={secondary?.label ?? "EXPLORE SERVICES"} secondaryHref={secondary?.href ?? "/services"} />
   );
 }
 
@@ -140,7 +140,7 @@ export function ClosingCTA({
           <Btn as="a" href="/contact">
             REQUEST ASSESSMENT
           </Btn>
-          <Btn as="a" href="/features" variant="ghostDark">
+          <Btn as="a" href="/services" variant="ghostDark">
             EXPLORE SERVICES
           </Btn>
         </div>

@@ -12,7 +12,7 @@
 ## Website content and navigation
 - Public content is repair-specific; shared repair catalogues drive service and audience views, with the saved category selecting repair options while detail pages retain their own subjects.
 - Electronics at / and Appliances at /appliances share the homepage layout but derive category context and leaf metadata from their route; use a non-modal navigation dropdown to avoid scroll-lock header shifts.
-- Individual repair pages use /repairs/$slug and a shared repair catalogue for destinations, diagnostics, preparation and enquiry defaults; public content-page heroes use the shared homepage Hero to keep their ribbon design consistent.
+- Individual repair pages use /$category/repairs/$slug with category-aware catalogue helpers and redirect-only legacy /repairs/$slug paths and a shared repair catalogue for destinations, diagnostics, preparation and enquiry defaults; public content-page heroes use the shared homepage Hero to keep their ribbon design consistent.
 - Homepage device illustrations use a shared browser-safe SVG repair visual with global semantic tokens and reduced-motion support, so service and audience panels stay consistent without changing their layout.
 - Who We Serve illustrations place shared device drawings within audience-specific room scenes, keeping audience imagery distinct from diagnostic-bench service panels.
 - Do not add phone-number or click-to-call buttons to heroes or CTA sections, including future pages. Use project, service, or email actions instead.
@@ -22,3 +22,5 @@
 - Shared Hero headings use two explicit no-wrap lines and measured container fitting, so headings stay complete across screen sizes without changing article titles.
 - A root category-selection context persists explicit selections in browser storage; homepage routes retain their own content and metadata, while interior shared navigation and repair options follow the saved selection without rewriting detail-page subjects.
 - Legacy development service and article URLs permanently redirect to the repair directory or related repair guides; audience pages use a shared repair-specific template instead of the retired software industry template.
+- Public navigation uses repair-specific canonical paths (/services, /repair-assessment, /repair-process, /repair-diagnostics, /repair-aftercare, /repair-safety, /repair-guides and /who-we-serve); old paths and development-era stage slugs remain redirect-only to preserve bookmarks and search links.
+- Repair lead presentation reuses existing enquiry fields and stored status identifiers; classify service/category through the repair catalogue, retain legacy email data, and store the originating page path without changing database permissions.

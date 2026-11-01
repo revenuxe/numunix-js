@@ -17,14 +17,14 @@ export type Lead = {
 export const STATUS_LABELS: Record<LeadStatus, string> = {
   new: "New",
   contacted: "Contacted",
-  qualified: "Qualified",
-  won: "Won",
+  qualified: "Assessment arranged",
+  won: "Repair booked",
   closed: "Closed",
 };
 export const STATUS_CLASSES: Record<LeadStatus, string> = {
   new: "bg-blue-50 text-blue-700 border-blue-100",
   contacted: "bg-amber-50 text-amber-700 border-amber-100",
-  qualified: "bg-violet-50 text-violet-700 border-violet-100",
+  qualified: "bg-accent text-primary border-border",
   won: "bg-emerald-50 text-emerald-700 border-emerald-100",
   closed: "bg-slate-100 text-slate-600 border-slate-200",
 };

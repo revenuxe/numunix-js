@@ -415,5 +415,13 @@ export function repairServiceForKind(category: RepairCategory, kind: DeviceKind)
 
 export function repairServiceHref(category: RepairCategory, kind: DeviceKind) {
  const service = repairServiceForKind(category, kind);
- return service ? `/repairs/${service.slug}` : (category === "appliances" ? "/appliances" : "/");
+ return service ? repairPageHref(service) : (category === "appliances" ? "/appliances" : "/");
+}
+
+export function repairCategoryPath(category: RepairCategory) {
+ return category === "electronics" ? "electronic" : "appliances";
+}
+
+export function repairPageHref(service: RepairService) {
+ return `/${repairCategoryPath(service.category)}/repairs/${service.slug}`;
 }

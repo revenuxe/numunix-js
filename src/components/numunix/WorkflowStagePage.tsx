@@ -20,7 +20,7 @@ export function WorkflowStagePage({ stage }: { stage: WorkflowStage }) {
           {WORKFLOW_STAGES.map((item, i) => (
             <Link
               key={item.slug}
-              to="/approach/$slug"
+              to="/repair-process/$slug"
               params={{ slug: item.slug }}
               aria-current={item.slug === stage.slug ? "page" : undefined}
               className={`inline-flex items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors hover:bg-[#eff4ff] focus-visible:outline-2 focus-visible:outline-[#2563eb] ${item.slug === stage.slug ? "bg-[#eff4ff] font-medium text-[#1e4ed8]" : "text-[#5d76a3]"}`}
@@ -38,8 +38,8 @@ export function WorkflowStagePage({ stage }: { stage: WorkflowStage }) {
         <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] items-center gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-24">
           <SectionHead
             label="THE OUTCOME"
-            title="Clarity you can build on."
-            accent="build on."
+            title="Your fault. Clearly understood."
+            accent="Clearly understood."
             body={stage.outcome}
           />
           <Reveal delay={100} className="min-w-0">
@@ -70,9 +70,9 @@ export function WorkflowStagePage({ stage }: { stage: WorkflowStage }) {
         <div className="shell">
           <SectionHead
             label="WHAT YOU GET"
-            title="Useful work. Tangible deliverables."
-            accent="Tangible deliverables."
-            body="We agree on the depth and scope together. These are the core outputs this stage is designed around."
+            title="Repair details. Kept together."
+            accent="Kept together."
+            body="Review the findings, decisions and records relevant to this stage of your repair."
           />
           <div className="mt-12 grid gap-5 md:grid-cols-2">
             {stage.deliverables.map(([title, body], i) => (
@@ -131,15 +131,15 @@ export function WorkflowStagePage({ stage }: { stage: WorkflowStage }) {
       <Section bg="#f0f4fa">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
           <Link
-            to="/approach"
+            to="/repair-process"
             className="inline-flex items-center gap-2 text-sm text-[#5d76a3] hover:text-[#1e4ed8]"
           >
             <ArrowLeft size={16} />
-            Explore the full approach
+            Explore the repair process
           </Link>
           {next ? (
             <Link
-              to="/approach/$slug"
+              to="/repair-process/$slug"
               params={{ slug: next.slug }}
               className="group flex items-center justify-between gap-8 rounded-2xl border border-[#dbe5f2] bg-white p-6 transition-colors hover:border-[#2563eb] focus-visible:outline-2 focus-visible:outline-[#2563eb] sm:min-w-80"
             >

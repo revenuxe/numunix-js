@@ -57,13 +57,12 @@ function AdminLogin() {
           </div>
           <span className="text-xs tracking-[0.2em] text-blue-300">NUMUNIX WORKSPACE</span>
           <h1 className="mt-5 text-5xl font-light leading-[1.12] tracking-tight">
-            Good relationships
+            Repair enquiries
             <br />
             <span className="text-blue-400">start here.</span>
           </h1>
           <p className="mt-6 max-w-sm text-base leading-relaxed text-slate-400">
-            One place to review enquiries, follow up with people, and turn conversations into
-            projects.
+            One place to review repair requests, arrange assessments and follow up with customers.
           </p>
           <div className="mt-10 flex gap-3 text-xs text-slate-300">
             <span className="rounded-full border border-white/10 px-4 py-2">Capture</span>
@@ -86,7 +85,7 @@ function AdminLogin() {
           </div>
           <h2 className="text-[32px] font-semibold tracking-tight text-slate-900">Welcome back.</h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-500">
-            Sign in to manage your leads and keep the next conversation moving.
+            Sign in to manage electronics and appliance repair enquiries.
           </p>
           {!supabaseConfigured && (
             <p

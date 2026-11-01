@@ -1,5 +1,14 @@
 # Roadmap
 
+- [x] Verified eight distinct navigation destinations, category-specific service links, Appliances return via logo and root homepage, and explicit Electronics selection across reloads.
+
+- [x] Added category-prefixed service addresses, updated all card links and metadata, retained old service redirects, and verified 49 pages and 18 tests.
+- [x] Replaced repair detail hero secondary actions with service-specific WhatsApp booking and the supplied icon rendered white; verified the icon loads and the message names the service.
+- [x] Removed public enquiry email inputs, made email omission valid, kept original service-page sources and added repair visit timing options. Added repair category/service filters, repair status labels, fault details, notes and WhatsApp customer actions to the admin dashboard. Twenty-one unit tests and five schema tests passed.
+- [ ] Verify signed-in admin lead management against real data. Blocked by external unmanaged Supabase authentication; existing browser tests also cannot launch their required Chromium version in this environment.
+
+- [x] Connected illustrated repair cards to named service pages; replaced development-era addresses and menu names with repair destinations and kept permanent redirects. Verified washing-machine card navigation, saved Appliances selection, twelve legacy redirects and all 49 public pages on phone and desktop with unique titles, self-referencing metadata and no overflow or page errors.
+
 - [x] Replaced software-development content across public directories, company pages, articles, policies, navigation and metadata with repair content. Verified all 49 sitemap pages, legacy redirects, category-specific audience and service views, service-to-enquiry flow, mobile/desktop rendering and 12 tests.
 
 - [x] Refresh repair H1s and keep shared public-page headings on two complete lines; verified phone and desktop rendering and existing repair tests.

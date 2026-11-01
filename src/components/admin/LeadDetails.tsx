@@ -1,5 +1,8 @@
 import { useState, type FormEvent } from "react";
 import { Mail, Phone, Save, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { repairLeadCategory, repairLeadWhatsApp } from "@/lib/repair-leads";
+import { WhatsAppIcon } from "@/components/numunix/WhatsAppIcon";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { getSupabase } from "@/lib/supabase";
 import { LEAD_STATUSES, STATUS_LABELS, type Lead, type LeadStatus } from "@/lib/leads";
@@ -84,6 +87,7 @@ export function LeadDetails({
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
+            <Button asChild size="sm"><a href={repairLeadWhatsApp(lead.phone)} target="_blank" rel="noopener noreferrer"><WhatsAppIcon className="size-4" />WhatsApp customer</a></Button>
             <a
               href={`tel:${lead.phone.replace(/[^+\d]/g, "")}`}
               className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-50"
@@ -105,10 +109,10 @@ export function LeadDetails({
         <div className="px-5 py-5 sm:px-7">
           <dl className="grid grid-cols-2 gap-x-5 gap-y-4 text-sm">
             {[
-              ["Service", lead.service],
-              ["Preferred start", lead.timeline],
-              ["Source", lead.source === "/" ? "Homepage" : "Contact page"],
-              ["Email", lead.email || "Not provided"],
+              ["Repair service", lead.service],
+              ["Preferred visit", lead.timeline],
+              ["Category", repairLeadCategory(lead) === "appliances" ? "Appliances" : repairLeadCategory(lead) === "electronics" ? "Electronics" : "Other enquiry"],
+              ["Enquiry page", lead.source],
             ].map(([label, value]) => (
               <div key={label} className="min-w-0">
                 <dt className="text-xs text-slate-400">{label}</dt>
@@ -119,7 +123,7 @@ export function LeadDetails({
             ))}
           </dl>
           <div className="mt-5 rounded-2xl border border-slate-100 bg-slate-50 p-4">
-            <h3 className="text-xs font-medium text-slate-500">PROJECT DETAILS</h3>
+            <h3 className="text-xs font-medium text-slate-500">FAULT & EQUIPMENT DETAILS</h3>
             <p className="mt-2 whitespace-pre-wrap break-words text-sm leading-relaxed text-slate-700 [overflow-wrap:anywhere]">
               {lead.description || "No additional details shared."}
             </p>
@@ -127,7 +131,7 @@ export function LeadDetails({
           <form onSubmit={save} className="mt-6">
             <fieldset disabled={pending} className="space-y-4">
               <label htmlFor="lead-status" className="block text-sm font-medium text-slate-700">
-                Lead status
+                Repair request status
                 <select
                   id="lead-status"
                   value={status}
@@ -142,14 +146,14 @@ export function LeadDetails({
                 </select>
               </label>
               <label htmlFor="lead-notes" className="block text-sm font-medium text-slate-700">
-                Internal notes
+                Repair notes
                 <textarea
                   id="lead-notes"
                   value={notes}
                   onChange={(event) => setNotes(event.target.value)}
                   rows={3}
                   maxLength={5000}
-                  placeholder="Add context, next steps, or follow-up notes…"
+                  placeholder="Model, visit location, assessment findings, estimate and next follow-up…"
                   className="mt-2 w-full resize-y rounded-xl border border-slate-200 bg-white p-3 text-base font-normal outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                 />
                 <span className="mt-1 block text-xs font-normal text-slate-400">
@@ -163,7 +167,7 @@ export function LeadDetails({
               </p>
             )}
             <div className="mt-5 flex gap-3 border-t border-slate-100 pt-5">
-              <button
+              <Button
                 type="button"
                 disabled={pending}
                 onClick={() => onDelete(lead)}
@@ -171,14 +175,14 @@ export function LeadDetails({
               >
                 <Trash2 size={16} />
                 <span>Delete</span>
-              </button>
-              <button
+              </Button>
+              <Button
                 disabled={pending}
                 className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
               >
                 <Save size={16} />
                 {pending ? "Saving…" : "Save changes"}
-              </button>
+              </Button>
             </div>
           </form>
         </div>

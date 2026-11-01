@@ -14,9 +14,9 @@ const lead = {
   name: "Avery Morgan",
   phone: "+91 98765 43210",
   email: "avery@example.com",
-  service: "SaaS Development",
+  service: "Mobile Repair",
   timeline: "Within a month",
-  description: "A subscription platform for our team.",
+  description: "Mobile charging fault, model and visit details.",
   source: "/contact",
   status: "new",
   notes: "",
@@ -89,11 +89,11 @@ test("mobile admin can view, update, filter and delete a lead", async ({ page },
   await mockSupabase(page);
   await login(page);
   await expect(page).toHaveURL(/admin\/dashboard/);
-  await expect(page.getByRole("heading", { name: "Every lead. One place." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Every repair. One desk." })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
     true,
   );
-  await page.screenshot({ path: testInfo.outputPath("mobile-dashboard.png"), fullPage: true });
+  await page.screenshot({ path: testInfo.outputPath("mobile-dashboard.png"), fullPage: false });
   await page.getByRole("button", { name: "Leads", exact: true }).click();
   await page
     .getByRole("button", { name: "View Avery Morgan", exact: true })
@@ -102,18 +102,19 @@ test("mobile admin can view, update, filter and delete a lead", async ({ page },
   const dialog = page.getByRole("dialog");
   await expect(dialog).toBeVisible();
   const box = await dialog.boundingBox();
-  expect(box!.width).toBeLessThan(375);
-  expect(box!.x).toBeGreaterThanOrEqual(0);
+  if (!box) throw new Error("Lead detail panel is missing");
+  expect(box.width).toBeLessThan(375);
+  expect(box.x).toBeGreaterThanOrEqual(0);
   await page.screenshot({ path: testInfo.outputPath("mobile-details.png") });
-  await page.getByLabel("Lead status").selectOption("qualified");
-  await page.getByLabel("Internal notes").fill("Follow up on Monday.");
+  await page.getByLabel("Repair request status").selectOption("qualified");
+  await page.getByLabel("Repair notes").fill("Follow up on Monday.");
   await page.getByRole("button", { name: "Save changes" }).click();
   await expect(page.getByRole("status")).toContainText("Lead updated.");
   await page
     .getByRole("button", { name: "View Avery Morgan", exact: true })
     .filter({ visible: true })
     .click();
-  await expect(page.getByLabel("Internal notes")).toHaveValue("Follow up on Monday.");
+  await expect(page.getByLabel("Repair notes")).toHaveValue("Follow up on Monday.");
   await page.getByRole("button", { name: "Close", exact: true }).click();
   await page
     .getByRole("button", { name: "Delete Avery Morgan", exact: true })
@@ -127,7 +128,7 @@ test("mobile admin can view, update, filter and delete a lead", async ({ page },
     .click();
   await page.getByRole("button", { name: "Delete lead", exact: true }).click();
   await expect(
-    page.getByRole("heading", { name: "Your next conversation starts here" }),
+    page.getByRole("heading", { name: "No repair requests yet" }),
   ).toBeVisible();
 });
 
@@ -145,7 +146,7 @@ test("desktop table supports search and public contact submission", async ({ pag
   await login(page);
   await page.getByRole("button", { name: "Leads", exact: true }).click();
   await expect(page.getByRole("table")).toBeVisible();
-  await page.screenshot({ path: testInfo.outputPath("desktop-dashboard.png"), fullPage: true });
+  await page.screenshot({ path: testInfo.outputPath("desktop-dashboard.png"), fullPage: false });
   await page.getByRole("textbox", { name: "Search leads" }).fill("Nobody");
   await expect(page.getByRole("heading", { name: "No matching leads" })).toBeVisible();
   await page.getByRole("button", { name: "Clear filters" }).click();
@@ -155,10 +156,10 @@ test("desktop table supports search and public contact submission", async ({ pag
   await page.getByLabel("Phone number *").fill("+91 98765 43210");
   await page
     .getByRole("combobox", { name: "Service *", exact: true })
-    .selectOption({ label: "SaaS Development" });
+    .selectOption({ label: "Mobile Repair" });
   await page.getByRole("button", { name: "Submit enquiry" }).click();
   await expect(page).toHaveURL(/\/thank-you$/);
-  await expect(page.getByRole("status")).toContainText("Your enquiry has been received");
+  await expect(page.getByRole("heading", {level: 1})).toContainText("Repair request received.");
 });
 
 test("home enquiry reaches a mobile-friendly thank-you page", async ({ page }, testInfo) => {
@@ -169,11 +170,11 @@ test("home enquiry reaches a mobile-friendly thank-you page", async ({ page }, t
   await page.getByLabel("Phone number *").fill("+91 98765 43210");
   await page
     .getByRole("combobox", { name: "Service *", exact: true })
-    .selectOption({ label: "SaaS Development" });
+    .selectOption({ label: "Mobile Repair" });
   await page.getByRole("button", { name: "Submit enquiry" }).click();
   await expect(page).toHaveURL(/\/thank-you$/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Great things start");
-  await page.screenshot({ path: testInfo.outputPath("thank-you-mobile.png"), fullPage: true });
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Repair request received.");
+  await page.screenshot({ path: testInfo.outputPath("thank-you-mobile.png"), fullPage: false });
   await expect(page.getByRole("link", { name: "Email our team" })).toHaveAttribute(
     "href",
     "mailto:hello@numunix.com",
@@ -182,7 +183,7 @@ test("home enquiry reaches a mobile-friendly thank-you page", async ({ page }, t
     true,
   );
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.screenshot({ path: testInfo.outputPath("thank-you-desktop.png"), fullPage: true });
+  await page.screenshot({ path: testInfo.outputPath("thank-you-desktop.png"), fullPage: false });
 });
 
 test("failed enquiries stay on the form and do not show confirmation", async ({ page }) => {
@@ -200,7 +201,7 @@ test("failed enquiries stay on the form and do not show confirmation", async ({ 
   await page.getByLabel("Phone number *").fill("+91 98765 43210");
   await page
     .getByRole("combobox", { name: "Service *", exact: true })
-    .selectOption({ label: "SaaS Development" });
+    .selectOption({ label: "Mobile Repair" });
   await page.getByRole("button", { name: "Submit enquiry" }).click();
   await expect(page.getByRole("alert")).toContainText("could not be saved");
   await expect(page).toHaveURL(/\/contact$/);

@@ -23,6 +23,9 @@ import {
   X,
   Zap,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { REPAIR_PAGES } from "@/content/repair-services";
+import { repairLeadCategory } from "@/lib/repair-leads";
 import { BrandLogo } from "@/components/numunix/BrandLogo";
 import { useAdminSession } from "@/components/admin/useAdminSession";
 import { LeadDetails } from "@/components/admin/LeadDetails";
@@ -45,7 +48,7 @@ import {
 
 export const Route = createFileRoute("/admin/dashboard")({
   head: () => ({
-    meta: [{ title: "Lead workspace | Numunix" }, { name: "robots", content: "noindex, nofollow" }],
+    meta: [{ title: "Repair Lead Dashboard | Numunix" }, { name: "description", content: "Private repair enquiry management for Numunix." }, { property: "og:title", content: "Repair Lead Dashboard | Numunix" }, { property: "og:description", content: "Private electronics and appliance repair leads." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex, nofollow" }],
   }),
   component: AdminDashboard,
 });
@@ -120,6 +123,8 @@ function AdminDashboard() {
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<LeadStatus | "all">("all");
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [serviceFilter, setServiceFilter] = useState("all");
   const [sort, setSort] = useState("newest");
   const [page, setPage] = useState(0);
   const [refresh, setRefresh] = useState(0);
@@ -156,9 +161,11 @@ function AdminDashboard() {
     setError("");
     let request = client.from("contact_enquiries").select("*", { count: "exact" });
     if (filter !== "all") request = request.eq("status", filter);
+    if (serviceFilter !== "all") request = request.eq("service", serviceFilter);
+    else if (categoryFilter !== "all") request = request.in("service", REPAIR_PAGES.filter(item => item.category === categoryFilter).map(item => item.name));
     if (query)
       request = request.or(
-        `name.ilike.%${query}%,email.ilike.%${query}%,phone.ilike.%${query}%,service.ilike.%${query}%`,
+        `name.ilike.%${query}%,phone.ilike.%${query}%,service.ilike.%${query}%,description.ilike.%${query}%`,
       );
     request
       .order("created_at", { ascending: sort === "oldest" })
@@ -181,7 +188,7 @@ function AdminDashboard() {
         setLoading(false);
       });
     return () => controller.abort();
-  }, [access, query, filter, sort, page, refresh]);
+  }, [access, query, filter, categoryFilter, serviceFilter, sort, page, refresh]);
 
   useEffect(() => {
     const client = getSupabase();
@@ -284,9 +291,9 @@ function AdminDashboard() {
                 Back to sign in
               </a>
               {session && (
-                <button onClick={signOut} className="min-h-11 text-sm text-slate-500">
+                <Button onClick={signOut} className="min-h-11 text-sm text-slate-500">
                   Sign out
-                </button>
+                </Button>
               )}
             </div>
           )}
@@ -296,20 +303,20 @@ function AdminDashboard() {
 
   const actionButtons = (lead: Lead) => (
     <div className="flex items-center justify-end gap-1">
-      <button
+      <Button
         onClick={() => setSelected(lead)}
         aria-label={`View ${lead.name}`}
         className="grid h-11 w-11 place-items-center rounded-xl text-slate-500 transition hover:bg-blue-50 hover:text-blue-600"
       >
         <Eye size={18} strokeWidth={1.6} />
-      </button>
-      <button
+      </Button>
+      <Button
         onClick={() => requestDelete(lead)}
         aria-label={`Delete ${lead.name}`}
         className="grid h-11 w-11 place-items-center rounded-xl text-slate-400 transition hover:bg-red-50 hover:text-red-600"
       >
         <Trash2 size={17} strokeWidth={1.6} />
-      </button>
+      </Button>
     </div>
   );
 
@@ -327,7 +334,7 @@ function AdminDashboard() {
           WORKSPACE
         </p>
         {tabs.map((t) => (
-          <button
+          <Button
             key={t.key}
             onClick={() => setTab(t.key)}
             className={`mt-1 flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition-colors ${
@@ -338,7 +345,7 @@ function AdminDashboard() {
           >
             <t.icon size={17} strokeWidth={1.6} />
             {t.label}
-          </button>
+          </Button>
         ))}
         <a
           href="/"
@@ -355,14 +362,14 @@ function AdminDashboard() {
             A little follow-up goes a long way.
           </p>
         </div>
-        <button
+        <Button
           onClick={signOut}
           disabled={signingOut}
           className="mt-5 flex min-h-11 items-center gap-3 px-3 text-sm text-slate-400 hover:text-white"
         >
           <LogOut size={16} />
           {signingOut ? "Signing out…" : "Sign out"}
-        </button>
+        </Button>
       </aside>
 
       {/* ── Main area ─────────────────────────────────────── */}
@@ -373,7 +380,7 @@ function AdminDashboard() {
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-blue-600 text-white xl:hidden">
               <LayoutDashboard size={18} />
             </span>
-            <span className="text-sm font-medium text-slate-600">Lead workspace</span>
+            <span className="text-sm font-medium text-slate-600">Repair lead desk</span>
             <span className="hidden text-xs text-slate-300 sm:inline">/</span>
             <span className="hidden text-xs text-slate-400 sm:inline">
               {tab === "overview" ? "Overview" : "Leads"}
@@ -389,21 +396,21 @@ function AdminDashboard() {
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-blue-100 bg-blue-50 text-xs font-semibold text-blue-600">
               {session?.user.email?.slice(0, 2).toUpperCase()}
             </span>
-            <button
+            <Button
               onClick={signOut}
               disabled={signingOut}
               aria-label="Sign out"
               className="grid h-11 w-11 place-items-center rounded-xl text-slate-500 hover:bg-slate-100 xl:hidden"
             >
               <LogOut size={17} />
-            </button>
+            </Button>
           </div>
         </header>
 
         {/* Mobile tab bar */}
         <div className="flex border-b border-slate-200/80 bg-white xl:hidden">
           {tabs.map((t) => (
-            <button
+            <Button
               key={t.key}
               onClick={() => setTab(t.key)}
               className={`flex flex-1 items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
@@ -414,7 +421,7 @@ function AdminDashboard() {
             >
               <t.icon size={16} />
               {t.label}
-            </button>
+            </Button>
           ))}
         </div>
 
@@ -426,13 +433,13 @@ function AdminDashboard() {
               className="mb-5 flex items-center justify-between gap-3 rounded-xl border border-blue-100 bg-blue-50 px-4 py-2 text-sm text-blue-700"
             >
               {notice}
-              <button
+              <Button
                 aria-label="Dismiss notification"
                 className="grid h-9 w-9 place-items-center"
                 onClick={() => setNotice("")}
               >
                 <X size={15} />
-              </button>
+              </Button>
             </div>
           )}
 
@@ -445,16 +452,16 @@ function AdminDashboard() {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-[10px] font-semibold tracking-[0.18em] text-blue-600">
-                    YOUR PIPELINE, AT A GLANCE
+                    REPAIR ENQUIRIES AT A GLANCE
                   </p>
                   <h1 className="mt-2 text-[28px] font-semibold tracking-tight sm:text-3xl">
-                    Every lead. One place.
+                    Every repair. One desk.
                   </h1>
                   <p className="mt-2 max-w-xl text-sm leading-relaxed text-slate-500">
-                    Keep track of new enquiries and make your next follow-up count.
+                    Review faults, arrange assessments and follow up on electronics and appliance repairs.
                   </p>
                 </div>
-                <button
+                <Button
                   onClick={() => setRefresh((value) => value + 1)}
                   disabled={loading}
                   aria-label="Refresh leads"
@@ -462,7 +469,7 @@ function AdminDashboard() {
                 >
                   <RefreshCw size={15} className={loading ? "animate-spin" : ""} />
                   <span className="hidden sm:inline">Refresh</span>
-                </button>
+                </Button>
               </div>
 
               {/* Metric cards */}
@@ -470,8 +477,8 @@ function AdminDashboard() {
                 {[
                   {
                     key: "all" as const,
-                    label: "Total leads",
-                    caption: "Every conversation",
+                    label: "Repair requests",
+                    caption: "All repair enquiries",
                     icon: Users,
                     gradient: "from-blue-500 to-blue-600",
                     bgLight: "bg-blue-50",
@@ -488,8 +495,8 @@ function AdminDashboard() {
                   },
                   {
                     key: "qualified" as const,
-                    label: "Qualified",
-                    caption: "Promising opportunities",
+                    label: "Assessment arranged",
+                    caption: "Awaiting assessment",
                     icon: SlidersHorizontal,
                     gradient: "from-violet-500 to-purple-600",
                     bgLight: "bg-violet-50",
@@ -497,8 +504,8 @@ function AdminDashboard() {
                   },
                   {
                     key: "won" as const,
-                    label: "Won",
-                    caption: "Converted successfully",
+                    label: "Repair booked",
+                    caption: "Customer approved booking",
                     icon: Check,
                     gradient: "from-emerald-500 to-green-600",
                     bgLight: "bg-emerald-50",
@@ -539,7 +546,7 @@ function AdminDashboard() {
                     <p className="text-2xl font-bold tracking-tight text-slate-900">
                       {countsError ? "—" : `${conversionRate}%`}
                     </p>
-                    <p className="text-[11px] text-slate-400">Conversion rate</p>
+                    <p className="text-[11px] text-slate-400">Booking rate</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white p-5">
@@ -574,12 +581,12 @@ function AdminDashboard() {
                 <section className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white">
                   <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
                     <h2 className="text-sm font-semibold text-slate-900">Recent enquiries</h2>
-                    <button
+                    <Button
                       onClick={() => setTab("leads")}
                       className="flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-700"
                     >
                       View all <ArrowUpRight size={13} />
-                    </button>
+                    </Button>
                   </div>
                   {loading ? (
                     <div className="space-y-3 p-5">
@@ -595,7 +602,7 @@ function AdminDashboard() {
                   ) : (
                     <div className="divide-y divide-slate-50">
                       {recentLeads.map((lead) => (
-                        <button
+                        <Button
                           key={lead.id}
                           onClick={() => setSelected(lead)}
                           className="flex w-full items-center gap-3 px-5 py-3.5 text-left transition-colors hover:bg-slate-50/50"
@@ -617,15 +624,15 @@ function AdminDashboard() {
                               <StatusBadge status={lead.status} />
                             </div>
                           </div>
-                        </button>
+                        </Button>
                       ))}
                     </div>
                   )}
                 </section>
 
-                {/* Pipeline breakdown */}
+                {/* Repair request stages */}
                 <section className="rounded-2xl border border-slate-200/80 bg-white p-5">
-                  <h2 className="text-sm font-semibold text-slate-900">Pipeline breakdown</h2>
+                  <h2 className="text-sm font-semibold text-slate-900">Repair request stages</h2>
                   <div className="mt-5 space-y-4">
                     {(
                       [
@@ -637,12 +644,12 @@ function AdminDashboard() {
                         {
                           status: "qualified" as const,
                           color: "bg-violet-500",
-                          label: "Qualified",
+                          label: "Assessment arranged",
                         },
                         {
                           status: "won" as const,
                           color: "bg-emerald-500",
-                          label: "Won",
+                          label: "Repair booked",
                         },
                       ] as const
                     ).map(({ status, color, label }) => {
@@ -670,15 +677,14 @@ function AdminDashboard() {
                       PRO TIP
                     </p>
                     <p className="mt-2 text-xs leading-relaxed text-slate-500">
-                      Reply to new leads within 5 minutes to increase conversion rates by up to
-                      21×.
+                      Review the model, fault, location and preferred timing before arranging an assessment.
                     </p>
                   </div>
                 </section>
               </div>
 
               <p className="mt-7 text-center text-[11px] text-slate-400">
-                Numunix workspace · Thoughtful follow-ups. Better conversations.
+                Numunix workspace · Electronics and appliance repair enquiries.
               </p>
             </div>
           )}
@@ -692,13 +698,13 @@ function AdminDashboard() {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-[10px] font-semibold tracking-[0.18em] text-blue-600">
-                    LEAD MANAGEMENT
+                    REPAIR LEAD MANAGEMENT
                   </p>
                   <h1 className="mt-2 text-[28px] font-semibold tracking-tight sm:text-3xl">
-                    All enquiries
+                    All repair enquiries
                   </h1>
                 </div>
-                <button
+                <Button
                   onClick={() => setRefresh((value) => value + 1)}
                   disabled={loading}
                   aria-label="Refresh leads"
@@ -706,7 +712,7 @@ function AdminDashboard() {
                 >
                   <RefreshCw size={15} className={loading ? "animate-spin" : ""} />
                   <span className="hidden sm:inline">Refresh</span>
-                </button>
+                </Button>
               </div>
 
               {/* Quick filter cards */}
@@ -715,11 +721,11 @@ function AdminDashboard() {
                   [
                     { key: "all" as const, label: "All leads", icon: Users },
                     { key: "new" as const, label: "New", icon: Inbox },
-                    { key: "qualified" as const, label: "Qualified", icon: SlidersHorizontal },
-                    { key: "won" as const, label: "Won", icon: Check },
+                    { key: "qualified" as const, label: "Assessment arranged", icon: SlidersHorizontal },
+                    { key: "won" as const, label: "Repair booked", icon: Check },
                   ] as const
                 ).map(({ key, label, icon: Icon }) => (
-                  <button
+                  <Button
                     key={key}
                     onClick={() => {
                       setFilter(key);
@@ -745,7 +751,7 @@ function AdminDashboard() {
                       </span>
                       <span className="ml-2 text-xs text-slate-400">{label}</span>
                     </div>
-                  </button>
+                  </Button>
                 ))}
               </div>
 
@@ -775,10 +781,14 @@ function AdminDashboard() {
                       />
                     </label>
                   </div>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                    <label className="text-xs text-muted-foreground">Repair category<select aria-label="Repair category" value={categoryFilter} onChange={event => {setCategoryFilter(event.target.value);setServiceFilter("all");setPage(0);}} className="mt-2 h-11 w-full rounded-md border border-border bg-card px-3 text-sm text-foreground"><option value="all">All categories</option><option value="electronics">Electronics</option><option value="appliances">Appliances</option></select></label>
+                    <label className="text-xs text-muted-foreground">Repair service<select aria-label="Repair service" value={serviceFilter} onChange={event => {setServiceFilter(event.target.value);setPage(0);}} className="mt-2 h-11 w-full rounded-md border border-border bg-card px-3 text-sm text-foreground"><option value="all">All services</option>{REPAIR_PAGES.filter(item => categoryFilter === "all" || item.category === categoryFilter).map(item => <option key={item.slug} value={item.name}>{item.name}</option>)}</select></label>
+                  </div>
                   <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
                     <div aria-label="Filter by status" className="flex flex-wrap gap-1">
                       {(["all", ...LEAD_STATUSES] as const).map((value) => (
-                        <button
+                        <Button
                           key={value}
                           aria-pressed={filter === value}
                           onClick={() => {
@@ -788,7 +798,7 @@ function AdminDashboard() {
                           className={`min-h-10 rounded-lg px-3 text-xs font-medium transition ${filter === value ? "bg-[#edf3ff] text-blue-700" : "text-slate-500 hover:bg-slate-50"}`}
                         >
                           {value === "all" ? "All leads" : STATUS_LABELS[value]}
-                        </button>
+                        </Button>
                       ))}
                     </div>
                     <label className="flex min-h-10 items-center gap-2 text-xs text-slate-400">
@@ -820,12 +830,12 @@ function AdminDashboard() {
                 ) : error ? (
                   <div role="alert" className="p-8 text-center">
                     <p className="text-sm text-red-600">{error}</p>
-                    <button
+                    <Button
                       onClick={() => setRefresh((value) => value + 1)}
                       className="mt-4 min-h-11 rounded-xl bg-blue-600 px-5 text-sm text-white"
                     >
                       Try again
-                    </button>
+                    </Button>
                   </div>
                 ) : leads.length === 0 ? (
                   <div className="px-5 py-16 text-center">
@@ -833,27 +843,29 @@ function AdminDashboard() {
                       <Inbox size={25} strokeWidth={1.4} />
                     </span>
                     <h3 className="mt-4 text-base font-semibold">
-                      {query || filter !== "all"
+                      {query || filter !== "all" || categoryFilter !== "all" || serviceFilter !== "all"
                         ? "No matching leads"
-                        : "Your next conversation starts here"}
+                        : "No repair requests yet"}
                     </h3>
                     <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-slate-500">
-                      {query || filter !== "all"
+                      {query || filter !== "all" || categoryFilter !== "all" || serviceFilter !== "all"
                         ? "Try another search or clear your filters."
                         : "Enquiries from your homepage and contact form will appear here."}
                     </p>
-                    {(query || filter !== "all") && (
-                      <button
+                    {(query || filter !== "all" || categoryFilter !== "all" || serviceFilter !== "all") && (
+                      <Button
                         onClick={() => {
                           setSearch("");
                           setQuery("");
                           setFilter("all");
+                          setCategoryFilter("all");
+                          setServiceFilter("all");
                           setPage(0);
                         }}
                         className="mt-4 min-h-11 text-sm font-medium text-blue-600"
                       >
                         Clear filters
-                      </button>
+                      </Button>
                     )}
                   </div>
                 ) : (
@@ -872,6 +884,7 @@ function AdminDashboard() {
                                   </h3>
                                   <p className="mt-1 break-words text-xs text-slate-500">
                                     {lead.service}
+                                    <span className="mt-1 block text-muted-foreground">{repairLeadCategory(lead) === "appliances" ? "Appliances" : repairLeadCategory(lead) === "electronics" ? "Electronics" : "Other enquiry"} · {lead.timeline}</span>
                                   </p>
                                 </div>
                                 <StatusBadge status={lead.status} />
@@ -912,7 +925,7 @@ function AdminDashboard() {
                       <table className="w-full text-left text-sm">
                         <thead className="border-b border-slate-100 bg-slate-50/60 text-[10px] uppercase tracking-wider text-slate-400">
                           <tr>
-                            {["Lead", "Contact", "Service", "Status", "Received", "Actions"].map(
+                            {["Customer", "Contact", "Repair service", "Status", "Received", "Actions"].map(
                               (heading) => (
                                 <th
                                   scope="col"
@@ -966,7 +979,7 @@ function AdminDashboard() {
                                 </div>
                               </td>
                               <td className="max-w-52 px-5 py-4 text-xs text-slate-500">
-                                {lead.service}
+                                {lead.service}<span className="mt-1 block text-muted-foreground">{lead.timeline}</span>
                               </td>
                               <td className="px-5 py-4">
                                 <StatusBadge status={lead.status} />
@@ -998,29 +1011,29 @@ function AdminDashboard() {
                         : `${total ? page * PAGE_SIZE + 1 : 0}–${Math.min((page + 1) * PAGE_SIZE, total)} of ${total} leads`}
                   </p>
                   <div className="flex items-center gap-2">
-                    <button
+                    <Button
                       aria-label="Previous page"
                       disabled={page === 0 || loading}
                       onClick={() => setPage((value) => value - 1)}
                       className="grid h-10 w-10 place-items-center rounded-lg border border-slate-200 text-slate-500 disabled:opacity-30"
                     >
                       <ChevronLeft size={16} />
-                    </button>
+                    </Button>
                     <span className="px-1 text-xs text-slate-500">{page + 1}</span>
-                    <button
+                    <Button
                       aria-label="Next page"
                       disabled={(page + 1) * PAGE_SIZE >= total || loading}
                       onClick={() => setPage((value) => value + 1)}
                       className="grid h-10 w-10 place-items-center rounded-lg border border-slate-200 text-slate-500 disabled:opacity-30"
                     >
                       <ChevronRight size={16} />
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </section>
 
               <p className="mt-5 text-center text-[11px] text-slate-400">
-                Numunix workspace · Thoughtful follow-ups. Better conversations.
+                Numunix workspace · Electronics and appliance repair enquiries.
               </p>
             </div>
           )}
@@ -1067,13 +1080,13 @@ function AdminDashboard() {
             <AlertDialogCancel disabled={deleting} className="m-0 min-h-11 rounded-xl">
               Keep lead
             </AlertDialogCancel>
-            <button
+            <Button
               onClick={confirmDelete}
               disabled={deleting}
               className="min-h-11 rounded-xl bg-red-600 px-4 text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50"
             >
               {deleting ? "Deleting…" : "Delete lead"}
-            </button>
+            </Button>
           </div>
         </AlertDialogContent>
       </AlertDialog>
