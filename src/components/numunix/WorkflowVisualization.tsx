@@ -25,7 +25,7 @@ const REPAIR_NODES = [
   { slug: "code", phase: "REPAIR", name: "TV & Audio", category: "PANELS · SOUND", icon: Tv },
   { slug: "apis", phase: "REPAIR", name: "Washing", category: "DRUMS · MOTORS", icon: WashingMachine },
   { slug: "qa", phase: "SERVICE", name: "AC", category: "GAS · COOLING", icon: AirVent },
-  { slug: "cloud", phase: "WORK", name: "Electrician", category: "WIRING · FITTINGS", icon: Zap },
+  { slug: "cloud", phase: "WORK", name: "Electrical", category: "WIRING · FITTINGS", icon: Zap },
   { slug: "grow", phase: "SERVICE", name: "Doorstep", category: "WE COME TO YOU", icon: Truck },
 ];
 
@@ -107,7 +107,7 @@ export function WorkflowVisualization({
               </div>
 
               <div className="mt-5">
-                <div className="font-mono text-[22px] leading-[1.05] font-light tracking-[-0.02em] break-words text-[#08152e] sm:text-[26px] xl:text-[19px]">
+                <div className="font-mono text-[22px] leading-[1.05] font-light tracking-[-0.02em] break-words text-[#08152e] sm:text-[26px] xl:text-[16px]">
                   {v}
                 </div>
                 <div className="label-mono mt-2 truncate text-[#1747b8]">{u}</div>
