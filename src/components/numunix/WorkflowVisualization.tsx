@@ -19,14 +19,14 @@ const NODES = WORKFLOW_STAGES;
 
 // Homepage panel shows the repair services we cover, each with its own icon.
 const REPAIR_NODES = [
-  { slug: "idea", phase: "MOBILE", name: "Repair", category: "SCREENS · BATTERIES", icon: Smartphone },
-  { slug: "scope", phase: "LAPTOP", name: "Repair", category: "BOARDS · UPGRADES", icon: Laptop },
-  { slug: "ux", phase: "CCTV", name: "Install", category: "SETUP · MAINTENANCE", icon: Cctv },
-  { slug: "code", phase: "TV & AUDIO", name: "Repair", category: "PANELS · SOUND", icon: Tv },
-  { slug: "apis", phase: "WASHING", name: "Machine", category: "DRUMS · MOTORS", icon: WashingMachine },
-  { slug: "qa", phase: "AC", name: "Service", category: "GAS · COOLING", icon: AirVent },
-  { slug: "cloud", phase: "ELECTRICIAN", name: "Work", category: "WIRING · FITTINGS", icon: Zap },
-  { slug: "grow", phase: "DOORSTEP", name: "Service", category: "WE COME TO YOU", icon: Truck },
+  { slug: "idea", phase: "REPAIR", name: "Mobile", category: "SCREENS · BATTERIES", icon: Smartphone },
+  { slug: "scope", phase: "REPAIR", name: "Laptop", category: "BOARDS · UPGRADES", icon: Laptop },
+  { slug: "ux", phase: "INSTALL", name: "CCTV", category: "SETUP · MAINTENANCE", icon: Cctv },
+  { slug: "code", phase: "REPAIR", name: "TV & Audio", category: "PANELS · SOUND", icon: Tv },
+  { slug: "apis", phase: "REPAIR", name: "Washing", category: "DRUMS · MOTORS", icon: WashingMachine },
+  { slug: "qa", phase: "SERVICE", name: "AC", category: "GAS · COOLING", icon: AirVent },
+  { slug: "cloud", phase: "WORK", name: "Electrical", category: "WIRING · FITTINGS", icon: Zap },
+  { slug: "grow", phase: "SERVICE", name: "Doorstep", category: "WE COME TO YOU", icon: Truck },
 ];
 
 type PanelNodes = { slug: string; phase: string; name: string; category: string; icon?: LucideIcon }[];
@@ -107,7 +107,7 @@ export function WorkflowVisualization({
               </div>
 
               <div className="mt-5">
-                <div className="font-mono text-[22px] leading-none font-light tracking-[-0.02em] text-[#08152e] sm:text-[26px]">
+                <div className="font-mono text-[22px] leading-[1.05] font-light tracking-[-0.02em] break-words text-[#08152e] sm:text-[26px] xl:text-[14px]">
                   {v}
                 </div>
                 <div className="label-mono mt-2 truncate text-[#1747b8]">{u}</div>
