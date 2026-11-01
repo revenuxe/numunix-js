@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Label, Heading, Accent, Reveal } from "./primitives";
 import { NODE_VIZ } from "./nodeviz";
 import { Link } from "@tanstack/react-router";
@@ -7,26 +8,52 @@ import {
   Laptop,
   Cctv,
   Tv,
+  Tablet,
+  HardDrive,
+  Gamepad2,
+  Truck,
   WashingMachine,
   AirVent,
+  Refrigerator,
+  Microwave,
+  Droplets,
+  BatteryCharging,
+  Fan,
   Zap,
-  Truck,
   type LucideIcon,
 } from "lucide-react";
 import { WORKFLOW_STAGES } from "@/content/workflow";
 
 const NODES = WORKFLOW_STAGES;
 
-// Homepage panel shows the repair services we cover, each with its own icon.
-const REPAIR_NODES = [
+type RepairNode = { slug: string; phase: string; name: string; category: string; icon: LucideIcon };
+
+// Homepage panel shows the repair services we cover, switchable by category.
+const ELECTRONICS_NODES: RepairNode[] = [
   { slug: "idea", phase: "REPAIR", name: "Mobile", category: "SCREENS · BATTERIES", icon: Smartphone },
   { slug: "scope", phase: "REPAIR", name: "Laptop", category: "BOARDS · UPGRADES", icon: Laptop },
   { slug: "ux", phase: "INSTALL", name: "CCTV", category: "SETUP · MAINTENANCE", icon: Cctv },
   { slug: "code", phase: "REPAIR", name: "TV & Audio", category: "PANELS · SOUND", icon: Tv },
-  { slug: "apis", phase: "REPAIR", name: "Washing", category: "DRUMS · MOTORS", icon: WashingMachine },
-  { slug: "qa", phase: "SERVICE", name: "AC", category: "GAS · COOLING", icon: AirVent },
-  { slug: "cloud", phase: "WORK", name: "Electrical", category: "WIRING · FITTINGS", icon: Zap },
+  { slug: "apis", phase: "REPAIR", name: "Tablet", category: "IPAD · ANDROID", icon: Tablet },
+  { slug: "qa", phase: "RECOVERY", name: "Data", category: "DRIVES · PHONES", icon: HardDrive },
+  { slug: "cloud", phase: "REPAIR", name: "Console", category: "PS · XBOX", icon: Gamepad2 },
   { slug: "grow", phase: "SERVICE", name: "Doorstep", category: "WE COME TO YOU", icon: Truck },
+];
+
+const APPLIANCE_NODES: RepairNode[] = [
+  { slug: "idea", phase: "REPAIR", name: "Washing", category: "DRUMS · MOTORS", icon: WashingMachine },
+  { slug: "scope", phase: "SERVICE", name: "AC", category: "GAS · COOLING", icon: AirVent },
+  { slug: "ux", phase: "REPAIR", name: "Fridge", category: "COOLING · GAS", icon: Refrigerator },
+  { slug: "code", phase: "REPAIR", name: "Microwave", category: "OVENS · CHIMNEY", icon: Microwave },
+  { slug: "apis", phase: "SERVICE", name: "Purifier", category: "RO · FILTERS", icon: Droplets },
+  { slug: "qa", phase: "REPAIR", name: "Inverter", category: "UPS · BATTERIES", icon: BatteryCharging },
+  { slug: "cloud", phase: "WORK", name: "Fan & Light", category: "FITTING · REPAIR", icon: Fan },
+  { slug: "grow", phase: "WORK", name: "Electrical", category: "WIRING · FITTINGS", icon: Zap },
+];
+
+const REPAIR_TABS = [
+  { label: "Electronics", nodes: ELECTRONICS_NODES },
+  { label: "Appliances", nodes: APPLIANCE_NODES },
 ];
 
 type PanelNodes = { slug: string; phase: string; name: string; category: string; icon?: LucideIcon }[];
