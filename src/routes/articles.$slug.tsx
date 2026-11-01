@@ -340,7 +340,7 @@ function ArticlePage() {
                     fetchPriority="high"
                     className="aspect-[2/1] w-full object-cover"
                   />
-                  <figcaption className="mt-3 text-xs text-primary-foreground/60">Bengaluru — architectural illustration, not a documentary photograph.</figcaption>
+                  <figcaption className="mt-3 text-xs text-primary-foreground/60">Bengaluru, architectural illustration, not a documentary photograph.</figcaption>
                 </figure>
               )}
             </Reveal>
@@ -417,7 +417,7 @@ function ArticlePage() {
                           <Callout
                             icon="💡"
                             title="Why this matters"
-                            body="Every section in this article includes actionable takeaways you can apply to your next project — not just theory."
+                            body="Every section in this article includes actionable takeaways you can apply to your next project, not just theory."
                             tone="blue"
                           />
                         )}
@@ -428,7 +428,7 @@ function ArticlePage() {
                               <div>
                                 <div className="text-[16px] font-semibold text-[#065f46]">Ready to build?</div>
                                 <div className="mt-1.5 text-[15px] leading-relaxed text-[#064e3b]">
-                                  If you're planning a project and want to apply these principles with a team that lives them — let's talk.
+                                  If you're planning a project and want to apply these principles with a team that lives them, let's talk.
                                 </div>
                                 <Link
                                   to="/contact"
@@ -530,7 +530,7 @@ function ArticlePage() {
                 <span className="text-[#3b82f6]">real product.</span>
               </h2>
               <p className="mx-auto mt-5 max-w-[52ch] text-[17px] leading-relaxed text-white/50">
-                Whether it's a website, mobile app, SaaS platform, or custom software — our team designs and develops digital products that grow your business.
+                Whether it's a website, mobile app, SaaS platform, or custom software, our team designs and develops digital products that grow your business.
               </p>
               <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
                 <Link

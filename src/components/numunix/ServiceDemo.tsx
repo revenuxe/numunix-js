@@ -182,10 +182,10 @@ const REPAIR_STORIES: Record<
     title: "Every repair, tracked end to end.",
     steps: ["Booked", "Diagnosed", "Repaired", "Ready"],
     captions: [
-      "Book your repair in a minute — walk in or request a doorstep pickup.",
+      "Book your repair in a minute, walk in or request a doorstep pickup.",
       "Technicians diagnose the fault and share a clear, itemised estimate.",
       "The repair is completed on the bench with tested, quality parts.",
-      "Collect your device, or get it delivered — with a service warranty.",
+      "Collect your device, or get it delivered, with a service warranty.",
     ],
   },
   "repair-board": {
@@ -248,10 +248,10 @@ const REPAIR_STORIES: Record<
     title: "Describe the fault. AI does the rest.",
     steps: ["Received", "Diagnosed", "Checked", "Booked"],
     captions: [
-      "Describe the problem in your own words — on chat or WhatsApp.",
+      "Describe the problem in your own words, on chat or WhatsApp.",
       "The assistant recognises the device and the likely fault.",
       "It checks your warranty, parts stock, and the next free bench slot.",
-      "You get a diagnosis, an estimate, and a booked slot — without waiting.",
+      "You get a diagnosis, an estimate, and a booked slot, without waiting.",
     ],
   },
   "repair-warranty": {
@@ -262,7 +262,7 @@ const REPAIR_STORIES: Record<
       "Register the devices your home or business depends on.",
       "Activate a maintenance plan that matches how you use them.",
       "Preventive checks and priority repairs are scheduled for you.",
-      "Something breaks? One call — the plan takes care of the rest.",
+      "Something breaks? One call, the plan takes care of the rest.",
     ],
   },
 };

@@ -39,7 +39,7 @@ export const APPROACH: CompanyPageData = {
   title: "From idea to a product your team can use.",
   accent: "your team can use.",
   intro:
-    "One team for discovery, design, development, and launch — so your website, app, or software stays connected from the first conversation to the first release.",
+    "One team for discovery, design, development, and launch, so your website, app, or software stays connected from the first conversation to the first release.",
   metaTitle: "Our Approach | Numunix",
   metaDescription:
     "See how Numunix takes digital products from idea to launch with one team for discovery, design, development, and ongoing improvement.",
@@ -56,7 +56,7 @@ export const APPROACH: CompanyPageData = {
       accent: "not a generic template.",
       body: "We begin with the business problem, then choose the product shape, experience, and technology that can actually be delivered.",
       items: [
-        ["Business first", "Scope follows your users, operations, and commercial goals — not a pre-set stack."],
+        ["Business first", "Scope follows your users, operations, and commercial goals, not a pre-set stack."],
         ["One connected team", "Design, engineering, and delivery stay on the same plan so handoffs do not stall the work."],
         ["Clear decisions", "You see the options, trade-offs, and next step before we commit to a build phase."],
         ["Built to continue", "The first release is designed so maintenance, integrations, and new features have a path."],
@@ -87,7 +87,7 @@ export const PROCESS: CompanyPageData = {
   title: "From the business problem to product growth.",
   accent: "product growth.",
   intro:
-    "Eight connected stages take a product from discovery to launch and improvement — with a clear owner, deliverable, and decision at each step.",
+    "Eight connected stages take a product from discovery to launch and improvement, with a clear owner, deliverable, and decision at each step.",
   metaTitle: "Our Process | Numunix",
   metaDescription:
     "Numunix product process: discover, define, design, develop, integrate, validate, launch, and grow websites, apps, and software.",
@@ -121,7 +121,7 @@ export const PROCESS: CompanyPageData = {
       bg: "#07111f",
       items: [
         ["Kickoff clarity", "We need goals, audience, examples, and any current product or content you already have."],
-        ["Regular checkpoints", "Reviews happen at definition, design, and pre-launch — not only at the end."],
+        ["Regular checkpoints", "Reviews happen at definition, design, and pre-launch, not only at the end."],
         ["Decisions in writing", "Scope changes and priorities are captured so the build stays aligned."],
         ["Handoff that lasts", "Documentation, credentials, and next-step options are part of launch, not an afterthought."],
       ],
@@ -135,10 +135,10 @@ export const TECHNOLOGY: CompanyPageData = {
   title: "Modern stacks chosen for the product, not the trend.",
   accent: "not the trend.",
   intro:
-    "We use proven web, mobile, cloud, and AI tools — selected for maintainability, integrations, and the kind of product you need to run.",
+    "We use proven web, mobile, cloud, and AI tools, selected for maintainability, integrations, and the kind of product you need to run.",
   metaTitle: "Technology | Numunix",
   metaDescription:
-    "Numunix technology for web, mobile, SaaS, custom software, cloud, integrations, and AI — chosen around your product requirements.",
+    "Numunix technology for web, mobile, SaaS, custom software, cloud, integrations, and AI, chosen around your product requirements.",
   stats: [
     ["WEB", "React"],
     ["LANGUAGE", "TypeScript"],
@@ -155,7 +155,7 @@ export const TECHNOLOGY: CompanyPageData = {
         ["Mobile products", "Cross-platform apps designed for everyday tasks on iOS and Android."],
         ["APIs and data", "Services, databases, and integrations that keep business tools connected."],
         ["Cloud and delivery", "Environments, deployment, and operational setup so a product can actually ship."],
-        ["AI where it fits", "Assistants and automation tied to a real workflow — not a disconnected demo."],
+        ["AI where it fits", "Assistants and automation tied to a real workflow, not a disconnected demo."],
         ["Design systems", "Reusable interface patterns so the product stays consistent as it grows."],
       ],
     },
@@ -169,7 +169,7 @@ export const TECHNOLOGY: CompanyPageData = {
         ["Fit over fashion", "We recommend tools your team can operate and extend after launch."],
         ["Integration first", "CRM, payments, analytics, and internal systems are planned into the architecture."],
         ["Security-conscious defaults", "Authentication, roles, and data handling are part of the technical plan."],
-        ["Room to grow", "The first version should not block the second — we design for iteration."],
+        ["Room to grow", "The first version should not block the second, we design for iteration."],
       ],
     },
   ],
@@ -182,7 +182,7 @@ export const SECURITY: CompanyPageData = {
   title: "Secure, reliable software built for business use.",
   accent: "built for business use.",
   intro:
-    "Security is part of how we design products — authentication, permissions, data handling, and operational visibility — not a checklist added at the end.",
+    "Security is part of how we design products, authentication, permissions, data handling, and operational visibility, not a checklist added at the end.",
   metaTitle: "Security | Numunix",
   metaDescription:
     "How Numunix approaches product security: authentication, role-based access, data handling, logging, and maintainable systems.",
@@ -226,7 +226,7 @@ export const SUPPORT: CompanyPageData = {
   title: "Help after launch, when the product is in real use.",
   accent: "in real use.",
   intro:
-    "Support is for existing products as much as new ones — issues, improvements, security updates, and the next set of features once customers are already using the software.",
+    "Support is for existing products as much as new ones, issues, improvements, security updates, and the next set of features once customers are already using the software.",
   metaTitle: "Support | Numunix",
   metaDescription:
     "Get Numunix support for maintenance, issues, optimizations, and new features on websites, apps, and custom software.",

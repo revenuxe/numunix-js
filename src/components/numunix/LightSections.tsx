@@ -27,7 +27,7 @@ import {
 } from "lucide-react";
 
 const STEPS = [
-  ["01", "BOOK", "Tell us the device and the fault — walk in, call, or book online.", "idea"],
+  ["01", "BOOK", "Tell us the device and the fault, walk in, call, or book online.", "idea"],
   ["02", "DIAGNOSE", "Technicians test the device and pinpoint the actual fault, not a guess.", "scope"],
   ["03", "ESTIMATE", "A clear, itemised quote before any work starts. You approve it.", "ux"],
   ["04", "REPAIR", "Skilled hands fix the fault using tested, quality spare parts.", "code"],
@@ -85,7 +85,7 @@ export function AutomationWorkflow() {
 }
 
 const INDUSTRIES = [
-  [Smartphone, "MOBILE PHONES", "Screens, batteries, charging ports, cameras, and water damage — every major brand.", "/features"],
+  [Smartphone, "MOBILE PHONES", "Screens, batteries, charging ports, cameras, and water damage, every major brand.", "/features"],
   [Laptop, "LAPTOPS & COMPUTERS", "Board-level repair, displays, keyboards, upgrades, and tune-ups.", "/features"],
   [Cctv, "CCTV & SECURITY", "Installation, DVR/NVR setup, camera repair, and preventive maintenance.", "/features"],
   [WashingMachine, "HOME APPLIANCES", "Washing machines, microwaves, chimneys, and small appliances.", "/features"],
@@ -322,7 +322,7 @@ export function AnalyticsDemo() {
 const POSTS = [
   ["FIXED RIGHT", "DIAGNOSTICS FIRST", "We find the real fault before replacing any part.", "/features"],
   ["QUALITY PARTS", "TESTED & WARRANTIED", "Every spare is verified, and every job carries a service warranty.", "/features"],
-  ["ONE WORKSHOP", "END TO END", "Booking, repair, quality check, and doorstep delivery — one team.", "/features"],
+  ["ONE WORKSHOP", "END TO END", "Booking, repair, quality check, and doorstep delivery, one team.", "/features"],
 ];
 
 export function BlogCards() {

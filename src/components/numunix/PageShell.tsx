@@ -150,7 +150,7 @@ export function SectionHead({
 export function ClosingCTA({
   title = "Have an idea? Let’s turn it into software.",
   accent = "Let’s turn it into software.",
-  body = "Websites, mobile apps, SaaS, custom software, and AI — designed and developed around your business.",
+  body = "Websites, mobile apps, SaaS, custom software, and AI, designed and developed around your business.",
 }: {
   title?: string;
   accent?: string;

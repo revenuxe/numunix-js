@@ -129,7 +129,7 @@ export function WorkflowVisualization({
               key={`${tab}-${slug}`}
               to="/approach/$slug"
               params={{ slug }}
-              aria-label={`${n}: ${v} — explore ${u.toLowerCase()}`}
+              aria-label={`${n}: ${v}, explore ${u.toLowerCase()}`}
               className="group relative flex min-w-0 flex-col justify-between overflow-hidden rounded-2xl border border-[#e1eaf5] bg-white px-4 py-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#b8ccec] hover:bg-[#f5f8fd] hover:shadow-[0_4px_20px_-10px_rgba(30,78,216,0.15)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] motion-reduce:transform-none motion-reduce:transition-none sm:px-5 sm:py-6"
             >
               <span className="pointer-events-none absolute inset-x-0 -top-px h-px scale-x-0 bg-gradient-to-r from-transparent via-[#2563eb] to-transparent transition-transform duration-500 group-hover:scale-x-100" />

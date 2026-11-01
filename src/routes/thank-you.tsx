@@ -72,7 +72,7 @@ function ThankYouPage() {
                 Great things start with <span className="text-[#6da6ff]">a hello.</span>
               </h1>
               <p className="mt-6 max-w-[43ch] text-base leading-relaxed text-slate-300 sm:text-lg">
-                Thank you for reaching out. You’ve taken the first step — we’re looking forward to
+                Thank you for reaching out. You’ve taken the first step, we’re looking forward to
                 hearing more about what you want to build.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">

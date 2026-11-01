@@ -5,11 +5,11 @@ export const REPAIR_HOME_PATHS = { electronics: "/", appliances: "/appliances" }
 
 const PAGE_META = {
   electronics: {
-    title: "Electronics Repair in Bangalore | Mobile, Laptop & CCTV — Numunix",
+    title: "Electronics Repair in Bangalore | Mobile, Laptop & CCTV, Numunix",
     description: "Mobile, laptop, tablet, TV and CCTV repair in Bangalore. Explore fault diagnosis, data recovery, repair estimates and device testing with Numunix.",
   },
   appliances: {
-    title: "Home Appliance Repair in Bangalore | AC, Washing Machine & Fridge — Numunix",
+    title: "Home Appliance Repair in Bangalore | AC, Washing Machine & Fridge, Numunix",
     description: "Washing machine, AC, refrigerator, microwave and water purifier repair in Bangalore. Request a doorstep assessment and review repair options with Numunix.",
   },
 };

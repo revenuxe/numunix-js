@@ -30,7 +30,7 @@ export const FEATURES: Feature[] = [
     intro: "Fast, responsive websites that make your business clear and easy to explore.",
     metaTitle: "Web Development Services | Numunix",
     metaDescription:
-      "Modern, responsive, high-performance websites and web applications built for speed, usability, and scalability — from company websites to portals and complex platforms.",
+      "Modern, responsive, high-performance websites and web applications built for speed, usability, and scalability, from company websites to portals and complex platforms.",
     demo: "booking",
     stats: [
       ["FRONTEND", "React"],

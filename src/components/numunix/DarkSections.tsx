@@ -96,7 +96,7 @@ export function DispatchSection() {
 }
 
 const SECURITY = [
-  [ShieldCheck, "PRIVACY FIRST", "Your photos, files, and accounts stay yours — we ask before touching anything."],
+  [ShieldCheck, "PRIVACY FIRST", "Your photos, files, and accounts stay yours, we ask before touching anything."],
   [Users, "CAREFUL HANDLING", "Every device is checked in, logged, and tracked from counter to bench."],
   [Activity, "TESTED PARTS", "Each replacement part is verified before it ever reaches your device."],
   [FileSearch, "TRANSPARENT JOBS", "Itemised estimates, live status, and a warranty recorded on your job card."],
@@ -148,7 +148,7 @@ export function SecuritySection() {
 
 const BUILT_TABS = ["PHONES", "LAPTOPS", "CCTV", "APPLIANCES"];
 const BUILT_CARDS = [
-  ["MOBILE & TABLET REPAIRS", "Screens, batteries, charging ports, cameras, and water damage — fixed fast, with tested parts.", "/features"],
+  ["MOBILE & TABLET REPAIRS", "Screens, batteries, charging ports, cameras, and water damage, fixed fast, with tested parts.", "/features"],
   ["LAPTOP & COMPUTER REPAIRS", "Board-level repair, displays, keyboards, and upgrades for every major brand.", "/features"],
   ["CCTV & SECURITY SYSTEMS", "Installation, DVR/NVR setup, camera repair, and maintenance for homes and businesses.", "/features"],
   ["APPLIANCES & AMC PLANS", "Washing machines, microwaves, chimneys, and annual maintenance for every device you own.", "/features"],
