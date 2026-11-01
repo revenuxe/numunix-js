@@ -36,25 +36,25 @@ export function PlatformIntro() {
     <section id="approach" className="section-pad bg-[#f1f5f9]">
       <div className="shell">
         <Reveal>
-          <Label tone="light">HOW A REPAIR WORKS</Label>
+          <Label tone="light">WHAT WE FIX</Label>
         </Reveal>
         <div className="mt-10 grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20">
           <Reveal delay={60}>
             <Heading tone="light">
-              From walk-in
+              Every device,
               <br />
-              <Accent>to working again.</Accent>
+              <Accent>one workshop.</Accent>
             </Heading>
           </Reveal>
           <Reveal delay={140}>
             <p className="max-w-[44ch] text-[18px] leading-relaxed text-[#5d76a3] lg:pt-6 lg:text-[20px]">
-              One workshop for diagnostics, repair, and everything it takes to get your device back.
+              Mobiles, laptops, CCTV, home appliances, and electrical work — repaired by certified technicians, at our bench or your doorstep.
             </p>
           </Reveal>
         </div>
       </div>
       <Reveal delay={120}>
-        <WorkflowVisualization nodes={REPAIR_NODES} label="DEVICE INTAKE TO HANDOVER" sub="/ BROKEN → FIXED" />
+        <WorkflowVisualization nodes={REPAIR_NODES} label="REPAIR SERVICES" sub="/ MOBILE → ELECTRICAL" />
       </Reveal>
     </section>
   );
