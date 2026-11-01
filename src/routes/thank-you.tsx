@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/numunix/Header";
 import Footer from "@/components/numunix/Footer";
+import Hero from "@/components/numunix/Hero";
 import { CONTACT } from "@/content/site";
 
 export const Route = createFileRoute("/thank-you")({
@@ -55,81 +56,7 @@ function ThankYouPage() {
     <div className="bg-[#05070c]">
       <Header />
       <main id="main-content">
-        <section className="relative overflow-hidden px-5 pb-16 pt-32 sm:px-8 sm:pb-24 lg:pt-44">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_75%_35%,rgba(37,99,235,0.18),transparent_55%)]"
-          />
-          <div className="relative mx-auto grid max-w-[1200px] items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
-            <div>
-              <div
-                role="status"
-                className="inline-flex items-center gap-2.5 rounded-full border border-emerald-300/20 bg-emerald-300/5 px-4 py-2 text-xs font-medium text-emerald-200"
-              >
-                <Check size={15} aria-hidden="true" /> Your enquiry has been received
-              </div>
-              <h1 className="mt-7 max-w-[13ch] text-[clamp(2.8rem,7vw,6rem)] font-light leading-[1.04] tracking-[-0.045em] text-white">
-                Great things start with <span className="text-[#6da6ff]">a hello.</span>
-              </h1>
-              <p className="mt-6 max-w-[43ch] text-base leading-relaxed text-slate-300 sm:text-lg">
-                Thank you for reaching out. You’ve taken the first step, we’re looking forward to
-                hearing more about what you want to build.
-              </p>
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <Link
-                  to="/"
-                  className={`${actionClass} bg-[#2563eb] text-white hover:bg-[#3b82f6]`}
-                >
-                  Back to home <ArrowRight size={17} aria-hidden="true" />
-                </Link>
-                <Link
-                  to="/features"
-                  className={`${actionClass} border border-white/15 bg-white/5 text-white hover:bg-white/10`}
-                >
-                  Explore our services <ArrowUpRight size={17} aria-hidden="true" />
-                </Link>
-              </div>
-              <p className="mt-5 text-xs leading-relaxed text-slate-400">
-                No need to submit again. Your details are with our team.
-              </p>
-            </div>
-
-            <div
-              aria-hidden="true"
-              className="relative mx-auto flex aspect-[1.15] w-full max-w-[420px] items-center justify-center"
-            >
-              <div className="absolute inset-3 rounded-full border border-blue-300/10" />
-              <div className="absolute inset-12 rounded-full border border-blue-300/15" />
-              <div className="absolute inset-20 rounded-full bg-blue-500/10 blur-3xl" />
-              <div className="absolute left-5 top-12 h-2 w-2 rounded-full bg-blue-400" />
-              <div className="absolute bottom-14 right-9 h-3 w-3 rounded-full border border-blue-300/50" />
-              <div className="relative w-[82%] -rotate-6 rounded-[26px] border border-white/15 bg-gradient-to-br from-[#203555] to-[#0b1425] p-6 shadow-[0_35px_90px_-25px_rgba(37,99,235,0.4)] sm:p-8">
-                <div className="flex items-center justify-between text-[10px] font-medium tracking-[0.2em] text-blue-200/70">
-                  <span>NUMUNIX / NEW CONNECTION</span>
-                  <ArrowUpRight size={16} />
-                </div>
-                <div className="mt-8 flex items-center gap-4">
-                  <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-blue-300/20 bg-blue-400/10 text-blue-200">
-                    <Mail size={26} strokeWidth={1.3} />
-                  </span>
-                  <div>
-                    <p className="text-lg font-medium text-white">Message delivered.</p>
-                    <p className="mt-1 text-xs text-slate-400">
-                      An idea. A conversation. A beginning.
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-8 flex items-center gap-2 border-t border-white/10 pt-5 text-xs text-emerald-200">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-300" /> Ready for our team to
-                  review
-                </div>
-                <div className="absolute -right-2 -top-5 grid h-16 w-16 rotate-6 place-items-center rounded-2xl border border-emerald-200/30 bg-[#153b36] text-emerald-200 shadow-xl sm:-right-4">
-                  <Check size={30} strokeWidth={1.8} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <Hero headline="Great things start with" accent="a hello." intro="Thank you for reaching out. Your enquiry has been received and our team will review the details you shared." primaryLabel="BACK TO HOME" primaryHref="/" secondaryLabel="EXPLORE SERVICES" secondaryHref="/features" />
 
         <section className="bg-[#f5f8fc] px-5 py-14 sm:px-8 sm:py-20">
           <div className="mx-auto max-w-[1200px]">

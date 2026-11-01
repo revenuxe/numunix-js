@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Phone, Mail, Clock, MapPin } from "lucide-react";
 import Header from "@/components/numunix/Header";
 import Footer from "@/components/numunix/Footer";
+import Hero from "@/components/numunix/Hero";
 import NumunixRibbonScene from "@/components/numunix/NumunixRibbonScene";
 import {
   Label,
@@ -45,33 +46,7 @@ function ContactPage() {
     <div className="bg-[#05070c]">
       <Header />
       <main>
-        <section className="relative flex min-h-[58svh] items-end overflow-hidden bg-[#05070c] pt-28 pb-14 lg:min-h-[64vh] lg:pt-40 lg:pb-24">
-          <div className="absolute inset-0">
-            <NumunixRibbonScene />
-          </div>
-          <div className="grain pointer-events-none absolute inset-0 opacity-[0.5]" />
-          <div className="shell relative grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end lg:gap-20">
-            <Reveal>
-              <Label>CONTACT</Label>
-              <h1
-                style={{ lineHeight: 1.04 }}
-                className="mt-6 max-w-[15ch] font-light tracking-[-0.03em] text-white text-[clamp(2.4rem,6vw,5.6rem)]"
-              >
-                Let's talk about <Accent>your next product.</Accent>
-              </h1>
-            </Reveal>
-            <Reveal delay={120}>
-              <p className="max-w-[44ch] text-[17px] leading-relaxed text-white/60 lg:text-[19px]">
-                Share your idea and goals. We’ll help shape the next step.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Btn as="a" href="#enquiry">
-                  START YOUR ENQUIRY
-                </Btn>
-              </div>
-            </Reveal>
-          </div>
-        </section>
+        <Hero headline="Let’s talk about" accent="your next product." intro="Share your idea and goals. We’ll help shape the next step." primaryLabel="START YOUR ENQUIRY" primaryHref="#enquiry" secondaryLabel="EXPLORE SERVICES" secondaryHref="/features" />
 
         <ContactFormSection />
 
