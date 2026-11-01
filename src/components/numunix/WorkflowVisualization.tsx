@@ -1,21 +1,32 @@
 import { Label, Heading, Accent, Reveal } from "./primitives";
 import { NODE_VIZ } from "./nodeviz";
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
+import {
+  ArrowUpRight,
+  Smartphone,
+  Laptop,
+  Cctv,
+  Tv,
+  WashingMachine,
+  AirVent,
+  Zap,
+  Truck,
+  type LucideIcon,
+} from "lucide-react";
 import { WORKFLOW_STAGES } from "@/content/workflow";
 
 const NODES = WORKFLOW_STAGES;
 
-// Homepage panel shows the same eight stages, relabelled for electronics repair.
+// Homepage panel shows the repair services we cover, each with its own icon.
 const REPAIR_NODES = [
-  { slug: "idea", phase: "INTAKE", name: "Walk-in", category: "BOOKED" },
-  { slug: "scope", phase: "DIAGNOSE", name: "Fault", category: "IDENTIFIED" },
-  { slug: "ux", phase: "ESTIMATE", name: "Quote", category: "APPROVED" },
-  { slug: "code", phase: "REPAIR", name: "Bench", category: "IN REPAIR" },
-  { slug: "apis", phase: "PARTS", name: "Spares", category: "SOURCED" },
-  { slug: "qa", phase: "TESTING", name: "QC", category: "PASSED" },
-  { slug: "cloud", phase: "HANDOVER", name: "Ready", category: "DELIVERED" },
-  { slug: "grow", phase: "WARRANTY", name: "90 days", category: "COVERED" },
+  { slug: "idea", phase: "MOBILE", name: "Repair", category: "SCREENS · BATTERIES", icon: Smartphone },
+  { slug: "scope", phase: "LAPTOP", name: "Repair", category: "BOARDS · UPGRADES", icon: Laptop },
+  { slug: "ux", phase: "CCTV", name: "Install", category: "SETUP · MAINTENANCE", icon: Cctv },
+  { slug: "code", phase: "TV & AUDIO", name: "Repair", category: "PANELS · SOUND", icon: Tv },
+  { slug: "apis", phase: "WASHING", name: "Machine", category: "DRUMS · MOTORS", icon: WashingMachine },
+  { slug: "qa", phase: "AC", name: "Service", category: "GAS · COOLING", icon: AirVent },
+  { slug: "cloud", phase: "ELECTRICIAN", name: "Work", category: "WIRING · FITTINGS", icon: Zap },
+  { slug: "grow", phase: "DOORSTEP", name: "Service", category: "WE COME TO YOU", icon: Truck },
 ];
 
 type PanelNodes = { slug: string; phase: string; name: string; category: string }[];
