@@ -3,6 +3,7 @@ type BookingNotification = {
   name: string;
   phone: string;
   service: string;
+  brand?: string | null;
   timeline: string;
   description: string | null;
   source: string;
@@ -25,6 +26,7 @@ export async function notifyRepairTeam(
     `Name: ${booking.name}`,
     `Mobile: ${booking.phone}`,
     `Repair service: ${booking.service}`,
+    `Brand: ${booking.brand || "Not provided"}`,
     `Preferred timing: ${booking.timeline}`,
     `Originating page: ${booking.source}`,
     "",

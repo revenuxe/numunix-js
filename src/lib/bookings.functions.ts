@@ -23,6 +23,7 @@ export const createRepairBooking = createServerFn({ method: "POST" })
       });
       const { data: booking, error } = await client.rpc('submit_repair_booking', {
         p_name: data.name, p_phone: data.phone, p_service: data.service,
+        p_brand: data.brand ?? '',
         p_timeline: data.timeline, p_description: data.description ?? '', p_source: data.source,
       }).single();
       if (error || !booking?.reference) {

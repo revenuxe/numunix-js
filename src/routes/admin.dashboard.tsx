@@ -167,7 +167,7 @@ function AdminDashboard() {
     else if (categoryFilter !== "all") request = request.in("service", REPAIR_PAGES.filter(item => item.category === categoryFilter).map(item => item.name));
     if (query)
       request = request.or(
-        `name.ilike.%${query}%,phone.ilike.%${query}%,service.ilike.%${query}%,description.ilike.%${query}%,booking_reference.ilike.%${query}%`,
+        `name.ilike.%${query}%,phone.ilike.%${query}%,service.ilike.%${query}%,brand.ilike.%${query}%,description.ilike.%${query}%,booking_reference.ilike.%${query}%`,
       );
     request
       .order("created_at", { ascending: sort === "oldest" })
@@ -879,6 +879,7 @@ function AdminDashboard() {
                                   <p className="mt-1 break-all font-mono text-xs text-muted-foreground">ID: {lead.booking_reference ?? lead.id}</p>
                                   <p className="mt-1 break-words text-xs text-muted-foreground">
                                     {lead.service}
+                                    {lead.brand && <span className="mt-1 block">Brand: {lead.brand}</span>}
                                     <span className="mt-1 block text-muted-foreground">{repairLeadCategory(lead) === "appliances" ? "Appliances" : repairLeadCategory(lead) === "electronics" ? "Electronics" : "Other enquiry"} · {lead.timeline}</span>
                                   </p>
                                 </div>
@@ -975,7 +976,7 @@ function AdminDashboard() {
                                 </div>
                               </td>
                               <td className="max-w-52 px-5 py-4 text-xs text-muted-foreground">
-                                {lead.service}<span className="mt-1 block text-muted-foreground">{lead.timeline}</span>
+                                {lead.service}{lead.brand && <span className="mt-1 block">Brand: {lead.brand}</span>}<span className="mt-1 block text-muted-foreground">{lead.timeline}</span>
                               </td>
                               <td className="px-5 py-4">
                                 <StatusBadge status={lead.status} />

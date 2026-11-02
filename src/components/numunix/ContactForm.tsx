@@ -9,6 +9,7 @@ import { REPAIR_SERVICES } from "@/content/homepage-repairs";
 import { REPAIR_PAGES } from "@/content/repair-services";
 import { CONTACT } from "@/content/site";
 import { Button } from "@/components/ui/button";
+import { BrandSelect } from "./BrandSelect";
 
 const fieldClass =
   "mt-2 block min-h-12 w-full min-w-0 rounded-xl border border-[#dbe5f2] bg-[#f8fafc] px-4 py-3 text-base font-normal text-[#102a63] outline-none transition focus:border-[#2563eb] focus:ring-3 focus:ring-[#2563eb]/10 placeholder:text-[#8190aa]";
@@ -25,10 +26,19 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
   useEffect(() => setHydrated(true), []);
   const [status, setStatus] = useState<"idle" | "pending" | "success" | "error">("idle");
   const [error, setError] = useState("");
+  const [selectedService, setSelectedService] = useState(initialService);
+  const [brand, setBrand] = useState("");
+  useEffect(() => { setSelectedService(initialService); setBrand(""); }, [initialService, ctx?.category]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (submitting.current) return;
+    if (!brand) {
+      setError("Please select a brand, or choose Other brand / Not sure.");
+      setStatus("error");
+      document.getElementById("contact-brand")?.focus();
+      return;
+    }
     const form = event.currentTarget;
     const data = new FormData(form);
     const values = Object.fromEntries(data.entries());
@@ -46,6 +56,8 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
     try {
       const receipt = await submitBooking({ data: { ...values, source: parsed.data.source } });
       form.reset();
+      setBrand("");
+      setSelectedService(initialService);
       setStatus("success");
       await navigate({ to: "/thank-you", search: { booking: receipt.reference, service: receipt.service } });
     } catch (cause) {
@@ -108,7 +120,8 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
             key={ctx?.category ?? "electronics"}
             id="contact-service"
             name="service"
-            defaultValue={initialService}
+            value={selectedService}
+            onChange={event => { setSelectedService(event.target.value); setBrand(""); }}
             required
           >
             <option value="" disabled>
@@ -122,6 +135,7 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
             <option value="Help me decide">Not sure yet, help me decide</option>
           </select>
         </label>
+        <BrandSelect disabled={!hydrated || status === "pending"} service={selectedService} value={brand} onChange={value => { setBrand(value); setStatus("idle"); }} />
         <label className={labelClass} htmlFor="contact-timeline">
           Preferred service timing
           <select

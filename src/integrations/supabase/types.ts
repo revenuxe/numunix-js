@@ -31,6 +31,7 @@ export type Database = {
       }
       contact_enquiries: {
         Row: {
+          brand: string | null
           booking_reference: string | null
           created_at: string
           description: string | null
@@ -46,6 +47,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          brand?: string | null
           booking_reference?: string | null
           created_at?: string
           description?: string | null
@@ -61,6 +63,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          brand?: string | null
           booking_reference?: string | null
           created_at?: string
           description?: string | null
@@ -84,6 +87,7 @@ export type Database = {
     Functions: {
       submit_repair_booking: {
         Args: {
+          p_brand?: string
           p_description: string
           p_name: string
           p_phone: string

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { notifyRepairTeam } from '../src/lib/booking-notification.ts';
 
-const booking = { reference: 'NX-TEST-123', name: 'Test customer', phone: '+919876543210', service: 'Mobile repair', timeline: 'Flexible', description: 'Screen not working', source: '/electronic/repairs/mobile-repair' };
+const booking = { reference: 'NX-TEST-123', name: 'Test customer', phone: '+919876543210', service: 'Mobile repair', brand: 'Samsung', timeline: 'Flexible', description: 'Screen not working', source: '/electronic/repairs/mobile-repair' };
 
 test('enquiries send only to the fixed inbox with receipt and contact details', async () => {
   const result = await notifyRepairTeam(booking, 'test-key', async (url, options) => {
@@ -12,7 +12,7 @@ test('enquiries send only to the fixed inbox with receipt and contact details', 
     assert.deepEqual(body.to, ['numunix@gmail.com']);
     assert.equal(body.from, 'Numunix Repairs <onboarding@resend.dev>');
     assert.match(body.subject, /Repair enquiry/);
-    for (const value of [booking.phone, booking.reference, booking.service, booking.source, booking.description]) assert.ok(body.text.includes(value));
+    for (const value of [booking.phone, booking.reference, booking.service, booking.brand, booking.source, booking.description]) assert.ok(body.text.includes(value));
     return new Response(JSON.stringify({ id: 'email-id' }));
   });
   assert.equal(result, 'sent');
