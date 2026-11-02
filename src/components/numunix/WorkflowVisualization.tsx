@@ -152,7 +152,7 @@ export function WorkflowVisualization({
 
               <div className="mt-4 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
                 {Icon ? (
-                  <span className="grid h-9 w-9 place-items-center rounded-lg border border-[#dbe5f2] bg-[#f4f8fd] text-[#1e4ed8] transition-all duration-300 group-hover:scale-110 group-hover:border-[#2563eb] group-hover:bg-[#2563eb] group-hover:text-white group-hover:shadow-[0_6px_14px_-6px_rgba(37,99,235,0.6)]">
+                  <span className="grid h-9 w-9 place-items-center rounded-lg border border-[#dbe5f2] bg-[#f4f8fd] text-[#1e4ed8] transition-all duration-300 group-hover:scale-110 group-hover:border-[#2563eb] group-hover:bg-[#2563eb] group-hover:text-white group-hover:shadow-[0_6px_14px_-6px_rgba(37,99,235,0.6)] coarse:border-[#b9d0ef] coarse:bg-[#e8f0fc]"
                     <Icon size={18} strokeWidth={1.6} aria-hidden="true" />
                   </span>
                 ) : (
@@ -164,7 +164,7 @@ export function WorkflowVisualization({
               </div>
               <span
                 aria-hidden="true"
-                className="absolute right-2 top-2 grid h-6 w-6 place-items-center rounded-full border border-transparent text-[#2563eb] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:border-[#2563eb] group-hover:bg-[#2563eb] group-hover:text-white group-focus-visible:border-[#2563eb] group-focus-visible:bg-[#2563eb] group-focus-visible:text-white"
+                className="absolute right-2 top-2 grid h-6 w-6 place-items-center rounded-full border border-transparent text-[#2563eb] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:border-[#2563eb] group-hover:bg-[#2563eb] group-hover:text-white group-focus-visible:border-[#2563eb] group-focus-visible:bg-[#2563eb] group-focus-visible:text-white coarse:border-[#2563eb] coarse:bg-[#2563eb] coarse:text-white coarse:shadow-[0_4px_10px_-4px_rgba(37,99,235,0.7)]"
               >
                 <ArrowUpRight size={14} />
               </span>
