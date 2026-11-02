@@ -1,4 +1,4 @@
-export function isPublicSupabaseKey(key: string | undefined): boolean {
+export function isPublicSupabaseKey(key: string | undefined): key is string {
   if (!key) return false;
   if (key.startsWith("sb_publishable_")) return true;
   // Legacy anon JWTs are also public. Never accept a service-role or secret key.
