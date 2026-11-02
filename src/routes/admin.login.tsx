@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { ArrowRight, ArrowUpRight, Eye, EyeOff, LockKeyhole, PanelsTopLeft } from "lucide-react";
 import { BrandLogo } from "@/components/numunix/BrandLogo";
-import { getSupabase, supabaseConfigured } from "@/lib/supabase";
+import { ensureSupabase } from "@/lib/supabase";
 import { useAdminSession } from "@/components/admin/useAdminSession";
 
 export const Route = createFileRoute("/admin/login")({

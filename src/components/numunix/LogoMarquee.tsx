@@ -1,20 +1,10 @@
 import { useCategory } from "./category";
 import { REPAIR_SERVICES } from "@/content/homepage-repairs";
-const NAMES = [
-  "MOBILE REPAIR",
-  "LAPTOP REPAIR",
-  "CCTV & SECURITY",
-  "TABLET REPAIR",
-  "HOME APPLIANCES",
-  "TV & AUDIO",
-  "DATA RECOVERY",
-  "GAMING CONSOLES",
-];
 
 export function LogoMarquee() {
   const ctx = useCategory();
-  const names = ctx ? REPAIR_SERVICES[ctx.category].map(item => item.nav) : NAMES;
-  const row = [...names, ...names];
+  const services = REPAIR_SERVICES[ctx?.category ?? "electronics"];
+  const row = [...services, ...services];
   return (
     <section className="relative overflow-hidden border-t border-white/10 bg-[#05070c] py-12">
       <div className="shell">
