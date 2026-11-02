@@ -152,7 +152,7 @@ export function WorkflowVisualization({
 
               <div className="mt-4 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
                 {Icon ? (
-                  <span className="grid h-9 w-9 place-items-center rounded-lg border border-[#dbe5f2] bg-[#f4f8fd] text-[#1e4ed8] transition-all duration-300 group-hover:scale-110 group-hover:border-[#2563eb] group-hover:bg-[#2563eb] group-hover:text-white group-hover:shadow-[0_6px_14px_-6px_rgba(37,99,235,0.6)] coarse:border-[#b9d0ef] coarse:bg-[#e8f0fc]"
+                  <span className="grid h-9 w-9 place-items-center rounded-lg border border-[#dbe5f2] bg-[#f4f8fd] text-[#1e4ed8] transition-all duration-300 group-hover:scale-110 group-hover:border-[#2563eb] group-hover:bg-[#2563eb] group-hover:text-white group-hover:shadow-[0_6px_14px_-6px_rgba(37,99,235,0.6)] coarse:border-[#b9d0ef] coarse:bg-[#e8f0fc]">
                     <Icon size={18} strokeWidth={1.6} aria-hidden="true" />
                   </span>
                 ) : (
