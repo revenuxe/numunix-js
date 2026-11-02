@@ -80,7 +80,9 @@ export function WashingMachineBrands({ onSelect }: { onSelect: (brand: string) =
               </span>
             </div>
             <div className="mt-3 flex items-center justify-between gap-2 border-t border-border/70 pt-3">
-              <span className="text-sm font-medium text-navytext">Other brands</span>
+              <span className="whitespace-nowrap text-sm font-medium text-navytext">
+                Other brands
+              </span>
               <span
                 aria-hidden="true"
                 className="grid size-7 shrink-0 place-items-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white"

@@ -6,6 +6,7 @@ test("brand search follows the repair service and clears a previous choice", asy
   await expect(page.getByRole("button", { name: "Submit enquiry" })).toBeEnabled();
   const brandCards = page.locator("#brands a");
   await expect(brandCards).toHaveCount(10);
+  await expect(page.getByText("Other brands", { exact: true })).toHaveCSS("white-space", "nowrap");
   for (const logo of await page.locator("#brands img").all()) {
     await expect(logo).toHaveJSProperty("complete", true);
     expect(await logo.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
