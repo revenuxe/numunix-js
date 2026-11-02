@@ -4,6 +4,7 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
+    "seo:check": "node scripts/check-public-seo.mjs",
     "db:check": "node scripts/supabase-migrate.mjs --dry-run",
     "db:migrate": "node scripts/supabase-migrate.mjs",
     "db:grant-admin": "node scripts/supabase-migrate.mjs --grant-admin",

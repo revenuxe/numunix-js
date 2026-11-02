@@ -1,7 +1,7 @@
 import { REPAIR_PAGES } from "./repair-services";
 
 /** Canonical base URL — no trailing slash */
-export const SITE_URL = "https://numunix-flow-engine.lovable.app";
+export const SITE_URL = "https://www.numunix.com";
 
 export const CONTACT = {
   phone: "+91 98865 79923",

@@ -13,6 +13,7 @@ import type { ErrorComponentProps } from "@tanstack/react-router";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { repairSiteSchema } from "@/content/repair-seo";
+import { SITE_URL } from "@/content/site";
 import { CategorySelectionProvider } from "@/components/numunix/category";
 
 function NotFoundComponent() {
@@ -84,6 +85,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Numunix" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: `${SITE_URL}/social-preview.png` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Numunix — Electronics and appliance repair in Bangalore" },
+      { name: "twitter:image", content: `${SITE_URL}/social-preview.png` },
+      { name: "twitter:image:alt", content: "Numunix — Electronics and appliance repair in Bangalore" },
     ],
     scripts: [{ type: "application/ld+json", children: JSON.stringify(repairSiteSchema()) }],
     links: [

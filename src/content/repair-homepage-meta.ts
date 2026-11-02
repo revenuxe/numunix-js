@@ -2,7 +2,7 @@ import { REPAIR_SERVICES, type RepairCategory } from "./homepage-repairs";
 import { REPAIR_PAGES, repairPageHref } from "./repair-services";
 import { repairPageHead, repairItemList, repairServiceSchema } from "./repair-seo";
 
-export const REPAIR_SITE_URL = "https://numunix-flow-engine.lovable.app";
+export { SITE_URL as REPAIR_SITE_URL } from "./site";
 export const REPAIR_HOME_PATHS = { electronics: "/", appliances: "/appliances" } as const;
 
 const PAGE_META = {
