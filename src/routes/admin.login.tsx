@@ -23,8 +23,11 @@ function AdminLogin() {
 
   async function signIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const client = getSupabase();
-    if (!client || pending) return;
+    const client = await ensureSupabase();
+    if (!client || pending) {
+      if (!client) setError("Unable to connect. Check your connection and try again.");
+      return;
+    }
     const form = new FormData(event.currentTarget);
     setPending(true);
     setError("");
