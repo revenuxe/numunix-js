@@ -160,7 +160,7 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
             defaultValue={initialDescription}
             rows={4}
             maxLength={1500}
-            placeholder="Share the model, symptoms, location and any damage or error codes."
+            placeholder="Share the model, issue, location and any damage or error codes."
           />
         </label>
       </fieldset>
