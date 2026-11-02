@@ -1,3 +1,5 @@
+import { CONTACT } from "./site";
+
 export type CompanyPageData = {
   slug: string;
   label: string;
@@ -377,7 +379,7 @@ export const PRIVACY: LegalPageData = {
     {
       "heading": "Your choices",
       "paragraphs": [
-        "Contact hello@numunix.com to ask about access, correction or deletion, subject to applicable record-keeping obligations."
+        `Contact ${CONTACT.email} to ask about access, correction or deletion, subject to applicable record-keeping obligations.`
       ]
     }
   ]
@@ -432,7 +434,7 @@ export const TERMS: LegalPageData = {
     {
       "heading": "Contact",
       "paragraphs": [
-        "Questions about service terms can be sent to hello@numunix.com."
+        `Questions about service terms can be sent to ${CONTACT.email}.`
       ]
     }
   ]
