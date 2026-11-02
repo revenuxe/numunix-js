@@ -23,12 +23,14 @@ function AdminLogin() {
 
   async function signIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    // Capture the form before any await: React clears currentTarget after dispatch.
+    const formEl = event.currentTarget;
     const client = await ensureSupabase();
     if (!client || pending) {
       if (!client) setError("Unable to connect. Check your connection and try again.");
       return;
     }
-    const form = new FormData(event.currentTarget);
+    const form = new FormData(formEl);
     setPending(true);
     setError("");
     try {
