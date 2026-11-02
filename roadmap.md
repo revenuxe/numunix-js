@@ -43,3 +43,5 @@
 - [x] Rebranded existing interior pages to repairs; retired development-service pages redirect to the repair directory and old articles redirect to repair guides.
 - [ ] From earlier: About/Pricing/Blog/Careers pages await content and user scope; Security/Privacy/Terms exist. Dedicated repair detail pages are now available.
 - [x] Retired the Bangalore software-company article as part of the approved repair-only rebrand; its address redirects to the Bangalore repair-service selection guide.
+- [x] Admin login no longer disabled when VITE_* vars are absent: browser client falls back to public-safe config from a server function; fixed FormData-after-await crash. Verified enabled button, real Supabase auth round-trip and error message.
+- [x] "What we repair" scroller now shows each service's specific icon next to its text on both Electronics and Appliances homepages. Verified 12 icons per category.

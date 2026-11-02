@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { ArrowRight, ArrowUpRight, Eye, EyeOff, LockKeyhole, PanelsTopLeft } from "lucide-react";
 import { BrandLogo } from "@/components/numunix/BrandLogo";
-import { getSupabase, supabaseConfigured } from "@/lib/supabase";
+import { ensureSupabase } from "@/lib/supabase";
 import { useAdminSession } from "@/components/admin/useAdminSession";
 
 export const Route = createFileRoute("/admin/login")({
@@ -23,9 +23,14 @@ function AdminLogin() {
 
   async function signIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const client = getSupabase();
-    if (!client || pending) return;
-    const form = new FormData(event.currentTarget);
+    // Capture the form before any await: React clears currentTarget after dispatch.
+    const formEl = event.currentTarget;
+    const client = await ensureSupabase();
+    if (!client || pending) {
+      if (!client) setError("Unable to connect. Check your connection and try again.");
+      return;
+    }
+    const form = new FormData(formEl);
     setPending(true);
     setError("");
     try {
@@ -87,7 +92,7 @@ function AdminLogin() {
           <p className="mt-3 text-sm leading-relaxed text-slate-500">
             Sign in to manage electronics and appliance repair enquiries.
           </p>
-          {!supabaseConfigured && (
+          {access === "unavailable" && (
             <p
               role="status"
               className="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900"
@@ -142,7 +147,7 @@ function AdminLogin() {
             )}
             <button
               disabled={
-                !supabaseConfigured || pending || access === "ready" || access === "loading"
+                pending || access === "ready" || access === "loading" || access === "unavailable"
               }
               className="flex min-h-12 w-full items-center justify-center gap-3 rounded-xl bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
             >

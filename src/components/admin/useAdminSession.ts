@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
-import { getSupabase, supabaseConfigured } from "@/lib/supabase";
+import { ensureSupabase, getSupabase } from "@/lib/supabase";
 
 export type AdminAccess =
   "loading" | "ready" | "signed-out" | "forbidden" | "error" | "unavailable";
@@ -8,17 +8,29 @@ export type AdminAccess =
 export function useAdminSession() {
   const [session, setSession] = useState<Session | null>(null);
   const [initialized, setInitialized] = useState(false);
-  const [access, setAccess] = useState<AdminAccess>(supabaseConfigured ? "loading" : "unavailable");
+  const [access, setAccess] = useState<AdminAccess>("loading");
 
   useEffect(() => {
-    const client = getSupabase();
-    if (!client) return;
-    const { data } = client.auth.onAuthStateChange((_event, next) => {
-      setSession(next);
-      setInitialized(true);
-      setAccess(next ? "loading" : "signed-out");
+    let subscription: { unsubscribe: () => void } | null = null;
+    let active = true;
+    ensureSupabase().then((client) => {
+      if (!active) return;
+      if (!client) {
+        setInitialized(true);
+        setAccess("unavailable");
+        return;
+      }
+      const { data } = client.auth.onAuthStateChange((_event, next) => {
+        setSession(next);
+        setInitialized(true);
+        setAccess(next ? "loading" : "signed-out");
+      });
+      subscription = data.subscription;
     });
-    return () => data.subscription.unsubscribe();
+    return () => {
+      active = false;
+      subscription?.unsubscribe();
+    };
   }, []);
 
   useEffect(() => {

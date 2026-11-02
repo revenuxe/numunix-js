@@ -1,20 +1,10 @@
 import { useCategory } from "./category";
 import { REPAIR_SERVICES } from "@/content/homepage-repairs";
-const NAMES = [
-  "MOBILE REPAIR",
-  "LAPTOP REPAIR",
-  "CCTV & SECURITY",
-  "TABLET REPAIR",
-  "HOME APPLIANCES",
-  "TV & AUDIO",
-  "DATA RECOVERY",
-  "GAMING CONSOLES",
-];
 
 export function LogoMarquee() {
   const ctx = useCategory();
-  const names = ctx ? REPAIR_SERVICES[ctx.category].map(item => item.nav) : NAMES;
-  const row = [...names, ...names];
+  const services = REPAIR_SERVICES[ctx?.category ?? "electronics"];
+  const row = [...services, ...services];
   return (
     <section className="relative overflow-hidden border-t border-white/10 bg-[#05070c] py-12">
       <div className="shell">
@@ -25,12 +15,17 @@ export function LogoMarquee() {
           className="flex w-max items-center gap-20 whitespace-nowrap"
           style={{ animation: "marquee 48s linear infinite" }}
         >
-          {row.map((n, i) => (
+          {row.map((service, i) => (
             <span
-              key={`${n}-${i}`}
-              className="text-[clamp(1.2rem,2vw,1.8rem)] font-medium tracking-[-0.02em] text-white/30"
+              key={`${service.nav}-${i}`}
+              className="inline-flex items-center gap-4 text-[clamp(1.2rem,2vw,1.8rem)] font-medium tracking-[-0.02em] text-white/30"
             >
-              {n}
+              <service.icon
+                aria-hidden="true"
+                className="h-[1.15em] w-[1.15em] shrink-0 text-[#8fb4e8]/60"
+                strokeWidth={1.5}
+              />
+              {service.nav}
             </span>
           ))}
         </div>
