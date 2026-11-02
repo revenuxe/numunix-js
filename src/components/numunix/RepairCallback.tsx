@@ -52,7 +52,7 @@ export function RepairCallback({ service }: { service: string }) {
         <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><PhoneCall size={20} aria-hidden="true" /></span>
         <div><h2 id="callback-title" className="text-xl font-medium tracking-tight text-navytext">Prefer a quick callback?</h2><p className="mt-1 whitespace-nowrap text-xs leading-relaxed text-mutedtext sm:text-sm">We’ll call you within 15 minutes.</p></div>
       </div>
-      <form onSubmit={handleSubmit} aria-busy={pending} className="w-full lg:max-w-md">
+      <form onSubmit={handleSubmit} aria-busy={pending} className="w-full lg:max-w-lg">
         <label htmlFor="callback-phone" className="sr-only">Mobile number</label>
         <div className="flex flex-col gap-3 sm:flex-row">
           <div className="flex min-h-12 min-w-0 flex-1 items-center rounded-xl border border-border bg-card px-4 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
@@ -62,7 +62,7 @@ export function RepairCallback({ service }: { service: string }) {
           <Button type="submit" variant="default" disabled={!ready || pending} className="min-h-12 rounded-xl px-5">{pending ? <><Loader2 className="size-4 animate-spin" aria-hidden="true" />Requesting…</> : "Request callback"}</Button>
         </div>
         {error && <p id="callback-error" role="alert" className="mt-2 text-sm text-destructive">{error}</p>}
-        <p className="mt-2 text-xs text-mutedtext">By requesting a callback, you agree to be contacted about your repair. <a href="/privacy" className="underline underline-offset-2">Privacy policy</a></p>
+        <p className="mt-2 text-xs text-mutedtext lg:whitespace-nowrap">By requesting a callback, you agree to be contacted about your repair. <a href="/privacy" className="underline underline-offset-2">Privacy policy</a></p>
       </form>
     </div>
     <Dialog open={open} onOpenChange={setOpen}>
