@@ -15,7 +15,7 @@ const fieldClass =
   "mt-2 block min-h-12 w-full min-w-0 rounded-xl border border-[#dbe5f2] bg-[#f8fafc] px-4 py-3 text-base font-normal text-[#102a63] outline-none transition focus:border-[#2563eb] focus:ring-3 focus:ring-[#2563eb]/10 placeholder:text-[#8190aa]";
 const labelClass = "block min-w-0 text-sm font-medium text-[#102a63]";
 
-export function ContactForm({ initialDescription = "", initialService = "" }: { initialDescription?: string; initialService?: string } = {}) {
+export function ContactForm({ initialDescription = "", initialService = "", brandSelection }: { initialDescription?: string; initialService?: string; brandSelection?: { brand: string } | undefined } = {}) {
   const submitBooking = useServerFn(createRepairBooking);
   const navigate = useNavigate();
   const ctx = useCategory();
@@ -29,6 +29,9 @@ export function ContactForm({ initialDescription = "", initialService = "" }: { 
   const [selectedService, setSelectedService] = useState(initialService);
   const [brand, setBrand] = useState("");
   useEffect(() => { setSelectedService(initialService); setBrand(""); }, [initialService, ctx?.category]);
+  useEffect(() => {
+    if (brandSelection) { setSelectedService(initialService); setBrand(brandSelection.brand); setStatus("idle"); }
+  }, [brandSelection, initialService]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();

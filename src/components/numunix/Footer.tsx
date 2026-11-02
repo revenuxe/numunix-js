@@ -1,4 +1,4 @@
-import { Linkedin, Instagram, Facebook } from "lucide-react";
+import { Linkedin, Instagram, Facebook, Info } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
 import { CONTACT } from "@/content/site";
 import { REPAIR_PAGES, repairPageHref } from "@/content/repair-services";
@@ -23,6 +23,16 @@ export function Footer() {
     return service ? repairPageHref(service) : FEATURE_LINKS[label] ?? "#enquiry";
   };
   return (
+    <>
+    <aside aria-label="Independent service provider disclaimer" className="border-t border-border bg-paper py-6 sm:py-8">
+      <div className="shell flex items-start gap-3 sm:gap-4">
+        <Info size={20} aria-hidden="true" className="mt-0.5 shrink-0 text-primary" />
+        <p className="max-w-[100ch] text-sm leading-relaxed text-mutedtext">
+          <strong className="font-semibold text-navytext">Disclaimer:</strong>{" "}
+          Numunix is an independent repair service provider, not an authorized service center for any brand. Brand names and logos are used for identification only and do not imply affiliation or endorsement.
+        </p>
+      </div>
+    </aside>
     <footer className="border-t border-white/8 bg-[#05070c] pt-20 pb-10">
       <div className="shell grid gap-14 lg:grid-cols-[1.1fr_2.4fr]">
         <div>
@@ -106,6 +116,7 @@ export function Footer() {
         </div>
       </div>
     </footer>
+    </>
   );
 }
 
