@@ -42,6 +42,7 @@ import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as WhoWeServeSlugRouteImport } from './routes/who-we-serve.$slug'
 import { Route as CategoryRepairsSlugRouteImport } from './routes/$category.repairs.$slug'
 import { Route as ApiPublicKeepaliveRouteImport } from './routes/api/public/keepalive'
+import { Route as CategoryRepairsSlugBrandRouteImport } from './routes/$category.repairs.$slug_.$brand'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -208,6 +209,12 @@ const ApiPublicKeepaliveRoute = ApiPublicKeepaliveRouteImport.update({
   path: '/api/public/keepalive',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CategoryRepairsSlugBrandRoute =
+  CategoryRepairsSlugBrandRouteImport.update({
+    id: '/$category/repairs/$slug_/$brand',
+    path: '/$category/repairs/$slug/$brand',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -243,6 +250,7 @@ export interface FileRoutesByFullPath {
   '/services/': typeof ServicesIndexRoute
   '/$category/repairs/$slug': typeof CategoryRepairsSlugRoute
   '/api/public/keepalive': typeof ApiPublicKeepaliveRoute
+  '/$category/repairs/$slug/$brand': typeof CategoryRepairsSlugBrandRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -278,6 +286,7 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesIndexRoute
   '/$category/repairs/$slug': typeof CategoryRepairsSlugRoute
   '/api/public/keepalive': typeof ApiPublicKeepaliveRoute
+  '/$category/repairs/$slug/$brand': typeof CategoryRepairsSlugBrandRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -314,6 +323,7 @@ export interface FileRoutesById {
   '/services/': typeof ServicesIndexRoute
   '/$category/repairs/$slug': typeof CategoryRepairsSlugRoute
   '/api/public/keepalive': typeof ApiPublicKeepaliveRoute
+  '/$category/repairs/$slug_/$brand': typeof CategoryRepairsSlugBrandRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -351,6 +361,7 @@ export interface FileRouteTypes {
     | '/services/'
     | '/$category/repairs/$slug'
     | '/api/public/keepalive'
+    | '/$category/repairs/$slug/$brand'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -386,6 +397,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/$category/repairs/$slug'
     | '/api/public/keepalive'
+    | '/$category/repairs/$slug/$brand'
   id:
     | '__root__'
     | '/'
@@ -421,6 +433,7 @@ export interface FileRouteTypes {
     | '/services/'
     | '/$category/repairs/$slug'
     | '/api/public/keepalive'
+    | '/$category/repairs/$slug_/$brand'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -457,6 +470,7 @@ export interface RootRouteChildren {
   ServicesIndexRoute: typeof ServicesIndexRoute
   CategoryRepairsSlugRoute: typeof CategoryRepairsSlugRoute
   ApiPublicKeepaliveRoute: typeof ApiPublicKeepaliveRoute
+  CategoryRepairsSlugBrandRoute: typeof CategoryRepairsSlugBrandRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -692,6 +706,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicKeepaliveRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$category/repairs/$slug_/$brand': {
+      id: '/$category/repairs/$slug_/$brand'
+      path: '/$category/repairs/$slug/$brand'
+      fullPath: '/$category/repairs/$slug/$brand'
+      preLoaderRoute: typeof CategoryRepairsSlugBrandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -729,6 +750,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesIndexRoute: ServicesIndexRoute,
   CategoryRepairsSlugRoute: CategoryRepairsSlugRoute,
   ApiPublicKeepaliveRoute: ApiPublicKeepaliveRoute,
+  CategoryRepairsSlugBrandRoute: CategoryRepairsSlugBrandRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
