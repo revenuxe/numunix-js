@@ -108,6 +108,12 @@
   <!-- Appliance repair services -->
 
   <url>
+    <loc>https://www.numunix.com/appliances/repairs/washing-machine-repair/bosch</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>https://www.numunix.com/appliances/repairs/washing-machine-repair</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

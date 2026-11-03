@@ -15,8 +15,8 @@ test("brand search follows the repair service and clears a previous choice", asy
   const callbackConsent = page.locator('section[aria-labelledby="callback-title"] form > p.text-xs');
   await expect(callbackConsent).toHaveCSS("white-space", "nowrap");
   expect(await callbackConsent.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
-  await page.getByRole("link", { name: "Request Bosch washing machine repair" }).click();
-  await expect(page.locator('input[name="brand"]')).toHaveValue("Bosch");
+  await page.getByRole("link", { name: "Request LG washing machine repair" }).click();
+  await expect(page.locator('input[name="brand"]')).toHaveValue("LG");
   const brand = page.getByRole("combobox", { name: /Brand/ });
   await brand.click();
   await page.getByRole("combobox", { name: "Search brands" }).fill("LG");
@@ -36,4 +36,9 @@ test("brand search follows the repair service and clears a previous choice", asy
   await page.getByRole("combobox", { name: "Search brands" }).fill("Apple");
   await page.getByRole("option", { name: "Apple", exact: true }).click();
   await expect(page.locator('input[name="brand"]')).toHaveValue("Apple");
+  await page.goto("/appliances/repairs/washing-machine-repair");
+  await page.getByRole("link", { name: "Request Bosch washing machine repair" }).click();
+  await expect(page).toHaveURL(/\/appliances\/repairs\/washing-machine-repair\/bosch$/);
+  await expect(page.locator('input[name="brand"]')).toHaveValue("Bosch");
+  await expect(page.locator("#contact-service")).toHaveValue("Washing Machine Repair");
 });
