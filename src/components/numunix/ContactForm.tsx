@@ -28,7 +28,7 @@ export function ContactForm({ initialDescription = "", initialService = "", bran
   const [error, setError] = useState("");
   const [selectedService, setSelectedService] = useState(initialService);
   const [brand, setBrand] = useState("");
-  useEffect(() => { setSelectedService(initialService); setBrand(""); }, [initialService, ctx?.category]);
+  useEffect(() => { setSelectedService(initialService); setBrand(brandSelection?.brand ?? ""); }, [initialService, ctx?.category, brandSelection]);
   useEffect(() => {
     if (brandSelection) { setSelectedService(initialService); setBrand(brandSelection.brand); setStatus("idle"); }
   }, [brandSelection, initialService]);

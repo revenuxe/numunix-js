@@ -5,7 +5,7 @@ import { createRepairBooking } from "@/lib/bookings.functions";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 
-export function RepairCallback({ service }: { service: string }) {
+export function RepairCallback({ service, brand, brandLogo }: { service: string; brand?: string; brandLogo?: string }) {
   const submitBooking = useServerFn(createRepairBooking);
   const submitting = useRef(false);
   const [ready, setReady] = useState(false);
@@ -31,6 +31,7 @@ export function RepairCallback({ service }: { service: string }) {
         name: "Callback request",
         phone: `+91${phone}`,
         service,
+        brand,
         timeline: "As soon as possible",
         description: "Callback requested. Please call within 15 minutes to discuss the repair.",
         source: window.location.pathname,
@@ -49,7 +50,7 @@ export function RepairCallback({ service }: { service: string }) {
   return <section aria-labelledby="callback-title" className="border-b border-border bg-paper py-7 sm:py-9">
     <div className="shell flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
       <div className="flex items-start gap-3">
-        <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><PhoneCall size={20} aria-hidden="true" /></span>
+        {brandLogo ? <span className="flex h-11 w-24 shrink-0 items-center justify-center rounded-xl border border-border bg-white px-2 sm:w-28"><img src={brandLogo} alt={`${brand} logo`} width={480} height={104} className="h-auto w-full object-contain" /></span> : <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><PhoneCall size={20} aria-hidden="true" /></span>}
         <div><h2 id="callback-title" className="text-xl font-medium tracking-tight text-navytext">Prefer a quick callback?</h2><p className="mt-1 whitespace-nowrap text-xs leading-relaxed text-mutedtext sm:text-sm">We’ll call you within 15 minutes.</p></div>
       </div>
       <form onSubmit={handleSubmit} aria-busy={pending} className="w-full lg:max-w-lg">

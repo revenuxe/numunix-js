@@ -268,4 +268,44 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://www.numunix.com/appliances/repairs/washing-machine-repair/godrej</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.numunix.com/appliances/repairs/washing-machine-repair/haier</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.numunix.com/appliances/repairs/washing-machine-repair/ifb</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.numunix.com/appliances/repairs/washing-machine-repair/lg</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.numunix.com/appliances/repairs/washing-machine-repair/panasonic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.numunix.com/appliances/repairs/washing-machine-repair/samsung</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.numunix.com/appliances/repairs/washing-machine-repair/siemens</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.numunix.com/appliances/repairs/washing-machine-repair/whirlpool</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
