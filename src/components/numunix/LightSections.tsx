@@ -303,15 +303,15 @@ export function AnalyticsDemo() {
 }
 
 const POSTS = [
-  ["FIXED RIGHT", "DIAGNOSTICS FIRST", "We find the real fault before replacing any part.", "/services"],
-  ["PARTS THAT FIT", "CLEAR TERMS", "Discuss compatible parts, function checks and the terms for your repair.", "/repair-diagnostics"],
-  ["ONE WORKSHOP", "END TO END", "Booking, repair, quality check, and doorstep delivery, one team.", "/services"],
+  ["FIXED RIGHT", "DIAGNOSTICS FIRST", "We find the real fault before replacing any part.", "/repair-diagnostics"],
+  ["PARTS THAT FIT", "CLEAR TERMS", "Discuss compatible parts, function checks and the terms for your repair.", "/repair-process/repair-estimate"],
+  ["ONE WORKSHOP", "END TO END", "Booking, repair, quality check, and doorstep delivery, one team.", "/repair-process"],
 ];
 
 export function BlogCards() {
   const category = useCategory()?.category ?? "electronics";
   const services = REPAIR_SERVICES[category];
-  const posts = category === "appliances" ? [["DIAGNOSE FIRST", "APPLIANCE CARE", "Cooling, drainage and power faults checked before replacing parts.", "/services"], ["CLEAR SCOPE", "YOUR APPROVAL", "Review the visit, parts and labour estimate before work begins.", "/services"], ["TESTED AT HOME", "AFTERCARE", "Check the repaired function and understand the next care steps.", "/services"]] : POSTS;
+  const posts = category === "appliances" ? [["DIAGNOSE FIRST", "APPLIANCE CARE", "Cooling, drainage and power faults checked before replacing parts.", "/repair-diagnostics"], ["CLEAR SCOPE", "YOUR APPROVAL", "Review the visit, parts and labour estimate before work begins.", "/repair-process/repair-estimate"], ["TESTED AT HOME", "AFTERCARE", "Check the repaired function and understand the next care steps.", "/repair-aftercare"]] : POSTS;
   return (
     <section className="section-pad bg-[#eef3f8]">
       <div className="shell">

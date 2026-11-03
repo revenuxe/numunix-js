@@ -111,6 +111,7 @@ export function LeadDetails({
             {[
               ["Booking reference", lead.booking_reference ?? "Legacy request"],
               ["Repair service", lead.service],
+              ["Brand", lead.brand || "Not provided"],
               ["Preferred visit", lead.timeline],
               ["Category", repairLeadCategory(lead) === "appliances" ? "Appliances" : repairLeadCategory(lead) === "electronics" ? "Electronics" : "Other enquiry"],
               ["Enquiry page", lead.source],

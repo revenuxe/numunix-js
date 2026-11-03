@@ -1,0 +1,23 @@
+// Enquiry choices identify customer equipment; they do not imply brand affiliation.
+export const REPAIR_BRANDS: Record<string, readonly string[]> = {
+  "Mobile Repair": ["Apple", "Samsung", "Xiaomi / Redmi / POCO", "OnePlus", "OPPO", "vivo", "realme", "Motorola", "Google", "Nothing", "Nokia", "HONOR", "Huawei", "ASUS", "Infinix", "Tecno", "iQOO"],
+  "Laptop Repair": ["Apple", "Dell", "HP", "Lenovo", "ASUS", "Acer", "MSI", "Samsung", "Microsoft", "Toshiba", "Sony", "Fujitsu", "Infinix", "Gigabyte"],
+  "CCTV Installation & Repair": ["Hikvision", "Dahua", "CP Plus", "Godrej", "Honeywell", "Bosch", "Axis", "TP-Link", "D-Link", "EZVIZ", "Imou", "Uniview"],
+  "TV & Audio Repair": ["Samsung", "LG", "Sony", "Panasonic", "TCL", "Hisense", "Xiaomi", "OnePlus", "Vu", "Toshiba", "Philips", "JBL", "Bose", "Yamaha", "Denon", "boAt"],
+  "Tablet & iPad Repair": ["Apple", "Samsung", "Lenovo", "Xiaomi", "realme", "OnePlus", "Microsoft", "Huawei", "HONOR", "Nokia", "Acer", "ASUS"],
+  "Data Recovery": ["Seagate", "Western Digital", "SanDisk", "Samsung", "Kingston", "Crucial", "Toshiba", "Transcend", "ADATA", "Apple", "Sony", "HP"],
+  "Gaming Console Repair": ["Sony PlayStation", "Microsoft Xbox", "Nintendo", "Valve", "ASUS"],
+  "Washing Machine Repair": ["LG", "Samsung", "IFB", "Bosch", "Whirlpool", "Haier", "Godrej", "Panasonic", "Voltas Beko", "Siemens", "Electrolux", "Onida", "Lloyd"],
+  "AC Service & Repair": ["Daikin", "Blue Star", "Voltas", "LG", "Samsung", "Carrier", "Hitachi", "Panasonic", "Lloyd", "Godrej", "Haier", "Mitsubishi Electric", "Mitsubishi Heavy Industries", "O General", "Toshiba", "Whirlpool"],
+  "Refrigerator Repair": ["LG", "Samsung", "Whirlpool", "Godrej", "Haier", "Bosch", "Panasonic", "Siemens", "Voltas Beko", "Hitachi", "Electrolux", "Liebherr"],
+  "Microwave & Chimney Repair": ["LG", "Samsung", "IFB", "Panasonic", "Whirlpool", "Godrej", "Bosch", "Haier", "Bajaj", "Morphy Richards", "Faber", "Elica", "Glen", "Hindware"],
+  "Water Purifier Service": ["Kent", "Aquaguard / Eureka Forbes", "Pureit", "AO Smith", "Livpure", "Blue Star", "Havells", "LG", "Faber", "V-Guard"],
+  "Inverter & UPS Repair": ["Luminous", "Microtek", "APC", "Exide", "Amaron", "V-Guard", "Su-Kam", "Livguard", "Numeric", "Eaton", "Vertiv"],
+  "Fan & Lighting Service": ["Havells", "Crompton", "Orient Electric", "Usha", "Bajaj", "Atomberg", "Polycab", "V-Guard", "Philips", "Syska", "Wipro", "Panasonic"],
+  "Electrical Service": ["Havells", "Schneider Electric", "Legrand", "Anchor / Panasonic", "GM", "Goldmedal", "Polycab", "Finolex", "Hager", "Siemens", "ABB", "L&T"],
+};
+
+export function repairBrandsForService(service: string): string[] {
+  const brands = REPAIR_BRANDS[service] ?? Object.values(REPAIR_BRANDS).flat();
+  return [...new Set(brands)].sort((a, b) => a.localeCompare(b)).concat("Other brand", "Not sure");
+}

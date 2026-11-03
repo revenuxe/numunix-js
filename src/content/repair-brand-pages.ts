@@ -1,0 +1,42 @@
+// Brand-specific editorial content describes independent service, not manufacturer affiliation.
+export const BOSCH_WASHER = {
+  brand: "Bosch",
+  service: "Washing Machine Repair",
+  path: "/appliances/repairs/washing-machine-repair/bosch",
+  title: "Bosch Washing Machine Repair in Bangalore | Numunix",
+  description: "Independent Bosch washing machine repair in Bangalore. Get help with drainage, spin, leaks and error codes, with model-specific assessment and clear estimates.",
+  intro: "Bosch washing machine repair in Bangalore for drainage problems, interrupted cycles, leaks and unusual noise. Share your model and symptoms for an independent assessment, a clear estimate and the next steps before any repair is approved.",
+  brandSelection: { brand: "Bosch" },
+  faults: [
+    { title: "Water stays in the drum", label: "DRAINAGE", body: "A cycle that stops with water inside can involve the drain hose, filter, pump or another obstruction. Note when the cycle stops and whether an E:18 message appears. A drainage fault does not automatically mean the pump needs replacing." },
+    { title: "Clothes come out wet", label: "SPIN & BALANCE", body: "A heavy or uneven load, incomplete drainage and drive-related faults can all interrupt spinning. Tell us whether the drum turns during washing, whether water remains inside and whether the issue happens with every load." },
+    { title: "The machine will not fill", label: "WATER INLET", body: "Water supply, an inlet hose or filter, door closure and internal controls may need checking. Start by noting whether the tap is open and whether other taps have normal supply. Avoid removing internal components yourself." },
+    { title: "Leaks around the machine", label: "SEALS & HOSES", body: "The source might be a hose connection, door seal, detergent drawer or excess foam. Record where water first appears and at which stage of the wash. Stop using the washer if water is near the plug or socket." },
+    { title: "Rattling or heavy vibration", label: "DRUM & INSTALLATION", body: "Load distribution, installation, trapped objects, suspension or bearings can produce different sounds. A short video helps explain whether the noise occurs during slow drum movement or a high-speed spin." },
+    { title: "Door or cycle problems", label: "LOCK & CONTROLS", body: "A door that stays locked, a cycle that will not start or a recurring display message needs context. Share the complete error code and model number. Do not force the handle or repeatedly restart a machine showing the same fault." },
+  ],
+  checks: ["Model & fault history", "Water inlet & drainage", "Door seal & drum movement", "Cycle & function checks"],
+  preparation: [
+    "Photograph the rating plate. Include the E-Nr model number and FD production number if visible, without moving a heavy machine alone.",
+    "Write down the full display message, when the problem began and which programme was running.",
+    "Mention recent installation, a change of detergent, earlier repairs or any visible leak.",
+    "Keep the area around the washer accessible. Do not pull it out or disconnect plumbing solely for the booking.",
+    "If there is a burning smell, an electrical trip or water near electrics, stop using it. Disconnect power only if it is safe and keep clear of wet sockets.",
+  ],
+  faqs: [
+    ["Is Numunix an authorized Bosch service center?", "No. Numunix provides independent repair assessment and is not affiliated with or authorized by Bosch. For manufacturer warranty work or official support, contact Bosch directly before arranging an independent repair."],
+    ["What does E:18 on a Bosch washing machine mean?", "Bosch identifies E:18, F:18 and d:02 as drainage-related messages. Possible causes include a blocked pump or kinked drain hose. The code alone does not identify a failed part; use the instructions for your exact model and arrange assessment if the issue persists."],
+    ["Can you assess a Bosch front-load washing machine?", "Share the exact E-Nr model, fault and your location when requesting an assessment. Model compatibility, repair feasibility and parts availability need confirmation before work is arranged. Include washer-dryer details if your appliance also dries clothes."],
+    ["How much does Bosch washing machine repair cost?", "The estimate depends on the model, diagnosis, labour and any required parts. Ask for inspection or visit charges, part specifications and exclusions before approving work. There is no fixed repair price quoted on this page."],
+    ["Will my washer need a new pump or control board?", "Not necessarily. A symptom can have several causes. Ask what checks support the diagnosis and whether cleaning, adjustment or another repair is appropriate before agreeing to a replacement part."],
+    ["Can I book a repair if my machine is under warranty?", "Check your manufacturer warranty terms and contact Bosch official support first. Independent repair may affect warranty eligibility. Share the appliance age and warranty status so you can make an informed choice."],
+    ["What should I send when booking?", "Send the model or rating-plate photo, complete error code, a description of the fault and your location. A video of unusual noise or a photo showing where a leak starts can make the initial conversation more useful."],
+    ["How long will repair take, and what about warranty?", "Timing depends on diagnosis, access and parts availability. Confirm the expected schedule after assessment. Ask what, if any, warranty applies to the specific labour and parts and request those terms in writing."],
+  ],
+  sources: [
+    { name: "Bosch India: E:18 drainage guidance", href: "https://www.bosch-home.in/service/get-support/e18-in-display" },
+    { name: "Bosch India: water supply checks", href: "https://www.bosch-home.in/service/get-support/water-is-not-running" },
+    { name: "Bosch India: error codes and model identification", href: "https://www.bosch-home.in/service/get-support/washing-machine-errors" },
+    { name: "Bosch India: official support", href: "https://www.bosch-home.in/service/get-support/washing-machines" },
+  ],
+};

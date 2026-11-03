@@ -116,6 +116,7 @@ function relativeTime(iso: string) {
 function AdminDashboard() {
   const { session, access } = useAdminSession();
   const [tab, setTab] = useState<Tab>("overview");
+  const [leadTab, setLeadTab] = useState<"all" | "callbacks">("all");
   const [leads, setLeads] = useState<Lead[]>([]);
   const [counts, setCounts] = useState(blankCounts);
   const [countsError, setCountsError] = useState(false);
@@ -160,12 +161,13 @@ function AdminDashboard() {
     setLoading(true);
     setError("");
     let request = client.from("contact_enquiries").select("*", { count: "exact" });
+    if (tab === "leads" && leadTab === "callbacks") request = request.eq("name", "Callback request");
     if (filter !== "all") request = request.eq("status", filter);
     if (serviceFilter !== "all") request = request.eq("service", serviceFilter);
     else if (categoryFilter !== "all") request = request.in("service", REPAIR_PAGES.filter(item => item.category === categoryFilter).map(item => item.name));
     if (query)
       request = request.or(
-        `name.ilike.%${query}%,phone.ilike.%${query}%,service.ilike.%${query}%,description.ilike.%${query}%`,
+        `name.ilike.%${query}%,phone.ilike.%${query}%,service.ilike.%${query}%,brand.ilike.%${query}%,description.ilike.%${query}%,booking_reference.ilike.%${query}%`,
       );
     request
       .order("created_at", { ascending: sort === "oldest" })
@@ -188,7 +190,7 @@ function AdminDashboard() {
         setLoading(false);
       });
     return () => controller.abort();
-  }, [access, query, filter, categoryFilter, serviceFilter, sort, page, refresh]);
+  }, [access, tab, leadTab, query, filter, categoryFilter, serviceFilter, sort, page, refresh]);
 
   useEffect(() => {
     const client = getSupabase();
@@ -699,6 +701,14 @@ function AdminDashboard() {
                 </Button>
               </div>
 
+              <div aria-label="Lead type" className="mt-5 flex flex-wrap gap-2">
+                {([{ key: "all", label: "All enquiries" }, { key: "callbacks", label: "Callback requested" }] as const).map(item => (
+                  <Button key={item.key} variant={leadTab === item.key ? "default" : "outline"} aria-pressed={leadTab === item.key} onClick={() => { setLeadTab(item.key); setPage(0); }} className="min-h-11">
+                    {item.label}
+                  </Button>
+                ))}
+              </div>
+
               {/* Quick filter cards */}
               <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:gap-4">
                 {(
@@ -748,7 +758,7 @@ function AdminDashboard() {
                 <div className="border-b border-border p-4 sm:p-5">
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <h2 className="text-base font-semibold">
-                      Enquiries{" "}
+                      {leadTab === "callbacks" ? "Callback requests" : "Enquiries"}{" "}
                       <span className="ml-2 rounded-md bg-secondary px-2 py-0.5 text-xs font-medium text-muted-foreground">
                         {loading ? "…" : total}
                       </span>
@@ -866,8 +876,10 @@ function AdminDashboard() {
                                   <h3 className="break-words text-sm font-semibold">
                                     {lead.name}
                                   </h3>
+                                  <p className="mt-1 break-all font-mono text-xs text-muted-foreground">ID: {lead.booking_reference ?? lead.id}</p>
                                   <p className="mt-1 break-words text-xs text-muted-foreground">
                                     {lead.service}
+                                    {lead.brand && <span className="mt-1 block">Brand: {lead.brand}</span>}
                                     <span className="mt-1 block text-muted-foreground">{repairLeadCategory(lead) === "appliances" ? "Appliances" : repairLeadCategory(lead) === "electronics" ? "Electronics" : "Other enquiry"} · {lead.timeline}</span>
                                   </p>
                                 </div>
@@ -938,6 +950,7 @@ function AdminDashboard() {
                                     >
                                       {lead.name}
                                     </p>
+                                    <p className="mt-1 break-all font-mono text-xs text-muted-foreground">ID: {lead.booking_reference ?? lead.id}</p>
                                   </div>
                                 </div>
                               </td>
@@ -963,7 +976,7 @@ function AdminDashboard() {
                                 </div>
                               </td>
                               <td className="max-w-52 px-5 py-4 text-xs text-muted-foreground">
-                                {lead.service}<span className="mt-1 block text-muted-foreground">{lead.timeline}</span>
+                                {lead.service}{lead.brand && <span className="mt-1 block">Brand: {lead.brand}</span>}<span className="mt-1 block text-muted-foreground">{lead.timeline}</span>
                               </td>
                               <td className="px-5 py-4">
                                 <StatusBadge status={lead.status} />

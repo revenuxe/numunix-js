@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Label, Reveal } from "./primitives";
 import AudienceRepairScene from "./AudienceRepairScene";
 import { useCategory } from "./category";
-import { repairServiceHref } from "@/content/repair-services";
+import { Link } from "@tanstack/react-router";
+import { REPAIR_AUDIENCE_PATHS } from "@/content/repair-audiences";
 import { HOMEPAGE_REPAIR, REPAIR_SERVICES } from "@/content/homepage-repairs";
 import { ArrowUpRight } from "lucide-react";
 
@@ -157,8 +158,9 @@ export default function IndustriesSection() {
                         {String(index + 1).padStart(2, "0")} / 08
                       </span>
                     </div>
-                    <a
-                      href={repairServiceHref(category, REPAIR_SERVICES[category][audience.service]?.kind ?? "phone")}
+                    <Link
+                      to="/who-we-serve/$slug"
+                      params={{ slug: REPAIR_AUDIENCE_PATHS[index]! }}
                       aria-label={`Explore ${audience.name}`}
                       className="block rounded-[24px] transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#2459e0] motion-reduce:transform-none"
                     >
@@ -170,19 +172,20 @@ export default function IndustriesSection() {
                         <div className="repair-audience-stage"><AudienceRepairScene key={`${category}-${index}`} category={category} index={index} service={audience.service} /></div>
                         <div className="repair-audience-footer"><span>ASSESS · REPAIR · TEST</span><span>Illustrative repair</span></div>
                       </div>
-                    </a>
+                    </Link>
                     <h3 className="mt-8 max-w-[620px] text-[1.3rem] font-normal leading-[1.28] tracking-[-0.02em] text-[#0b1b38] lg:mt-10 lg:text-[clamp(1.35rem,1.9vw,1.75rem)]">
                       {audience.name}
                     </h3>
                     <p className="mt-3 max-w-[560px] text-[15px] leading-[1.65] text-[#5d76a3] lg:mt-4 lg:text-[17px]">
                       {audience.description}
                     </p>
-                    <a
-                      href={repairServiceHref(category, REPAIR_SERVICES[category][audience.service]?.kind ?? "phone")}
+                    <Link
+                      to="/who-we-serve/$slug"
+                      params={{ slug: REPAIR_AUDIENCE_PATHS[index]! }}
                       className="mt-5 inline-flex items-center gap-2 text-sm text-[#1e4ed8]"
                     >
                       Explore {audience.name} <ArrowUpRight size={16} />
-                    </a>
+                    </Link>
                   </Reveal>
                 </div>
               );

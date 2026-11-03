@@ -34,7 +34,7 @@ describe("homepage repair category rules", () => {
     expect(REPAIR_HOME_PATHS.appliances).toBe("/appliances");
     for (const category of ["electronics", "appliances"] as const) {
       const head = repairHomepageHead(category);
-      const url = `https://numunix-flow-engine.lovable.app${REPAIR_HOME_PATHS[category]}`;
+      const url = `https://www.numunix.com${REPAIR_HOME_PATHS[category]}`;
       expect(head.links.find(link => link.rel === "canonical")?.href).toBe(url);
       expect(head.meta.find(meta => "property" in meta && meta.property === "og:url")?.content).toBe(url);
     }
