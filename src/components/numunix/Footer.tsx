@@ -1,15 +1,14 @@
-import { Linkedin, Instagram, Facebook, Info } from "lucide-react";
+import { Linkedin, Instagram, Facebook } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
 import { CONTACT } from "@/content/site";
 import { REPAIR_PAGES, repairPageHref } from "@/content/repair-services";
-import { useCategory, useCategorySelection } from "./category";
+import { useCategory } from "./category";
 import { REPAIR_SERVICES, HOMEPAGE_REPAIR } from "@/content/homepage-repairs";
 
 const FEATURE_LINKS: Record<string,string> = {"Fault Assessment":"/repair-assessment","Repair Process":"/repair-process","Diagnostics & Tools":"/repair-diagnostics","Contact":"/contact","Repair Aftercare":"/repair-aftercare","Privacy Policy":"/privacy","Terms":"/terms","Device & Data Care":"/repair-safety","Repair Guides":"/repair-guides","Repair Estimates":"/repair-process/repair-estimate","Function Testing":"/repair-process/function-testing","Maintenance Visits":"/repair-aftercare"};
 
 export function Footer() {
   const category = useCategory()?.category ?? "electronics";
-  const selection = useCategorySelection();
   const columns: [string, string[]][] = [
     ["REPAIR SERVICES", REPAIR_PAGES.filter(service => service.category === category).map(service => service.name)],
     ["REPAIR CARE", ["Fault Assessment", "Repair Estimates", "Function Testing", "Maintenance Visits"]],
@@ -23,16 +22,6 @@ export function Footer() {
     return service ? repairPageHref(service) : FEATURE_LINKS[label] ?? "#enquiry";
   };
   return (
-    <>
-    <aside aria-label="Independent service provider disclaimer" className="border-t border-border bg-paper py-6 sm:py-8">
-      <div className="shell flex items-start gap-3 sm:gap-4">
-        <Info size={20} aria-hidden="true" className="mt-0.5 shrink-0 text-primary" />
-        <p className="max-w-[100ch] text-sm leading-relaxed text-mutedtext">
-          <strong className="font-semibold text-navytext">Disclaimer:</strong>{" "}
-          Numunix is an independent repair service provider, not an authorized service center for any brand. Brand names and logos are used for identification only and do not imply affiliation or endorsement.
-        </p>
-      </div>
-    </aside>
     <footer className="border-t border-white/8 bg-[#05070c] pt-20 pb-10">
       <div className="shell grid gap-14 lg:grid-cols-[1.1fr_2.4fr]">
         <div>
@@ -83,10 +72,6 @@ export function Footer() {
                   <li key={i}>
                     <a
                       href={category ? repairLink(i) : FEATURE_LINKS[i] ?? "/services"}
-                      onClick={() => {
-                        if (i === "Electronics") selection?.select("electronics");
-                        if (i === "Appliances") selection?.select("appliances");
-                      }}
                       className="text-[15px] text-white/65 transition-colors hover:text-white"
                     >
                       {i}
@@ -116,7 +101,6 @@ export function Footer() {
         </div>
       </div>
     </footer>
-    </>
   );
 }
 

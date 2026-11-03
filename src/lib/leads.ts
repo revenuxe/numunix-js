@@ -3,7 +3,6 @@ export type LeadStatus = (typeof LEAD_STATUSES)[number];
 export type Lead = {
   id: string;
   booking_reference?: string | null;
-  brand?: string | null;
   created_at: string;
   updated_at: string;
   name: string;

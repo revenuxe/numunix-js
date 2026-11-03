@@ -79,8 +79,7 @@ export function Hero({
         <div className="grid min-w-0 items-end gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)] lg:gap-20">
           <Reveal className="min-w-0">
             {eyebrow && <Label className="mb-7">{eyebrow}</Label>}
-            <noscript><style>{`.hero-heading { visibility: visible !important; font-size: clamp(12px, 3.5vw, 48px) !important; } .hero-heading > span { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }`}</style></noscript>
-            <h1 ref={headingRef} className={`hero-heading ${fittedHeading === headingKey ? "visible" : "invisible"} font-light leading-[1.08] tracking-normal text-primary-foreground text-[40px] sm:text-[56px] lg:text-[80px] xl:text-[96px]`}>
+            <h1 ref={headingRef} className={`${fittedHeading === headingKey ? "visible" : "invisible"} font-light leading-[1.08] tracking-normal text-primary-foreground text-[40px] sm:text-[56px] lg:text-[80px] xl:text-[96px]`}>
               <span className="inline-block whitespace-nowrap">{firstLine}</span>
               {secondLine && <><br /><span className={`inline-block whitespace-nowrap${accent ? " text-electric" : ""}`}>{secondLine}</span></>}
             </h1>

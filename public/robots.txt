@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://www.numunix.com/sitemap.xml
+Sitemap: https://numunix-flow-engine.lovable.app/sitemap.xml

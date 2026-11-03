@@ -17,7 +17,6 @@ export const enquirySchema = z.object({
     .optional()
     .transform((value) => value || null),
   service: z.string().trim().min(1, "Please select a service.").max(100),
-  brand: z.string().trim().max(100, "Brand must be 100 characters or fewer.").optional().transform(value => value || null),
   timeline: z.enum([
     "Flexible",
     "As soon as possible",

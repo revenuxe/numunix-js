@@ -19,7 +19,7 @@ import { articleBySlug, ARTICLES } from "@/content/articles";
 import { LEGACY_ARTICLE_PATHS } from "@/content/repair-legacy";
 import { REPAIR_ORGANIZATION_ID, REPAIR_WEBSITE_ID } from "@/content/repair-seo";
 
-import { SITE_URL } from "@/content/site";
+const SITE_URL = "https://numunix-flow-engine.lovable.app";
 
 export const Route = createFileRoute("/repair-guides/$slug")({
   beforeLoad: ({ params }) => {

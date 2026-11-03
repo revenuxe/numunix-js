@@ -2,7 +2,6 @@ import { createServerFn } from "@tanstack/react-start";
 import { enquirySchema } from "./enquiry-schema";
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
-import { notifyRepairTeam } from "./booking-notification";
 
 export const createRepairBooking = createServerFn({ method: "POST" })
   .inputValidator((values: unknown) => enquirySchema.parse(values))
@@ -23,16 +22,10 @@ export const createRepairBooking = createServerFn({ method: "POST" })
       });
       const { data: booking, error } = await client.rpc('submit_repair_booking', {
         p_name: data.name, p_phone: data.phone, p_service: data.service,
-        p_brand: data.brand ?? '',
         p_timeline: data.timeline, p_description: data.description ?? '', p_source: data.source,
       }).single();
       if (error || !booking?.reference) {
         throw new Error("Booking storage unavailable");
-      }
-      const notification = await notifyRepairTeam({ ...data, reference: booking.reference }, process.env['RESEND_API_KEY']);
-      if (notification !== "sent") {
-        // Log the receipt and outcome only, never customer details or provider credentials.
-        console.error("Repair notification not sent", { reference: booking.reference, reason: notification });
       }
       return { reference: booking.reference, service: booking.service };
     } catch {

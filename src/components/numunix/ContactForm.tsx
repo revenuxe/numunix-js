@@ -9,13 +9,12 @@ import { REPAIR_SERVICES } from "@/content/homepage-repairs";
 import { REPAIR_PAGES } from "@/content/repair-services";
 import { CONTACT } from "@/content/site";
 import { Button } from "@/components/ui/button";
-import { BrandSelect } from "./BrandSelect";
 
 const fieldClass =
   "mt-2 block min-h-12 w-full min-w-0 rounded-xl border border-[#dbe5f2] bg-[#f8fafc] px-4 py-3 text-base font-normal text-[#102a63] outline-none transition focus:border-[#2563eb] focus:ring-3 focus:ring-[#2563eb]/10 placeholder:text-[#8190aa]";
 const labelClass = "block min-w-0 text-sm font-medium text-[#102a63]";
 
-export function ContactForm({ initialDescription = "", initialService = "", brandSelection }: { initialDescription?: string; initialService?: string; brandSelection?: { brand: string } | undefined } = {}) {
+export function ContactForm({ initialDescription = "", initialService = "" }: { initialDescription?: string; initialService?: string } = {}) {
   const submitBooking = useServerFn(createRepairBooking);
   const navigate = useNavigate();
   const ctx = useCategory();
@@ -26,22 +25,10 @@ export function ContactForm({ initialDescription = "", initialService = "", bran
   useEffect(() => setHydrated(true), []);
   const [status, setStatus] = useState<"idle" | "pending" | "success" | "error">("idle");
   const [error, setError] = useState("");
-  const [selectedService, setSelectedService] = useState(initialService);
-  const [brand, setBrand] = useState("");
-  useEffect(() => { setSelectedService(initialService); setBrand(""); }, [initialService, ctx?.category]);
-  useEffect(() => {
-    if (brandSelection) { setSelectedService(initialService); setBrand(brandSelection.brand); setStatus("idle"); }
-  }, [brandSelection, initialService]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (submitting.current) return;
-    if (!brand) {
-      setError("Please select a brand, or choose Other brand / Not sure.");
-      setStatus("error");
-      document.getElementById("contact-brand")?.focus();
-      return;
-    }
     const form = event.currentTarget;
     const data = new FormData(form);
     const values = Object.fromEntries(data.entries());
@@ -59,8 +46,6 @@ export function ContactForm({ initialDescription = "", initialService = "", bran
     try {
       const receipt = await submitBooking({ data: { ...values, source: parsed.data.source } });
       form.reset();
-      setBrand("");
-      setSelectedService(initialService);
       setStatus("success");
       await navigate({ to: "/thank-you", search: { booking: receipt.reference, service: receipt.service } });
     } catch (cause) {
@@ -123,8 +108,7 @@ export function ContactForm({ initialDescription = "", initialService = "", bran
             key={ctx?.category ?? "electronics"}
             id="contact-service"
             name="service"
-            value={selectedService}
-            onChange={event => { setSelectedService(event.target.value); setBrand(""); }}
+            defaultValue={initialService}
             required
           >
             <option value="" disabled>
@@ -138,7 +122,6 @@ export function ContactForm({ initialDescription = "", initialService = "", bran
             <option value="Help me decide">Not sure yet, help me decide</option>
           </select>
         </label>
-        <BrandSelect disabled={!hydrated || status === "pending"} service={selectedService} value={brand} onChange={value => { setBrand(value); setStatus("idle"); }} />
         <label className={labelClass} htmlFor="contact-timeline">
           Preferred service timing
           <select
@@ -163,7 +146,7 @@ export function ContactForm({ initialDescription = "", initialService = "", bran
             defaultValue={initialDescription}
             rows={4}
             maxLength={1500}
-            placeholder="Share the model, issue, location and any damage or error codes."
+            placeholder="Share the model, symptoms, location and any damage or error codes."
           />
         </label>
       </fieldset>

@@ -1,15 +1,13 @@
 import { REPAIR_PAGES } from "./repair-services";
 
 /** Canonical base URL — no trailing slash */
-export const SITE_URL = "https://www.numunix.com";
-
-const CONTACT_EMAIL = "numunix@gmail.com";
+export const SITE_URL = "https://numunix-flow-engine.lovable.app";
 
 export const CONTACT = {
   phone: "+91 98865 79923",
   phoneHref: "tel:+919886579923",
-  email: CONTACT_EMAIL,
-  emailHref: `mailto:${CONTACT_EMAIL}`,
+  email: "hello@numunix.com",
+  emailHref: "mailto:hello@numunix.com",
   whatsappHref: "https://wa.me/919886579923?text=Hi%20Numunix%2C%20I%27d%20like%20to%20request%20a%20repair.",
   hours: "Mon – Sat · 9:00 AM – 8:00 PM IST",
   address: "Shop No 1, 1st Floor, 10/1, 10th Cross, LR Bande C L Ramaiah Layout, RT Nagar Post, Bengaluru, Karnataka 560032",

@@ -177,7 +177,7 @@ test("home enquiry reaches a mobile-friendly thank-you page", async ({ page }, t
   await page.screenshot({ path: testInfo.outputPath("thank-you-mobile.png"), fullPage: false });
   await expect(page.getByRole("link", { name: "Email our team" })).toHaveAttribute(
     "href",
-    "mailto:numunix@gmail.com",
+    "mailto:hello@numunix.com",
   );
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
     true,
