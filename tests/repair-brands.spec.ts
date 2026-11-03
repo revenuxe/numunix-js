@@ -31,7 +31,7 @@ test("brand search follows the repair service and clears a previous choice", asy
   await page.getByRole("option", { name: "Daikin", exact: true }).click();
   await expect(page.locator('input[name="brand"]')).toHaveValue("Daikin");
   await page.goto("/electronic/repairs/mobile-repair");
-  await expect(page.locator("#brands")).toHaveCount(0);
+  await expect(page.locator("#brands a")).toHaveCount(18);
   await brand.click();
   await page.getByRole("combobox", { name: "Search brands" }).fill("Apple");
   await page.getByRole("option", { name: "Apple", exact: true }).click();

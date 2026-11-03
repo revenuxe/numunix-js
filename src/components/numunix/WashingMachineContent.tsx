@@ -3,11 +3,11 @@ import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { WASHING_MACHINE_PAGE as content } from "@/content/washing-machine-page";
 import { REPAIR_DECISION_GUIDANCE, REPAIR_AFTERCARE_GUIDANCE } from "@/content/washer-repair-guidance";
-import { CONTACT } from "@/content/site";
+import { repairWhatsAppHref } from "@/content/repair-whatsapp";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { Label, Heading, Accent } from "./primitives";
 
-const whatsappHref = `${CONTACT.whatsappHref.split("?")[0]}?text=${encodeURIComponent("Hi Numunix, I would like to enquire about washing machine repair. Brand / Model: Machine type: Fault: Bangalore locality: ")}`;
+const whatsappHref = repairWhatsAppHref("washing machine repair", ["Brand","Model","Machine type","Issue","Location"]);
 
 export function WashingMachineCTA({ final = false }: { final?: boolean }) {
   return <section className="border-y border-primary/20 bg-ink-800 py-12 sm:py-16" aria-labelledby={final ? "washer-final-cta" : "washer-assessment-cta"}>

@@ -5,7 +5,7 @@ import { createRepairBooking } from "@/lib/bookings.functions";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 
-export function RepairCallback({ service, brand, brandLogo }: { service: string; brand?: string; brandLogo?: string }) {
+export function RepairCallback({ service, brand, brandLogo, brandLogoDark = false }: { service: string; brand?: string; brandLogo?: string; brandLogoDark?: boolean }) {
   const submitBooking = useServerFn(createRepairBooking);
   const submitting = useRef(false);
   const [ready, setReady] = useState(false);
@@ -50,7 +50,7 @@ export function RepairCallback({ service, brand, brandLogo }: { service: string;
   return <section aria-labelledby="callback-title" className="border-b border-border bg-paper py-7 sm:py-9">
     <div className="shell flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
       <div className="flex min-w-0 items-start gap-2 sm:gap-3">
-        {brandLogo ? <span className="flex h-11 w-20 shrink-0 items-center justify-center rounded-xl border border-border bg-white px-2 sm:w-28"><img src={brandLogo} alt={`${brand} logo`} width={480} height={104} className="h-auto w-full object-contain" /></span> : <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><PhoneCall size={20} aria-hidden="true" /></span>}
+        {brandLogo ? <span className={`flex h-11 w-20 shrink-0 items-center justify-center rounded-xl border border-border px-2 sm:w-28 ${brandLogoDark ? "bg-ink-900" : "bg-white"}`}><img src={brandLogo} alt={`${brand} logo`} width={480} height={104} className="h-auto max-h-full w-auto max-w-full object-contain" /></span> : <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><PhoneCall size={20} aria-hidden="true" /></span>}
         <div className="min-w-0"><h2 id="callback-title" className={`whitespace-nowrap font-medium tracking-tight text-navytext ${brandLogo ? "text-sm sm:text-xl" : "text-xl"}`}>Prefer a quick callback?</h2><p className={`mt-1 whitespace-nowrap leading-relaxed text-mutedtext sm:text-sm ${brandLogo ? "text-[10px]" : "text-xs"}`}>We’ll call you within 15 minutes.</p></div>
       </div>
       <form onSubmit={handleSubmit} aria-busy={pending} className="w-full lg:max-w-lg">

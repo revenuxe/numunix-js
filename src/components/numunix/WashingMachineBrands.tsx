@@ -3,15 +3,15 @@ import { Link } from "@tanstack/react-router";
 import { Label, Heading, Accent } from "./primitives";
 
 const BRANDS = [
+  { name: "LG", file: "lg", width: 480, height: 215 },
+  { name: "Samsung", file: "samsung", width: 480, height: 74 },
   { name: "Bosch", file: "bosch", width: 480, height: 104 },
+  { name: "IFB", file: "ifb", width: 480, height: 170 },
+  { name: "Whirlpool", file: "whirlpool", width: 480, height: 160 },
   { name: "Godrej", file: "godrej", width: 480, height: 232 },
   { name: "Haier", file: "haier", width: 480, height: 150 },
-  { name: "IFB", file: "ifb", width: 480, height: 170 },
-  { name: "LG", file: "lg", width: 480, height: 215 },
-  { name: "Panasonic", file: "panasonic", width: 480, height: 78 },
-  { name: "Samsung", file: "samsung", width: 480, height: 74 },
   { name: "Siemens", file: "siemens", width: 480, height: 113 },
-  { name: "Whirlpool", file: "whirlpool", width: 480, height: 160 },
+  { name: "Panasonic", file: "panasonic", width: 480, height: 78 },
 ];
 
 export function WashingMachineBrands() {

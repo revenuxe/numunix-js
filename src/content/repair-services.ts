@@ -12,8 +12,8 @@ export const REPAIR_PAGES: RepairService[] = [
     "category": "electronics",
     "name": "Mobile Repair",
     "kind": "phone",
-    "headline": "Mobile repair.",
-    "accent": "Stay connected.",
+    "headline": "Mobile Repair",
+    "accent": "in Bangalore",
     "faults": [
       "Cracked screen or unresponsive touch",
       "Battery draining or phone switching off",
@@ -30,7 +30,7 @@ export const REPAIR_PAGES: RepairService[] = [
       "Share the phone model and any liquid exposure",
       "Remove SIM and memory cards before handover"
     ],
-    "intro": "Mobile Repair in Bangalore. Describe the model and symptoms, review the assessment and estimate, and agree on the work before repairs begin."
+    "intro": "Independent phone repair enquiries for screen, battery, charging and camera faults. Get model-specific assessment and a clear estimate before approving work."
   },
   {
     "slug": "laptop-repair",

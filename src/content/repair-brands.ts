@@ -1,6 +1,6 @@
 // Enquiry choices identify customer equipment; they do not imply brand affiliation.
 export const REPAIR_BRANDS: Record<string, readonly string[]> = {
-  "Mobile Repair": ["Apple", "Samsung", "Xiaomi / Redmi / POCO", "OnePlus", "OPPO", "vivo", "realme", "Motorola", "Google", "Nothing", "Nokia", "HONOR", "Huawei", "ASUS", "Infinix", "Tecno", "iQOO"],
+  "Mobile Repair": ["Ai+", "LG", "Lenovo", "Xiaomi", "POCO", "Apple", "Samsung", "Xiaomi / Redmi / POCO", "OnePlus", "OPPO", "vivo", "realme", "Motorola", "Google", "Nothing", "Nokia", "HONOR", "Huawei", "ASUS", "Infinix", "Tecno", "iQOO"],
   "Laptop Repair": ["Apple", "Dell", "HP", "Lenovo", "ASUS", "Acer", "MSI", "Samsung", "Microsoft", "Toshiba", "Sony", "Fujitsu", "Infinix", "Gigabyte"],
   "CCTV Installation & Repair": ["Hikvision", "Dahua", "CP Plus", "Godrej", "Honeywell", "Bosch", "Axis", "TP-Link", "D-Link", "EZVIZ", "Imou", "Uniview"],
   "TV & Audio Repair": ["Samsung", "LG", "Sony", "Panasonic", "TCL", "Hisense", "Xiaomi", "OnePlus", "Vu", "Toshiba", "Philips", "JBL", "Bose", "Yamaha", "Denon", "boAt"],
@@ -8,7 +8,7 @@ export const REPAIR_BRANDS: Record<string, readonly string[]> = {
   "Data Recovery": ["Seagate", "Western Digital", "SanDisk", "Samsung", "Kingston", "Crucial", "Toshiba", "Transcend", "ADATA", "Apple", "Sony", "HP"],
   "Gaming Console Repair": ["Sony PlayStation", "Microsoft Xbox", "Nintendo", "Valve", "ASUS"],
   "Washing Machine Repair": ["LG", "Samsung", "IFB", "Bosch", "Whirlpool", "Haier", "Godrej", "Panasonic", "Voltas Beko", "Siemens", "Electrolux", "Onida", "Lloyd"],
-  "AC Service & Repair": ["Daikin", "Blue Star", "Voltas", "LG", "Samsung", "Carrier", "Hitachi", "Panasonic", "Lloyd", "Godrej", "Haier", "Mitsubishi Electric", "Mitsubishi Heavy Industries", "O General", "Toshiba", "Whirlpool"],
+  "AC Service & Repair": ["BPL", "IFB", "Daikin", "Blue Star", "Voltas", "LG", "Samsung", "Carrier", "Hitachi", "Panasonic", "Lloyd", "Godrej", "Haier", "Mitsubishi Electric", "Mitsubishi Heavy Industries", "O General", "Toshiba", "Whirlpool"],
   "Refrigerator Repair": ["LG", "Samsung", "Whirlpool", "Godrej", "Haier", "Bosch", "Panasonic", "Siemens", "Voltas Beko", "Hitachi", "Electrolux", "Liebherr", "IFB", "Onida", "Lloyd", "Voltas", "Croma"],
   "Microwave & Chimney Repair": ["LG", "Samsung", "IFB", "Panasonic", "Whirlpool", "Godrej", "Bosch", "Haier", "Bajaj", "Morphy Richards", "Faber", "Elica", "Glen", "Hindware"],
   "Water Purifier Service": ["Kent", "Aquaguard / Eureka Forbes", "Pureit", "AO Smith", "Livpure", "Blue Star", "Havells", "LG", "Faber", "V-Guard"],

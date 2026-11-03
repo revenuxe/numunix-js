@@ -20,7 +20,7 @@ test("Godrej card opens its own mobile repair page and booking defaults", async 
 });
 
 test("unsupported brand and service combinations return not found", async ({ request }) => {
-  for (const path of ["/appliances/repairs/ac-repair/godrej", "/electronic/repairs/washing-machine-repair/godrej", "/appliances/repairs/washing-machine-repair/unknown"]) {
+  for (const path of ["/appliances/repairs/ac-repair/unknown", "/electronic/repairs/washing-machine-repair/godrej", "/appliances/repairs/washing-machine-repair/unknown"]) {
     const response = await request.get(path);
     expect(response.status()).toBe(404);
   }
