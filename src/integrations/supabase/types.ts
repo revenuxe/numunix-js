@@ -32,6 +32,7 @@ export type Database = {
       contact_enquiries: {
         Row: {
           booking_reference: string | null
+          brand: string | null
           created_at: string
           description: string | null
           email: string | null
@@ -47,6 +48,7 @@ export type Database = {
         }
         Insert: {
           booking_reference?: string | null
+          brand?: string | null
           created_at?: string
           description?: string | null
           email?: string | null
@@ -62,6 +64,7 @@ export type Database = {
         }
         Update: {
           booking_reference?: string | null
+          brand?: string | null
           created_at?: string
           description?: string | null
           email?: string | null
@@ -82,20 +85,36 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      submit_repair_booking: {
-        Args: {
-          p_description: string
-          p_name: string
-          p_phone: string
-          p_service: string
-          p_source: string
-          p_timeline: string
-        }
-        Returns: {
-          reference: string
-          service: string
-        }[]
-      }
+      submit_repair_booking:
+        | {
+            Args: {
+              p_description: string
+              p_name: string
+              p_phone: string
+              p_service: string
+              p_source: string
+              p_timeline: string
+            }
+            Returns: {
+              reference: string
+              service: string
+            }[]
+          }
+        | {
+            Args: {
+              p_brand: string
+              p_description: string
+              p_name: string
+              p_phone: string
+              p_service: string
+              p_source: string
+              p_timeline: string
+            }
+            Returns: {
+              reference: string
+              service: string
+            }[]
+          }
     }
     Enums: {
       [_ in never]: never
