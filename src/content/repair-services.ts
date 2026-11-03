@@ -212,8 +212,8 @@ export const REPAIR_PAGES: RepairService[] = [
     "category": "appliances",
     "name": "Washing Machine Repair",
     "kind": "washer",
-    "headline": "Washing machine",
-    "accent": "repair, with care.",
+    "headline": "Washing Machine",
+    "accent": "Repair in Bangalore",
     "faults": [
       "Water not draining or filling",
       "Drum not spinning or unusual noise",
@@ -230,7 +230,7 @@ export const REPAIR_PAGES: RepairService[] = [
       "Keep the appliance accessible",
       "Avoid running repeated cycles with a leak"
     ],
-    "intro": "Washing Machine Repair in Bangalore. Describe the model and symptoms, review the assessment and estimate, and agree on the work before repairs begin."
+    "intro": "Independent washing machine repair for drainage, spin, filling and leak problems. Share your model and fault for an assessment and a clear estimate."
   },
   {
     "slug": "ac-repair",

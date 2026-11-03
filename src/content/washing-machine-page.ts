@@ -1,0 +1,43 @@
+// Service-page guidance describes enquiry scope, not guaranteed findings or delivery times.
+export const WASHING_MACHINE_PAGE = {
+  description: "Washing machine repair in Bangalore for drainage, spin, filling and leak problems. Discuss your model, assessment, parts and estimate before approving work.",
+  assessmentIntro: "A washer that stops mid-cycle, leaves clothes soaked or leaks onto the floor needs more than a part guessed from a symptom. Start with the machine type, model and the point where the wash changes. An assessment can then establish the cause, the repair options and which checks are appropriate before work is proposed.",
+  faults: [
+    { title: "Water stays inside after washing", body: "Explain whether the machine stops before spinning, whether water remains visible and whether a display message appears. Drainage symptoms can involve several checks; they do not establish that the pump needs replacement. Do not open a pump cover with hot water inside or attempt draining if you are unsure.", label: "DRAINAGE" },
+    { title: "Clothes remain wet after spinning", body: "Tell us whether the drum attempts to spin, whether the water has drained and whether the interruption happens with every load. For a twin-tub washer, identify the spin tub separately. Include unusual sounds and any message rather than assuming a motor fault.", label: "SPIN & BALANCE" },
+    { title: "The washer fills slowly or not at all", body: "Mention whether the household water supply is available, whether the washer takes in any water and which programme was selected. A change after installation or plumbing work is useful context. Leave internal valves, wiring and component checks to the assessment.", label: "WATER SUPPLY" },
+    { title: "Leaks around the door or underneath", body: "Record where water first appears and whether the leak begins during filling, washing or draining. Share a photo if you can take one safely. Stop using the machine when water reaches electrical connections; continued test cycles can make the situation worse.", label: "LEAKS & SEALS" },
+    { title: "Noise, vibration or movement", body: "Describe the sound and whether it occurs during washing or high-speed spinning. Mention a recent move or installation and whether the behaviour began gradually or suddenly. A short video can explain the complaint without pulling out or dismantling the washer.", label: "DRUM & INSTALLATION" },
+    { title: "A locked door or interrupted programme", body: "Photograph the complete display message and note the last completed stage. Explain whether water remains in the drum and whether the controls respond. Do not force a locked door, bypass a lid switch or repeatedly restart a machine showing the same fault.", label: "DOOR & CONTROLS" },
+  ],
+  types: [
+    { title: "Front-load washing machines", body: "Share the full model, programme and any door or display behaviour. For a leak, describe whether it starts near the door, drawer, connections or underneath. For a locked door, include whether water is still inside and avoid forcing the handle.", detail: "Useful details: model label, door condition, programme stage and display photo." },
+    { title: "Top-load washing machines", body: "Explain whether filling and washing complete before the spin interruption. Mention lid behaviour, load conditions and any repeated message. Keep clear of moving parts and do not bypass the lid mechanism to demonstrate the problem.", detail: "Useful details: model, last completed cycle stage, load and lid behaviour." },
+    { title: "Semi-automatic and twin-tub washers", body: "Describe the wash tub and spin tub separately. Say whether one works normally while the other will not start, stops early or makes a new sound. This distinction helps scope an enquiry without assuming a timer or motor replacement.", detail: "Useful details: affected tub, control response, drainage and sound." },
+  ],
+  costs: [
+    { title: "Assessment and visit charges", body: "Confirm the inspection charge, what the assessment includes and whether that charge is separate from any later repair. Share the location and access conditions before agreeing the visit so the arrangements are clear." },
+    { title: "Diagnosis and labour", body: "Ask for the identified fault and the work proposed to address it. A useful estimate explains labour and any further inspection needed, including how a change in scope or cost would be approved." },
+    { title: "Parts and compatibility", body: "Request the part description and how it is matched to the full appliance model. Confirm the proposed specification, availability and any written terms. A similar-looking part or a shared brand name does not establish compatibility." },
+    { title: "Testing and handover", body: "Agree which relevant functions will be reviewed after the repair, how to report a recurring symptom and what, if any, labour or parts warranty applies. Keep the estimate, approval and completed-work details together." },
+  ],
+  preparation: [
+    "Photograph the full model and serial label if it is safely accessible; do not move a heavy washer alone to reach it.",
+    "Note the selected programme, last completed stage and full error message. Mention earlier repairs or recent installation.",
+    "Share your Bangalore locality or PIN code, preferred timing and any access restrictions around the appliance.",
+    "Keep the area accessible without pulling the washer out, removing panels or disconnecting plumbing solely for the booking.",
+    "Stop using a washer with a leak near electrics, burning smell or electrical trip. Do not handle wet plugs or force a locked door.",
+  ],
+  faqs: [
+    ["How much does washing machine repair in Bangalore cost?", "The cost depends on the model, diagnosed fault, labour and any required parts. Confirm inspection charges and ask for the complete estimate, exclusions and proposed part specifications before approval. This page does not quote a fixed repair price."],
+    ["Can I request doorstep washing machine repair?", "Share your locality, appliance model and symptoms to discuss assessment at your premises. Confirm location coverage, access requirements and visit charges before arrangements are agreed. Some work or specialist checks may require a different arrangement; do not assume every fault can be completed at home."],
+    ["Do you assess front-load, top-load and semi-automatic washers?", "Identify your machine type and full model when enquiring. For a twin-tub washer, say which tub is affected. Model compatibility, repair feasibility and parts availability must be confirmed for the particular appliance."],
+    ["Which washing machine brands can I enquire about?", "Use the brand cards on this page for dedicated Bosch, Godrej, Haier, IFB, LG, Panasonic, Samsung, Siemens and Whirlpool guidance. For another brand, use the enquiry form and select the relevant option. A brand listing does not guarantee that every model or repair can be supported."],
+    ["Is Numunix a manufacturer-authorized service center?", "No. Numunix provides independent repair assessment. For manufacturer warranty work or official service, contact your appliance brand directly and check your existing cover before authorizing independent work."],
+    ["How long will the repair take?", "Timing depends on the findings, access, parts availability and relevant function checks. Ask for the expected schedule after assessment. A callback request or an enquiry does not establish a repair completion time."],
+    ["Does an error code mean a part must be replaced?", "No. Photograph the complete code and share the exact model. Meanings and permitted user checks depend on the appliance manual. Ask what assessment findings support the proposed repair rather than ordering a part from a display message alone."],
+    ["Can you help with a washer-dryer?", "Mention that the appliance also dries clothes and describe washing and drying symptoms separately. Confirm whether the model and affected drying function can be assessed before arranging work."],
+    ["Should I repair or replace my washing machine?", "Consider the diagnosed fault, complete estimate, appliance condition, repair history and availability of compatible parts. Compare that with replacement and installation costs. Ask about the practical options before approving work; age alone does not decide the outcome."],
+    ["What warranty applies after a repair?", "Ask what, if any, written warranty applies to the particular labour and parts, including its duration, exclusions and reporting process. Independent repair terms and manufacturer cover are separate. Keep the work details and receipt for future reference."],
+  ],
+};

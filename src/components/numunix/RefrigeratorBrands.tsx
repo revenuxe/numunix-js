@@ -1,0 +1,21 @@
+import { Link } from "@tanstack/react-router";
+import { ArrowUpRight } from "lucide-react";
+import { REFRIGERATOR_BRANDS } from "@/content/refrigerator-brands";
+import { Label, Heading, Accent } from "./primitives";
+
+export function RefrigeratorBrands() {
+  return <section id="brands" aria-labelledby="fridge-brands-title" className="section-pad border-t border-border bg-mist">
+    <div className="shell">
+      <div className="grid gap-5 lg:grid-cols-2 lg:items-end lg:gap-16">
+        <div><Label tone="light">BRANDS WE SERVE</Label><Heading tone="light" className="mt-5"><span id="fridge-brands-title">Your refrigerator.<br /><Accent>Familiar brands.</Accent></span></Heading></div>
+        <p className="max-w-[48ch] text-base leading-relaxed text-mutedtext">Select your brand to request a refrigerator assessment. Share the model and issue so we can confirm repair options and parts availability.</p>
+      </div>
+      <div className="mt-9 grid grid-cols-3 gap-2 sm:gap-5 lg:mt-12">
+        {REFRIGERATOR_BRANDS.map(brand => <Link key={brand.file} to="/$category/repairs/$slug/$brand" params={{ category: "appliances", slug: "refrigerator-repair", brand: brand.name.toLowerCase() }} aria-label={`Request ${brand.name} refrigerator repair`} className="group flex min-w-0 flex-col rounded-lg border border-primary/30 bg-card p-2.5 transition duration-200 hover:-translate-y-1 hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none sm:p-6">
+          <div className="flex h-16 items-center justify-center sm:h-24 sm:px-6"><img src={`/brands/refrigerators/${brand.file}`} alt={`${brand.name} logo`} width={brand.width} height={brand.height} loading="lazy" decoding="async" className="max-h-14 w-auto max-w-full object-contain sm:max-h-16" /></div>
+          <div className="mt-3 flex items-center justify-between gap-1 border-t border-border/70 pt-3 sm:gap-2"><span className="text-[10px] font-medium text-navytext sm:text-sm">{brand.name}</span><span aria-hidden="true" className="grid size-4 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground sm:size-7"><ArrowUpRight size={15} className="size-3 sm:size-[15px]" /></span></div>
+        </Link>)}
+      </div>
+    </div>
+  </section>;
+}

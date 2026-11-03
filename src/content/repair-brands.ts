@@ -9,7 +9,7 @@ export const REPAIR_BRANDS: Record<string, readonly string[]> = {
   "Gaming Console Repair": ["Sony PlayStation", "Microsoft Xbox", "Nintendo", "Valve", "ASUS"],
   "Washing Machine Repair": ["LG", "Samsung", "IFB", "Bosch", "Whirlpool", "Haier", "Godrej", "Panasonic", "Voltas Beko", "Siemens", "Electrolux", "Onida", "Lloyd"],
   "AC Service & Repair": ["Daikin", "Blue Star", "Voltas", "LG", "Samsung", "Carrier", "Hitachi", "Panasonic", "Lloyd", "Godrej", "Haier", "Mitsubishi Electric", "Mitsubishi Heavy Industries", "O General", "Toshiba", "Whirlpool"],
-  "Refrigerator Repair": ["LG", "Samsung", "Whirlpool", "Godrej", "Haier", "Bosch", "Panasonic", "Siemens", "Voltas Beko", "Hitachi", "Electrolux", "Liebherr"],
+  "Refrigerator Repair": ["LG", "Samsung", "Whirlpool", "Godrej", "Haier", "Bosch", "Panasonic", "Siemens", "Voltas Beko", "Hitachi", "Electrolux", "Liebherr", "IFB", "Onida", "Lloyd", "Voltas", "Croma"],
   "Microwave & Chimney Repair": ["LG", "Samsung", "IFB", "Panasonic", "Whirlpool", "Godrej", "Bosch", "Haier", "Bajaj", "Morphy Richards", "Faber", "Elica", "Glen", "Hindware"],
   "Water Purifier Service": ["Kent", "Aquaguard / Eureka Forbes", "Pureit", "AO Smith", "Livpure", "Blue Star", "Havells", "LG", "Faber", "V-Guard"],
   "Inverter & UPS Repair": ["Luminous", "Microtek", "APC", "Exide", "Amaron", "V-Guard", "Su-Kam", "Livguard", "Numeric", "Eaton", "Vertiv"],

@@ -7,6 +7,7 @@ test("brand search follows the repair service and clears a previous choice", asy
   const brandCards = page.locator("#brands a");
   await expect(brandCards).toHaveCount(9);
   for (const logo of await page.locator("#brands img").all()) {
+    await logo.scrollIntoViewIfNeeded();
     await expect(logo).toHaveJSProperty("complete", true);
     expect(await logo.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
   }
