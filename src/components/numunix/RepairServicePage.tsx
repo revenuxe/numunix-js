@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
 import { ArrowUpRight, Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { REPAIR_PAGES, repairCategoryPath, type RepairService } from "@/content/repair-services";
@@ -34,7 +33,6 @@ export function RepairServicePage({ service }: { service: RepairService }) {
   const isMobile = service.category === "electronics" && service.slug === "mobile-repair";
   const isCCTV = service.category === "electronics" && service.slug === "cctv-service";
   const isLaptop = service.category === "electronics" && service.slug === "laptop-repair";
-  const [cctvBrandSelection, setCCTVBrandSelection] = useState<{ brand: string }>();
   const detailedContent = isMobile
     ? MOBILE_REPAIR_PAGE
     : isWasher
@@ -142,7 +140,7 @@ export function RepairServicePage({ service }: { service: RepairService }) {
               <MobileRepairScope />
             </>
           )}
-          {isCCTV && <CCTVBrands onSelect={(brand) => setCCTVBrandSelection({ brand })} />}
+          {isCCTV && <CCTVBrands />}
           {isLaptop && <LaptopBrands />}
           <section className="section-pad bg-ink-800 text-primary-foreground">
             <div className="shell">
@@ -255,7 +253,6 @@ export function RepairServicePage({ service }: { service: RepairService }) {
                 </p>
               </div>
               <ContactForm
-                brandSelection={isCCTV ? cctvBrandSelection : undefined}
                 initialService={service.name}
                 initialDescription={
                   isMobile

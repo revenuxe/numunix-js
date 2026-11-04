@@ -1,3 +1,4 @@
+import { cctvBrandPage } from "@/content/cctv-brand-pages";
 import { laptopBrandPage } from "@/content/laptop-brand-pages";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { washerBrandPage } from "@/content/repair-brand-pages";
@@ -10,6 +11,7 @@ import { RepairBrandPage } from "@/components/numunix/RepairBrandPage";
 export const Route = createFileRoute("/$category/repairs/$slug_/$brand")({
   loader: ({ params }) => {
     const page =
+      cctvBrandPage(params.category, params.slug, params.brand) ??
       laptopBrandPage(params.category, params.slug, params.brand) ??
       washerBrandPage(params.category, params.slug, params.brand) ??
       fridgeBrandPage(params.category, params.slug, params.brand) ??
@@ -28,31 +30,36 @@ export const Route = createFileRoute("/$category/repairs/$slug_/$brand")({
       };
     const isMobile = loaderData.service === "Mobile Repair";
     const isLaptop = loaderData.service === "Laptop Repair";
-    const categoryPath = isMobile || isLaptop ? "electronic" : "appliances";
-    const serviceSlug = isLaptop
-      ? "laptop-repair"
-      : isMobile
-        ? "mobile-repair"
-        : loaderData.service === "AC Service & Repair"
-          ? "ac-repair"
-          : loaderData.service === "Refrigerator Repair"
-            ? "refrigerator-repair"
-            : "washing-machine-repair";
-    const serviceName = isLaptop
-      ? "Laptop repair"
-      : isMobile
-        ? "Mobile repair"
-        : loaderData.service === "AC Service & Repair"
-          ? "AC repair"
-          : loaderData.service === "Refrigerator Repair"
-            ? "Fridge repair"
-            : "Washing machine repair";
+    const isCCTV = loaderData.service === "CCTV Installation & Repair";
+    const categoryPath = isMobile || isLaptop || isCCTV ? "electronic" : "appliances";
+    const serviceSlug = isCCTV
+      ? "cctv-service"
+      : isLaptop
+        ? "laptop-repair"
+        : isMobile
+          ? "mobile-repair"
+          : loaderData.service === "AC Service & Repair"
+            ? "ac-repair"
+            : loaderData.service === "Refrigerator Repair"
+              ? "refrigerator-repair"
+              : "washing-machine-repair";
+    const serviceName = isCCTV
+      ? "CCTV repair"
+      : isLaptop
+        ? "Laptop repair"
+        : isMobile
+          ? "Mobile repair"
+          : loaderData.service === "AC Service & Repair"
+            ? "AC repair"
+            : loaderData.service === "Refrigerator Repair"
+              ? "Fridge repair"
+              : "Washing machine repair";
     return repairPageHead({
       title: loaderData.title,
       description: loaderData.description,
       path: loaderData.path,
       breadcrumbs: [
-        ...(isMobile || isLaptop ? [] : [{ name: "Appliances", path: "/appliances" }]),
+        ...(isMobile || isLaptop || isCCTV ? [] : [{ name: "Appliances", path: "/appliances" }]),
         { name: serviceName, path: `/${categoryPath}/repairs/${serviceSlug}` },
         { name: `${loaderData.brand} ${serviceName.toLowerCase()}`, path: loaderData.path },
       ],

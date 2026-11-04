@@ -1,4 +1,9 @@
 import {
+  CCTV_AFTERCARE_GUIDANCE,
+  CCTV_DECISION_GUIDANCE,
+  type CCTVBrandPage,
+} from "@/content/cctv-brand-pages";
+import {
   LAPTOP_AFTERCARE_GUIDANCE,
   LAPTOP_DECISION_GUIDANCE,
   type LaptopBrandPage,
@@ -26,22 +31,31 @@ export function RepairBrandScope({
   page,
   whatsappHref,
 }: {
-  page: WasherBrandPage | FridgeBrandPage | ACBrandPage | MobileBrandPage | LaptopBrandPage;
+  page:
+    | WasherBrandPage
+    | FridgeBrandPage
+    | ACBrandPage
+    | MobileBrandPage
+    | LaptopBrandPage
+    | CCTVBrandPage;
   whatsappHref: string;
 }) {
   const isFridge = "guidance" in page;
   const isAC = "acGuidance" in page;
   const isMobile = "mobileGuidance" in page;
   const isLaptop = "laptopGuidance" in page;
-  const guidance = isLaptop
-    ? page.laptopGuidance
-    : isMobile
-      ? page.mobileGuidance
-      : isAC
-        ? page.acGuidance
-        : isFridge
-          ? page.guidance
-          : washerRepairGuidance(page.slug);
+  const isCCTV = "cctvGuidance" in page;
+  const guidance = isCCTV
+    ? page.cctvGuidance
+    : isLaptop
+      ? page.laptopGuidance
+      : isMobile
+        ? page.mobileGuidance
+        : isAC
+          ? page.acGuidance
+          : isFridge
+            ? page.guidance
+            : washerRepairGuidance(page.slug);
   return (
     <>
       <section className="section-pad bg-paper" aria-labelledby="brand-assessment-title">
@@ -78,7 +92,9 @@ export function RepairBrandScope({
                 Arrange the assessment around your location.
               </h3>
               <p className="mt-4 text-base leading-relaxed text-mutedtext">
-                {isLaptop ? (
+                {isCCTV ? (
+                  `For your ${page.brand} CCTV repair enquiry in Bangalore, share the locality, camera count, affected devices and access restrictions. Coordinate site access with the owner, building manager or IT contact, and confirm inspection charges and visit arrangements.`
+                ) : isLaptop ? (
                   `For your ${page.brand} laptop repair enquiry in Bangalore, share the full model, symptoms and locality. Confirm assessment and handover arrangements, inspection charges and whether the charger or an accessory is needed.`
                 ) : isMobile ? (
                   `For your ${page.brand} mobile repair enquiry in Bangalore, share the model, symptoms and locality. Discuss assessment and handover arrangements, any inspection charge and the device functions that can be checked before work is agreed.`
@@ -92,11 +108,13 @@ export function RepairBrandScope({
                 )}
               </p>
               <p className="mt-4 text-sm leading-relaxed text-mutedtext">
-                {isLaptop
-                  ? "Discuss backup status and any data priorities before work begins. Keep passwords and encryption recovery keys private. Confirm location coverage and arrangements for the specific laptop and fault."
-                  : isMobile
-                    ? "Mention whether data is backed up and whether the phone can still be used. Keep SIM, account and authentication arrangements under your control. A booking enquiry does not require passwords or approval for a reset."
-                    : "Confirm location coverage, inspection charges and whether work would be assessed at your premises or require another arrangement. Availability and the appropriate scope depend on your model, fault and location."}
+                {isCCTV
+                  ? "Mention important recordings and discuss any interruption before changes are agreed. Do not include passwords, device verification codes or footage in the enquiry. Describe high or restricted camera locations without climbing."
+                  : isLaptop
+                    ? "Discuss backup status and any data priorities before work begins. Keep passwords and encryption recovery keys private. Confirm location coverage and arrangements for the specific laptop and fault."
+                    : isMobile
+                      ? "Mention whether data is backed up and whether the phone can still be used. Keep SIM, account and authentication arrangements under your control. A booking enquiry does not require passwords or approval for a reset."
+                      : "Confirm location coverage, inspection charges and whether work would be assessed at your premises or require another arrangement. Availability and the appropriate scope depend on your model, fault and location."}
               </p>
               <Button
                 asChild
@@ -122,15 +140,17 @@ export function RepairBrandScope({
               className="text-2xl font-medium leading-tight text-white sm:text-3xl"
             >
               Your {page.brand}{" "}
-              {isLaptop
-                ? "laptop needs attention."
-                : isMobile
-                  ? "phone needs attention."
-                  : isAC
-                    ? "AC needs attention."
-                    : isFridge
-                      ? "fridge needs attention."
-                      : "washer stopped."}{" "}
+              {isCCTV
+                ? "CCTV system needs attention."
+                : isLaptop
+                  ? "laptop needs attention."
+                  : isMobile
+                    ? "phone needs attention."
+                    : isAC
+                      ? "AC needs attention."
+                      : isFridge
+                        ? "fridge needs attention."
+                        : "washer stopped."}{" "}
               Let’s plan the next step.
             </h2>
             <p className="mt-4 max-w-[65ch] text-base leading-relaxed text-white/70">
@@ -168,13 +188,20 @@ export function RepairBrandDecisions({
   page,
   whatsappHref,
 }: {
-  page: WasherBrandPage | FridgeBrandPage | ACBrandPage | MobileBrandPage | LaptopBrandPage;
+  page:
+    | WasherBrandPage
+    | FridgeBrandPage
+    | ACBrandPage
+    | MobileBrandPage
+    | LaptopBrandPage
+    | CCTVBrandPage;
   whatsappHref: string;
 }) {
   const isFridge = "guidance" in page;
   const isAC = "acGuidance" in page;
   const isMobile = "mobileGuidance" in page;
   const isLaptop = "laptopGuidance" in page;
+  const isCCTV = "cctvGuidance" in page;
   return (
     <>
       <section className="section-pad bg-mist" aria-labelledby="repair-decision-title">
@@ -189,25 +216,29 @@ export function RepairBrandDecisions({
           </Heading>
           <p className="mt-6 max-w-[70ch] text-base leading-relaxed text-mutedtext">
             Whether to repair your {page.brand}{" "}
-            {isLaptop
-              ? "laptop"
-              : isMobile
-                ? "phone"
-                : isAC
-                  ? "AC"
-                  : isFridge
-                    ? "fridge"
-                    : "washing machine"}{" "}
+            {isCCTV
+              ? "CCTV system"
+              : isLaptop
+                ? "laptop"
+                : isMobile
+                  ? "phone"
+                  : isAC
+                    ? "AC"
+                    : isFridge
+                      ? "fridge"
+                      : "washing machine"}{" "}
             depends on more than a single faulty part. Use the assessment to weigh the condition of
             the device, the proposed repair and the practical alternatives. An enquiry begins that
             conversation; it does not commit you to replacement parts or repair work.
           </p>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {(isLaptop
-              ? LAPTOP_DECISION_GUIDANCE
-              : isMobile
-                ? MOBILE_DECISION_GUIDANCE
-                : REPAIR_DECISION_GUIDANCE
+            {(isCCTV
+              ? CCTV_DECISION_GUIDANCE
+              : isLaptop
+                ? LAPTOP_DECISION_GUIDANCE
+                : isMobile
+                  ? MOBILE_DECISION_GUIDANCE
+                  : REPAIR_DECISION_GUIDANCE
             ).map((item) => (
               <article
                 key={item.title}
@@ -227,15 +258,17 @@ export function RepairBrandDecisions({
           <div className="mt-10 rounded-lg border border-border bg-paper p-6 sm:p-8">
             <h3 className="text-xl text-navytext">
               Before replacing a part on your {page.brand}{" "}
-              {isLaptop
-                ? "laptop"
-                : isMobile
-                  ? "phone"
-                  : isAC
-                    ? "AC"
-                    : isFridge
-                      ? "fridge"
-                      : "washer"}
+              {isCCTV
+                ? "CCTV system"
+                : isLaptop
+                  ? "laptop"
+                  : isMobile
+                    ? "phone"
+                    : isAC
+                      ? "AC"
+                      : isFridge
+                        ? "fridge"
+                        : "washer"}
             </h3>
             <p className="mt-4 max-w-[90ch] text-base leading-relaxed text-mutedtext">
               Ask which checks support the diagnosis, how the proposed part is matched to the full
@@ -269,28 +302,32 @@ export function RepairBrandDecisions({
           </Heading>
           <p className="mt-6 max-w-[70ch] text-base leading-relaxed text-mutedtext">
             A useful handover explains the work completed on your {page.brand}{" "}
-            {isLaptop
-              ? "laptop"
-              : isMobile
-                ? "phone"
-                : isAC
-                  ? "AC"
-                  : isFridge
-                    ? "fridge"
-                    : "washing machine"}{" "}
+            {isCCTV
+              ? "CCTV system"
+              : isLaptop
+                ? "laptop"
+                : isMobile
+                  ? "phone"
+                  : isAC
+                    ? "AC"
+                    : isFridge
+                      ? "fridge"
+                      : "washing machine"}{" "}
             and what to do next. Before closing the visit, ask about the affected function, routine
             care and the route for reporting the same symptom again.
           </p>
           <div className="mt-10 grid gap-8 md:grid-cols-3">
-            {(isLaptop
-              ? LAPTOP_AFTERCARE_GUIDANCE
-              : isMobile
-                ? MOBILE_AFTERCARE_GUIDANCE
-                : isAC
-                  ? AC_AFTERCARE_GUIDANCE
-                  : isFridge
-                    ? FRIDGE_AFTERCARE_GUIDANCE
-                    : REPAIR_AFTERCARE_GUIDANCE
+            {(isCCTV
+              ? CCTV_AFTERCARE_GUIDANCE
+              : isLaptop
+                ? LAPTOP_AFTERCARE_GUIDANCE
+                : isMobile
+                  ? MOBILE_AFTERCARE_GUIDANCE
+                  : isAC
+                    ? AC_AFTERCARE_GUIDANCE
+                    : isFridge
+                      ? FRIDGE_AFTERCARE_GUIDANCE
+                      : REPAIR_AFTERCARE_GUIDANCE
             ).map((item, index) => (
               <article key={item.title} className="border-t border-border pt-6">
                 <span className="font-mono text-xs text-primary">0{index + 1}</span>

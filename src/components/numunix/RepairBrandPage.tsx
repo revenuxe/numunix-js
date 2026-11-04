@@ -1,3 +1,6 @@
+import { CCTV_BRANDS } from "@/content/cctv-brands";
+import type { CCTVBrandPage } from "@/content/cctv-brand-pages";
+import { CCTVBrandLogo } from "./CCTVBrandLogo";
 import type { LaptopBrandPage } from "@/content/laptop-brand-pages";
 import { Link } from "@tanstack/react-router";
 import {
@@ -32,50 +35,64 @@ import { Label, Heading, Accent, Reveal } from "./primitives";
 export function RepairBrandPage({
   page,
 }: {
-  page: WasherBrandPage | FridgeBrandPage | ACBrandPage | MobileBrandPage | LaptopBrandPage;
+  page:
+    | WasherBrandPage
+    | FridgeBrandPage
+    | ACBrandPage
+    | MobileBrandPage
+    | LaptopBrandPage
+    | CCTVBrandPage;
 }) {
   const isFridge = "guidance" in page;
   const isAC = "acGuidance" in page;
   const isMobile = "mobileGuidance" in page;
   const isLaptop = "laptopGuidance" in page;
-  const directoryCategory = isMobile || isLaptop ? "electronic" : "appliances";
+  const isCCTV = "cctvGuidance" in page;
+  const cctvLogo = isCCTV ? CCTV_BRANDS.find((brand) => brand.name === page.brand) : undefined;
+  const directoryCategory = isMobile || isLaptop || isCCTV ? "electronic" : "appliances";
   const mobileLogo = isMobile
     ? MOBILE_BRANDS.find((brand) => brand.name === page.brand)
     : undefined;
-  const appliance = isLaptop
-    ? "laptop"
-    : isMobile
-      ? "mobile"
-      : isAC
-        ? "AC"
-        : isFridge
-          ? "fridge"
-          : "washing machine";
-  const directorySlug = isLaptop
-    ? "laptop-repair"
-    : isMobile
-      ? "mobile-repair"
-      : isAC
-        ? "ac-repair"
-        : isFridge
-          ? "refrigerator-repair"
-          : "washing-machine-repair";
-  const logo = isLaptop
-    ? `/brands/laptop/${page.slug}.svg`
-    : isMobile
-      ? `/brands/mobiles/${mobileLogo?.file}`
-      : isAC
-        ? `/brands/air-conditioners/${AC_BRANDS.find((brand) => brand.name === page.brand)?.file}`
-        : isFridge
-          ? `/brands/refrigerators/${REFRIGERATOR_BRANDS.find((brand) => brand.name === page.brand)?.file}`
-          : `/brands/washing-machines/${page.slug}.webp`;
+  const appliance = isCCTV
+    ? "cctv"
+    : isLaptop
+      ? "laptop"
+      : isMobile
+        ? "mobile"
+        : isAC
+          ? "AC"
+          : isFridge
+            ? "fridge"
+            : "washing machine";
+  const directorySlug = isCCTV
+    ? "cctv-service"
+    : isLaptop
+      ? "laptop-repair"
+      : isMobile
+        ? "mobile-repair"
+        : isAC
+          ? "ac-repair"
+          : isFridge
+            ? "refrigerator-repair"
+            : "washing-machine-repair";
+  const logo = isCCTV
+    ? `/brands/cctv/${cctvLogo?.file}`
+    : isLaptop
+      ? `/brands/laptop/${page.slug}.svg`
+      : isMobile
+        ? `/brands/mobiles/${mobileLogo?.file}`
+        : isAC
+          ? `/brands/air-conditioners/${AC_BRANDS.find((brand) => brand.name === page.brand)?.file}`
+          : isFridge
+            ? `/brands/refrigerators/${REFRIGERATOR_BRANDS.find((brand) => brand.name === page.brand)?.file}`
+            : `/brands/washing-machines/${page.slug}.webp`;
   const whatsappHref = repairWhatsAppHref(`${page.brand} ${appliance} repair`);
   return (
     <div className="bg-ink-900">
       <Header />
       <main>
         <Hero
-          headline={`${page.brand} ${isLaptop ? "Laptop" : isMobile ? "Mobile" : isAC ? "AC" : isFridge ? "Fridge" : "Washing Machine"}`}
+          headline={`${page.brand} ${isCCTV ? "CCTV" : isLaptop ? "Laptop" : isMobile ? "Mobile" : isAC ? "AC" : isFridge ? "Fridge" : "Washing Machine"}`}
           accent="Repair in Bangalore"
           intro={page.heroIntro}
           primaryLabel="BOOK A REPAIR"
@@ -88,6 +105,7 @@ export function RepairBrandPage({
           service={page.service}
           brand={page.brand}
           brandLogo={logo}
+          brandLogoContent={cctvLogo ? <CCTVBrandLogo brand={cctvLogo} /> : undefined}
           brandLogoDark={mobileLogo?.darkLogo ?? false}
         />
         <section className="section-pad bg-paper">
@@ -95,15 +113,17 @@ export function RepairBrandPage({
             <Reveal ssrVisible>
               <Label tone="light">
                 {page.brand.toUpperCase()}{" "}
-                {isLaptop
-                  ? "LAPTOP"
-                  : isMobile
-                    ? "MOBILE"
-                    : isAC
-                      ? "AC"
-                      : isFridge
-                        ? "FRIDGE"
-                        : "WASHING MACHINE"}{" "}
+                {isCCTV
+                  ? "CCTV"
+                  : isLaptop
+                    ? "LAPTOP"
+                    : isMobile
+                      ? "MOBILE"
+                      : isAC
+                        ? "AC"
+                        : isFridge
+                          ? "FRIDGE"
+                          : "WASHING MACHINE"}{" "}
                 SERVICE
               </Label>
               <Heading tone="light" className="mt-6">
@@ -112,15 +132,17 @@ export function RepairBrandPage({
                 <Accent>So does the diagnosis.</Accent>
               </Heading>
               <p className="mt-6 text-base leading-relaxed text-mutedtext">
-                {isLaptop
-                  ? `A screen, charging or startup fault on your ${page.brand} laptop needs assessment of the actual device. Explain the power indicators, display response and tasks affected. Discuss backup status before any software, storage or board work is approved.`
-                  : isMobile
-                    ? `A display, charging or start-up complaint on your ${page.brand} phone needs assessment of the actual device. Describe damage, earlier work and the functions that still respond. Discuss your backup and data priorities before any repair or software change is approved.`
-                    : isAC
-                      ? `A cooling or operating change in your ${page.brand} AC needs model-specific assessment. Describe airflow, settings, messages and installation history so the proposed work follows the findings rather than a guessed part.`
-                      : isFridge
-                        ? `A cooling change in your ${page.brand} fridge needs an assessment of the actual appliance, not a part guessed from the symptom. Describe the compartments, controls and fault history so the proposed work follows the findings.`
-                        : `A washer that stops halfway through a programme is not always a failed motor. Water supply, drainage, load balance and door locking can affect the same cycle. Numunix starts with your ${page.brand} model and the sequence of symptoms, rather than prescribing a part from a display message alone.`}
+                {isCCTV
+                  ? `A missing picture or recording gap on your ${page.brand} system needs assessment of the camera, power, connection and recording path. Describe local viewing, playback and remote access separately. The symptoms help establish which checks are needed before a part or configuration change is proposed.`
+                  : isLaptop
+                    ? `A screen, charging or startup fault on your ${page.brand} laptop needs assessment of the actual device. Explain the power indicators, display response and tasks affected. Discuss backup status before any software, storage or board work is approved.`
+                    : isMobile
+                      ? `A display, charging or start-up complaint on your ${page.brand} phone needs assessment of the actual device. Describe damage, earlier work and the functions that still respond. Discuss your backup and data priorities before any repair or software change is approved.`
+                      : isAC
+                        ? `A cooling or operating change in your ${page.brand} AC needs model-specific assessment. Describe airflow, settings, messages and installation history so the proposed work follows the findings rather than a guessed part.`
+                        : isFridge
+                          ? `A cooling change in your ${page.brand} fridge needs an assessment of the actual appliance, not a part guessed from the symptom. Describe the compartments, controls and fault history so the proposed work follows the findings.`
+                          : `A washer that stops halfway through a programme is not always a failed motor. Water supply, drainage, load balance and door locking can affect the same cycle. Numunix starts with your ${page.brand} model and the sequence of symptoms, rather than prescribing a part from a display message alone.`}
               </p>
               <p className="mt-5 text-base leading-relaxed text-mutedtext">{page.modelIntro}</p>
             </Reveal>
@@ -129,30 +151,34 @@ export function RepairBrandPage({
                 <div className="repair-visual-top">
                   <span>
                     {page.brand}{" "}
-                    {isLaptop
-                      ? "laptop"
-                      : isMobile
-                        ? "phone"
-                        : isAC
-                          ? "AC"
-                          : isFridge
-                            ? "fridge"
-                            : "washer"}{" "}
+                    {isCCTV
+                      ? "cctv"
+                      : isLaptop
+                        ? "laptop"
+                        : isMobile
+                          ? "phone"
+                          : isAC
+                            ? "AC"
+                            : isFridge
+                              ? "fridge"
+                              : "washer"}{" "}
                     / assessment
                   </span>
                   <span className="repair-status">ILLUSTRATIVE</span>
                 </div>
                 <DeviceVisual
                   kind={
-                    isLaptop
-                      ? "laptop"
-                      : isMobile
-                        ? "phone"
-                        : isAC
-                          ? "ac"
-                          : isFridge
-                            ? "fridge"
-                            : "washer"
+                    isCCTV
+                      ? "cctv"
+                      : isLaptop
+                        ? "laptop"
+                        : isMobile
+                          ? "phone"
+                          : isAC
+                            ? "ac"
+                            : isFridge
+                              ? "fridge"
+                              : "washer"
                   }
                 />
                 <div className="repair-checks">
@@ -171,15 +197,17 @@ export function RepairBrandPage({
           <div className="shell">
             <Label tone="light">
               COMMON {page.brand.toUpperCase()}{" "}
-              {isLaptop
-                ? "LAPTOP"
-                : isMobile
-                  ? "MOBILE"
-                  : isAC
-                    ? "AC"
-                    : isFridge
-                      ? "FRIDGE"
-                      : "WASHER"}{" "}
+              {isCCTV
+                ? "CCTV"
+                : isLaptop
+                  ? "LAPTOP"
+                  : isMobile
+                    ? "MOBILE"
+                    : isAC
+                      ? "AC"
+                      : isFridge
+                        ? "FRIDGE"
+                        : "WASHER"}{" "}
               FAULTS
             </Label>
             <Heading tone="light" className="mt-6">
@@ -217,11 +245,13 @@ export function RepairBrandPage({
           <div className="shell grid gap-12 lg:grid-cols-2 lg:gap-20">
             <div>
               <Label>
-                {isLaptop
-                  ? "LAPTOP SYMPTOMS, NOT GUESSWORK"
-                  : isMobile
-                    ? "PHONE SYMPTOMS, NOT GUESSWORK"
-                    : "ERROR CODES, NOT GUESSWORK"}
+                {isCCTV
+                  ? "SYSTEM SYMPTOMS, NOT GUESSWORK"
+                  : isLaptop
+                    ? "LAPTOP SYMPTOMS, NOT GUESSWORK"
+                    : isMobile
+                      ? "PHONE SYMPTOMS, NOT GUESSWORK"
+                      : "ERROR CODES, NOT GUESSWORK"}
               </Label>
               <Heading className="mt-6">
                 {page.diagnosticTitle}
@@ -232,15 +262,17 @@ export function RepairBrandPage({
                 {page.diagnosticBody}
               </p>
               <p className="mt-5 text-base leading-relaxed text-primary-foreground/70">
-                {isLaptop
-                  ? "Do not keep powering a wet laptop, force a damaged hinge or press a swollen battery. Keep passwords and recovery keys out of the enquiry, and discuss any data-impacting work before approval."
-                  : isMobile
-                    ? "Do not open the phone, press a swollen battery or keep charging a wet or visibly damaged device. Keep passwords and OTPs out of the enquiry, and discuss any data-impacting work before approval."
-                    : isAC
-                      ? "Keep electrical covers closed and leave internal or refrigerant work to a professional. Do not climb or lean out to inspect an outdoor unit. Follow the exact model manual for permitted user checks."
-                      : isFridge
-                        ? "Do not chip ice with tools, remove electrical covers or attempt work on refrigerant pipework. Follow your exact model manual and leave internal inspection to a professional."
-                        : "Do not force a locked door or open the pump cover while the machine contains hot water. Follow your model manual. If you are unsure, leave draining and inspection to a professional."}
+                {isCCTV
+                  ? "Keep electrical covers closed and do not climb to inspect cameras. Do not reset or format a recorder when footage matters. Keep account passwords, verification codes and device QR labels private, and coordinate access through the authorized system contact."
+                  : isLaptop
+                    ? "Do not keep powering a wet laptop, force a damaged hinge or press a swollen battery. Keep passwords and recovery keys out of the enquiry, and discuss any data-impacting work before approval."
+                    : isMobile
+                      ? "Do not open the phone, press a swollen battery or keep charging a wet or visibly damaged device. Keep passwords and OTPs out of the enquiry, and discuss any data-impacting work before approval."
+                      : isAC
+                        ? "Keep electrical covers closed and leave internal or refrigerant work to a professional. Do not climb or lean out to inspect an outdoor unit. Follow the exact model manual for permitted user checks."
+                        : isFridge
+                          ? "Do not chip ice with tools, remove electrical covers or attempt work on refrigerant pipework. Follow your exact model manual and leave internal inspection to a professional."
+                          : "Do not force a locked door or open the pump cover while the machine contains hot water. Follow your model manual. If you are unsure, leave draining and inspection to a professional."}
               </p>
               <Button
                 asChild
@@ -253,95 +285,113 @@ export function RepairBrandPage({
               </Button>
             </div>
             <div className="grid gap-0">
-              {(isLaptop
+              {(isCCTV
                 ? [
                     [
                       Droplets,
-                      "Damage and fault history",
-                      "Mention spills, drops and earlier repairs. Describe which functions still respond without repeating unsafe tests.",
+                      "Camera and connection",
+                      "Identify affected channels and whether the local image is missing, unclear or intermittent. Describe power and cable changes without handling installed wiring.",
                     ],
                     [
                       RotateCw,
-                      "Power and startup",
-                      "Note adapter behaviour, lights, fan activity and the complete startup message. Separate no power from a missing image.",
+                      "Recording and playback",
+                      "Separate live view from saved footage. Include the affected time range and any storage warning before reset or replacement is discussed.",
                     ],
                     [
                       ShieldCheck,
-                      "Data and privacy",
-                      "Discuss backups and any encryption before software or storage work. Keep passwords and recovery keys private.",
+                      "Authorized access",
+                      "Coordinate with the system owner or responsible IT contact. Keep credentials private and discuss important recordings before changes.",
                     ],
                   ]
-                : isMobile
+                : isLaptop
                   ? [
                       [
                         Droplets,
-                        "Damage history",
-                        "Mention drops, liquid exposure and earlier work, along with the functions that still respond.",
+                        "Damage and fault history",
+                        "Mention spills, drops and earlier repairs. Describe which functions still respond without repeating unsafe tests.",
                       ],
                       [
                         RotateCw,
-                        "Power and start-up",
-                        "Describe charging indicators, restarts and screen behaviour without repeatedly testing an unsafe device.",
+                        "Power and startup",
+                        "Note adapter behaviour, lights, fan activity and the complete startup message. Separate no power from a missing image.",
                       ],
                       [
                         ShieldCheck,
                         "Data and privacy",
-                        "Back up accessible files and discuss reset risks. Keep passwords, OTPs and recovery codes private.",
+                        "Discuss backups and any encryption before software or storage work. Keep passwords and recovery keys private.",
                       ],
                     ]
-                  : isAC
+                  : isMobile
                     ? [
                         [
                           Droplets,
-                          "Cooling and airflow",
-                          "Explain whether air moves normally and how cooling changed. Include mode and temperature settings.",
+                          "Damage history",
+                          "Mention drops, liquid exposure and earlier work, along with the functions that still respond.",
                         ],
                         [
                           RotateCw,
-                          "Operating pattern",
-                          "Note a recurring shutdown, message or new sound and how long the unit runs before it occurs.",
+                          "Power and start-up",
+                          "Describe charging indicators, restarts and screen behaviour without repeatedly testing an unsafe device.",
                         ],
                         [
                           ShieldCheck,
-                          "Safe access",
-                          "Describe indoor and outdoor access without climbing, opening covers or touching refrigerant pipework.",
+                          "Data and privacy",
+                          "Back up accessible files and discuss reset risks. Keep passwords, OTPs and recovery codes private.",
                         ],
                       ]
-                    : isFridge
+                    : isAC
                       ? [
                           [
                             Droplets,
-                            "Compartment observations",
-                            "Describe the fresh-food and freezer sections separately and include settings and visible ice or water.",
+                            "Cooling and airflow",
+                            "Explain whether air moves normally and how cooling changed. Include mode and temperature settings.",
                           ],
                           [
                             RotateCw,
                             "Operating pattern",
-                            "Mention a new sound, a recurring warning or a change in operation and when it began.",
+                            "Note a recurring shutdown, message or new sound and how long the unit runs before it occurs.",
                           ],
                           [
                             ShieldCheck,
-                            "Safe assessment",
-                            "Keep covers in place, avoid refrigerant pipework and do not handle wet electrical connections.",
+                            "Safe access",
+                            "Describe indoor and outdoor access without climbing, opening covers or touching refrigerant pipework.",
                           ],
                         ]
-                      : [
-                          [
-                            Droplets,
-                            "Drainage first",
-                            "Explain whether water is left inside, whether the hose appears kinked and when the programme stops.",
-                          ],
-                          [
-                            RotateCw,
-                            "Cycle behaviour",
-                            "Tell us if washing works but spinning does not. Mention load size and any repeated interruption.",
-                          ],
-                          [
-                            ShieldCheck,
-                            "Safety before testing",
-                            "Stop using a leaking or electrically unsafe machine. Never handle plugs or switches with wet hands.",
-                          ],
-                        ]
+                      : isFridge
+                        ? [
+                            [
+                              Droplets,
+                              "Compartment observations",
+                              "Describe the fresh-food and freezer sections separately and include settings and visible ice or water.",
+                            ],
+                            [
+                              RotateCw,
+                              "Operating pattern",
+                              "Mention a new sound, a recurring warning or a change in operation and when it began.",
+                            ],
+                            [
+                              ShieldCheck,
+                              "Safe assessment",
+                              "Keep covers in place, avoid refrigerant pipework and do not handle wet electrical connections.",
+                            ],
+                          ]
+                        : [
+                            [
+                              Droplets,
+                              "Drainage first",
+                              "Explain whether water is left inside, whether the hose appears kinked and when the programme stops.",
+                            ],
+                            [
+                              RotateCw,
+                              "Cycle behaviour",
+                              "Tell us if washing works but spinning does not. Mention load size and any repeated interruption.",
+                            ],
+                            [
+                              ShieldCheck,
+                              "Safety before testing",
+                              "Stop using a leaking or electrically unsafe machine. Never handle plugs or switches with wet hands.",
+                            ],
+                          ]
               ).map(([Icon, title, body]) => {
                 const Symbol = Icon as typeof Droplets;
                 return (
@@ -378,11 +428,13 @@ export function RepairBrandPage({
                 ],
                 [
                   "Confirm assessment",
-                  isLaptop
-                    ? "Agree assessment and handover arrangements, inspection charges and data priorities before work is proposed."
-                    : isMobile
-                      ? "Agree the handover or assessment arrangements, inspection charges and data priorities. Diagnosis establishes the proposed repair scope."
-                      : "Agree the visit arrangements and any inspection charges. Diagnosis establishes repair feasibility and parts requirements.",
+                  isCCTV
+                    ? "Confirm the site, authorized contact, affected devices, access restrictions and inspection charges before a visit is agreed."
+                    : isLaptop
+                      ? "Agree assessment and handover arrangements, inspection charges and data priorities before work is proposed."
+                      : isMobile
+                        ? "Agree the handover or assessment arrangements, inspection charges and data priorities. Diagnosis establishes the proposed repair scope."
+                        : "Agree the visit arrangements and any inspection charges. Diagnosis establishes repair feasibility and parts requirements.",
                 ],
                 [
                   "Review the estimate",
@@ -390,15 +442,17 @@ export function RepairBrandPage({
                 ],
                 [
                   "Check the result",
-                  isLaptop
-                    ? "Review relevant startup, display, input, charging, port and cooling checks. Confirm any remaining limitations and written repair terms."
-                    : isMobile
-                      ? "Review the relevant display, touch, charging, camera and audio checks, and confirm any functionality limitations and written repair terms."
-                      : isAC
-                        ? "Review relevant cooling, airflow, drainage and control checks and confirm any applicable written repair terms."
-                        : isFridge
-                          ? "Discuss relevant cooling, control and door checks, observation guidance and any applicable written warranty terms."
-                          : "Review relevant fill, wash, drain and spin functions after the repair. Confirm aftercare and any applicable written warranty terms.",
+                  isCCTV
+                    ? "Review affected channels, live images, new recording and playback, timestamps and agreed remote access. Confirm any remaining limitations and written repair terms."
+                    : isLaptop
+                      ? "Review relevant startup, display, input, charging, port and cooling checks. Confirm any remaining limitations and written repair terms."
+                      : isMobile
+                        ? "Review the relevant display, touch, charging, camera and audio checks, and confirm any functionality limitations and written repair terms."
+                        : isAC
+                          ? "Review relevant cooling, airflow, drainage and control checks and confirm any applicable written repair terms."
+                          : isFridge
+                            ? "Discuss relevant cooling, control and door checks, observation guidance and any applicable written warranty terms."
+                            : "Review relevant fill, wash, drain and spin functions after the repair. Confirm aftercare and any applicable written warranty terms.",
                 ],
               ].map(([title, body], index) => (
                 <div key={title} className="border-t border-border pt-6">
@@ -474,15 +528,17 @@ export function RepairBrandPage({
             <div>
               <Label tone="light">
                 BOOK {page.brand.toUpperCase()}{" "}
-                {isLaptop
-                  ? "LAPTOP"
-                  : isMobile
-                    ? "MOBILE"
-                    : isAC
-                      ? "AC"
-                      : isFridge
-                        ? "FRIDGE"
-                        : "WASHING MACHINE"}{" "}
+                {isCCTV
+                  ? "CCTV"
+                  : isLaptop
+                    ? "LAPTOP"
+                    : isMobile
+                      ? "MOBILE"
+                      : isAC
+                        ? "AC"
+                        : isFridge
+                          ? "FRIDGE"
+                          : "WASHING MACHINE"}{" "}
                 REPAIR
               </Label>
               <Heading tone="light" className="mt-6">
@@ -544,15 +600,17 @@ export function RepairBrandPage({
                     params={{ category: directoryCategory, slug: directorySlug }}
                   >
                     All{" "}
-                    {isLaptop
-                      ? "laptop"
-                      : isMobile
-                        ? "mobile"
-                        : isAC
-                          ? "AC"
-                          : isFridge
-                            ? "fridge"
-                            : "washing machine"}{" "}
+                    {isCCTV
+                      ? "cctv"
+                      : isLaptop
+                        ? "laptop"
+                        : isMobile
+                          ? "mobile"
+                          : isAC
+                            ? "AC"
+                            : isFridge
+                              ? "fridge"
+                              : "washing machine"}{" "}
                     repairs <ArrowUpRight size={16} />
                   </Link>
                 </Button>
@@ -560,18 +618,22 @@ export function RepairBrandPage({
                   <Link
                     to="/repair-guides/$slug"
                     params={{
-                      slug: isLaptop
-                        ? "laptop-faults-repair-or-replace"
-                        : isMobile
-                          ? "mobile-repair-before-you-book"
-                          : "appliance-repair-visit-checklist",
+                      slug: isCCTV
+                        ? "choosing-a-repair-service-in-bangalore"
+                        : isLaptop
+                          ? "laptop-faults-repair-or-replace"
+                          : isMobile
+                            ? "mobile-repair-before-you-book"
+                            : "appliance-repair-visit-checklist",
                     }}
                   >
-                    {isLaptop
-                      ? "Before booking a laptop repair"
-                      : isMobile
-                        ? "Before booking a mobile repair"
-                        : "Appliance repair visit checklist"}{" "}
+                    {isCCTV
+                      ? "Choosing a repair service"
+                      : isLaptop
+                        ? "Before booking a laptop repair"
+                        : isMobile
+                          ? "Before booking a mobile repair"
+                          : "Appliance repair visit checklist"}{" "}
                     <ArrowUpRight size={16} />
                   </Link>
                 </Button>
