@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Differentiate all existing repair brand pages with useful brand-specific sections and metadata while preserving the homepage design and booking flow.
+
 - [ ] Build the Bosch washing machine repair page with researched content, shared homepage design, brand-prefilled booking, metadata, schema and a brand-card link.
 
 - [x] Switched bookings to publishable-key-only RPC. Verified actual Mobile/Washer receipts, stored New status with blank internal notes and blocked anonymous customer reads. Public execution warnings are intentional for this narrow write-only RPC. Vercel redeploy remains user action.
