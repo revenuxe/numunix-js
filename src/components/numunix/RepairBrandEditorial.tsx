@@ -231,7 +231,7 @@ export function RepairBrandDecisions({
             the device, the proposed repair and the practical alternatives. An enquiry begins that
             conversation; it does not commit you to replacement parts or repair work.
           </p>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
+          <div className={page.editorial ? "mt-10 max-w-3xl" : "mt-10 grid gap-6 md:grid-cols-3"}>
             {(page.editorial ? [page.editorial.decision] : isCCTV
               ? CCTV_DECISION_GUIDANCE
               : isLaptop
@@ -316,7 +316,7 @@ export function RepairBrandDecisions({
             and what to do next. Before closing the visit, ask about the affected function, routine
             care and the route for reporting the same symptom again.
           </p>
-          <div className="mt-10 grid gap-8 md:grid-cols-3">
+          <div className={page.editorial ? "mt-10 max-w-3xl" : "mt-10 grid gap-8 md:grid-cols-3"}>
             {(page.editorial ? [page.editorial.handover] : isCCTV
               ? CCTV_AFTERCARE_GUIDANCE
               : isLaptop

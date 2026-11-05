@@ -57,7 +57,7 @@ export function curateBrandRepair<T extends BrandPage>(page: T): T & { editorial
       page.faqs[0] ?? [],
       [advice.decision.title, advice.decision.body],
       [advice.handover.title, advice.handover.body],
-      ...page.faqs.filter(([question]) => /cost|warranty|data stay|password|gas refill|water resistant/.test(question.toLowerCase())).slice(0, 4),
+      ...page.faqs.filter(([question]) => /cost|warranty|data stay|password|gas refill|water resistant/.test(question?.toLowerCase() ?? "")).slice(0, 4),
     ],
     editorial: { topic, subject, paragraphs, example, decision: advice.decision, handover: advice.handover },
   };
