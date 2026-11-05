@@ -17,6 +17,7 @@ import { ACBrands } from "./ACBrands";
 import { MobileBrands } from "./MobileBrands";
 import { CCTVBrands } from "./CCTVBrands";
 import { LaptopBrands } from "./LaptopBrands";
+import { PurifierBrands } from "./PurifierBrands";
 import { MOBILE_REPAIR_PAGE } from "@/content/mobile-repair-page";
 import { MobileRepairScope, MobileRepairDecisions, MobileRepairCTA } from "./MobileRepairContent";
 import { WASHING_MACHINE_PAGE } from "@/content/washing-machine-page";
@@ -142,6 +143,7 @@ export function RepairServicePage({ service }: { service: RepairService }) {
           )}
           {isCCTV && <CCTVBrands />}
           {isLaptop && <LaptopBrands />}
+          {service.category === "appliances" && service.slug === "water-purifier-service" && <PurifierBrands />}
           <section className="section-pad bg-ink-800 text-primary-foreground">
             <div className="shell">
               <Label>THE REPAIR JOURNEY</Label>

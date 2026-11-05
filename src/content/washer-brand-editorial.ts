@@ -1,3 +1,4 @@
+import { brandSymptomCards } from "./brand-faults";
 import type { WasherBrandPage } from "./repair-brand-pages";
 
 // Model-scoping guidance, not claims of manufacturer authorization or parts availability.
@@ -116,7 +117,7 @@ export function additionalWasherBrandPages(shared: WasherBrandPage): WasherBrand
       diagnosticLink: `Visit ${entry.brand} official support`,
       brandSelection: { brand: entry.brand },
       enquiryDescription: `${entry.brand} washing machine repair\n${modelPrompt}: \nMachine type: \nIssue / Error code: `,
-      faults: [{ title: entry.focusTitle, label: "MODEL & SYMPTOMS", body: entry.focusBody }, ...shared.faults.slice(1).map(fault => ({ ...fault, body: fault.body.replace("For a twin-tub model, mention whether washing still works normally.", "Mention whether washing completes normally before the spin problem begins.") }))],
+      faults: brandSymptomCards("washing-machine-repair", entry.slug),
       preparation: [
         `Photograph the ${entry.brand} rating label if accessible. Include ${modelPrompt.toLowerCase()} without moving a heavy appliance alone.`,
         "Note the machine type, selected programme and last completed stage. Include a photo of the full display message.",

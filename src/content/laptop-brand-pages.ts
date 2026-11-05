@@ -1,3 +1,4 @@
+import { brandSymptomCards } from "./brand-faults";
 import type { WasherBrandPage } from "./repair-brand-pages";
 import { LAPTOP_BRANDS } from "./laptop-brands";
 import { LAPTOP_EDITORIAL } from "./laptop-brand-editorial";
@@ -61,38 +62,7 @@ export const LAPTOP_BRAND_PAGES: LaptopBrandPage[] = LAPTOP_BRANDS.map((brand) =
       "Charging & cooling symptoms",
       "Backup priorities & repair scope",
     ],
-    faults: [
-      {
-        title: "Cracked screen or missing image",
-        label: "DISPLAY",
-        body: `Describe the image, backlight and any touch response on your ${brand.name} laptop separately. Mention visible damage, hinge movement and external-display behaviour already observed. Ask which panel specification and features are included in the estimate.`,
-      },
-      {
-        title: "Not charging or short battery life",
-        label: "BATTERY & POWER",
-        body: "Tell us whether the laptop runs on adapter power, battery power or neither. Include the adapter rating and any warning message. A power fault can involve the adapter, connector, battery or internal circuitry; the symptom alone does not identify a failed part.",
-      },
-      {
-        title: "Keyboard, trackpad or port faults",
-        label: "INPUT & CONNECTIONS",
-        body: "Identify the affected keys, input function or connection. Mention spills, accidental damage and accessories involved. Distinguish one failed connection from a system-wide issue. Do not insert metal objects into ports or keep using a liquid-damaged device.",
-      },
-      {
-        title: "Overheating, fan noise or shutdowns",
-        label: "COOLING",
-        body: "Describe the task running when the symptom occurs, fan behaviour and whether the laptop slows, freezes or switches off. Mention earlier internal cleaning or repairs. Avoid repeated stress tests; the appropriate cooling or power work depends on inspection.",
-      },
-      {
-        title: "Slow startup, freezing or boot errors",
-        label: "STARTUP & STORAGE",
-        body: "Record the complete message and whether the problem began after an update, damage or storage change. Explain your backup status before approving a reset or reinstallation. Software symptoms and storage faults require different checks, and data recovery is a separate scope.",
-      },
-      {
-        title: "Hinge damage, liquid or no power",
-        label: "DAMAGE ASSESSMENT",
-        body: "Describe when the damage happened and which functions still respond. Stop powering a wet device, forcing a damaged hinge or pressing a swollen battery. Assessment may reveal more than one affected assembly; request findings before agreeing to board or enclosure replacement.",
-      },
-    ],
+    faults: brandSymptomCards("laptop-repair", slug),
     estimateChecks: [
       {
         title: "Diagnosis and data priorities",

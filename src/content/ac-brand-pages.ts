@@ -1,3 +1,4 @@
+import { brandSymptomCards } from "./brand-faults";
 import type { WasherBrandPage } from "./repair-brand-pages";
 import { AC_BRANDS } from "./ac-brands";
 
@@ -116,14 +117,7 @@ export const AC_BRAND_PAGES: ACBrandPage[] = AC_BRANDS.map(brand => {
     brandSelection: { brand: brand.name },
     enquiryDescription: `${brand.name} AC repair\nIndoor / Outdoor model: \nAC type: \nIssue / Error code: \nBangalore locality: `,
     checks: ["Model & installation history", "Airflow & cooling observations", "Drainage & visible condition", "Relevant function checks"],
-    faults: [
-      { title: "AC running but cooling has changed", label: "COOLING", body: `Share the ${brand.name} model, mode, set temperature and when the change began. Explain whether air moves normally or feels weak. Reduced cooling does not establish that refrigerant or a compressor is needed.` },
-      { title: "Weak or missing airflow", label: "AIRFLOW", body: "Describe whether the indoor unit starts and whether airflow changes with the selected setting. Mention noise or visible ice without opening covers. Use only the checks permitted by your exact model manual." },
-      { title: "Water dripping indoors", label: "DRAINAGE", body: "Record where water first appears and whether it follows installation or cleaning. Stop use if water reaches electrical connections. Do not open panels or disconnect drainage to demonstrate the leak." },
-      { title: "A repeating message or shutdown", label: "CONTROLS", body: "Photograph the complete display message and note how long the unit runs before stopping. Identify app notifications separately. Avoid repeated resets to get past a recurring fault." },
-      { title: "New noise or vibration", label: "NOISE & INSTALLATION", body: "Note whether the sound comes from indoors or outdoors and when it begins. A safe recording can help. Do not climb, lean out or reach into a running unit to locate the source." },
-      { title: "Remote or start-up problems", label: "OPERATION", body: "Explain whether the remote display, unit indicators or both respond. Include the mode and any recent power interruption. Do not bypass protective devices or alter wiring when the AC fails to start." },
-    ],
+    faults: brandSymptomCards("ac-repair", slug),
     estimateChecks: [
       { title: "Visit and access scope", body: "Confirm the assessment charge, location coverage and safe access to the indoor and outdoor equipment. Agree any special access arrangements before the visit." },
       { title: "Work, parts and specifications", body: "Ask what findings support the proposal, how parts match the model and which labour and exclusions the estimate includes. Refrigerant work should follow assessment, not an assumption." },

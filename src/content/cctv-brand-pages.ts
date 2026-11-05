@@ -1,3 +1,4 @@
+import { brandSymptomCards } from "./brand-faults";
 import type { WasherBrandPage } from "./repair-brand-pages";
 import { CCTV_BRANDS } from "./cctv-brands";
 import { CCTV_EDITORIAL } from "./cctv-brand-editorial";
@@ -59,38 +60,7 @@ export const CCTV_BRAND_PAGES: CCTVBrandPage[] = CCTV_BRANDS.map((brand) => {
       "Live view, recording & access",
       "Footage priorities & repair scope",
     ],
-    faults: [
-      {
-        title: "No video on one or more cameras",
-        label: "CAMERA & SIGNAL",
-        body: `Tell us which channels are missing on your ${brand.name} system and whether the same issue appears on the local monitor and viewing app. Camera power, connections, cabling and recorder inputs may need checking before a replacement is proposed.`,
-      },
-      {
-        title: "Missing recordings or playback gaps",
-        label: "RECORDING & STORAGE",
-        body: "Identify the affected dates and channels, whether live images still work and any storage warning. Share the recording method if known. Do not format a drive or initialize storage to test it when existing footage matters; discuss preservation before work is agreed.",
-      },
-      {
-        title: "Remote viewing or app offline",
-        label: "NETWORK & ACCESS",
-        body: "Separate a working local picture from a remote-access failure. Mention router, internet or app changes and whether one user or every user is affected. Keep passwords, QR codes and verification details out of the enquiry. Account recovery must follow the appropriate ownership process.",
-      },
-      {
-        title: "Blurred image or poor night view",
-        label: "IMAGE QUALITY",
-        body: "Describe whether the image is unclear throughout the day, only at night or after rain. Mention glare, a changed view or visible condensation from a safe position. Image quality can involve positioning, the enclosure, power or the camera; do not climb to inspect it.",
-      },
-      {
-        title: "Recorder restarting or power loss",
-        label: "POWER & RECORDER",
-        body: "Note whether every camera drops together, how long the recorder runs and any warning before it restarts. Mention a recent electrical event or installation change. Keep electrical covers closed and avoid repeated power cycling when recordings or damaged equipment may be at risk.",
-      },
-      {
-        title: "Intermittent channels or mixed equipment",
-        label: "CABLING & COMPATIBILITY",
-        body: "List the camera, recorder and other relevant device models, including different brands. Note whether the issue followed a cable change or replacement camera. Compatible signal formats, power and recording functions need confirmation for the actual equipment.",
-      },
-    ],
+    faults: brandSymptomCards("cctv-service", slug),
     estimateChecks: [
       {
         title: "Assessment and site access",

@@ -179,6 +179,9 @@ export const REPAIR_BRANDS: Record<string, readonly string[]> = {
     "Hindware",
   ],
   "Water Purifier Service": [
+    "Native by Urban Company",
+    "Zero B",
+    "Aquafresh",
     "Kent",
     "Aquaguard / Eureka Forbes",
     "Pureit",

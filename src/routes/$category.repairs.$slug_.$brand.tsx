@@ -5,12 +5,14 @@ import { washerBrandPage } from "@/content/repair-brand-pages";
 import { mobileBrandPage } from "@/content/mobile-brand-pages";
 import { acBrandPage } from "@/content/ac-brand-pages";
 import { fridgeBrandPage } from "@/content/fridge-brand-pages";
+import { purifierBrandPage } from "@/content/purifier-brand-pages";
 import { repairPageHead, repairServiceSchema } from "@/content/repair-seo";
 import { RepairBrandPage } from "@/components/numunix/RepairBrandPage";
 
 export const Route = createFileRoute("/$category/repairs/$slug_/$brand")({
   loader: ({ params }) => {
     const page =
+      purifierBrandPage(params.category, params.slug, params.brand) ??
       cctvBrandPage(params.category, params.slug, params.brand) ??
       laptopBrandPage(params.category, params.slug, params.brand) ??
       washerBrandPage(params.category, params.slug, params.brand) ??
@@ -38,22 +40,26 @@ export const Route = createFileRoute("/$category/repairs/$slug_/$brand")({
         ? "laptop-repair"
         : isMobile
           ? "mobile-repair"
-          : loaderData.service === "AC Service & Repair"
-            ? "ac-repair"
-            : loaderData.service === "Refrigerator Repair"
-              ? "refrigerator-repair"
-              : "washing-machine-repair";
+          : loaderData.service === "Water Purifier Service"
+            ? "water-purifier-service"
+            : loaderData.service === "AC Service & Repair"
+              ? "ac-repair"
+              : loaderData.service === "Refrigerator Repair"
+                ? "refrigerator-repair"
+                : "washing-machine-repair";
     const serviceName = isCCTV
       ? "CCTV repair"
       : isLaptop
         ? "Laptop repair"
         : isMobile
           ? "Mobile repair"
-          : loaderData.service === "AC Service & Repair"
-            ? "AC repair"
-            : loaderData.service === "Refrigerator Repair"
-              ? "Fridge repair"
-              : "Washing machine repair";
+          : loaderData.service === "Water Purifier Service"
+            ? "Water purifier repair"
+            : loaderData.service === "AC Service & Repair"
+              ? "AC repair"
+              : loaderData.service === "Refrigerator Repair"
+                ? "Fridge repair"
+                : "Washing machine repair";
     return repairPageHead({
       title: loaderData.title,
       description: loaderData.description,

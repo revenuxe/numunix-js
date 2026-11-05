@@ -1,3 +1,4 @@
+import { brandSymptomCards } from "./brand-faults";
 import { additionalWasherBrandPages } from "./washer-brand-editorial";
 
 // Brand-specific editorial content describes independent service, not manufacturer affiliation.
@@ -22,14 +23,7 @@ export const BOSCH_WASHER = {
     { title: "Proposed work and parts", body: "Ask for the diagnosis, proposed repair, part specifications and labour cost. Confirm model compatibility and availability before approving a replacement." },
     { title: "Timing and aftercare", body: "Agree the expected schedule, function checks and any written terms for the specific work. Ask how to report a recurring fault." },
   ],
-  faults: [
-    { title: "Water stays in the drum", label: "DRAINAGE", body: "A cycle that stops with water inside can involve the drain hose, filter, pump or another obstruction. Note when the cycle stops and whether an E:18 message appears. A drainage fault does not automatically mean the pump needs replacing." },
-    { title: "Clothes come out wet", label: "SPIN & BALANCE", body: "A heavy or uneven load, incomplete drainage and drive-related faults can all interrupt spinning. Tell us whether the drum turns during washing, whether water remains inside and whether the issue happens with every load." },
-    { title: "The machine will not fill", label: "WATER INLET", body: "Water supply, an inlet hose or filter, door closure and internal controls may need checking. Start by noting whether the tap is open and whether other taps have normal supply. Avoid removing internal components yourself." },
-    { title: "Leaks around the machine", label: "SEALS & HOSES", body: "The source might be a hose connection, door seal, detergent drawer or excess foam. Record where water first appears and at which stage of the wash. Stop using the washer if water is near the plug or socket." },
-    { title: "Rattling or heavy vibration", label: "DRUM & INSTALLATION", body: "Load distribution, installation, trapped objects, suspension or bearings can produce different sounds. A short video helps explain whether the noise occurs during slow drum movement or a high-speed spin." },
-    { title: "Door or cycle problems", label: "LOCK & CONTROLS", body: "A door that stays locked, a cycle that will not start or a recurring display message needs context. Share the complete error code and model number. Do not force the handle or repeatedly restart a machine showing the same fault." },
-  ],
+  faults: brandSymptomCards("washing-machine-repair", "bosch"),
   checks: ["Model & fault history", "Water inlet & drainage", "Door seal & drum movement", "Cycle & function checks"],
   preparation: [
     "Photograph the rating plate. Include the E-Nr model number and FD production number if visible, without moving a heavy machine alone.",
@@ -75,14 +69,7 @@ export const GODREJ_WASHER: WasherBrandPage = {
   diagnosticBody: "Describe what happened just before the machine stopped: filling, washing, draining or spinning. For a semi-automatic washer, say whether the wash tub, spin tub or both are affected. Photograph any display message rather than guessing which part has failed.",
   diagnosticLink: "Find your Godrej user manual",
   checks: ["Model & machine type", "Water supply & drainage", "Wash & spin behaviour", "Relevant function checks"],
-  faults: [
-    { title: "Water will not drain", label: "DRAINAGE", body: "Tell us whether water remains in the wash tub or drum and whether the problem started suddenly. Note the machine type and any visible hose restriction without dismantling the appliance." },
-    { title: "Spinning stops or struggles", label: "SPIN & BALANCE", body: "Explain whether clothes remain soaked, the spin cycle never begins or the machine stops during spinning. For a twin-tub model, mention whether washing still works normally." },
-    { title: "The washer will not fill", label: "WATER SUPPLY", body: "Mention whether water enters slowly or not at all, whether the household supply is available and which stage stops. Include a photo of any display message." },
-    { title: "Water appears underneath", label: "LEAKS", body: "Record where the leak first appears and whether it happens during filling, washing or draining. Stop using the appliance if water reaches electrical connections." },
-    { title: "Unusual noise or movement", label: "NOISE & VIBRATION", body: "Describe the sound and whether it occurs during washing or spinning. A short video and details of recent installation or movement help frame the assessment." },
-    { title: "Wash cycle will not start", label: "CYCLE & CONTROLS", body: "Share the model, selected programme and what happens after starting. Mention a lid or door that will not close, an unresponsive control or a repeating display message. Avoid repeated restarts." },
-  ],
+  faults: brandSymptomCards("washing-machine-repair", "godrej"),
   preparation: [
     "Photograph the model and serial-number label if accessible. Do not move a heavy washer alone to find it.",
     "Note whether the machine is semi-automatic, top-loading or front-loading, and which tub or cycle is affected.",

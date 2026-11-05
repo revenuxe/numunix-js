@@ -1,3 +1,4 @@
+import { brandSymptomCards } from "./brand-faults";
 import type { WasherBrandPage } from "./repair-brand-pages";
 import { REFRIGERATOR_BRANDS } from "./refrigerator-brands";
 import { FRIDGE_SEARCH_COPY } from "./fridge-repair-details";
@@ -136,14 +137,7 @@ export const FRIDGE_BRAND_PAGES: FridgeBrandPage[] = REFRIGERATOR_BRANDS.map(bra
     brandSelection: { brand: brand.name },
     enquiryDescription: `${brand.name} fridge repair\nModel / Serial number: \nFridge type: \nAffected compartment / Issue: \nBangalore locality: `,
     checks: ["Model & compartment symptoms", "Door closure & visible frost", "Controls & cooling observations", "Relevant function checks"],
-    faults: [
-      { title: "Fridge not cooling as expected", label: "COOLING", body: `Explain whether the fresh-food section, freezer or both have changed on your ${brand.name} fridge. Include settings, timing and any display message. Reduced cooling alone does not prove that refrigerant or a compressor is needed.` },
-      { title: "Freezer cold, fridge section warm", label: "COMPARTMENTS", body: "Describe each section separately and mention any visible ice or change in airflow. If a model has selectable compartment modes, include the selected setting. Keep internal covers in place while collecting information." },
-      { title: "Frost or ice keeps returning", label: "FROST & DEFROST", body: "Photograph where the buildup appears and note how quickly it returns. Mention the door condition and any recent defrosting. Follow the model manual; never chip ice with sharp tools or apply improvised heat." },
-      { title: "Water collecting inside or outside", label: "WATER & LEAKS", body: "Record where water first appears and whether it recurs after cleaning or normal use. Mention an ice maker or dispenser if fitted. Keep clear of water near plugs and do not open panels to trace the source." },
-      { title: "A new sound or running pattern", label: "NOISE & OPERATION", body: "Describe whether the sound is new, constant or intermittent and whether cooling changed at the same time. A short recording helps explain the complaint without moving the fridge or reaching behind it while connected." },
-      { title: "Door, alarm or display problems", label: "SEALS & CONTROLS", body: "Share a photo of the full display message and explain whether the door closes normally. Mention visible seal damage or a light that behaves differently. Do not bypass switches, alter wiring or repeatedly reset a recurring warning." },
-    ],
+    faults: brandSymptomCards("refrigerator-repair", slug),
     estimateChecks: [
       { title: "Assessment arrangements", body: "Confirm the inspection charge, location coverage, access requirements and which checks are included before a visit is agreed." },
       { title: "Parts and proposed work", body: "Ask what findings support the repair, how the part matches your full model and what labour, specifications and exclusions the estimate covers." },

@@ -1,3 +1,4 @@
+import { brandSymptomCards } from "./brand-faults";
 import type { WasherBrandPage } from "./repair-brand-pages";
 import { MOBILE_BRANDS } from "./mobile-brands";
 import { MOBILE_EDITORIAL } from "./mobile-brand-editorial";
@@ -37,14 +38,7 @@ export const MOBILE_BRAND_PAGES: MobileBrandPage[] = MOBILE_BRANDS.map(brand => 
     brandSelection: { brand: brand.name },
     enquiryDescription: `${brand.name} mobile repair\nPhone model / Variant: \nIssue / Damage history: \nBackup status / Data priority: \nBangalore locality: `,
     checks: ["Model & damage history", "Display, touch & charging", "Relevant camera & audio checks", "Data priorities & repair scope"],
-    faults: [
-      { title: "Cracked screen or unresponsive touch", label: "DISPLAY & TOUCH", body: `Describe the image, touch response and frame condition on your ${brand.name} phone separately. Mention prior screen work and damage. Confirm the replacement specification, relevant checks and any model-specific limitations before approval.` },
-      { title: "Battery drain or unexpected shutdowns", label: "BATTERY & POWER", body: "Note whether the phone drains quickly, switches off or has visible swelling. Describe the activity at the time and any earlier battery work. Stop using or charging a swollen or damaged phone; do not open or press the battery." },
-      { title: "Intermittent or failed charging", label: "CHARGING", body: "Explain whether a charging indicator appears and mention the cable, charger and any port damage or liquid exposure. Do not insert metal objects into the connection or repeatedly charge a wet phone to reproduce the fault." },
-      { title: "Camera, speaker or microphone trouble", label: "CAMERA & AUDIO", body: "Identify the affected camera or audio function and whether it happens in one app or several. Mention external damage and earlier work. Share an example only if it does not expose private recordings or personal information." },
-      { title: "Repeated restarts or no start-up", label: "START-UP & SOFTWARE", body: "Describe whether the device responds, shows a logo, rings or vibrates. Tell us whether data is backed up before software or internal work is proposed. Do not factory-reset the phone solely to demonstrate the problem." },
-      { title: "Drop damage or liquid exposure", label: "DAMAGE ASSESSMENT", body: "State when the damage occurred and which functions still work. Avoid repeated power or charging attempts after liquid exposure. Assessment may identify several affected areas; a visible crack alone does not establish the whole repair scope." },
-    ],
+    faults: brandSymptomCards("mobile-repair", slug),
     estimateChecks: [
       { title: "Assessment and data priorities", body: "Confirm inspection charges, what can be tested and whether any proposed step may affect stored data. Do not treat phone repair as a promise of data recovery." },
       { title: "Parts and functionality", body: "Ask how the part matches the full model, its agreed specification and what functions or messages may be affected. Review labour, exclusions and any change in scope before approval." },
