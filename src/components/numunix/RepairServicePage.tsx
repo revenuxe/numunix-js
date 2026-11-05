@@ -18,6 +18,9 @@ import { MobileBrands } from "./MobileBrands";
 import { CCTVBrands } from "./CCTVBrands";
 import { LaptopBrands } from "./LaptopBrands";
 import { PurifierBrands } from "./PurifierBrands";
+import type { RepairHubContent } from "@/content/repair-hub-content";
+import { guidesForRepair } from "@/content/repair-guide-links";
+import { articleBySlug } from "@/content/articles";
 import { MOBILE_REPAIR_PAGE } from "@/content/mobile-repair-page";
 import { MobileRepairScope, MobileRepairDecisions, MobileRepairCTA } from "./MobileRepairContent";
 import { WASHING_MACHINE_PAGE } from "@/content/washing-machine-page";
@@ -27,7 +30,13 @@ import {
   WashingMachineCTA,
 } from "./WashingMachineContent";
 
-export function RepairServicePage({ service }: { service: RepairService }) {
+export function RepairServicePage({
+  service,
+  hubContent,
+}: {
+  service: RepairService;
+  hubContent?: RepairHubContent | undefined;
+}) {
   const isWasher = service.category === "appliances" && service.slug === "washing-machine-repair";
   const isFridge = service.category === "appliances" && service.slug === "refrigerator-repair";
   const isAC = service.category === "appliances" && service.slug === "ac-repair";
@@ -38,7 +47,10 @@ export function RepairServicePage({ service }: { service: RepairService }) {
     ? MOBILE_REPAIR_PAGE
     : isWasher
       ? WASHING_MACHINE_PAGE
-      : undefined;
+      : hubContent;
+  const relatedGuides = guidesForRepair(service.slug)
+    .map((slug) => articleBySlug(slug))
+    .filter((article) => article !== undefined);
   const related = REPAIR_PAGES.filter(
     (item) => item.category === service.category && item.slug !== service.slug,
   ).slice(0, 3);
@@ -48,8 +60,8 @@ export function RepairServicePage({ service }: { service: RepairService }) {
         <Header />
         <main>
           <Hero
-            headline={service.headline}
-            accent={service.accent}
+            headline={service.name}
+            accent="in Bangalore"
             intro={service.intro}
             primaryLabel="BOOK A REPAIR"
             primaryHref="#enquiry"
@@ -143,7 +155,38 @@ export function RepairServicePage({ service }: { service: RepairService }) {
           )}
           {isCCTV && <CCTVBrands />}
           {isLaptop && <LaptopBrands />}
-          {service.category === "appliances" && service.slug === "water-purifier-service" && <PurifierBrands />}
+          {service.category === "appliances" && service.slug === "water-purifier-service" && (
+            <PurifierBrands />
+          )}
+          {hubContent && (
+            <section
+              id="service-scope"
+              className="section-pad bg-paper"
+              aria-labelledby="service-scope-title"
+            >
+              <div className="shell">
+                <Label tone="light">{service.name.toUpperCase()} / SCOPE</Label>
+                <Heading tone="light" className="mt-6">
+                  <span id="service-scope-title">
+                    The right scope.
+                    <br />
+                    <Accent>For your equipment.</Accent>
+                  </span>
+                </Heading>
+                <div className="mt-10 grid gap-6 md:grid-cols-3">
+                  {hubContent.scope.map((item) => (
+                    <article
+                      key={item.title}
+                      className="rounded-lg border border-border bg-card p-6 sm:p-8"
+                    >
+                      <h3 className="text-xl text-navytext">{item.title}</h3>
+                      <p className="mt-4 text-base leading-relaxed text-mutedtext">{item.body}</p>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
           <section className="section-pad bg-ink-800 text-primary-foreground">
             <div className="shell">
               <Label>THE REPAIR JOURNEY</Label>
@@ -287,6 +330,29 @@ export function RepairServicePage({ service }: { service: RepairService }) {
                   </Button>
                 ))}
               </div>
+              {relatedGuides.length > 0 && (
+                <nav
+                  aria-label="Guides for this repair"
+                  className="mt-12 border-t border-border pt-8"
+                >
+                  <h2 className="text-xl text-navytext">
+                    Prepare for {service.name.toLowerCase()}
+                  </h2>
+                  <ul className="mt-5 flex flex-wrap gap-x-8 gap-y-4">
+                    {relatedGuides.map((article) => (
+                      <li key={article.slug}>
+                        <Link
+                          to="/repair-guides/$slug"
+                          params={{ slug: article.slug }}
+                          className="text-sm text-primary underline underline-offset-4"
+                        >
+                          {article.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              )}
             </div>
           </section>
         </main>

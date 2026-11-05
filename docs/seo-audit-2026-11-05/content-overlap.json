@@ -1,0 +1,72 @@
+[
+  {
+    "service": "washing-machine-repair",
+    "pages": 9,
+    "median5wordJaccard": 0.5727095516569201,
+    "highest": {
+      "a": "/appliances/repairs/washing-machine-repair/haier",
+      "b": "/appliances/repairs/washing-machine-repair/panasonic",
+      "score": 0.5801646413171305
+    }
+  },
+  {
+    "service": "refrigerator-repair",
+    "pages": 12,
+    "median5wordJaccard": 0.7144841959013546,
+    "highest": {
+      "a": "/appliances/repairs/refrigerator-repair/panasonic",
+      "b": "/appliances/repairs/refrigerator-repair/lloyd",
+      "score": 0.7228451296426068
+    }
+  },
+  {
+    "service": "ac-repair",
+    "pages": 12,
+    "median5wordJaccard": 0.6687979539641944,
+    "highest": {
+      "a": "/appliances/repairs/ac-repair/godrej",
+      "b": "/appliances/repairs/ac-repair/voltas",
+      "score": 0.6847354726799653
+    }
+  },
+  {
+    "service": "water-purifier-service",
+    "pages": 9,
+    "median5wordJaccard": 0.5726833552920509,
+    "highest": {
+      "a": "/appliances/repairs/water-purifier-service/v-guard",
+      "b": "/appliances/repairs/water-purifier-service/faber",
+      "score": 0.6658823529411765
+    }
+  },
+  {
+    "service": "mobile-repair",
+    "pages": 18,
+    "median5wordJaccard": 0.6875259013675922,
+    "highest": {
+      "a": "/electronic/repairs/mobile-repair/nothing",
+      "b": "/electronic/repairs/mobile-repair/huawei",
+      "score": 0.6992860142797144
+    }
+  },
+  {
+    "service": "laptop-repair",
+    "pages": 12,
+    "median5wordJaccard": 0.6943734015345269,
+    "highest": {
+      "a": "/electronic/repairs/laptop-repair/hp",
+      "b": "/electronic/repairs/laptop-repair/honor",
+      "score": 0.7086206896551724
+    }
+  },
+  {
+    "service": "cctv-service",
+    "pages": 12,
+    "median5wordJaccard": 0.7038099139696845,
+    "highest": {
+      "a": "/electronic/repairs/cctv-service/dahua",
+      "b": "/electronic/repairs/cctv-service/hi-focus",
+      "score": 0.7180762852404643
+    }
+  }
+]

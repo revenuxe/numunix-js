@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type ReactNode, type FormEvent } from "rea
 import { useServerFn } from "@tanstack/react-start";
 import { Check, Loader2, PhoneCall } from "lucide-react";
 import { createRepairBooking } from "@/lib/bookings.functions";
+import { emitRepairEvent } from "@/lib/repair-events";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -26,6 +27,7 @@ export function RepairCallback({
 }) {
   const submitBooking = useServerFn(createRepairBooking);
   const submitting = useRef(false);
+  const started = useRef(false);
   const [ready, setReady] = useState(false);
   const [phone, setPhone] = useState("");
   const [pending, setPending] = useState(false);
@@ -57,6 +59,7 @@ export function RepairCallback({
         },
       });
       setReceipt({ reference: result.reference, phone });
+      emitRepairEvent("callback_success", service);
       setOpen(true);
       setPhone("");
     } catch {
@@ -107,7 +110,17 @@ export function RepairCallback({
             </p>
           </div>
         </div>
-        <form onSubmit={handleSubmit} aria-busy={pending} className="w-full lg:max-w-lg">
+        <form
+          onSubmit={handleSubmit}
+          onFocusCapture={() => {
+            if (!started.current) {
+              started.current = true;
+              emitRepairEvent("callback_start", service);
+            }
+          }}
+          aria-busy={pending}
+          className="w-full lg:max-w-lg"
+        >
           <label htmlFor="callback-phone" className="sr-only">
             Mobile number
           </label>

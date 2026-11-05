@@ -15,7 +15,7 @@ import { CONTACT, SITE_URL } from "@/content/site";
 import { repairPageHead } from "@/content/repair-seo";
 import { ContactFormSection } from "@/components/numunix/ContactFormSection";
 
-const TITLE = "Contact Numunix | Request Electronics & Appliance Repair";
+const TITLE = "Contact Numunix Repairs in Bangalore | Location & Enquiries";
 const DESC =
   "Contact Numunix for electronics and appliance repair enquiries. Share the model, fault and location to discuss assessment and service options.";
 
@@ -71,6 +71,7 @@ function ContactPage() {
                   </a>
                 ))}
               </div>
+              <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CONTACT.address)}`} target="_blank" rel="noopener noreferrer" className="mt-6 inline-block text-sm text-primary underline underline-offset-4">Find this address on Google Maps</a>
             </Reveal>
 
             <Reveal delay={120}>

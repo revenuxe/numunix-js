@@ -15,6 +15,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { repairSiteSchema } from "@/content/repair-seo";
 import { SITE_URL } from "@/content/site";
 import { CategorySelectionProvider } from "@/components/numunix/category";
+import { RepairInteractionEvents } from "@/components/numunix/RepairInteractionEvents";
 
 function NotFoundComponent() {
   return (
@@ -133,7 +134,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <CategorySelectionProvider><Outlet /></CategorySelectionProvider>
+      <CategorySelectionProvider><RepairInteractionEvents /><Outlet /></CategorySelectionProvider>
     </QueryClientProvider>
   );
 }

@@ -20,11 +20,17 @@ import { LEGACY_ARTICLE_PATHS } from "@/content/repair-legacy";
 import { REPAIR_ORGANIZATION_ID, REPAIR_WEBSITE_ID } from "@/content/repair-seo";
 
 import { SITE_URL } from "@/content/site";
+import { guideRepairLinks } from "@/content/repair-guide-links";
 
 export const Route = createFileRoute("/repair-guides/$slug")({
   beforeLoad: ({ params }) => {
     const replacement = LEGACY_ARTICLE_PATHS[params.slug];
-    if (replacement) throw redirect({to:"/repair-guides/$slug",params:{slug:replacement},statusCode:301});
+    if (replacement)
+      throw redirect({
+        to: "/repair-guides/$slug",
+        params: { slug: replacement },
+        statusCode: 301,
+      });
   },
   loader: ({ params }) => {
     const article = articleBySlug(params.slug);
@@ -51,10 +57,10 @@ export const Route = createFileRoute("/repair-guides/$slug")({
         { property: "og:locale", content: "en_IN" },
         ...(a
           ? [
-            { property: "article:published_time", content: a.publishedAt },
-            ...(a.updatedAt ? [{ property: "article:modified_time", content: a.updatedAt }] : []),
-            { property: "article:author", content: a.author },
-          ]
+              { property: "article:published_time", content: a.publishedAt },
+              ...(a.updatedAt ? [{ property: "article:modified_time", content: a.updatedAt }] : []),
+              { property: "article:author", content: a.author },
+            ]
           : []),
       ],
       links: [{ rel: "canonical", href: pageUrl }],
@@ -82,33 +88,33 @@ export const Route = createFileRoute("/repair-guides/$slug")({
         },
         ...(a
           ? [
-            {
-              type: "application/ld+json",
-              children: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Article",
-                headline: a.title,
-                description: desc,
-                url: pageUrl,
-                mainEntityOfPage: pageUrl,
-                inLanguage: "en-IN",
-                isPartOf: { "@id": REPAIR_WEBSITE_ID },
-                datePublished: a.publishedAt,
-                dateModified: a.updatedAt ?? a.publishedAt,
-                author: {
-                  "@type": "Organization",
-                  name: a.author,
-                  url: SITE_URL,
-                },
-                publisher: {
-                  "@type": "Organization",
-                  "@id": REPAIR_ORGANIZATION_ID,
-                  name: "Numunix",
-                  url: SITE_URL,
-                },
-              }),
-            },
-          ]
+              {
+                type: "application/ld+json",
+                children: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "Article",
+                  headline: a.title,
+                  description: desc,
+                  url: pageUrl,
+                  mainEntityOfPage: pageUrl,
+                  inLanguage: "en-IN",
+                  isPartOf: { "@id": REPAIR_WEBSITE_ID },
+                  datePublished: a.publishedAt,
+                  dateModified: a.updatedAt ?? a.publishedAt,
+                  author: {
+                    "@type": "Organization",
+                    name: a.author,
+                    url: SITE_URL,
+                  },
+                  publisher: {
+                    "@type": "Organization",
+                    "@id": REPAIR_ORGANIZATION_ID,
+                    name: "Numunix",
+                    url: SITE_URL,
+                  },
+                }),
+              },
+            ]
           : []),
       ],
     };
@@ -154,15 +160,31 @@ function StatCard({ value, label, delay = 0 }: { value: string; label: string; d
 }
 
 /* ── Callout box ─── */
-function Callout({ icon, title, body, tone = "blue" }: { icon: string; title: string; body: string; tone?: "blue" | "amber" | "green" }) {
+function Callout({
+  icon,
+  title,
+  body,
+  tone = "blue",
+}: {
+  icon: string;
+  title: string;
+  body: string;
+  tone?: "blue" | "amber" | "green";
+}) {
   const colors = {
     blue: "border-[#3b82f6]/20 bg-[#eef4ff]",
     amber: "border-[#f59e0b]/20 bg-[#fffbeb]",
     green: "border-[#10b981]/20 bg-[#ecfdf5]",
   }[tone];
-  const iconColor = { blue: "text-[#1e4ed8]", amber: "text-[#d97706]", green: "text-[#059669]" }[tone];
-  const titleColor = { blue: "text-[#102a63]", amber: "text-[#92400e]", green: "text-[#065f46]" }[tone];
-  const bodyColor = { blue: "text-[#3d5585]", amber: "text-[#78350f]", green: "text-[#064e3b]" }[tone];
+  const iconColor = { blue: "text-[#1e4ed8]", amber: "text-[#d97706]", green: "text-[#059669]" }[
+    tone
+  ];
+  const titleColor = { blue: "text-[#102a63]", amber: "text-[#92400e]", green: "text-[#065f46]" }[
+    tone
+  ];
+  const bodyColor = { blue: "text-[#3d5585]", amber: "text-[#78350f]", green: "text-[#064e3b]" }[
+    tone
+  ];
   return (
     <div className={`my-8 rounded-2xl border p-6 ${colors}`}>
       <div className="flex items-start gap-3">
@@ -192,14 +214,20 @@ function TableOfContents({ headings }: { headings: string[] }) {
               key={h}
               onClick={() => {
                 setActive(i);
-                document.getElementById(`section-${i}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+                document
+                  .getElementById(`section-${i}`)
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
-              className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-[14px] transition-all duration-200 ${active === i
+              className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-[14px] transition-all duration-200 ${
+                active === i
                   ? "bg-[#eef4ff] text-[#1e4ed8]"
                   : "text-[#5d76a3] hover:bg-[#f1f5f9] hover:text-[#102a63]"
-                }`}
+              }`}
             >
-              <ChevronRight size={12} className={active === i ? "text-[#3b82f6]" : "text-[#5d76a3]/50"} />
+              <ChevronRight
+                size={12}
+                className={active === i ? "text-[#3b82f6]" : "text-[#5d76a3]/50"}
+              />
               <span className="line-clamp-1">{h}</span>
             </button>
           ))}
@@ -221,8 +249,9 @@ function BackToTop() {
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Back to top"
-      className={`fixed bottom-8 right-8 z-50 grid h-12 w-12 place-items-center rounded-full border border-white/10 bg-[#1e4ed8] text-white shadow-[0_8px_30px_-6px_rgba(30,78,216,0.5)] transition-all duration-300 hover:bg-[#2563eb] ${show ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none"
-        }`}
+      className={`fixed bottom-8 right-8 z-50 grid h-12 w-12 place-items-center rounded-full border border-white/10 bg-[#1e4ed8] text-white shadow-[0_8px_30px_-6px_rgba(30,78,216,0.5)] transition-all duration-300 hover:bg-[#2563eb] ${
+        show ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none"
+      }`}
     >
       <ArrowUp size={18} />
     </button>
@@ -234,7 +263,9 @@ function ShareButton({ title, url }: { title: string; url: string }) {
   const [copied, setCopied] = useState(false);
   const handleShare = async () => {
     if (navigator.share) {
-      try { await navigator.share({ title, url }); } catch { }
+      try {
+        await navigator.share({ title, url });
+      } catch {}
     } else {
       await navigator.clipboard.writeText(url);
       setCopied(true);
@@ -255,14 +286,14 @@ function ShareButton({ title, url }: { title: string; url: string }) {
 function ArticlePage() {
   const { article } = Route.useLoaderData();
   const contentRef = useRef<HTMLDivElement>(null);
-
+  const repairLinks = guideRepairLinks(article.slug);
 
   // Find related articles (exclude current)
   const related = ARTICLES.filter((a) => a.slug !== article.slug).slice(0, 2);
 
   const formattedDate = new Date(article.updatedAt ?? article.publishedAt).toLocaleDateString(
     "en-US",
-    { year: "numeric", month: "long", day: "numeric" }
+    { year: "numeric", month: "long", day: "numeric" },
   );
 
   const pageUrl = `${SITE_URL}/repair-guides/${article.slug}`;
@@ -276,40 +307,56 @@ function ArticlePage() {
       <Header />
       <main>
         {/* Hero */}
-        <Hero headline={article.title} accent="" intro={article.excerpt} primaryLabel="READ ARTICLE" primaryHref="#article-content" secondaryLabel="ALL REPAIR GUIDES" secondaryHref="/repair-guides" breadcrumb={<div className="flex items-center justify-between gap-4"><Link to="/repair-guides" className="text-sm text-primary-foreground/65">Back to Repair Guides</Link><ShareButton title={article.title} url={pageUrl} /></div>} />
-        <section className="bg-ink-900 pb-12 text-primary-foreground"><div className="shell">
-              <div className="mt-8 flex flex-wrap items-center gap-5 text-[14px] text-white/50">
-                <span className="flex items-center gap-1.5">
-                  <User size={14} />
-                  {article.author}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Calendar size={14} />
-                  {article.updatedAt ? "Updated " : ""}
-                  {formattedDate}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Clock size={14} />
-                  {article.readTime}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <BookOpen size={14} />
-                  {article.content.length} sections
-                </span>
-              </div>
+        <Hero
+          headline={article.title}
+          accent=""
+          intro={article.excerpt}
+          primaryLabel="READ ARTICLE"
+          primaryHref="#article-content"
+          secondaryLabel="ALL REPAIR GUIDES"
+          secondaryHref="/repair-guides"
+          breadcrumb={
+            <div className="flex items-center justify-between gap-4">
+              <Link to="/repair-guides" className="text-sm text-primary-foreground/65">
+                Back to Repair Guides
+              </Link>
+              <ShareButton title={article.title} url={pageUrl} />
+            </div>
+          }
+        />
+        <section className="bg-ink-900 pb-12 text-primary-foreground">
+          <div className="shell">
+            <div className="mt-8 flex flex-wrap items-center gap-5 text-[14px] text-white/50">
+              <span className="flex items-center gap-1.5">
+                <User size={14} />
+                {article.author}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Calendar size={14} />
+                {article.updatedAt ? "Updated " : ""}
+                {formattedDate}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Clock size={14} />
+                {article.readTime}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <BookOpen size={14} />
+                {article.content.length} sections
+              </span>
+            </div>
 
-              <div className="mt-5 flex flex-wrap gap-2">
-                {article.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="inline-flex items-center gap-1 rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[12px] font-medium tracking-wide text-white/50 transition-colors hover:border-white/20 hover:text-white/70"
-                  >
-                    <Tag size={10} />
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
+            <div className="mt-5 flex flex-wrap gap-2">
+              {article.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center gap-1 rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[12px] font-medium tracking-wide text-white/50 transition-colors hover:border-white/20 hover:text-white/70"
+                >
+                  <Tag size={10} />
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -377,6 +424,36 @@ function ArticlePage() {
                           className="article-body text-[17px] leading-[1.8] text-[#3d5585]"
                           dangerouslySetInnerHTML={{ __html: section.body }}
                         />
+                        {i === 1 && repairLinks.length > 0 && (
+                          <nav
+                            aria-label="Repair services related to this guide"
+                            className="mt-7 border-l-2 border-primary pl-5"
+                          >
+                            <p className="text-base leading-relaxed text-mutedtext">
+                              Ready to discuss this issue? Explore the relevant service, assessment
+                              scope and model details before sending an enquiry.
+                            </p>
+                            <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-3">
+                              {repairLinks.map((service) => (
+                                <li key={service.slug}>
+                                  <Link
+                                    to="/$category/repairs/$slug"
+                                    params={{
+                                      category:
+                                        service.category === "electronics"
+                                          ? "electronic"
+                                          : "appliances",
+                                      slug: service.slug,
+                                    }}
+                                    className="text-base text-primary underline underline-offset-4"
+                                  >
+                                    {service.name} in Bangalore
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </nav>
+                        )}
 
                         {/* Inline callouts for specific sections */}
                         {section.heading.toLowerCase().includes("introduction") && (
@@ -392,9 +469,12 @@ function ArticlePage() {
                             <div className="flex items-start gap-3">
                               <span className="text-2xl text-[#059669]">🚀</span>
                               <div>
-                                <div className="text-[16px] font-semibold text-[#065f46]">Need a repair assessment?</div>
+                                <div className="text-[16px] font-semibold text-[#065f46]">
+                                  Need a repair assessment?
+                                </div>
                                 <div className="mt-1.5 text-[15px] leading-relaxed text-[#064e3b]">
-                                  Share the model, symptoms and location to discuss an appropriate next step.
+                                  Share the model, symptoms and location to discuss an appropriate
+                                  next step.
                                 </div>
                                 <Link
                                   to="/contact"
@@ -411,43 +491,52 @@ function ArticlePage() {
                     </Reveal>
 
                     {/* Mid-article CTA banner — after every 3rd section (but not the last) */}
-                    {(article.cta ? i === article.cta.afterSection : (i + 1) % 3 === 0) && i < article.content.length - 1 && (
-                      <Reveal delay={20}>
-                        {article.cta ? (
-                          <div className="mb-16 border-y border-border py-8">
-                            <Label tone="light">YOUR REPAIR, YOUR DECISION</Label>
-                            <h3 className="mt-4 text-2xl font-light text-navytext">{article.cta.title}</h3>
-                            <p className="mt-3 max-w-[60ch] text-base leading-relaxed text-foreground/75">{article.cta.body}</p>
-                            <Btn as="a" href="/contact" className="mt-5">{article.cta.label}<ChevronRight size={14} /></Btn>
-                          </div>
-                        ) : (
-                        <div className="relative mb-16 overflow-hidden rounded-[22px] border border-[#1e4ed8]/15 bg-gradient-to-r from-[#0b1b38] to-[#102a63] p-7 lg:p-9">
-                          {/* Decorative elements */}
-                          <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-[#3b82f6]/10 blur-[40px]" />
-                          <div className="absolute bottom-0 left-0 h-24 w-24 rounded-full bg-[#1e4ed8]/10 blur-[30px]" />
-
-                          <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-                            <div>
-                              <span className="label-mono text-[#60a5fa]">WORK WITH US</span>
-                              <h3 className="mt-2 text-[20px] font-light tracking-[-0.01em] text-white lg:text-[22px]">
-                                Not sure what needs repairing?
+                    {(article.cta ? i === article.cta.afterSection : (i + 1) % 3 === 0) &&
+                      i < article.content.length - 1 && (
+                        <Reveal delay={20}>
+                          {article.cta ? (
+                            <div className="mb-16 border-y border-border py-8">
+                              <Label tone="light">YOUR REPAIR, YOUR DECISION</Label>
+                              <h3 className="mt-4 text-2xl font-light text-navytext">
+                                {article.cta.title}
                               </h3>
-                              <p className="mt-1.5 max-w-[44ch] text-[15px] text-white/50">
-                                Discuss the symptoms, assessment and repair options before approving work.
+                              <p className="mt-3 max-w-[60ch] text-base leading-relaxed text-foreground/75">
+                                {article.cta.body}
                               </p>
+                              <Btn as="a" href="/contact" className="mt-5">
+                                {article.cta.label}
+                                <ChevronRight size={14} />
+                              </Btn>
                             </div>
-                            <Link
-                              to="/contact"
-                              className="label-mono inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-[#102a63] transition-all duration-250 hover:-translate-y-0.5 hover:shadow-[0_12px_38px_-10px_rgba(255,255,255,0.3)]"
-                            >
-                              GET IN TOUCH
-                              <ChevronRight size={14} />
-                            </Link>
-                          </div>
-                        </div>
-                        )}
-                      </Reveal>
-                    )}
+                          ) : (
+                            <div className="relative mb-16 overflow-hidden rounded-[22px] border border-[#1e4ed8]/15 bg-gradient-to-r from-[#0b1b38] to-[#102a63] p-7 lg:p-9">
+                              {/* Decorative elements */}
+                              <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-[#3b82f6]/10 blur-[40px]" />
+                              <div className="absolute bottom-0 left-0 h-24 w-24 rounded-full bg-[#1e4ed8]/10 blur-[30px]" />
+
+                              <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                                <div>
+                                  <span className="label-mono text-[#60a5fa]">WORK WITH US</span>
+                                  <h3 className="mt-2 text-[20px] font-light tracking-[-0.01em] text-white lg:text-[22px]">
+                                    Not sure what needs repairing?
+                                  </h3>
+                                  <p className="mt-1.5 max-w-[44ch] text-[15px] text-white/50">
+                                    Discuss the symptoms, assessment and repair options before
+                                    approving work.
+                                  </p>
+                                </div>
+                                <Link
+                                  to="/contact"
+                                  className="label-mono inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-[#102a63] transition-all duration-250 hover:-translate-y-0.5 hover:shadow-[0_12px_38px_-10px_rgba(255,255,255,0.3)]"
+                                >
+                                  GET IN TOUCH
+                                  <ChevronRight size={14} />
+                                </Link>
+                              </div>
+                            </div>
+                          )}
+                        </Reveal>
+                      )}
                   </div>
                 ))}
 
@@ -461,7 +550,8 @@ function ArticlePage() {
                           Ready to understand the fault?
                         </h3>
                         <p className="mt-2 max-w-[42ch] text-[15px] text-[#5d76a3]">
-                          Share your device or appliance model, symptoms and location. Confirm the assessment and estimate before approving work.
+                          Share your device or appliance model, symptoms and location. Confirm the
+                          assessment and estimate before approving work.
                         </p>
                       </div>
                       <Link
@@ -492,11 +582,11 @@ function ArticlePage() {
                 style={{ lineHeight: 1.1 }}
                 className="mx-auto mt-5 max-w-[18ch] text-[clamp(2rem,4.5vw,4rem)] font-light tracking-[-0.025em] text-white"
               >
-                Make an informed{" "}
-                <span className="text-[#3b82f6]">repair decision.</span>
+                Make an informed <span className="text-[#3b82f6]">repair decision.</span>
               </h2>
               <p className="mx-auto mt-5 max-w-[52ch] text-[17px] leading-relaxed text-white/50">
-                From phones and laptops to washers and cooling appliances, discuss the fault and the checks needed before choosing a repair.
+                From phones and laptops to washers and cooling appliances, discuss the fault and the
+                checks needed before choosing a repair.
               </p>
               <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
                 <Link
@@ -555,7 +645,10 @@ function ArticlePage() {
                       </p>
                       <div className="mt-6 flex flex-wrap gap-2">
                         {r.tags.slice(0, 3).map((tag) => (
-                          <span key={tag} className="rounded-md border border-white/[0.06] bg-white/[0.03] px-2 py-0.5 text-[11px] text-white/35">
+                          <span
+                            key={tag}
+                            className="rounded-md border border-white/[0.06] bg-white/[0.03] px-2 py-0.5 text-[11px] text-white/35"
+                          >
                             {tag}
                           </span>
                         ))}

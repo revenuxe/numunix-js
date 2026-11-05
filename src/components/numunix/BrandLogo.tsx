@@ -16,6 +16,8 @@ export function BrandLogo({ className, variant = "full" }: { className?: string;
         alt="Numunix"
         width={variant === "header" ? 1571 : 1728}
         height={variant === "header" ? 285 : 345}
+        loading={variant === "header" ? "eager" : "lazy"}
+        decoding="async"
         className="block h-auto w-full"
       />
     </Link>

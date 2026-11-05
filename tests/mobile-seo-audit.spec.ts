@@ -93,7 +93,7 @@ test("all 19 mobile URLs have crawlable content, unique metadata, valid schemas 
     expect(service.provider).toEqual({ "@id": `${origin}/#organization` });
     expect(service).not.toHaveProperty("aggregateRating");
     expect(service).not.toHaveProperty("offers");
-    expect(result.graph.find(node => node['@id'] === `${origin}/#organization`)?.['@type']).toBe("Organization");
+    expect(result.graph.find(node => node['@id'] === `${origin}/#organization`)?.['@type']).toEqual(["Organization", "LocalBusiness"]);
     const breadcrumbs = result.graph.find(node => node['@type'] === "BreadcrumbList");
     expect(breadcrumbs.itemListElement.at(-1).item).toBe(`${origin}${path}`);
     const trail = breadcrumbs.itemListElement.map((item: { item: string }) => item.item);

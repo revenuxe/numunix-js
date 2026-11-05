@@ -26,7 +26,7 @@ import { WashingMachine as WashingMachineIcon } from "lucide-react";
 
 export const HOMEPAGE_REPAIR = {
   electronics: {
-    headline: "Every device,", accent: "expertly repaired.",
+    headline: "Electronics Repair", accent: "in Bangalore",
     intro: "Mobile, laptop, CCTV, TV and tablet repairs, clear diagnosis, an estimate before work begins, and careful testing before handover.",
     overview: "From phones and laptops to CCTV, tablets and TVs, tell us the fault and we’ll help you choose the right next step.",
     audienceIntro: "From one phone to an office full of devices, repair care for homes, shops and shared spaces.",
@@ -46,7 +46,7 @@ export const HOMEPAGE_REPAIR = {
     ],
   },
   appliances: {
-    headline: "Every appliance,", accent: "back to its best.",
+    headline: "Appliance Repairs", accent: "in Bangalore",
     intro: "Washing machine, AC, refrigerator and kitchen-appliance repair, doorstep assessment, clear estimates and testing after the work is done.",
     overview: "Washing machines, ACs, refrigerators, microwaves, purifiers and electrical fittings, service for the essentials your home runs on.",
     audienceIntro: "From a home wash cycle to shared cooling and kitchen essentials, appliance care for everyday spaces.",

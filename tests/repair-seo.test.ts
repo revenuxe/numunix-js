@@ -31,7 +31,7 @@ describe("repair search entities", () => {
   });
   test("site entities advertise repairs without a software application or unverified commercial claims", () => {
     const schema = repairSiteSchema();
-    expect(schema["@graph"].map(entity => entity["@type"])).toEqual(["Organization", "WebSite"]);
+    expect(schema["@graph"].map(entity => entity["@type"])).toEqual([["Organization", "LocalBusiness"], "WebSite"]);
     for (const entity of schema["@graph"]) {
       expect(entity).not.toHaveProperty("aggregateRating");
       expect(entity).not.toHaveProperty("openingHours");

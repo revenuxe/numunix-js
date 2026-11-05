@@ -81,7 +81,7 @@ for (const pages of groups) {
     const section = page
       .locator("section")
       .filter({
-        has: page.getByRole("heading", { name: "What changed? Start with the symptom." }),
+        has: page.getByRole("heading", { name: `${brand.brand} symptoms. Repair decisions.` }),
       });
     await expect(section.getByRole("heading", { level: 3 })).toHaveCount(6);
     for (const card of brand.faults)

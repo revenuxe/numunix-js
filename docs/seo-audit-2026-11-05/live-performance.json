@@ -1,0 +1,1771 @@
+{
+  "method": "Single cold-cache Chromium runs; 390x844 viewport, 4x CPU slowdown, 150ms network latency, 1.6Mbps download. Lab diagnostics, not field Core Web Vitals or a Lighthouse score. CLS reported here is raw non-input shift sum, not the session-window CLS calculation. No INP claim.",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "observer": {
+        "lcp": [
+          {
+            "time": 2872,
+            "size": 25487,
+            "element": "P",
+            "text": "Mobile, laptop, CCTV, TV and tablet repairs, clear diagnosis, an estimate before work begins, and careful testing before handover."
+          }
+        ],
+        "shifts": [
+          {
+            "time": 4538.900000002235,
+            "value": 0.010610442263201637
+          }
+        ],
+        "longTasks": [
+          {
+            "time": 2975.5,
+            "duration": 228
+          },
+          {
+            "time": 3291.60000000149,
+            "duration": 85
+          },
+          {
+            "time": 3683.900000002235,
+            "duration": 207
+          },
+          {
+            "time": 4556.300000000745,
+            "duration": 213
+          },
+          {
+            "time": 4889,
+            "duration": 503
+          },
+          {
+            "time": 5441,
+            "duration": 149
+          },
+          {
+            "time": 6130.5,
+            "duration": 143
+          },
+          {
+            "time": 6274.400000002235,
+            "duration": 521
+          },
+          {
+            "time": 6796.300000000745,
+            "duration": 136
+          },
+          {
+            "time": 6934.20000000298,
+            "duration": 129
+          },
+          {
+            "time": 7063.800000000745,
+            "duration": 144
+          },
+          {
+            "time": 7208.400000002235,
+            "duration": 128
+          },
+          {
+            "time": 7337.800000000745,
+            "duration": 134
+          },
+          {
+            "time": 7473,
+            "duration": 131
+          },
+          {
+            "time": 7604.800000000745,
+            "duration": 132
+          },
+          {
+            "time": 7737.800000000745,
+            "duration": 133
+          },
+          {
+            "time": 7871.70000000298,
+            "duration": 131
+          },
+          {
+            "time": 8003.800000000745,
+            "duration": 129
+          },
+          {
+            "time": 8133.60000000149,
+            "duration": 122
+          },
+          {
+            "time": 8256.20000000298,
+            "duration": 123
+          },
+          {
+            "time": 8380.300000000745,
+            "duration": 125
+          },
+          {
+            "time": 8506.300000000745,
+            "duration": 121
+          },
+          {
+            "time": 8627.800000000745,
+            "duration": 122
+          },
+          {
+            "time": 8751.10000000149,
+            "duration": 123
+          },
+          {
+            "time": 8875.400000002235,
+            "duration": 135
+          },
+          {
+            "time": 9011.900000002235,
+            "duration": 130
+          },
+          {
+            "time": 9143.20000000298,
+            "duration": 124
+          },
+          {
+            "time": 9267.900000002235,
+            "duration": 128
+          },
+          {
+            "time": 9397.10000000149,
+            "duration": 124
+          },
+          {
+            "time": 9522.60000000149,
+            "duration": 135
+          }
+        ]
+      },
+      "h1": "Every device,\nexpertly repaired.",
+      "h1Visibility": "visible",
+      "overflow": false,
+      "domNodes": 2434,
+      "navigation": [
+        {
+          "ttfbMs": 22.199999999254942,
+          "domContentLoadedMs": 2918.800000000745,
+          "loadMs": 4561.10000000149,
+          "encodedBodySize": 22967,
+          "decodedBodySize": 231552
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://www.numunix.com/numunix-logo-header.webp",
+          "type": "link",
+          "bytes": 36126,
+          "encoded": 35826,
+          "decoded": 35826,
+          "duration": 1399.4000000022352
+        },
+        {
+          "name": "https://www.numunix.com/numunix-logo.webp",
+          "type": "link",
+          "bytes": 45846,
+          "encoded": 45546,
+          "decoded": 45546,
+          "duration": 1538.800000000745
+        },
+        {
+          "name": "https://www.numunix.com/assets/styles-CQgS9-Je.css",
+          "type": "link",
+          "bytes": 24540,
+          "encoded": 24240,
+          "decoded": 146920,
+          "duration": 1040.4000000022352
+        },
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
+          "type": "link",
+          "bytes": 1253,
+          "encoded": 953,
+          "decoded": 17327,
+          "duration": 228.80000000074506
+        },
+        {
+          "name": "https://www.numunix.com/assets/RepairHomepage-DCiHPnTa.css",
+          "type": "link",
+          "bytes": 6767,
+          "encoded": 6467,
+          "decoded": 24287,
+          "duration": 676.9000000022352
+        },
+        {
+          "name": "https://www.numunix.com/assets/index-Cz_zqdGF.js",
+          "type": "other",
+          "bytes": 174931,
+          "encoded": 174631,
+          "decoded": 569165,
+          "duration": 2238.900000002235
+        },
+        {
+          "name": "https://www.numunix.com/assets/rolldown-runtime-CbXtAM7H.js",
+          "type": "other",
+          "bytes": 889,
+          "encoded": 589,
+          "decoded": 589,
+          "duration": 302.9000000022352
+        },
+        {
+          "name": "https://www.numunix.com/assets/category-BsvtzMFI.js",
+          "type": "other",
+          "bytes": 60015,
+          "encoded": 59715,
+          "decoded": 173878,
+          "duration": 1690.1000000014901
+        },
+        {
+          "name": "https://www.numunix.com/assets/not-found-i5RsCZif.js",
+          "type": "other",
+          "bytes": 418,
+          "encoded": 118,
+          "decoded": 118,
+          "duration": 332.5
+        },
+        {
+          "name": "https://www.numunix.com/assets/redirect-DmtLUW0N.js",
+          "type": "other",
+          "bytes": 688,
+          "encoded": 388,
+          "decoded": 388,
+          "duration": 276.6000000014901
+        },
+        {
+          "name": "https://www.numunix.com/assets/preload-helper-ByMWDV6I.js",
+          "type": "other",
+          "bytes": 2243,
+          "encoded": 1943,
+          "decoded": 4839,
+          "duration": 472.1000000014901
+        },
+        {
+          "name": "https://www.numunix.com/assets/types-CVKYa72O.js",
+          "type": "other",
+          "bytes": 13642,
+          "encoded": 13342,
+          "decoded": 56324,
+          "duration": 876
+        },
+        {
+          "name": "https://www.numunix.com/assets/workflow-BHAAVRHu.js",
+          "type": "other",
+          "bytes": 2702,
+          "encoded": 2402,
+          "decoded": 8971,
+          "duration": 485.3999999985099
+        },
+        {
+          "name": "https://www.numunix.com/assets/repair-audiences-tqPQE1Np.js",
+          "type": "other",
+          "bytes": 841,
+          "encoded": 541,
+          "decoded": 541,
+          "duration": 313.80000000074506
+        },
+        {
+          "name": "https://www.numunix.com/assets/washer-repair-guidance-CikAmCT_.js",
+          "type": "other",
+          "bytes": 14738,
+          "encoded": 14438,
+          "decoded": 45084,
+          "duration": 750
+        },
+        {
+          "name": "https://www.numunix.com/assets/routes-DM2ZxS4T.js",
+          "type": "other",
+          "bytes": 478,
+          "encoded": 178,
+          "decoded": 178,
+          "duration": 187.69999999925494
+        },
+        {
+          "name": "https://www.numunix.com/assets/RepairHomepage-BlEajDKS.js",
+          "type": "other",
+          "bytes": 19954,
+          "encoded": 19654,
+          "decoded": 72717,
+          "duration": 951
+        },
+        {
+          "name": "https://www.numunix.com/assets/arrow-right-DVNoC2fN.js",
+          "type": "script",
+          "bytes": 457,
+          "encoded": 157,
+          "decoded": 157,
+          "duration": 176.5
+        },
+        {
+          "name": "https://www.numunix.com/assets/arrow-up-right-l3G5nykn.js",
+          "type": "script",
+          "bytes": 459,
+          "encoded": 159,
+          "decoded": 159,
+          "duration": 331.19999999925494
+        },
+        {
+          "name": "https://www.numunix.com/assets/check-check-DPYUdm7j.js",
+          "type": "script",
+          "bytes": 471,
+          "encoded": 171,
+          "decoded": 171,
+          "duration": 173.5
+        },
+        {
+          "name": "https://www.numunix.com/assets/Hero-CVyVCTad.js",
+          "type": "script",
+          "bytes": 7263,
+          "encoded": 6963,
+          "decoded": 18076,
+          "duration": 546.3999999985099
+        },
+        {
+          "name": "https://www.numunix.com/assets/x-DOa3JS0t.js",
+          "type": "script",
+          "bytes": 715,
+          "encoded": 415,
+          "decoded": 415,
+          "duration": 327
+        },
+        {
+          "name": "https://www.numunix.com/assets/BrandLogo-gvu1mO8A.js",
+          "type": "script",
+          "bytes": 781,
+          "encoded": 481,
+          "decoded": 481,
+          "duration": 357.30000000074506
+        },
+        {
+          "name": "https://www.numunix.com/assets/WorkflowVisualization-Nxcsw_kY.js",
+          "type": "script",
+          "bytes": 3646,
+          "encoded": 3346,
+          "decoded": 8162,
+          "duration": 308
+        },
+        {
+          "name": "https://www.numunix.com/assets/zap--fjVVrKb.js",
+          "type": "script",
+          "bytes": 554,
+          "encoded": 254,
+          "decoded": 254,
+          "duration": 197.60000000149012
+        },
+        {
+          "name": "https://www.numunix.com/assets/nodeviz-BDRqWjmP.js",
+          "type": "script",
+          "bytes": 1665,
+          "encoded": 1365,
+          "decoded": 3396,
+          "duration": 211.80000000074506
+        },
+        {
+          "name": "https://www.numunix.com/assets/users-uW7Kevgh.js",
+          "type": "script",
+          "bytes": 896,
+          "encoded": 596,
+          "decoded": 596,
+          "duration": 209.80000000074506
+        },
+        {
+          "name": "https://www.numunix.com/assets/lock-keyhole-B_ycHnS1.js",
+          "type": "script",
+          "bytes": 547,
+          "encoded": 247,
+          "decoded": 247,
+          "duration": 223.19999999925494
+        },
+        {
+          "name": "https://www.numunix.com/assets/dist-DtVHnKe5.js",
+          "type": "script",
+          "bytes": 2188,
+          "encoded": 1888,
+          "decoded": 4870,
+          "duration": 409.5
+        },
+        {
+          "name": "https://www.numunix.com/assets/shield-check-Cywi9_DZ.js",
+          "type": "script",
+          "bytes": 612,
+          "encoded": 312,
+          "decoded": 312,
+          "duration": 345.79999999701977
+        },
+        {
+          "name": "https://www.numunix.com/assets/RepairVisual-CTKCTqtK.js",
+          "type": "script",
+          "bytes": 2301,
+          "encoded": 2001,
+          "decoded": 6596,
+          "duration": 390.80000000074506
+        },
+        {
+          "name": "https://www.numunix.com/assets/AudienceRepairScene-CD9HFkGb.js",
+          "type": "script",
+          "bytes": 1809,
+          "encoded": 1509,
+          "decoded": 5276,
+          "duration": 435.1000000014901
+        },
+        {
+          "name": "https://www.numunix.com/assets/ContactFormSection-D3pzYgXc.js",
+          "type": "script",
+          "bytes": 1297,
+          "encoded": 997,
+          "decoded": 997,
+          "duration": 215
+        },
+        {
+          "name": "https://www.numunix.com/assets/ContactForm-w78YO2aM.js",
+          "type": "script",
+          "bytes": 11715,
+          "encoded": 11415,
+          "decoded": 29547,
+          "duration": 541.2999999970198
+        },
+        {
+          "name": "https://www.numunix.com/assets/createServerFn-C98uqa5V.js",
+          "type": "script",
+          "bytes": 2226,
+          "encoded": 1926,
+          "decoded": 4455,
+          "duration": 279.9000000022352
+        }
+      ],
+      "scriptUrls": [
+        "https://www.numunix.com/assets/index-Cz_zqdGF.js"
+      ],
+      "analyticsDetected": {
+        "gtag": "undefined",
+        "ga": "undefined",
+        "dataLayer": false
+      },
+      "errors": [],
+      "failed": []
+    },
+    {
+      "path": "/appliances",
+      "status": 200,
+      "observer": {
+        "lcp": [
+          {
+            "time": 2900,
+            "size": 35280,
+            "element": "P",
+            "text": "Washing machine, AC, refrigerator and kitchen-appliance repair, doorstep assessment, clear estimates and testing after the work is done."
+          }
+        ],
+        "shifts": [],
+        "longTasks": [
+          {
+            "time": 3028.39999999851,
+            "duration": 218
+          },
+          {
+            "time": 3368.300000000745,
+            "duration": 79
+          },
+          {
+            "time": 3630.89999999851,
+            "duration": 64
+          },
+          {
+            "time": 3712,
+            "duration": 251
+          },
+          {
+            "time": 4616.699999999255,
+            "duration": 212
+          },
+          {
+            "time": 5058.10000000149,
+            "duration": 532
+          },
+          {
+            "time": 5646.699999999255,
+            "duration": 185
+          },
+          {
+            "time": 6420.199999999255,
+            "duration": 151
+          },
+          {
+            "time": 6572.10000000149,
+            "duration": 492
+          },
+          {
+            "time": 7064.60000000149,
+            "duration": 139
+          },
+          {
+            "time": 7205.800000000745,
+            "duration": 151
+          },
+          {
+            "time": 7357.300000000745,
+            "duration": 144
+          },
+          {
+            "time": 7502.89999999851,
+            "duration": 145
+          },
+          {
+            "time": 7649.10000000149,
+            "duration": 154
+          },
+          {
+            "time": 7804.89999999851,
+            "duration": 163
+          },
+          {
+            "time": 7968.5,
+            "duration": 161
+          },
+          {
+            "time": 8130.699999999255,
+            "duration": 180
+          },
+          {
+            "time": 8311.39999999851,
+            "duration": 160
+          },
+          {
+            "time": 8473.300000000745,
+            "duration": 155
+          },
+          {
+            "time": 8629.199999999255,
+            "duration": 179
+          },
+          {
+            "time": 8809.89999999851,
+            "duration": 184
+          },
+          {
+            "time": 8994.39999999851,
+            "duration": 164
+          },
+          {
+            "time": 9159.300000000745,
+            "duration": 158
+          },
+          {
+            "time": 9318,
+            "duration": 159
+          },
+          {
+            "time": 9478.300000000745,
+            "duration": 169
+          },
+          {
+            "time": 9653.699999999255,
+            "duration": 157
+          }
+        ]
+      },
+      "h1": "Every appliance,\nback to its best.",
+      "h1Visibility": "visible",
+      "overflow": false,
+      "domNodes": 2333,
+      "navigation": [
+        {
+          "ttfbMs": 19.799999997019768,
+          "domContentLoadedMs": 2965.89999999851,
+          "loadMs": 4621.89999999851,
+          "encodedBodySize": 22491,
+          "decodedBodySize": 223533
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://www.numunix.com/numunix-logo-header.webp",
+          "type": "link",
+          "bytes": 36126,
+          "encoded": 35826,
+          "decoded": 35826,
+          "duration": 1347.6000000014901
+        },
+        {
+          "name": "https://www.numunix.com/numunix-logo.webp",
+          "type": "link",
+          "bytes": 45846,
+          "encoded": 45546,
+          "decoded": 45546,
+          "duration": 1530.699999999255
+        },
+        {
+          "name": "https://www.numunix.com/assets/styles-CQgS9-Je.css",
+          "type": "link",
+          "bytes": 24540,
+          "encoded": 24240,
+          "decoded": 146920,
+          "duration": 1140.699999999255
+        },
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
+          "type": "link",
+          "bytes": 1253,
+          "encoded": 953,
+          "decoded": 17327,
+          "duration": 318.29999999701977
+        },
+        {
+          "name": "https://www.numunix.com/assets/RepairHomepage-DCiHPnTa.css",
+          "type": "link",
+          "bytes": 6767,
+          "encoded": 6467,
+          "decoded": 24287,
+          "duration": 566.3999999985099
+        },
+        {
+          "name": "https://www.numunix.com/assets/index-Cz_zqdGF.js",
+          "type": "other",
+          "bytes": 174931,
+          "encoded": 174631,
+          "decoded": 569165,
+          "duration": 2246.199999999255
+        },
+        {
+          "name": "https://www.numunix.com/assets/rolldown-runtime-CbXtAM7H.js",
+          "type": "other",
+          "bytes": 889,
+          "encoded": 589,
+          "decoded": 589,
+          "duration": 222.59999999776483
+        },
+        {
+          "name": "https://www.numunix.com/assets/category-BsvtzMFI.js",
+          "type": "other",
+          "bytes": 60015,
+          "encoded": 59715,
+          "decoded": 173878,
+          "duration": 1665.4000000022352
+        },
+        {
+          "name": "https://www.numunix.com/assets/not-found-i5RsCZif.js",
+          "type": "other",
+          "bytes": 418,
+          "encoded": 118,
+          "decoded": 118,
+          "duration": 191
+        },
+        {
+          "name": "https://www.numunix.com/assets/redirect-DmtLUW0N.js",
+          "type": "other",
+          "bytes": 688,
+          "encoded": 388,
+          "decoded": 388,
+          "duration": 236.90000000223517
+        },
+        {
+          "name": "https://www.numunix.com/assets/preload-helper-ByMWDV6I.js",
+          "type": "other",
+          "bytes": 2243,
+          "encoded": 1943,
+          "decoded": 4839,
+          "duration": 361.30000000074506
+        },
+        {
+          "name": "https://www.numunix.com/assets/types-CVKYa72O.js",
+          "type": "other",
+          "bytes": 13642,
+          "encoded": 13342,
+          "decoded": 56324,
+          "duration": 780.3999999985099
+        },
+        {
+          "name": "https://www.numunix.com/assets/workflow-BHAAVRHu.js",
+          "type": "other",
+          "bytes": 2702,
+          "encoded": 2402,
+          "decoded": 8971,
+          "duration": 314
+        },
+        {
+          "name": "https://www.numunix.com/assets/repair-audiences-tqPQE1Np.js",
+          "type": "other",
+          "bytes": 841,
+          "encoded": 541,
+          "decoded": 541,
+          "duration": 266.80000000074506
+        },
+        {
+          "name": "https://www.numunix.com/assets/washer-repair-guidance-CikAmCT_.js",
+          "type": "other",
+          "bytes": 14738,
+          "encoded": 14438,
+          "decoded": 45084,
+          "duration": 855.1000000014901
+        },
+        {
+          "name": "https://www.numunix.com/assets/appliances-BzwODKxf.js",
+          "type": "other",
+          "bytes": 477,
+          "encoded": 177,
+          "decoded": 177,
+          "duration": 249.60000000149012
+        },
+        {
+          "name": "https://www.numunix.com/assets/RepairHomepage-BlEajDKS.js",
+          "type": "other",
+          "bytes": 19954,
+          "encoded": 19654,
+          "decoded": 72717,
+          "duration": 1039.800000000745
+        },
+        {
+          "name": "https://www.numunix.com/assets/arrow-right-DVNoC2fN.js",
+          "type": "script",
+          "bytes": 457,
+          "encoded": 157,
+          "decoded": 157,
+          "duration": 184.80000000074506
+        },
+        {
+          "name": "https://www.numunix.com/assets/arrow-up-right-l3G5nykn.js",
+          "type": "script",
+          "bytes": 459,
+          "encoded": 159,
+          "decoded": 159,
+          "duration": 167.30000000074506
+        },
+        {
+          "name": "https://www.numunix.com/assets/check-check-DPYUdm7j.js",
+          "type": "script",
+          "bytes": 471,
+          "encoded": 171,
+          "decoded": 171,
+          "duration": 197.30000000074506
+        },
+        {
+          "name": "https://www.numunix.com/assets/Hero-CVyVCTad.js",
+          "type": "script",
+          "bytes": 7263,
+          "encoded": 6963,
+          "decoded": 18076,
+          "duration": 462.6000000014901
+        },
+        {
+          "name": "https://www.numunix.com/assets/x-DOa3JS0t.js",
+          "type": "script",
+          "bytes": 715,
+          "encoded": 415,
+          "decoded": 415,
+          "duration": 210.39999999850988
+        },
+        {
+          "name": "https://www.numunix.com/assets/BrandLogo-gvu1mO8A.js",
+          "type": "script",
+          "bytes": 781,
+          "encoded": 481,
+          "decoded": 481,
+          "duration": 240.10000000149012
+        },
+        {
+          "name": "https://www.numunix.com/assets/WorkflowVisualization-Nxcsw_kY.js",
+          "type": "script",
+          "bytes": 3646,
+          "encoded": 3346,
+          "decoded": 8162,
+          "duration": 396
+        },
+        {
+          "name": "https://www.numunix.com/assets/zap--fjVVrKb.js",
+          "type": "script",
+          "bytes": 554,
+          "encoded": 254,
+          "decoded": 254,
+          "duration": 221.70000000298023
+        },
+        {
+          "name": "https://www.numunix.com/assets/nodeviz-BDRqWjmP.js",
+          "type": "script",
+          "bytes": 1665,
+          "encoded": 1365,
+          "decoded": 3396,
+          "duration": 204.40000000223517
+        },
+        {
+          "name": "https://www.numunix.com/assets/users-uW7Kevgh.js",
+          "type": "script",
+          "bytes": 896,
+          "encoded": 596,
+          "decoded": 596,
+          "duration": 218.69999999925494
+        },
+        {
+          "name": "https://www.numunix.com/assets/lock-keyhole-B_ycHnS1.js",
+          "type": "script",
+          "bytes": 547,
+          "encoded": 247,
+          "decoded": 247,
+          "duration": 248.10000000149012
+        },
+        {
+          "name": "https://www.numunix.com/assets/dist-DtVHnKe5.js",
+          "type": "script",
+          "bytes": 2188,
+          "encoded": 1888,
+          "decoded": 4870,
+          "duration": 340.69999999925494
+        },
+        {
+          "name": "https://www.numunix.com/assets/shield-check-Cywi9_DZ.js",
+          "type": "script",
+          "bytes": 612,
+          "encoded": 312,
+          "decoded": 312,
+          "duration": 260.8999999985099
+        },
+        {
+          "name": "https://www.numunix.com/assets/RepairVisual-CTKCTqtK.js",
+          "type": "script",
+          "bytes": 2301,
+          "encoded": 2001,
+          "decoded": 6596,
+          "duration": 354.1000000014901
+        },
+        {
+          "name": "https://www.numunix.com/assets/AudienceRepairScene-CD9HFkGb.js",
+          "type": "script",
+          "bytes": 1809,
+          "encoded": 1509,
+          "decoded": 5276,
+          "duration": 352.29999999701977
+        },
+        {
+          "name": "https://www.numunix.com/assets/ContactFormSection-D3pzYgXc.js",
+          "type": "script",
+          "bytes": 1297,
+          "encoded": 997,
+          "decoded": 997,
+          "duration": 303.1000000014901
+        },
+        {
+          "name": "https://www.numunix.com/assets/ContactForm-w78YO2aM.js",
+          "type": "script",
+          "bytes": 11715,
+          "encoded": 11415,
+          "decoded": 29547,
+          "duration": 534.3999999985099
+        },
+        {
+          "name": "https://www.numunix.com/assets/createServerFn-C98uqa5V.js",
+          "type": "script",
+          "bytes": 2226,
+          "encoded": 1926,
+          "decoded": 4455,
+          "duration": 362.30000000074506
+        }
+      ],
+      "scriptUrls": [
+        "https://www.numunix.com/assets/index-Cz_zqdGF.js"
+      ],
+      "analyticsDetected": {
+        "gtag": "undefined",
+        "ga": "undefined",
+        "dataLayer": false
+      },
+      "errors": [],
+      "failed": []
+    },
+    {
+      "path": "/electronic/repairs/mobile-repair",
+      "status": 200,
+      "observer": {
+        "lcp": [
+          {
+            "time": 2348,
+            "size": 34230,
+            "element": "P",
+            "text": "Independent phone repair enquiries for screen, battery, charging and camera faults. Get model-specific assessment and a clear estimate before approving work."
+          }
+        ],
+        "shifts": [
+          {
+            "time": 3167.300000000745,
+            "value": 0.00009019619954628155
+          },
+          {
+            "time": 3508.10000000149,
+            "value": 0.011664684923968464
+          }
+        ],
+        "longTasks": [
+          {
+            "time": 2835.300000000745,
+            "duration": 201
+          },
+          {
+            "time": 3177.2000000029802,
+            "duration": 316
+          },
+          {
+            "time": 3531.7000000029802,
+            "duration": 57
+          },
+          {
+            "time": 3888.7000000029802,
+            "duration": 306
+          },
+          {
+            "time": 4220,
+            "duration": 142
+          },
+          {
+            "time": 4365.300000000745,
+            "duration": 163
+          },
+          {
+            "time": 4529.5,
+            "duration": 131
+          },
+          {
+            "time": 4661.400000002235,
+            "duration": 129
+          },
+          {
+            "time": 4792.70000000298,
+            "duration": 126
+          },
+          {
+            "time": 4919.70000000298,
+            "duration": 131
+          },
+          {
+            "time": 5051.900000002235,
+            "duration": 132
+          },
+          {
+            "time": 5184.400000002235,
+            "duration": 126
+          },
+          {
+            "time": 5312,
+            "duration": 127
+          },
+          {
+            "time": 5439.400000002235,
+            "duration": 127
+          },
+          {
+            "time": 5567.20000000298,
+            "duration": 130
+          },
+          {
+            "time": 5698.20000000298,
+            "duration": 123
+          },
+          {
+            "time": 5822,
+            "duration": 122
+          },
+          {
+            "time": 5945.10000000149,
+            "duration": 121
+          },
+          {
+            "time": 6067.60000000149,
+            "duration": 121
+          },
+          {
+            "time": 6189.60000000149,
+            "duration": 120
+          },
+          {
+            "time": 6310.70000000298,
+            "duration": 120
+          },
+          {
+            "time": 6431.70000000298,
+            "duration": 117
+          },
+          {
+            "time": 6549.60000000149,
+            "duration": 120
+          },
+          {
+            "time": 6670.60000000149,
+            "duration": 118
+          },
+          {
+            "time": 6789.800000000745,
+            "duration": 116
+          },
+          {
+            "time": 6906.900000002235,
+            "duration": 119
+          },
+          {
+            "time": 7027.10000000149,
+            "duration": 123
+          },
+          {
+            "time": 7150.5,
+            "duration": 123
+          },
+          {
+            "time": 7275.400000002235,
+            "duration": 118
+          },
+          {
+            "time": 7393.70000000298,
+            "duration": 124
+          },
+          {
+            "time": 7518.70000000298,
+            "duration": 120
+          },
+          {
+            "time": 7640,
+            "duration": 120
+          },
+          {
+            "time": 7760.900000002235,
+            "duration": 116
+          },
+          {
+            "time": 7877.400000002235,
+            "duration": 122
+          },
+          {
+            "time": 7999.800000000745,
+            "duration": 124
+          },
+          {
+            "time": 8124.800000000745,
+            "duration": 118
+          }
+        ]
+      },
+      "h1": "Mobile Repair\nin Bangalore",
+      "h1Visibility": "visible",
+      "overflow": false,
+      "domNodes": 797,
+      "navigation": [
+        {
+          "ttfbMs": 20,
+          "domContentLoadedMs": 2361.10000000149,
+          "loadMs": 3179.5,
+          "encodedBodySize": 18346,
+          "decodedBodySize": 112491
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://www.numunix.com/numunix-logo-header.webp",
+          "type": "link",
+          "bytes": 36126,
+          "encoded": 35826,
+          "decoded": 35826,
+          "duration": 1394.8999999985099
+        },
+        {
+          "name": "https://www.numunix.com/numunix-logo.webp",
+          "type": "link",
+          "bytes": 45846,
+          "encoded": 45546,
+          "decoded": 45546,
+          "duration": 1549.1000000014901
+        },
+        {
+          "name": "https://www.numunix.com/assets/styles-CQgS9-Je.css",
+          "type": "link",
+          "bytes": 24540,
+          "encoded": 24240,
+          "decoded": 146920,
+          "duration": 1189
+        },
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
+          "type": "link",
+          "bytes": 1253,
+          "encoded": 953,
+          "decoded": 17327,
+          "duration": 339.69999999925494
+        },
+        {
+          "name": "https://www.numunix.com/assets/index-Cz_zqdGF.js",
+          "type": "other",
+          "bytes": 174931,
+          "encoded": 174631,
+          "decoded": 569165,
+          "duration": 2479.900000002235
+        },
+        {
+          "name": "https://www.numunix.com/assets/rolldown-runtime-CbXtAM7H.js",
+          "type": "other",
+          "bytes": 889,
+          "encoded": 589,
+          "decoded": 589,
+          "duration": 296.80000000074506
+        },
+        {
+          "name": "https://www.numunix.com/assets/category-BsvtzMFI.js",
+          "type": "other",
+          "bytes": 60015,
+          "encoded": 59715,
+          "decoded": 173878,
+          "duration": 1699.5
+        },
+        {
+          "name": "https://www.numunix.com/assets/not-found-i5RsCZif.js",
+          "type": "other",
+          "bytes": 418,
+          "encoded": 118,
+          "decoded": 118,
+          "duration": 179.5
+        },
+        {
+          "name": "https://www.numunix.com/assets/redirect-DmtLUW0N.js",
+          "type": "other",
+          "bytes": 688,
+          "encoded": 388,
+          "decoded": 388,
+          "duration": 195.20000000298023
+        },
+        {
+          "name": "https://www.numunix.com/assets/preload-helper-ByMWDV6I.js",
+          "type": "other",
+          "bytes": 2243,
+          "encoded": 1943,
+          "decoded": 4839,
+          "duration": 327.3999999985099
+        },
+        {
+          "name": "https://www.numunix.com/assets/types-CVKYa72O.js",
+          "type": "other",
+          "bytes": 13642,
+          "encoded": 13342,
+          "decoded": 56324,
+          "duration": 867.1999999992549
+        },
+        {
+          "name": "https://www.numunix.com/assets/workflow-BHAAVRHu.js",
+          "type": "other",
+          "bytes": 2702,
+          "encoded": 2402,
+          "decoded": 8971,
+          "duration": 384.19999999925494
+        },
+        {
+          "name": "https://www.numunix.com/assets/repair-audiences-tqPQE1Np.js",
+          "type": "other",
+          "bytes": 841,
+          "encoded": 541,
+          "decoded": 541,
+          "duration": 217.59999999776483
+        },
+        {
+          "name": "https://www.numunix.com/assets/washer-repair-guidance-CikAmCT_.js",
+          "type": "other",
+          "bytes": 14738,
+          "encoded": 14438,
+          "decoded": 45084,
+          "duration": 924
+        },
+        {
+          "name": "https://www.numunix.com/assets/_category.repairs._slug-BgUxLbqI.js",
+          "type": "other",
+          "bytes": 8004,
+          "encoded": 7704,
+          "decoded": 40336,
+          "duration": 722.3000000007451
+        },
+        {
+          "name": "https://www.numunix.com/assets/ContactForm-w78YO2aM.js",
+          "type": "other",
+          "bytes": 11715,
+          "encoded": 11415,
+          "decoded": 29547,
+          "duration": 823.3999999985099
+        },
+        {
+          "name": "https://www.numunix.com/assets/arrow-up-right-l3G5nykn.js",
+          "type": "other",
+          "bytes": 459,
+          "encoded": 159,
+          "decoded": 159,
+          "duration": 281.20000000298023
+        },
+        {
+          "name": "https://www.numunix.com/assets/Hero-CVyVCTad.js",
+          "type": "other",
+          "bytes": 7263,
+          "encoded": 6963,
+          "decoded": 18076,
+          "duration": 613.2000000029802
+        },
+        {
+          "name": "https://www.numunix.com/assets/CCTVBrandLogo-DcH-v-cB.js",
+          "type": "other",
+          "bytes": 3011,
+          "encoded": 2711,
+          "decoded": 6217,
+          "duration": 363.3999999985099
+        },
+        {
+          "name": "https://www.numunix.com/assets/RepairVisual-CTKCTqtK.js",
+          "type": "other",
+          "bytes": 2301,
+          "encoded": 2001,
+          "decoded": 6596,
+          "duration": 405
+        },
+        {
+          "name": "https://www.numunix.com/assets/WhatsAppIcon-DcCPrAsJ.js",
+          "type": "other",
+          "bytes": 1995,
+          "encoded": 1695,
+          "decoded": 3423,
+          "duration": 487
+        },
+        {
+          "name": "https://www.numunix.com/assets/createServerFn-C98uqa5V.js",
+          "type": "script",
+          "bytes": 2226,
+          "encoded": 1926,
+          "decoded": 4455,
+          "duration": 200.09999999776483
+        },
+        {
+          "name": "https://www.numunix.com/assets/dist-DtVHnKe5.js",
+          "type": "script",
+          "bytes": 2188,
+          "encoded": 1888,
+          "decoded": 4870,
+          "duration": 213.30000000074506
+        },
+        {
+          "name": "https://www.numunix.com/assets/x-DOa3JS0t.js",
+          "type": "script",
+          "bytes": 715,
+          "encoded": 415,
+          "decoded": 415,
+          "duration": 179.89999999850988
+        },
+        {
+          "name": "https://www.numunix.com/assets/BrandLogo-gvu1mO8A.js",
+          "type": "script",
+          "bytes": 781,
+          "encoded": 481,
+          "decoded": 481,
+          "duration": 186.40000000223517
+        }
+      ],
+      "scriptUrls": [
+        "https://www.numunix.com/assets/index-Cz_zqdGF.js"
+      ],
+      "analyticsDetected": {
+        "gtag": "undefined",
+        "ga": "undefined",
+        "dataLayer": false
+      },
+      "errors": [],
+      "failed": []
+    },
+    {
+      "path": "/appliances/repairs/washing-machine-repair/bosch",
+      "status": 200,
+      "observer": {
+        "lcp": [
+          {
+            "time": 2492,
+            "size": 33810,
+            "element": "P",
+            "text": "Get your wash routine back on track. Independent Bosch repair with careful diagnosis and a clear estimate before work begins."
+          }
+        ],
+        "shifts": [
+          {
+            "time": 3242.5,
+            "value": 0.00009019619954628155
+          },
+          {
+            "time": 4488.699999999255,
+            "value": 0.009152600630990044
+          }
+        ],
+        "longTasks": [
+          {
+            "time": 3338.5,
+            "duration": 253
+          },
+          {
+            "time": 3629.800000000745,
+            "duration": 189
+          },
+          {
+            "time": 3838.5,
+            "duration": 51
+          },
+          {
+            "time": 4175.800000000745,
+            "duration": 299
+          },
+          {
+            "time": 4508.400000002235,
+            "duration": 134
+          },
+          {
+            "time": 4643.199999999255,
+            "duration": 146
+          },
+          {
+            "time": 4790.699999999255,
+            "duration": 143
+          },
+          {
+            "time": 4934.60000000149,
+            "duration": 149
+          },
+          {
+            "time": 5086.699999999255,
+            "duration": 146
+          },
+          {
+            "time": 5233.10000000149,
+            "duration": 164
+          },
+          {
+            "time": 5398.10000000149,
+            "duration": 149
+          },
+          {
+            "time": 5548.10000000149,
+            "duration": 135
+          },
+          {
+            "time": 5684.300000000745,
+            "duration": 145
+          },
+          {
+            "time": 5830,
+            "duration": 124
+          },
+          {
+            "time": 5955.5,
+            "duration": 121
+          },
+          {
+            "time": 6077.800000000745,
+            "duration": 126
+          },
+          {
+            "time": 6204.400000002235,
+            "duration": 123
+          },
+          {
+            "time": 6328.5,
+            "duration": 125
+          },
+          {
+            "time": 6454.5,
+            "duration": 127
+          },
+          {
+            "time": 6582.900000002235,
+            "duration": 133
+          },
+          {
+            "time": 6717.300000000745,
+            "duration": 128
+          },
+          {
+            "time": 6846.199999999255,
+            "duration": 133
+          },
+          {
+            "time": 6981,
+            "duration": 132
+          },
+          {
+            "time": 7113.60000000149,
+            "duration": 134
+          },
+          {
+            "time": 7249.5,
+            "duration": 126
+          },
+          {
+            "time": 7376.60000000149,
+            "duration": 130
+          },
+          {
+            "time": 7508.10000000149,
+            "duration": 129
+          },
+          {
+            "time": 7638,
+            "duration": 134
+          },
+          {
+            "time": 7773.400000002235,
+            "duration": 129
+          },
+          {
+            "time": 7903.199999999255,
+            "duration": 133
+          },
+          {
+            "time": 8036.699999999255,
+            "duration": 129
+          },
+          {
+            "time": 8166.900000002235,
+            "duration": 128
+          },
+          {
+            "time": 8299.10000000149,
+            "duration": 129
+          },
+          {
+            "time": 8429,
+            "duration": 121
+          },
+          {
+            "time": 8551,
+            "duration": 126
+          },
+          {
+            "time": 8677.60000000149,
+            "duration": 121
+          },
+          {
+            "time": 8799.900000002235,
+            "duration": 121
+          },
+          {
+            "time": 8925.699999999255,
+            "duration": 120
+          }
+        ]
+      },
+      "h1": "Bosch Washing Machine\nRepair in Bangalore",
+      "h1Visibility": "visible",
+      "overflow": false,
+      "domNodes": 654,
+      "navigation": [
+        {
+          "ttfbMs": 21,
+          "domContentLoadedMs": 2507.400000002235,
+          "loadMs": 3836,
+          "encodedBodySize": 16887,
+          "decodedBodySize": 90466
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://www.numunix.com/numunix-logo-header.webp",
+          "type": "link",
+          "bytes": 36126,
+          "encoded": 35826,
+          "decoded": 35826,
+          "duration": 1448.1000000014901
+        },
+        {
+          "name": "https://www.numunix.com/brands/washing-machines/bosch.webp",
+          "type": "link",
+          "bytes": 11460,
+          "encoded": 11160,
+          "decoded": 11160,
+          "duration": 947.6000000014901
+        },
+        {
+          "name": "https://www.numunix.com/numunix-logo.webp",
+          "type": "link",
+          "bytes": 45846,
+          "encoded": 45546,
+          "decoded": 45546,
+          "duration": 1645.4000000022352
+        },
+        {
+          "name": "https://www.numunix.com/assets/styles-CQgS9-Je.css",
+          "type": "link",
+          "bytes": 24540,
+          "encoded": 24240,
+          "decoded": 146920,
+          "duration": 1243
+        },
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
+          "type": "link",
+          "bytes": 1253,
+          "encoded": 953,
+          "decoded": 17327,
+          "duration": 336.1000000014901
+        },
+        {
+          "name": "https://www.numunix.com/assets/index-Cz_zqdGF.js",
+          "type": "other",
+          "bytes": 174931,
+          "encoded": 174631,
+          "decoded": 569165,
+          "duration": 2770.599999997765
+        },
+        {
+          "name": "https://www.numunix.com/assets/rolldown-runtime-CbXtAM7H.js",
+          "type": "other",
+          "bytes": 889,
+          "encoded": 589,
+          "decoded": 589,
+          "duration": 195.29999999701977
+        },
+        {
+          "name": "https://www.numunix.com/assets/category-BsvtzMFI.js",
+          "type": "other",
+          "bytes": 60015,
+          "encoded": 59715,
+          "decoded": 173878,
+          "duration": 1770.0999999977648
+        },
+        {
+          "name": "https://www.numunix.com/assets/not-found-i5RsCZif.js",
+          "type": "other",
+          "bytes": 418,
+          "encoded": 118,
+          "decoded": 118,
+          "duration": 178.89999999850988
+        },
+        {
+          "name": "https://www.numunix.com/assets/redirect-DmtLUW0N.js",
+          "type": "other",
+          "bytes": 688,
+          "encoded": 388,
+          "decoded": 388,
+          "duration": 209.40000000223517
+        },
+        {
+          "name": "https://www.numunix.com/assets/preload-helper-ByMWDV6I.js",
+          "type": "other",
+          "bytes": 2243,
+          "encoded": 1943,
+          "decoded": 4839,
+          "duration": 396.5999999977648
+        },
+        {
+          "name": "https://www.numunix.com/assets/types-CVKYa72O.js",
+          "type": "other",
+          "bytes": 13642,
+          "encoded": 13342,
+          "decoded": 56324,
+          "duration": 926.3999999985099
+        },
+        {
+          "name": "https://www.numunix.com/assets/workflow-BHAAVRHu.js",
+          "type": "other",
+          "bytes": 2702,
+          "encoded": 2402,
+          "decoded": 8971,
+          "duration": 347.79999999701977
+        },
+        {
+          "name": "https://www.numunix.com/assets/repair-audiences-tqPQE1Np.js",
+          "type": "other",
+          "bytes": 841,
+          "encoded": 541,
+          "decoded": 541,
+          "duration": 238.10000000149012
+        },
+        {
+          "name": "https://www.numunix.com/assets/washer-repair-guidance-CikAmCT_.js",
+          "type": "other",
+          "bytes": 14738,
+          "encoded": 14438,
+          "decoded": 45084,
+          "duration": 1003.7999999970198
+        },
+        {
+          "name": "https://www.numunix.com/assets/_category.repairs._slug_._brand-OzMKBM9m.js",
+          "type": "other",
+          "bytes": 9077,
+          "encoded": 8777,
+          "decoded": 31599,
+          "duration": 829.5
+        },
+        {
+          "name": "https://www.numunix.com/assets/ContactForm-w78YO2aM.js",
+          "type": "other",
+          "bytes": 11715,
+          "encoded": 11415,
+          "decoded": 29547,
+          "duration": 876.3000000007451
+        },
+        {
+          "name": "https://www.numunix.com/assets/arrow-up-right-l3G5nykn.js",
+          "type": "other",
+          "bytes": 459,
+          "encoded": 159,
+          "decoded": 159,
+          "duration": 251.80000000074506
+        },
+        {
+          "name": "https://www.numunix.com/assets/Hero-CVyVCTad.js",
+          "type": "other",
+          "bytes": 7263,
+          "encoded": 6963,
+          "decoded": 18076,
+          "duration": 640.6999999992549
+        },
+        {
+          "name": "https://www.numunix.com/assets/CCTVBrandLogo-DcH-v-cB.js",
+          "type": "other",
+          "bytes": 3011,
+          "encoded": 2711,
+          "decoded": 6217,
+          "duration": 391.80000000074506
+        },
+        {
+          "name": "https://www.numunix.com/assets/shield-check-Cywi9_DZ.js",
+          "type": "other",
+          "bytes": 612,
+          "encoded": 312,
+          "decoded": 312,
+          "duration": 234.39999999850988
+        },
+        {
+          "name": "https://www.numunix.com/assets/RepairVisual-CTKCTqtK.js",
+          "type": "other",
+          "bytes": 2301,
+          "encoded": 2001,
+          "decoded": 6596,
+          "duration": 358.8999999985099
+        },
+        {
+          "name": "https://www.numunix.com/assets/WhatsAppIcon-DcCPrAsJ.js",
+          "type": "other",
+          "bytes": 1995,
+          "encoded": 1695,
+          "decoded": 3423,
+          "duration": 406.5
+        },
+        {
+          "name": "https://www.numunix.com/assets/createServerFn-C98uqa5V.js",
+          "type": "script",
+          "bytes": 2226,
+          "encoded": 1926,
+          "decoded": 4455,
+          "duration": 206.30000000074506
+        },
+        {
+          "name": "https://www.numunix.com/assets/dist-DtVHnKe5.js",
+          "type": "script",
+          "bytes": 2188,
+          "encoded": 1888,
+          "decoded": 4870,
+          "duration": 204.59999999776483
+        },
+        {
+          "name": "https://www.numunix.com/assets/x-DOa3JS0t.js",
+          "type": "script",
+          "bytes": 715,
+          "encoded": 415,
+          "decoded": 415,
+          "duration": 187.69999999925494
+        },
+        {
+          "name": "https://www.numunix.com/assets/BrandLogo-gvu1mO8A.js",
+          "type": "script",
+          "bytes": 781,
+          "encoded": 481,
+          "decoded": 481,
+          "duration": 186.5
+        }
+      ],
+      "scriptUrls": [
+        "https://www.numunix.com/assets/index-Cz_zqdGF.js"
+      ],
+      "analyticsDetected": {
+        "gtag": "undefined",
+        "ga": "undefined",
+        "dataLayer": false
+      },
+      "errors": [],
+      "failed": []
+    }
+  ],
+  "variations": [
+    {
+      "url": "http://numunix.com/",
+      "status": 308,
+      "location": "https://numunix.com/",
+      "headers": {
+        "cacheControl": null,
+        "contentEncoding": null,
+        "xRobotsTag": null
+      },
+      "noindex": false
+    },
+    {
+      "url": "http://www.numunix.com/",
+      "status": 308,
+      "location": "https://www.numunix.com/",
+      "headers": {
+        "cacheControl": null,
+        "contentEncoding": null,
+        "xRobotsTag": null
+      },
+      "noindex": false
+    },
+    {
+      "url": "https://numunix.com/",
+      "status": 308,
+      "location": "https://www.numunix.com/",
+      "headers": {
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "contentEncoding": null,
+        "xRobotsTag": null
+      },
+      "noindex": false
+    },
+    {
+      "url": "https://www.numunix.com/services/",
+      "status": 307,
+      "location": "/services",
+      "headers": {
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "contentEncoding": null,
+        "xRobotsTag": null
+      },
+      "noindex": false
+    },
+    {
+      "url": "https://www.numunix.com/appliances/",
+      "status": 307,
+      "location": "/appliances",
+      "headers": {
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "contentEncoding": null,
+        "xRobotsTag": null
+      },
+      "noindex": false
+    },
+    {
+      "url": "https://www.numunix.com/admin/login",
+      "status": 200,
+      "location": null,
+      "headers": {
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "contentEncoding": "br",
+        "xRobotsTag": null
+      },
+      "noindex": true
+    },
+    {
+      "url": "https://www.numunix.com/definitely-not-a-real-page",
+      "status": 404,
+      "location": null,
+      "headers": {
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "contentEncoding": "br",
+        "xRobotsTag": null
+      },
+      "noindex": false
+    }
+  ]
+}

@@ -10,27 +10,49 @@ import { REPAIR_PAGES } from "@/content/repair-services";
 import { CONTACT } from "@/content/site";
 import { Button } from "@/components/ui/button";
 import { BrandSelect } from "./BrandSelect";
+import { emitRepairEvent } from "@/lib/repair-events";
 
 const fieldClass =
   "mt-2 block min-h-12 w-full min-w-0 rounded-xl border border-[#dbe5f2] bg-[#f8fafc] px-4 py-3 text-base font-normal text-[#102a63] outline-none transition focus:border-[#2563eb] focus:ring-3 focus:ring-[#2563eb]/10 placeholder:text-[#8190aa]";
 const labelClass = "block min-w-0 text-sm font-medium text-[#102a63]";
 
-export function ContactForm({ initialDescription = "", initialService = "", brandSelection }: { initialDescription?: string; initialService?: string; brandSelection?: { brand: string } | undefined } = {}) {
+export function ContactForm({
+  initialDescription = "",
+  initialService = "",
+  brandSelection,
+}: {
+  initialDescription?: string;
+  initialService?: string;
+  brandSelection?: { brand: string } | undefined;
+} = {}) {
   const submitBooking = useServerFn(createRepairBooking);
   const navigate = useNavigate();
   const ctx = useCategory();
-  const baseOptions = REPAIR_PAGES.filter(item => item.category === (ctx?.category ?? "electronics"));
-  const serviceOptions = initialService && !baseOptions.some(item => item.name === initialService) ? [{slug: "requested-repair", name: initialService}, ...baseOptions] : baseOptions;
+  const baseOptions = REPAIR_PAGES.filter(
+    (item) => item.category === (ctx?.category ?? "electronics"),
+  );
+  const serviceOptions =
+    initialService && !baseOptions.some((item) => item.name === initialService)
+      ? [{ slug: "requested-repair", name: initialService }, ...baseOptions]
+      : baseOptions;
   const submitting = useRef(false);
+  const started = useRef(false);
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => setHydrated(true), []);
   const [status, setStatus] = useState<"idle" | "pending" | "success" | "error">("idle");
   const [error, setError] = useState("");
   const [selectedService, setSelectedService] = useState(initialService);
   const [brand, setBrand] = useState("");
-  useEffect(() => { setSelectedService(initialService); setBrand(brandSelection?.brand ?? ""); }, [initialService, ctx?.category, brandSelection]);
   useEffect(() => {
-    if (brandSelection) { setSelectedService(initialService); setBrand(brandSelection.brand); setStatus("idle"); }
+    setSelectedService(initialService);
+    setBrand(brandSelection?.brand ?? "");
+  }, [initialService, ctx?.category, brandSelection]);
+  useEffect(() => {
+    if (brandSelection) {
+      setSelectedService(initialService);
+      setBrand(brandSelection.brand);
+      setStatus("idle");
+    }
   }, [brandSelection, initialService]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -58,11 +80,15 @@ export function ContactForm({ initialDescription = "", initialService = "", bran
     setStatus("pending");
     try {
       const receipt = await submitBooking({ data: { ...values, source: parsed.data.source } });
+      emitRepairEvent("enquiry_success", receipt.service);
       form.reset();
       setBrand("");
       setSelectedService(initialService);
       setStatus("success");
-      await navigate({ to: "/thank-you", search: { booking: receipt.reference, service: receipt.service } });
+      await navigate({
+        to: "/thank-you",
+        search: { booking: receipt.reference, service: receipt.service },
+      });
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : "Please try again later.");
       setStatus("error");
@@ -75,6 +101,12 @@ export function ContactForm({ initialDescription = "", initialService = "", bran
     <form
       method="post"
       onSubmit={handleSubmit}
+      onFocusCapture={() => {
+        if (!started.current) {
+          started.current = true;
+          emitRepairEvent("enquiry_start", selectedService);
+        }
+      }}
       aria-busy={status === "pending"}
       onChange={() => {
         if (status !== "pending") setStatus("idle");
@@ -124,7 +156,11 @@ export function ContactForm({ initialDescription = "", initialService = "", bran
             id="contact-service"
             name="service"
             value={selectedService}
-            onChange={event => { setSelectedService(event.target.value); setBrand(""); }}
+            onChange={(event) => {
+              setSelectedService(event.target.value);
+              setBrand("");
+              emitRepairEvent("service_selection", event.target.value);
+            }}
             required
           >
             <option value="" disabled>
@@ -138,7 +174,15 @@ export function ContactForm({ initialDescription = "", initialService = "", bran
             <option value="Help me decide">Not sure yet, help me decide</option>
           </select>
         </label>
-        <BrandSelect disabled={!hydrated || status === "pending"} service={selectedService} value={brand} onChange={value => { setBrand(value); setStatus("idle"); }} />
+        <BrandSelect
+          disabled={!hydrated || status === "pending"}
+          service={selectedService}
+          value={brand}
+          onChange={(value) => {
+            setBrand(value);
+            setStatus("idle");
+          }}
+        />
         <label className={labelClass} htmlFor="contact-timeline">
           Preferred service timing
           <select

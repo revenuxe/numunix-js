@@ -4,7 +4,7 @@ import { chromium } from "@playwright/test";
 
 const origin = process.argv[2] || "http://127.0.0.1:4173";
 const live = process.argv.includes("--live");
-const outputDir = "docs/seo-audit-2026-11-05";
+const outputDir = process.argv.find(arg => arg.startsWith("--output-dir="))?.slice("--output-dir=".length) || "docs/seo-audit-2026-11-05";
 mkdirSync(outputDir, { recursive: true });
 const sitemap = readFileSync("public/sitemap.xml", "utf8");
 const canonicalOrigin = "https://www.numunix.com";
