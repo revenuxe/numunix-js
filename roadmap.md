@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Expand brand pages with complete symptom cards and detailed repair-scope explainers, preserving unique model guidance, homepage styling and booking actions.
+
 - [x] Differentiated all 75 existing repair brand pages with explicit approval/handover advice, assessment angles, model guidance, FAQs and metadata while preserving homepage design and booking selection. Verified 75 SSR pages, six service families on desktop/mobile, booking navigation and 18 tests. Publish/redeploy required; traffic and indexing are not guaranteed.
 
 - [x] Built the Bosch washing machine repair page with researched content, shared homepage design, brand-prefilled booking, metadata, schema and a brand-card link. Verified Bosch enquiry prefill and enabled submission on desktop/mobile.
