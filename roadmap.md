@@ -1,8 +1,8 @@
 # Roadmap
 
-- [ ] Differentiate all existing repair brand pages with useful brand-specific sections and metadata while preserving the homepage design and booking flow.
+- [x] Differentiated all 75 existing repair brand pages with explicit approval/handover advice, assessment angles, model guidance, FAQs and metadata while preserving homepage design and booking selection. Verified 75 SSR pages, six service families on desktop/mobile, booking navigation and 18 tests. Publish/redeploy required; traffic and indexing are not guaranteed.
 
-- [ ] Build the Bosch washing machine repair page with researched content, shared homepage design, brand-prefilled booking, metadata, schema and a brand-card link.
+- [x] Built the Bosch washing machine repair page with researched content, shared homepage design, brand-prefilled booking, metadata, schema and a brand-card link. Verified Bosch enquiry prefill and enabled submission on desktop/mobile.
 
 - [x] Switched bookings to publishable-key-only RPC. Verified actual Mobile/Washer receipts, stored New status with blank internal notes and blocked anonymous customer reads. Public execution warnings are intentional for this narrow write-only RPC. Vercel redeploy remains user action.
 - [ ] Remove latest test bookings 077ef692-7ca0-4774-869c-7f8bc32baef7 and db8c24f3-08c4-4026-b9b3-97d768891ba9; prior cleanup permission was declined.

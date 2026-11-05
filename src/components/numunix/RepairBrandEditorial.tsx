@@ -66,7 +66,7 @@ export function RepairBrandScope({
               <span id="brand-assessment-title">
                 {page.brand} assessment.
                 <br />
-                <Accent>The details that matter.</Accent>
+                <Accent>Details that matter.</Accent>
               </span>
             </Heading>
             <h3 className="mt-8 text-xl text-navytext">{guidance.subject}</h3>
