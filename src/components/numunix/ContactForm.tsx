@@ -11,6 +11,7 @@ import { CONTACT } from "@/content/site";
 import { Button } from "@/components/ui/button";
 import { BrandSelect } from "./BrandSelect";
 import { emitRepairEvent } from "@/lib/repair-events";
+import { VISIT_CHARGE_POLICY } from "@/content/repair-visit-policy";
 
 const fieldClass =
   "mt-2 block min-h-12 w-full min-w-0 rounded-xl border border-[#dbe5f2] bg-[#f8fafc] px-4 py-3 text-base font-normal text-[#102a63] outline-none transition focus:border-[#2563eb] focus:ring-3 focus:ring-[#2563eb]/10 placeholder:text-[#8190aa]";
@@ -119,6 +120,7 @@ export function ContactForm({
       <p className="mt-2 text-sm leading-relaxed text-[#5d76a3]">
         A few details are enough to start. Fields marked * are required.
       </p>
+      <p className="mt-3 text-sm leading-relaxed text-[#5d76a3]">{VISIT_CHARGE_POLICY}</p>
       <fieldset disabled={status === "pending"} className="mt-7 grid min-w-0 gap-5 sm:grid-cols-2">
         <label className={labelClass} htmlFor="contact-name">
           Name *

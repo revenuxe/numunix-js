@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { Check, Loader2, PhoneCall } from "lucide-react";
 import { createRepairBooking } from "@/lib/bookings.functions";
 import { emitRepairEvent } from "@/lib/repair-events";
+import { VISIT_CHARGE_POLICY } from "@/content/repair-visit-policy";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -178,6 +179,7 @@ export function RepairCallback({
               Privacy policy
             </a>
           </p>
+          <p className="mt-2 text-xs leading-relaxed text-mutedtext">{VISIT_CHARGE_POLICY}</p>
         </form>
       </div>
       <Dialog open={open} onOpenChange={setOpen}>

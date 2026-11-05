@@ -42,6 +42,8 @@ No external analytics provider, cookies, identifiers or network transport are in
 
 The owner has been asked for confirmed inspection/visit fees, actual coverage, doorstep/workshop arrangements and written repair terms. These cannot be supplied by code or inferred from competitors. Real workshop/technician photos, permission-cleared repair examples, reviewer credentials and Business Profile verification also require genuine business evidence.
 
+Owner clarification: visit and inspection charges depend on the area, PIN code and service location. The shared enquiry form, callback form and doorstep-service FAQ now display this charge basis and say the amount is confirmed before a visit is agreed. No free-visit claim or fixed charge has been added. Specific coverage, arrangements and repair terms still require confirmed business information.
+
 The existing callback timing promise has not been expanded. Confirm its operational accuracy before treating it as a service guarantee. Existing public contact details were reused for consistency; the audit did not independently verify the physical business location.
 
 ## Publication

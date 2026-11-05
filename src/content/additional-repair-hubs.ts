@@ -1,4 +1,5 @@
 import type { HubCopy } from "./repair-hub-content";
+import { VISIT_CHARGE_POLICY } from "./repair-visit-policy";
 
 export const ADDITIONAL_REPAIR_HUBS: Record<string, HubCopy> = {
   "tv-audio-repair": {
@@ -276,8 +277,8 @@ export const ADDITIONAL_REPAIR_HUBS: Record<string, HubCopy> = {
         "Share your locality or PIN code to confirm current coverage and arrangements. A city-wide page does not establish availability for every address.",
       ],
       [
-        "Is the visit free?",
-        "No free-visit claim is made. Confirm any assessment, visit, transport, labour or parts charges before approving the arrangement.",
+        "How are visit and inspection charges calculated?",
+        VISIT_CHARGE_POLICY,
       ],
     ],
   },
