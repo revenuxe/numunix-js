@@ -11,6 +11,7 @@
 
 ## Website content and navigation
 - Brand repair subpages use unnested service-child routes and dedicated editorial content, reuse the homepage Hero and existing booking form, and validate supported brand/service/category combinations before rendering to avoid duplicate or fabricated pages.
+- Curate supported brand pages through the shared editorial resolver with explicit per-brand approval and handover advice; fail on missing coverage so brand-name substitutions cannot silently become public content.
 - Scope the private dashboard theme to admin-workspace and explicitly choose button variants, keeping public styles and lead permissions unchanged.
 - Render the supplied WhatsApp symbol as an inline SVG with semantic foreground color, so booking actions do not depend on a separate image request.
 - Public content is repair-specific; shared repair catalogues drive service and audience views, with the saved category selecting repair options while detail pages retain their own subjects.

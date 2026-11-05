@@ -1,4 +1,5 @@
 import { additionalWasherBrandPages } from "./washer-brand-editorial";
+import type { BrandPageEditorial } from "./curated-brand-repair";
 
 // Brand-specific editorial content describes independent service, not manufacturer affiliation.
 export const BOSCH_WASHER = {
@@ -56,7 +57,7 @@ export const BOSCH_WASHER = {
   ],
 };
 
-export type WasherBrandPage = typeof BOSCH_WASHER;
+export type WasherBrandPage = typeof BOSCH_WASHER & { editorial?: BrandPageEditorial };
 
 export const GODREJ_WASHER: WasherBrandPage = {
   ...BOSCH_WASHER,
