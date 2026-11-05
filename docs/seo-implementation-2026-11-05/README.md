@@ -47,3 +47,9 @@ The existing callback timing promise has not been expanded. Confirm its operatio
 ## Publication
 
 The reviewed source is intended for the existing GitHub/Lovable connection. Pushing the connected branch synchronizes editor source; live deployment must be verified separately. Do not describe the public site as updated until the production responses show the new release.
+
+The reviewed implementation was pushed to `main` in commit `6876715`, after merging the newer Lovable commits without rewriting history. A subsequent public check still found the previous homepage, missing service-scope section and 124-entry live sitemap; the Kent purifier destination remained 404. See [deployment check](deployment-check.json).
+
+The existing Lovable publishing integration is available but was not installed/connected in this session. It has been offered as the direct path for publishing the existing project. Alternatively, open the same project in Lovable and use **Publish → Publish changes**, then rerun `node scripts/verify-seo-release.mjs`. [Lovable publishing documentation](https://docs.lovable.dev/features/publish)
+
+Validation completed: production build, TypeScript, 133-page local crawl, thirteen brand/booking regression checks and five final SEO/browser integration checks. The final audience check waits for the existing font-fitting visibility step, and contact-event checks use the WhatsApp action beside the enquiry form.

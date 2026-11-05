@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-11-05T11:20:43.282Z",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "newHomepageHeading": false
+    },
+    {
+      "path": "/electronic/repairs/laptop-repair",
+      "status": 200,
+      "serviceScope": false
+    },
+    {
+      "path": "/who-we-serve/offices",
+      "status": 200,
+      "audienceSubject": false
+    },
+    {
+      "path": "/appliances/repairs/water-purifier-service/kent",
+      "status": 404
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "sitemapUrls": 124
+    }
+  ],
+  "verified": false
+}
