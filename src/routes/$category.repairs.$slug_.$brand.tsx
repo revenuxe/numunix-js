@@ -8,6 +8,7 @@ import { fridgeBrandPage } from "@/content/fridge-brand-pages";
 import { purifierBrandPage } from "@/content/purifier-brand-pages";
 import { repairPageHead, repairServiceSchema } from "@/content/repair-seo";
 import { RepairBrandPage } from "@/components/numunix/RepairBrandPage";
+import { curateBrandRepair } from "@/content/curated-brand-repair";
 
 export const Route = createFileRoute("/$category/repairs/$slug_/$brand")({
   loader: ({ params }) => {
@@ -20,7 +21,7 @@ export const Route = createFileRoute("/$category/repairs/$slug_/$brand")({
       acBrandPage(params.category, params.slug, params.brand) ??
       mobileBrandPage(params.category, params.slug, params.brand);
     if (!page) throw notFound();
-    return page;
+    return curateBrandRepair(page);
   },
   head: ({ loaderData }) => {
     if (!loaderData)

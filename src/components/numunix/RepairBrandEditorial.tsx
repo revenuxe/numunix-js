@@ -52,19 +52,21 @@ export function RepairBrandScope({
   const isLaptop = "laptopGuidance" in page;
   const isCCTV = "cctvGuidance" in page;
   const isPurifier = "purifierGuidance" in page;
-  const guidance = isPurifier
-    ? page.purifierGuidance
-    : isCCTV
-      ? page.cctvGuidance
-      : isLaptop
-        ? page.laptopGuidance
-        : isMobile
-          ? page.mobileGuidance
-          : isAC
-            ? page.acGuidance
-            : isFridge
-              ? page.guidance
-              : washerRepairGuidance(page.slug);
+  const guidance =
+    page.editorial ??
+    (isPurifier
+      ? page.purifierGuidance
+      : isCCTV
+        ? page.cctvGuidance
+        : isLaptop
+          ? page.laptopGuidance
+          : isMobile
+            ? page.mobileGuidance
+            : isAC
+              ? page.acGuidance
+              : isFridge
+                ? page.guidance
+                : washerRepairGuidance(page.slug));
   return (
     <>
       <section className="section-pad bg-paper" aria-labelledby="brand-assessment-title">
@@ -73,9 +75,9 @@ export function RepairBrandScope({
             <Label tone="light">{page.brand.toUpperCase()} REPAIR IN BANGALORE</Label>
             <Heading tone="light" className="mt-6">
               <span id="brand-assessment-title">
-                A better description.
+                {page.brand} assessment.
                 <br />
-                <Accent>A focused assessment.</Accent>
+                <Accent>Details that matter.</Accent>
               </span>
             </Heading>
             <h3 className="mt-8 text-xl text-navytext">{guidance.subject}</h3>
@@ -153,7 +155,7 @@ export function RepairBrandScope({
           <div>
             <h2
               id="brand-repair-cta-title"
-              className="text-2xl font-medium leading-tight text-white sm:text-3xl"
+              className="text-2xl font-medium leading-tight text-primary-foreground sm:text-3xl"
             >
               Your {page.brand}{" "}
               {isPurifier
@@ -171,7 +173,7 @@ export function RepairBrandScope({
                           : "washer stopped."}{" "}
               Let’s plan the next step.
             </h2>
-            <p className="mt-4 max-w-[65ch] text-base leading-relaxed text-white/70">
+            <p className="mt-4 max-w-[65ch] text-base leading-relaxed text-primary-foreground/70">
               Share the model, fault and Bangalore locality. Start with an assessment request and
               discuss the proposed work before you approve a repair.
             </p>
@@ -189,7 +191,7 @@ export function RepairBrandScope({
             <Button
               asChild
               variant="outline"
-              className="h-auto min-h-12 min-w-0 gap-1 whitespace-normal border-white/30 bg-transparent px-2 py-3 text-center text-xs text-white hover:bg-white/10 hover:text-white sm:gap-2 sm:px-4 sm:text-sm"
+              className="h-auto min-h-12 min-w-0 gap-1 whitespace-normal border-primary-foreground/30 bg-transparent px-2 py-3 text-center text-xs text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground sm:gap-2 sm:px-4 sm:text-sm"
             >
               <a href={whatsappHref}>
                 <WhatsAppIcon /> Share on WhatsApp
@@ -253,16 +255,18 @@ export function RepairBrandDecisions({
             the device, the proposed repair and the practical alternatives. An enquiry begins that
             conversation; it does not commit you to replacement parts or repair work.
           </p>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {(isPurifier
-              ? PURIFIER_DECISION_GUIDANCE
-              : isCCTV
-                ? CCTV_DECISION_GUIDANCE
-                : isLaptop
-                  ? LAPTOP_DECISION_GUIDANCE
-                  : isMobile
-                    ? MOBILE_DECISION_GUIDANCE
-                    : REPAIR_DECISION_GUIDANCE
+          <div className={page.editorial ? "mt-10 max-w-3xl" : "mt-10 grid gap-6 md:grid-cols-3"}>
+            {(page.editorial
+              ? [page.editorial.decision]
+              : isPurifier
+                ? PURIFIER_DECISION_GUIDANCE
+                : isCCTV
+                  ? CCTV_DECISION_GUIDANCE
+                  : isLaptop
+                    ? LAPTOP_DECISION_GUIDANCE
+                    : isMobile
+                      ? MOBILE_DECISION_GUIDANCE
+                      : REPAIR_DECISION_GUIDANCE
             ).map((item) => (
               <article
                 key={item.title}
@@ -344,20 +348,22 @@ export function RepairBrandDecisions({
             and what to do next. Before closing the visit, ask about the affected function, routine
             care and the route for reporting the same symptom again.
           </p>
-          <div className="mt-10 grid gap-8 md:grid-cols-3">
-            {(isPurifier
-              ? PURIFIER_AFTERCARE_GUIDANCE
-              : isCCTV
-                ? CCTV_AFTERCARE_GUIDANCE
-                : isLaptop
-                  ? LAPTOP_AFTERCARE_GUIDANCE
-                  : isMobile
-                    ? MOBILE_AFTERCARE_GUIDANCE
-                    : isAC
-                      ? AC_AFTERCARE_GUIDANCE
-                      : isFridge
-                        ? FRIDGE_AFTERCARE_GUIDANCE
-                        : REPAIR_AFTERCARE_GUIDANCE
+          <div className={page.editorial ? "mt-10 max-w-3xl" : "mt-10 grid gap-8 md:grid-cols-3"}>
+            {(page.editorial
+              ? [page.editorial.handover]
+              : isPurifier
+                ? PURIFIER_AFTERCARE_GUIDANCE
+                : isCCTV
+                  ? CCTV_AFTERCARE_GUIDANCE
+                  : isLaptop
+                    ? LAPTOP_AFTERCARE_GUIDANCE
+                    : isMobile
+                      ? MOBILE_AFTERCARE_GUIDANCE
+                      : isAC
+                        ? AC_AFTERCARE_GUIDANCE
+                        : isFridge
+                          ? FRIDGE_AFTERCARE_GUIDANCE
+                          : REPAIR_AFTERCARE_GUIDANCE
             ).map((item, index) => (
               <article key={item.title} className="border-t border-border pt-6">
                 <span className="font-mono text-xs text-primary">0{index + 1}</span>

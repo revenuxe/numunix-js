@@ -149,25 +149,11 @@ export function RepairBrandPage({
                 SERVICE
               </Label>
               <Heading tone="light" className="mt-6">
-                Your model matters.
+                {page.brand} repair.
                 <br />
-                <Accent>So does the diagnosis.</Accent>
+                <Accent>Your model first.</Accent>
               </Heading>
-              <p className="mt-6 text-base leading-relaxed text-mutedtext">
-                {isPurifier
-                  ? `A refill, dispensing or operating change in your ${page.brand} purifier needs assessment of the fitted system. Share the model, source-water changes, filter history and complete indicators before discussing compatible parts.`
-                  : isCCTV
-                    ? `A missing picture or recording gap on your ${page.brand} system needs assessment of the camera, power, connection and recording path. Describe local viewing, playback and remote access separately. The symptoms help establish which checks are needed before a part or configuration change is proposed.`
-                    : isLaptop
-                      ? `A screen, charging or startup fault on your ${page.brand} laptop needs assessment of the actual device. Explain the power indicators, display response and tasks affected. Discuss backup status before any software, storage or board work is approved.`
-                      : isMobile
-                        ? `A display, charging or start-up complaint on your ${page.brand} phone needs assessment of the actual device. Describe damage, earlier work and the functions that still respond. Discuss your backup and data priorities before any repair or software change is approved.`
-                        : isAC
-                          ? `A cooling or operating change in your ${page.brand} AC needs model-specific assessment. Describe airflow, settings, messages and installation history so the proposed work follows the findings rather than a guessed part.`
-                          : isFridge
-                            ? `A cooling change in your ${page.brand} fridge needs an assessment of the actual appliance, not a part guessed from the symptom. Describe the compartments, controls and fault history so the proposed work follows the findings.`
-                            : `A washer that stops halfway through a programme is not always a failed motor. Water supply, drainage, load balance and door locking can affect the same cycle. Numunix starts with your ${page.brand} model and the sequence of symptoms, rather than prescribing a part from a display message alone.`}
-              </p>
+              <p className="mt-6 text-base leading-relaxed text-mutedtext">{page.description}</p>
               <p className="mt-5 text-base leading-relaxed text-mutedtext">{page.modelIntro}</p>
             </Reveal>
             <Reveal ssrVisible>
@@ -224,7 +210,7 @@ export function RepairBrandPage({
         <section className="section-pad bg-mist">
           <div className="shell">
             <Label tone="light">
-              COMMON {page.brand.toUpperCase()}{" "}
+              YOUR {page.brand.toUpperCase()}{" "}
               {isPurifier
                 ? "WATER PURIFIER"
                 : isCCTV
@@ -238,12 +224,12 @@ export function RepairBrandPage({
                         : isFridge
                           ? "FRIDGE"
                           : "WASHER"}{" "}
-              FAULTS
+              REPAIR QUESTIONS
             </Label>
             <Heading tone="light" className="mt-6">
-              What changed?
+              {page.brand} symptoms.
               <br />
-              <Accent>Start with the symptom.</Accent>
+              <Accent>Repair decisions.</Accent>
             </Heading>
             <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {page.faults.map((fault, index) => (
@@ -286,12 +272,12 @@ export function RepairBrandPage({
                         : "ERROR CODES, NOT GUESSWORK"}
               </Label>
               <Heading className="mt-6">
-                {page.diagnosticTitle}
+                {page.editorial ? "Before a replacement." : page.diagnosticTitle}
                 <br />
                 <Accent>Check the context.</Accent>
               </Heading>
               <p className="mt-6 text-base leading-relaxed text-primary-foreground/70">
-                {page.diagnosticBody}
+                {page.editorial?.decision.body ?? page.diagnosticBody}
               </p>
               <p className="mt-5 text-base leading-relaxed text-primary-foreground/70">
                 {isPurifier
