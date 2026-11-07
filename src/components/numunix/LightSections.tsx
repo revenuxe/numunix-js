@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
-import { Label, Heading, Accent, Reveal } from "./primitives";
+import { Heading, Accent, Reveal } from "./primitives";
 import { useCategory } from "./category";
 import { REPAIR_PAGES, repairServiceHref, repairPageHref } from "@/content/repair-services";
 import { REPAIR_SERVICES } from "@/content/homepage-repairs";
@@ -44,12 +44,9 @@ export function AutomationWorkflow() {
   return (
     <section id="process" className="section-pad bg-[#f7f9fc]">
       <div className="shell">
-        <Reveal>
-          <Label tone="light">HOW WE REPAIR</Label>
-        </Reveal>
         <Reveal delay={60}>
           <Heading tone="light" className="mt-8 max-w-[18ch]">
-            From the first fault to {category === "appliances" ? "an appliance" : "a device"} that <Accent>works again.</Accent>
+            From enquiry <Accent>to completion.</Accent>
           </Heading>
         </Reveal>
 
@@ -188,9 +185,6 @@ export function FeatureDirectory() {
   return (
     <section className="section-pad bg-[#eef3f8]">
       <div className="shell grid gap-12 lg:grid-cols-[0.35fr_1.65fr] lg:gap-20">
-        <Reveal>
-          <Label tone="light">WHAT WE FIX</Label>
-        </Reveal>
         <div className="grid gap-x-10 md:grid-cols-2">
           <div>
             {left.map(([icon, l, href]) => (
@@ -232,9 +226,6 @@ export function AnalyticsDemo() {
   return (
     <section id="analytics" className="section-pad bg-[#f7f9fc]">
       <div className="shell">
-        <Reveal>
-          <Label tone="light">REPAIR DESK · SAMPLE DASHBOARD</Label>
-        </Reveal>
         <Reveal delay={60}>
           <Heading tone="light" className="mt-8 max-w-[18ch]">
             See every {category === "appliances" ? "appliance repair" : "device repair"}, <Accent>clearly.</Accent>
@@ -256,7 +247,7 @@ export function AnalyticsDemo() {
 
             <div className="mt-6 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
               <div className="rounded-2xl border border-[#e6ecf4] p-6">
-                <div className="label-mono text-[#8190aa]">REPAIRS COMPLETED · SAMPLE 12 WEEKS</div>
+                <div className="label-mono text-[#8190aa]">ILLUSTRATIVE REPAIR WORKFLOW</div>
                 <svg viewBox="0 0 640 130" className="mt-6 h-auto w-full">
                   {[30, 60, 90].map((y) => (
                     <line key={y} x1="0" y1={y} x2="640" y2={y} stroke="#eef1f6" />
@@ -276,7 +267,7 @@ export function AnalyticsDemo() {
                 </svg>
               </div>
               <div className="rounded-2xl border border-[#e6ecf4] p-6">
-                <div className="label-mono text-[#8190aa]">JOBS BY DEVICE</div>
+                <div className="label-mono text-[#8190aa]">SAMPLE SERVICE CATEGORIES</div>
                 <div className="mt-6 space-y-4">
                   {top.map(([k, v]) => (
                     <div key={k}>
@@ -303,9 +294,9 @@ export function AnalyticsDemo() {
 }
 
 const POSTS = [
-  ["FIXED RIGHT", "DIAGNOSTICS FIRST", "We find the real fault before replacing any part.", "/repair-diagnostics"],
-  ["PARTS THAT FIT", "CLEAR TERMS", "Discuss compatible parts, function checks and the terms for your repair.", "/repair-process/repair-estimate"],
-  ["ONE WORKSHOP", "END TO END", "Booking, repair, quality check, and doorstep delivery, one team.", "/repair-process"],
+  ["LEAD MANAGEMENT", "CUSTOMER ENQUIRIES", "Capture customer enquiries, organize service requests and keep every potential repair opportunity in view.", "/admin/login"],
+  ["BOOKING MANAGEMENT", "SERVICE BOOKINGS", "Manage customer bookings, appliance details and scheduled service requests through a structured workflow.", "/admin/login"],
+  ["JOB TRACKING", "CONNECTED WORKFLOW", "Follow repair jobs through assignment, acceptance, progress and completion.", "/admin/login"],
 ];
 
 export function BlogCards() {
@@ -316,7 +307,7 @@ export function BlogCards() {
     <section className="section-pad bg-[#eef3f8]">
       <div className="shell">
         <Reveal>
-          <Heading tone="light">Why repair with Numunix</Heading>
+          <Heading tone="light">Everything you need to manage every repair.</Heading>
         </Reveal>
         <div className="mt-16 grid gap-6 md:grid-cols-3">
           {posts.map(([d, c, t, href], i) => (

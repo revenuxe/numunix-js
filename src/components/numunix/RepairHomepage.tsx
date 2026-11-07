@@ -39,11 +39,13 @@ function HomepageContent() {
       <Header />
       <main>
         <Hero
-          headline={content.headline}
-          accent={content.accent}
-          intro={content.intro}
-          primaryLabel="BOOK A REPAIR"
-          secondaryLabel="WHAT WE REPAIR"
+          headline="Building the Future"
+          accent="of Repair Intelligence."
+          intro="One connected platform to manage repair enquiries, appliance details, bookings, technician assignments, job progress and invoicing. Make repair operations simpler, faster and more organized."
+          primaryLabel="GET STARTED"
+          primaryHref="/contact"
+          secondaryLabel="EXPLORE PLATFORM"
+          secondaryHref="#approach"
         />
         <LogoMarquee />
         <PlatformIntro />
@@ -51,16 +53,16 @@ function HomepageContent() {
           <div className="shell flex flex-wrap items-center justify-between gap-3">
             <p className="text-base text-navytext">
               {category === "electronics"
-                ? "Need help with a home appliance?"
-                : "Looking for electronics repair?"}
+                ? "Manage appliance service operations?"
+                : "Manage electronics service operations?"}
             </p>
             <a
               href={category === "electronics" ? "/appliances" : "/"}
               className="text-sm text-primary underline underline-offset-4"
             >
               {category === "electronics"
-                ? "Explore appliance repairs in Bangalore"
-                : "Explore electronics repairs in Bangalore"}
+                ? "Explore the appliance workspace"
+                : "Explore the electronics workspace"}
             </a>
           </div>
         </nav>

@@ -1,4 +1,4 @@
-import { Label, Heading, Accent, Reveal } from "./primitives";
+import { Heading, Accent, Reveal } from "./primitives";
 import { REPAIR_PAGES } from "@/content/repair-services";
 import { HOMEPAGE_REPAIR } from "@/content/homepage-repairs";
 import { useCategory } from "./category";
@@ -65,26 +65,23 @@ export function PlatformIntro() {
   return (
     <section id="approach" className="section-pad bg-[#f1f5f9]">
       <div className="shell">
-        <Reveal>
-          <Label tone="light">WHAT WE FIX</Label>
-        </Reveal>
         <div className="mt-10 grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20">
           <Reveal delay={60}>
             <Heading tone="light">
-              {category === "appliances" ? "Every appliance," : "Every device,"}
+              {category === "appliances" ? "Appliance repairs," : "Every repair,"}
               <br />
-              <Accent>one workshop.</Accent>
+              <Accent>one workspace.</Accent>
             </Heading>
           </Reveal>
           <Reveal delay={140}>
             <p className="max-w-[44ch] text-[18px] leading-relaxed text-[#5d76a3] lg:pt-6 lg:text-[20px]">
-              {HOMEPAGE_REPAIR[category].overview}
+              Manage enquiries, bookings, technicians, jobs and invoices in one place.
             </p>
           </Reveal>
         </div>
       </div>
       <Reveal delay={120}>
-        <WorkflowVisualization tabs={REPAIR_TABS} label="OUR REPAIR" sub={category === "appliances" ? "/ WASHING → ELECTRICAL" : "/ MOBILE → CCTV"} />
+        <WorkflowVisualization tabs={REPAIR_TABS} label="SERVICE WORKSPACE" sub={category === "appliances" ? "/ APPLIANCES → SERVICE JOBS" : "/ DEVICES → SERVICE JOBS"} />
       </Reveal>
     </section>
   );

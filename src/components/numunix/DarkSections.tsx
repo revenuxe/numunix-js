@@ -3,7 +3,7 @@ import { useCategory } from "./category";
 import { repairServiceHref } from "@/content/repair-services";
 import { HOMEPAGE_REPAIR, REPAIR_SERVICES } from "@/content/homepage-repairs";
 import NumunixRibbonScene from "./NumunixRibbonScene";
-import { Label, Heading, Accent, Btn, Reveal } from "./primitives";
+import { Heading, Accent, Btn, Reveal } from "./primitives";
 import ServiceDemo from "./ServiceDemo";
 import { ShieldCheck, Users, Activity, FileSearch } from "lucide-react";
 
@@ -18,19 +18,16 @@ export function AIAgentsSection() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(100%_70%_at_0%_50%,rgba(5,7,12,0.95),transparent_70%)]" />
       <div className="shell relative grid gap-14 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-20">
         <div>
-          <Reveal>
-            <Label>FAULT DIAGNOSIS</Label>
-          </Reveal>
           <Reveal delay={60}>
             <Heading className="mt-8">
-              {content.diagnostic}
+              Intelligent
               <br />
-              <Accent>{content.diagnosticAccent}</Accent>
+              <Accent>Repair Operations</Accent>
             </Heading>
           </Reveal>
           <Reveal delay={120}>
             <p className="mt-8 max-w-[50ch] text-[18px] leading-relaxed text-white/60 lg:text-[20px]">
-              {content.diagnosticBody}
+              Future vision, planned for development. Numunix has no AI features today. Planned ideas include service assistance, technician recommendations and operational insights.
             </p>
           </Reveal>
           <Reveal delay={180}>
@@ -38,7 +35,7 @@ export function AIAgentsSection() {
               <Btn as="a" href="/contact">
                 BOOK A REPAIR
               </Btn>
-              <Btn as="a" href="/services" variant="ghostDark">
+            <Btn as="a" href="#approach" variant="ghostDark">
                 WHAT WE REPAIR
               </Btn>
             </div>
@@ -59,26 +56,23 @@ export function DispatchSection() {
     <section className="relative overflow-hidden bg-[#07111f] py-14 sm:py-20 lg:py-[104px]">
       <div className="shell grid gap-14 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-20">
         <div>
-          <Reveal>
-            <Label>WARRANTY & AMC</Label>
-          </Reveal>
           <Reveal delay={60}>
             <Heading className="mt-8">
-              One plan. {category === "appliances" ? "Your appliances" : "Your devices"} <Accent>cared for.</Accent>
+              A workspace for <Accent>every technician.</Accent>
             </Heading>
           </Reveal>
           <Reveal delay={120}>
             <p className="mt-8 max-w-[46ch] text-[18px] leading-relaxed text-white/60">
-              {category === "appliances" ? "Plan preventive checks for ACs, washing machines, refrigerators and purifiers. Discuss visit schedules, exclusions and parts costs before choosing your maintenance cover." : "Plan preventive care for laptops, CCTV and everyday electronics. Discuss visit schedules, exclusions and parts costs before choosing your maintenance cover."}
+              Keep technicians connected to assigned jobs, service details and completion updates through their dedicated workspace.
             </p>
           </Reveal>
           <Reveal delay={160}>
             <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-white/10 pt-8">
               {[
-                ["PLANS", "Home · Shop · Office"],
-                ["ITEMS", content.maintenance],
-                ["VISITS", "Scheduled preventive checks"],
-                ["SUPPORT", "Priority slots · Doorstep service"],
+                ["ASSIGNMENTS", "Assigned job overview"],
+                ["DETAILS", "Customer & appliance information"],
+                ["PROGRESS", "Job acceptance & status updates"],
+                ["COMPLETION", "Service completion workflow"],
               ].map(([k, v]) => (
                 <div key={k}>
                   <dt className="label-mono text-[#8fb4e8]">{k}</dt>
@@ -114,9 +108,6 @@ export function SecuritySection() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(110%_80%_at_20%_50%,rgba(5,7,12,0.95),transparent_72%)]" />
       <div className="shell relative grid gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <div>
-          <Reveal>
-            <Label>SECURITY</Label>
-          </Reveal>
           <Reveal delay={60}>
             <Heading className="mt-8">
               Careful,
@@ -168,7 +159,7 @@ export function BuiltWithNumunix() {
       </div>
       <div className="shell relative">
         <Reveal>
-          <Heading className="text-center">What we can fix for you</Heading>
+          <Heading className="text-center">Manage every repair.</Heading>
         </Reveal>
         <Reveal delay={80}>
           <div className="mt-10 flex justify-center">
@@ -205,7 +196,7 @@ export function BuiltWithNumunix() {
                   {d}
                 </p>
                 <span className="label-mono mt-10 inline-flex items-center gap-2 text-[#1747b8]">
-                  EXPLORE SERVICE <span className="hover-arrow">→</span>
+                  PLATFORM CAPABILITY <span className="hover-arrow">→</span>
                 </span>
               </a>
             </Reveal>
@@ -231,24 +222,21 @@ export function FinalCTA() {
       <div className="shell relative">
         <Reveal>
           <Heading size="xl" className="max-w-[16ch]">
-            {content.cta}{" "}
-            <Accent>
-              Let’s bring it back.
-            </Accent>
+            Bring your entire repair operation <Accent>together.</Accent>
           </Heading>
         </Reveal>
         <Reveal delay={100}>
           <p className="mt-10 max-w-[54ch] text-[18px] leading-relaxed text-white/60 lg:text-[20px]">
-            {content.ctaBody}
+            Manage customer enquiries, bookings, technicians, repair jobs and invoices from one connected platform.
           </p>
         </Reveal>
         <Reveal delay={160}>
           <div className="mt-12 flex flex-wrap gap-3">
             <Btn as="a" href="/contact">
-              BOOK A REPAIR
+              GET STARTED
             </Btn>
-            <Btn as="a" href="/services" variant="ghostDark">
-              WHAT WE REPAIR
+            <Btn as="a" href="#approach" variant="ghostDark">
+              EXPLORE PLATFORM
             </Btn>
           </div>
         </Reveal>
