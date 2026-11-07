@@ -28,7 +28,7 @@ export function PageHero({
   title,
   accent,
   body,
-  primary = { label: "REQUEST ASSESSMENT", href: "/contact" },
+  primary = { label: "OPEN WORKSPACE", href: "https://app.numunix.com" },
   secondary,
 }: {
   label: string;
@@ -40,7 +40,7 @@ export function PageHero({
   compact?: boolean;
 }) {
   return (
-    <Hero headline={accent && title.includes(accent) ? title.replace(accent, "").trim() : title} accent={accent ?? ""} intro={body} eyebrow={label} primaryLabel={primary.label} primaryHref={primary.href} secondaryLabel={secondary?.label ?? "EXPLORE SERVICES"} secondaryHref={secondary?.href ?? "/services"} />
+    <Hero headline={accent && title.includes(accent) ? title.replace(accent, "").trim() : title} accent={accent ?? ""} intro={body} eyebrow={label} primaryLabel={primary.label} primaryHref={primary.href} secondaryLabel={secondary?.label ?? "EXPLORE FEATURES"} secondaryHref={secondary?.href ?? "/features"} />
   );
 }
 
@@ -113,9 +113,9 @@ export function SectionHead({
 }
 
 export function ClosingCTA({
-  title = "Something not working? Let’s take a look.",
-  accent = "Let’s take a look.",
-  body = "Share the model, symptoms and location. Discuss repair feasibility and review the estimate before approving work.",
+  title = "Bring your service work together.",
+  accent = "service work together.",
+  body = "Coordinate enquiries, bookings, technician assignments, job updates and invoices in one workspace.",
 }: {
   title?: string;
   accent?: string;
@@ -138,10 +138,10 @@ export function ClosingCTA({
         </p>
         <div className="mt-9 flex flex-wrap justify-center gap-3">
           <Btn as="a" href="/contact">
-            REQUEST ASSESSMENT
+            TALK TO OUR TEAM
           </Btn>
-          <Btn as="a" href="/services" variant="ghostDark">
-            EXPLORE SERVICES
+          <Btn as="a" href="/features" variant="ghostDark">
+            EXPLORE FEATURES
           </Btn>
         </div>
       </div>

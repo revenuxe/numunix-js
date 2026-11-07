@@ -1,86 +1,20 @@
-import { cctvBrandPage } from "@/content/cctv-brand-pages";
-import { laptopBrandPage } from "@/content/laptop-brand-pages";
-import { createFileRoute, notFound } from "@tanstack/react-router";
-import { washerBrandPage } from "@/content/repair-brand-pages";
-import { mobileBrandPage } from "@/content/mobile-brand-pages";
-import { acBrandPage } from "@/content/ac-brand-pages";
-import { fridgeBrandPage } from "@/content/fridge-brand-pages";
-import { purifierBrandPage } from "@/content/purifier-brand-pages";
-import { repairPageHead, repairServiceSchema } from "@/content/repair-seo";
-import { RepairBrandPage } from "@/components/numunix/RepairBrandPage";
-import { curateBrandRepair } from "@/content/curated-brand-repair";
+import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/$category/repairs/$slug_/$brand")({
-  loader: ({ params }) => {
-    const page =
-      purifierBrandPage(params.category, params.slug, params.brand) ??
-      cctvBrandPage(params.category, params.slug, params.brand) ??
-      laptopBrandPage(params.category, params.slug, params.brand) ??
-      washerBrandPage(params.category, params.slug, params.brand) ??
-      fridgeBrandPage(params.category, params.slug, params.brand) ??
-      acBrandPage(params.category, params.slug, params.brand) ??
-      mobileBrandPage(params.category, params.slug, params.brand);
-    if (!page) throw notFound();
-    return curateBrandRepair(page);
+  beforeLoad: async ({ params }) => {
+    const { category, slug, brand } = params;
+    const candidates = await Promise.all([
+      import("@/content/purifier-brand-pages").then(module => module.purifierBrandPage(category, slug, brand)),
+      import("@/content/cctv-brand-pages").then(module => module.cctvBrandPage(category, slug, brand)),
+      import("@/content/laptop-brand-pages").then(module => module.laptopBrandPage(category, slug, brand)),
+      import("@/content/repair-brand-pages").then(module => module.washerBrandPage(category, slug, brand)),
+      import("@/content/fridge-brand-pages").then(module => module.fridgeBrandPage(category, slug, brand)),
+      import("@/content/ac-brand-pages").then(module => module.acBrandPage(category, slug, brand)),
+      import("@/content/mobile-brand-pages").then(module => module.mobileBrandPage(category, slug, brand)),
+    ]);
+    if (!candidates.some(Boolean)) throw notFound();
+    throw redirect({ to: "/features/$slug", params: { slug: "jobs" }, statusCode: 301 });
   },
-  head: ({ loaderData }) => {
-    if (!loaderData)
-      return {
-        meta: [
-          { title: "Brand repair unavailable | Numunix" },
-          { name: "robots", content: "noindex" },
-        ],
-      };
-    const isMobile = loaderData.service === "Mobile Repair";
-    const isLaptop = loaderData.service === "Laptop Repair";
-    const isCCTV = loaderData.service === "CCTV Installation & Repair";
-    const categoryPath = isMobile || isLaptop || isCCTV ? "electronic" : "appliances";
-    const serviceSlug = isCCTV
-      ? "cctv-service"
-      : isLaptop
-        ? "laptop-repair"
-        : isMobile
-          ? "mobile-repair"
-          : loaderData.service === "Water Purifier Service"
-            ? "water-purifier-service"
-            : loaderData.service === "AC Service & Repair"
-              ? "ac-repair"
-              : loaderData.service === "Refrigerator Repair"
-                ? "refrigerator-repair"
-                : "washing-machine-repair";
-    const serviceName = isCCTV
-      ? "CCTV repair"
-      : isLaptop
-        ? "Laptop repair"
-        : isMobile
-          ? "Mobile repair"
-          : loaderData.service === "Water Purifier Service"
-            ? "Water purifier repair"
-            : loaderData.service === "AC Service & Repair"
-              ? "AC repair"
-              : loaderData.service === "Refrigerator Repair"
-                ? "Fridge repair"
-                : "Washing machine repair";
-    return repairPageHead({
-      title: loaderData.title,
-      description: loaderData.description,
-      path: loaderData.path,
-      breadcrumbs: [
-        ...(isMobile || isLaptop || isCCTV ? [] : [{ name: "Appliances", path: "/appliances" }]),
-        { name: serviceName, path: `/${categoryPath}/repairs/${serviceSlug}` },
-        { name: `${loaderData.brand} ${serviceName.toLowerCase()}`, path: loaderData.path },
-      ],
-      entities: [
-        repairServiceSchema(
-          { name: `Independent ${loaderData.brand} ${serviceName}`, intro: loaderData.intro },
-          loaderData.path,
-        ),
-      ],
-    });
-  },
-  component: BrandRepair,
+  head: () => ({ meta: [{ title: "Service management feature | Numunix" }, { name: "robots", content: "noindex, follow" }] }),
+  component: () => null,
 });
-function BrandRepair() {
-  const page = Route.useLoaderData();
-  return <RepairBrandPage page={page} />;
-}

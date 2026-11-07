@@ -11,44 +11,45 @@ export function repairSiteSchema() {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": ["Organization", "LocalBusiness"],
+        "@type": "Organization",
         "@id": REPAIR_ORGANIZATION_ID,
         name: "Numunix",
         url: SITE_URL,
         description:
-          "Electronics and home appliance repair assessment, service and aftercare in Bangalore.",
-        telephone: CONTACT.phone,
+          "Numunix provides service management software for service businesses and field teams.",
         email: CONTACT.email,
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: CONTACT.address,
-          addressLocality: CONTACT.addressLocality,
-          addressRegion: CONTACT.addressRegion,
-          postalCode: CONTACT.postalCode,
-          addressCountry: CONTACT.addressCountry,
-        },
-        openingHoursSpecification: [
-          {
-            "@type": "OpeningHoursSpecification",
-            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            opens: "09:00",
-            closes: "20:00",
-          },
-        ],
         logo: {
           "@type": "ImageObject",
           url: `${SITE_URL}/numunix-logo.webp`,
           width: 1728,
           height: 345,
         },
-        areaServed: { "@type": "City", name: "Bangalore" },
       },
       {
         "@type": "WebSite",
         "@id": REPAIR_WEBSITE_ID,
-        name: "Numunix Repairs",
+        name: "Numunix Service Management",
         url: SITE_URL,
         inLanguage: "en-IN",
+        publisher: { "@id": REPAIR_ORGANIZATION_ID },
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": `${SITE_URL}/#service-management-software`,
+        name: "Numunix Service Management",
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web",
+        url: SITE_URL,
+        description:
+          "A shared workspace for managing service enquiries, bookings, customers, technician assignments, jobs and invoices.",
+        featureList: [
+          "Lead and enquiry management",
+          "Service booking management",
+          "Customer records",
+          "Technician assignments",
+          "Service job tracking",
+          "Service invoicing",
+        ],
         publisher: { "@id": REPAIR_ORGANIZATION_ID },
       },
     ],
@@ -102,7 +103,7 @@ export function repairPageHead({
   about?: SchemaNode[];
 }) {
   const url = `${SITE_URL}${path}`;
-  const trail = [{ name: "Numunix Repairs", path: "/" }, ...breadcrumbs];
+  const trail = [{ name: "Numunix Service Management", path: "/" }, ...breadcrumbs];
   return {
     meta: [
       { title },

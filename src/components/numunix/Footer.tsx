@@ -1,122 +1,50 @@
-import { Linkedin, Instagram, Facebook, Info } from "lucide-react";
+import { Facebook, Instagram, Linkedin, type LucideIcon } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
 import { CONTACT } from "@/content/site";
-import { REPAIR_PAGES, repairPageHref } from "@/content/repair-services";
-import { useCategory, useCategorySelection } from "./category";
-import { REPAIR_SERVICES, HOMEPAGE_REPAIR } from "@/content/homepage-repairs";
 
-const FEATURE_LINKS: Record<string,string> = {"Fault Assessment":"/repair-assessment","Repair Process":"/repair-process","Diagnostics & Tools":"/repair-diagnostics","Contact":"/contact","Repair Aftercare":"/repair-aftercare","Privacy Policy":"/privacy","Terms":"/terms","Device & Data Care":"/repair-safety","Repair Guides":"/repair-guides","Repair Estimates":"/repair-process/repair-estimate","Function Testing":"/repair-process/function-testing","Maintenance Visits":"/repair-aftercare"};
+const SOCIAL_LINKS: { Icon: LucideIcon; label: string; href: string }[] = [
+  { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/numunix/" },
+  { Icon: Instagram, label: "Instagram", href: "https://www.instagram.com/numunix" },
+  { Icon: Facebook, label: "Facebook", href: "https://www.facebook.com/people/Numunix/61592696692436/" },
+];
+
+const COLUMNS: [string, [string, string][]][] = [
+  ["PLATFORM", [["Overview", "/#approach"], ["Lead management", "/lead-management"], ["Workflow", "/workflow"], ["Operations", "/operations"], ["Team workspace", "/team-workspace"], ["Access and records", "/access-and-records"]]],
+  ["FEATURES", [["Leads", "/features/leads"], ["Bookings", "/features/bookings"], ["Customers", "/features/customers"], ["Technicians", "/features/technicians"], ["Jobs", "/features/jobs"], ["Invoicing", "/features/invoicing"], ["Dashboard", "/features/dashboard"]]],
+  ["TEAMS", [["Owners", "/industries/service-business-owners"], ["Operations", "/industries/operations-managers"], ["Support", "/industries/customer-support-teams"], ["Booking coordinators", "/industries/booking-coordinators"], ["Field technicians", "/industries/field-technicians"], ["Service managers", "/industries/service-managers"], ["Billing teams", "/industries/billing-teams"], ["Growing teams", "/industries/growing-service-teams"]]],
+  ["RESOURCES", [["Playbooks", "/resources"], ["Contact", "/contact"], ["Privacy Policy", "/privacy"], ["Terms", "/terms"]]],
+];
 
 export function Footer() {
-  const category = useCategory()?.category ?? "electronics";
-  const selection = useCategorySelection();
-  const columns: [string, string[]][] = [
-    ["REPAIR SERVICES", REPAIR_PAGES.filter(service => service.category === category).map(service => service.name)],
-    ["REPAIR CARE", ["Fault Assessment", "Repair Estimates", "Function Testing", "Maintenance Visits"]],
-    ["NUMUNIX", ["Electronics", "Appliances", "Fault Assessment", "Repair Process", "Diagnostics & Tools", "Repair Guides", "Contact"]],
-    ["INFORMATION", ["Repair Aftercare", "Privacy Policy", "Terms"]],
-  ];
-  const repairLink = (label: string) => {
-    if (label === "Electronics") return "/";
-    if (label === "Appliances") return "/appliances";
-    const service = REPAIR_PAGES.find(item => item.category === category && item.name === label);
-    return service ? repairPageHref(service) : FEATURE_LINKS[label] ?? "#enquiry";
-  };
   return (
-    <>
-    <aside aria-label="Independent service provider disclaimer" className="border-t border-border bg-paper py-6 sm:py-8">
-      <div className="shell flex items-start gap-3 sm:gap-4">
-        <Info size={20} aria-hidden="true" className="mt-0.5 shrink-0 text-primary" />
-        <p className="max-w-[100ch] text-sm leading-relaxed text-mutedtext">
-          <strong className="font-semibold text-navytext">Disclaimer:</strong>{" "}
-          Numunix is an independent repair service provider, not an authorized service center for any brand. Brand names and logos are used for identification only and do not imply affiliation or endorsement.
-        </p>
-      </div>
-    </aside>
-    <footer className="border-t border-white/8 bg-[#05070c] pt-20 pb-10">
-      <div className="shell grid gap-14 lg:grid-cols-[1.1fr_2.4fr]">
+    <footer className="border-t border-white/8 bg-[#05070c] pt-16 pb-10 sm:pt-20">
+      <div className="shell grid gap-12 lg:grid-cols-[1.1fr_2.4fr]">
         <div>
           <BrandLogo className="w-[200px] sm:w-[220px]" />
-          <p className="mt-5 max-w-[34ch] text-[15px] leading-relaxed text-white/50">
-            {HOMEPAGE_REPAIR[category].audienceIntro}
-          </p>
-          <p className="mt-3 max-w-[34ch] text-[13px] leading-relaxed text-white/35">
-            {CONTACT.address}
-          </p>
+          <p className="mt-5 max-w-[36ch] text-[15px] leading-relaxed text-white/50">A shared workspace for service enquiries, bookings, teams, jobs and invoices.</p>
+          <p className="mt-3 max-w-[36ch] text-[13px] leading-relaxed text-white/35">Questions? <a href={CONTACT.emailHref} className="underline underline-offset-4 hover:text-white/70">{CONTACT.email}</a></p>
           <div className="mt-8 flex gap-3">
-            <a
-              href="https://www.linkedin.com/company/numunix/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 text-white/60 transition-colors hover:border-[#3b82f6]/50 hover:text-white"
-            >
-              <Linkedin size={15} />
-            </a>
-            <a
-              href="https://www.instagram.com/numunix"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 text-white/60 transition-colors hover:border-[#3b82f6]/50 hover:text-white"
-            >
-              <Instagram size={15} />
-            </a>
-            <a
-              href="https://www.facebook.com/people/Numunix/61592696692436/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 text-white/60 transition-colors hover:border-[#3b82f6]/50 hover:text-white"
-            >
-              <Facebook size={15} />
-            </a>
+            {SOCIAL_LINKS.map(({ Icon, label, href }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 text-white/60 transition-colors hover:border-[#3b82f6]/50 hover:text-white"><Icon size={15} /></a>
+            ))}
           </div>
         </div>
-
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {columns.map(([title, items]) => (
+        <div className="grid gap-9 sm:grid-cols-2 lg:grid-cols-4">
+          {COLUMNS.map(([title, items]) => (
             <div key={title}>
               <div className="label-mono text-white/40">{title}</div>
               <ul className="mt-5 space-y-3">
-                {items.map((i) => (
-                  <li key={i}>
-                    <a
-                      href={category ? repairLink(i) : FEATURE_LINKS[i] ?? "/services"}
-                      onClick={() => {
-                        if (i === "Electronics") selection?.select("electronics");
-                        if (i === "Appliances") selection?.select("appliances");
-                      }}
-                      className="text-[15px] text-white/65 transition-colors hover:text-white"
-                    >
-                      {i}
-                    </a>
-                  </li>
-                ))}
+                {items.map(([label, href]) => <li key={label}><a href={href} className="text-[15px] text-white/65 transition-colors hover:text-white">{label}</a></li>)}
               </ul>
             </div>
           ))}
         </div>
       </div>
-
-      <div className="shell mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-white/8 pt-8">
-        <span className="label-mono text-white/35">
-          © 2026 NUMUNIX. ALL RIGHTS RESERVED.
-        </span>
-        <div className="flex flex-wrap gap-6">
-          {["Privacy Policy", "Terms", "Device & Data Care"].map((l) => (
-            <a
-              key={l}
-              href={FEATURE_LINKS[l]}
-              className="text-[14px] text-white/45 transition-colors hover:text-white"
-            >
-              {l}
-            </a>
-          ))}
-        </div>
+      <div className="shell mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-white/8 pt-8">
+        <span className="label-mono text-white/35">(c) 2026 NUMUNIX. ALL RIGHTS RESERVED.</span>
+        <div className="flex flex-wrap gap-6">{[["Privacy Policy", "/privacy"], ["Terms", "/terms"]].map(([label, href]) => <a key={label} href={href} className="text-[14px] text-white/45 transition-colors hover:text-white">{label}</a>)}</div>
       </div>
     </footer>
-    </>
   );
 }
 

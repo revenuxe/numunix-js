@@ -1,29 +1,28 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "@tanstack/react-router";
-import { Menu, X, Grip, Phone } from "lucide-react";
+import { Menu, X, Grip, ChevronDown, Building2, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CONTACT } from "@/content/site";
 import { cn } from "@/lib/utils";
 import { BrandLogo } from "./BrandLogo";
-import { CategoryToggle, useCategory } from "./category";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
-const NAV: [string, string][] = [
-  ["REPAIR SERVICES", "/services"],
-  ["FAULT ASSESSMENT", "/repair-assessment"],
-  ["REPAIR PROCESS", "/repair-process"],
-  ["REPAIR GUIDES", "/repair-guides"],
+const PLATFORM_NAV: [string, string][] = [
+  ["PLATFORM", "/#approach"],
+  ["FEATURES", "/features"],
+  ["WORKFLOW", "/workflow"],
+  ["TEAMS", "/#industries"],
   ["CONTACT", "/contact"],
 ];
 
 export function Header() {
-  const categoryContext = useCategory();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const pathname = useLocation({ select: (location) => location.pathname });
   const isHomepage = pathname === "/" || pathname === "/appliances";
-  const headerAction = isHomepage && categoryContext ? <CategoryToggle /> : <Button asChild size="sm" className="h-8 gap-2 px-3 font-mono text-[10px] tracking-normal shadow-none sm:h-9"><a href={CONTACT.phoneHref}><Phone className="size-3.5" />CALL NOW</a></Button>;
+  const navigation = PLATFORM_NAV;
+  const headerAction = isHomepage ? <WorkspaceToggle /> : <Button asChild size="sm" className="h-8 gap-2 px-3 font-mono text-[10px] tracking-normal shadow-none sm:h-9"><a href="https://app.numunix.com">WORKSPACE</a></Button>;
 
   useEffect(() => {
     setOpen(false);
@@ -111,7 +110,7 @@ export function Header() {
                 "flex items-center gap-1 rounded-lg border border-primary-foreground/15 bg-ink-800 px-3 py-2",
               )}
             >
-              {NAV.map(([n, href]) => (
+              {navigation.map(([n, href]) => (
                 <a
                   key={n}
                   href={href}
@@ -149,7 +148,7 @@ export function Header() {
       {open && (
         <div id="mobile-navigation" className="lg:hidden">
           <div className="mx-6 rounded-lg border border-primary-foreground/20 bg-ink-800 p-4">
-            {NAV.map(([n, href]) => (
+            {navigation.map(([n, href]) => (
               <a
                 key={n}
                 href={href}
@@ -167,3 +166,27 @@ export function Header() {
 }
 
 export default Header;
+
+function WorkspaceToggle() {
+  return <DropdownMenu modal={false}>
+    <DropdownMenuTrigger asChild>
+      <Button aria-label="Choose a workspace" size="sm" className="h-8 w-[132px] shrink-0 justify-between gap-1.5 border border-primary/60 px-2.5 font-mono text-[10px] tracking-normal shadow-none sm:h-9 sm:w-[148px]">
+        WORKSPACES <ChevronDown className="size-3 opacity-80" />
+      </Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent align="end" sideOffset={8} className="z-[70] w-72 border-primary-foreground/15 bg-ink-800 p-1 text-primary-foreground motion-reduce:animate-none">
+      <DropdownMenuItem asChild className="cursor-pointer rounded-md px-3 py-3 focus:bg-primary focus:text-primary-foreground">
+        <a href="https://app.numunix.com" className="flex items-start gap-3">
+          <Building2 size={17} className="mt-0.5 shrink-0" />
+          <span><span className="block text-sm font-medium">Organization dashboard</span><span className="mt-1 block text-xs leading-relaxed opacity-70">Manage leads, bookings, jobs and your team.</span></span>
+        </a>
+      </DropdownMenuItem>
+      <DropdownMenuItem asChild className="cursor-pointer rounded-md px-3 py-3 focus:bg-primary focus:text-primary-foreground">
+        <a href="https://app.numunix.com" className="flex items-start gap-3">
+          <Wrench size={17} className="mt-0.5 shrink-0" />
+          <span><span className="block text-sm font-medium">Technician dashboard</span><span className="mt-1 block text-xs leading-relaxed opacity-70">View assigned jobs and update job status.</span></span>
+        </a>
+      </DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>;
+}

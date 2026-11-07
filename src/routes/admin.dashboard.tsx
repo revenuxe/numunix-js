@@ -48,7 +48,7 @@ import {
 
 export const Route = createFileRoute("/admin/dashboard")({
   head: () => ({
-    meta: [{ title: "Repair Lead Dashboard | Numunix" }, { name: "description", content: "Private repair enquiry management for Numunix." }, { property: "og:title", content: "Repair Lead Dashboard | Numunix" }, { property: "og:description", content: "Private electronics and appliance repair leads." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex, nofollow" }],
+    meta: [{ title: "Service Management Dashboard | Numunix" }, { name: "description", content: "Private workspace for managing service enquiries, bookings, customers, technicians, jobs and invoices." }, { property: "og:title", content: "Service Management Dashboard | Numunix" }, { property: "og:description", content: "Private operations workspace for service teams." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex, nofollow" }],
   }),
   component: AdminDashboard,
 });
@@ -139,7 +139,7 @@ function AdminDashboard() {
   const [signingOut, setSigningOut] = useState(false);
 
   useEffect(() => {
-    if (access === "signed-out") window.location.replace("/admin/login");
+    if (access === "signed-out") window.location.replace("https://app.numunix.com");
     if (access !== "ready") {
       setLeads([]);
       setSelected(null);
@@ -225,7 +225,7 @@ function AdminDashboard() {
     if (signOutError) {
       setNotice("Could not sign out. Please try again.");
       setSigningOut(false);
-    } else window.location.replace("/admin/login");
+    } else window.location.replace("https://app.numunix.com");
   }
   async function confirmDelete() {
     const client = getSupabase();
@@ -287,7 +287,7 @@ function AdminDashboard() {
           {!["loading", "signed-out"].includes(access) && (
             <div className="mt-6 flex flex-col gap-3">
               <a
-                href="/admin/login"
+                href="https://app.numunix.com"
                 className="rounded-md bg-primary px-4 py-3 text-sm text-primary-foreground"
               >
                 Back to sign in

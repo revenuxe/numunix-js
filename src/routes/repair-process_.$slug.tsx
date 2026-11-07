@@ -1,27 +1,13 @@
-import { createFileRoute, notFound } from "@tanstack/react-router";
-import { WorkflowStagePage } from "@/components/numunix/WorkflowStagePage";
+import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 import { workflowBySlug } from "@/content/workflow";
-import { repairPageHead } from "@/content/repair-seo";
+import { FEATURE_BY_LEGACY_STAGE } from "@/content/legacy-feature-routes";
 
 export const Route = createFileRoute("/repair-process_/$slug")({
-  loader: ({ params }) => {
-    const stage = workflowBySlug(params.slug);
-    if (!stage) throw notFound();
-    return { stage };
+  beforeLoad: ({ params }) => {
+    if (!workflowBySlug(params.slug)) throw notFound();
+    const slug = FEATURE_BY_LEGACY_STAGE[params.slug] ?? "jobs";
+    throw redirect({ to: "/features/$slug", params: { slug }, statusCode: 301 });
   },
-  head: ({ loaderData, params }) => {
-    const stage = loaderData?.stage;
-    const title = stage
-      ? `${stage.name}: Repair Process | Numunix`
-      : "Repair Process | Numunix Repairs";
-    const description = stage?.intro ?? "Explore the Numunix repair assessment and service process.";
-    const path = `/repair-process/${params.slug}`;
-    return repairPageHead({ title, description, path, breadcrumbs: [{ name: "Repair process", path: "/repair-process" }, { name: stage?.name ?? params.slug, path }] });
-  },
-  component: StageRoute,
+  head: () => ({ meta: [{ title: "Service workflow feature | Numunix" }, { name: "robots", content: "noindex, follow" }] }),
+  component: () => null,
 });
-
-function StageRoute() {
-  const { stage } = Route.useLoaderData();
-  return <WorkflowStagePage stage={stage} />;
-}

@@ -281,10 +281,10 @@ const REPAIR_STORIES: Record<
     title: "Lead inbox",
     steps: ["Capture", "Review", "Follow up", "Book"],
     captions: [
-      "Record the customer's repair request and appliance details.",
+      "Record the customer's service request and the details the team needs.",
       "Review new enquiries and the service they need.",
       "Track follow-up through clear lead statuses.",
-      "Move qualified enquiries into a repair booking.",
+      "Move qualified enquiries into a service booking.",
     ],
   },
   "workspace-bookings": {
@@ -294,19 +294,19 @@ const REPAIR_STORIES: Record<
     captions: [
       "Keep booking requests and service details together.",
       "Review appointment information in one workspace.",
-      "Connect a booking with the repair job and technician.",
+      "Connect a booking with the service job and technician.",
       "Keep the next service step clear for your team.",
     ],
   },
   "workspace-jobs": {
     eyebrow: "ILLUSTRATIVE WORKSPACE",
-    title: "Repair job board",
+    title: "Service job board",
     steps: ["Create", "Assign", "Progress", "Complete"],
     captions: [
-      "Turn a service request into a trackable repair job.",
+      "Turn a service request into a trackable service job.",
       "Keep technician assignment with the job record.",
       "Review job status as service work moves forward.",
-      "Record completion as part of the repair workflow.",
+      "Record completion as part of the service workflow.",
     ],
   },
   "workspace-technicians": {
@@ -317,7 +317,7 @@ const REPAIR_STORIES: Record<
       "Assign service jobs through the repair workspace.",
       "Technicians can review their assigned work.",
       "Keep job progress connected to its service details.",
-      "Record the completed repair for the team.",
+      "Record completed work for the team.",
     ],
   },
   "workspace-invoices": {
@@ -325,7 +325,7 @@ const REPAIR_STORIES: Record<
     title: "Service invoices",
     steps: ["Review", "Prepare", "Share", "Record"],
     captions: [
-      "Bring invoice records into the repair workflow.",
+      "Bring invoice records into the service workflow.",
       "Prepare service invoices from completed work.",
       "Keep billing information connected to the job.",
       "Review invoice status in the workspace.",
@@ -336,7 +336,7 @@ const REPAIR_STORIES: Record<
     title: "Daily overview",
     steps: ["Enquiries", "Bookings", "Jobs", "Invoices"],
     captions: [
-      "Bring new repair enquiries into a shared view.",
+      "Bring new service enquiries into a shared view.",
       "Keep bookings and service details together.",
       "Follow assigned jobs through completion.",
       "Keep invoice records connected to the work.",
@@ -859,32 +859,32 @@ function LeadWorkspacePreview({ phase }: { phase: number }) {
   const screens = [
     <div className="sd-lead-list" key="inbox">
       <div className="sd-module-toolbar"><span>Recent enquiries</span><span><Search size={10} /> Search leads</span></div>
-      {["Appliance repair request", "Electronics service enquiry", "Repair assessment request"].map((item, i) => (
-        <div className={`sd-lead-row ${i === 0 ? "is-selected" : ""}`} key={item}><i>{i === 0 ? "A" : "E"}</i><span><b>{item}</b><small>{i === 0 ? "Appliance details received" : "Service details captured"}</small></span><em>{i === 0 ? "NEW" : "OPEN"}</em></div>
+      {["New service request", "Booking enquiry", "Follow-up needed"].map((item, i) => (
+        <div className={`sd-lead-row ${i === 0 ? "is-selected" : ""}`} key={item}><i>{i === 0 ? "S" : "E"}</i><span><b>{item}</b><small>{i === 0 ? "Customer details received" : "Service details captured"}</small></span><em>{i === 0 ? "NEW" : "OPEN"}</em></div>
       ))}
     </div>,
     <div className="sd-lead-detail" key="detail">
       <div className="sd-detail-back">‹ All enquiries <span>NEW ENQUIRY</span></div>
-      <h5>Appliance repair request</h5><p>Customer request and appliance details</p>
-      <div className="sd-detail-grid"><span>Service type<b>Appliance repair</b></span><span>Appliance<b>Washing machine</b></span><span>Issue reported<b>Needs assessment</b></span><span>Lead status<b>New enquiry</b></span></div>
+      <h5>New service request</h5><p>Customer request and service details</p>
+      <div className="sd-detail-grid"><span>Service type<b>On-site service</b></span><span>Customer<b>Contact details</b></span><span>Request<b>Review needed</b></span><span>Lead status<b>New enquiry</b></span></div>
       <div className="sd-lead-action"><span>Next step</span><b>Review and follow up <ArrowRight size={10} /></b></div>
     </div>,
     <div className="sd-lead-status-screen" key="status">
       <div className="sd-status-heading"><span className="sd-large-icon"><Users size={16} /></span><div><b>Update lead status</b><small>Keep the enquiry moving through your workflow</small></div></div>
-      <div className="sd-status-options">{["New", "Contacted", "Assessment arranged", "Repair booked"].map((label, i) => <span key={label} className={i === 1 ? "is-current" : ""}><i>{i === 1 ? <Check size={9} /> : i + 1}</i>{label}</span>)}</div>
+      <div className="sd-status-options">{["New", "Contacted", "Qualified", "Booking ready"].map((label, i) => <span key={label} className={i === 1 ? "is-current" : ""}><i>{i === 1 ? <Check size={9} /> : i + 1}</i>{label}</span>)}</div>
       <div className="sd-status-note">Customer follow-up is recorded with the lead.</div>
     </div>,
-    <div className="sd-success-screen" key="converted"><span><Check size={17} /></span><h5>Enquiry moved forward</h5><p>The qualified lead is ready to continue as a service booking.</p><div>LEAD STATUS <b>REPAIR BOOKED</b></div></div>,
+    <div className="sd-success-screen" key="converted"><span><Check size={17} /></span><h5>Enquiry moved forward</h5><p>The qualified lead is ready to continue as a service booking.</p><div>LEAD STATUS <b>BOOKING READY</b></div></div>,
   ];
   return <WorkspaceFrame module="leads" action="+ New lead"><div key={phase} className="sd-workspace-screen">{screens[phase]}</div></WorkspaceFrame>;
 }
 
 function BookingWorkspacePreview({ phase }: { phase: number }) {
   const screens = [
-    <div className="sd-booking-request" key="request"><div className="sd-module-toolbar"><span>New service booking</span><span>Step 1 of 3</span></div><div className="sd-booking-fields"><label>Service type<b>Appliance repair <ChevronRight size={10} /></b></label><label>Appliance details<b>Washing machine <ChevronRight size={10} /></b></label><label>Customer availability<b>Select a suitable time <ChevronRight size={10} /></b></label></div><div className="sd-booking-footnote">Booking details stay connected to the repair request.</div></div>,
+    <div className="sd-booking-request" key="request"><div className="sd-module-toolbar"><span>New service booking</span><span>Step 1 of 3</span></div><div className="sd-booking-fields"><label>Service type<b>On-site service <ChevronRight size={10} /></b></label><label>Customer details<b>Request information <ChevronRight size={10} /></b></label><label>Availability<b>Select a suitable time <ChevronRight size={10} /></b></label></div><div className="sd-booking-footnote">Booking details stay connected to the service request.</div></div>,
     <div className="sd-calendar-screen" key="calendar"><div className="sd-module-toolbar"><span>Choose an appointment</span><span>Availability</span></div><div className="sd-calendar-week">{["MON", "TUE", "WED", "THU", "FRI"].map((day, i) => <span className={i === 2 ? "is-selected" : ""} key={day}><small>{day}</small><b>{i === 2 ? "Select" : "Choose"}</b></span>)}</div><div className="sd-slot-list"><span>Morning visit <b>Available</b></span><span className="is-selected">Afternoon visit <b>Selected</b></span><span>Another time <b>View options</b></span></div></div>,
-    <div className="sd-booking-assign" key="assign"><div className="sd-module-toolbar"><span>Service booking</span><span>Appointment details</span></div><div className="sd-appointment-card"><span className="sd-large-icon"><CalendarDays size={16} /></span><div><small>APPLIANCE SERVICE</small><b>Washing machine repair</b><span>Appointment time selected</span></div></div><div className="sd-assignment-line"><span>Technician</span><b>Choose team member <ChevronRight size={10} /></b></div><div className="sd-assignment-line"><span>Booking status</span><b>Ready to confirm</b></div></div>,
-    <div className="sd-success-screen" key="confirmed"><span><Check size={17} /></span><h5>Booking ready</h5><p>Appointment and repair details are together in the service workspace.</p><div>BOOKING STATUS <b>CONFIRMED</b></div></div>,
+    <div className="sd-booking-assign" key="assign"><div className="sd-module-toolbar"><span>Service booking</span><span>Appointment details</span></div><div className="sd-appointment-card"><span className="sd-large-icon"><CalendarDays size={16} /></span><div><small>SERVICE VISIT</small><b>Customer appointment</b><span>Appointment time selected</span></div></div><div className="sd-assignment-line"><span>Technician</span><b>Choose team member <ChevronRight size={10} /></b></div><div className="sd-assignment-line"><span>Booking status</span><b>Ready to confirm</b></div></div>,
+    <div className="sd-success-screen" key="confirmed"><span><Check size={17} /></span><h5>Booking ready</h5><p>Appointment and service details are together in the workspace.</p><div>BOOKING STATUS <b>CONFIRMED</b></div></div>,
   ];
   return <WorkspaceFrame module="bookings" action="+ New booking"><div key={phase} className="sd-workspace-screen">{screens[phase]}</div></WorkspaceFrame>;
 }
@@ -894,8 +894,8 @@ function JobWorkspacePreview({ phase }: { phase: number }) {
   return (
     <WorkspaceFrame module="jobs" action="+ New job">
       <div key={phase} className="sd-workspace-screen sd-job-board">
-        <div className="sd-module-toolbar"><span>Repair job board</span><span>Job status</span></div>
-        <div className="sd-kanban-columns">{columns.map((label, i) => <div className={i === phase ? "is-active" : ""} key={label}><small>{label}</small>{i === phase && <article><span>REPAIR JOB</span><b>Appliance service</b><em>{["Request received", "Technician assigned", "Service underway", "Work completed"][phase]}</em><div><i>AS</i> Service team</div></article>}</div>)}</div>
+        <div className="sd-module-toolbar"><span>Service job board</span><span>Job status</span></div>
+        <div className="sd-kanban-columns">{columns.map((label, i) => <div className={i === phase ? "is-active" : ""} key={label}><small>{label}</small>{i === phase && <article><span>SERVICE JOB</span><b>Scheduled service</b><em>{["Request received", "Technician assigned", "Service underway", "Work completed"][phase]}</em><div><i>ST</i> Service team</div></article>}</div>)}</div>
         <div className="sd-job-footer"><ClipboardList size={12} /> Job details and progress stay on one record.</div>
       </div>
     </WorkspaceFrame>
@@ -904,17 +904,17 @@ function JobWorkspacePreview({ phase }: { phase: number }) {
 
 function TechnicianWorkspacePreview({ phase }: { phase: number }) {
   const screens = [
-    <div className="sd-tech-queue" key="queue"><div className="sd-module-toolbar"><span>Assigned jobs</span><span>Technician view</span></div>{["Appliance service", "Repair assessment"].map((job, i) => <div className={`sd-tech-row ${i === 0 ? "is-selected" : ""}`} key={job}><span className="sd-large-icon"><Wrench size={14} /></span><div><b>{job}</b><small>{i === 0 ? "Service details ready" : "Review job information"}</small></div><ArrowRight size={11} /></div>)}</div>,
-    <div className="sd-tech-detail" key="detail"><div className="sd-module-toolbar"><span>Assigned job</span><span>JOB DETAILS</span></div><h5>Appliance service</h5><p>Review the request before starting the visit.</p><div className="sd-tech-detail-grid"><span>Appliance<b>Washing machine</b></span><span>Issue<b>Customer-reported fault</b></span><span>Service notes<b>Assessment required</b></span></div></div>,
+    <div className="sd-tech-queue" key="queue"><div className="sd-module-toolbar"><span>Assigned jobs</span><span>Technician view</span></div>{["Service visit", "Follow-up appointment"].map((job, i) => <div className={`sd-tech-row ${i === 0 ? "is-selected" : ""}`} key={job}><span className="sd-large-icon"><Wrench size={14} /></span><div><b>{job}</b><small>{i === 0 ? "Customer and schedule ready" : "Review job information"}</small></div><ArrowRight size={11} /></div>)}</div>,
+    <div className="sd-tech-detail" key="detail"><div className="sd-module-toolbar"><span>Assigned job</span><span>JOB DETAILS</span></div><h5>Service visit</h5><p>Review the request before starting the appointment.</p><div className="sd-tech-detail-grid"><span>Customer<b>Contact details</b></span><span>Schedule<b>Appointment information</b></span><span>Service notes<b>Work details</b></span></div></div>,
     <div className="sd-tech-progress" key="progress"><div className="sd-module-toolbar"><span>Update job progress</span><span>IN PROGRESS</span></div><div className="sd-progress-track"><i /><i className="is-active" /><i /><i /></div><div className="sd-progress-labels"><span>Assigned</span><b>In progress</b><span>Complete</span></div><div className="sd-tech-note">Add a progress update to the job record.</div></div>,
-    <div className="sd-success-screen" key="completed"><span><Check size={17} /></span><h5>Job completed</h5><p>Technician progress and completion are recorded with the repair job.</p><div>JOB STATUS <b>COMPLETE</b></div></div>,
+    <div className="sd-success-screen" key="completed"><span><Check size={17} /></span><h5>Job completed</h5><p>Technician progress and completion are recorded with the service job.</p><div>JOB STATUS <b>COMPLETE</b></div></div>,
   ];
   return <WorkspaceFrame module="technicians" action="View team"><div key={phase} className="sd-workspace-screen">{screens[phase]}</div></WorkspaceFrame>;
 }
 
 function OverviewWorkspacePreview({ phase }: { phase: number }) {
   const attention = [
-    ["New enquiries", "Review repair requests", "LEADS"],
+    ["New enquiries", "Review service requests", "LEADS"],
     ["Bookings to confirm", "Check service appointments", "BOOKINGS"],
     ["Jobs to assign", "Connect work with technicians", "JOBS"],
     ["Invoices to review", "Keep billing moving", "INVOICES"],
@@ -923,7 +923,7 @@ function OverviewWorkspacePreview({ phase }: { phase: number }) {
     <WorkspaceFrame module="overview" action="+ Create">
       <div key={phase} className="sd-workspace-screen sd-overview-screen">
         <div className="sd-overview-welcome"><div><small>WORKSPACE OVERVIEW</small><b>Your service day</b></div><span>Today <ChevronRight size={10} /></span></div>
-        <div className="sd-overview-cards">{[["Leads", "Review requests"], ["Bookings", "Manage visits"], ["Jobs", "Track repair work"], ["Invoices", "Review billing"]].map(([title, copy], i) => <div className={i === phase ? "is-active" : ""} key={title}><small>{title}</small><b>{copy}</b></div>)}</div>
+        <div className="sd-overview-cards">{[["Leads", "Review requests"], ["Bookings", "Manage visits"], ["Jobs", "Track service work"], ["Invoices", "Review billing"]].map(([title, copy], i) => <div className={i === phase ? "is-active" : ""} key={title}><small>{title}</small><b>{copy}</b></div>)}</div>
         <div className="sd-overview-attention"><div className="sd-module-toolbar"><span>Needs attention</span><span>Open items</span></div>{attention.slice(0, phase + 1).map(([title, copy, tag], i) => <div className="sd-attention-row" key={title}><i>{i + 1}</i><span><b>{title}</b><small>{copy}</small></span><em>{tag}</em><ArrowRight size={10} /></div>)}</div>
       </div>
     </WorkspaceFrame>
@@ -954,8 +954,8 @@ function InvoiceGenerationPreview({ phase }: { phase: number }) {
           {generated ? (
             <div className="sd-invoice-paper">
               <div className="sd-invoice-paper-head"><div><small>NUMUNIX SERVICE WORKSPACE</small><b>Service invoice</b></div><span>PREVIEW</span></div>
-              <div className="sd-invoice-meta"><div><small>BILL TO</small><b>Customer record</b></div><div><small>SERVICE JOB</small><b>Completed repair</b></div></div>
-              <div className="sd-invoice-line"><b>Service description</b><span>Repair service</span><span>Amount from job</span></div>
+              <div className="sd-invoice-meta"><div><small>BILL TO</small><b>Customer record</b></div><div><small>SERVICE JOB</small><b>Completed service</b></div></div>
+              <div className="sd-invoice-line"><b>Service description</b><span>Completed work</span><span>Amount from job</span></div>
               <div className="sd-invoice-total"><span>Total</span><b>Review service charges</b></div>
               <div className="sd-invoice-ready"><Check size={10} /> Invoice prepared for review</div>
             </div>
@@ -963,7 +963,7 @@ function InvoiceGenerationPreview({ phase }: { phase: number }) {
             <div className="sd-invoice-form">
               <div className="sd-invoice-form-head"><b>Invoice details</b><span>Linked service job</span></div>
               <label><span>Customer</span><b className={phase > 0 ? "is-filled" : ""}>{phase > 0 ? "Customer record" : "Select a customer"}<ChevronRight size={10} /></b></label>
-              <label><span>Repair job</span><b className={phase > 0 ? "is-filled" : ""}>{phase > 0 ? "Completed repair" : "Choose a completed job"}<ChevronRight size={10} /></b></label>
+              <label><span>Service job</span><b className={phase > 0 ? "is-filled" : ""}>{phase > 0 ? "Completed service" : "Choose a completed job"}<ChevronRight size={10} /></b></label>
               <div className="sd-invoice-charge"><span>Service charges</span><b>{phase > 0 ? "From linked job" : "Added from service details"}</b></div>
               <div className="sd-invoice-actions"><span>Save draft</span><button type="button" tabIndex={-1}>{phase >= 2 ? "Generating invoice" : "Generate invoice"}<ArrowRight size={10} /></button></div>
               {phase === 2 && <MousePointer2 className="sd-invoice-cursor" size={22} />}
@@ -1640,7 +1640,7 @@ export default function ServiceDemo({
         </button>
       </div>
       {linkedRepair ? <Link className="sd-scene-link" to="/$category/repairs/$slug" params={{ category: repairCategoryPath(linkedRepair.category), slug: linkedRepair.slug }} aria-label={`Explore ${linkedRepair.name}`}>{linkedVisual}</Link>
-        : href === "/admin/login" ? <Link className="sd-scene-link" to="/admin/login">{linkedVisual}</Link>
+        : href === "https://app.numunix.com" ? <a className="sd-scene-link" href="https://app.numunix.com">{linkedVisual}</a>
         : href ? <Link className="sd-scene-link" to={isWarranty ? "/repair-aftercare" : "/repair-assessment"}>{linkedVisual}</Link> : visual}
       <span className="sr-only">
         {config.steps.join(" → ")}. {config.captions[3]} This preview is illustrative.

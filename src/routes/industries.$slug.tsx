@@ -1,10 +1,22 @@
-import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
-import { LEGACY_AUDIENCE_PATHS, REPAIR_AUDIENCE_PATHS } from "@/content/repair-audiences";
+import { createFileRoute, notFound } from "@tanstack/react-router";
+import { ServiceManagementPersonaPage } from "@/components/numunix/ServiceManagementPersonaPage";
+import { serviceManagementPersona } from "@/content/service-management-personas";
+import { repairPageHead } from "@/content/repair-seo";
+
 export const Route = createFileRoute("/industries/$slug")({
-  beforeLoad: ({ params }) => {
-    const slug = LEGACY_AUDIENCE_PATHS[params.slug] ?? params.slug;
-    if (!REPAIR_AUDIENCE_PATHS.includes(slug)) throw notFound();
-    throw redirect({ to: "/who-we-serve/$slug", params: { slug }, statusCode: 301 });
+  loader: ({ params }) => {
+    const persona = serviceManagementPersona(params.slug);
+    if (!persona) throw notFound();
+    return persona;
   },
-  head: () => ({ meta: [{ name: "robots", content: "noindex, follow" }] }),
+  head: ({ loaderData }) => {
+    const persona = loaderData;
+    if (!persona) return { meta: [{ title: "Team page unavailable | Numunix" }, { name: "robots", content: "noindex" }] };
+    return repairPageHead({ title: persona.metaTitle, description: persona.metaDescription, path: `/industries/${persona.slug}`, breadcrumbs: [{ name: "Teams", path: "/#industries" }, { name: persona.name, path: `/industries/${persona.slug}` }] });
+  },
+  component: PersonaPage,
 });
+
+function PersonaPage() {
+  return <ServiceManagementPersonaPage persona={Route.useLoaderData()} />;
+}

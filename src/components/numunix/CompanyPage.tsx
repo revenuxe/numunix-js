@@ -24,7 +24,7 @@ export function CompanyPage({
         title={page.title}
         accent={page.accent}
         body={page.intro}
-        secondary={{ label: "EXPLORE SERVICES", href: "/services" }}
+        secondary={{ label: "EXPLORE FEATURES", href: "/features" }}
       />
       <StatStrip stats={page.stats} />
       {children}

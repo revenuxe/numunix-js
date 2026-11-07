@@ -1,10 +1,15 @@
-import { useCategory } from "./category";
-import { REPAIR_SERVICES } from "@/content/homepage-repairs";
+import { Users, CalendarDays, BriefcaseBusiness, Wrench, FileText, LayoutDashboard } from "lucide-react";
 
 export function LogoMarquee() {
-  const ctx = useCategory();
-  const services = REPAIR_SERVICES[ctx?.category ?? "electronics"];
-  const row = [...services, ...services];
+  const modules = [
+    [Users, "LEAD MANAGEMENT"],
+    [CalendarDays, "BOOKINGS"],
+    [BriefcaseBusiness, "JOB TRACKING"],
+    [Wrench, "TECHNICIAN WORKSPACE"],
+    [FileText, "INVOICING"],
+    [LayoutDashboard, "OPERATIONS DASHBOARD"],
+  ] as const;
+  const row = [...modules, ...modules];
   return (
     <section className="relative overflow-hidden border-t border-white/10 bg-[#05070c] py-12">
       <div className="shell">
@@ -14,17 +19,17 @@ export function LogoMarquee() {
           className="flex w-max items-center gap-20 whitespace-nowrap"
           style={{ animation: "marquee 48s linear infinite" }}
         >
-          {row.map((service, i) => (
+          {row.map(([Icon, title], i) => (
             <span
-              key={`${service.nav}-${i}`}
+              key={`${title}-${i}`}
               className="inline-flex items-center gap-4 text-[clamp(1.2rem,2vw,1.8rem)] font-medium tracking-[-0.02em] text-white/30"
             >
-              <service.icon
+              <Icon
                 aria-hidden="true"
                 className="h-[1.15em] w-[1.15em] shrink-0 text-[#8fb4e8]/60"
                 strokeWidth={1.5}
               />
-              {service.nav}
+              {title}
             </span>
           ))}
         </div>
