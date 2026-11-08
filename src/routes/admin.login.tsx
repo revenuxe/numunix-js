@@ -7,7 +7,7 @@ import { useAdminSession } from "@/components/admin/useAdminSession";
 
 export const Route = createFileRoute("/admin/login")({
   head: () => ({
-    meta: [{ title: "Service Management Workspace Login | Numunix" }, { name: "description", content: "Private sign-in to the Numunix service-management workspace for team members." }, { property: "og:title", content: "Service Management Workspace Login | Numunix" }, { property: "og:description", content: "Private workspace sign-in for service teams." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex, nofollow" }],
+    meta: [{ title: "Repair Team Login | Numunix" }, { name: "description", content: "Private sign-in for Numunix repair enquiry management." }, { property: "og:title", content: "Repair Team Login | Numunix" }, { property: "og:description", content: "Private sign-in for the Numunix repair team." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex, nofollow" }],
   }),
   component: AdminLogin,
 });

@@ -1,30 +1,21 @@
-import { createFileRoute, notFound } from "@tanstack/react-router";
-import { ServiceManagementFeaturePage } from "@/components/numunix/ServiceManagementPages";
-import { serviceManagementFeature } from "@/content/service-management";
-import { repairPageHead } from "@/content/repair-seo";
-import { SITE_URL } from "@/content/site";
+import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
+import { LEGACY_SERVICE_SLUGS } from "@/content/repair-legacy";
+import { REPAIR_PAGES, repairCategoryPath } from "@/content/repair-services";
 
 export const Route = createFileRoute("/features/$slug")({
-  loader: ({ params }) => {
-    const feature = serviceManagementFeature(params.slug);
-    if (!feature) throw notFound();
-    return feature;
+  beforeLoad: ({ params }) => {
+    const service = REPAIR_PAGES.find(item => item.slug === params.slug);
+    if (service) throw redirect({ to: "/$category/repairs/$slug", params: {category: repairCategoryPath(service.category), slug: service.slug}, statusCode: 301 });
+    if (LEGACY_SERVICE_SLUGS.includes(params.slug)) throw redirect({ to: "/services", statusCode: 301 });
+    throw notFound();
   },
-  head: ({ loaderData }) => {
-    const feature = loaderData;
-    if (!feature) return { meta: [{ title: "Feature unavailable | Numunix" }, { name: "robots", content: "noindex" }] };
-    const pageHead = repairPageHead({
-      title: feature.metaTitle,
-      description: feature.metaDescription,
-      path: `/features/${feature.slug}`,
-      breadcrumbs: [{ name: "Features", path: "/features" }, { name: feature.nav, path: `/features/${feature.slug}` }],
-      entities: [{ "@type": "SoftwareApplication", "@id": `${SITE_URL}/#service-management-software`, name: "Numunix Service Management", applicationCategory: "BusinessApplication" }],
-    });
-    return feature.planned ? { ...pageHead, meta: [...pageHead.meta, { name: "robots", content: "noindex, follow" }] } : pageHead;
-  },
-  component: FeaturePage,
+  head: () => ({ meta: [
+    {title: "Repair Services | Numunix"},
+    {name: "description", content: "Explore Electronics and Appliances repair services from Numunix."},
+    {property: "og:title", content: "Repair Services | Numunix"},
+    {property: "og:description", content: "Find the right repair assessment for your device or appliance."},
+    {property: "og:type", content: "website"},
+    {name: "twitter:card", content: "summary_large_image"},
+    {name: "robots", content: "noindex, follow"},
+  ]}),
 });
-
-function FeaturePage() {
-  return <ServiceManagementFeaturePage feature={Route.useLoaderData()} />;
-}

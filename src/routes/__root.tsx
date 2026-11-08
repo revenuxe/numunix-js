@@ -89,9 +89,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image", content: `${SITE_URL}/social-preview.png` },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Numunix service management workspace" },
+      { property: "og:image:alt", content: "Numunix — Electronics and appliance repair in Bangalore" },
       { name: "twitter:image", content: `${SITE_URL}/social-preview.png` },
-      { name: "twitter:image:alt", content: "Numunix service management workspace" },
+      { name: "twitter:image:alt", content: "Numunix — Electronics and appliance repair in Bangalore" },
     ],
     scripts: [{ type: "application/ld+json", children: JSON.stringify(repairSiteSchema()) }],
     links: [

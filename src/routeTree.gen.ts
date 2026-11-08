@@ -10,27 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AccessAndRecordsRouteImport } from './routes/access-and-records'
 import { Route as AppliancesRouteImport } from './routes/appliances'
 import { Route as ApproachRouteImport } from './routes/approach'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as LeadManagementRouteImport } from './routes/lead-management'
-import { Route as OperationsRouteImport } from './routes/operations'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as RepairAftercareRouteImport } from './routes/repair-aftercare'
 import { Route as RepairAssessmentRouteImport } from './routes/repair-assessment'
 import { Route as RepairDiagnosticsRouteImport } from './routes/repair-diagnostics'
 import { Route as RepairProcessRouteImport } from './routes/repair-process'
-import { Route as RepairRequestRouteImport } from './routes/repair-request'
 import { Route as RepairSafetyRouteImport } from './routes/repair-safety'
 import { Route as SecurityRouteImport } from './routes/security'
 import { Route as SupportRouteImport } from './routes/support'
-import { Route as TeamWorkspaceRouteImport } from './routes/team-workspace'
 import { Route as TechnologyRouteImport } from './routes/technology'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ThankYouRouteImport } from './routes/thank-you'
-import { Route as WorkflowRouteImport } from './routes/workflow'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
@@ -44,8 +38,6 @@ import { Route as RepairGuidesIndexRouteImport } from './routes/repair-guides.in
 import { Route as RepairGuidesSlugRouteImport } from './routes/repair-guides.$slug'
 import { Route as RepairProcessSlugRouteImport } from './routes/repair-process_.$slug'
 import { Route as RepairsSlugRouteImport } from './routes/repairs.$slug'
-import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
-import { Route as ResourcesSlugRouteImport } from './routes/resources.$slug'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as WhoWeServeSlugRouteImport } from './routes/who-we-serve.$slug'
 import { Route as CategoryRepairsSlugRouteImport } from './routes/$category.repairs.$slug'
@@ -55,11 +47,6 @@ import { Route as CategoryRepairsSlugBrandRouteImport } from './routes/$category
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AccessAndRecordsRoute = AccessAndRecordsRouteImport.update({
-  id: '/access-and-records',
-  path: '/access-and-records',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppliancesRoute = AppliancesRouteImport.update({
@@ -75,16 +62,6 @@ const ApproachRoute = ApproachRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LeadManagementRoute = LeadManagementRouteImport.update({
-  id: '/lead-management',
-  path: '/lead-management',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OperationsRoute = OperationsRouteImport.update({
-  id: '/operations',
-  path: '/operations',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -117,11 +94,6 @@ const RepairProcessRoute = RepairProcessRouteImport.update({
   path: '/repair-process',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RepairRequestRoute = RepairRequestRouteImport.update({
-  id: '/repair-request',
-  path: '/repair-request',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const RepairSafetyRoute = RepairSafetyRouteImport.update({
   id: '/repair-safety',
   path: '/repair-safety',
@@ -137,11 +109,6 @@ const SupportRoute = SupportRouteImport.update({
   path: '/support',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TeamWorkspaceRoute = TeamWorkspaceRouteImport.update({
-  id: '/team-workspace',
-  path: '/team-workspace',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TechnologyRoute = TechnologyRouteImport.update({
   id: '/technology',
   path: '/technology',
@@ -155,11 +122,6 @@ const TermsRoute = TermsRouteImport.update({
 const ThankYouRoute = ThankYouRouteImport.update({
   id: '/thank-you',
   path: '/thank-you',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const WorkflowRoute = WorkflowRouteImport.update({
-  id: '/workflow',
-  path: '/workflow',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -227,16 +189,6 @@ const RepairsSlugRoute = RepairsSlugRouteImport.update({
   path: '/repairs/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ResourcesIndexRoute = ResourcesIndexRouteImport.update({
-  id: '/resources/',
-  path: '/resources/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResourcesSlugRoute = ResourcesSlugRouteImport.update({
-  id: '/resources/$slug',
-  path: '/resources/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ServicesIndexRoute = ServicesIndexRouteImport.update({
   id: '/services/',
   path: '/services/',
@@ -266,27 +218,21 @@ const CategoryRepairsSlugBrandRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/access-and-records': typeof AccessAndRecordsRoute
   '/appliances': typeof AppliancesRoute
   '/approach': typeof ApproachRoute
   '/contact': typeof ContactRoute
-  '/lead-management': typeof LeadManagementRoute
-  '/operations': typeof OperationsRoute
   '/privacy': typeof PrivacyRoute
   '/process': typeof ProcessRoute
   '/repair-aftercare': typeof RepairAftercareRoute
   '/repair-assessment': typeof RepairAssessmentRoute
   '/repair-diagnostics': typeof RepairDiagnosticsRoute
   '/repair-process': typeof RepairProcessRoute
-  '/repair-request': typeof RepairRequestRoute
   '/repair-safety': typeof RepairSafetyRoute
   '/security': typeof SecurityRoute
   '/support': typeof SupportRoute
-  '/team-workspace': typeof TeamWorkspaceRoute
   '/technology': typeof TechnologyRoute
   '/terms': typeof TermsRoute
   '/thank-you': typeof ThankYouRoute
-  '/workflow': typeof WorkflowRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
   '/approach/$slug': typeof ApproachSlugRoute
@@ -296,13 +242,11 @@ export interface FileRoutesByFullPath {
   '/repair-guides/$slug': typeof RepairGuidesSlugRoute
   '/repair-process/$slug': typeof RepairProcessSlugRoute
   '/repairs/$slug': typeof RepairsSlugRoute
-  '/resources/$slug': typeof ResourcesSlugRoute
   '/who-we-serve/$slug': typeof WhoWeServeSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/articles/': typeof ArticlesIndexRoute
   '/features/': typeof FeaturesIndexRoute
   '/repair-guides/': typeof RepairGuidesIndexRoute
-  '/resources/': typeof ResourcesIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/$category/repairs/$slug': typeof CategoryRepairsSlugRoute
   '/api/public/keepalive': typeof ApiPublicKeepaliveRoute
@@ -310,27 +254,21 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/access-and-records': typeof AccessAndRecordsRoute
   '/appliances': typeof AppliancesRoute
   '/approach': typeof ApproachRoute
   '/contact': typeof ContactRoute
-  '/lead-management': typeof LeadManagementRoute
-  '/operations': typeof OperationsRoute
   '/privacy': typeof PrivacyRoute
   '/process': typeof ProcessRoute
   '/repair-aftercare': typeof RepairAftercareRoute
   '/repair-assessment': typeof RepairAssessmentRoute
   '/repair-diagnostics': typeof RepairDiagnosticsRoute
   '/repair-process': typeof RepairProcessRoute
-  '/repair-request': typeof RepairRequestRoute
   '/repair-safety': typeof RepairSafetyRoute
   '/security': typeof SecurityRoute
   '/support': typeof SupportRoute
-  '/team-workspace': typeof TeamWorkspaceRoute
   '/technology': typeof TechnologyRoute
   '/terms': typeof TermsRoute
   '/thank-you': typeof ThankYouRoute
-  '/workflow': typeof WorkflowRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
   '/approach/$slug': typeof ApproachSlugRoute
@@ -340,13 +278,11 @@ export interface FileRoutesByTo {
   '/repair-guides/$slug': typeof RepairGuidesSlugRoute
   '/repair-process/$slug': typeof RepairProcessSlugRoute
   '/repairs/$slug': typeof RepairsSlugRoute
-  '/resources/$slug': typeof ResourcesSlugRoute
   '/who-we-serve/$slug': typeof WhoWeServeSlugRoute
   '/admin': typeof AdminIndexRoute
   '/articles': typeof ArticlesIndexRoute
   '/features': typeof FeaturesIndexRoute
   '/repair-guides': typeof RepairGuidesIndexRoute
-  '/resources': typeof ResourcesIndexRoute
   '/services': typeof ServicesIndexRoute
   '/$category/repairs/$slug': typeof CategoryRepairsSlugRoute
   '/api/public/keepalive': typeof ApiPublicKeepaliveRoute
@@ -355,27 +291,21 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/access-and-records': typeof AccessAndRecordsRoute
   '/appliances': typeof AppliancesRoute
   '/approach': typeof ApproachRoute
   '/contact': typeof ContactRoute
-  '/lead-management': typeof LeadManagementRoute
-  '/operations': typeof OperationsRoute
   '/privacy': typeof PrivacyRoute
   '/process': typeof ProcessRoute
   '/repair-aftercare': typeof RepairAftercareRoute
   '/repair-assessment': typeof RepairAssessmentRoute
   '/repair-diagnostics': typeof RepairDiagnosticsRoute
   '/repair-process': typeof RepairProcessRoute
-  '/repair-request': typeof RepairRequestRoute
   '/repair-safety': typeof RepairSafetyRoute
   '/security': typeof SecurityRoute
   '/support': typeof SupportRoute
-  '/team-workspace': typeof TeamWorkspaceRoute
   '/technology': typeof TechnologyRoute
   '/terms': typeof TermsRoute
   '/thank-you': typeof ThankYouRoute
-  '/workflow': typeof WorkflowRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
   '/approach_/$slug': typeof ApproachSlugRoute
@@ -385,13 +315,11 @@ export interface FileRoutesById {
   '/repair-guides/$slug': typeof RepairGuidesSlugRoute
   '/repair-process_/$slug': typeof RepairProcessSlugRoute
   '/repairs/$slug': typeof RepairsSlugRoute
-  '/resources/$slug': typeof ResourcesSlugRoute
   '/who-we-serve/$slug': typeof WhoWeServeSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/articles/': typeof ArticlesIndexRoute
   '/features/': typeof FeaturesIndexRoute
   '/repair-guides/': typeof RepairGuidesIndexRoute
-  '/resources/': typeof ResourcesIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/$category/repairs/$slug': typeof CategoryRepairsSlugRoute
   '/api/public/keepalive': typeof ApiPublicKeepaliveRoute
@@ -401,27 +329,21 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/access-and-records'
     | '/appliances'
     | '/approach'
     | '/contact'
-    | '/lead-management'
-    | '/operations'
     | '/privacy'
     | '/process'
     | '/repair-aftercare'
     | '/repair-assessment'
     | '/repair-diagnostics'
     | '/repair-process'
-    | '/repair-request'
     | '/repair-safety'
     | '/security'
     | '/support'
-    | '/team-workspace'
     | '/technology'
     | '/terms'
     | '/thank-you'
-    | '/workflow'
     | '/admin/dashboard'
     | '/admin/login'
     | '/approach/$slug'
@@ -431,13 +353,11 @@ export interface FileRouteTypes {
     | '/repair-guides/$slug'
     | '/repair-process/$slug'
     | '/repairs/$slug'
-    | '/resources/$slug'
     | '/who-we-serve/$slug'
     | '/admin/'
     | '/articles/'
     | '/features/'
     | '/repair-guides/'
-    | '/resources/'
     | '/services/'
     | '/$category/repairs/$slug'
     | '/api/public/keepalive'
@@ -445,27 +365,21 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/access-and-records'
     | '/appliances'
     | '/approach'
     | '/contact'
-    | '/lead-management'
-    | '/operations'
     | '/privacy'
     | '/process'
     | '/repair-aftercare'
     | '/repair-assessment'
     | '/repair-diagnostics'
     | '/repair-process'
-    | '/repair-request'
     | '/repair-safety'
     | '/security'
     | '/support'
-    | '/team-workspace'
     | '/technology'
     | '/terms'
     | '/thank-you'
-    | '/workflow'
     | '/admin/dashboard'
     | '/admin/login'
     | '/approach/$slug'
@@ -475,13 +389,11 @@ export interface FileRouteTypes {
     | '/repair-guides/$slug'
     | '/repair-process/$slug'
     | '/repairs/$slug'
-    | '/resources/$slug'
     | '/who-we-serve/$slug'
     | '/admin'
     | '/articles'
     | '/features'
     | '/repair-guides'
-    | '/resources'
     | '/services'
     | '/$category/repairs/$slug'
     | '/api/public/keepalive'
@@ -489,27 +401,21 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/access-and-records'
     | '/appliances'
     | '/approach'
     | '/contact'
-    | '/lead-management'
-    | '/operations'
     | '/privacy'
     | '/process'
     | '/repair-aftercare'
     | '/repair-assessment'
     | '/repair-diagnostics'
     | '/repair-process'
-    | '/repair-request'
     | '/repair-safety'
     | '/security'
     | '/support'
-    | '/team-workspace'
     | '/technology'
     | '/terms'
     | '/thank-you'
-    | '/workflow'
     | '/admin/dashboard'
     | '/admin/login'
     | '/approach_/$slug'
@@ -519,13 +425,11 @@ export interface FileRouteTypes {
     | '/repair-guides/$slug'
     | '/repair-process_/$slug'
     | '/repairs/$slug'
-    | '/resources/$slug'
     | '/who-we-serve/$slug'
     | '/admin/'
     | '/articles/'
     | '/features/'
     | '/repair-guides/'
-    | '/resources/'
     | '/services/'
     | '/$category/repairs/$slug'
     | '/api/public/keepalive'
@@ -534,27 +438,21 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AccessAndRecordsRoute: typeof AccessAndRecordsRoute
   AppliancesRoute: typeof AppliancesRoute
   ApproachRoute: typeof ApproachRoute
   ContactRoute: typeof ContactRoute
-  LeadManagementRoute: typeof LeadManagementRoute
-  OperationsRoute: typeof OperationsRoute
   PrivacyRoute: typeof PrivacyRoute
   ProcessRoute: typeof ProcessRoute
   RepairAftercareRoute: typeof RepairAftercareRoute
   RepairAssessmentRoute: typeof RepairAssessmentRoute
   RepairDiagnosticsRoute: typeof RepairDiagnosticsRoute
   RepairProcessRoute: typeof RepairProcessRoute
-  RepairRequestRoute: typeof RepairRequestRoute
   RepairSafetyRoute: typeof RepairSafetyRoute
   SecurityRoute: typeof SecurityRoute
   SupportRoute: typeof SupportRoute
-  TeamWorkspaceRoute: typeof TeamWorkspaceRoute
   TechnologyRoute: typeof TechnologyRoute
   TermsRoute: typeof TermsRoute
   ThankYouRoute: typeof ThankYouRoute
-  WorkflowRoute: typeof WorkflowRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminLoginRoute: typeof AdminLoginRoute
   ApproachSlugRoute: typeof ApproachSlugRoute
@@ -564,13 +462,11 @@ export interface RootRouteChildren {
   RepairGuidesSlugRoute: typeof RepairGuidesSlugRoute
   RepairProcessSlugRoute: typeof RepairProcessSlugRoute
   RepairsSlugRoute: typeof RepairsSlugRoute
-  ResourcesSlugRoute: typeof ResourcesSlugRoute
   WhoWeServeSlugRoute: typeof WhoWeServeSlugRoute
   AdminIndexRoute: typeof AdminIndexRoute
   ArticlesIndexRoute: typeof ArticlesIndexRoute
   FeaturesIndexRoute: typeof FeaturesIndexRoute
   RepairGuidesIndexRoute: typeof RepairGuidesIndexRoute
-  ResourcesIndexRoute: typeof ResourcesIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
   CategoryRepairsSlugRoute: typeof CategoryRepairsSlugRoute
   ApiPublicKeepaliveRoute: typeof ApiPublicKeepaliveRoute
@@ -584,13 +480,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/access-and-records': {
-      id: '/access-and-records'
-      path: '/access-and-records'
-      fullPath: '/access-and-records'
-      preLoaderRoute: typeof AccessAndRecordsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/appliances': {
@@ -612,20 +501,6 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/lead-management': {
-      id: '/lead-management'
-      path: '/lead-management'
-      fullPath: '/lead-management'
-      preLoaderRoute: typeof LeadManagementRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/operations': {
-      id: '/operations'
-      path: '/operations'
-      fullPath: '/operations'
-      preLoaderRoute: typeof OperationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -670,13 +545,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RepairProcessRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/repair-request': {
-      id: '/repair-request'
-      path: '/repair-request'
-      fullPath: '/repair-request'
-      preLoaderRoute: typeof RepairRequestRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/repair-safety': {
       id: '/repair-safety'
       path: '/repair-safety'
@@ -698,13 +566,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SupportRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/team-workspace': {
-      id: '/team-workspace'
-      path: '/team-workspace'
-      fullPath: '/team-workspace'
-      preLoaderRoute: typeof TeamWorkspaceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/technology': {
       id: '/technology'
       path: '/technology'
@@ -724,13 +585,6 @@ declare module '@tanstack/react-router' {
       path: '/thank-you'
       fullPath: '/thank-you'
       preLoaderRoute: typeof ThankYouRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/workflow': {
-      id: '/workflow'
-      path: '/workflow'
-      fullPath: '/workflow'
-      preLoaderRoute: typeof WorkflowRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -824,20 +678,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RepairsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources/': {
-      id: '/resources/'
-      path: '/resources'
-      fullPath: '/resources/'
-      preLoaderRoute: typeof ResourcesIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/resources/$slug': {
-      id: '/resources/$slug'
-      path: '/resources/$slug'
-      fullPath: '/resources/$slug'
-      preLoaderRoute: typeof ResourcesSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/services/': {
       id: '/services/'
       path: '/services'
@@ -878,27 +718,21 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AccessAndRecordsRoute: AccessAndRecordsRoute,
   AppliancesRoute: AppliancesRoute,
   ApproachRoute: ApproachRoute,
   ContactRoute: ContactRoute,
-  LeadManagementRoute: LeadManagementRoute,
-  OperationsRoute: OperationsRoute,
   PrivacyRoute: PrivacyRoute,
   ProcessRoute: ProcessRoute,
   RepairAftercareRoute: RepairAftercareRoute,
   RepairAssessmentRoute: RepairAssessmentRoute,
   RepairDiagnosticsRoute: RepairDiagnosticsRoute,
   RepairProcessRoute: RepairProcessRoute,
-  RepairRequestRoute: RepairRequestRoute,
   RepairSafetyRoute: RepairSafetyRoute,
   SecurityRoute: SecurityRoute,
   SupportRoute: SupportRoute,
-  TeamWorkspaceRoute: TeamWorkspaceRoute,
   TechnologyRoute: TechnologyRoute,
   TermsRoute: TermsRoute,
   ThankYouRoute: ThankYouRoute,
-  WorkflowRoute: WorkflowRoute,
   AdminDashboardRoute: AdminDashboardRoute,
   AdminLoginRoute: AdminLoginRoute,
   ApproachSlugRoute: ApproachSlugRoute,
@@ -908,13 +742,11 @@ const rootRouteChildren: RootRouteChildren = {
   RepairGuidesSlugRoute: RepairGuidesSlugRoute,
   RepairProcessSlugRoute: RepairProcessSlugRoute,
   RepairsSlugRoute: RepairsSlugRoute,
-  ResourcesSlugRoute: ResourcesSlugRoute,
   WhoWeServeSlugRoute: WhoWeServeSlugRoute,
   AdminIndexRoute: AdminIndexRoute,
   ArticlesIndexRoute: ArticlesIndexRoute,
   FeaturesIndexRoute: FeaturesIndexRoute,
   RepairGuidesIndexRoute: RepairGuidesIndexRoute,
-  ResourcesIndexRoute: ResourcesIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
   CategoryRepairsSlugRoute: CategoryRepairsSlugRoute,
   ApiPublicKeepaliveRoute: ApiPublicKeepaliveRoute,

@@ -1,6 +1,12 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { RepairHomepage } from "@/components/numunix/RepairHomepage";
+import { repairHomepageHead } from "@/content/repair-homepage-meta";
 
 export const Route = createFileRoute("/appliances")({
-  beforeLoad: () => { throw redirect({ to: "/", statusCode: 301 }); },
-  head: () => ({ meta: [{ name: "robots", content: "noindex, follow" }] }),
+  head: () => repairHomepageHead("appliances"),
+  component: AppliancesHomepage,
 });
+
+function AppliancesHomepage() {
+  return <RepairHomepage category="appliances" />;
+}

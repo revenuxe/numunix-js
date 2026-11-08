@@ -1,7 +1,5 @@
 # Roadmap
 
-> Status note — 7 November 2026: the public-site direction has changed back to Numunix service-management software. The repair-specific items below are historical; unchecked external-account and data-cleanup tasks remain owner actions and were not performed by this code change.
-
 - [ ] Expand brand pages with complete symptom cards and detailed repair-scope explainers, preserving unique model guidance, homepage styling and booking actions.
 
 - [x] Differentiated all 75 existing repair brand pages with explicit approval/handover advice, assessment angles, model guidance, FAQs and metadata while preserving homepage design and booking selection. Verified 75 SSR pages, six service families on desktop/mobile, booking navigation and 18 tests. Publish/redeploy required; traffic and indexing are not guaranteed.

@@ -25,9 +25,6 @@ import {
   Tv,
   Workflow,
   Wrench,
-  CalendarDays,
-  Users,
-  ClipboardList,
 } from "lucide-react";
 import "./ServiceDemo.css";
 import { useCategory } from "./category";
@@ -176,13 +173,7 @@ export type RepairStory =
   | "repair-tv"
   | "repair-data"
   | "repair-ai"
-  | "repair-warranty"
-  | "workspace-leads"
-  | "workspace-bookings"
-  | "workspace-jobs"
-  | "workspace-technicians"
-  | "workspace-invoices"
-  | "workspace-overview";
+  | "repair-warranty";
 
 const REPAIR_STORIES: Record<
   RepairStory,
@@ -274,72 +265,6 @@ const REPAIR_STORIES: Record<
       "Activate a maintenance plan that matches how you use them.",
       "Preventive checks and priority repairs are scheduled for you.",
       "Something breaks? One call, the plan takes care of the rest.",
-    ],
-  },
-  "workspace-leads": {
-    eyebrow: "ILLUSTRATIVE WORKSPACE",
-    title: "Lead inbox",
-    steps: ["Capture", "Review", "Follow up", "Book"],
-    captions: [
-      "Record the customer's service request and the details the team needs.",
-      "Review new enquiries and the service they need.",
-      "Track follow-up through clear lead statuses.",
-      "Move qualified enquiries into a service booking.",
-    ],
-  },
-  "workspace-bookings": {
-    eyebrow: "ILLUSTRATIVE WORKSPACE",
-    title: "Booking schedule",
-    steps: ["Request", "Schedule", "Assign", "Confirm"],
-    captions: [
-      "Keep booking requests and service details together.",
-      "Review appointment information in one workspace.",
-      "Connect a booking with the service job and technician.",
-      "Keep the next service step clear for your team.",
-    ],
-  },
-  "workspace-jobs": {
-    eyebrow: "ILLUSTRATIVE WORKSPACE",
-    title: "Service job board",
-    steps: ["Create", "Assign", "Progress", "Complete"],
-    captions: [
-      "Turn a service request into a trackable service job.",
-      "Keep technician assignment with the job record.",
-      "Review job status as service work moves forward.",
-      "Record completion as part of the service workflow.",
-    ],
-  },
-  "workspace-technicians": {
-    eyebrow: "ILLUSTRATIVE WORKSPACE",
-    title: "Technician assignments",
-    steps: ["Assign", "Receive", "Update", "Complete"],
-    captions: [
-      "Assign service jobs through the repair workspace.",
-      "Technicians can review their assigned work.",
-      "Keep job progress connected to its service details.",
-      "Record completed work for the team.",
-    ],
-  },
-  "workspace-invoices": {
-    eyebrow: "ILLUSTRATIVE WORKSPACE",
-    title: "Service invoices",
-    steps: ["Review", "Prepare", "Share", "Record"],
-    captions: [
-      "Bring invoice records into the service workflow.",
-      "Prepare service invoices from completed work.",
-      "Keep billing information connected to the job.",
-      "Review invoice status in the workspace.",
-    ],
-  },
-  "workspace-overview": {
-    eyebrow: "ILLUSTRATIVE WORKSPACE",
-    title: "Daily overview",
-    steps: ["Enquiries", "Bookings", "Jobs", "Invoices"],
-    captions: [
-      "Bring new service enquiries into a shared view.",
-      "Keep bookings and service details together.",
-      "Follow assigned jobs through completion.",
-      "Keep invoice records connected to the work.",
     ],
   },
 };
@@ -823,158 +748,6 @@ function RepairWarrantyScene({ phase }: { phase: number }) {
   );
 }
 
-type WorkspaceModule = "leads" | "bookings" | "jobs" | "technicians" | "invoices" | "overview";
-
-const WORKSPACE_TITLES: Record<WorkspaceModule, string> = {
-  leads: "Leads",
-  bookings: "Bookings",
-  jobs: "Jobs",
-  technicians: "Technicians",
-  invoices: "Invoices",
-  overview: "Dashboard",
-};
-
-function WorkspaceFrame({ module, action, children }: { module: WorkspaceModule; action: string; children: ReactNode }) {
-  const title = WORKSPACE_TITLES[module];
-  return (
-    <div className="sd-dashboard">
-      <div className="sd-dashboard-main">
-        <div className="sd-dashboard-topbar">
-          <span><LayoutDashboard size={10} /> Workspace <b>/</b> {title}</span>
-          <span className="sd-dashboard-sample">ILLUSTRATIVE</span>
-        </div>
-        <div className="sd-dashboard-content">
-          <div className="sd-dashboard-heading">
-            <div><h4>{title}</h4><p>Repair service workspace</p></div>
-            <button type="button" tabIndex={-1}>{action}</button>
-          </div>
-          {children}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function LeadWorkspacePreview({ phase }: { phase: number }) {
-  const screens = [
-    <div className="sd-lead-list" key="inbox">
-      <div className="sd-module-toolbar"><span>Recent enquiries</span><span><Search size={10} /> Search leads</span></div>
-      {["New service request", "Booking enquiry", "Follow-up needed"].map((item, i) => (
-        <div className={`sd-lead-row ${i === 0 ? "is-selected" : ""}`} key={item}><i>{i === 0 ? "S" : "E"}</i><span><b>{item}</b><small>{i === 0 ? "Customer details received" : "Service details captured"}</small></span><em>{i === 0 ? "NEW" : "OPEN"}</em></div>
-      ))}
-    </div>,
-    <div className="sd-lead-detail" key="detail">
-      <div className="sd-detail-back">‹ All enquiries <span>NEW ENQUIRY</span></div>
-      <h5>New service request</h5><p>Customer request and service details</p>
-      <div className="sd-detail-grid"><span>Service type<b>On-site service</b></span><span>Customer<b>Contact details</b></span><span>Request<b>Review needed</b></span><span>Lead status<b>New enquiry</b></span></div>
-      <div className="sd-lead-action"><span>Next step</span><b>Review and follow up <ArrowRight size={10} /></b></div>
-    </div>,
-    <div className="sd-lead-status-screen" key="status">
-      <div className="sd-status-heading"><span className="sd-large-icon"><Users size={16} /></span><div><b>Update lead status</b><small>Keep the enquiry moving through your workflow</small></div></div>
-      <div className="sd-status-options">{["New", "Contacted", "Qualified", "Booking ready"].map((label, i) => <span key={label} className={i === 1 ? "is-current" : ""}><i>{i === 1 ? <Check size={9} /> : i + 1}</i>{label}</span>)}</div>
-      <div className="sd-status-note">Customer follow-up is recorded with the lead.</div>
-    </div>,
-    <div className="sd-success-screen" key="converted"><span><Check size={17} /></span><h5>Enquiry moved forward</h5><p>The qualified lead is ready to continue as a service booking.</p><div>LEAD STATUS <b>BOOKING READY</b></div></div>,
-  ];
-  return <WorkspaceFrame module="leads" action="+ New lead"><div key={phase} className="sd-workspace-screen">{screens[phase]}</div></WorkspaceFrame>;
-}
-
-function BookingWorkspacePreview({ phase }: { phase: number }) {
-  const screens = [
-    <div className="sd-booking-request" key="request"><div className="sd-module-toolbar"><span>New service booking</span><span>Step 1 of 3</span></div><div className="sd-booking-fields"><label>Service type<b>On-site service <ChevronRight size={10} /></b></label><label>Customer details<b>Request information <ChevronRight size={10} /></b></label><label>Availability<b>Select a suitable time <ChevronRight size={10} /></b></label></div><div className="sd-booking-footnote">Booking details stay connected to the service request.</div></div>,
-    <div className="sd-calendar-screen" key="calendar"><div className="sd-module-toolbar"><span>Choose an appointment</span><span>Availability</span></div><div className="sd-calendar-week">{["MON", "TUE", "WED", "THU", "FRI"].map((day, i) => <span className={i === 2 ? "is-selected" : ""} key={day}><small>{day}</small><b>{i === 2 ? "Select" : "Choose"}</b></span>)}</div><div className="sd-slot-list"><span>Morning visit <b>Available</b></span><span className="is-selected">Afternoon visit <b>Selected</b></span><span>Another time <b>View options</b></span></div></div>,
-    <div className="sd-booking-assign" key="assign"><div className="sd-module-toolbar"><span>Service booking</span><span>Appointment details</span></div><div className="sd-appointment-card"><span className="sd-large-icon"><CalendarDays size={16} /></span><div><small>SERVICE VISIT</small><b>Customer appointment</b><span>Appointment time selected</span></div></div><div className="sd-assignment-line"><span>Technician</span><b>Choose team member <ChevronRight size={10} /></b></div><div className="sd-assignment-line"><span>Booking status</span><b>Ready to confirm</b></div></div>,
-    <div className="sd-success-screen" key="confirmed"><span><Check size={17} /></span><h5>Booking ready</h5><p>Appointment and service details are together in the workspace.</p><div>BOOKING STATUS <b>CONFIRMED</b></div></div>,
-  ];
-  return <WorkspaceFrame module="bookings" action="+ New booking"><div key={phase} className="sd-workspace-screen">{screens[phase]}</div></WorkspaceFrame>;
-}
-
-function JobWorkspacePreview({ phase }: { phase: number }) {
-  const columns = ["New", "Assigned", "In progress", "Complete"];
-  return (
-    <WorkspaceFrame module="jobs" action="+ New job">
-      <div key={phase} className="sd-workspace-screen sd-job-board">
-        <div className="sd-module-toolbar"><span>Service job board</span><span>Job status</span></div>
-        <div className="sd-kanban-columns">{columns.map((label, i) => <div className={i === phase ? "is-active" : ""} key={label}><small>{label}</small>{i === phase && <article><span>SERVICE JOB</span><b>Scheduled service</b><em>{["Request received", "Technician assigned", "Service underway", "Work completed"][phase]}</em><div><i>ST</i> Service team</div></article>}</div>)}</div>
-        <div className="sd-job-footer"><ClipboardList size={12} /> Job details and progress stay on one record.</div>
-      </div>
-    </WorkspaceFrame>
-  );
-}
-
-function TechnicianWorkspacePreview({ phase }: { phase: number }) {
-  const screens = [
-    <div className="sd-tech-queue" key="queue"><div className="sd-module-toolbar"><span>Assigned jobs</span><span>Technician view</span></div>{["Service visit", "Follow-up appointment"].map((job, i) => <div className={`sd-tech-row ${i === 0 ? "is-selected" : ""}`} key={job}><span className="sd-large-icon"><Wrench size={14} /></span><div><b>{job}</b><small>{i === 0 ? "Customer and schedule ready" : "Review job information"}</small></div><ArrowRight size={11} /></div>)}</div>,
-    <div className="sd-tech-detail" key="detail"><div className="sd-module-toolbar"><span>Assigned job</span><span>JOB DETAILS</span></div><h5>Service visit</h5><p>Review the request before starting the appointment.</p><div className="sd-tech-detail-grid"><span>Customer<b>Contact details</b></span><span>Schedule<b>Appointment information</b></span><span>Service notes<b>Work details</b></span></div></div>,
-    <div className="sd-tech-progress" key="progress"><div className="sd-module-toolbar"><span>Update job progress</span><span>IN PROGRESS</span></div><div className="sd-progress-track"><i /><i className="is-active" /><i /><i /></div><div className="sd-progress-labels"><span>Assigned</span><b>In progress</b><span>Complete</span></div><div className="sd-tech-note">Add a progress update to the job record.</div></div>,
-    <div className="sd-success-screen" key="completed"><span><Check size={17} /></span><h5>Job completed</h5><p>Technician progress and completion are recorded with the service job.</p><div>JOB STATUS <b>COMPLETE</b></div></div>,
-  ];
-  return <WorkspaceFrame module="technicians" action="View team"><div key={phase} className="sd-workspace-screen">{screens[phase]}</div></WorkspaceFrame>;
-}
-
-function OverviewWorkspacePreview({ phase }: { phase: number }) {
-  const attention = [
-    ["New enquiries", "Review service requests", "LEADS"],
-    ["Bookings to confirm", "Check service appointments", "BOOKINGS"],
-    ["Jobs to assign", "Connect work with technicians", "JOBS"],
-    ["Invoices to review", "Keep billing moving", "INVOICES"],
-  ];
-  return (
-    <WorkspaceFrame module="overview" action="+ Create">
-      <div key={phase} className="sd-workspace-screen sd-overview-screen">
-        <div className="sd-overview-welcome"><div><small>WORKSPACE OVERVIEW</small><b>Your service day</b></div><span>Today <ChevronRight size={10} /></span></div>
-        <div className="sd-overview-cards">{[["Leads", "Review requests"], ["Bookings", "Manage visits"], ["Jobs", "Track service work"], ["Invoices", "Review billing"]].map(([title, copy], i) => <div className={i === phase ? "is-active" : ""} key={title}><small>{title}</small><b>{copy}</b></div>)}</div>
-        <div className="sd-overview-attention"><div className="sd-module-toolbar"><span>Needs attention</span><span>Open items</span></div>{attention.slice(0, phase + 1).map(([title, copy, tag], i) => <div className="sd-attention-row" key={title}><i>{i + 1}</i><span><b>{title}</b><small>{copy}</small></span><em>{tag}</em><ArrowRight size={10} /></div>)}</div>
-      </div>
-    </WorkspaceFrame>
-  );
-}
-
-function InvoiceGenerationPreview({ phase }: { phase: number }) {
-  const generated = phase === 3;
-  return (
-    <div className="sd-dashboard sd-invoice-preview">
-      <div className="sd-dashboard-main">
-        <div className="sd-dashboard-topbar">
-          <span><LayoutDashboard size={10} /> Workspace <b>/</b> Invoices</span>
-          <span className="sd-dashboard-sample">ILLUSTRATIVE</span>
-        </div>
-        <div className="sd-dashboard-content">
-          <div className="sd-dashboard-heading">
-            <div><h4>{generated ? "Invoice preview" : "Create invoice"}</h4><p>Prepare an invoice from completed service work</p></div>
-            <span className="sd-invoice-draft">{generated ? "READY TO REVIEW" : "DRAFT"}</span>
-          </div>
-          <div className="sd-invoice-progress">
-            {["Service job", "Invoice details", "Preview"].map((label, index) => (
-              <span key={label} className={index <= (generated ? 2 : phase > 0 ? 1 : 0) ? "is-active" : ""}>
-                <i>{index < (generated ? 3 : phase > 0 ? 2 : 1) ? <Check size={9} /> : index + 1}</i>{label}
-              </span>
-            ))}
-          </div>
-          {generated ? (
-            <div className="sd-invoice-paper">
-              <div className="sd-invoice-paper-head"><div><small>NUMUNIX SERVICE WORKSPACE</small><b>Service invoice</b></div><span>PREVIEW</span></div>
-              <div className="sd-invoice-meta"><div><small>BILL TO</small><b>Customer record</b></div><div><small>SERVICE JOB</small><b>Completed service</b></div></div>
-              <div className="sd-invoice-line"><b>Service description</b><span>Completed work</span><span>Amount from job</span></div>
-              <div className="sd-invoice-total"><span>Total</span><b>Review service charges</b></div>
-              <div className="sd-invoice-ready"><Check size={10} /> Invoice prepared for review</div>
-            </div>
-          ) : (
-            <div className="sd-invoice-form">
-              <div className="sd-invoice-form-head"><b>Invoice details</b><span>Linked service job</span></div>
-              <label><span>Customer</span><b className={phase > 0 ? "is-filled" : ""}>{phase > 0 ? "Customer record" : "Select a customer"}<ChevronRight size={10} /></b></label>
-              <label><span>Service job</span><b className={phase > 0 ? "is-filled" : ""}>{phase > 0 ? "Completed service" : "Choose a completed job"}<ChevronRight size={10} /></b></label>
-              <div className="sd-invoice-charge"><span>Service charges</span><b>{phase > 0 ? "From linked job" : "Added from service details"}</b></div>
-              <div className="sd-invoice-actions"><span>Save draft</span><button type="button" tabIndex={-1}>{phase >= 2 ? "Generating invoice" : "Generate invoice"}<ArrowRight size={10} /></button></div>
-              {phase === 2 && <MousePointer2 className="sd-invoice-cursor" size={22} />}
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 const REPAIR_SCENES: Record<RepairStory, (props: { phase: number }) => ReactNode> = {
   "repair-mobile": MobileRepairScene,
   "repair-board": RepairBoardScene,
@@ -984,12 +757,6 @@ const REPAIR_SCENES: Record<RepairStory, (props: { phase: number }) => ReactNode
   "repair-data": RepairDataScene,
   "repair-ai": AIRepairScene,
   "repair-warranty": RepairWarrantyScene,
-  "workspace-leads": ({ phase }) => <LeadWorkspacePreview phase={phase} />,
-  "workspace-bookings": ({ phase }) => <BookingWorkspacePreview phase={phase} />,
-  "workspace-jobs": ({ phase }) => <JobWorkspacePreview phase={phase} />,
-  "workspace-technicians": ({ phase }) => <TechnicianWorkspacePreview phase={phase} />,
-  "workspace-invoices": ({ phase }) => <InvoiceGenerationPreview phase={phase} />,
-  "workspace-overview": ({ phase }) => <OverviewWorkspacePreview phase={phase} />,
 };
 
 function Browser({
@@ -1523,9 +1290,7 @@ export default function ServiceDemo({
   const linkedRepair = REPAIR_PAGES.find(item => href === repairPageHref(item));
   const story: Story = preset ? "software" : (BY_SLUG[slug] ?? "software");
   const originalConfig = preset ? REPAIR_STORIES[preset] : STORIES[story];
-  const isWorkspaceDemo = Boolean(preset?.startsWith("workspace-"));
-  const isHomepageDemo = Boolean(preset && categoryContext);
-  const isHomepageRepair = Boolean(preset && categoryContext && !isWorkspaceDemo);
+  const isHomepageRepair = Boolean(preset && categoryContext);
   const isWarranty = preset === "repair-warranty";
   const isDiagnostic = preset === "repair-ai";
   const config = isHomepageRepair ? {
@@ -1557,19 +1322,13 @@ export default function ServiceDemo({
     };
   }, []);
   useEffect(() => {
-    if (!visible || reduced || (phase >= 3 && !isHomepageDemo)) return;
-    const timer = window.setTimeout(
-      () => setPhase((current) => (current >= 3 ? 0 : current + 1)),
-      phase >= 3 ? 1600 : 1400,
-    );
+    if (!visible || reduced || phase >= 3) return;
+    const timer = window.setTimeout(() => setPhase((p) => Math.min(3, p + 1)), 1400);
     return () => window.clearTimeout(timer);
-  }, [visible, reduced, phase, isHomepageDemo]);
+  }, [visible, reduced, phase]);
   let scene: ReactNode;
   if (isHomepageRepair) {
     scene = <RepairVisual category={category} service={serviceIndex} phase={phase} />;
-  } else if (isWorkspaceDemo && preset) {
-    const WorkspaceScene = REPAIR_SCENES[preset];
-    scene = <WorkspaceScene phase={phase} />;
   } else if (preset) {
     const RepairScene = REPAIR_SCENES[preset];
     scene = <RepairScene phase={phase} />;
@@ -1620,19 +1379,19 @@ export default function ServiceDemo({
       </div>
     </>
   );
-  const linkedVisual = <>{visual}<span className="sd-link-footer">{isWorkspaceDemo ? "Open Numunix workspace" : linkedRepair ? `Explore ${linkedRepair.name}` : isWarranty ? "Explore repair aftercare" : "Explore fault assessment"}<ArrowRight size={16} /></span></>;
+  const linkedVisual = <>{visual}<span className="sd-link-footer">{linkedRepair ? `Explore ${linkedRepair.name}` : isWarranty ? "Explore repair aftercare" : "Explore fault assessment"}<ArrowRight size={16} /></span></>;
   return (
     <div ref={ref} className="service-demo" data-service={slug} data-phase={phase}>
       <div className="sd-heading">
         <div>
-          {!isHomepageDemo && <span className="sd-eyebrow">{config.eyebrow ?? "IN MOTION / PRODUCT CONCEPT"}</span>}
+          <span className="sd-eyebrow">{config.eyebrow ?? "IN MOTION / PRODUCT CONCEPT"}</span>
           <h3>{config.title}</h3>
         </div>
         <button
           type="button"
           className="sd-replay"
-          aria-label={`Restart ${config.title} preview`}
-          disabled={reduced}
+          aria-label={`Replay ${config.title}`}
+          disabled={reduced || phase < 3}
           onClick={() => setPhase(0)}
         >
           <Play size={13} />
@@ -1640,10 +1399,9 @@ export default function ServiceDemo({
         </button>
       </div>
       {linkedRepair ? <Link className="sd-scene-link" to="/$category/repairs/$slug" params={{ category: repairCategoryPath(linkedRepair.category), slug: linkedRepair.slug }} aria-label={`Explore ${linkedRepair.name}`}>{linkedVisual}</Link>
-        : href === "https://app.numunix.com" ? <a className="sd-scene-link" href="https://app.numunix.com">{linkedVisual}</a>
         : href ? <Link className="sd-scene-link" to={isWarranty ? "/repair-aftercare" : "/repair-assessment"}>{linkedVisual}</Link> : visual}
       <span className="sr-only">
-        {config.steps.join(" → ")}. {config.captions[3]} This preview is illustrative.
+        {config.steps.join(" → ")}. {config.captions[3]} This is an illustrative repair journey.
       </span>
     </div>
   );

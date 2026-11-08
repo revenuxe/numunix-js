@@ -1,18 +1,42 @@
-import { repairPageHead } from "./repair-seo";
-import { SITE_URL } from "./site";
+import { REPAIR_SERVICES, type RepairCategory } from "./homepage-repairs";
+import { REPAIR_PAGES, repairPageHref } from "./repair-services";
+import { repairPageHead, repairItemList, repairServiceSchema } from "./repair-seo";
 
-export { SITE_URL } from "./site";
+export { SITE_URL as REPAIR_SITE_URL } from "./site";
+import { REPAIR_HOME_PATHS } from "./category-selection";
+export { REPAIR_HOME_PATHS } from "./category-selection";
 
-export function homepageHead() {
-  const title = "Service Management Software for Service Businesses | Numunix";
-  const description =
-    "Coordinate leads, bookings, customer records, technician assignments, jobs and invoices across your service business in one workspace.";
+const PAGE_META = {
+  electronics: {
+    title: "Electronics Repair in Bangalore | Numunix",
+    description:
+      "Mobile, laptop, tablet, TV and CCTV repair in Bangalore. Explore fault diagnosis, data recovery, repair estimates and device testing with Numunix.",
+  },
+  appliances: {
+    title: "Home Appliance Repair in Bangalore | Numunix",
+    description:
+      "Washing machine, AC, refrigerator, microwave and water purifier repair in Bangalore. Request a doorstep assessment and review repair options with Numunix.",
+  },
+};
+
+export function repairHomepageHead(category: RepairCategory) {
+  const { title, description } = PAGE_META[category];
+  const services = REPAIR_PAGES.filter((service) => service.category === category);
   return repairPageHead({
     title,
     description,
-    path: "/",
-    type: "WebPage",
-    about: [{ "@type": "SoftwareApplication", "@id": `${SITE_URL}/#service-management-software` }],
-    entities: [{ "@type": "SoftwareApplication", "@id": `${SITE_URL}/#service-management-software` }],
+    path: REPAIR_HOME_PATHS[category],
+    type: "CollectionPage",
+    about: REPAIR_SERVICES[category].map((service) => ({
+      "@type": "Service",
+      name: service.nav,
+      serviceType: service.nav,
+    })),
+    entities: [
+      repairItemList(
+        services.map((service) => ({ name: service.name, path: repairPageHref(service) })),
+      ),
+      ...services.map((service) => repairServiceSchema(service, repairPageHref(service))),
+    ],
   });
 }

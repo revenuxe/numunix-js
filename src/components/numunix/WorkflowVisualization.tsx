@@ -1,23 +1,179 @@
-import { ArrowUpRight, BriefcaseBusiness, CalendarDays, FileCheck2, FileText, LayoutDashboard, Users, Wrench, type LucideIcon } from "lucide-react";
-import { Heading, Accent, Reveal } from "./primitives";
+import { Label, Heading, Accent, Reveal } from "./primitives";
+import { REPAIR_PAGES } from "@/content/repair-services";
+import { HOMEPAGE_REPAIR } from "@/content/homepage-repairs";
+import { useCategory } from "./category";
+import { NODE_VIZ } from "./nodeviz";
+import { Link } from "@tanstack/react-router";
+import {
+  ArrowUpRight,
+  Smartphone,
+  Laptop,
+  Cctv,
+  Tv,
+  Tablet,
+  HardDrive,
+  Gamepad2,
+  Truck,
+  WashingMachine,
+  AirVent,
+  Refrigerator,
+  Microwave,
+  Droplets,
+  BatteryCharging,
+  Fan,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
+import { WORKFLOW_STAGES } from "@/content/workflow";
 
-const WORKSPACE_MODULES: { slug: string; phase: string; name: string; detail: string; icon: LucideIcon }[] = [
-  { slug: "leads", phase: "ENQUIRIES", name: "Leads", detail: "Capture and review", icon: Users },
-  { slug: "bookings", phase: "SCHEDULING", name: "Bookings", detail: "Request and confirm", icon: CalendarDays },
-  { slug: "jobs", phase: "OPERATIONS", name: "Jobs", detail: "Assign and track", icon: BriefcaseBusiness },
-  { slug: "technicians", phase: "FIELD TEAM", name: "Technicians", detail: "Assign and update", icon: Wrench },
-  { slug: "customers", phase: "CUSTOMERS", name: "Records", detail: "Details and history", icon: Users },
-  { slug: "quotations", phase: "PLANNED", name: "Quotations", detail: "Planned capability", icon: FileCheck2 },
-  { slug: "invoicing", phase: "BILLING", name: "Invoices", detail: "Prepare and record", icon: FileText },
-  { slug: "dashboard", phase: "OVERVIEW", name: "Dashboard", detail: "Daily work view", icon: LayoutDashboard },
+const NODES = WORKFLOW_STAGES;
+
+type RepairNode = { slug: string; phase: string; name: string; category: string; icon: LucideIcon };
+
+// Homepage panel shows the repair services we cover, switchable by category.
+const ELECTRONICS_NODES: RepairNode[] = [
+  { slug: "fault-intake", phase: "REPAIR", name: "Mobile", category: "SCREENS · BATTERIES", icon: Smartphone },
+  { slug: "fault-diagnosis", phase: "REPAIR", name: "Laptop", category: "BOARDS · UPGRADES", icon: Laptop },
+  { slug: "repair-estimate", phase: "INSTALL", name: "CCTV", category: "SETUP · MAINTENANCE", icon: Cctv },
+  { slug: "repair-approval", phase: "REPAIR", name: "TV & Audio", category: "PANELS · SOUND", icon: Tv },
+  { slug: "repair-work", phase: "REPAIR", name: "Tablet", category: "IPAD · ANDROID", icon: Tablet },
+  { slug: "function-testing", phase: "RECOVERY", name: "Data", category: "DRIVES · PHONES", icon: HardDrive },
+  { slug: "repair-handover", phase: "REPAIR", name: "Console", category: "PS · XBOX", icon: Gamepad2 },
+  { slug: "repair-aftercare", phase: "SERVICE", name: "Doorstep", category: "WE COME TO YOU", icon: Truck },
 ];
 
+const APPLIANCE_NODES: RepairNode[] = [
+  { slug: "fault-intake", phase: "REPAIR", name: "Washing", category: "DRUMS · MOTORS", icon: WashingMachine },
+  { slug: "fault-diagnosis", phase: "SERVICE", name: "AC", category: "GAS · COOLING", icon: AirVent },
+  { slug: "repair-estimate", phase: "REPAIR", name: "Fridge", category: "COOLING · GAS", icon: Refrigerator },
+  { slug: "repair-approval", phase: "REPAIR", name: "Microwave", category: "OVENS · CHIMNEY", icon: Microwave },
+  { slug: "repair-work", phase: "SERVICE", name: "Purifier", category: "RO · FILTERS", icon: Droplets },
+  { slug: "function-testing", phase: "REPAIR", name: "Inverter", category: "UPS · BATTERIES", icon: BatteryCharging },
+  { slug: "repair-handover", phase: "WORK", name: "Fan & Light", category: "FITTING · REPAIR", icon: Fan },
+  { slug: "repair-aftercare", phase: "WORK", name: "Electrical", category: "WIRING · FITTINGS", icon: Zap },
+];
+
+const REPAIR_TABS = [
+  { label: "Electronics", nodes: ELECTRONICS_NODES },
+  { label: "Appliances", nodes: APPLIANCE_NODES },
+];
+
+type PanelNodes = { slug: string; phase: string; name: string; category: string; icon?: LucideIcon }[];
+
 export function PlatformIntro() {
-  return <section id="approach" className="section-pad bg-[#f1f5f9]"><div className="shell"><div className="mt-10 grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20"><Reveal delay={60}><Heading tone="light">Every service job,<br/><Accent>one connected workspace.</Accent></Heading></Reveal><Reveal delay={140}><p className="max-w-[44ch] text-[18px] leading-relaxed text-[#5d76a3] lg:pt-6 lg:text-[20px]">Manage enquiries, bookings, customer records, technicians and invoices in one place. Quotation management is planned.</p></Reveal></div></div><Reveal delay={120}><WorkflowVisualization/></Reveal></section>;
+  const category = useCategory()?.category ?? "electronics";
+  return (
+    <section id="approach" className="section-pad bg-[#f1f5f9]">
+      <div className="shell">
+        <Reveal>
+          <Label tone="light">WHAT WE FIX</Label>
+        </Reveal>
+        <div className="mt-10 grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20">
+          <Reveal delay={60}>
+            <Heading tone="light">
+              {category === "appliances" ? "Every appliance," : "Every device,"}
+              <br />
+              <Accent>one workshop.</Accent>
+            </Heading>
+          </Reveal>
+          <Reveal delay={140}>
+            <p className="max-w-[44ch] text-[18px] leading-relaxed text-[#5d76a3] lg:pt-6 lg:text-[20px]">
+              {HOMEPAGE_REPAIR[category].overview}
+            </p>
+          </Reveal>
+        </div>
+      </div>
+      <Reveal delay={120}>
+        <WorkflowVisualization tabs={REPAIR_TABS} label="OUR REPAIR" sub={category === "appliances" ? "/ WASHING → ELECTRICAL" : "/ MOBILE → CCTV"} />
+      </Reveal>
+    </section>
+  );
 }
 
-export function WorkflowVisualization() {
-  return <div className="mt-12 w-full lg:mt-20"><div className="flex items-center justify-between gap-4 px-6 py-5 lg:px-12"><div><p className="text-[15px] font-medium text-[#102a63]">Service workspace</p><p className="mt-1 text-[13px] text-[#8190aa]">Connected modules for the daily flow of work</p></div><span className="hidden items-center gap-2 text-[12px] text-[#8190aa] sm:flex"><span className="h-2 w-2 rounded-full bg-[#2563eb]"/>Shared workflow</span></div><div className="overflow-x-auto px-6 pb-6 [scrollbar-width:thin] [scrollbar-color:#c5d3e6_transparent] md:overflow-visible lg:px-12"><div className="flex snap-x snap-mandatory gap-4 md:grid md:grid-cols-4 md:gap-5 xl:grid-cols-8">{WORKSPACE_MODULES.map(({slug,phase,name,detail,icon:Icon},index)=><a key={slug} href={`/features/${slug}`} aria-label={`Explore ${name}: ${detail}`} className="group relative flex min-h-[220px] w-[min(78vw,17rem)] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-2xl border border-[#cdddf3] bg-white px-5 py-5 shadow-[0_4px_8px_-3px_rgba(16,42,99,0.08),0_12px_24px_-12px_rgba(30,78,216,0.22)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#7ea8e8] hover:bg-[#f9fbff] hover:shadow-[0_18px_40px_-16px_rgba(30,78,216,0.35)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] motion-reduce:transform-none motion-reduce:transition-none md:min-h-[230px] md:w-auto md:min-w-0"><span className="pointer-events-none absolute inset-x-0 -top-px h-px scale-x-0 bg-gradient-to-r from-transparent via-[#2563eb] to-transparent transition-transform duration-500 group-hover:scale-x-100"/><div className="flex items-center gap-2"><span className="font-mono text-[12px] text-[#b3c2d6]">{String(index+1).padStart(2,"0")}</span><span className="text-[11px] tracking-[0.08em] text-[#5d76a3]">{phase}</span></div><div className="mt-6"><h3 className="text-[22px] font-medium tracking-[-0.025em] text-[#08152e]">{name}</h3><p className="mt-2 text-[13px] text-[#1747b8]">{detail}</p></div><div className="flex items-center justify-between"><span className="grid h-10 w-10 place-items-center rounded-xl border border-[#dbe5f2] bg-[#edf3ff] text-[#1747b8] transition-all group-hover:border-[#102a63] group-hover:bg-[#102a63] group-hover:text-white"><Icon size={19} strokeWidth={1.7}/></span><span className="grid h-8 w-8 place-items-center rounded-full border border-[#dbe5f2] bg-white text-[#2563eb]"><ArrowUpRight size={15}/></span></div></a>)}</div></div><p className="px-6 text-[12px] text-[#8190aa] md:hidden">Swipe to explore the workspace</p></div>;
+export function WorkflowVisualization({
+  nodes = NODES,
+  tabs,
+  label = "REPAIR PROCESS",
+  sub = "/ INTAKE → AFTERCARE",
+}: {
+  nodes?: PanelNodes;
+  tabs?: { label: string; nodes: PanelNodes }[];
+  label?: string;
+  sub?: string;
+}) {
+  const ctx = useCategory();
+  // The header toggle drives the panel on the homepage.
+  const tab = ctx?.category === "appliances" ? 1 : 0;
+  const activeNodes = tabs ? (tabs[tab]?.nodes ?? nodes) : nodes;
+  return (
+    <div className="mt-12 w-full lg:mt-20">
+      {/* head */}
+      <div className="flex flex-nowrap items-center justify-between gap-3 px-6 py-5 lg:px-12">
+        <div className="flex min-w-0 items-baseline gap-4">
+          <span className="label-mono shrink-0 text-[#1747b8]">{label}</span>
+          <span className="label-mono hidden text-[#a8b7cc] sm:inline">{sub}</span>
+        </div>
+        <span className="label-mono flex shrink-0 items-center gap-2 text-[#8190aa]">
+          <span
+            className="h-1.5 w-1.5 rounded-full bg-[#2563eb]"
+            style={{ animation: "nx-pulse-dot 2.4s ease-in-out infinite" }}
+          />
+          {tabs ? (tab === 0 ? "ELECTRONICS" : "APPLIANCES") : "CONNECTED AT EVERY STEP"}
+        </span>
+      </div>
+
+      {/* flow rail */}
+      <div>
+        <div className="grid grid-cols-2 gap-4 px-6 py-5 sm:gap-5 md:grid-cols-4 xl:grid-cols-8 lg:px-12">
+          {activeNodes.map(({ phase: n, name: v, category: u, slug, icon: Icon }, i) => (
+            <Link
+              key={`${tab}-${slug}`}
+              to={tabs ? "/$category/repairs/$slug" : "/repair-process/$slug"}
+              params={{ category: tab === 0 ? "electronic" : "appliances", slug: tabs ? (REPAIR_PAGES.filter(service => service.category === (tab === 0 ? "electronics" : "appliances"))[i]?.slug ?? slug) : slug }}
+              aria-label={`${n}: ${v}, explore ${u.toLowerCase()}`}
+              className="group relative flex min-w-0 cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-[#cdddf3] bg-white px-4 py-5 shadow-[0_4px_8px_-3px_rgba(16,42,99,0.08),0_12px_24px_-12px_rgba(30,78,216,0.22)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#7ea8e8] hover:bg-[#f5f8fd] hover:shadow-[0_18px_40px_-16px_rgba(30,78,216,0.35)] active:translate-y-0 active:scale-[0.98] active:shadow-[0_6px_16px_-10px_rgba(30,78,216,0.3)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] motion-reduce:transform-none motion-reduce:transition-none sm:px-5 sm:py-6 coarse:border-[#c3d6f2] coarse:bg-[#fbfdff] coarse:shadow-[0_10px_24px_-14px_rgba(30,78,216,0.4)]"
+            >
+              <span className="pointer-events-none absolute inset-x-0 -top-px h-px scale-x-0 bg-gradient-to-r from-transparent via-[#2563eb] to-transparent transition-transform duration-500 group-hover:scale-x-100" />
+              <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_0%,rgba(37,99,235,0.08),transparent_60%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+              <div className="flex items-center gap-2">
+                <span className="label-mono text-[#b3c2d6]">{String(i + 1).padStart(2, "0")}</span>
+                <span className="text-[12px] tracking-[0.04em] text-[#5d76a3] sm:text-[12.5px] xl:text-[11px]">
+                  {n}
+                </span>
+              </div>
+
+              <div className="mt-5">
+                <div className="font-mono text-[19px] leading-[1.05] font-light tracking-[-0.02em] whitespace-nowrap text-[#08152e] sm:text-[24px] xl:text-[14px]">
+                  {v}
+                </div>
+                <div className="label-mono mt-2 truncate text-[#1747b8]">{u}</div>
+              </div>
+
+              <div className="mt-4 flex items-center justify-between gap-2 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
+                {Icon ? (
+                  <span className="grid h-9 w-9 place-items-center rounded-lg border border-[#102a63] bg-[#102a63] text-white shadow-[0_4px_10px_-4px_rgba(16,42,99,0.4)] transition-all duration-300 group-hover:scale-110 group-hover:border-[#1e4ed8] group-hover:bg-[#1e4ed8] group-hover:shadow-[0_6px_14px_-6px_rgba(37,99,235,0.6)] motion-reduce:transform-none">
+                    <Icon size={18} strokeWidth={1.6} aria-hidden="true" />
+                  </span>
+                ) : (
+                  (() => {
+                    const V = NODE_VIZ[i];
+                    return V ? <V /> : null;
+                  })()
+                )}
+              </div>
+              <span
+                aria-hidden="true"
+                className="absolute right-2 top-2 grid h-6 w-6 place-items-center rounded-full border border-[#dbe5f2] bg-[#edf3ff] text-[#2563eb] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:border-[#2563eb] group-hover:bg-[#2563eb] group-hover:text-white group-focus-visible:border-[#2563eb] group-focus-visible:bg-[#2563eb] group-focus-visible:text-white motion-reduce:transform-none"
+              >
+                <ArrowUpRight size={14} />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default PlatformIntro;

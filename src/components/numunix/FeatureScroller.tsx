@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from "react";
+import { Label } from "./primitives";
 import ServiceDemo, { type RepairStory } from "./ServiceDemo";
+import { useCategory } from "./category";
+import { repairServiceHref } from "@/content/repair-services";
+import { REPAIR_SERVICES } from "@/content/homepage-repairs";
 
 type Item = {
   nav: string;
@@ -12,52 +16,52 @@ type Item = {
 
 const ITEMS: Item[] = [
   {
-    nav: "LEAD MANAGEMENT",
-    href: "https://app.numunix.com",
-    title: "Keep every enquiry in view.",
-    body: "Capture service enquiries, review customer details and follow each lead through a clear status flow.",
-    slug: "workspace-leads",
-    preset: "workspace-leads",
+    nav: "MOBILE REPAIR",
+    href: "/services",
+    title: "Cracked, dead, or drowned, fixed.",
+    body: "Screen replacements, batteries, charging ports, cameras, and water-damage recovery for every major brand, with live status from check-in to handover.",
+    slug: "mobile-repair",
+    preset: "repair-mobile",
   },
   {
-    nav: "BOOKING MANAGEMENT",
-    href: "https://app.numunix.com",
-    title: "Bring service bookings together.",
-    body: "Keep customer, service and appointment information connected to the work being arranged.",
-    slug: "workspace-bookings",
-    preset: "workspace-bookings",
+    nav: "LAPTOP & COMPUTER REPAIR",
+    href: "/services",
+    title: "Board-level repair, not just replacement.",
+    body: "From no-display and overheating to keyboards, hinges, and upgrades, our bench repairs what other service centres simply replace.",
+    slug: "laptop-repair",
+    preset: "repair-board",
   },
   {
-    nav: "TECHNICIAN ASSIGNMENT",
-    href: "https://app.numunix.com",
-    title: "Coordinate work across your team.",
-    body: "Assign service jobs to technicians and keep field operations organized.",
-    slug: "workspace-technicians",
-    preset: "workspace-technicians",
+    nav: "CCTV & SECURITY SYSTEMS",
+    href: "/services",
+    title: "Cameras that stay online.",
+    body: "Installation, DVR/NVR setup, camera repair, and preventive maintenance for homes, shops, and offices.",
+    slug: "cctv-security",
+    preset: "repair-cctv",
   },
   {
-    nav: "JOB TRACKING",
-    href: "https://app.numunix.com",
-    title: "Follow every service job through completion.",
-    body: "Keep assignment, acceptance, progress and completion updates tied to the service job.",
-    slug: "workspace-jobs",
-    preset: "workspace-jobs",
+    nav: "HOME APPLIANCE REPAIR",
+    href: "/services",
+    title: "Everyday machines, back to work.",
+    body: "Washing machines, microwaves, chimneys, and more, doorstep diagnosis, itemised estimates, and repairs on schedule.",
+    slug: "appliance-repair",
+    preset: "repair-web",
   },
   {
-    nav: "INVOICING",
-    href: "https://app.numunix.com",
-    title: "Keep service billing organized.",
-    body: "Create and manage service invoices as part of the day-to-day workflow.",
-    slug: "workspace-invoices",
-    preset: "workspace-invoices",
+    nav: "TV & AUDIO REPAIR",
+    href: "/services",
+    title: "Picture and sound, restored.",
+    body: "Panel and backlight work, board repair, and speaker service for every brand and size.",
+    slug: "tv-audio-repair",
+    preset: "repair-tv",
   },
   {
-    nav: "SERVICE WORKSPACE",
-    href: "https://app.numunix.com",
-    title: "One view of the work ahead.",
-    body: "Bring enquiries, bookings, jobs and invoice follow-up into one connected workspace.",
-    slug: "workspace-overview",
-    preset: "workspace-overview",
+    nav: "DATA RECOVERY",
+    href: "/services",
+    title: "When the data matters more than the device.",
+    body: "Photos, files, and contacts recovered from failed drives, phones, and memory cards, assessed before anything is powered on.",
+    slug: "data-recovery",
+    preset: "repair-data",
   },
 ];
 
@@ -98,7 +102,8 @@ function MobileStage({ items }: { items: Item[] }) {
 
 
 export function FeatureScroller() {
-  const items = ITEMS;
+  const category = useCategory()?.category ?? "electronics";
+  const items: Item[] = REPAIR_SERVICES[category].map((service, i) => ({ nav: service.nav, href: repairServiceHref(category, service.kind), title: service.title, body: service.body, slug: `${category}-repair-${i}`, preset: ITEMS[i]?.preset ?? "repair-web" }));
   const [active, setActive] = useState(0);
   const refs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -140,6 +145,7 @@ export function FeatureScroller() {
           {/* LEFT — sticky index */}
           <div>
             <div className="lg:sticky lg:top-32">
+              <Label tone="light">OUR REPAIR SERVICES</Label>
               <div className="mt-8 hidden lg:block">
                 {items.map((it, i) => (
                   <button

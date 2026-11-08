@@ -1,7 +1,5 @@
 # SEO implementation — 5 November 2026
 
-> Historical release note: this implementation documents the previous repair-service public site. On 7 November 2026 the public-site direction changed back to Numunix service-management software. The current SaaS source has a 31-URL sitemap that passes the local SSR SEO check; deployment and live verification are still pending.
-
 This release follows the [full-site audit](../seo-audit-2026-11-05/REPORT.md). The original audit remains a dated baseline; it is not a description of the updated release.
 
 ## Implemented

@@ -35,159 +35,408 @@ export type LegalPageData = {
   sections: { heading: string; paragraphs: string[] }[];
 };
 
-const sharedCTA = {
-  ctaTitle: "Bring your service work together.",
-  ctaAccent: "service work together.",
-  ctaBody: "Use one workspace to coordinate enquiries, bookings, technicians, jobs and invoices.",
-};
-
 export const APPROACH: CompanyPageData = {
-  slug: "repair-assessment",
-  label: "LEAD MANAGEMENT",
-  title: "Turn each service enquiry into a clear next step.",
-  accent: "a clear next step.",
-  intro: "Capture customer and equipment details, review incoming requests and keep follow-up connected to the service work that comes next.",
-  metaTitle: "Service Lead Management Software | Numunix",
-  metaDescription: "Capture service enquiries, organize customer details and keep follow-up connected to bookings and job records in Numunix.",
-  stats: [["CAPTURE", "New enquiries"], ["REVIEW", "Customer details"], ["FOLLOW UP", "Next action"], ["CONVERT", "Service booking"]],
-  sections: [{
-    label: "FROM REQUEST TO BOOKING",
-    title: "Keep the enquiry in context.",
-    items: [
-      ["Collect useful details", "Record customer contact information, the requested service and the equipment details needed by your team."],
-      ["Review new requests", "Use a shared lead view to see what has arrived and what needs a response."],
-      ["Track follow-up", "Keep the next action and request status with its customer record."],
-      ["Move work forward", "Connect a suitable enquiry to a booking and continue the service record."],
+  "slug": "repair-assessment",
+  "label": "FAULT ASSESSMENT",
+  "title": "Repair starts here. Understand the fault.",
+  "accent": "Understand the fault.",
+  "intro": "A useful repair begins with the model, symptoms and history. Review diagnosis, repair feasibility and the estimate before deciding how to proceed.",
+  "metaTitle": "Electronics & Appliance Fault Assessment | Numunix Repairs",
+  "metaDescription": "A useful repair begins with the model, symptoms and history. Review diagnosis, repair feasibility and the estimate before deciding how to proceed.",
+  "stats": [
+    [
+      "FIRST",
+      "Symptoms"
     ],
-  }],
-  ...sharedCTA,
+    [
+      "THEN",
+      "Assessment"
+    ],
+    [
+      "BEFORE WORK",
+      "Approval"
+    ],
+    [
+      "HANDOVER",
+      "Checks"
+    ]
+  ],
+  "sections": [
+    {
+      "label": "HOW WE WORK",
+      "title": "Care without guesswork.",
+      "items": [
+        [
+          "Model-specific assessment",
+          "A phone charging fault, a warm fridge and a leaking washer need different checks. Share the exact model and when the symptom appears."
+        ],
+        [
+          "Your decision matters",
+          "Ask what the estimate includes, which parts are proposed and whether further testing is needed before committing."
+        ],
+        [
+          "Practical repair options",
+          "Discuss repair versus replacement, parts compatibility and whether work belongs on site or in the workshop."
+        ],
+        [
+          "Clear handover",
+          "Review the functions tested, any remaining limitations and the aftercare terms for the agreed work."
+        ]
+      ]
+    }
+  ],
+  "ctaTitle": "Something not working? Let\u2019s take a look.",
+  "ctaAccent": "Let\u2019s take a look.",
+  "ctaBody": "Tell us the model, symptoms and location. Confirm the assessment and estimate before approving repairs."
 };
 
 export const PROCESS: CompanyPageData = {
-  slug: "repair-process",
-  label: "SERVICE WORKFLOW",
-  title: "From first request to completed service.",
-  accent: "completed service.",
-  intro: "Numunix brings the steps service teams coordinate every day into one connected operational workflow.",
-  metaTitle: "Service Management Workflow Software | Numunix",
-  metaDescription: "Coordinate service enquiries, bookings, technician assignments, job progress and invoices through one connected workflow.",
-  stats: [["ENQUIRY", "Capture"], ["BOOKING", "Schedule"], ["JOB", "Track"], ["INVOICE", "Record"]],
-  sections: [{
-    label: "A CONNECTED SERVICE JOURNEY",
-    title: "One record, shared across the work.",
-    items: [
-      ["01 Capture", "Add a new enquiry and keep customer and service details together."],
-      ["02 Schedule", "Organize the booking and the appointment information your team needs."],
-      ["03 Assign", "Connect the job to a technician and its service record."],
-      ["04 Update", "Follow job status as work moves through the team."],
-      ["05 Complete", "Record completion and retain the service history."],
-      ["06 Invoice", "Keep billing records connected to the completed service job."],
+  "slug": "repair-process",
+  "label": "REPAIR PROCESS",
+  "title": "From fault to finish. One clear journey.",
+  "accent": "One clear journey.",
+  "intro": "Describe the problem, arrange assessment, review the estimate and approve the work. Testing and handover complete the repair conversation.",
+  "metaTitle": "Repair Process | Numunix Repairs",
+  "metaDescription": "Describe the problem, arrange assessment, review the estimate and approve the work. Testing and handover complete the repair conversation.",
+  "stats": [
+    [
+      "INTAKE",
+      "Model & fault"
     ],
-  }],
-  ...sharedCTA,
+    [
+      "DIAGNOSIS",
+      "Cause & scope"
+    ],
+    [
+      "WORK",
+      "Approved repairs"
+    ],
+    [
+      "FINISH",
+      "Test & handover"
+    ]
+  ],
+  "sections": [
+    {
+      "label": "REPAIR STAGES",
+      "title": "Every step has a purpose.",
+      "items": [
+        [
+          "01 Describe",
+          "Share the model, symptoms, fault history and location. Avoid repeated use if there is leakage, overheating or exposed wiring."
+        ],
+        [
+          "02 Assess",
+          "Inspect the relevant power, mechanical, display, cooling or connection paths. A symptom alone is not a final diagnosis."
+        ],
+        [
+          "03 Estimate",
+          "Confirm inspection charges, labour, parts, exclusions and expected timing."
+        ],
+        [
+          "04 Approve",
+          "Give permission for the agreed scope. Additional faults or parts should be discussed before extending the work."
+        ],
+        [
+          "05 Repair",
+          "The agreed repair or service is completed using compatible parts where needed."
+        ],
+        [
+          "06 Test",
+          "Review the affected functions, such as charging, recording, cooling, drainage or display output."
+        ],
+        [
+          "07 Handover",
+          "Confirm accessories, completed work, limitations and any applicable repair terms."
+        ],
+        [
+          "08 Aftercare",
+          "Keep the service record and report recurring symptoms with the original reference."
+        ]
+      ]
+    }
+  ],
+  "ctaTitle": "Something not working? Let\u2019s take a look.",
+  "ctaAccent": "Let\u2019s take a look.",
+  "ctaBody": "Tell us the model, symptoms and location. Confirm the assessment and estimate before approving repairs."
 };
 
 export const TECHNOLOGY: CompanyPageData = {
-  slug: "repair-diagnostics",
-  label: "OPERATIONS OVERVIEW",
-  title: "See what needs attention across the team.",
-  accent: "across the team.",
-  intro: "Bring leads, bookings, job progress and invoice follow-up into a shared view designed for day-to-day service operations.",
-  metaTitle: "Service Operations Dashboard | Numunix",
-  metaDescription: "Review service enquiries, bookings, jobs, technicians and invoice records through one service operations dashboard.",
-  stats: [["LEADS", "Review"], ["BOOKINGS", "Schedule"], ["JOBS", "Track"], ["INVOICES", "Follow up"]],
-  sections: [{
-    label: "TEAM VISIBILITY",
-    title: "Find the next useful action.",
-    items: [
-      ["New enquiries", "Review incoming requests and the customer details attached to each one."],
-      ["Upcoming bookings", "Keep scheduled service work visible to the people coordinating it."],
-      ["Jobs in progress", "See assigned jobs and their latest recorded status."],
-      ["Invoice records", "Keep billing activity connected to customer and job information."],
+  "slug": "repair-diagnostics",
+  "label": "DIAGNOSTICS & TOOLS",
+  "title": "The right checks. Not trial and error.",
+  "accent": "Not trial and error.",
+  "intro": "Different devices need different assessment methods. Our service guidance explains the power, signal, mechanical and functional checks to discuss with your technician.",
+  "metaTitle": "Electronics & Appliance Repair Diagnostics | Numunix",
+  "metaDescription": "Different devices need different assessment methods. Our service guidance explains the power, signal, mechanical and functional checks to discuss with your technician.",
+  "stats": [
+    [
+      "ELECTRONICS",
+      "Power & signal"
     ],
-  }],
-  ...sharedCTA,
+    [
+      "APPLIANCES",
+      "Cycle & cooling"
+    ],
+    [
+      "PARTS",
+      "Compatibility"
+    ],
+    [
+      "FINISH",
+      "Function checks"
+    ]
+  ],
+  "sections": [
+    {
+      "label": "ASSESSMENT AREAS",
+      "title": "Look beyond the symptom.",
+      "items": [
+        [
+          "Power and charging",
+          "Phone ports, laptop adapters, backup batteries and appliance controls need model-specific power checks."
+        ],
+        [
+          "Display and audio",
+          "Screen, backlight, touch, input and speaker checks help distinguish a panel fault from a connection or board issue."
+        ],
+        [
+          "Cooling and airflow",
+          "AC and refrigerator assessments consider airflow, temperature behaviour, seals and the cooling system."
+        ],
+        [
+          "Water and movement",
+          "Washer and purifier assessments consider supply, hoses, drainage, pumps and moving parts."
+        ],
+        [
+          "CCTV signal and recording",
+          "Camera power, cables, storage and recorder settings all affect the picture and saved footage."
+        ],
+        [
+          "Final function checks",
+          "Confirm what was tested and under which conditions before taking the device back into daily use."
+        ]
+      ]
+    }
+  ],
+  "ctaTitle": "Something not working? Let\u2019s take a look.",
+  "ctaAccent": "Let\u2019s take a look.",
+  "ctaBody": "Tell us the model, symptoms and location. Confirm the assessment and estimate before approving repairs."
 };
 
 export const SECURITY: CompanyPageData = {
-  slug: "repair-safety",
-  label: "ACCESS & RECORDS",
-  title: "Keep work information organized by role.",
-  accent: "organized by role.",
-  intro: "Numunix provides administrator and team sign-in for the service workspace. Keep customer, booking and job records available to the people coordinating that work.",
-  metaTitle: "Service Workspace Access & Records | Numunix",
-  metaDescription: "Learn how Numunix organizes service enquiries, bookings and job records in an administrator and team workspace.",
-  stats: [["SIGN IN", "Team access"], ["CUSTOMERS", "Service context"], ["ASSIGNMENTS", "Clear ownership"], ["HISTORY", "Job records"]],
-  sections: [{
-    label: "WORKSPACE PRACTICES",
-    title: "Clear access, useful records.",
-    items: [
-      ["Use individual sign-in", "Team members sign in to reach the workspace functions available to them."],
-      ["Keep service context together", "Customer and equipment details stay associated with their service requests and jobs."],
-      ["Record job changes", "Status updates help the team understand where work stands."],
-      ["Handle customer data thoughtfully", "Only enter information your team needs to coordinate and complete the requested service work."],
+  "slug": "repair-safety",
+  "label": "DEVICE & DATA CARE",
+  "title": "Care for your device. Respect for your data.",
+  "accent": "Respect for your data.",
+  "intro": "Before repair, discuss data access, backup, safe handling and the checks the device needs. Access should be limited to what is necessary for the agreed assessment.",
+  "metaTitle": "Device & Data Care | Numunix Repairs",
+  "metaDescription": "Before repair, discuss data access, backup, safe handling and the checks the device needs. Access should be limited to what is necessary for the agreed assessment.",
+  "stats": [
+    [
+      "DATA",
+      "Backup first"
     ],
-  }],
-  ...sharedCTA,
+    [
+      "ACCESS",
+      "Discuss scope"
+    ],
+    [
+      "SAFETY",
+      "Stop unsafe use"
+    ],
+    [
+      "RECORDS",
+      "Keep details"
+    ]
+  ],
+  "sections": [
+    {
+      "label": "BEFORE HANDOVER",
+      "title": "Protect what matters.",
+      "items": [
+        [
+          "Back up accessible files",
+          "Save important photos and documents before handing over a device that still works. Data recovery is a separate assessment, not a guaranteed outcome."
+        ],
+        [
+          "Limit account access",
+          "Do not send passwords, payment details or one-time codes in an enquiry. Discuss a temporary test account or supervised access where appropriate."
+        ],
+        [
+          "Remove personal accessories",
+          "Remove SIM and memory cards if they are not needed for diagnosis. Record any accessories handed over."
+        ],
+        [
+          "Recognise unsafe symptoms",
+          "Stop using items with smoke, burning smells, battery swelling, exposed wiring or water near electrical connections. Do not open the casing yourself."
+        ]
+      ]
+    }
+  ],
+  "ctaTitle": "Something not working? Let\u2019s take a look.",
+  "ctaAccent": "Let\u2019s take a look.",
+  "ctaBody": "Tell us the model, symptoms and location. Confirm the assessment and estimate before approving repairs."
 };
 
 export const SUPPORT: CompanyPageData = {
-  slug: "repair-aftercare",
-  label: "TEAM WORKSPACE",
-  title: "Keep the team aligned as work moves forward.",
-  accent: "moves forward.",
-  intro: "Give coordinators and technicians a shared view of assignments, customer context and service job updates.",
-  metaTitle: "Service Team Management Workspace | Numunix",
-  metaDescription: "Coordinate technician assignments, job updates, customer context and service completion in the Numunix team workspace.",
-  stats: [["ASSIGN", "Share work"], ["REVIEW", "Job details"], ["UPDATE", "Track progress"], ["COMPLETE", "Keep a record"]],
-  sections: [{
-    label: "COORDINATION",
-    title: "Keep the service record moving.",
-    items: [
-      ["Review assigned work", "Keep technician assignments connected to their service job details."],
-      ["Share the right context", "Make customer and equipment information available alongside the job."],
-      ["Record progress", "Update the service status as work moves through the team."],
-      ["Close the loop", "Record completion and keep the job history available for later reference."],
+  "slug": "repair-aftercare",
+  "label": "REPAIR AFTERCARE",
+  "title": "After the repair. Keep care close.",
+  "accent": "Keep care close.",
+  "intro": "Questions about completed work, recurring symptoms or routine maintenance? Share the service details, current fault and device model so the next step can be reviewed.",
+  "metaTitle": "Repair Aftercare & Maintenance | Numunix",
+  "metaDescription": "Questions about completed work, recurring symptoms or routine maintenance? Share the service details, current fault and device model so the next step can be reviewed.",
+  "stats": [
+    [
+      "CONTACT",
+      "Service reference"
     ],
-  }],
-  ...sharedCTA,
+    [
+      "DETAILS",
+      "Model & symptoms"
+    ],
+    [
+      "TERMS",
+      "Confirm coverage"
+    ],
+    [
+      "NEXT STEP",
+      "Review scope"
+    ]
+  ],
+  "sections": [
+    {
+      "label": "GETTING HELP",
+      "title": "Useful details, better follow-up.",
+      "items": [
+        [
+          "Completed repair questions",
+          "Explain which function is affected and whether the symptom matches the original issue. Include the service reference if available."
+        ],
+        [
+          "Repair terms",
+          "Warranty or follow-up coverage depends on the agreed work and parts. Confirm duration, exclusions and any inspection charges in your service record."
+        ],
+        [
+          "New or recurring faults",
+          "A new symptom may need a fresh assessment. Avoid repeatedly operating a device with leaks, overheating or electrical damage."
+        ],
+        [
+          "Maintenance planning",
+          "List the devices, usage and location. Discuss suitable preventive checks and what any maintenance arrangement includes."
+        ]
+      ]
+    }
+  ],
+  "ctaTitle": "Something not working? Let\u2019s take a look.",
+  "ctaAccent": "Let\u2019s take a look.",
+  "ctaBody": "Tell us the model, symptoms and location. Confirm the assessment and estimate before approving repairs."
 };
 
 export const COMPANY_PAGES = [APPROACH, PROCESS, TECHNOLOGY, SECURITY, SUPPORT] as const;
 
 export const PRIVACY: LegalPageData = {
-  slug: "privacy",
-  label: "PRIVACY",
-  title: "Your information, handled with care.",
-  accent: "handled with care.",
-  intro: "This policy explains information Numunix handles through the service-management workspace and public enquiry forms.",
-  metaTitle: "Privacy Policy | Numunix Service Management",
-  metaDescription: "Read how Numunix handles customer, team and service information submitted through its service-management workspace and public enquiry forms.",
-  updated: "7 November 2026",
-  sections: [
-    { heading: "Who we are", paragraphs: ["Numunix provides a service-management workspace for service businesses and may also receive public service enquiries through this website."] },
-    { heading: "Information you share", paragraphs: ["Depending on how you use the website, information may include contact details, customer and equipment details, service requests, booking information, job notes, invoice records and account sign-in information. Do not submit passwords, payment credentials or one-time codes in public enquiry forms."] },
-    { heading: "How information is used", paragraphs: ["Information is used to operate the workspace, respond to service enquiries, coordinate bookings and jobs, maintain service records, provide support and protect the website and account access."] },
-    { heading: "Access and service providers", paragraphs: ["Information may be processed by providers needed to host the website, store operational records and deliver requested communications. Access should be limited to people and providers involved in operating the service."] },
-    { heading: "Retention", paragraphs: ["Records are retained for as long as needed to operate the workspace, respond to requests, meet applicable obligations and resolve disputes. Retention can vary by record type and the service relationship."] },
-    { heading: "Your choices", paragraphs: [`For questions or requests about personal information, contact ${CONTACT.email}. Some records may need to be retained where legal or operational obligations apply.`] },
-  ],
+  "slug": "privacy",
+  "label": "PRIVACY",
+  "title": "Your information. Handled with care.",
+  "accent": "Handled with care.",
+  "intro": "How we use repair enquiries, service details and contact information shared through Numunix.",
+  "metaTitle": "Privacy | Numunix Repairs",
+  "metaDescription": "How we use repair enquiries, service details and contact information shared through Numunix.",
+  "updated": "1 November 2026",
+  "sections": [
+    {
+      "heading": "Who we are",
+      "paragraphs": [
+        "Numunix provides electronics and appliance repair services. This policy covers enquiries and service-related information shared through our website and contact channels."
+      ]
+    },
+    {
+      "heading": "Information you share",
+      "paragraphs": [
+        "Enquiries may include your name, contact details, location, device model, symptoms and service history. Do not submit passwords, payment credentials or one-time codes through the enquiry form."
+      ]
+    },
+    {
+      "heading": "Why we use it",
+      "paragraphs": [
+        "We use these details to respond, assess service scope, arrange visits and keep relevant service records. Standard technical information may help operate and protect the website."
+      ]
+    },
+    {
+      "heading": "Device data",
+      "paragraphs": [
+        "A repair enquiry does not grant unrestricted access to device data. Discuss any access needed for diagnosis separately, and back up accessible files before handover."
+      ]
+    },
+    {
+      "heading": "Sharing and retention",
+      "paragraphs": [
+        "Service providers may process information needed to operate contact channels or deliver the requested service. Records are kept as needed for service, legal obligations and dispute resolution. We do not sell personal information."
+      ]
+    },
+    {
+      "heading": "Your choices",
+      "paragraphs": [
+        `Contact ${CONTACT.email} to ask about access, correction or deletion, subject to applicable record-keeping obligations.`
+      ]
+    }
+  ]
 };
 
 export const TERMS: LegalPageData = {
-  slug: "terms",
-  label: "TERMS",
-  title: "Clear terms for a shared workspace.",
-  accent: "shared workspace.",
-  intro: "These terms cover use of the Numunix website and service-management workspace.",
-  metaTitle: "Terms of Use | Numunix Service Management",
-  metaDescription: "Review the terms for using the Numunix service-management workspace and website, including account access, records and service availability.",
-  updated: "7 November 2026",
-  sections: [
-    { heading: "Workspace use", paragraphs: ["Use the workspace for lawful service-management activity. Do not attempt to disrupt the website, access another account or misuse customer information."] },
-    { heading: "Account access", paragraphs: ["Keep account credentials private and notify Numunix if you believe an account has been accessed without permission. Users are responsible for activity carried out through their access."] },
-    { heading: "Records and decisions", paragraphs: ["The workspace helps organize enquiries, bookings, jobs and invoice records. The service business remains responsible for the accuracy of information entered and for decisions made using those records."] },
-    { heading: "Availability and changes", paragraphs: ["Features and website content may change as the service develops. No specific uptime, response time or uninterrupted availability is promised by this page."] },
-    { heading: "Contact", paragraphs: [`Questions about these terms can be sent to ${CONTACT.email}.`] },
-  ],
+  "slug": "terms",
+  "label": "TERMS",
+  "title": "Clear terms. Informed repairs.",
+  "accent": "Informed repairs.",
+  "intro": "General website information does not replace the assessment, estimate and service terms agreed for your repair.",
+  "metaTitle": "Terms | Numunix Repairs",
+  "metaDescription": "General website information does not replace the assessment, estimate and service terms agreed for your repair.",
+  "updated": "1 November 2026",
+  "sections": [
+    {
+      "heading": "Website information",
+      "paragraphs": [
+        "Service descriptions explain common assessment areas. They are not a guarantee that every model or fault can be repaired. Availability and scope are confirmed before booking."
+      ]
+    },
+    {
+      "heading": "Estimates and approval",
+      "paragraphs": [
+        "Confirm any visit or inspection charge, labour, parts, exclusions and expected timing. Work and additional scope require your approval. An enquiry alone does not confirm a booking."
+      ]
+    },
+    {
+      "heading": "Repair and replacement",
+      "paragraphs": [
+        "Parts availability and fault condition affect feasibility. Ask about compatible parts and alternatives when repair may not be practical."
+      ]
+    },
+    {
+      "heading": "Data and access",
+      "paragraphs": [
+        "Back up accessible data and disclose relevant device damage. Discuss access needed for testing rather than sending credentials through the enquiry form. Recovery outcomes cannot be guaranteed."
+      ]
+    },
+    {
+      "heading": "Testing and aftercare",
+      "paragraphs": [
+        "Confirm the functions tested and any remaining limitations at handover. Warranty, follow-up coverage, exclusions and charges depend on the terms agreed for the specific work."
+      ]
+    },
+    {
+      "heading": "Website use",
+      "paragraphs": [
+        "Do not misuse or disrupt this website. Site text and visual assets belong to Numunix or their licensors. General guidance is not a substitute for professional electrical inspection."
+      ]
+    },
+    {
+      "heading": "Contact",
+      "paragraphs": [
+        `Questions about service terms can be sent to ${CONTACT.email}.`
+      ]
+    }
+  ]
 };
+
