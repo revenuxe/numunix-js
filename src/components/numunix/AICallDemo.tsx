@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import { Check } from "lucide-react";
 import { Waveform } from "./primitives";

@@ -81,6 +81,7 @@ async function login(page: Page) {
   await page.goto("/admin/login");
   await page.getByLabel("Email address").fill("admin@example.com");
   await page.getByLabel("Password", { exact: true }).fill("local-test-password");
+  await expect(page.getByRole("button", { name: "Sign in to workspace" })).toBeEnabled();
   await page.getByRole("button", { name: "Sign in to workspace" }).click();
 }
 
@@ -109,7 +110,7 @@ test("mobile admin can view, update, filter and delete a lead", async ({ page },
   await page.getByLabel("Repair request status").selectOption("qualified");
   await page.getByLabel("Repair notes").fill("Follow up on Monday.");
   await page.getByRole("button", { name: "Save changes" }).click();
-  await expect(page.getByRole("status")).toContainText("Lead updated.");
+  await expect(page.getByRole("status").filter({ hasText: "Lead updated." })).toBeVisible();
   await page
     .getByRole("button", { name: "View Avery Morgan", exact: true })
     .filter({ visible: true })
@@ -127,21 +128,21 @@ test("mobile admin can view, update, filter and delete a lead", async ({ page },
     .filter({ visible: true })
     .click();
   await page.getByRole("button", { name: "Delete lead", exact: true }).click();
-  await expect(
-    page.getByRole("heading", { name: "No repair requests yet" }),
-  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "No repair requests yet" })).toBeVisible();
 });
 
 test("non-admin accounts cannot enter the dashboard", async ({ page }) => {
   await mockSupabase(page, false);
   await login(page);
-  await expect(page.getByRole("alert")).toContainText("doesn’t have admin access");
+  await expect(page.locator("form [role=alert]")).toContainText("doesn’t have admin access");
   await page.goto("/admin/dashboard");
   await expect(page.getByRole("heading", { name: "Admin access required" })).toBeVisible();
   await expect(page.getByText("Avery Morgan")).not.toBeVisible();
 });
 
-test("desktop table supports search and public contact submission", async ({ page }, testInfo) => {
+test("desktop table supports search and deduplicates public contact submission", async ({
+  page,
+}, testInfo) => {
   await mockSupabase(page);
   await login(page);
   await page.getByRole("button", { name: "Leads", exact: true }).click();
@@ -157,9 +158,20 @@ test("desktop table supports search and public contact submission", async ({ pag
   await page
     .getByRole("combobox", { name: "Service *", exact: true })
     .selectOption({ label: "Mobile Repair" });
-  await page.getByRole("button", { name: "Submit enquiry" }).click();
-  await expect(page).toHaveURL(/\/thank-you$/);
-  await expect(page.getByRole("heading", {level: 1})).toContainText("Repair request received.");
+  await page.getByRole("combobox", { name: /Brand/ }).click();
+  await page.getByRole("option", { name: "Apple", exact: true }).click();
+  let submissions = 0;
+  page.on("request", (request) => {
+    if (request.method() === "POST" && request.headers()["next-action"]) submissions++;
+  });
+  await page.locator("#contact-name").evaluate((input) => {
+    const form = input.closest("form")!;
+    form.requestSubmit();
+    form.requestSubmit();
+  });
+  await expect(page).toHaveURL(/\/thank-you\?booking=NU-/);
+  expect(submissions).toBe(1);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Repair request received.");
 });
 
 test("home enquiry reaches a mobile-friendly thank-you page", async ({ page }, testInfo) => {
@@ -171,8 +183,10 @@ test("home enquiry reaches a mobile-friendly thank-you page", async ({ page }, t
   await page
     .getByRole("combobox", { name: "Service *", exact: true })
     .selectOption({ label: "Mobile Repair" });
+  await page.getByRole("combobox", { name: /Brand/ }).click();
+  await page.getByRole("option", { name: "Apple", exact: true }).click();
   await page.getByRole("button", { name: "Submit enquiry" }).click();
-  await expect(page).toHaveURL(/\/thank-you$/);
+  await expect(page).toHaveURL(/\/thank-you\?booking=NU-/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Repair request received.");
   await page.screenshot({ path: testInfo.outputPath("thank-you-mobile.png"), fullPage: false });
   await expect(page.getByRole("link", { name: "Email our team" })).toHaveAttribute(
@@ -188,22 +202,16 @@ test("home enquiry reaches a mobile-friendly thank-you page", async ({ page }, t
 
 test("failed enquiries stay on the form and do not show confirmation", async ({ page }) => {
   await mockSupabase(page);
-  await page.route("**/rest/v1/contact_enquiries", (route) =>
-    route.fulfill({
-      status: route.request().method() === "OPTIONS" ? 204 : 500,
-      body:
-        route.request().method() === "OPTIONS" ? "" : JSON.stringify({ message: "Save failed" }),
-      headers: { "access-control-allow-origin": "*", "access-control-allow-headers": "*" },
-    }),
-  );
   await page.goto("/contact");
-  await page.getByLabel("Name *", { exact: true }).fill("Test Visitor");
+  await page.getByLabel("Name *", { exact: true }).fill("Fail Visitor");
   await page.getByLabel("Phone number *").fill("+91 98765 43210");
   await page
     .getByRole("combobox", { name: "Service *", exact: true })
     .selectOption({ label: "Mobile Repair" });
+  await page.getByRole("combobox", { name: /Brand/ }).click();
+  await page.getByRole("option", { name: "Apple", exact: true }).click();
   await page.getByRole("button", { name: "Submit enquiry" }).click();
-  await expect(page.getByRole("alert")).toContainText("could not be saved");
+  await expect(page.locator("form [role=alert]")).toContainText("could not be saved");
   await expect(page).toHaveURL(/\/contact$/);
-  await expect(page.getByLabel("Name *", { exact: true })).toHaveValue("Test Visitor");
+  await expect(page.getByLabel("Name *", { exact: true })).toHaveValue("Fail Visitor");
 });

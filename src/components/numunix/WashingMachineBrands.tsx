@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
+import { resolveHref } from "@/lib/route-href";
 import { Label, Heading, Accent } from "./primitives";
 
 const BRANDS = [
@@ -40,7 +41,7 @@ export function WashingMachineBrands() {
         </div>
         <div className="mt-9 grid grid-cols-3 gap-2 sm:grid-cols-3 sm:gap-5 lg:mt-12">
           {BRANDS.map((brand) => (
-            <Link key={brand.file} to="/$category/repairs/$slug/$brand" params={{ category: "appliances", slug: "washing-machine-repair", brand: brand.file }} aria-label={`Request ${brand.name} washing machine repair`} className="group flex min-w-0 flex-col rounded-lg border border-primary/30 bg-card p-2.5 transition duration-200 hover:-translate-y-1 hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none sm:p-6">
+            <Link key={brand.file} href={resolveHref("/$category/repairs/$slug/$brand", { category: "appliances", slug: "washing-machine-repair", brand: brand.file })}  aria-label={`Request ${brand.name} washing machine repair`} className="group flex min-w-0 flex-col rounded-lg border border-primary/30 bg-card p-2.5 transition duration-200 hover:-translate-y-1 hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none sm:p-6">
               <div className="flex h-16 items-center justify-center sm:h-24 sm:px-6"><img src={`/brands/washing-machines/${brand.file}.webp`} alt={`${brand.name} logo`} width={brand.width} height={brand.height} loading="lazy" decoding="async" className="max-h-14 w-auto max-w-full object-contain sm:max-h-16" /></div>
               <div className="mt-3 flex items-center justify-between gap-1 border-t border-border/70 pt-3 sm:gap-2"><span className="text-[10px] font-medium text-navytext sm:text-sm">{brand.name}</span><span aria-hidden="true" className="grid size-4 shrink-0 place-items-center sm:size-7 rounded-full bg-primary text-primary-foreground"><ArrowUpRight size={15} className="size-3 sm:size-[15px]" /></span></div>
             </Link>

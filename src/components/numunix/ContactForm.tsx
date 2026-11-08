@@ -1,9 +1,9 @@
+"use client";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { createRepairBooking } from "@/lib/bookings.functions";
-import { useServerFn } from "@tanstack/react-start";
-import { useNavigate } from "@tanstack/react-router";
-import { enquirySchema } from "@/lib/enquiry-schema";
+
+import { useRouter } from "next/navigation";
 import { useCategory } from "./category";
 import { REPAIR_SERVICES } from "@/content/homepage-repairs";
 import { REPAIR_PAGES } from "@/content/repair-services";
@@ -26,8 +26,8 @@ export function ContactForm({
   initialService?: string;
   brandSelection?: { brand: string } | undefined;
 } = {}) {
-  const submitBooking = useServerFn(createRepairBooking);
-  const navigate = useNavigate();
+  const submitBooking = createRepairBooking;
+  const router = useRouter();
   const ctx = useCategory();
   const baseOptions = REPAIR_PAGES.filter(
     (item) => item.category === (ctx?.category ?? "electronics"),
@@ -68,28 +68,29 @@ export function ContactForm({
     const form = event.currentTarget;
     const data = new FormData(form);
     const values = Object.fromEntries(data.entries());
-    const parsed = enquirySchema.safeParse({
-      ...values,
-      source: window.location.pathname,
-    });
-    if (!parsed.success) {
-      setError(parsed.error.issues[0]?.message ?? "Please check your details.");
-      setStatus("error");
-      return;
-    }
+    const source = window.location.pathname;
     submitting.current = true;
     setStatus("pending");
     try {
+      // Keep schema/validator code out of the initial public-page download.
+      // Acquire the submission lock before awaiting the chunk to prevent duplicate writes.
+      const { enquirySchema } = await import("@/lib/enquiry-schema");
+      const parsed = enquirySchema.safeParse({ ...values, source });
+      if (!parsed.success) {
+        setError(parsed.error.issues[0]?.message ?? "Please check your details.");
+        setStatus("error");
+        return;
+      }
       const receipt = await submitBooking({ data: { ...values, source: parsed.data.source } });
+      if ("error" in receipt) throw new Error(receipt.error);
       emitRepairEvent("enquiry_success", receipt.service);
       form.reset();
       setBrand("");
       setSelectedService(initialService);
       setStatus("success");
-      await navigate({
-        to: "/thank-you",
-        search: { booking: receipt.reference, service: receipt.service },
-      });
+      router.push(
+        `/thank-you?${new URLSearchParams({ booking: receipt.reference, service: receipt.service })}`,
+      );
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : "Please try again later.");
       setStatus("error");

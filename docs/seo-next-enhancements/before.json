@@ -1,0 +1,37 @@
+{
+  "method": "Single cold-cache local production runs: mobile 390x844, 4x CPU, 150ms latency, 1.6Mbps download, six-second observation. Lab diagnostics, not field Core Web Vitals or Lighthouse scores. Long-task excess is not Lighthouse TBT. No INP claim.",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "lcpMs": 1732,
+      "cls": 0,
+      "longTaskExcessMs": 2803,
+      "ttfbMs": 58,
+      "resourceTransferBytes": 346635,
+      "javascriptDecodedBytes": 897174,
+      "thirdPartyRequests": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      ],
+      "headingVisible": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "path": "/appliances/repairs/washing-machine-repair/bosch",
+      "status": 200,
+      "lcpMs": 1460,
+      "cls": 0.005698267066708364,
+      "longTaskExcessMs": 3193,
+      "ttfbMs": 14,
+      "resourceTransferBytes": 375829,
+      "javascriptDecodedBytes": 942739,
+      "thirdPartyRequests": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      ],
+      "headingVisible": true,
+      "overflow": false,
+      "errors": []
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+"use client";
 import { Linkedin, Instagram, Facebook, Info } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
 import { CONTACT } from "@/content/site";

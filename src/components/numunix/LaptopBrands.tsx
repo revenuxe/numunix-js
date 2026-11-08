@@ -1,4 +1,5 @@
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
+import { resolveHref } from "@/lib/route-href";
 import { ArrowUpRight } from "lucide-react";
 import { LAPTOP_BRANDS } from "@/content/laptop-brands";
 import { Label, Heading, Accent } from "./primitives";
@@ -32,12 +33,12 @@ export function LaptopBrands() {
           {LAPTOP_BRANDS.map((brand) => (
             <Link
               key={brand.file}
-              to="/$category/repairs/$slug/$brand"
-              params={{
+              href={resolveHref("/$category/repairs/$slug/$brand", {
                 category: "electronic",
                 slug: "laptop-repair",
                 brand: brand.file.replace(/\.[^.]+$/, ""),
-              }}
+              })}
+
               aria-label={`Request ${brand.name} laptop repair`}
               className="group flex min-w-0 flex-col rounded-lg border border-primary/30 bg-card p-2.5 transition duration-200 hover:-translate-y-1 hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none sm:p-6"
             >

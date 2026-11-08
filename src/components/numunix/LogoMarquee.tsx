@@ -1,3 +1,4 @@
+"use client";
 import { useCategory } from "./category";
 import { REPAIR_SERVICES } from "@/content/homepage-repairs";
 

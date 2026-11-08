@@ -1,9 +1,11 @@
+"use client";
 import { Label, Heading, Accent, Reveal } from "./primitives";
 import { REPAIR_PAGES } from "@/content/repair-services";
 import { HOMEPAGE_REPAIR } from "@/content/homepage-repairs";
 import { useCategory } from "./category";
 import { NODE_VIZ } from "./nodeviz";
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
+import { resolveHref } from "@/lib/route-href";
 import {
   ArrowUpRight,
   Smartphone,
@@ -128,8 +130,8 @@ export function WorkflowVisualization({
           {activeNodes.map(({ phase: n, name: v, category: u, slug, icon: Icon }, i) => (
             <Link
               key={`${tab}-${slug}`}
-              to={tabs ? "/$category/repairs/$slug" : "/repair-process/$slug"}
-              params={{ category: tab === 0 ? "electronic" : "appliances", slug: tabs ? (REPAIR_PAGES.filter(service => service.category === (tab === 0 ? "electronics" : "appliances"))[i]?.slug ?? slug) : slug }}
+              href={resolveHref(tabs ? "/$category/repairs/$slug" : "/repair-process/$slug", { category: tab === 0 ? "electronic" : "appliances", slug: tabs ? (REPAIR_PAGES.filter(service => service.category === (tab === 0 ? "electronics" : "appliances"))[i]?.slug ?? slug) : slug })}
+
               aria-label={`${n}: ${v}, explore ${u.toLowerCase()}`}
               className="group relative flex min-w-0 cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-[#cdddf3] bg-white px-4 py-5 shadow-[0_4px_8px_-3px_rgba(16,42,99,0.08),0_12px_24px_-12px_rgba(30,78,216,0.22)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#7ea8e8] hover:bg-[#f5f8fd] hover:shadow-[0_18px_40px_-16px_rgba(30,78,216,0.35)] active:translate-y-0 active:scale-[0.98] active:shadow-[0_6px_16px_-10px_rgba(30,78,216,0.3)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] motion-reduce:transform-none motion-reduce:transition-none sm:px-5 sm:py-6 coarse:border-[#c3d6f2] coarse:bg-[#fbfdff] coarse:shadow-[0_10px_24px_-14px_rgba(30,78,216,0.4)]"
             >

@@ -8,7 +8,8 @@ import {
   LAPTOP_DECISION_GUIDANCE,
   type LaptopBrandPage,
 } from "@/content/laptop-brand-pages";
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
+import { resolveHref } from "@/lib/route-href";
 import {
   PURIFIER_AFTERCARE_GUIDANCE,
   PURIFIER_DECISION_GUIDANCE,
@@ -139,7 +140,7 @@ export function RepairBrandScope({
                 variant="link"
                 className="mt-5 h-auto whitespace-normal p-0 text-left"
               >
-                <Link to="/repair-assessment">
+                <Link href={"/repair-assessment"}>
                   Explore the assessment process <ArrowUpRight size={16} />
                 </Link>
               </Button>
@@ -373,7 +374,7 @@ export function RepairBrandDecisions({
             ))}
           </div>
           <Button asChild variant="link" className="mt-8 h-auto whitespace-normal p-0 text-left">
-            <Link to="/repair-aftercare">
+            <Link href={"/repair-aftercare"}>
               Read the repair aftercare guide <ArrowUpRight size={16} />
             </Link>
           </Button>

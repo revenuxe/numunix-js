@@ -1,5 +1,7 @@
+"use client";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
+import { resolveHref } from "@/lib/route-href";
 import { REPAIR_PAGES, repairPageHref, repairCategoryPath } from "@/content/repair-services";
 import {
   ArrowRight,
@@ -1398,8 +1400,8 @@ export default function ServiceDemo({
           <span>Replay</span>
         </button>
       </div>
-      {linkedRepair ? <Link className="sd-scene-link" to="/$category/repairs/$slug" params={{ category: repairCategoryPath(linkedRepair.category), slug: linkedRepair.slug }} aria-label={`Explore ${linkedRepair.name}`}>{linkedVisual}</Link>
-        : href ? <Link className="sd-scene-link" to={isWarranty ? "/repair-aftercare" : "/repair-assessment"}>{linkedVisual}</Link> : visual}
+      {linkedRepair ? <Link className="sd-scene-link" href={resolveHref("/$category/repairs/$slug", { category: repairCategoryPath(linkedRepair.category), slug: linkedRepair.slug })}  aria-label={`Explore ${linkedRepair.name}`}>{linkedVisual}</Link>
+        : href ? <Link className="sd-scene-link" href={isWarranty ? "/repair-aftercare" : "/repair-assessment"}>{linkedVisual}</Link> : visual}
       <span className="sr-only">
         {config.steps.join(" → ")}. {config.captions[3]} This is an illustrative repair journey.
       </span>

@@ -1,3 +1,4 @@
+"use client";
 import NumunixRibbonScene from "./NumunixRibbonScene";
 import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { Btn, Label, Reveal } from "./primitives";
@@ -31,8 +32,11 @@ export function Hero({
   const words = headline.trim().split(/\s+/);
   let splitAt = 1;
   for (let i = 1; i < words.length; i++) {
-    if (Math.abs(words.slice(0, i).join(" ").length - words.slice(i).join(" ").length) <
-        Math.abs(words.slice(0, splitAt).join(" ").length - words.slice(splitAt).join(" ").length)) splitAt = i;
+    if (
+      Math.abs(words.slice(0, i).join(" ").length - words.slice(i).join(" ").length) <
+      Math.abs(words.slice(0, splitAt).join(" ").length - words.slice(splitAt).join(" ").length)
+    )
+      splitAt = i;
   }
   const firstLine = accent || words.length < 2 ? headline : words.slice(0, splitAt).join(" ");
   const secondLine = accent || (words.length > 1 ? words.slice(splitAt).join(" ") : "");
@@ -47,9 +51,11 @@ export function Hero({
       if (!active) return;
       heading.style.removeProperty("font-size");
       const baseSize = parseFloat(getComputedStyle(heading).fontSize);
-      const widestLine = Math.max(...Array.from(heading.children, line => line.getBoundingClientRect().width));
+      const widestLine = Math.max(
+        ...Array.from(heading.children, (line) => line.getBoundingClientRect().width),
+      );
       if (widestLine > heading.clientWidth) {
-        heading.style.fontSize = `${Math.floor(baseSize * (heading.clientWidth - 1) / widestLine * 100) / 100}px`;
+        heading.style.fontSize = `${Math.floor(((baseSize * (heading.clientWidth - 1)) / widestLine) * 100) / 100}px`;
       }
       if (document.fonts.status === "loaded") setFittedHeading(headingKey);
     };
@@ -57,8 +63,14 @@ export function Hero({
     window.addEventListener("resize", fit);
     const observer = new ResizeObserver(fit);
     if (heading.parentElement) observer.observe(heading.parentElement);
-    document.fonts.ready.then(() => { if (active) fit(); });
-    return () => { active = false; observer.disconnect(); window.removeEventListener("resize", fit); };
+    document.fonts.ready.then(() => {
+      if (active) fit();
+    });
+    return () => {
+      active = false;
+      observer.disconnect();
+      window.removeEventListener("resize", fit);
+    };
   }, [headingKey]);
 
   return (
@@ -67,7 +79,11 @@ export function Hero({
       className="grain relative min-h-[100svh] overflow-hidden bg-ink-900 lg:min-h-[100vh]"
     >
       <div className="pointer-events-none absolute inset-0">
-        <NumunixRibbonScene className="h-full w-full" ribbons={6} />
+        <NumunixRibbonScene
+          active={fittedHeading === headingKey}
+          className="h-full w-full"
+          ribbons={6}
+        />
       </div>
       <div className="pointer-events-none absolute inset-0 hero-shade-side" />
       <div className="pointer-events-none absolute inset-0 hero-shade-top" />
@@ -79,10 +95,24 @@ export function Hero({
         <div className="grid min-w-0 items-end gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)] lg:gap-20">
           <Reveal className="min-w-0">
             {eyebrow && <Label className="mb-7">{eyebrow}</Label>}
-            <noscript><style>{`.hero-heading { visibility: visible !important; font-size: clamp(12px, 3.5vw, 48px) !important; } .hero-heading > span { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }`}</style></noscript>
-            <h1 ref={headingRef} className={`hero-heading ${fittedHeading === headingKey ? "visible" : "invisible"} font-light leading-[1.08] tracking-normal text-primary-foreground text-[40px] sm:text-[56px] lg:text-[80px] xl:text-[96px]`}>
+            <noscript>
+              <style>{`.hero-heading { visibility: visible !important; font-size: clamp(12px, 3.5vw, 48px) !important; } .hero-heading > span { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }`}</style>
+            </noscript>
+            <h1
+              ref={headingRef}
+              className={`hero-heading ${fittedHeading === headingKey ? "visible" : "invisible"} font-light leading-[1.08] tracking-normal text-primary-foreground text-[40px] sm:text-[56px] lg:text-[80px] xl:text-[96px]`}
+            >
               <span className="inline-block whitespace-nowrap">{firstLine}</span>
-              {secondLine && <><br /><span className={`inline-block whitespace-nowrap${accent ? " text-electric" : ""}`}>{secondLine}</span></>}
+              {secondLine && (
+                <>
+                  <br />{" "}
+                  <span
+                    className={`inline-block whitespace-nowrap${accent ? " text-electric" : ""}`}
+                  >
+                    {secondLine}
+                  </span>
+                </>
+              )}
             </h1>
           </Reveal>
 

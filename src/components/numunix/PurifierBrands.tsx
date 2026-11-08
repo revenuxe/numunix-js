@@ -1,5 +1,6 @@
 import { PURIFIER_BRANDS } from "@/content/purifier-brands";
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
+import { resolveHref } from "@/lib/route-href";
 import { ArrowUpRight } from "lucide-react";
 import { PurifierBrandLogo } from "./PurifierBrandLogo";
 import { Label, Heading, Accent } from "./primitives";
@@ -32,12 +33,12 @@ export function PurifierBrands() {
           {PURIFIER_BRANDS.map((brand) => (
             <li key={brand.file} className="flex min-w-0">
               <Link
-                to="/$category/repairs/$slug/$brand"
-                params={{
+                href={resolveHref("/$category/repairs/$slug/$brand", {
                   category: "appliances",
                   slug: "water-purifier-service",
                   brand: brand.file.replace(/\.[^.]+$/, ""),
-                }}
+                })}
+
                 aria-label={`Explore ${brand.name} water purifier repair`}
                 className="group flex w-full min-w-0 flex-col rounded-lg border border-primary/30 bg-card p-2.5 transition duration-200 hover:-translate-y-1 hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none sm:p-6"
               >

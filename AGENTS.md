@@ -30,3 +30,13 @@
 - Repair lead presentation reuses existing enquiry fields and stored status identifiers; classify service/category through the repair catalogue, retain legacy email data, and store the originating page path without changing database permissions.
 - Public repair metadata uses the shared repair SEO helper and stable Organization/WebSite identifiers; page graphs describe visible services, collections and breadcrumbs without inventing prices, ratings, certifications or business details.
 - Repair forms use a publishable-key client and narrow write-only submit_repair_booking RPC; the security-definer function accepts only enquiry fields, fixes internal status/notes, and returns only the newly inserted reference and service. It intentionally permits public execution without public customer reads.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

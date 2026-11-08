@@ -6,9 +6,9 @@ import { randomUUID } from "node:crypto";
 
 if (existsSync(".env")) loadEnvFile(".env");
 const databaseUrl = process.env.SUPABASE_DB_URL?.trim();
-const projectUrl = process.env.VITE_SUPABASE_URL?.trim();
+const projectUrl = (process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL)?.trim();
 if (!projectUrl) {
-  console.error("Fill in VITE_SUPABASE_URL in .env before running migrations.");
+  console.error("Fill in SUPABASE_URL in .env before running migrations.");
   process.exit(1);
 }
 
@@ -37,7 +37,7 @@ if (
     ))
 ) {
   console.error(
-    "Use the direct or Session pooler URI for the same Supabase project as VITE_SUPABASE_URL, including your database password.",
+    "Use the direct or Session pooler URI for the same Supabase project as SUPABASE_URL, including your database password.",
   );
   process.exit(1);
 }

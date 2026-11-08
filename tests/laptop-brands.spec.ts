@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { LAPTOP_BRANDS } from "../src/content/laptop-brands";
 import { LAPTOP_BRAND_PAGES, laptopBrandPage } from "../src/content/laptop-brand-pages";
+import { curateBrandRepair } from "../src/content/curated-brand-repair";
 
 test("laptop cards load supplied logos and link to dedicated pages", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
@@ -42,7 +43,7 @@ test("all laptop landing pages have metadata, relevant content and booking conte
     );
     await expect(page.locator('meta[name="description"]')).toHaveAttribute(
       "content",
-      brand.description,
+      curateBrandRepair(brand).description,
     );
     await expect(page.locator("#contact-service")).toHaveValue("Laptop Repair");
     await expect(page.locator('input[name="brand"]')).toHaveValue(brand.brand);

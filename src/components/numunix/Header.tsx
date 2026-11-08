@@ -1,5 +1,6 @@
+"use client";
 import { useEffect, useRef, useState } from "react";
-import { useLocation } from "@tanstack/react-router";
+import { usePathname } from "next/navigation";
 import { Menu, X, Grip, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CONTACT } from "@/content/site";
@@ -21,7 +22,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
-  const pathname = useLocation({ select: (location) => location.pathname });
+  const pathname = usePathname();
   const isHomepage = pathname === "/" || pathname === "/appliances";
   const headerAction = isHomepage && categoryContext ? <CategoryToggle /> : <Button asChild size="sm" className="h-8 gap-2 px-3 font-mono text-[10px] tracking-normal shadow-none sm:h-9"><a href={CONTACT.phoneHref}><Phone className="size-3.5" />CALL NOW</a></Button>;
 

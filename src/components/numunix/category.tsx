@@ -1,5 +1,7 @@
+"use client";
 import { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
+import { resolveHref } from "@/lib/route-href";
 import { Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -106,7 +108,7 @@ export function CategoryToggle({ className = "" }: { className?: string }) {
             className="px-3 py-3 font-mono text-[11px] tracking-normal focus:bg-primary focus:text-primary-foreground"
           >
             <Link
-              to={REPAIR_HOME_PATHS[option.value]}
+              href={REPAIR_HOME_PATHS[option.value]}
               onClick={() => selection?.select(option.value)}
               aria-current={ctx.category === option.value ? "page" : undefined}
             >

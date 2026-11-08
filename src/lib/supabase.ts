@@ -2,8 +2,8 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { isPublicSupabaseKey } from "./supabase-config";
 import { getPublicSupabaseConfig } from "./supabase-config.functions";
 
-export const supabaseUrl = import.meta.env["VITE_SUPABASE_URL"]?.trim();
-export const supabaseKey = import.meta.env["VITE_SUPABASE_PUBLISHABLE_KEY"]?.trim();
+export const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
+export const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim();
 export const supabaseConfigured = Boolean(
   supabaseUrl?.startsWith("https://") && isPublicSupabaseKey(supabaseKey),
 );
@@ -25,9 +25,7 @@ export function getSupabase() {
   return buildClient(supabaseUrl!, supabaseKey!);
 }
 
-// Async path: when the deployment only sets server-side Supabase variables
-// (for example Vercel without VITE_* vars), fetch the public-safe config
-// from the server instead of disabling sign-in.
+// Resolve public configuration without exposing server credentials.
 export function ensureSupabase(): Promise<SupabaseClient | null> {
   if (typeof window === "undefined") return Promise.resolve(null);
   const existing = getSupabase();

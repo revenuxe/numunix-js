@@ -11,9 +11,6 @@ node_modules
 dist
 dist-ssr
 .output
-.vinxi
-.tanstack/**
-.nitro
 *.local
 .env
 .env.*
@@ -36,3 +33,7 @@ supabase/.temp/
 *.njsproj
 *.sln
 *.sw?
+
+.next/
+out/
+*.tsbuildinfo

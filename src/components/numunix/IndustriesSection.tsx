@@ -1,8 +1,10 @@
+"use client";
 import { useEffect, useRef, useState } from "react";
 import { Label, Reveal } from "./primitives";
 import AudienceRepairScene from "./AudienceRepairScene";
 import { useCategory } from "./category";
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
+import { resolveHref } from "@/lib/route-href";
 import { REPAIR_AUDIENCE_PATHS } from "@/content/repair-audiences";
 import { HOMEPAGE_REPAIR, REPAIR_SERVICES } from "@/content/homepage-repairs";
 import { ArrowUpRight } from "lucide-react";
@@ -159,8 +161,8 @@ export default function IndustriesSection() {
                       </span>
                     </div>
                     <Link
-                      to="/who-we-serve/$slug"
-                      params={{ slug: REPAIR_AUDIENCE_PATHS[index]! }}
+                      href={resolveHref("/who-we-serve/$slug", { slug: REPAIR_AUDIENCE_PATHS[index]! })}
+
                       aria-label={`Explore ${audience.name}`}
                       className="block rounded-[24px] transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#2459e0] motion-reduce:transform-none"
                     >
@@ -180,8 +182,8 @@ export default function IndustriesSection() {
                       {audience.description}
                     </p>
                     <Link
-                      to="/who-we-serve/$slug"
-                      params={{ slug: REPAIR_AUDIENCE_PATHS[index]! }}
+                      href={resolveHref("/who-we-serve/$slug", { slug: REPAIR_AUDIENCE_PATHS[index]! })}
+
                       className="mt-5 inline-flex items-center gap-2 text-sm text-[#1e4ed8]"
                     >
                       Explore {audience.name} <ArrowUpRight size={16} />

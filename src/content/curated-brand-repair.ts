@@ -28,6 +28,9 @@ type BrandPage = {
   faults: { title: string; label: string; body: string }[];
   faqs: string[][];
   acGuidance?: { subject: string; paragraphs: string[]; example: string };
+  mobileGuidance?: { subject: string; paragraphs: string[]; example: string };
+  laptopGuidance?: { subject: string; paragraphs: string[]; example: string };
+  cctvGuidance?: { subject: string; paragraphs: string[]; example: string };
   guidance?: { subject: string; paragraphs: string[]; example: string };
   purifierGuidance?: { subject: string; paragraphs: string[]; example: string };
 };
@@ -45,7 +48,9 @@ export function curateBrandRepair<T extends BrandPage>(
   const laptop = page.service === "Laptop Repair" ? LAPTOP_EDITORIAL[page.slug] : undefined;
   const cctv =
     page.service === "CCTV Installation & Repair" ? CCTV_EDITORIAL[page.slug] : undefined;
+  const specificGuidance = page.mobileGuidance ?? page.laptopGuidance ?? page.cctvGuidance;
   const guidance =
+    specificGuidance ??
     page.purifierGuidance ??
     page.acGuidance ??
     page.guidance ??
@@ -53,7 +58,8 @@ export function curateBrandRepair<T extends BrandPage>(
   const topic = focus?.topic ?? page.diagnosticTitle.replace(/\?$/, "");
   const diagnosticBody = mobile?.focus ?? laptop?.focus ?? cctv?.focus ?? page.diagnosticBody;
   const subject = mobile?.subject ?? guidance?.subject ?? topic;
-  const paragraphs = guidance?.paragraphs.slice(1) ?? [diagnosticBody];
+  const paragraphs = specificGuidance?.paragraphs ??
+    guidance?.paragraphs.slice(1) ?? [diagnosticBody];
   const example = mobile?.example ?? laptop?.example ?? cctv?.example ?? guidance?.example;
   if (!example) throw new Error(`Missing brand enquiry example: ${page.service}/${page.slug}`);
   const serviceName =

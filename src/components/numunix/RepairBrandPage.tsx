@@ -5,7 +5,8 @@ import { PurifierBrandLogo } from "./PurifierBrandLogo";
 import type { CCTVBrandPage } from "@/content/cctv-brand-pages";
 import { CCTVBrandLogo } from "./CCTVBrandLogo";
 import type { LaptopBrandPage } from "@/content/laptop-brand-pages";
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
+import { resolveHref } from "@/lib/route-href";
 import {
   ArrowUpRight,
   Check,
@@ -646,8 +647,8 @@ export function RepairBrandPage({
               <div className="mt-4 flex flex-col items-start gap-3">
                 <Button asChild variant="link" className="h-auto whitespace-normal p-0 text-left">
                   <Link
-                    to="/$category/repairs/$slug"
-                    params={{ category: directoryCategory, slug: directorySlug }}
+                    href={resolveHref("/$category/repairs/$slug", { category: directoryCategory, slug: directorySlug })}
+
                   >
                     All{" "}
                     {isPurifier
@@ -668,8 +669,7 @@ export function RepairBrandPage({
                 </Button>
                 <Button asChild variant="link" className="h-auto whitespace-normal p-0 text-left">
                   <Link
-                    to="/repair-guides/$slug"
-                    params={{
+                    href={resolveHref("/repair-guides/$slug", {
                       slug: isCCTV
                         ? "choosing-a-repair-service-in-bangalore"
                         : isLaptop
@@ -677,7 +677,8 @@ export function RepairBrandPage({
                           : isMobile
                             ? "mobile-repair-before-you-book"
                             : "appliance-repair-visit-checklist",
-                    }}
+                    })}
+
                   >
                     {isCCTV
                       ? "Choosing a repair service"
@@ -690,7 +691,7 @@ export function RepairBrandPage({
                   </Link>
                 </Button>
                 <Button asChild variant="link" className="h-auto p-0">
-                  <Link to="/repair-assessment">
+                  <Link href={"/repair-assessment"}>
                     How assessment works <ArrowUpRight size={16} />
                   </Link>
                 </Button>

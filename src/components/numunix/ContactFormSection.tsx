@@ -1,3 +1,4 @@
+"use client";
 import { useCategory } from "./category";
 import { ContactForm } from "./ContactForm";
 import { Accent, Heading, Label } from "./primitives";

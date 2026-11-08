@@ -1,4 +1,5 @@
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
+import { resolveHref } from "@/lib/route-href";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { WORKFLOW_STAGES, type WorkflowStage } from "@/content/workflow";
 import { Page, Section, SectionHead, ClosingCTA } from "./PageShell";
@@ -20,8 +21,8 @@ export function WorkflowStagePage({ stage }: { stage: WorkflowStage }) {
           {WORKFLOW_STAGES.map((item, i) => (
             <Link
               key={item.slug}
-              to="/repair-process/$slug"
-              params={{ slug: item.slug }}
+              href={resolveHref("/repair-process/$slug", { slug: item.slug })}
+
               aria-current={item.slug === stage.slug ? "page" : undefined}
               className={`inline-flex items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors hover:bg-[#eff4ff] focus-visible:outline-2 focus-visible:outline-[#2563eb] ${item.slug === stage.slug ? "bg-[#eff4ff] font-medium text-[#1e4ed8]" : "text-[#5d76a3]"}`}
             >
@@ -131,7 +132,7 @@ export function WorkflowStagePage({ stage }: { stage: WorkflowStage }) {
       <Section bg="#f0f4fa">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
           <Link
-            to="/repair-process"
+            href={"/repair-process"}
             className="inline-flex items-center gap-2 text-sm text-[#5d76a3] hover:text-[#1e4ed8]"
           >
             <ArrowLeft size={16} />
@@ -139,8 +140,8 @@ export function WorkflowStagePage({ stage }: { stage: WorkflowStage }) {
           </Link>
           {next ? (
             <Link
-              to="/repair-process/$slug"
-              params={{ slug: next.slug }}
+              href={resolveHref("/repair-process/$slug", { slug: next.slug })}
+
               className="group flex items-center justify-between gap-8 rounded-2xl border border-[#dbe5f2] bg-white p-6 transition-colors hover:border-[#2563eb] focus-visible:outline-2 focus-visible:outline-[#2563eb] sm:min-w-80"
             >
               <div>
@@ -151,7 +152,7 @@ export function WorkflowStagePage({ stage }: { stage: WorkflowStage }) {
             </Link>
           ) : (
             <Link
-              to="/contact"
+              href={"/contact"}
               className="inline-flex items-center gap-3 rounded-xl bg-[#1e4ed8] px-6 py-4 text-white"
             >
               Discuss your aftercare

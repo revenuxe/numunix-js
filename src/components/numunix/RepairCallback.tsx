@@ -1,5 +1,6 @@
+"use client";
 import { useEffect, useRef, useState, type ReactNode, type FormEvent } from "react";
-import { useServerFn } from "@tanstack/react-start";
+
 import { Check, Loader2, PhoneCall } from "lucide-react";
 import { createRepairBooking } from "@/lib/bookings.functions";
 import { emitRepairEvent } from "@/lib/repair-events";
@@ -26,7 +27,7 @@ export function RepairCallback({
   brandLogoDark?: boolean;
   brandLogoContent?: ReactNode;
 }) {
-  const submitBooking = useServerFn(createRepairBooking);
+  const submitBooking = createRepairBooking;
   const submitting = useRef(false);
   const started = useRef(false);
   const [ready, setReady] = useState(false);
@@ -59,6 +60,7 @@ export function RepairCallback({
           source: window.location.pathname,
         },
       });
+      if ('error' in result) throw new Error(result.error);
       setReceipt({ reference: result.reference, phone });
       emitRepairEvent("callback_success", service);
       setOpen(true);

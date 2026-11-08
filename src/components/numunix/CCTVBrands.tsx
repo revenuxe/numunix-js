@@ -1,4 +1,5 @@
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
+import { resolveHref } from "@/lib/route-href";
 import { CCTVBrandLogo } from "./CCTVBrandLogo";
 import { ArrowUpRight } from "lucide-react";
 import { CCTV_BRANDS } from "@/content/cctv-brands";
@@ -33,12 +34,12 @@ export function CCTVBrands() {
           {CCTV_BRANDS.map((brand) => (
             <Link
               key={brand.file}
-              to="/$category/repairs/$slug/$brand"
-              params={{
+              href={resolveHref("/$category/repairs/$slug/$brand", {
                 category: "electronic",
                 slug: "cctv-service",
                 brand: brand.file.replace(/\.[^.]+$/, ""),
-              }}
+              })}
+
               aria-label={`Request ${brand.name} CCTV repair`}
               className="group flex min-w-0 flex-col rounded-lg border border-primary/30 bg-card p-2.5 transition duration-200 hover:-translate-y-1 hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none sm:p-6"
             >

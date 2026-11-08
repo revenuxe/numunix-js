@@ -12,9 +12,13 @@ test("brand search follows the repair service and clears a previous choice", asy
     expect(await logo.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
   }
   await page.setViewportSize({ width: 1440, height: 900 });
-  const callbackConsent = page.locator('section[aria-labelledby="callback-title"] form > p.text-xs');
+  const callbackConsent = page
+    .locator('section[aria-labelledby="callback-title"] form > p.text-xs')
+    .filter({ hasText: "By requesting a callback" });
   await expect(callbackConsent).toHaveCSS("white-space", "nowrap");
-  expect(await callbackConsent.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
+  expect(
+    await callbackConsent.evaluate((element) => element.scrollWidth <= element.clientWidth),
+  ).toBe(true);
   await page.getByRole("link", { name: "Request LG washing machine repair" }).click();
   await expect(page.locator('input[name="brand"]')).toHaveValue("LG");
   const brand = page.getByRole("combobox", { name: /Brand/ });

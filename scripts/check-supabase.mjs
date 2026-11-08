@@ -2,8 +2,8 @@ import { loadEnvFile } from "node:process";
 import { isPublicSupabaseKey } from "../src/lib/supabase-config.ts";
 
 loadEnvFile(".env");
-const url = process.env.VITE_SUPABASE_URL?.trim();
-const key = process.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim();
+const url = (process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL)?.trim();
+const key = (process.env.SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY)?.trim();
 if (!url?.startsWith("https://") || !isPublicSupabaseKey(key)) {
   console.error("Set a valid Supabase project URL and public API key in .env.");
   process.exit(1);

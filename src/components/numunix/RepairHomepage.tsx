@@ -21,18 +21,17 @@ import {
 import Footer from "@/components/numunix/Footer";
 import { ContactFormSection } from "@/components/numunix/ContactFormSection";
 import { HOMEPAGE_REPAIR, type RepairCategory } from "@/content/homepage-repairs";
-import { useCategory, CategoryProvider } from "./category";
+import { CategoryProvider } from "./category";
 
 export function RepairHomepage({ category }: { category: RepairCategory }) {
   return (
     <CategoryProvider category={category}>
-      <HomepageContent />
+      <HomepageContent category={category} />
     </CategoryProvider>
   );
 }
 
-function HomepageContent() {
-  const category = useCategory()?.category ?? "electronics";
+function HomepageContent({ category }: { category: RepairCategory }) {
   const content = HOMEPAGE_REPAIR[category];
   return (
     <div className="bg-ink-900" data-repair-category={category}>

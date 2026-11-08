@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useRef, useState } from "react";
 import { Label } from "./primitives";
 import ServiceDemo, { type RepairStory } from "./ServiceDemo";

@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { CCTV_BRANDS } from "../src/content/cctv-brands";
 import { CCTV_BRAND_PAGES, cctvBrandPage } from "../src/content/cctv-brand-pages";
+import { curateBrandRepair } from "../src/content/curated-brand-repair";
 
 test("CCTV cards load supplied logos and link to dedicated pages", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
@@ -42,7 +43,7 @@ test("all CCTV landing pages have metadata, relevant content and booking context
     );
     await expect(page.locator('meta[name="description"]')).toHaveAttribute(
       "content",
-      brand.description,
+      curateBrandRepair(brand).description,
     );
     await expect(page.locator("#contact-service")).toHaveValue("CCTV Installation & Repair");
     await expect(page.locator('input[name="brand"]')).toHaveValue(brand.brand);

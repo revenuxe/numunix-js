@@ -1,5 +1,7 @@
+"use client";
 import { useRef } from "react";
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
+import { resolveHref } from "@/lib/route-href";
 import { Label, Heading, Accent, Reveal } from "./primitives";
 import { useCategory } from "./category";
 import { REPAIR_PAGES, repairServiceHref, repairPageHref } from "@/content/repair-services";
@@ -57,8 +59,8 @@ export function AutomationWorkflow() {
           {steps.map(([n, t, d, slug], i) => (
             <Reveal key={n} delay={i * 50}>
               <Link
-                to="/repair-process/$slug"
-                params={{ slug }}
+                href={resolveHref("/repair-process/$slug", { slug })}
+
                 aria-label={`Explore ${t.toLowerCase()}: ${d}`}
                 className="group relative block h-full rounded-2xl border border-[#e2e9f3] bg-white p-7 transition-all duration-250 hover:-translate-y-1 hover:border-[#3b82f6]/45 hover:shadow-[0_24px_60px_-40px_rgba(16,42,99,0.6)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#2563eb] motion-reduce:transform-none motion-reduce:transition-none"
               >

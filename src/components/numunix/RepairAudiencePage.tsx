@@ -1,4 +1,6 @@
-import { Link } from "@tanstack/react-router";
+"use client";
+import Link from "next/link";
+import { resolveHref } from "@/lib/route-href";
 import { repairAudience, REPAIR_AUDIENCE_PATHS } from "@/content/repair-audiences";
 import { REPAIR_PAGES, repairCategoryPath } from "@/content/repair-services";
 import { useCategory } from "./category";
@@ -56,11 +58,11 @@ export function RepairAudiencePage({ slug }: { slug: string }) {
                   {repair && (
                     <Button asChild variant="link" className="mt-4 px-0">
                       <Link
-                        to="/$category/repairs/$slug"
-                        params={{
+                        href={resolveHref("/$category/repairs/$slug", {
                           category: repairCategoryPath(repair.category),
                           slug: repair.slug,
-                        }}
+                        })}
+
                       >
                         View repair details
                         <ArrowUpRight />
@@ -123,7 +125,7 @@ export function RepairAudiencePage({ slug }: { slug: string }) {
         <div className="flex flex-wrap gap-3">
           {REPAIR_AUDIENCE_PATHS.filter((path) => path !== slug).map((path) => (
             <Button key={path} asChild variant="outline">
-              <Link to="/who-we-serve/$slug" params={{ slug: path }}>
+              <Link href={resolveHref("/who-we-serve/$slug", { slug: path })} >
                 {repairAudience(path, category)?.name}
               </Link>
             </Button>

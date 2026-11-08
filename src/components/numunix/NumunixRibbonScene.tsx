@@ -1,6 +1,8 @@
+"use client";
 import { useEffect, useRef } from "react";
 
 type Props = {
+  active?: boolean;
   className?: string;
   intensity?: number;
   /** external boost 0..1 (click and hold) */
@@ -19,11 +21,8 @@ type Ribbon = {
   tilt: number;
 };
 
-const REDUCED =
-  typeof window !== "undefined" &&
-  window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-
 export function NumunixRibbonScene({
+  active = true,
   className,
   intensity = 1,
   boostRef,
@@ -32,26 +31,35 @@ export function NumunixRibbonScene({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
+    if (!active) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let reduced = motionQuery.matches;
 
     let w = 0;
     let h = 0;
     let dpr = 1;
+    let drawStaticFrame: (() => void) | undefined;
     const parent = canvas.parentElement!;
 
     const resize = () => {
       const r = parent.getBoundingClientRect();
-      dpr = Math.min(window.devicePixelRatio || 1, 1.75);
-      w = Math.max(320, r.width);
-      h = Math.max(320, r.height);
+      const nextDpr = Math.min(window.devicePixelRatio || 1, 1.75);
+      const nextWidth = Math.max(320, r.width);
+      const nextHeight = Math.max(320, r.height);
+      if (w === nextWidth && h === nextHeight && dpr === nextDpr) return;
+      dpr = nextDpr;
+      w = nextWidth;
+      h = nextHeight;
       canvas.width = Math.floor(w * dpr);
       canvas.height = Math.floor(h * dpr);
       canvas.style.width = `${w}px`;
       canvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (reduced) drawStaticFrame?.();
     };
     resize();
 
@@ -81,13 +89,32 @@ export function NumunixRibbonScene({
     let t = 0;
     let raf = 0;
     let visible = true;
+    let lastFrame = 0;
+    let previousFrame = 0;
+    const scheduleFrame = () => {
+      if (!raf && visible && !document.hidden) raf = requestAnimationFrame(render);
+    };
+    const syncActivity = () => {
+      cancelAnimationFrame(raf);
+      raf = 0;
+      lastFrame = 0;
+      previousFrame = 0;
+      scheduleFrame();
+    };
     const io = new IntersectionObserver(
       (entries) => {
         visible = entries[0]?.isIntersecting ?? true;
+        syncActivity();
       },
       { threshold: 0.01 },
     );
     io.observe(parent);
+    const updateMotion = () => {
+      reduced = motionQuery.matches;
+      syncActivity();
+    };
+    motionQuery.addEventListener("change", updateMotion);
+    document.addEventListener("visibilitychange", syncActivity);
 
     type RGB = readonly [number, number, number];
     const mix = (a: RGB, b: RGB, k: number) =>
@@ -99,22 +126,28 @@ export function NumunixRibbonScene({
     const ROYAL: RGB = [23, 71, 184];
     const ELECTRIC: RGB = [59, 130, 246];
 
+    const steps = 46;
+    const n = steps + 1;
+    const geometry = new Map(
+      bands.map((band) => [
+        band,
+        {
+          tx: new Float32Array(n),
+          ty: new Float32Array(n),
+          bx: new Float32Array(n),
+          by: new Float32Array(n),
+          shade: new Float32Array(n),
+        },
+      ]),
+    );
     const drawRibbon = (b: Ribbon, time: number, boost: number) => {
-      const steps = 46;
-      const n = steps + 1;
-      const tx = new Float32Array(n);
-      const ty = new Float32Array(n);
-      const bx = new Float32Array(n);
-      const by = new Float32Array(n);
-      const shade = new Float32Array(n);
-
+      const { tx, ty, bx, by, shade } = geometry.get(b)!;
 
       for (let i = 0; i <= steps; i++) {
         const u = i / steps;
         const x = -0.25 * w + u * 1.5 * w;
         const curve =
-          Math.sin(u * 2.1 + b.phase + time * b.speed) * b.amp * h +
-          (u - 0.5) * b.tilt * h;
+          Math.sin(u * 2.1 + b.phase + time * b.speed) * b.amp * h + (u - 0.5) * b.tilt * h;
         const y = b.yBase * h + curve;
 
         const tw = Math.sin(u * 3.1 * b.twist + b.phase + time * b.speed * 1.4);
@@ -181,11 +214,19 @@ export function NumunixRibbonScene({
       ctx.stroke();
     };
 
-    const render = () => {
-      raf = requestAnimationFrame(render);
-      if (!visible) return;
+    const render = (now: number) => {
+      raf = 0;
+      if (!visible || document.hidden) return;
+      // Cap decorative work at 30fps while preserving motion speed across displays.
+      if (!reduced && lastFrame && now - lastFrame < 1000 / 30) {
+        scheduleFrame();
+        return;
+      }
+      const delta = previousFrame ? Math.min((now - previousFrame) / (1000 / 60), 4) : 1;
+      lastFrame = now;
+      previousFrame = now;
       const boost = Math.min(1, boostRef?.current ?? 0);
-      t += REDUCED ? 0 : 1 + boost * 2.2;
+      t += reduced ? 0 : delta * (1 + boost * 2.2);
 
       ctx.clearRect(0, 0, w, h);
 
@@ -222,7 +263,7 @@ export function NumunixRibbonScene({
       ctx.fillRect(0, 0, w, h);
 
       for (const p of particles) {
-        p.y -= p.s * (1 + boost * 3) * 16;
+        if (!reduced) p.y -= p.s * (1 + boost * 3) * 16 * delta;
         if (p.y < -0.02) p.y = 1.02;
         ctx.beginPath();
         ctx.arc(p.x * w, p.y * h, p.r, 0, Math.PI * 2);
@@ -232,25 +273,24 @@ export function NumunixRibbonScene({
       ctx.globalCompositeOperation = "source-over";
 
       if (boostRef && boostRef.current > 0) {
-        boostRef.current = Math.max(0, boostRef.current - 0.012);
+        boostRef.current = Math.max(0, boostRef.current - 0.012 * delta);
       }
+      if (!reduced) scheduleFrame();
     };
-    raf = requestAnimationFrame(render);
+    drawStaticFrame = syncActivity;
+    scheduleFrame();
 
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
       io.disconnect();
+      motionQuery.removeEventListener("change", updateMotion);
+      document.removeEventListener("visibilitychange", syncActivity);
     };
-  }, [intensity, boostRef, ribbons]);
+  }, [active, intensity, boostRef, ribbons]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      aria-hidden="true"
-      className={className}
-      style={{ display: "block" }}
-    />
+    <canvas ref={canvasRef} aria-hidden="true" className={className} style={{ display: "block" }} />
   );
 }
 

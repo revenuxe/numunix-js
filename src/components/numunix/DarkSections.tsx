@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { useCategory } from "./category";
 import { repairServiceHref } from "@/content/repair-services";

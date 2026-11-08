@@ -1,4 +1,5 @@
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
+import { resolveHref } from "@/lib/route-href";
 import { ArrowUpRight, Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { REPAIR_PAGES, repairCategoryPath, type RepairService } from "@/content/repair-services";
@@ -321,8 +322,8 @@ export function RepairServicePage({
                     className="h-auto min-h-20 justify-between whitespace-normal bg-card p-6 text-left text-navytext"
                   >
                     <Link
-                      to="/$category/repairs/$slug"
-                      params={{ category: repairCategoryPath(item.category), slug: item.slug }}
+                      href={resolveHref("/$category/repairs/$slug", { category: repairCategoryPath(item.category), slug: item.slug })}
+
                     >
                       {item.name}
                       <ArrowUpRight className="shrink-0 text-primary" />
@@ -342,8 +343,8 @@ export function RepairServicePage({
                     {relatedGuides.map((article) => (
                       <li key={article.slug}>
                         <Link
-                          to="/repair-guides/$slug"
-                          params={{ slug: article.slug }}
+                          href={resolveHref("/repair-guides/$slug", { slug: article.slug })}
+
                           className="text-sm text-primary underline underline-offset-4"
                         >
                           {article.title}
