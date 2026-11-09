@@ -168,7 +168,7 @@ function RepairCategoryCard({
     <Link
       href={repairNodeHref(slug, category)}
       aria-label={`${phase}: ${name}, explore ${detail.toLowerCase()}`}
-      className="group relative flex min-w-0 flex-col overflow-hidden rounded-[22px] border border-[#d5e1f1] bg-white px-4 py-4 shadow-[0_3px_12px_rgba(16,42,99,0.04)] transition duration-300 hover:-translate-y-1 hover:border-[#84aafa] hover:shadow-[0_12px_30px_-12px_rgba(37,99,235,0.24)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transform-none motion-reduce:transition-none sm:px-5 sm:py-5"
+      className="group relative flex min-w-0 flex-col overflow-hidden rounded-[22px] border border-[#d5e1f1] bg-white px-4 py-3.5 shadow-[0_3px_12px_rgba(16,42,99,0.04)] transition duration-300 hover:-translate-y-1 hover:border-[#84aafa] hover:shadow-[0_12px_30px_-12px_rgba(37,99,235,0.24)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transform-none motion-reduce:transition-none sm:px-5 sm:py-4"
     >
       <div className="flex min-w-0 items-center justify-between gap-1">
         <span className="flex min-w-0 items-center gap-1.5 whitespace-nowrap font-mono text-[8px] tracking-[0.06em] text-[#8394ae] min-[375px]:text-[9px] sm:gap-2 sm:text-[10px]">
@@ -182,7 +182,7 @@ function RepairCategoryCard({
           <ArrowUpRight size={13} />
         </span>
       </div>
-      <div className="relative my-3 h-24 w-full sm:my-4 sm:h-28">
+      <div className="relative mx-2 my-2.5 h-20 sm:my-3 sm:h-24">
         <Image
           src={repairCardImage(slug)}
           alt=""
@@ -192,8 +192,15 @@ function RepairCategoryCard({
           className="object-contain transition-transform duration-300 group-hover:scale-[1.03] motion-reduce:transform-none motion-reduce:transition-none"
         />
       </div>
-      <div className="min-h-[74px] min-w-0 border-t border-[#e7edf6] pt-3 text-left sm:min-h-[78px] sm:pt-4">
-        <h3 className="whitespace-normal text-base font-medium leading-tight tracking-[-0.025em] text-[#102a3d] sm:text-xl lg:text-2xl xl:whitespace-nowrap">
+      <div className="@container min-h-[58px] min-w-0 border-t border-[#e7edf6] pt-2.5 text-left text-base sm:min-h-[62px] sm:pt-3 sm:text-xl lg:text-2xl">
+        <h3
+          className="whitespace-nowrap font-medium leading-tight tracking-[-0.025em] text-[#102a3d]"
+          style={
+            name === "Washing Machine"
+              ? { fontSize: "min(1em, calc((100cqw - 1px) / 8.4))" }
+              : undefined
+          }
+        >
           {name}
         </h3>
         <SingleLineCardLabel text={detail} />
