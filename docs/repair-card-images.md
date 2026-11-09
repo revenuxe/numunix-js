@@ -27,3 +27,6 @@ Shared brief: perfectly straight-on orthographic product elevation; centered, le
 | fan-light-repair-straight | One three-blade ceiling fan with central light, viewed straight from directly underneath, symmetrical balanced blades in image plane, no perspective. |
 | electrical-service-straight | One white electrical distribution box with a neat horizontal row of circuit breakers visible on its flat front. No open projecting door, no exposed wires. Only front face visible. |
 
+## TV and desktop screen update
+
+The built-in Image Generation edit tool changed only the TV and monitor displays to a luminous pale cyan-blue at top left, royal blue in the middle and deep navy at bottom right. Prompt constraints preserved product geometry, straight-on composition, bezels, stands, soundbar, computer tower, keyboard, materials and transparent alpha; no UI, text, icons or added objects. Final assets use `tv-audio-repair-straight-blue.webp` and `desktop-repair-straight-blue.webp`.

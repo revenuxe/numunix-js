@@ -17,7 +17,10 @@ export const REPAIR_CARD_IMAGES: Record<string, string> = Object.fromEntries(
     "inverter-ups-repair",
     "fan-light-repair",
     "electrical-service",
-  ].map((slug) => [slug, `/images/repair-categories/${slug}-straight.webp`]),
+  ].map((slug) => [
+    slug,
+    `/images/repair-categories/${slug}-straight${["tv-audio-repair", "desktop-repair"].includes(slug) ? "-blue" : ""}.webp`,
+  ]),
 );
 
 export function repairCardImage(slug: string) {
