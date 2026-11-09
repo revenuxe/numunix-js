@@ -18,6 +18,22 @@ The enhancements retain the repair content, public URL structure, two-line fitte
 
 `before.json` and `after.json` record reproducible mobile lab diagnostics. The runner uses cold browser contexts, 390×844 resolution, 4× CPU slowdown, 150ms network latency and 1.6Mbps download, with a six-second observation window. They are individual local samples, not Lighthouse scores or real-user Core Web Vitals. They do not measure field INP or prove search ranking improvements.
 
+| Sample | Initial JavaScript, decoded | LCP before → after | CLS after |
+| --- | --- | --- | --- |
+| Electronics homepage | 897,174 → 805,278 bytes (10.2% less) | 1,732 → 1,904 ms | 0 |
+| Bosch washing-machine page | 942,739 → 811,092 bytes (14.0% less) | 1,460 → 1,448 ms | 0.0092 |
+
+Both final samples had zero third-party requests, no browser errors and no horizontal overflow. Total resource transfer increased by about 33 kB on the homepage and 18 kB on the brand page while the actual font files moved to local delivery. The homepage's LCP was slightly slower in this sample; these results demonstrate less initial JavaScript and more reliable font delivery, not a proven overall speed or ranking gain.
+
+## Completed checks
+
+- TypeScript route generation/checking and the final production build passed.
+- The 23-check production browser regression run passed. After deferring validation, all eight affected admin/booking/font/animation/indexing checks passed again, including two synchronous form submissions producing only one booking action.
+- All 15 SEO-validator, enquiry, notification and brand-validation unit tests passed.
+- The final crawl checked all 133 public pages and 133 internal destinations with zero failures; five sitemap dates are backed by article records.
+- All ten legacy redirects, six invalid-route responses and three private/transactional indexing checks passed. The apex-domain redirect also passed its production browser check.
+- Installing the font packages reported zero dependency vulnerabilities.
+
 To repeat:
 
 ```text
