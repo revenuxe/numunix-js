@@ -13,10 +13,10 @@ Shared brief: photorealistic premium studio catalogue cutout, complete unbranded
 | File stem | Product-specific brief |
 | --- | --- |
 | mobile-repair-v2 | Two overlapping views of the same silver smartphone: rear on the left with two simple camera lenses, front on the right with a luminous pale-blue to navy gradient screen. Upright, subtle opposing angles, complete devices, bright studio lighting, no interface or text. Fuller silhouette for clarity at 80px tall. Generated with the built-in Image Generation tool, preserving transparent alpha. |
-| laptop-repair | Open silver laptop, three-quarter front view, plain deep-navy screen. |
+| laptop-repair-v2 | Single silver laptop open about 105 degrees, near-front three-quarter view with gentle side angle, screen and keyboard clearly visible, natural proportions and luminous pale-blue to navy gradient screen without UI. |
 | cctv-service | White outdoor bullet security camera, dark glass lens and short wall mount. |
 | tv-audio-repair | Thin dark television on feet with compact matching soundbar, blank navy screen. |
-| tablet-repair | Upright silver tablet, slightly angled, plain navy screen and proportions distinct from a phone. |
+| tablet-repair-v2 | Two overlapping views of one silver tablet, front in foreground with partial rear behind. Upright portrait, wider proportions than a phone, subtle opposing angles, thin bezels, simple rear camera and luminous pale-blue to navy screen without UI. |
 | data-recovery | Computer hard drive with top cover removed, silver platter and read arm visible, three-quarter top/front view. |
 | console-repair | Charcoal game console with a matching controller in front, no logos. |
 | desktop-repair | Compact dark tower, slim monitor and keyboard, blank navy screen. |
