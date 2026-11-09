@@ -217,11 +217,11 @@ function RepairCategoryCard({
         </span>
       </div>
       <div className="flex flex-1 items-center justify-center py-5 sm:py-6">
-        <span className="grid size-16 place-items-center rounded-[18px] border border-[#d8e5fb] bg-gradient-to-br from-[#f4f8ff] to-[#e8f0ff] text-[#265bd5] shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] transition duration-300 group-hover:border-[#2864e8] group-hover:from-[#2864e8] group-hover:to-[#1747b8] group-hover:text-white motion-reduce:transition-none sm:size-20 sm:rounded-[22px]">
+        <span className="grid size-16 place-items-center rounded-[18px] border border-[#102a63] bg-[#102a63] text-white shadow-[0_4px_10px_-4px_rgba(16,42,99,0.4)] transition duration-300 group-hover:border-[#1e4ed8] group-hover:bg-[#1e4ed8] motion-reduce:transition-none sm:size-20 sm:rounded-[22px]">
           {Icon && <Icon aria-hidden="true" strokeWidth={1.5} className="size-8 sm:size-10" />}
         </span>
       </div>
-      <div className="min-w-0 border-t border-[#e7edf6] pt-4 text-center sm:pt-5">
+      <div className="min-w-0 border-t border-[#e7edf6] pt-4 text-left sm:pt-5">
         <h3 className="whitespace-nowrap text-base font-medium leading-tight tracking-[-0.025em] text-[#102a3d] sm:text-xl lg:text-2xl">
           {name}
         </h3>
