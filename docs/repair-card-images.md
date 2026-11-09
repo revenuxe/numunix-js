@@ -12,7 +12,7 @@ Shared brief: photorealistic premium studio catalogue cutout, complete unbranded
 
 | File stem | Product-specific brief |
 | --- | --- |
-| mobile-repair | Upright dark smartphone, three-quarter front view, plain deep-navy screen without UI. |
+| mobile-repair-v2 | Two overlapping views of the same silver smartphone: rear on the left with two simple camera lenses, front on the right with a luminous pale-blue to navy gradient screen. Upright, subtle opposing angles, complete devices, bright studio lighting, no interface or text. Fuller silhouette for clarity at 80px tall. Generated with the built-in Image Generation tool, preserving transparent alpha. |
 | laptop-repair | Open silver laptop, three-quarter front view, plain deep-navy screen. |
 | cctv-service | White outdoor bullet security camera, dark glass lens and short wall mount. |
 | tv-audio-repair | Thin dark television on feet with compact matching soundbar, blank navy screen. |
