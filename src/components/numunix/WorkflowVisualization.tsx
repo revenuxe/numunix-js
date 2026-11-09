@@ -126,7 +126,7 @@ export function WorkflowVisualization({
 
       {/* flow rail */}
       <div>
-        <div className="grid grid-cols-2 gap-4 px-6 py-5 sm:gap-5 md:grid-cols-4 xl:grid-cols-8 lg:px-12">
+        <div className={`grid grid-cols-2 gap-4 px-6 py-5 sm:gap-5 md:grid-cols-4 ${tabs ? "" : "xl:grid-cols-8"} lg:px-12`}>
           {activeNodes.map(({ phase: n, name: v, category: u, slug, icon: Icon }, i) => (
             <Link
               key={`${tab}-${slug}`}
@@ -140,13 +140,13 @@ export function WorkflowVisualization({
 
               <div className="flex items-center gap-2">
                 <span className="label-mono text-[#b3c2d6]">{String(i + 1).padStart(2, "0")}</span>
-                <span className="text-[12px] tracking-[0.04em] text-[#5d76a3] sm:text-[12.5px] xl:text-[11px]">
+                <span className={`text-[12px] tracking-[0.04em] text-[#5d76a3] sm:text-[12.5px] ${tabs ? "" : "xl:text-[11px]"}`}>
                   {n}
                 </span>
               </div>
 
               <div className="mt-5">
-                <div className="font-mono text-[19px] leading-[1.05] font-light tracking-[-0.02em] whitespace-nowrap text-[#08152e] sm:text-[24px] xl:text-[14px]">
+                <div className={`font-mono text-[19px] leading-[1.05] font-light tracking-[-0.02em] whitespace-nowrap text-[#08152e] sm:text-[24px] ${tabs ? "" : "xl:text-[14px]"}`}>
                   {v}
                 </div>
                 <div className="label-mono mt-2 truncate text-[#1747b8]">{u}</div>
