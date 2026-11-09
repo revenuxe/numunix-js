@@ -113,7 +113,7 @@ const APPLIANCE_NODES: RepairNode[] = [
   {
     slug: "washing-machine-repair",
     phase: "REPAIR",
-    name: "Washing",
+    name: "Washing Machine",
     category: "DRUMS · MOTORS",
     icon: WashingMachine,
   },
@@ -222,7 +222,7 @@ function RepairCategoryCard({
         </span>
       </div>
       <div className="min-w-0 border-t border-[#e7edf6] pt-4 text-left sm:pt-5">
-        <h3 className="whitespace-nowrap text-base font-medium leading-tight tracking-[-0.025em] text-[#102a3d] sm:text-xl lg:text-2xl">
+        <h3 className="min-h-[2.5em] whitespace-normal text-base font-medium leading-tight tracking-[-0.025em] text-[#102a3d] sm:text-xl lg:text-2xl xl:min-h-[1.25em] xl:whitespace-nowrap">
           {name}
         </h3>
         <SingleLineCardLabel text={detail} />
