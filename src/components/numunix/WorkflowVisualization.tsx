@@ -5,27 +5,10 @@ import { HOMEPAGE_REPAIR } from "@/content/homepage-repairs";
 import { useCategory } from "./category";
 import { NODE_VIZ } from "./nodeviz";
 import Link from "next/link";
+import Image from "next/image";
+import { repairCardImage } from "@/content/repair-card-images";
 import { resolveHref } from "@/lib/route-href";
-import {
-  ArrowUpRight,
-  Smartphone,
-  Laptop,
-  Cctv,
-  Tv,
-  Tablet,
-  HardDrive,
-  Gamepad2,
-  Monitor,
-  WashingMachine,
-  AirVent,
-  Refrigerator,
-  Microwave,
-  Droplets,
-  BatteryCharging,
-  Fan,
-  Zap,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowUpRight, type LucideIcon } from "lucide-react";
 import { WORKFLOW_STAGES } from "@/content/workflow";
 
 const NODES = WORKFLOW_STAGES;
@@ -34,7 +17,7 @@ function SingleLineCardLabel({ text }: { text: string }) {
   return (
     <div
       data-card-label
-      className="@container mt-3 min-w-0 whitespace-nowrap font-mono leading-[1.4] text-[#5d76a3]"
+      className="@container mt-1.5 min-w-0 whitespace-nowrap font-mono text-[10px] leading-[1.4] text-[#5d76a3] sm:text-[11px]"
     >
       <span
         className="inline-block whitespace-nowrap tracking-[0.04em]"
@@ -47,7 +30,7 @@ function SingleLineCardLabel({ text }: { text: string }) {
   );
 }
 
-type RepairNode = { slug: string; phase: string; name: string; category: string; icon: LucideIcon };
+type RepairNode = { slug: string; phase: string; name: string; category: string };
 
 // Homepage panel shows the repair services we cover, switchable by category.
 const ELECTRONICS_NODES: RepairNode[] = [
@@ -56,56 +39,48 @@ const ELECTRONICS_NODES: RepairNode[] = [
     phase: "REPAIR",
     name: "Mobile",
     category: "SCREENS · BATTERIES",
-    icon: Smartphone,
   },
   {
     slug: "laptop-repair",
     phase: "REPAIR",
     name: "Laptop",
     category: "BOARDS · UPGRADES",
-    icon: Laptop,
   },
   {
     slug: "cctv-service",
     phase: "INSTALL",
     name: "CCTV",
     category: "SETUP · MAINTENANCE",
-    icon: Cctv,
   },
   {
     slug: "tv-audio-repair",
     phase: "REPAIR",
     name: "TV & Audio",
     category: "PANELS · SOUND",
-    icon: Tv,
   },
   {
     slug: "tablet-repair",
     phase: "REPAIR",
     name: "Tablet",
     category: "IPAD · ANDROID",
-    icon: Tablet,
   },
   {
     slug: "data-recovery",
     phase: "RECOVERY",
     name: "Data",
     category: "DRIVES · PHONES",
-    icon: HardDrive,
   },
   {
     slug: "console-repair",
     phase: "REPAIR",
     name: "Console",
     category: "PS · XBOX",
-    icon: Gamepad2,
   },
   {
     slug: "desktop-repair",
     phase: "REPAIR",
     name: "Desktop",
     category: "TOWERS · ALL-IN-ONES",
-    icon: Monitor,
   },
 ];
 
@@ -115,50 +90,43 @@ const APPLIANCE_NODES: RepairNode[] = [
     phase: "REPAIR",
     name: "Washing Machine",
     category: "DRUMS · MOTORS",
-    icon: WashingMachine,
   },
-  { slug: "ac-repair", phase: "SERVICE", name: "AC", category: "GAS · COOLING", icon: AirVent },
+  { slug: "ac-repair", phase: "SERVICE", name: "AC", category: "GAS · COOLING" },
   {
     slug: "refrigerator-repair",
     phase: "REPAIR",
     name: "Fridge",
     category: "COOLING · GAS",
-    icon: Refrigerator,
   },
   {
     slug: "microwave-repair",
     phase: "REPAIR",
     name: "Microwave",
     category: "OVENS · CHIMNEY",
-    icon: Microwave,
   },
   {
     slug: "water-purifier-service",
     phase: "SERVICE",
     name: "Purifier",
     category: "RO · FILTERS",
-    icon: Droplets,
   },
   {
     slug: "inverter-ups-repair",
     phase: "REPAIR",
     name: "Inverter",
     category: "UPS · BATTERIES",
-    icon: BatteryCharging,
   },
   {
     slug: "fan-light-repair",
     phase: "WORK",
     name: "Fan & Light",
     category: "FITTING · REPAIR",
-    icon: Fan,
   },
   {
     slug: "electrical-service",
     phase: "WORK",
     name: "Electrical",
     category: "WIRING · FITTINGS",
-    icon: Zap,
   },
 ];
 
@@ -186,7 +154,6 @@ function RepairCategoryCard({
   phase,
   detail,
   slug,
-  Icon,
   index,
   category,
 }: {
@@ -194,7 +161,6 @@ function RepairCategoryCard({
   phase: string;
   detail: string;
   slug: string;
-  Icon: LucideIcon | undefined;
   index: number;
   category: "electronics" | "appliances";
 }) {
@@ -202,7 +168,7 @@ function RepairCategoryCard({
     <Link
       href={repairNodeHref(slug, category)}
       aria-label={`${phase}: ${name}, explore ${detail.toLowerCase()}`}
-      className="group relative flex min-h-[232px] min-w-0 flex-col overflow-hidden rounded-[22px] border border-[#d5e1f1] bg-white px-4 py-4 shadow-[0_3px_12px_rgba(16,42,99,0.04)] transition duration-300 hover:-translate-y-1 hover:border-[#84aafa] hover:shadow-[0_12px_30px_-12px_rgba(37,99,235,0.24)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transform-none motion-reduce:transition-none sm:min-h-[272px] sm:px-5 sm:py-5"
+      className="group relative flex min-w-0 flex-col overflow-hidden rounded-[22px] border border-[#d5e1f1] bg-white px-4 py-4 shadow-[0_3px_12px_rgba(16,42,99,0.04)] transition duration-300 hover:-translate-y-1 hover:border-[#84aafa] hover:shadow-[0_12px_30px_-12px_rgba(37,99,235,0.24)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transform-none motion-reduce:transition-none sm:px-5 sm:py-5"
     >
       <div className="flex min-w-0 items-center justify-between gap-1">
         <span className="flex min-w-0 items-center gap-1.5 whitespace-nowrap font-mono text-[8px] tracking-[0.06em] text-[#8394ae] min-[375px]:text-[9px] sm:gap-2 sm:text-[10px]">
@@ -216,13 +182,18 @@ function RepairCategoryCard({
           <ArrowUpRight size={13} />
         </span>
       </div>
-      <div className="flex flex-1 items-center justify-center py-5 sm:py-6">
-        <span className="grid size-16 place-items-center rounded-[18px] border border-[#102a63] bg-[#102a63] text-white shadow-[0_4px_10px_-4px_rgba(16,42,99,0.4)] transition duration-300 group-hover:border-[#1e4ed8] group-hover:bg-[#1e4ed8] motion-reduce:transition-none sm:size-20 sm:rounded-[22px]">
-          {Icon && <Icon aria-hidden="true" strokeWidth={1.5} className="size-8 sm:size-10" />}
-        </span>
+      <div className="relative my-3 h-24 w-full sm:my-4 sm:h-28">
+        <Image
+          src={repairCardImage(slug)}
+          alt=""
+          aria-hidden="true"
+          fill
+          sizes="(min-width: 1280px) 240px, (min-width: 768px) 180px, (min-width: 640px) 240px, 140px"
+          className="object-contain transition-transform duration-300 group-hover:scale-[1.03] motion-reduce:transform-none motion-reduce:transition-none"
+        />
       </div>
-      <div className="min-w-0 border-t border-[#e7edf6] pt-4 text-left sm:pt-5">
-        <h3 className="min-h-[2.5em] whitespace-normal text-base font-medium leading-tight tracking-[-0.025em] text-[#102a3d] sm:text-xl lg:text-2xl xl:min-h-[1.25em] xl:whitespace-nowrap">
+      <div className="min-h-[74px] min-w-0 border-t border-[#e7edf6] pt-3 text-left sm:min-h-[78px] sm:pt-4">
+        <h3 className="whitespace-normal text-base font-medium leading-tight tracking-[-0.025em] text-[#102a3d] sm:text-xl lg:text-2xl xl:whitespace-nowrap">
           {name}
         </h3>
         <SingleLineCardLabel text={detail} />
@@ -310,7 +281,6 @@ export function WorkflowVisualization({
                 phase={n}
                 detail={u}
                 slug={slug}
-                Icon={Icon}
                 index={i}
                 category={tab === 0 ? "electronics" : "appliances"}
               />
