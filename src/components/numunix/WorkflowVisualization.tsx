@@ -170,7 +170,7 @@ function RepairCategoryCard({
       aria-label={`${phase}: ${name}, explore ${detail.toLowerCase()}`}
       className="group relative flex min-w-0 flex-col overflow-hidden rounded-[22px] border border-[#d5e1f1] bg-white px-4 py-3.5 shadow-[0_3px_12px_rgba(16,42,99,0.04)] transition duration-300 hover:-translate-y-1 hover:border-[#84aafa] hover:shadow-[0_12px_30px_-12px_rgba(37,99,235,0.24)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transform-none motion-reduce:transition-none sm:px-5 sm:py-4"
     >
-      <div className="flex min-w-0 items-center justify-between gap-1">
+      <div className="flex min-w-0 items-center justify-between gap-1 border-b border-[#e7edf6] pb-2.5">
         <span className="flex min-w-0 items-center gap-1.5 whitespace-nowrap font-mono text-[8px] tracking-[0.06em] text-[#8394ae] min-[375px]:text-[9px] sm:gap-2 sm:text-[10px]">
           <span className="text-[#a8b7cc]">{String(index + 1).padStart(2, "0")}</span>
           {phase}
