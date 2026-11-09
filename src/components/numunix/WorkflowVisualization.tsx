@@ -91,13 +91,13 @@ const APPLIANCE_NODES: RepairNode[] = [
     name: "Washing",
     category: "DRUMS · MOTORS",
   },
-  { slug: "ac-repair", phase: "SERVICE", name: "AC", category: "GAS · COOLING" },
   {
     slug: "refrigerator-repair",
     phase: "REPAIR",
     name: "Fridge",
     category: "COOLING · GAS",
   },
+  { slug: "ac-repair", phase: "SERVICE", name: "AC", category: "GAS · COOLING" },
   {
     slug: "microwave-repair",
     phase: "REPAIR",
