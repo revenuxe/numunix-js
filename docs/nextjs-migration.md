@@ -22,7 +22,11 @@ Existing canonical production URLs, metadata, visible content and JSON-LD are pr
 
 ## Supabase and email
 
-Copy `.env.example` to `.env.local` and configure `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY`. Optional `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` allow build-time browser configuration. Otherwise the admin client obtains only public-safe configuration through a server action. Never use a service-role key as a public key.
+Copy `.env.example` to `.env.local` and configure `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY`. Set the same names in the deployment host's Production environment and redeploy; ignored local environment files are not uploaded by Git. Optional `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` allow build-time browser configuration. Otherwise the admin client obtains only public-safe configuration through the uncached runtime `/api/public/config` endpoint, independently of Server Action transport. Legacy anon-key names and existing `VITE_SUPABASE_*` deployment values are accepted as migration aliases. Never use a service-role key as a public key.
+
+The login offers a connection retry after a temporary configuration request failure. Failed configuration loads are not permanently cached in the browser. The endpoint returns only the project URL and a validated public key, never server secrets; missing or unsafe configuration returns HTTP 503.
+
+For the runtime-only deployment regression, set `TEST_RUNTIME_SUPABASE_CONFIG=1` when running `npx playwright test tests/admin-config.spec.ts tests/admin.spec.ts`. This builds without `NEXT_PUBLIC_*` configuration and exercises the legacy deployment aliases, configuration retry, unsafe-key rejection, authenticated admin permissions and booking flows against isolated test backends.
 
 The booking server action validates enquiries and calls the existing write-only `submit_repair_booking` RPC with the publishable key. It returns only the new receipt and service, preserves the source path and sends optional Resend notification through `RESEND_API_KEY`. Database policies and status permissions are unchanged. The authenticated admin browser client continues to rely on Supabase authentication, role checks and row-level security.
 

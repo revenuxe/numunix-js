@@ -3,7 +3,7 @@ import { enquirySchema } from "./enquiry-schema";
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
 import { notifyRepairTeam } from "./booking-notification";
-import { isPublicSupabaseKey } from "./supabase-config";
+import { resolvePublicSupabaseConfig } from "./supabase-config";
 
 export async function createRepairBooking({ data: values }: { data: unknown }) {
   const parsed = enquirySchema.safeParse(values);
@@ -12,11 +12,9 @@ export async function createRepairBooking({ data: values }: { data: unknown }) {
   const data = parsed.data;
   // Public write-only form: validate first and return only this new row's receipt.
   try {
-    const url = process.env["SUPABASE_URL"] || process.env["NEXT_PUBLIC_SUPABASE_URL"];
-    const key =
-      process.env["SUPABASE_PUBLISHABLE_KEY"] ||
-      process.env["NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY"];
-    if (!url || !isPublicSupabaseKey(key)) throw new Error("Booking configuration unavailable");
+    const config = resolvePublicSupabaseConfig(process.env, { allowLoopback: true });
+    if (!config) throw new Error("Booking configuration unavailable");
+    const { url, key } = config;
     const client = createClient<Database>(url, key, {
       auth: { persistSession: false, autoRefreshToken: false },
       global: {

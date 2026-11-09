@@ -10,7 +10,7 @@ type ViewProps = {
   search: Record<string, string | undefined>;
 };
 function AdminLogin({ loaderData, params, search }: ViewProps) {
-  const { access } = useAdminSession();
+  const { access, retry } = useAdminSession();
   const [showPassword, setShowPassword] = useState(false);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
@@ -90,13 +90,19 @@ function AdminLogin({ loaderData, params, search }: ViewProps) {
             Sign in to manage electronics and appliance repair enquiries.
           </p>
           {access === "unavailable" && (
-            <p
+            <div
               role="status"
               className="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900"
             >
-              Admin sign-in is not available yet. The workspace connection is still being
-              configured.
-            </p>
+              <p>We couldn't connect to the workspace. Please retry the connection.</p>
+              <button
+                type="button"
+                onClick={retry}
+                className="mt-3 min-h-10 rounded-lg border border-amber-300 bg-white px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-100"
+              >
+                Retry connection
+              </button>
+            </div>
           )}
           <form method="post" onSubmit={signIn} className="mt-8 space-y-5">
             <label className="block text-sm font-medium text-slate-700" htmlFor="admin-email">

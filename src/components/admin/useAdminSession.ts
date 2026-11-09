@@ -10,6 +10,7 @@ export function useAdminSession() {
   const [session, setSession] = useState<Session | null>(null);
   const [initialized, setInitialized] = useState(false);
   const [access, setAccess] = useState<AdminAccess>("loading");
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     let subscription: { unsubscribe: () => void } | null = null;
@@ -32,7 +33,7 @@ export function useAdminSession() {
       active = false;
       subscription?.unsubscribe();
     };
-  }, []);
+  }, [attempt]);
 
   useEffect(() => {
     const client = getSupabase();
@@ -51,5 +52,11 @@ export function useAdminSession() {
     };
   }, [initialized, session]);
 
-  return { session, access };
+  const retry = () => {
+    setAccess("loading");
+    setInitialized(false);
+    setSession(null);
+    setAttempt((value) => value + 1);
+  };
+  return { session, access, retry };
 }
