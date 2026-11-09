@@ -305,7 +305,11 @@ export function RepairServicePage({
                     ? "Mobile repair\nBrand / Model: \nIssue / Damage history: \nBackup status / Data priority: \nBangalore locality: "
                     : isWasher
                       ? "Washing machine repair\nBrand / Model: \nMachine type: \nIssue / Error code: \nBangalore locality: "
-                      : `Service: ${service.name}\nModel: \nIssue: `
+                        : service.slug === 'desktop-repair'
+                          ? 'Desktop computer repair\nBrand / Model or assembled specifications: \nTower / All-in-one: \nStartup behaviour / Issue: \nBackup status / Data priority: \nBangalore locality: '
+                        : service.slug === 'desktop-repair'
+                          ? 'Desktop computer repair\nBrand / Model or assembled specifications: \nTower / All-in-one: \nStartup behaviour / Issue: \nBackup status / Data priority: \nBangalore locality: '
+                          : `Service: ${service.name}\nModel: \nIssue: `
                 }
               />
             </div>

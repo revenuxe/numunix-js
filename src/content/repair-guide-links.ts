@@ -15,7 +15,7 @@ export const GUIDE_REPAIR_SLUGS: Record<string, readonly string[]> = {
     "cctv-service",
     "washing-machine-repair",
   ],
-  "understanding-repair-estimates": ["laptop-repair", "tv-audio-repair", "refrigerator-repair"],
+  "understanding-repair-estimates": ["laptop-repair", "desktop-repair", "tv-audio-repair", "refrigerator-repair"],
 };
 
 export function guideRepairLinks(slug: string) {

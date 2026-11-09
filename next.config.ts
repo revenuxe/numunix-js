@@ -4,6 +4,7 @@ const config: NextConfig = {
   htmlLimitedBots: /.*/,
   async redirects() {
     return [
+      ...['/electronic/repairs/doorstep-repair', '/repairs/doorstep-repair', '/features/doorstep-repair'].map(source => ({source, destination:'/electronic/repairs/desktop-repair', permanent:true})),
       {
         source: "/:path*",
         has: [{ type: "host", value: "numunix.com" }],

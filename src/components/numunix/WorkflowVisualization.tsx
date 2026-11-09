@@ -1,6 +1,6 @@
 "use client";
 import { Label, Heading, Accent, Reveal } from "./primitives";
-import { REPAIR_PAGES } from "@/content/repair-services";
+import { REPAIR_PAGES, repairPageHref } from "@/content/repair-services";
 import { HOMEPAGE_REPAIR } from "@/content/homepage-repairs";
 import { useCategory } from "./category";
 import { NODE_VIZ } from "./nodeviz";
@@ -15,7 +15,7 @@ import {
   Tablet,
   HardDrive,
   Gamepad2,
-  Truck,
+  Monitor,
   WashingMachine,
   AirVent,
   Refrigerator,
@@ -34,25 +34,115 @@ type RepairNode = { slug: string; phase: string; name: string; category: string;
 
 // Homepage panel shows the repair services we cover, switchable by category.
 const ELECTRONICS_NODES: RepairNode[] = [
-  { slug: "fault-intake", phase: "REPAIR", name: "Mobile", category: "SCREENS · BATTERIES", icon: Smartphone },
-  { slug: "fault-diagnosis", phase: "REPAIR", name: "Laptop", category: "BOARDS · UPGRADES", icon: Laptop },
-  { slug: "repair-estimate", phase: "INSTALL", name: "CCTV", category: "SETUP · MAINTENANCE", icon: Cctv },
-  { slug: "repair-approval", phase: "REPAIR", name: "TV & Audio", category: "PANELS · SOUND", icon: Tv },
-  { slug: "repair-work", phase: "REPAIR", name: "Tablet", category: "IPAD · ANDROID", icon: Tablet },
-  { slug: "function-testing", phase: "RECOVERY", name: "Data", category: "DRIVES · PHONES", icon: HardDrive },
-  { slug: "repair-handover", phase: "REPAIR", name: "Console", category: "PS · XBOX", icon: Gamepad2 },
-  { slug: "repair-aftercare", phase: "SERVICE", name: "Doorstep", category: "WE COME TO YOU", icon: Truck },
+  {
+    slug: "mobile-repair",
+    phase: "REPAIR",
+    name: "Mobile",
+    category: "SCREENS · BATTERIES",
+    icon: Smartphone,
+  },
+  {
+    slug: "laptop-repair",
+    phase: "REPAIR",
+    name: "Laptop",
+    category: "BOARDS · UPGRADES",
+    icon: Laptop,
+  },
+  {
+    slug: "cctv-service",
+    phase: "INSTALL",
+    name: "CCTV",
+    category: "SETUP · MAINTENANCE",
+    icon: Cctv,
+  },
+  {
+    slug: "tv-audio-repair",
+    phase: "REPAIR",
+    name: "TV & Audio",
+    category: "PANELS · SOUND",
+    icon: Tv,
+  },
+  {
+    slug: "tablet-repair",
+    phase: "REPAIR",
+    name: "Tablet",
+    category: "IPAD · ANDROID",
+    icon: Tablet,
+  },
+  {
+    slug: "data-recovery",
+    phase: "RECOVERY",
+    name: "Data",
+    category: "DRIVES · PHONES",
+    icon: HardDrive,
+  },
+  {
+    slug: "console-repair",
+    phase: "REPAIR",
+    name: "Console",
+    category: "PS · XBOX",
+    icon: Gamepad2,
+  },
+  {
+    slug: "desktop-repair",
+    phase: "REPAIR",
+    name: "Desktop",
+    category: "TOWERS · ALL-IN-ONES",
+    icon: Monitor,
+  },
 ];
 
 const APPLIANCE_NODES: RepairNode[] = [
-  { slug: "fault-intake", phase: "REPAIR", name: "Washing", category: "DRUMS · MOTORS", icon: WashingMachine },
-  { slug: "fault-diagnosis", phase: "SERVICE", name: "AC", category: "GAS · COOLING", icon: AirVent },
-  { slug: "repair-estimate", phase: "REPAIR", name: "Fridge", category: "COOLING · GAS", icon: Refrigerator },
-  { slug: "repair-approval", phase: "REPAIR", name: "Microwave", category: "OVENS · CHIMNEY", icon: Microwave },
-  { slug: "repair-work", phase: "SERVICE", name: "Purifier", category: "RO · FILTERS", icon: Droplets },
-  { slug: "function-testing", phase: "REPAIR", name: "Inverter", category: "UPS · BATTERIES", icon: BatteryCharging },
-  { slug: "repair-handover", phase: "WORK", name: "Fan & Light", category: "FITTING · REPAIR", icon: Fan },
-  { slug: "repair-aftercare", phase: "WORK", name: "Electrical", category: "WIRING · FITTINGS", icon: Zap },
+  {
+    slug: "washing-machine-repair",
+    phase: "REPAIR",
+    name: "Washing",
+    category: "DRUMS · MOTORS",
+    icon: WashingMachine,
+  },
+  { slug: "ac-repair", phase: "SERVICE", name: "AC", category: "GAS · COOLING", icon: AirVent },
+  {
+    slug: "refrigerator-repair",
+    phase: "REPAIR",
+    name: "Fridge",
+    category: "COOLING · GAS",
+    icon: Refrigerator,
+  },
+  {
+    slug: "microwave-repair",
+    phase: "REPAIR",
+    name: "Microwave",
+    category: "OVENS · CHIMNEY",
+    icon: Microwave,
+  },
+  {
+    slug: "water-purifier-service",
+    phase: "SERVICE",
+    name: "Purifier",
+    category: "RO · FILTERS",
+    icon: Droplets,
+  },
+  {
+    slug: "inverter-ups-repair",
+    phase: "REPAIR",
+    name: "Inverter",
+    category: "UPS · BATTERIES",
+    icon: BatteryCharging,
+  },
+  {
+    slug: "fan-light-repair",
+    phase: "WORK",
+    name: "Fan & Light",
+    category: "FITTING · REPAIR",
+    icon: Fan,
+  },
+  {
+    slug: "electrical-service",
+    phase: "WORK",
+    name: "Electrical",
+    category: "WIRING · FITTINGS",
+    icon: Zap,
+  },
 ];
 
 const REPAIR_TABS = [
@@ -60,7 +150,19 @@ const REPAIR_TABS = [
   { label: "Appliances", nodes: APPLIANCE_NODES },
 ];
 
-type PanelNodes = { slug: string; phase: string; name: string; category: string; icon?: LucideIcon }[];
+function repairNodeHref(slug: string, category: "electronics" | "appliances") {
+  const service = REPAIR_PAGES.find((item) => item.slug === slug && item.category === category);
+  if (!service) throw new Error("Repair card is missing its catalogue destination: " + slug);
+  return repairPageHref(service);
+}
+
+type PanelNodes = {
+  slug: string;
+  phase: string;
+  name: string;
+  category: string;
+  icon?: LucideIcon;
+}[];
 
 export function PlatformIntro() {
   const category = useCategory()?.category ?? "electronics";
@@ -86,7 +188,11 @@ export function PlatformIntro() {
         </div>
       </div>
       <Reveal delay={120}>
-        <WorkflowVisualization tabs={REPAIR_TABS} label="OUR REPAIR" sub={category === "appliances" ? "/ WASHING → ELECTRICAL" : "/ MOBILE → CCTV"} />
+        <WorkflowVisualization
+          tabs={REPAIR_TABS}
+          label="OUR REPAIR"
+          sub={category === "appliances" ? "/ WASHING → ELECTRICAL" : "/ MOBILE → DESKTOP"}
+        />
       </Reveal>
     </section>
   );
@@ -126,27 +232,37 @@ export function WorkflowVisualization({
 
       {/* flow rail */}
       <div>
-        <div className={`grid grid-cols-2 gap-4 px-6 py-5 sm:gap-5 md:grid-cols-4 ${tabs ? "" : "xl:grid-cols-8"} lg:px-12`}>
+        <div
+          className={`grid grid-cols-2 gap-4 px-6 py-5 sm:gap-5 md:grid-cols-4 ${tabs ? "auto-rows-fr" : ""} ${tabs ? "" : "xl:grid-cols-8"} lg:px-12`}
+        >
           {activeNodes.map(({ phase: n, name: v, category: u, slug, icon: Icon }, i) => (
             <Link
               key={`${tab}-${slug}`}
-              href={resolveHref(tabs ? "/$category/repairs/$slug" : "/repair-process/$slug", { category: tab === 0 ? "electronic" : "appliances", slug: tabs ? (REPAIR_PAGES.filter(service => service.category === (tab === 0 ? "electronics" : "appliances"))[i]?.slug ?? slug) : slug })}
+              href={
+                tabs
+                  ? repairNodeHref(slug, tab === 0 ? "electronics" : "appliances")
+                  : resolveHref("/repair-process/$slug", { slug })
+              }
 
               aria-label={`${n}: ${v}, explore ${u.toLowerCase()}`}
-              className="group relative flex min-w-0 cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-[#cdddf3] bg-white px-4 py-5 shadow-[0_4px_8px_-3px_rgba(16,42,99,0.08),0_12px_24px_-12px_rgba(30,78,216,0.22)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#7ea8e8] hover:bg-[#f5f8fd] hover:shadow-[0_18px_40px_-16px_rgba(30,78,216,0.35)] active:translate-y-0 active:scale-[0.98] active:shadow-[0_6px_16px_-10px_rgba(30,78,216,0.3)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] motion-reduce:transform-none motion-reduce:transition-none sm:px-5 sm:py-6 coarse:border-[#c3d6f2] coarse:bg-[#fbfdff] coarse:shadow-[0_10px_24px_-14px_rgba(30,78,216,0.4)]"
+              className={`group relative ${tabs ? "grid min-h-[180px] grid-rows-[auto_1fr_auto] sm:min-h-[200px]" : "flex flex-col justify-between"} min-w-0 cursor-pointer overflow-hidden rounded-2xl border border-[#cdddf3] bg-white px-4 py-5 shadow-[0_4px_8px_-3px_rgba(16,42,99,0.08),0_12px_24px_-12px_rgba(30,78,216,0.22)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#7ea8e8] hover:bg-[#f5f8fd] hover:shadow-[0_18px_40px_-16px_rgba(30,78,216,0.35)] active:translate-y-0 active:scale-[0.98] active:shadow-[0_6px_16px_-10px_rgba(30,78,216,0.3)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] motion-reduce:transform-none motion-reduce:transition-none sm:px-5 sm:py-6 coarse:border-[#c3d6f2] coarse:bg-[#fbfdff] coarse:shadow-[0_10px_24px_-14px_rgba(30,78,216,0.4)]`}
             >
               <span className="pointer-events-none absolute inset-x-0 -top-px h-px scale-x-0 bg-gradient-to-r from-transparent via-[#2563eb] to-transparent transition-transform duration-500 group-hover:scale-x-100" />
               <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_0%,rgba(37,99,235,0.08),transparent_60%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
               <div className="flex items-center gap-2">
                 <span className="label-mono text-[#b3c2d6]">{String(i + 1).padStart(2, "0")}</span>
-                <span className={`text-[12px] tracking-[0.04em] text-[#5d76a3] sm:text-[12.5px] ${tabs ? "" : "xl:text-[11px]"}`}>
+                <span
+                  className={`text-[12px] tracking-[0.04em] text-[#5d76a3] sm:text-[12.5px] ${tabs ? "" : "xl:text-[11px]"}`}
+                >
                   {n}
                 </span>
               </div>
 
               <div className="mt-5">
-                <div className={`font-mono text-[19px] leading-[1.05] font-light tracking-[-0.02em] whitespace-nowrap text-[#08152e] sm:text-[24px] ${tabs ? "" : "xl:text-[14px]"}`}>
+                <div
+                  className={`font-mono text-[19px] leading-[1.05] font-light tracking-[-0.02em] text-[#08152e] sm:text-[24px] ${tabs ? "min-h-[2.1em] whitespace-normal md:min-h-0 md:whitespace-nowrap md:text-[clamp(0.875rem,1.25vw,1.5rem)]" : "whitespace-nowrap xl:text-[14px]"}`}
+                >
                   {v}
                 </div>
                 <div className="label-mono mt-2 truncate text-[#1747b8]">{u}</div>

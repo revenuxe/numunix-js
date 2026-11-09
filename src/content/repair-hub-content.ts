@@ -1,5 +1,6 @@
 import type { RepairService } from "./repair-services";
 import { ADDITIONAL_REPAIR_HUBS } from "./additional-repair-hubs";
+import { DESKTOP_REPAIR_HUB } from './desktop-repair-page';
 
 type Card = { title: string; body: string };
 export type HubCopy = {
@@ -13,6 +14,7 @@ export type HubCopy = {
 // Service scope and preparation guidance. Prices, attendance and written cover require job confirmation.
 const HUB_COPY: Record<string, HubCopy> = {
   ...ADDITIONAL_REPAIR_HUBS,
+  'desktop-repair': DESKTOP_REPAIR_HUB,
   "laptop-repair": {
     description:
       "Laptop repair in Bangalore for display, charging, keyboard, hinge and startup faults. Discuss your model, backup priorities, assessment and repair estimate.",

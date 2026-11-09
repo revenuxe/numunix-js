@@ -1,15 +1,17 @@
-import { AirVent, BatteryCharging, Cctv, Droplets, Fan, Gamepad2, HardDrive, Laptop, Microwave, Refrigerator, Smartphone, Tablet, Tv, Zap } from "lucide-react";
+import { AirVent, BatteryCharging, Cctv, Droplets, Fan, Gamepad2, HardDrive, Laptop, Monitor, Microwave, Refrigerator, Smartphone, Tablet, Tv, Zap } from "lucide-react";
 
 export type RepairCategory = "electronics" | "appliances";
-export type DeviceKind = "phone" | "laptop" | "cctv" | "tv" | "tablet" | "drive" | "console" | "washer" | "ac" | "fridge" | "microwave" | "purifier" | "inverter" | "electrical";
+export type DeviceKind = "phone" | "laptop" | "desktop" | "cctv" | "tv" | "tablet" | "drive" | "console" | "washer" | "ac" | "fridge" | "microwave" | "purifier" | "inverter" | "electrical";
 export const REPAIR_SERVICES = {
   electronics: [
     { name: "Mobile", nav: "MOBILE REPAIR", kind: "phone", icon: Smartphone, title: "Your screen, touch and charge. Restored.", body: "Cracked screens, weak batteries, charging faults and camera issues, assessed before parts are replaced.", checks: ["Display & touch", "Battery & charge", "Camera & audio"] },
-    { name: "Laptop", nav: "LAPTOP & COMPUTER REPAIR", kind: "laptop", icon: Laptop, title: "Find the fault. Keep the laptop.", body: "No power, overheating, damaged hinges and failing keyboards, with board-level assessment and upgrade advice.", checks: ["Power & board", "Cooling & fans", "Keyboard & display"] },
+    { name: "Laptop", nav: "LAPTOP REPAIR", kind: "laptop", icon: Laptop, title: "Find the fault. Keep the laptop.", body: "No power, overheating, damaged hinges and failing keyboards, with board-level assessment and upgrade advice.", checks: ["Power & board", "Cooling & fans", "Keyboard & display"] },
     { name: "CCTV", nav: "CCTV & SECURITY SYSTEMS", kind: "cctv", icon: Cctv, title: "A clear view. A recording you can rely on.", body: "Camera installation, cable checks, recorder setup and remote viewing for homes, shops and offices.", checks: ["Camera signal", "Recorder & storage", "Remote viewing"] },
     { name: "TV & Audio", nav: "TV & AUDIO REPAIR", kind: "tv", icon: Tv, title: "Bring the picture and sound back.", body: "Backlight, display-board and speaker faults assessed with a clear repair-versus-replacement recommendation.", checks: ["Panel & backlight", "Input signal", "Sound & speakers"] },
     { name: "Tablet", nav: "TABLET & IPAD REPAIR", kind: "tablet", icon: Tablet, title: "Back to reading, drawing and everyday use.", body: "Display, battery and charging-port repairs for tablets, with touch and connectivity checks before handover.", checks: ["Screen & touch", "Charging port", "Wi-Fi & audio"] },
-    { name: "Data Recovery", nav: "DATA RECOVERY & CONSOLES", kind: "drive", icon: HardDrive, title: "Assess first. Protect what matters.", body: "Failed drives, unreadable storage and console faults, careful assessment, recovery options and device-specific repair advice.", checks: ["Drive assessment", "Recovery options", "File verification"] },
+    { name: "Data Recovery", nav: "DATA RECOVERY", kind: "drive", icon: HardDrive, title: "Assess first. Protect what matters.", body: "Failed drives and unreadable storage, careful assessment, recovery options and file verification without a guaranteed recovery outcome.", checks: ["Drive assessment", "Recovery options", "File verification"] },
+    { name: "Console", nav: "GAMING CONSOLE REPAIR", kind: "console", icon: Gamepad2, title: "Understand the fault. Get back to play.", body: "Power, HDMI, cooling and storage fault assessment with model-specific repair options and clear approval before work.", checks: ["Power & cooling", "HDMI & output", "Storage & connectivity"] },
+    { name: "Desktop", nav: "DESKTOP COMPUTER REPAIR", kind: "desktop", icon: Monitor, title: "Your desktop. Ready for everyday work.", body: "Tower, assembled PC and all-in-one startup, power, cooling and storage faults, with compatible upgrade advice and data priorities agreed before work.", checks: ["Power & startup", "Memory & storage", "Cooling & stability"] },
   ],
   appliances: [
     { name: "Washing Machine", nav: "WASHING MACHINE REPAIR", kind: "washer", icon: WashingMachineIcon, title: "From a stopped cycle to a steady spin.", body: "Drainage, drum, motor and control-board faults, diagnosed at home, with a wash-cycle check after repair.", checks: ["Water inlet & drain", "Drum & motor", "Full cycle test"] },
@@ -27,12 +29,12 @@ import { WashingMachine as WashingMachineIcon } from "lucide-react";
 export const HOMEPAGE_REPAIR = {
   electronics: {
     headline: "Electronics Repair", accent: "in Bangalore",
-    intro: "Mobile, laptop, CCTV, TV and tablet repairs, clear diagnosis, an estimate before work begins, and careful testing before handover.",
-    overview: "From phones and laptops to CCTV, tablets and TVs, tell us the fault and we’ll help you choose the right next step.",
+    intro: "Mobile, laptop, desktop, CCTV, TV and tablet repairs, clear diagnosis, an estimate before work begins, and careful testing before handover.",
+    overview: "From phones, laptops and desktops to CCTV, tablets and TVs, tell us the fault and we’ll help you choose the right next step.",
     audienceIntro: "From one phone to an office full of devices, repair care for homes, shops and shared spaces.",
     diagnostic: "A device fault,", diagnosticAccent: "properly understood.",
     diagnosticBody: "A dead screen, a hot laptop, or a camera that’s offline? Share the model and symptoms. A technician checks the cause before recommending a repair.",
-    maintenance: "Phones · Laptops · CCTV · TVs",
+    maintenance: "Phones · Laptops · Desktops · CCTV",
     cta: "Device not working?", ctaBody: "A cracked phone screen, a laptop that won’t start, or CCTV that dropped offline, tell us the symptoms and request a repair assessment.",
     audiences: [
       ["Homes & individuals", "Phones, tablets, laptops and TVs, repair options for the devices you use every day.", 0],

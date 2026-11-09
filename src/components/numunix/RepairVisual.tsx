@@ -6,7 +6,15 @@ export function DeviceVisual({ kind, repaired = true }: { kind: DeviceKind; repa
   return (
     <svg viewBox="0 0 360 230" role="img" aria-label={`${kind} repair illustration`} className={`repair-device ${repaired ? "is-repaired" : ""}`}>
       <ellipse cx="180" cy="207" rx="100" ry="7" className="repair-ground" />
-      {screen ? <>
+      {kind === 'desktop' ? <>
+        <rect x="37" y="42" width="195" height="125" rx="7" className="repair-shell" />
+        <rect x="46" y="51" width="177" height="105" rx="3" className="repair-screen" />
+        <path d="M127 167v24m-34 0h68M63 74h125m-125 16h92m-92 16h111" className="repair-interface-line" />
+        <rect x="251" y="25" width="71" height="172" rx="7" className="repair-shell" />
+        <circle cx="287" cy="49" r="6" className="repair-outline" />
+        <path d="M265 72h43m-43 12h43m-43 12h43M265 164h43m-43 11h43" className="repair-outline" />
+        <rect x="61" y="198" width="147" height="8" rx="3" className="repair-shell" />
+      </> : screen ? <>
         <rect x={kind === "phone" ? 133 : 74} y="24" width={kind === "phone" ? 94 : 212} height="155" rx={kind === "phone" || kind === "tablet" ? 14 : 5} className="repair-shell" />
         <rect x={kind === "phone" ? 141 : 83} y="35" width={kind === "phone" ? 78 : 194} height="130" rx="4" className="repair-screen" />
         {kind === "phone" || kind === "tablet" ? <>

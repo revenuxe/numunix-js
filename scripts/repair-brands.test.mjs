@@ -4,12 +4,12 @@ import { readFileSync } from 'node:fs';
 import { repairBrandsForService, REPAIR_BRANDS } from '../src/content/repair-brands.ts';
 import { enquirySchema } from '../src/lib/enquiry-schema.ts';
 
-test('each specific repair service has its own brands; doorstep supports the combined list', () => {
+test('each specific repair service has its own brand choices', () => {
   const catalogue = readFileSync('src/content/repair-services.ts', 'utf8');
   const services = [...catalogue.matchAll(/"name": "([^"]+)"/g)].map(match => match[1]);
   assert.equal(services.length, 16);
   for (const service of services) {
-    if (service !== 'Doorstep Electronics Service') assert.ok(REPAIR_BRANDS[service]?.length, service);
+    assert.ok(REPAIR_BRANDS[service]?.length, service);
     const brands = repairBrandsForService(service);
     assert.equal(new Set(brands).size, brands.length);
     assert.ok(brands.includes('Other brand'));

@@ -5,7 +5,7 @@ import { REPAIR_PAGES, repairServiceHref } from "../src/content/repair-services"
 
 describe("homepage repair category rules", () => {
   test("every repair-panel service has its own page in the correct category", () => {
-    expect(REPAIR_PAGES.filter(service => service.category === "electronics").map(service => service.slug)).toEqual(["mobile-repair", "laptop-repair", "cctv-service", "tv-audio-repair", "tablet-repair", "data-recovery", "console-repair", "doorstep-repair"]);
+    expect(REPAIR_PAGES.filter(service => service.category === "electronics").map(service => service.slug)).toEqual(["mobile-repair", "laptop-repair", "cctv-service", "tv-audio-repair", "tablet-repair", "data-recovery", "console-repair", "desktop-repair"]);
     expect(REPAIR_PAGES.filter(service => service.category === "appliances").map(service => service.slug)).toEqual(["washing-machine-repair", "ac-repair", "refrigerator-repair", "microwave-repair", "water-purifier-service", "inverter-ups-repair", "fan-light-repair", "electrical-service"]);
     expect(new Set(REPAIR_PAGES.map(service => service.slug)).size).toBe(16);
   });

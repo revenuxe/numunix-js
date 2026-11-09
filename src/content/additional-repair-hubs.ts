@@ -1,5 +1,4 @@
 import type { HubCopy } from "./repair-hub-content";
-import { VISIT_CHARGE_POLICY } from "./repair-visit-policy";
 
 export const ADDITIONAL_REPAIR_HUBS: Record<string, HubCopy> = {
   "tv-audio-repair": {
@@ -223,62 +222,6 @@ export const ADDITIONAL_REPAIR_HUBS: Record<string, HubCopy> = {
       [
         "Can a controller be included?",
         "Name its model and symptoms separately and confirm accessory scope. It should not be assumed to be included in every console repair.",
-      ],
-    ],
-  },
-  "doorstep-repair": {
-    description:
-      "Doorstep electronics assessment enquiries in Bangalore. Share the device, locality and access details to confirm visit scope and any workshop requirements.",
-    assessmentIntro:
-      "A doorstep enquiry begins with the device, fault and Bangalore locality. Numunix records the requested service and contact details so assessment arrangements can be discussed. A visit request does not confirm availability or mean every repair can be completed at home. Portable-device, installed-system and workshop requirements are agreed for the actual job.",
-    faults: [
-      [
-        "Installed equipment needs an assessment",
-        "SITE",
-        "Identify the device, mounting and safe access. A TV, camera system and portable computer can need different equipment and permissions, so state the complete setup.",
-      ],
-      [
-        "A portable device may need workshop checks",
-        "HANDOVER",
-        "Describe what works and the suspected scope without selecting parts. Confirm collection or handover responsibilities and records before any equipment leaves your premises.",
-      ],
-      [
-        "Several devices are affected",
-        "EQUIPMENT LIST",
-        "Provide models and separate symptoms and identify any shared connection or power event. A multi-item visit requires an explicit scope rather than an assumed single-device arrangement.",
-      ],
-      [
-        "Entry or timing constraints affect the visit",
-        "ACCESS",
-        "Include building permissions, parking or entry instructions where relevant and preferred windows. Keep sensitive account details out of access notes.",
-      ],
-    ],
-    scope: [
-      {
-        title: "Locality and availability",
-        body: "Send the locality or PIN code with preferred timing. Coverage, assessment charges and availability are confirmed before a visit is agreed; this page does not promise attendance across every Bangalore area.",
-      },
-      {
-        title: "On-site checks and workshop work",
-        body: "The confirmed proposal should distinguish the checks possible at the premises from work needing workshop equipment or specialist assessment. Describe data priorities before portable devices are handed over.",
-      },
-      {
-        title: "Equipment and approval records",
-        body: "Agree the estimate approver, accessories and any transport arrangement. Retain an equipment record and confirm the function checks and written terms applicable to the approved work.",
-      },
-    ],
-    faqs: [
-      [
-        "Does booking guarantee an at-home repair?",
-        "No. The enquiry starts a scope and availability discussion. Some work may require a workshop; confirm arrangements before equipment is moved or a visit is agreed.",
-      ],
-      [
-        "Which Bangalore areas are covered?",
-        "Share your locality or PIN code to confirm current coverage and arrangements. A city-wide page does not establish availability for every address.",
-      ],
-      [
-        "How are visit and inspection charges calculated?",
-        VISIT_CHARGE_POLICY,
       ],
     ],
   },

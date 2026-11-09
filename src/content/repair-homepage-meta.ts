@@ -10,7 +10,7 @@ const PAGE_META = {
   electronics: {
     title: "Electronics Repair in Bangalore | Numunix",
     description:
-      "Mobile, laptop, tablet, TV and CCTV repair in Bangalore. Explore fault diagnosis, data recovery, repair estimates and device testing with Numunix.",
+      "Mobile, laptop, desktop, tablet, TV and CCTV repair in Bangalore. Explore fault diagnosis, data recovery, repair estimates and device testing with Numunix.",
   },
   appliances: {
     title: "Home Appliance Repair in Bangalore | Numunix",

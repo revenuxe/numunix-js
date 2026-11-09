@@ -4,6 +4,7 @@ import type { Lead } from "./leads";
 export function repairLeadCategory(lead: Pick<Lead, "service" | "source">) {
   const service = REPAIR_PAGES.find(item => item.name === lead.service);
   if (service) return service.category;
+  if (lead.service === 'Doorstep Electronics Service') return 'electronics';
   if (lead.source.startsWith("/appliances")) return "appliances";
   if (lead.source.startsWith("/electronic/")) return "electronics";
   return "other";

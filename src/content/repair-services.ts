@@ -183,29 +183,30 @@ export const REPAIR_PAGES: RepairService[] = [
     "intro": "Gaming Console Repair in Bangalore. Describe the model and symptoms, review the assessment and estimate, and agree on the work before repairs begin."
   },
   {
-    "slug": "doorstep-repair",
+    "slug": "desktop-repair",
     "category": "electronics",
-    "name": "Doorstep Electronics Service",
-    "kind": "laptop",
-    "headline": "Doorstep repairs.",
-    "accent": "Care comes to you.",
+    "name": "Desktop Computer Repair",
+    "kind": "desktop",
+    "headline": "Desktop repair.",
+    "accent": "Back to your work.",
     "faults": [
-      "Devices that need an initial assessment at home",
-      "Multiple laptops or screens needing checks",
-      "CCTV faults at the installed location",
-      "Pickup or workshop handover requirements"
+      "Tower or all-in-one will not power on",
+      "Fans run but there is no display or startup",
+      "Overheating, restarts or unexpected shutdowns",
+      "Storage faults, slow operation or upgrade requirements"
     ],
     "checks": [
-      "Model and symptoms reviewed before a visit",
-      "On-site fault assessment where practical",
-      "Workshop requirements explained before handover"
+      "Power supply, motherboard and startup assessment",
+      "Memory, storage, cooling and display-output checks",
+      "Compatible upgrade options and post-repair function testing"
     ],
     "preparation": [
-      "List the devices and location",
-      "Confirm access and a suitable work area",
-      "Ask which work can be done on site"
+      "Back up accessible files and identify important data",
+      "Share the desktop model or assembled-system specifications",
+      "List attached equipment and describe recent changes or power events",
+      "Do not open the power supply or repeatedly power a failing drive"
     ],
-    "intro": "Doorstep Electronics Service in Bangalore. Describe the model and symptoms, review the assessment and estimate, and agree on the work before repairs begin."
+    "intro": "Desktop computer repair in Bangalore for tower, assembled PC and all-in-one startup, power, cooling and storage faults. Review model-specific assessment, data priorities and an estimate before approving work."
   },
   {
     "slug": "washing-machine-repair",

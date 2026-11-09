@@ -1,5 +1,6 @@
 // Enquiry choices identify customer equipment; they do not imply brand affiliation.
 export const REPAIR_BRANDS: Record<string, readonly string[]> = {
+  'Desktop Computer Repair': ['Dell', 'HP', 'Lenovo', 'ASUS', 'Acer', 'Apple', 'MSI', 'Custom-built / Assembled'],
   "Mobile Repair": [
     "Ai+",
     "LG",
