@@ -88,7 +88,7 @@ const APPLIANCE_NODES: RepairNode[] = [
   {
     slug: "washing-machine-repair",
     phase: "REPAIR",
-    name: "Washing Machine",
+    name: "Washing",
     category: "DRUMS · MOTORS",
   },
   { slug: "ac-repair", phase: "SERVICE", name: "AC", category: "GAS · COOLING" },
@@ -193,14 +193,7 @@ function RepairCategoryCard({
         />
       </div>
       <div className="@container min-h-[58px] min-w-0 border-t border-[#e7edf6] pt-2.5 text-left text-base sm:min-h-[62px] sm:pt-3 sm:text-xl lg:text-2xl">
-        <h3
-          className="whitespace-nowrap font-medium leading-tight tracking-[-0.025em] text-[#102a3d]"
-          style={
-            name === "Washing Machine"
-              ? { fontSize: "min(1em, calc((100cqw - 1px) / 8.4))" }
-              : undefined
-          }
-        >
+        <h3 className="whitespace-nowrap font-medium leading-tight tracking-[-0.025em] text-[#102a3d]">
           {name}
         </h3>
         <SingleLineCardLabel text={detail} />
