@@ -1,4 +1,5 @@
 "use client";
+import { useLayoutEffect, useRef } from "react";
 import { Label, Heading, Accent, Reveal } from "./primitives";
 import { REPAIR_PAGES, repairPageHref } from "@/content/repair-services";
 import { HOMEPAGE_REPAIR } from "@/content/homepage-repairs";
@@ -29,6 +30,45 @@ import {
 import { WORKFLOW_STAGES } from "@/content/workflow";
 
 const NODES = WORKFLOW_STAGES;
+
+function SingleLineCardLabel({ text }: { text: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLSpanElement>(null);
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    const label = textRef.current;
+    if (!container || !label) return;
+    let active = true;
+    const fit = () => {
+      if (!active || !container.clientWidth) return;
+      label.style.removeProperty("font-size");
+      const fontSize = parseFloat(getComputedStyle(label).fontSize);
+      const width = label.getBoundingClientRect().width;
+      if (width > container.clientWidth - 1) {
+        label.style.fontSize = `${Math.floor(((fontSize * (container.clientWidth - 1)) / width) * 10) / 10}px`;
+      }
+    };
+    fit();
+    const observer = new ResizeObserver(fit);
+    observer.observe(container);
+    document.fonts.ready.then(fit);
+    return () => {
+      active = false;
+      observer.disconnect();
+    };
+  }, [text]);
+  return (
+    <div
+      ref={containerRef}
+      data-card-label
+      className="mt-3 min-w-0 whitespace-nowrap font-mono text-[10px] leading-[1.4] text-[#1747b8] sm:text-[11px]"
+    >
+      <span ref={textRef} className="inline-block whitespace-nowrap tracking-[0.04em]" title={text}>
+        {text}
+      </span>
+    </div>
+  );
+}
 
 type RepairNode = { slug: string; phase: string; name: string; category: string; icon: LucideIcon };
 
@@ -245,7 +285,7 @@ export function WorkflowVisualization({
               }
 
               aria-label={`${n}: ${v}, explore ${u.toLowerCase()}`}
-              className={`group relative ${tabs ? "grid min-h-[180px] grid-rows-[auto_1fr_auto] sm:min-h-[200px]" : "flex flex-col justify-between"} min-w-0 cursor-pointer overflow-hidden rounded-2xl border border-[#cdddf3] bg-white px-4 py-5 shadow-[0_4px_8px_-3px_rgba(16,42,99,0.08),0_12px_24px_-12px_rgba(30,78,216,0.22)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#7ea8e8] hover:bg-[#f5f8fd] hover:shadow-[0_18px_40px_-16px_rgba(30,78,216,0.35)] active:translate-y-0 active:scale-[0.98] active:shadow-[0_6px_16px_-10px_rgba(30,78,216,0.3)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] motion-reduce:transform-none motion-reduce:transition-none sm:px-5 sm:py-6 coarse:border-[#c3d6f2] coarse:bg-[#fbfdff] coarse:shadow-[0_10px_24px_-14px_rgba(30,78,216,0.4)]`}
+              className={`group relative ${tabs ? "grid min-h-[180px] grid-cols-[minmax(0,1fr)] grid-rows-[auto_1fr_auto] sm:min-h-[200px]" : "flex flex-col justify-between"} min-w-0 cursor-pointer overflow-hidden rounded-2xl border border-[#cdddf3] bg-white px-4 py-5 shadow-[0_4px_8px_-3px_rgba(16,42,99,0.08),0_12px_24px_-12px_rgba(30,78,216,0.22)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#7ea8e8] hover:bg-[#f5f8fd] hover:shadow-[0_18px_40px_-16px_rgba(30,78,216,0.35)] active:translate-y-0 active:scale-[0.98] active:shadow-[0_6px_16px_-10px_rgba(30,78,216,0.3)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] motion-reduce:transform-none motion-reduce:transition-none sm:px-5 sm:py-6 coarse:border-[#c3d6f2] coarse:bg-[#fbfdff] coarse:shadow-[0_10px_24px_-14px_rgba(30,78,216,0.4)]`}
             >
               <span className="pointer-events-none absolute inset-x-0 -top-px h-px scale-x-0 bg-gradient-to-r from-transparent via-[#2563eb] to-transparent transition-transform duration-500 group-hover:scale-x-100" />
               <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_0%,rgba(37,99,235,0.08),transparent_60%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -259,13 +299,17 @@ export function WorkflowVisualization({
                 </span>
               </div>
 
-              <div className="mt-5">
+              <div className="mt-5 min-w-0">
                 <div
-                  className={`font-mono text-[19px] leading-[1.05] font-light tracking-[-0.02em] text-[#08152e] sm:text-[24px] ${tabs ? "min-h-[2.1em] whitespace-normal md:min-h-0 md:whitespace-nowrap md:text-[clamp(0.875rem,1.25vw,1.5rem)]" : "whitespace-nowrap xl:text-[14px]"}`}
+                  className={`font-mono leading-[1.05] font-light tracking-[-0.02em] text-[#08152e] sm:text-[24px] ${tabs ? "min-h-[2.1em] break-words whitespace-normal text-[clamp(0.875rem,5vw,1.1875rem)] md:min-h-0 md:whitespace-nowrap md:text-[clamp(0.875rem,1.25vw,1.5rem)]" : "text-[19px] whitespace-nowrap xl:text-[14px]"}`}
                 >
                   {v}
                 </div>
-                <div className="label-mono mt-2 truncate text-[#1747b8]">{u}</div>
+                {tabs ? (
+                  <SingleLineCardLabel text={u} />
+                ) : (
+                  <div className="label-mono mt-2 truncate text-[#1747b8]">{u}</div>
+                )}
               </div>
 
               <div className="mt-4 flex items-center justify-between gap-2 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
