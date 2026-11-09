@@ -30,3 +30,7 @@ Shared brief: perfectly straight-on orthographic product elevation; centered, le
 ## TV and desktop screen update
 
 The built-in Image Generation edit tool changed only the TV and monitor displays to a luminous pale cyan-blue at top left, royal blue in the middle and deep navy at bottom right. Prompt constraints preserved product geometry, straight-on composition, bezels, stands, soundbar, computer tower, keyboard, materials and transparent alpha; no UI, text, icons or added objects. Final assets use `tv-audio-repair-straight-blue.webp` and `desktop-repair-straight-blue.webp`.
+
+## Phone and tablet rear views
+
+Built-in Image Generation edits preserved each front device and blue screen, adding a matching silver rear view behind and offset left with a simple rear camera. Prompt constraints: equal heights, aligned tops and bottoms, perfectly upright front and rear, zero tilt or perspective yaw, transparent alpha, no logos or extra props. Final assets: `mobile-repair-straight-pair.webp` and `tablet-repair-straight-pair.webp`.
