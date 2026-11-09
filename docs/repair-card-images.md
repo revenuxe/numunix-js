@@ -1,32 +1,29 @@
 # Repair category product images
 
-These are AI-generated illustrative device cutouts for category navigation. They are not manufacturer endorsements, exact supported-model promises or photographs of completed customer jobs.
+AI-generated illustrative cutouts created with the built-in Image Generation tool. Final transparent WebP files live in `public/images/repair-categories/` with the `-straight.webp` suffix. The shared resolver maps service slugs to assets.
 
-Final files live in `public/images/repair-categories/`. `src/content/repair-card-images.ts` resolves the service slug to its image; cards still link to the shared repair catalogue's canonical detail page.
-
-Assets were created with the built-in Image Generation tool, requesting actual transparent alpha. `scripts/prepare-repair-card-images.mjs` trims transparent outer padding, bounds each asset to 512px, and encodes WebP at quality 84 with alpha quality 100. It checks alpha-channel transparency on every output. Input PNGs are retained in the image-generation Library and are not needed at runtime.
+`scripts/prepare-repair-card-images.mjs` trims transparent padding, bounds assets to 512px, encodes WebP at quality 84 and alpha quality 100, and verifies transparency. Original PNGs remain in the image-generation Library.
 
 ## Prompt set
 
-Shared brief: photorealistic premium studio catalogue cutout, complete unbranded product centered in a square frame with generous transparent margin, soft upper-left lighting, realistic white/silver/charcoal materials, crisp edges and a truly transparent alpha background. No room, floor, platform, text, logos, watermark, particles or decorative graphics. No objects beyond the explicitly named product or set. Recognizable at website-card size.
+Shared brief: perfectly straight-on orthographic product elevation; centered, level camera, zero yaw or roll, no tilt, no three-quarter angle. Vertical and horizontal edges remain level. No visible side panels unless specified. Photorealistic studio product with realistic proportions, bright neutral silver/white/charcoal materials, whole product centered with transparent margins, soft frontal light and actual alpha transparency. No floor, room, platform, cast shadow, text, logos, watermark, people or unrelated props. Recognizable at 80px tall.
 
 | File stem | Product-specific brief |
 | --- | --- |
-| mobile-repair-v2 | Two overlapping views of the same silver smartphone: rear on the left with two simple camera lenses, front on the right with a luminous pale-blue to navy gradient screen. Upright, subtle opposing angles, complete devices, bright studio lighting, no interface or text. Fuller silhouette for clarity at 80px tall. Generated with the built-in Image Generation tool, preserving transparent alpha. |
-| laptop-repair-v2 | Single silver laptop open about 105 degrees, near-front three-quarter view with gentle side angle, screen and keyboard clearly visible, natural proportions and luminous pale-blue to navy gradient screen without UI. |
-| cctv-service | White outdoor bullet security camera, dark glass lens and short wall mount. |
-| tv-audio-repair | Thin dark television on feet with compact matching soundbar, blank navy screen. |
-| tablet-repair-v2 | Two overlapping views of one silver tablet, front in foreground with partial rear behind. Upright portrait, wider proportions than a phone, subtle opposing angles, thin bezels, simple rear camera and luminous pale-blue to navy screen without UI. |
-| data-recovery | Computer hard drive with top cover removed, silver platter and read arm visible, three-quarter top/front view. |
-| console-repair | Charcoal game console with a matching controller in front, no logos. |
-| desktop-repair | Compact dark tower, slim monitor and keyboard, blank navy screen. |
-| washing-machine-repair | White front-loading washer, large round dark glass door and realistic unlabeled controls. |
-| ac-repair | White split-AC indoor unit, isolated without a wall, lower airflow louver slightly open. |
-| refrigerator-repair | Brushed-silver domestic refrigerator with closed doors and lower freezer drawer. |
-| microwave-repair | Brushed-silver countertop microwave, closed dark-glass door and simple controls at right. |
-| water-purifier-service | White/deep-blue domestic RO purifier with dispensing tap and compact clear lower reservoir. |
-| inverter-ups-repair | Dark-gray domestic inverter head above one enclosed battery, vents and blank status display. |
-| fan-light-repair | Three-blade ceiling fan with central integrated light, complete blades visible, isolated without ceiling. |
-| electrical-service | White domestic distribution enclosure, open front cover showing a neat breaker row, no exposed live wires. |
+| mobile-repair-straight | One silver smartphone upright portrait, front display luminous pale-blue to navy gradient without UI. |
+| laptop-repair-straight | One silver laptop open, display facing camera exactly square on, keyboard base visible symmetrically below, luminous pale-blue to navy gradient screen without UI. |
+| cctv-service-straight | White outdoor security camera, lens pointing directly at camera, circular dark lens and white housing, small mounting stem visible below. |
+| tv-audio-repair-straight | Thin dark television standing on two symmetrical feet with a matching soundbar directly below, plain navy display. |
+| tablet-repair-straight | One silver tablet upright portrait with generous tablet width, thin black bezels and luminous pale-blue to navy gradient display without UI. |
+| data-recovery-straight | One computer hard disk drive with cover removed, flat face with silver platter and read arm facing directly at camera, upright rectangular silhouette, no perspective. |
+| console-repair-straight | One charcoal game console upright with matching controller centered directly in front, front faces directly at camera. |
+| desktop-repair-straight | Desktop computer set, monitor centered with blank navy screen, tower standing beside it and keyboard centered below. All front faces parallel to camera. |
+| washing-machine-repair-straight | One white front-loading washing machine, large round dark glass door centered below realistic unlabeled controls. Only flat front face visible. |
+| ac-repair-straight | One white split air-conditioner indoor unit, long horizontal rectangle, vent and louvers symmetrically visible below, only front visible. |
+| refrigerator-repair-straight | One brushed-silver domestic refrigerator, closed doors and lower freezer drawer, symmetrical front, only front visible. |
+| microwave-repair-straight | One silver microwave oven, dark rectangular glass door on left, controls on right. Only flat front visible, no top or side. |
+| water-purifier-service-straight | One white and navy domestic RO water purifier, front-facing tank and small tap centered below, only front visible. |
+| inverter-ups-repair-straight | One dark household inverter placed level on top of a light-gray battery, clean front control panel, both front faces directly at camera. |
+| fan-light-repair-straight | One three-blade ceiling fan with central light, viewed straight from directly underneath, symmetrical balanced blades in image plane, no perspective. |
+| electrical-service-straight | One white electrical distribution box with a neat horizontal row of circuit breakers visible on its flat front. No open projecting door, no exposed wires. Only front face visible. |
 
-The washing-machine brief additionally specifies a slightly right-facing three-quarter view and an approximately 80% frame fill. The other briefs use approximately 78% frame fill. All use transparent output and the same no-brand/no-backdrop constraints.
