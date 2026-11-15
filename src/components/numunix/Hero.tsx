@@ -76,10 +76,11 @@ export function Hero({
   return (
     <section
       id="top"
-      className="grain relative min-h-[100svh] overflow-hidden bg-ink-900 lg:min-h-[100vh]"
+      className="grain relative min-h-[100svh] overflow-hidden bg-white lg:min-h-[100vh]"
     >
       <div className="pointer-events-none absolute inset-0">
         <NumunixRibbonScene
+          theme="light"
           active={fittedHeading === headingKey}
           className="h-full w-full"
           ribbons={6}
@@ -88,19 +89,19 @@ export function Hero({
       <div className="pointer-events-none absolute inset-0 hero-shade-side" />
       <div className="pointer-events-none absolute inset-0 hero-shade-top" />
       {breadcrumb && (
-        <div className="shell absolute inset-x-0 top-28 z-10 lg:top-32">{breadcrumb}</div>
+        <div className="shell absolute inset-x-0 top-52 z-10 lg:top-44">{breadcrumb}</div>
       )}
 
-      <div className="shell relative flex min-h-[calc(88svh+48px)] flex-col justify-end pt-46 pb-6 lg:min-h-[100vh] lg:pt-40 lg:pb-24">
+      <div className={`shell relative flex min-h-[calc(88svh+48px)] flex-col justify-end pb-6 lg:min-h-[100vh] lg:pb-24 ${breadcrumb ? "pt-64 lg:pt-56" : "pt-52 lg:pt-48"}`}>
         <div className="grid min-w-0 items-end gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)] lg:gap-20">
           <Reveal className="min-w-0">
-            {eyebrow && <Label className="mb-7">{eyebrow}</Label>}
+            {eyebrow && <Label tone="light" className="mb-7">{eyebrow}</Label>}
             <noscript>
               <style>{`.hero-heading { visibility: visible !important; font-size: clamp(12px, 3.5vw, 48px) !important; } .hero-heading > span { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }`}</style>
             </noscript>
             <h1
               ref={headingRef}
-              className={`hero-heading ${fittedHeading === headingKey ? "visible" : "invisible"} font-light leading-[1.08] tracking-normal text-primary-foreground text-[40px] sm:text-[56px] lg:text-[80px] xl:text-[96px]`}
+              className={`hero-heading ${fittedHeading === headingKey ? "visible" : "invisible"} font-light leading-[1.08] tracking-normal text-foreground text-[40px] sm:text-[56px] lg:text-[80px] xl:text-[96px]`}
             >
               <span className="inline-block whitespace-nowrap">{firstLine}</span>
               {secondLine && (
@@ -118,14 +119,14 @@ export function Hero({
 
           <Reveal delay={120}>
             <div className="lg:pb-3">
-              <p className="max-w-[40ch] text-[17px] leading-relaxed text-primary-foreground/70 lg:text-[18px]">
+              <p className="max-w-[40ch] text-[17px] leading-relaxed text-foreground/70 lg:text-[18px]">
                 {intro}
               </p>
               <div className="hero-actions mt-6 flex flex-wrap gap-3 lg:mt-8">
                 <Btn as="a" href={primaryHref}>
                   {primaryLabel}
                 </Btn>
-                <Btn as="a" href={secondaryHref} variant="ghostDark">
+                <Btn as="a" href={secondaryHref} variant="ghostLight">
                   {secondaryIcon}
                   {secondaryLabel}
                 </Btn>

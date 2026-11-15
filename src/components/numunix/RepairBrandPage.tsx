@@ -104,7 +104,13 @@ export function RepairBrandPage({
   const whatsappHref = repairWhatsAppHref(`${page.brand} ${appliance} repair`);
   return (
     <div className="bg-ink-900">
-      <Header />
+      <Header callback={{
+        service: page.service,
+        brand: page.brand,
+        brandLogo: purifierLogo ? <PurifierBrandLogo brand={purifierLogo} />
+          : cctvLogo ? <CCTVBrandLogo brand={cctvLogo} />
+          : <img src={logo} alt={`${page.brand} logo`} width={96} height={32} className={`h-full w-full object-contain${mobileLogo?.darkLogo ? " rounded bg-ink-900 p-1" : ""}`} />,
+      }} />
       <main>
         <Hero
           headline={`${page.brand} ${isPurifier ? "Water Purifier" : isCCTV ? "CCTV" : isLaptop ? "Laptop" : isMobile ? "Mobile" : isAC ? "AC" : isFridge ? "Fridge" : "Washing Machine"}`}

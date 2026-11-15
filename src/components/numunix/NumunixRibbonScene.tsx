@@ -2,6 +2,7 @@
 import { useEffect, useRef } from "react";
 
 type Props = {
+  theme?: "light" | "dark";
   active?: boolean;
   className?: string;
   intensity?: number;
@@ -22,6 +23,7 @@ type Ribbon = {
 };
 
 export function NumunixRibbonScene({
+  theme = "dark",
   active = true,
   className,
   intensity = 1,
@@ -122,7 +124,7 @@ export function NumunixRibbonScene({
         a[1] + (b[1] - a[1]) * k,
       )},${Math.round(a[2] + (b[2] - a[2]) * k)})`;
 
-    const NAVY: RGB = [8, 20, 44];
+    const NAVY: RGB = theme === "light" ? [96, 165, 250] : [8, 20, 44];
     const ROYAL: RGB = [23, 71, 184];
     const ELECTRIC: RGB = [59, 130, 246];
 
@@ -173,7 +175,7 @@ export function NumunixRibbonScene({
       g.addColorStop(0.68, mix(NAVY, ROYAL, 0.5));
       g.addColorStop(1, mix(NAVY, ROYAL, 0.08));
       ctx.fillStyle = g;
-      ctx.shadowColor = "rgba(4,8,20,0.85)";
+      ctx.shadowColor = theme === "light" ? "rgba(37,99,235,0.12)" : "rgba(4,8,20,0.85)";
       ctx.shadowBlur = 50;
       ctx.shadowOffsetY = 26;
       ctx.fill();
@@ -209,7 +211,7 @@ export function NumunixRibbonScene({
       ctx.beginPath();
       ctx.moveTo(bx[0]!, by[0]!);
       for (let i = 1; i < n; i++) ctx.lineTo(bx[i]!, by[i]!);
-      ctx.strokeStyle = "rgba(3,6,14,0.75)";
+      ctx.strokeStyle = theme === "light" ? "rgba(37,99,235,0.2)" : "rgba(3,6,14,0.75)";
       ctx.lineWidth = 2;
       ctx.stroke();
     };
@@ -240,7 +242,7 @@ export function NumunixRibbonScene({
         Math.max(w, h) * 0.8,
       );
       bg.addColorStop(0, `rgba(23,71,184,${(0.26 + boost * 0.18) * intensity})`);
-      bg.addColorStop(0.45, "rgba(11,27,56,0.35)");
+      bg.addColorStop(0.45, theme === "light" ? "rgba(219,234,254,0.15)" : "rgba(11,27,56,0.35)");
       bg.addColorStop(1, "rgba(5,7,12,0)");
       ctx.fillStyle = bg;
       ctx.fillRect(0, 0, w, h);
@@ -287,7 +289,7 @@ export function NumunixRibbonScene({
       motionQuery.removeEventListener("change", updateMotion);
       document.removeEventListener("visibilitychange", syncActivity);
     };
-  }, [active, intensity, boostRef, ribbons]);
+  }, [active, intensity, boostRef, ribbons, theme]);
 
   return (
     <canvas ref={canvasRef} aria-hidden="true" className={className} style={{ display: "block" }} />

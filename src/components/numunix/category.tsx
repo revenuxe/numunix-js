@@ -99,7 +99,7 @@ export function CategoryToggle({ className = "" }: { className?: string }) {
         align="end"
         sideOffset={8}
         onCloseAutoFocus={(event) => event.preventDefault()}
-        className="z-[70] min-w-[160px] border-primary-foreground/15 bg-ink-800 text-primary-foreground motion-reduce:animate-none"
+        className="z-[70] min-w-[160px] border-border bg-white text-foreground motion-reduce:animate-none"
       >
         {OPTIONS.map((option) => (
           <DropdownMenuItem

@@ -5,8 +5,10 @@ import { Menu, X, Grip, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CONTACT } from "@/content/site";
 import { cn } from "@/lib/utils";
+import { HeroCallback } from "./HeroCallback";
 import { BrandLogo } from "./BrandLogo";
 import { CategoryToggle, useCategory } from "./category";
+import type { ComponentProps } from "react";
 
 const NAV: [string, string][] = [
   ["REPAIR SERVICES", "/services"],
@@ -16,7 +18,7 @@ const NAV: [string, string][] = [
   ["CONTACT", "/contact"],
 ];
 
-export function Header() {
+export function Header({ callback }: { callback?: ComponentProps<typeof HeroCallback> } = {}) {
   const categoryContext = useCategory();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -99,30 +101,30 @@ export function Header() {
     >
       <div
         className={cn(
-          "border-b bg-ink-900",
-          scrolled ? "border-primary-foreground/15" : "border-primary-foreground/5",
+          "border-b bg-white",
+          scrolled ? "border-border shadow-sm" : "border-border/60",
         )}
       >
         <div className="shell grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 py-4 lg:flex lg:justify-between">
-          <BrandLogo variant="header" className="w-[112px] min-[375px]:w-[140px] sm:w-[180px]" />
+          <BrandLogo variant="header" className="[&_img]:brightness-0 w-[112px] min-[375px]:w-[140px] sm:w-[180px]" />
 
           <div className="hidden items-center gap-3 lg:flex">
             <nav
               className={cn(
-                "flex items-center gap-1 rounded-lg border border-primary-foreground/15 bg-ink-800 px-3 py-2",
+                "flex items-center gap-1 rounded-lg border border-border bg-slate-50 px-3 py-2",
               )}
             >
               {NAV.map(([n, href]) => (
                 <a
                   key={n}
                   href={href}
-                  className="label-mono rounded-md px-3.5 py-2 text-primary-foreground/90 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground"
+                  className="label-mono rounded-md px-3.5 py-2 text-foreground/90 transition-colors hover:bg-blue-50 hover:text-primary"
                 >
                   {n}
                 </a>
               ))}
-              <span className="mx-1 h-5 w-px bg-white/10" />
-              <span className="grid h-8 w-8 place-items-center rounded-lg text-white/60 transition-colors hover:bg-white/6 hover:text-white">
+              <span className="mx-1 h-5 w-px bg-border" />
+              <span className="grid h-8 w-8 place-items-center rounded-lg text-foreground/60 transition-colors hover:bg-blue-50 hover:text-primary">
                 <Grip size={15} />
               </span>
             </nav>
@@ -139,7 +141,7 @@ export function Header() {
               onClick={() => setOpen((v) => !v)}
               variant="ghost"
               size="icon"
-              className="h-10 w-10 shrink-0 rounded-lg border border-primary-foreground/20 bg-ink-800 text-primary-foreground hover:bg-primary hover:text-primary-foreground"
+              className="h-10 w-10 shrink-0 rounded-lg border border-border bg-white text-foreground hover:bg-primary hover:text-primary-foreground"
             >
               {open ? <X size={17} /> : <Menu size={17} />}
             </Button>
@@ -147,15 +149,17 @@ export function Header() {
         </div>
       </div>
 
+      <HeroCallback {...callback} />
+
       {open && (
         <div id="mobile-navigation" className="lg:hidden">
-          <div className="mx-6 rounded-lg border border-primary-foreground/20 bg-ink-800 p-4">
+          <div className="mx-6 rounded-lg border border-border bg-white p-4 shadow-lg">
             {NAV.map(([n, href]) => (
               <a
                 key={n}
                 href={href}
                 onClick={() => setOpen(false)}
-                className="label-mono block border-b border-primary-foreground/10 py-4 text-primary-foreground/90 last:border-0"
+                className="label-mono block border-b border-border py-4 text-foreground/90 last:border-0"
               >
                 {n}
               </a>
