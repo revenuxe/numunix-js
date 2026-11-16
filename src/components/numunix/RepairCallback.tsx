@@ -157,7 +157,7 @@ export function RepairCallback({
               type="submit"
               variant="default"
               disabled={!ready || pending}
-              className="min-h-12 rounded-xl bg-ink-900 px-5 text-white hover:bg-ink-900/85 focus-visible:ring-primary/50"
+              className="min-h-12 rounded-xl px-5"
             >
               {pending ? (
                 <>
