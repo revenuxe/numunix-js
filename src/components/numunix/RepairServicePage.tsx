@@ -12,13 +12,7 @@ import { Label, Heading, Accent, Reveal } from "./primitives";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { repairWhatsAppHref } from "@/content/repair-whatsapp";
 import { RepairCallback } from "./RepairCallback";
-import { WashingMachineBrands } from "./WashingMachineBrands";
-import { RefrigeratorBrands } from "./RefrigeratorBrands";
-import { ACBrands } from "./ACBrands";
-import { MobileBrands } from "./MobileBrands";
-import { CCTVBrands } from "./CCTVBrands";
-import { LaptopBrands } from "./LaptopBrands";
-import { PurifierBrands } from "./PurifierBrands";
+import { RepairBrands } from "./RepairBrands";
 import type { RepairHubContent } from "@/content/repair-hub-content";
 import { guidesForRepair } from "@/content/repair-guide-links";
 import { articleBySlug } from "@/content/articles";
@@ -39,11 +33,7 @@ export function RepairServicePage({
   hubContent?: RepairHubContent | undefined;
 }) {
   const isWasher = service.category === "appliances" && service.slug === "washing-machine-repair";
-  const isFridge = service.category === "appliances" && service.slug === "refrigerator-repair";
-  const isAC = service.category === "appliances" && service.slug === "ac-repair";
   const isMobile = service.category === "electronics" && service.slug === "mobile-repair";
-  const isCCTV = service.category === "electronics" && service.slug === "cctv-service";
-  const isLaptop = service.category === "electronics" && service.slug === "laptop-repair";
   const detailedContent = isMobile
     ? MOBILE_REPAIR_PAGE
     : isWasher
@@ -76,6 +66,7 @@ export function RepairServicePage({
             ])}
           />
           <RepairCallback service={service.name} />
+          <RepairBrands serviceSlug={service.slug} />
           <section id="assessment" className="section-pad scroll-mt-24 bg-paper">
             <div className="shell grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
               <Reveal ssrVisible>
@@ -140,25 +131,8 @@ export function RepairServicePage({
               </div>
             )}
           </section>
-          {isWasher && (
-            <>
-              <WashingMachineBrands />
-              <WashingMachineScope />
-            </>
-          )}
-          {isFridge && <RefrigeratorBrands />}
-          {isAC && <ACBrands />}
-          {isMobile && (
-            <>
-              <MobileBrands />
-              <MobileRepairScope />
-            </>
-          )}
-          {isCCTV && <CCTVBrands />}
-          {isLaptop && <LaptopBrands />}
-          {service.category === "appliances" && service.slug === "water-purifier-service" && (
-            <PurifierBrands />
-          )}
+          {isWasher && <WashingMachineScope />}
+          {isMobile && <MobileRepairScope />}
           {hubContent && (
             <section
               id="service-scope"

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState, type ReactNode, type FormEvent } from "rea
 import { Check, Loader2, PhoneCall } from "lucide-react";
 import { createRepairBooking } from "@/lib/bookings.functions";
 import { emitRepairEvent } from "@/lib/repair-events";
-import { VISIT_CHARGE_POLICY } from "@/content/repair-visit-policy";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -76,7 +75,7 @@ export function RepairCallback({
   return (
     <section
       aria-labelledby="callback-title"
-      className="border-b border-border bg-paper py-7 sm:py-9"
+      className="border-b border-primary/10 bg-blue-50 py-7 text-navytext sm:py-9"
     >
       <div className="shell flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
         <div className="flex min-w-0 items-start gap-2 sm:gap-3">
@@ -158,7 +157,7 @@ export function RepairCallback({
               type="submit"
               variant="default"
               disabled={!ready || pending}
-              className="min-h-12 rounded-xl px-5"
+              className="min-h-12 rounded-xl bg-ink-900 px-5 text-white hover:bg-ink-900/85 focus-visible:ring-primary/50"
             >
               {pending ? (
                 <>
@@ -181,7 +180,6 @@ export function RepairCallback({
               Privacy policy
             </a>
           </p>
-          <p className="mt-2 text-xs leading-relaxed text-mutedtext">{VISIT_CHARGE_POLICY}</p>
         </form>
       </div>
       <Dialog open={open} onOpenChange={setOpen}>
