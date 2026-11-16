@@ -32,7 +32,6 @@ import { DeviceVisual } from "./RepairVisual";
 import { ContactForm } from "./ContactForm";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { RepairCallback } from "./RepairCallback";
-import { RepairBrands } from "./RepairBrands";
 import { RepairBrandScope, RepairBrandDecisions } from "./RepairBrandEditorial";
 import { FridgeRepairDetails } from "./FridgeRepairDetails";
 import { Label, Heading, Accent, Reveal } from "./primitives";
@@ -136,7 +135,6 @@ export function RepairBrandPage({
           }
           brandLogoDark={mobileLogo?.darkLogo ?? false}
         />
-        <RepairBrands serviceSlug={directorySlug} />
         <section className="section-pad bg-paper">
           <div className="shell grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
             <Reveal ssrVisible>
