@@ -5,6 +5,7 @@ import { CategorySelectionProvider } from "@/components/numunix/category";
 import { RepairInteractionEvents } from "@/components/numunix/RepairInteractionEvents";
 import { repairSiteSchema } from "@/content/repair-seo";
 import { SITE_URL } from "@/content/site";
+import { GOOGLE_ADS_ID, GOOGLE_ADS_SCRIPT } from "@/lib/google-ads";
 import { inter, jetbrainsMono } from "./fonts";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -22,6 +23,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       data-scroll-behavior="smooth"
     >
       <head>
+        <script
+          id="google-ads-conversions"
+          dangerouslySetInnerHTML={{ __html: GOOGLE_ADS_SCRIPT }}
+        />
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
