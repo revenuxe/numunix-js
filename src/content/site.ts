@@ -6,11 +6,11 @@ export const SITE_URL = "https://www.numunix.com";
 const CONTACT_EMAIL = "numunix@gmail.com";
 
 export const CONTACT = {
-  phone: "+91 98865 79923",
-  phoneHref: "tel:+919886579923",
+  phone: "+91 98862 85028",
+  phoneHref: "tel:+919886285028",
   email: CONTACT_EMAIL,
   emailHref: `mailto:${CONTACT_EMAIL}`,
-  whatsappHref: `https://wa.me/919886579923?text=${encodeURIComponent("Hi Numunix, I would like to request a repair.\n\nModel:\nIssue:\nLocation:")}`,
+  whatsappHref: `https://wa.me/919886285028?text=${encodeURIComponent("Hi Numunix, I would like to request a repair.\n\nModel:\nIssue:\nLocation:")}`,
   hours: "Mon – Sat · 9:00 AM – 8:00 PM IST",
   address: "Shop No 1, 1st Floor, 10/1, 10th Cross, LR Bande C L Ramaiah Layout, RT Nagar Post, Bengaluru, Karnataka 560032",
   addressLocality: "Bengaluru",
