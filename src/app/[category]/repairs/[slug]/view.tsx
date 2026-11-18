@@ -11,8 +11,8 @@ type ViewProps = {
   search: Record<string, string | undefined>;
 };
 function RepairDetail({ loaderData, params, search }: ViewProps) {
-  const { service, hubContent } = loaderData;
-  return <RepairServicePage service={service} hubContent={hubContent} />;
+  const { service, hubContent, washerType } = loaderData;
+  return <RepairServicePage service={service} hubContent={hubContent} washerType={washerType} />;
 }
 export default function PageView(props: ViewProps) {
   return <RepairDetail {...props} />;

@@ -19,6 +19,8 @@ import { articleBySlug } from "@/content/articles";
 import { MOBILE_REPAIR_PAGE } from "@/content/mobile-repair-page";
 import { MobileRepairScope, MobileRepairDecisions, MobileRepairCTA } from "./MobileRepairContent";
 import { WASHING_MACHINE_PAGE } from "@/content/washing-machine-page";
+import { type WasherTypePage, WASHER_PARENT_PATH } from "@/content/washer-type-pages";
+import { WasherTypeScope } from "./WasherTypeContent";
 import {
   WashingMachineScope,
   WashingMachineDecisions,
@@ -28,18 +30,21 @@ import {
 export function RepairServicePage({
   service,
   hubContent,
+  washerType,
 }: {
   service: RepairService;
   hubContent?: RepairHubContent | undefined;
+  washerType?: WasherTypePage | undefined;
 }) {
-  const isWasher = service.category === "appliances" && service.slug === "washing-machine-repair";
+  const isWasher = service.category === "appliances" && (service.slug === "washing-machine-repair" || !!washerType);
+  const bookingService = washerType ? "Washing Machine Repair" : service.name;
   const isMobile = service.category === "electronics" && service.slug === "mobile-repair";
   const detailedContent = isMobile
     ? MOBILE_REPAIR_PAGE
     : isWasher
-      ? WASHING_MACHINE_PAGE
+      ? (washerType ?? WASHING_MACHINE_PAGE)
       : hubContent;
-  const relatedGuides = guidesForRepair(service.slug)
+  const relatedGuides = guidesForRepair(washerType ? "washing-machine-repair" : service.slug)
     .map((slug) => articleBySlug(slug))
     .filter((article) => article !== undefined);
   const related = REPAIR_PAGES.filter(
@@ -51,6 +56,7 @@ export function RepairServicePage({
         <Header />
         <main>
           <Hero
+            breadcrumb={washerType ? <nav aria-label="Breadcrumb" className="text-sm text-navytext"><Link href={WASHER_PARENT_PATH} className="underline underline-offset-4">Washing machine repair</Link><span aria-hidden="true"> / </span><span>{washerType.machineType}</span></nav> : undefined}
             headline={service.name}
             accent="in Bangalore"
             intro={service.intro}
@@ -65,8 +71,8 @@ export function RepairServicePage({
               "Location",
             ])}
           />
-          <RepairCallback service={service.name} />
-          <RepairBrands serviceSlug={service.slug} />
+          <RepairCallback service={bookingService} />
+          <RepairBrands serviceSlug={washerType ? "washing-machine-repair" : service.slug} />
           <section id="assessment" className="section-pad scroll-mt-24 bg-paper">
             <div className="shell grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
               <Reveal ssrVisible>
@@ -131,7 +137,7 @@ export function RepairServicePage({
               </div>
             )}
           </section>
-          {isWasher && <WashingMachineScope />}
+          {isWasher && (washerType ? <WasherTypeScope page={washerType} /> : <WashingMachineScope />)}
           {isMobile && <MobileRepairScope />}
           {hubContent && (
             <section
@@ -256,7 +262,7 @@ export function RepairServicePage({
               </div>
             </div>
           </section>
-          {isWasher && <WashingMachineCTA final />}
+          {isWasher && <WashingMachineCTA final subject={service.name.toLowerCase()} />}
           {isMobile && <MobileRepairCTA final />}
           <section id="enquiry" className="section-pad scroll-mt-24 bg-paper">
             <div className="shell grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
@@ -273,9 +279,11 @@ export function RepairServicePage({
                 </p>
               </div>
               <ContactForm
-                initialService={service.name}
+                initialService={bookingService}
                 initialDescription={
-                  isMobile
+                  washerType
+                    ? `${washerType.name}\nBrand / Model: \nMachine type: ${washerType.machineType}\nIssue / Error code: \nBangalore locality: `
+                    : isMobile
                     ? "Mobile repair\nBrand / Model: \nIssue / Damage history: \nBackup status / Data priority: \nBangalore locality: "
                     : isWasher
                       ? "Washing machine repair\nBrand / Model: \nMachine type: \nIssue / Error code: \nBangalore locality: "

@@ -11,6 +11,7 @@ import { LAPTOP_BRAND_PAGES } from "./laptop-brand-pages";
 import { CCTV_BRAND_PAGES } from "./cctv-brand-pages";
 import { PURIFIER_BRAND_PAGES } from "./purifier-brand-pages";
 import { curateBrandRepair } from "./curated-brand-repair";
+import { WASHER_TYPE_PAGES, washerTypeHref } from "./washer-type-pages";
 
 // Prerendering and sitemap discovery use the same approved content.
 // Fail the build when a listed brand lacks curated editorial coverage.
@@ -28,6 +29,7 @@ export const PUBLIC_PATHS: string[] = [
   "/privacy",
   "/terms",
   ...REPAIR_PAGES.map(repairPageHref),
+  ...WASHER_TYPE_PAGES.map(washerTypeHref),
   ...ARTICLES.map((article) => `/repair-guides/${article.slug}`),
   ...WORKFLOW_STAGES.map((stage) => `/repair-process/${stage.slug}`),
   ...REPAIR_AUDIENCE_PATHS.map((slug) => `/who-we-serve/${slug}`),

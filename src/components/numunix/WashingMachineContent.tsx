@@ -7,10 +7,10 @@ import { REPAIR_DECISION_GUIDANCE, REPAIR_AFTERCARE_GUIDANCE } from "@/content/w
 import { repairWhatsAppHref } from "@/content/repair-whatsapp";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { Label, Heading, Accent } from "./primitives";
+import { WASHER_TYPE_PAGES, washerTypeHref } from "@/content/washer-type-pages";
 
-const whatsappHref = repairWhatsAppHref("washing machine repair", ["Brand","Model","Machine type","Issue","Location"]);
-
-export function WashingMachineCTA({ final = false }: { final?: boolean }) {
+export function WashingMachineCTA({ final = false, subject = "washing machine repair" }: { final?: boolean; subject?: string }) {
+  const whatsappHref = repairWhatsAppHref(subject, ["Brand", "Model", "Machine type", "Issue", "Location"]);
   return <section className="border-y border-primary/20 bg-ink-800 py-12 sm:py-16" aria-labelledby={final ? "washer-final-cta" : "washer-assessment-cta"}>
     <div className="shell grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-12">
       <div><h2 id={final ? "washer-final-cta" : "washer-assessment-cta"} className="text-2xl font-medium leading-tight text-white sm:text-3xl">{final ? "Ready to discuss your washing machine repair?" : "Laundry on hold? Start with a clear repair plan."}</h2><p className="mt-4 max-w-[65ch] text-base leading-relaxed text-white/70">{final ? "Send your model, symptoms and Bangalore locality. Discuss assessment arrangements, the estimate and the proposed next step before approving work." : "Share what stopped, the full appliance model and your location. An assessment request is the starting point for a diagnosis and estimate."}</p></div>
@@ -28,7 +28,11 @@ export function WashingMachineScope() {
       <Label tone="light">MATCH THE ASSESSMENT TO THE MACHINE</Label>
       <Heading tone="light" className="mt-6"><span id="washer-types-title">Different washers.<br /><Accent>A specific repair plan.</Accent></span></Heading>
       <p className="mt-6 max-w-[70ch] text-base leading-relaxed text-mutedtext">Front-load, top-load and semi-automatic washing machines need different descriptions of the same complaint. Start with your appliance type and the function that stopped. The exact model determines the appropriate instructions, assessment scope and parts enquiries.</p>
-      <div className="mt-10 grid gap-6 md:grid-cols-3">{content.types.map(type => <article key={type.title} className="rounded-lg border border-border bg-card p-6 sm:p-8"><h3 className="text-xl text-navytext">{type.title}</h3><p className="mt-4 text-sm leading-relaxed text-mutedtext">{type.body}</p><p className="mt-5 border-t border-border pt-4 text-sm leading-relaxed text-navytext">{type.detail}</p></article>)}</div>
+      <div className="mt-10 grid gap-6 md:grid-cols-3">{content.types.map(type => {
+        const page = WASHER_TYPE_PAGES.find(page => `${page.machineType.toLowerCase()} washing machines` === type.title.toLowerCase());
+        const copy = <><h3 className={`text-xl text-navytext ${page ? "pr-7" : ""}`}>{type.title}</h3><p className="mt-4 text-sm leading-relaxed text-mutedtext">{type.body}</p><p className="mt-5 border-t border-border pt-4 text-sm leading-relaxed text-navytext">{type.detail}</p></>;
+        return page ? <Link key={type.title} href={washerTypeHref(page)} className="group relative rounded-lg border border-border bg-card p-6 transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary sm:p-8"><ArrowUpRight aria-hidden="true" size={20} className="absolute right-6 top-6 text-primary sm:right-8 sm:top-8" />{copy}</Link> : <article key={type.title} className="rounded-lg border border-border bg-card p-6 sm:p-8">{copy}</article>;
+      })}</div>
       <p className="mt-8 max-w-[80ch] text-base leading-relaxed text-mutedtext">Have a washer-dryer? Mention both functions and explain whether the problem occurs during washing, spinning or drying. Confirm assessment options for the full model and affected function before a visit is arranged.</p>
     </div></section>
     <section className="section-pad bg-mist" aria-labelledby="washer-doorstep-title"><div className="shell grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
